@@ -1,0 +1,152 @@
+$ucleft-width:250px;
+.user-center-content{
+  .user-center-inner{
+    margin-top:40px;
+    .profile-sidebar {
+      float: left;
+      width: 250px;
+      margin-right: 20px;
+      .profile-sidebar-portlet {
+        padding: 30px 0 0!important;
+        text-align: center;
+        .profile-userpic{
+          margin: 0 auto;
+          text-align: center;
+        }
+        .profile-usertitle {
+          font-family:$font-family-sans-serif;
+          text-align: center;
+          margin-top: 20px;
+          .profile-usertitle-name {
+            color: $blue-chambray;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 7px;
+          }
+          .profile-usertitle-job {
+            text-transform: uppercase;
+            color: $blue-soft;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 7px;
+          }
+        }
+        .profile-useinfo{
+          margin: 0 auto;
+          margin-top:20px;
+          text-align:left;
+          background-color: #f6f9fb;
+          border-left: 2px solid $blue-soft;
+          margin-left: -2px;
+          border-top: 1px solid #f0f4f7;
+          border-bottom: 1px solid #f0f4f7;
+          ul{
+            margin:0 23px;
+            padding: 10px 0;
+            li{
+              margin:0;
+              font-size:$font-size-small;
+              padding: 5px 10px;
+              text-align: left;
+              list-style: none;
+              word-break:break-all;
+            }
+          }
+        }
+        .profile-uselink{
+          padding: 20px 0;
+          font-size:$font-size-base;
+        }
+        .profile-userbuttons {
+          text-align: center;
+          margin-top: 10px;
+        }
+        .profile-usermenu{
+          margin-top: 20px;
+          ul li {
+            border-bottom: 1px solid #f0f4f7;
+            text-align: left;
+          }
+          .nav{
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            .fa{
+              color:$text-color-light;
+              min-width:30px;
+              text-align:center;
+            }
+          }
+          .nav>li, .nav>li>a {
+            display: block;
+            position: relative;
+            &:hover{
+              background:$gray-lightest;
+            }
+          }
+          .active a {
+            color: $blue-soft;
+            background-color: #f6f9fb;
+            border-left: 2px solid $blue-soft;
+            margin-left: -2px;
+          }
+        }
+      }
+    }
+    .profile-content {
+      float: left;
+      width: 670px;
+      //min-height: 800px;
+      @media only screen and (max-width: 1200px) {
+        width: 670px;
+      }
+      @media only screen and (min-width: 1200px) {
+        width: 870px;
+      }
+      .calendar-dd{
+        height:100px;
+        overflow: hidden;
+        .calendar{
+          float:left;
+          width:220px;
+          text-align:center;
+          color:$blue-soft;
+          display:table;
+          padding: 0 15px;
+          border-right: 1px solid $gray-lighter;
+          .day{
+            font-size:75px;
+            font-weight: 600;
+            display:table-cell;
+            vertical-align: middle;
+          }
+          .date{
+            font-size:18px;
+            display:table-cell;
+            vertical-align: middle;
+          }
+        }
+        .dianming{
+          overflow: hidden;
+        }
+      }
+    }
+    .ribbon{
+      margin-top:8px;
+      padding: 4px 0;
+      background: $blue-soft;
+      font-size:$font-size-base;
+      .ribbon-content:before {
+        border-color: darken($blue-soft,20%) transparent transparent transparent;
+        border-width: 10px 0 0 10px;
+        bottom:-10px;
+      }
+      .ribbon-bg{
+        width:100%;
+        padding: 0 20px;
+        border-top: 1px dashed darken($blue-soft,20%);
+        border-bottom: 1px dashed darken($blue-soft,20%);
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.course
+    .col-xs-4(ng-repeat='course in courseFn.courses')
+        .course-item
+            .course-img(ng-click='courseFn.toCourse(course.id)')
+                img(ng-if='course.picUrl1' src='{{course.picUrl1}}')
+                img(ng-if='!course.picUrl1' src='../assets/images/course_bg.png')
+            .course-title {{course.name}}

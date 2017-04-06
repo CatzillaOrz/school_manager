@@ -1,0 +1,100 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <base href="/diandian">
+    <title>知新点点</title>
+    <meta name="description" content="鼎利在线教育平台">
+    <meta name="keywords" content="教育,在线教育,教育平台,招聘,招聘平台,鼎利,世纪鼎利">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/dd_vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/dd.css -->
+    <link rel="stylesheet" href="app/global.css">
+    <link rel="stylesheet" href="app/dd/dd.css">
+    <link rel="stylesheet" href="app/ngDialog-theme-overwrite.css">
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css">
+
+    <!-- injector:css -->
+    <!-- endinjector -->
+    <!-- endbuild -->
+</head>
+<body ng-app="dleduWebAppDianDian">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="signinmodel-position" ui-view="siginin"></div>
+<div ui-view="navbar"></div>
+<!-- Add your site or application content here -->
+<div ui-view="content"></div>
+<footer ui-view="footer"></footer>
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<!-- build:js({client,node_modules}) app/dd_vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/js-cookie/src/js.cookie.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ngDialog/js/ngDialog.min.js"></script>
+<script src="bower_components/bootstrap/js/collapse.js"></script>
+<script src="bower_components/bootstrap/js/modal.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script src="http://static.polyv.net/file/polyvplayer_v2.0.min.js"></script>
+<script src="assets/flexpaper/js/flexpaper.js"></script>
+<script src="assets/flexpaper/js/flexpaper.js"></script>
+<script  src="assets/ueditor/ueditor.config.js"></script>
+<script   src="assets/ueditor/ueditor.all.min.js"> </script>
+<script  src="assets/ueditor/lang/zh-cn/zh-cn.js"> </script>
+
+
+
+<!-- build:js({.tmp,client}) app/dd.js -->
+<script src="services/index.js"></script>
+<script src="services/entity/account.js"></script>
+<script src="services/entity/course.js"></script>
+<script src="services/entity/user.js"></script>
+<script src="services/auth.js"></script>
+<script src="services/lastMessage.js"></script>
+<script src="services/fileProcess.js"></script>
+<script src="services/entity/website.js"></script>
+<script src="components/index.js"></script>
+<script src="components/footer/footer.controller.js"></script>
+<script src="components/navbar/navbar.controller.js"></script>
+<script src="components/signin/signinmodel.controller.js"></script>
+<script src="directives/index.js"></script>
+<script src="directives/ui-href.js"></script>
+<script src="directives/rateStar.js"></script>
+<script src="directives/onBannerUpdated.js"></script>
+<script src="app/dd/index.js"></script>
+<script src="app/dd/dd.controller.js"></script>
+<!-- injector:js -->
+<script src="app/dd/dd.js"></script>
+
+
+
+<!-- endinjector -->
+<!-- endbuild -->
+</body>
+</html>

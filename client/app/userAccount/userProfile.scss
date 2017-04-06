@@ -1,0 +1,84 @@
+.user-profile {
+  &.content {
+    width: auto;
+    padding: 0 40px 30px;
+    .content-heading {
+      height: 50px;
+      border-bottom: 1px solid $gray-lighter;
+    }
+    .content-body {
+
+    }
+    .content-foot {
+
+    }
+  }
+  .nav-tabs {
+    margin-top: 30px;
+  }
+  .readonly-info {
+    $table-width: 800px;
+    $th-width: 100px;
+    width: $table-width;
+    tr {
+    }
+    th {
+      border: none;
+      width: $th-width;
+      font-weight: normal;
+      color: $text-color-dark;
+      padding: 8px 0;
+    }
+    td {
+      border: none;
+      padding: 8px 0;
+      width: $table-width/2 - $th-width;
+    }
+  }
+
+  .profile-form {
+    .form-group{
+      width: 300px;
+    }
+    .add-text{
+      position: absolute;
+      left: 310px;
+      width:100%;
+      font-size:$font-size-small;
+    }
+    label {
+      color: $text-color-dark;
+    }
+    .radio-inline {
+      display: inline-block;
+      margin-right: 30px;
+      input {
+        display: inline-block;
+      }
+    }
+  }
+  .btn-upload {
+    margin-bottom: 40px;
+    .button {
+      position: absolute;
+      z-index: 1;
+    }
+    input {
+      position: absolute;
+      opacity: 1;
+      filter: alpha(opacity=1);
+      display: block;
+      overflow: hidden;
+      width: 170px;
+      z-index: 2;
+    }
+  }
+  .ng-jcrop-image-wrapper {
+    display: inline-block;
+  }
+  .ng-jcrop-thumbnail-wrapper {
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+  }
+}

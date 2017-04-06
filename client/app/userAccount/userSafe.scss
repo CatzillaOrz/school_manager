@@ -1,0 +1,107 @@
+
+.user-safe {
+  &.content {
+    width: auto;
+    padding: 0 40px;
+    .content-heading {
+      height: 50px;
+      border-bottom: 1px solid $gray-lighter;
+    }
+    .content-body {
+      padding:30px 0 !important;
+      .tips{
+        width:100%;
+        text-align: center;
+        margin: 20px 0 50px 0;
+        color: $text-color-light;
+        font-size:$font-size-small;
+        .fa{
+          color:$text-color-lighter;
+        }
+        .security-level{
+          font-size:24px;
+        }
+      }
+      /*.alert{
+        width:400px;
+        margin: 20px auto;
+      }*/
+      .table{
+        td{
+          vertical-align: middle;
+          height:80px;
+        }
+        .icon{
+          width:60px;
+          text-align: center;
+        }
+        .title{
+          width:100px;
+          color: $text-color-daskest;
+        }
+        .describe{
+          font-size:$font-size-small;
+        }
+        .operation{
+          width:150px;
+          text-align: center;
+        }
+      }
+      .user-safe-form{
+        width:400px;
+        min-height:200px;
+        margin: 0 auto 50px auto;
+        .form-body{
+          margin-right:50px;
+        }
+        .form-actions{
+          margin-right:50px;
+        }
+      }
+      .message-success{
+        margin: 50px auto;
+        display: table;
+        .message-icon{
+          width:80px;
+          text-align: center;
+          display:table-cell;
+          vertical-align: top;
+        }
+        .message-body{
+          display: table-cell;
+          vertical-align: middle;
+          .tittle{
+            margin: 5px 0;
+            color:$text-color-daskest;
+          }
+          .message{
+            margin: 5px 0;
+            font-size:$font-size-small;
+            p{
+              margin-bottom:5px;
+            }
+          }
+        }
+      }
+      .message-help{
+        margin: 0;
+        padding:20px;
+        background:$gray-lightest;
+        .message-title{
+          color:$text-color-dark;
+          margin-bottom:10px;
+        }
+        .message-list{
+          color:$text-color;
+          font-size:$font-size-small;
+        }
+      }
+      .step-line{
+        margin: 0 auto 50px auto;
+      }
+    }
+    .content-foot {
+
+    }
+  }
+}

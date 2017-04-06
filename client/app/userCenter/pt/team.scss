@@ -1,0 +1,60 @@
+.uc-team{
+  width:100%;
+  margin: 0;
+  padding-bottom:20px;
+  .team-list{
+    width:100%;
+    .team-item{
+      width:100%;
+      display:table;
+      padding: 20px 0;
+      border-bottom: 1px solid $gray-lighter;
+      .team-logo{
+        display:table-cell;
+        vertical-align: middle;
+        padding: 0 8px;
+        cursor: pointer;
+        width:80px;
+      }
+      .team-info{
+        width:auto;
+        display:table-cell;
+        padding: 0 8px;
+        vertical-align: middle;
+        .team-name{
+          font-size:$font-size-large;
+          color:$text-color-blue-dark;
+          cursor: pointer;
+          word-break:break-all;
+        }
+        .team-link{
+          margin-bottom:5px;
+          font-size:$font-size-small;
+          height:17px;
+          overflow: hidden;
+          i.fa{
+            display:inline;
+            margin-right:5px;
+          }
+          a{
+            word-break:break-all;
+          }
+        }
+        .team-introduce{
+          font-size:$font-size-small;
+          max-height:35px;
+          overflow: hidden;
+          word-break:break-all;
+        }
+      }
+    }
+    .team-item:first-child{
+      padding-top: 0 !important;
+    }
+    .team-item:last-child{
+      padding-bottom: 0 !important;
+      border:none !important;
+    }
+
+  }
+}

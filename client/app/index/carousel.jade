@@ -1,0 +1,12 @@
+.carousel-inner(ng-transclude='')
+a.left.carousel-control(role='button', href='', ng-click='prev()', ng-class='{ disabled: isPrevDisabled() }', ng-show='slides.length > 1')
+    span.glyphicon.glyphicon-menu-left(aria-hidden='true')
+    span.sr-only previous
+a.right.carousel-control(role='button', href='', ng-click='next()', ng-class='{ disabled: isNextDisabled() }', ng-show='slides.length > 1')
+    span.glyphicon.glyphicon-menu-right(aria-hidden='true')
+    span.sr-only next
+ol.carousel-indicators(ng-show='slides.length > 1')
+    li(ng-repeat='slide in slides | orderBy:indexOfSlide track by $index', ng-class='{ active: isActive(slide) }', ng-click='select(slide)')
+        span.sr-only
+            | slide {{ $index + 1 }} of {{ slides.length }}
+            span(ng-if='isActive(slide)') , currently active

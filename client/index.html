@@ -1,0 +1,117 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <base href="/">
+    <title>知新网</title>
+    <meta name="description" content="鼎利在线教育平台">
+    <meta name="keywords" content="教育,在线教育,教育平台,招聘,招聘平台,鼎利,世纪鼎利">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/swiper/dist/css/swiper.css" />
+    <link rel="stylesheet" href="bower_components/cropper/dist/cropper.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/jcrop/css/jquery.Jcrop.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/global.css">
+    <link rel="stylesheet" href="app/components.css">
+    <link rel="stylesheet" href="app/main.css">
+    <!-- injector:css -->
+    <!-- endinjector -->
+    <!-- endbuild -->
+
+
+</head>
+<body ng-app="dleduWebApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div ui-view="root" style="height:100%;"></div>
+
+<!-- build:js({client,node_modules}) app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/js-cookie/src/js.cookie.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/swiper/dist/js/swiper.js"></script>
+<script src="bower_components/cropper/dist/cropper.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+<script src="bower_components/jcrop/js/jquery.Jcrop.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/ng-jcrop/ng-jcrop.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,client}) app/app.js -->
+
+<script src="services/index.js"></script>
+<script src="services/entity/account.js"></script>
+<script src="services/entity/userAccount.js"></script>
+<script src="services/entity/forgetpassword.js"></script>
+<script src="services/entity/website.js"></script>
+<script src="services/common.js"></script>
+<script src="components/index.js"></script>
+<script src="components/modal/modal.service.js"></script>
+<script src="components/azxcommon/azxcommon.js"></script>
+<script src="components/azxswiper/azxswiper.js"></script>
+<!--<script src="components/ng-jcrop/js/jquery.Jcrop.js"></script> -->
+<!--<script src="components/ng-jcrop/ng-jcrop.js"></script>-->
+<script src="services/entity/userCenter/dd.js"></script>
+<script src="services/entity/userCenter/hy.js"></script>
+<script src="services/entity/userCenter/em.js"></script>
+<script src="services/entity/userCenter/pt.js"></script>
+<script src="services/upload.js"></script>
+<script src="filters/index.js"></script>
+<script src="app/app.js"></script>
+<!-- injector:js -->
+<script src="app/layout/layout.controller.js"></script>
+<script src="app/account/account.js"></script>
+<script src="app/account/signin.controller.js"></script>
+<script src="app/account/forgotpassword.controller.js"></script>
+<script src="app/account/validemail.controller.js"></script>
+<script src="app/index/index.controller.js"></script>
+<script src="app/index/index.js"></script>
+<script src="app/userCenter/userCenter.js"></script>
+<script src="app/userCenter/userCenter.controller.js"></script>
+<script src="app/userCenter/dd/rollCall.directive.js"></script>
+<script src="app/userCenter/em/course.directive.js"></script>
+<script src="app/userCenter/em/ex.directive.js"></script>
+<script src="app/userCenter/pt/team.directive.js"></script>
+<script src="app/userAccount/userAccount.js"></script>
+<script src="app/userAccount/userAccount.controller.js"></script>
+<script src="app/userAccount/userProfile.controller.js"></script>
+<script src="app/userAccount/userSafe.controller.js"></script>
+
+<!-- endinjector -->
+<!-- endbuild -->
+</body>
+</html>

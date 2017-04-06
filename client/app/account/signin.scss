@@ -1,0 +1,178 @@
+.sigin-content {
+    height          : 100%;
+    .login-container {
+        margin    : 0 auto;
+        max-width : 1920px;
+        height    : 600px;
+        padding   : 0 15px;
+        min-height:300px;
+        overflow: hidden;
+        position: relative;
+        //background      : url($base-url + "index/index_head_bg.jpg") center center no-repeat fixed;
+        background      : url("http://oli56k5b0.bkt.clouddn.com/login_bg.jpg") center center no-repeat;
+        //background      : url("http://localhost:8890/login_bg.jpg") center center no-repeat;
+        -webkit-background-size:cover;
+        background-size:cover;
+        .bg_layer {
+            //background : rgba(40, 41, 55, 0.2);
+            //background : rgba(255, 255, 255, 0.2);
+            bottom     : 0;
+            left       : 0;
+            position   : absolute;
+            right      : 0;
+            top        : 0;
+            height:100%;
+            width: 100%;
+        }
+        .login-box{
+            margin: 0 auto;
+            height:100%;
+            min-width: 770px;
+            position: relative;
+            @media only screen and (min-width: 770px) and (max-width: 1280px) {
+                width: 100%;
+            }
+            @media only screen and (min-width: 1281px) {
+                width: 1200px;
+            }
+            .slogin-panel {
+                position    : absolute;
+                z-index     : 4;
+                top         : 50%;
+                right        : 20px;
+                margin-top  : -190px;
+                width       : 420px;
+                @include background-opacity(#ffffff, 0.2);
+                @include border-radius(5px);
+                @include box-shadows();
+                .user_signin_inner {
+                    position   : relative;
+                    height     : 100%;
+                    margin     : 20px;
+                    padding    : 15px;
+                    overflow   : hidden;
+                    background : #f5f5f5;
+                    @include border-radius(4px);
+                    .title {
+                        height   : 45px;
+                        overflow : hidden;
+                        h4 {
+                            margin-top     : 15px;
+                            text-align     : center;
+                            font-weight    : 400;
+                            font-size      : 24px;
+                            letter-spacing : 8px;
+                            color          : $brand-primary;
+                        }
+                    }
+                    .signin_user {
+                        position : relative;
+                        width    : 300px;
+                        margin   : 20px 0px 0px;
+                        * {
+                            box-sizing: content-box;
+                        }
+                        span {
+                            position  : absolute;
+                            top       : 11px;
+                            left      : 12px;
+                            z-index   : 100;
+                            font-size : 18px;
+                            color     : rgb(195, 195, 195);
+                        }
+                        input {
+                            width              : 100%;
+                            height             : 35px;
+                            line-height        : 40px;
+                            box-shadow         : none;
+                            font-weight        : 400;
+                            font-size          : 16px;
+                            padding            : 0px 10px 0px 35px;
+                            border-width       : 1px;
+                            border-style       : solid;
+                            border-color       : $gray-light;
+                            border-radius      : 4px;
+                            outline            : none;
+                            background         : rgb(255, 255, 255) !important;
+                            -webkit-box-shadow : 0 0 0 1000px white inset;
+                        }
+                    }
+                    .signin_warning {
+                        margin-top : 6px;
+                        .signin_warning_inner {
+                            text-align  : left;
+                            font-size   : 14px;
+                            font-weight : 700;
+                            color       : $brand-primary;
+                            margin      : 0 auto;
+                        }
+                    }
+                    .signin_submit {
+                        margin-top : 20px;
+                        .signin_submit_btn {
+                            width         : 100%;
+                            height        : 35px;
+                            font-size     : 14px;
+                            color         : rgb(255, 255, 255);
+                            padding       : 0;
+                            border-radius : 4px;
+                            background    : $brand-primary;
+                            border-width  : 0;
+                            border-style  : initial;
+                            border-color  : initial;
+                        }
+                    }
+                    .forget_pawd {
+                        margin        : 0 auto;
+                        height        : 50px;
+                        line-height   : 50px;
+                        font-size     : 12px;
+                        text-align    : center;
+                        width         : 80%;
+                    }
+                    .back-home {
+                        margin      : 0 auto;
+                        height      : 35px;
+                        line-height : 50px;
+                        font-size   : 12px;
+                        text-align  : center;
+                        width       : 80%;
+                    }
+                    .splie-line{
+                        margin:0;
+                    }
+                }
+            }
+        }
+        
+    }
+    .mask-top{
+        width:100%;
+        height:90px;
+        background:#ffffff;
+        .logo{
+            margin: 0 auto;
+            min-width: 770px;
+            @media only screen and (min-width: 770px) and (max-width: 1280px) {
+                width: 100%;
+            }
+            @media only screen and (min-width: 1281px) {
+                width: 1200px;
+            }
+            img{
+                width:auto;
+                height:50px;
+                margin: 20px 0 0 20px;
+            }
+        }
+    }
+    .mask-bottom{
+        width:100%;
+        background:#ffffff;
+        bottom:0;
+    }
+    .azx-footer{
+        background:#ffffff;
+        border:none;
+    }
+}

@@ -1,0 +1,28 @@
+.sigin-content
+    .mask-top
+        .logo
+            a(href='javascript:;' ng-click='signinFn.toIndex()')
+                img(src='http://oli56k5b0.bkt.clouddn.com/logo_lighter.png')
+    .login-container
+        .bg_layer
+        .login-box
+            .slogin-panel
+                .user_signin_inner
+                    .title
+                        h4 知 新 树 · 智慧校园
+                    label.signin_user
+                        span.i.fa.fa-user
+                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='账号 / 手机号 / 邮箱 ', type='text' name='username', ng-trim='true', ng-keypress='signinFn.keyPressHandle($event)', required='required', ng-model='signinFn.form.username')
+                    label.signin_user
+                        span.i.fa.fa-lock
+                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='请输入您的密码', type='password', name='password', required='required', ng-keypress='signinFn.keyPressHandle($event)', ng-model='signinFn.form.password', autocomplete='off')
+                    .signin_warning
+                        .signin_warning_inner.ng-binding.ng-hide(ng-show='signInError')
+                    .signin_submit
+                        button.signin_submit_btn(ng-click='signinFn.signIn()', type='button') 登 录
+                    .forget_pawd
+                        a(ui-sref='forgotpassword' title='忘记密码') 忘记密码 ？
+                    .splie-line
+                    .back-home
+                        a(ui-sref='index' title='返回首页') 返回知新树首页
+    .mask-bottom(azx-footer data-product='{{signinFn.product.name}}' data-version='{{signinFn.product.version}}')

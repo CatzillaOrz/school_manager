@@ -1,0 +1,40 @@
+.content.user-safe
+    .content-heading
+        .caption
+            .caption-subject 安全设置
+    .content-body
+        .tips
+            i.fa.fa-fw.fa-info-circle
+            span 您的账号 {{usFn.user.login}} 安全级别：
+            span.security-level(ng-class='{"text-danger":usFn.level=="低","text-warning":usFn.level=="中","text-success":usFn.level=="高"}') {{usFn.level}}
+        table.table
+            tbody
+                tr
+                    td.icon.text-success
+                        i.fa.fa-lg.fa-check-circle
+                    td.title 登陆密码
+                    td.describe 安全性高的密码可以使账号更安全。建议您定期更换密码，且设置一个包含数字和字母，并长度超过6位以上的密码。
+                    td.operation
+                        a(href='javascript:;' ng-click='usFn.btnChangePass()') 修改
+                tr
+                    td.icon(ng-class="{'true':'text-success'}[usFn.user.phoneActivated]")
+                        i.fa.fa-lg.fa-check-circle
+                    td.title 绑定手机
+                    td.describe 绑定手机后，您可以通过手机验证码找回密码，并且可以使用手机号码作为账号进行登录。
+                    td.operation
+                        a(ui-sref='userBindPhone' ng-if='!usFn.user.phoneActivated') 立即绑定
+                        a(ui-sref='userChangePhone' ng-if='usFn.user.phoneActivated') 修改
+                tr
+                    td.icon(ng-class="{'true':'text-success'}[usFn.user.mailActivated]")
+                        i.fa.fa-lg.fa-check-circle
+                    td.title 绑定邮箱
+                    td.describe 绑定邮箱后，您可以通过邮箱回执找回密码，并且可以使用邮箱地址作为账号进行登录。
+                    td.operation
+                        a(ui-sref='userBindMail' ng-if='!usFn.user.mailActivated') 立即绑定
+                        a(ui-sref='userChangeMail' ng-if='usFn.user.mailActivated') 修改
+                tr
+                    td.icon
+                    td.title
+                    td.describe
+                    td.operation
+
