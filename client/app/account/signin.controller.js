@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SignInCtrl', function ($scope, $state, $window, AuthService, ngDialog,CommonService) {
+    .controller('SignInCtrl', function ($scope, $state, $window, AuthService, ngDialog,CommonService,messageService) {
         $scope.signinFn = {
             product:CommonService.product,
             signInError: '',
@@ -24,7 +24,12 @@ angular.module('dleduWebApp')
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                          //$state.go('index');
-                        that.toRedirectUrl();
+                        if("ROLE_ADMIN".indexOf(user.roleNames.toString())>-1){
+                            that.toRedirectUrl();
+                        }else {
+                            messageService.openMsg("您没有管理员权限！")
+                        }
+
                     })
                     .catch(function (err) {
                         that.signError(err);
@@ -51,9 +56,10 @@ angular.module('dleduWebApp')
                     if (subdomain == 'aizhixin' || domain == 'localhost' || domain == 'dlztc') {
                         $window.location.href = decodeURIComponent(that.redirectURL);
                     } else {
-                        $state.go('userCenter');
+                        $state.go('home');
                     }
                 }else{
+                    $state.go('home');
                 }
             },
             init: function () {

@@ -1,8 +1,49 @@
 #layout
     //#pageheader(azx-header data-inverse data-redirect-url='/' data-subnav='subnav')
-    #pageheader(azx-header data-redirect-url='/userCenter' data-subnav='subnav')
+    #pageheader
+        .azxsm-header
+            .nav-fiexd-box
+                .nav-container
+                    div
+                        a.azxlogo(href='javascript:;', ng-click='headerFn.navigate(0)')
+                            span
+                                div(azx-logo='')
+                    ul.account(ng-if='headerFn.user')
+                        li.user-menu(uib-dropdown='uib-dropdown', uib-dropdown-toggle='uib-dropdown-toggle')
+                            span.user-avatar
+                                img.avatar-30.img-circle(ng-src='{{headerFn.user.avatar}}')
+                            span#user-name.dropdown-toggle
+                                span {{headerFn.user.login | cutStr:8}}
+                        li.logo-split
+                        li.user-menu(uib-dropdown='uib-dropdown', uib-dropdown-toggle='uib-dropdown-toggle')
+                            a(ng-click='headerFn.signOut()')
+                                i.fa.fa-power-off
+                                span 退出
     //#pageheader(azx-header data-redirect-url='/userCenter')
+    #pageleftmenu
+       ul.nav.nav-pills.nav-stacked
+           li.active(role="presentation" ui-sref="home")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 首页
+           li(role="presentation")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 学校信息管理
+           li(role="presentation" ui-sref="collegelist")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 院系管理
+           li(role="presentation" ui-sref="majorlist")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 专业管理
+           li(role="presentation" ui-sref="classlist")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 班级管理
+           li(role="presentation" ui-sref="teacherlist")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 教师管理
+           li(role="presentation" ui-sref="studentlist")
+               i.fa.fa-lg.fa-fw.fa-home
+               | 学生管理
     #pagecontent
         .page-content(ui-view='content')
-    #pagerfooter(azx-footer data-product='{{product.name}}' data-version='{{product.version}}')
+   // #pagerfooter(azx-footer data-product='{{product.name}}' data-version='{{product.version}}')
 

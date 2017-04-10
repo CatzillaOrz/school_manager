@@ -1,0 +1,48 @@
+.college-handle-container{
+  margin: 10px;
+  .content-panel{
+    border: 1px solid #cccccc;
+    .prompt{
+      margin: 10px;
+      border-bottom: 1px dashed #cccccc;
+      font-size: 18px;
+      padding-bottom: 15px;
+      font-weight: 400;
+    }
+    .content-form{
+      margin-top: 40px;
+      padding-left: 25%;
+      padding-right: 25%;
+      margin-bottom: 155px;
+    }
+  }
+  .panel-footer{
+    text-align: center;
+    a{
+      margin: 20px;
+    }
+
+  }
+  .finish-prompt{
+    padding: 103px;
+    .prompt{
+      text-align: center;
+      font-family: 'PingFangSC-Regular', 'PingFang SC';
+      font-weight: 400;
+      font-style: normal;
+      font-size: 28px;
+      color: #33495F;
+      line-height: 37px;
+    }
+    .icon{
+      font-family: 'FontAwesome', 'FontAwesome';
+      font-weight: 400;
+      font-style: normal;
+      font-size: 120px;
+      color: #21CA6B;
+      text-align: center;
+      line-height: 120px;
+    }
+
+  }
+}

@@ -56,7 +56,6 @@ module.exports = function (app) {
           req.session.oauth = _oauth;
           req.session.oauth.timestamp_left = req.session.oauth.expires_in * 1000;
           req.session.oauth.timestamp = new Date().getTime();
-          console.log(req);
           res.json(account);
       }).catch(function (e) {
         res.status(401).json({

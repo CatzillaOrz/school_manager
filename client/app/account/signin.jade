@@ -6,10 +6,12 @@
     .login-container
         .bg_layer
         .login-box
+            .slogin-picture-panel
+               img(src="http://7xpscc.com1.z0.glb.clouddn.com/tree.png")
             .slogin-panel
                 .user_signin_inner
                     .title
-                        h4 知 新 树 · 智慧校园
+                        h4 知新平台 · 智慧校园
                     label.signin_user
                         span.i.fa.fa-user
                         input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='账号 / 手机号 / 邮箱 ', type='text' name='username', ng-trim='true', ng-keypress='signinFn.keyPressHandle($event)', required='required', ng-model='signinFn.form.username')
