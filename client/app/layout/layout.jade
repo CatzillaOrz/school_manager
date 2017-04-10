@@ -44,6 +44,40 @@
                i.fa.fa-lg.fa-fw.fa-home
                | 学生管理
     #pagecontent
+        #ribbon
+            span.ribbon-button-alignment.pull-right
+                span.btn.btn-ribbon.hidden-xs(data-title='search')
+                    i.fa.fa-grid
+                    |  Change Grid
+                span#add.btn.btn-ribbon.hidden-xs(data-title='add')
+                    i.fa.fa-plus
+                    |  Add
+                span#search.btn.btn-ribbon(data-title='search')
+                    i.fa.fa-search
+                    span.hidden-mobile Search
+            span.ribbon-button-alignment
+                span#refresh.btn.btn-ribbon(data-action='resetWidgets', data-title='refresh', rel='tooltip', data-placement='bottom', data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.", data-html='true')
+                    i.fa.fa-refresh
+            // breadcrumb
+            ol.breadcrumb
+                li 首页
+                li 院系管理
+            // end breadcrumb
+            //
+              You can also add more buttons to the
+              ribbon for further usability
+              Example below:
+              span.ribbon-button-alignment.pull-right
+                span#search.btn.btn-ribbon.hidden-xs(data-title='search')
+                  i.fa-grid
+                  |  Change Grid
+                span#add.btn.btn-ribbon.hidden-xs(data-title='add')
+                  i.fa-plus
+                  |  Add
+                span#search.btn.btn-ribbon(data-title='search')
+                  i.fa-search
+                  span.hidden-mobile Search
+
         .page-content(ui-view='content')
    // #pagerfooter(azx-footer data-product='{{product.name}}' data-version='{{product.version}}')
 

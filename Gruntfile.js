@@ -526,8 +526,7 @@ module.exports = function (grunt) {
                 files  : {
                     '.tmp/app/global.css'    : '<%= yeoman.client %>/app/global.scss',
                     '.tmp/app/components.css': '<%= yeoman.client %>/app/components.scss',
-                    '.tmp/app/main.css'      : '<%= yeoman.client %>/app/main.scss',
-                    '.tmp/app/dd/dd.css'     : '<%= yeoman.client %>/app/dd/dd.scss'
+                    '.tmp/app/main.css'      : '<%= yeoman.client %>/app/main.scss'
                 }
             }
         },
@@ -578,10 +577,6 @@ module.exports = function (grunt) {
                     '<%= yeoman.client %>/app/main.scss'      : [
                         '<%= yeoman.client %>/app/main.{scss,sass}',
                         '!<%= yeoman.client %>/app/main.{scss,sass}'
-                    ],
-                    '<%= yeoman.client %>/app/dd/dd.scss'     : [
-                        '<%= yeoman.client %>/app/dd/**/*.{scss,sass}',
-                        '!<%= yeoman.client %>/app/dd/dd.{scss,sass}'
                     ]
                 }
             },
