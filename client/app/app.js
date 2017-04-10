@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp', [
-   'ngSanitize',
+    'ngSanitize',
     'ngAnimate',
     'ngResource',
     'ui.router',
@@ -26,7 +26,7 @@ angular.module('dleduWebApp', [
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
                     AuthService.clearUser();
-                    _location.$$path != '/login' && (AuthService.navigation(0,'/login'));
+                    _location.$$path != '/login' && (AuthService.navigation(0, '/login'));
                 } else if (response.status === 404) {
                     // _window.location.href = '/404';
                 } else if (response.status >= 500) {
@@ -34,18 +34,18 @@ angular.module('dleduWebApp', [
                 }
                 return $q.reject(response);
             },
-            'response'     : function (response) {
+            'response': function (response) {
                 return response;
             },
-            'request'      : function (config) {
+            'request': function (config) {
                 return config;
             },
-            'requestError' : function (config) {
+            'requestError': function (config) {
                 return $q.reject(config);
             }
         };
     }])
-    .config(['$urlRouterProvider', '$locationProvider', '$stateProvider', '$httpProvider', 'localStorageServiceProvider',function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, localStorageServiceProvider) {
+    .config(['$urlRouterProvider', '$locationProvider', '$stateProvider', '$httpProvider', 'localStorageServiceProvider', function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, localStorageServiceProvider) {
         console.log('============================');
         console.log($httpProvider.defaults.headers.common);
         //加载拦截器
@@ -56,7 +56,7 @@ angular.module('dleduWebApp', [
         // $httpProvider.defaults.headers.common["Accept"] = 'text/plain';
         console.log($httpProvider.defaults.headers.common);
         //禁用 IE ajax request caching
-        var browser={
+        var browser = {
             versions: function () {
                 var u = navigator.userAgent, app = navigator.appVersion;
                 console.log(u);
@@ -73,15 +73,15 @@ angular.module('dleduWebApp', [
                     iPad: u.indexOf('iPad') > -1, //是否iPad
                     webApp: u.indexOf('Safari') == -1,//是否web应该程序，没有头部与底部
                     google: u.indexOf('Chrome') > -1,
-                    weixin:u.match(/MicroMessenger/i)=="MicroMessenger"
+                    weixin: u.match(/MicroMessenger/i) == "MicroMessenger"
                 };
             }(),
-                language: (navigator.browserLanguage || navigator.language).toLowerCase()
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
         };
 
         // console.log("language"+ CommonService.browser.language);
         // console.log('是否为Ie'+ CommonService.browser.versions.trident);
-        if(browser.versions.trident){
+        if (browser.versions.trident) {
             $httpProvider.defaults.headers.common["Accept"] = 'text/plain';
             $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
             $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
@@ -96,13 +96,13 @@ angular.module('dleduWebApp', [
         $stateProvider
             .state('base', {
                 abstract: true,
-                views   : {
+                views: {
                     root: {
                         templateUrl: 'app/layout/layout.html',
-                        controller : 'LayoutCtrl'
+                        controller: 'LayoutCtrl'
                     }
                 },
-                access  : {requiredLogin: false}
+                access: {requiredLogin: false}
             });
         $locationProvider.html5Mode(true);
     }])
