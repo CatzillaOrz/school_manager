@@ -1,0 +1,19 @@
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .content-panel
+            .prompt {{handleFn.prompt}}
+            .content-form
+                form.form-horizontal.repeater
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 院系名称：
+                        .col-sm-10
+                            input.form-control(placeholder="填写院系名称",ng-model="handleFn.params.name")
+        .panel-footer
+            a.btn.btn-success(ng-click="handleFn.addCollege()") 提交
+            a.btn.btn-default(ui-sref="collegelist") 取消

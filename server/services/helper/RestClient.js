@@ -31,6 +31,8 @@ function request(options) {
         _host = Config.backend_api.hy_host;
     } else  if (options.host && options.host == 'io') {
         _host = Config.backend_api.io_host;
+    }else if(options.host && options.host == 'gateway'){
+        _host = Config.backend_api.api_gateway
     } else {
         _host = Config.backend_api.host
     }

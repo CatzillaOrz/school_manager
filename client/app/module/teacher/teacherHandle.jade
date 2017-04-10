@@ -1,0 +1,44 @@
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .content-panel
+            .prompt {{handleFn.prompt}}
+            .content-form
+                form.form-horizontal.repeater
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 姓名：
+                        .col-sm-10
+                            input.form-control(placeholder="填写教师姓名")
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 工号：
+                        .col-sm-10
+                            input.form-control(placeholder="填写教师工号")
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 性别：
+                        .col-sm-10
+                            label.radio-inline
+                                input#inlineRadio1(type='radio', name='inlineRadioOptions', value='option1')
+                                |  男
+                            label.radio-inline
+                                input#inlineRadio2(type='radio', name='inlineRadioOptions', value='option2')
+                                |  女
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 手机号码：
+                        .col-sm-10
+                            input.form-control(placeholder="填写教师手机号码")
+                    .form-group
+                        .col-sm-2
+                            label.control-label.text-center 邮箱：
+                        .col-sm-10
+                            input.form-control(placeholder="填写教师邮箱")
+        .panel-footer
+            a.btn.btn-success 提交
+            a.btn.btn-default(ui-sref="majorlist") 取消

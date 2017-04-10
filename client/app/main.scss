@@ -8,16 +8,11 @@ common scss
 所有子页面的独立样式都放这里
 */
 
-@import '../app/index/index.scss';
 @import '../app/layout/layout.scss';
+@import "../app/layout/header.scss";
 @import '../app/account/signin.scss';
 @import '../app/account/forgotpassword.scss';
 @import '../app/account/validemail.scss';
-@import '../app/userCenter/userCenter.scss';
-@import '../app/userCenter/dd/rollCall.scss';
-@import '../app/userCenter/em/course.scss';
-@import '../app/userCenter/em/ex.scss';
-@import '../app/userCenter/pt/team.scss';
-@import '../app/userAccount/userAccount.scss';
-@import '../app/userAccount/userProfile.scss';
-@import '../app/userAccount/userSafe.scss';
+@import "../app/home/home.scss";
+@import "../app/module/college/collegeHandle.scss";
+@import "../app/module/college/collegeList.scss";

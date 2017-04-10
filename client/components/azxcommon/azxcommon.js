@@ -284,7 +284,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '                       <img ng-src="{{headerFn.user.avatar}}" class="avatar-30 img-circle"/>' +
             '                   </span>' +
             '                   <span id="user-name" class="dropdown-toggle">' +
-            '                       <span>{{headerFn.user.name | cutStr:8}}</span>' +
+            '                       <span>{{headerFn.user.login | cutStr:8}}</span>' +
             '                       <i class="caret"></i>' +
             '                   </span>' +
             '               <ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +

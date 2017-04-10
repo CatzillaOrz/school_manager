@@ -4,7 +4,6 @@ var AccountService = require('../services/accountService');
 
 module.exports = {
   isSignedIn : function(req, res, next){
-      console.log(req);
     if (req.session.oauth){
       req.user = req.session.oauth;
       return next();

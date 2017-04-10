@@ -11,7 +11,7 @@ module.exports = {
     BACKEND_API   : 'http://dledudev.aizhixin.com/zhixin_api',
     DIANDIAN_API: 'http://dddev.aizhixin.com/diandian_api',
     IO_API: 'http://iodev.aizhixin.com',
-
+    API_GATEWAY:'http://172.16.23.107:3333/org-manager',
     //redis
     SESSION_REDIS_HOST: '172.16.23.30',
     SESSION_REDIS_PORT  : 6379,

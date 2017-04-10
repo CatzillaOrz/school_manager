@@ -39,7 +39,8 @@
     <!-- endinjector -->
     <!-- endbuild -->
 
-
+    <link rel="stylesheet" href="assets/smartadmin/smartadmin-production.min.css"/>
+    <link rel="stylesheet" href="assets/smartadmin/smartadmin-production-plugins.min.css"/>
 </head>
 <body ng-app="dleduWebApp">
 <!--[if lt IE 7]>
@@ -68,6 +69,7 @@
 <script src="bower_components/jcrop/js/jquery.Jcrop.js"></script>
 <script src="bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="bower_components/ng-jcrop/ng-jcrop.js"></script>
+<script src="bower_components/jquery.repeater/jquery.repeater.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -75,20 +77,14 @@
 
 <script src="services/index.js"></script>
 <script src="services/entity/account.js"></script>
-<script src="services/entity/userAccount.js"></script>
-<script src="services/entity/forgetpassword.js"></script>
-<script src="services/entity/website.js"></script>
 <script src="services/common.js"></script>
+<script src="services/message.js"></script>
 <script src="components/index.js"></script>
-<script src="components/modal/modal.service.js"></script>
 <script src="components/azxcommon/azxcommon.js"></script>
 <script src="components/azxswiper/azxswiper.js"></script>
 <!--<script src="components/ng-jcrop/js/jquery.Jcrop.js"></script> -->
 <!--<script src="components/ng-jcrop/ng-jcrop.js"></script>-->
-<script src="services/entity/userCenter/dd.js"></script>
-<script src="services/entity/userCenter/hy.js"></script>
-<script src="services/entity/userCenter/em.js"></script>
-<script src="services/entity/userCenter/pt.js"></script>
+
 <script src="services/upload.js"></script>
 <script src="filters/index.js"></script>
 <script src="app/app.js"></script>
@@ -96,21 +92,39 @@
 <script src="app/layout/layout.controller.js"></script>
 <script src="app/account/account.js"></script>
 <script src="app/account/signin.controller.js"></script>
-<script src="app/account/forgotpassword.controller.js"></script>
-<script src="app/account/validemail.controller.js"></script>
-<script src="app/index/index.controller.js"></script>
-<script src="app/index/index.js"></script>
-<script src="app/userCenter/userCenter.js"></script>
-<script src="app/userCenter/userCenter.controller.js"></script>
-<script src="app/userCenter/dd/rollCall.directive.js"></script>
-<script src="app/userCenter/em/course.directive.js"></script>
-<script src="app/userCenter/em/ex.directive.js"></script>
-<script src="app/userCenter/pt/team.directive.js"></script>
-<script src="app/userAccount/userAccount.js"></script>
-<script src="app/userAccount/userAccount.controller.js"></script>
-<script src="app/userAccount/userProfile.controller.js"></script>
-<script src="app/userAccount/userSafe.controller.js"></script>
 
+ <script src="app/home/home.js"></script>
+<script src="app/home/home.controller.js"></script>
+
+<script src="app/module/college/college.js"></script>
+<script src="services/entity/college.js"></script>
+<script src="app/module/college/collegeList.controller.js"></script>
+<script src="app/module/college/collegeHandle.controller.js"></script>
+<script src="app/module/college/collegeHandleFinish.controller.js"></script>
+
+<script src="app/module/major/major.js"></script>
+<script src="services/entity/major.js"></script>
+<script src="app/module/major/majorList.controller.js"></script>
+<script src="app/module/major/majorHandle.controller.js"></script>
+<script src="app/module/major/majorHandleFinish.controller.js"></script>
+
+<script src="app/module/class/class.js"></script>
+<script src="services/entity/class.js"></script>
+<script src="app/module/class/classList.controller.js"></script>
+<script src="app/module/class/classHandle.controller.js"></script>
+<script src="app/module/class/classHandleFinish.controller.js"></script>
+
+<script src="app/module/teacher/teacher.js"></script>
+<script src="services/entity/teacher.js"></script>
+<script src="app/module/teacher/teacherList.controller.js"></script>
+<script src="app/module/teacher/teacherHandle.controller.js"></script>
+<script src="app/module/teacher/teacherHandleFinish.controller.js"></script>
+
+<script src="app/module/student/student.js"></script>
+<script src="services/entity/student.js"></script>
+<script src="app/module/student/studentList.controller.js"></script>
+<script src="app/module/student/studentHandle.controller.js"></script>
+<script src="app/module/student/studentHandleFinish.controller.js"></script>
 <!-- endinjector -->
 <!-- endbuild -->
 </body>

@@ -37,7 +37,8 @@ var all = {
         pt_host: process.env.PT_API ||  'http://ptdev.aizhixin.com/pt_api',
         hy_host: process.env.HY_API ||  'http://hy.aizhixindev.com/ew_api',
         io_host: process.env.IO_API ||  'http://iodev.aizhixin.com',
-        open_host: process.env.BACKEND_OPEN_API || 'http://127.0.0.1:8080/dledu'
+        open_host: process.env.BACKEND_OPEN_API || 'http://127.0.0.1:8080/dledu',
+        api_gateway:process.env.API_GATEWAY || 'http://172.16.23.120:3333/org-manager'
     },
 
     oa: 'http://172.16.1.103',
