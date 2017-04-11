@@ -1,11 +1,11 @@
-# 在线教育平台
+# 知新学校管理平台
 
 ## 安装&运行
 
 * Python 2.7
 * Ruby
 * compass:  gem install compass   //此处可使用淘宝ruby镜像， https://ruby.taobao.org/
-* Node.js: https://nodejs.org/dist/v0.12.7/
+* Node.js: https://nodejs.org/dist/v4.4+/
 * c++: (Linux)`gcc-c++`,  (Widnows)`VISUAL C++ 2010 EXPRESS` or `Visual Studio 2010`  or lastest
 * Bower:  npm install -g bower
 * Grunt:  npm install -g grunt-cli
@@ -25,7 +25,7 @@
 
 ### For Test
 
-> $ pm2 delete DLEDU_Web    // 如果DLEDU_Web不在pm2的list中（$ pm2 list 查看）则不执行此命令
+> $ pm2 delete school_manager    // 如果school_manager不在pm2的list中（$ pm2 list 查看）则不执行此命令
 
 > $ npm install
 
@@ -39,21 +39,23 @@
 
 > $ export NODE_ENV=production
 
-> $ export BACKEND_API=http://127.0.0.1:8080   // 后端业务服务REST API地址
+> $ export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api   // 知新登录验证api
 
-> $ export BACKEND_OPEN_API=http://api.dlztc.com   // 后端业务服务REST OPEN API地址
+> $ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api   // 点点api
+
+> $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
 
 > $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
 
-> $ export SESSION_REDIS_PORT=6479   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
+> $ export SESSION_REDIS_PORT=6379   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
 
-> $ export SESSION_REDIS_PASS=Good2015   // 用于缓存Session的Redis服务密码， 缺省值：`Good2015`
+> $ export SESSION_REDIS_PASS=   // 用于缓存Session的Redis服务密码， 缺省值：``
 
 > $ export SESSION_REDIS_DB=0                // 用于缓存Session的Redis服务DB的index， 缺省值：`0`
 
-> $ export SESSION_REDIS_PREFIX=dledu_web_session:   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`aizhixin_frontend_session:`
+> $ export SESSION_REDIS_PREFIX=dledu_web_session   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`dledu_web_session`
 
-> $ pm2 start server/app.js -i max --name 'DLEDU_Web'
+> $ pm2 start server/app.js -i max --name 'school_manager'
 
 ### For Production
 
@@ -69,23 +71,25 @@
 
 > $ export NODE_ENV=production
 
-> $ export BACKEND_API=http://127.0.0.1:8080   // 后端业务服务REST API地址
+> $ export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api   // 知新登录验证api
 
-> $ export BACKEND_OPEN_API=http://api.dlztc.com   // 后端业务服务REST OPEN API地址
+> $ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api   // 点点api
+
+> $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
 
 > $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
 
-> $ export SESSION_REDIS_PORT=6479   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
+> $ export SESSION_REDIS_PORT=6379   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
 
-> $ export SESSION_REDIS_PASS=Good2015   // 用于缓存Session的Redis服务密码， 缺省值：`Good2015`
+> $ export SESSION_REDIS_PASS=   // 用于缓存Session的Redis服务密码， 缺省值：``
 
 > $ export SESSION_REDIS_DB=0                // 用于缓存Session的Redis服务DB的index， 缺省值：`0`
 
-> $ export SESSION_REDIS_PREFIX=dledu_web_session:   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`aizhixin_frontend_session:`
+> $ export SESSION_REDIS_PREFIX=dledu_web_session   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`dledu_web_session`
 
 > $ npm install --production
 
-> $ pm2 start server/app.js -i max --name 'DLEDU_Web' 
+> $ pm2 start server/app.js -i max --name 'school_manager'
 
 ## Main Stack
 
