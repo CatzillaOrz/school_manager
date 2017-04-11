@@ -28,7 +28,10 @@ angular.module('dleduWebService')
                 var major = $resource('api/major/getMajorById');
                 return major.get(params);
             },
-
+            getMajorDropList: function (params) {
+                var majorList = $resource('api/major/getMajorDropList');
+                return majorList.get(params);
+            },
         }
 
     });

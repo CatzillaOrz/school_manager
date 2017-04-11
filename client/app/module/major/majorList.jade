@@ -20,9 +20,9 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    span.input-group-addon
+                                    input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder' ng-model="majorListFn.params.name")
+                                    span.input-group-addon(ng-click="majorListFn.getMajorList()")
                                         i.glyphicon.glyphicon-search
-                                    input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder')
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.ColVis_Button.ColVis_MasterButton(ui-sref="majorhandle({handle:'create'})")
@@ -65,24 +65,7 @@
                                 |  entries
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination.pagination-sm
-                                    li#datatable_col_reorder_previous.paginate_button.previous.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Previous
-                                    li.paginate_button.active(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 1
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 2
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 3
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 4
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 5
-                                    li#datatable_col_reorder_ellipsis.paginate_button.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') …
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 10
-                                    li#datatable_col_reorder_next.paginate_button.next(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Next
+                                ul.pagination-sm(uib-pagination, total-items='majorListFn.page.totalElements', max-size='majorListFn.page.pageSize' ng-model='majorListFn.page.pageNumber',ng-change="majorListFn.findMajorByPage()" boundary-link-numbers='true', rotate='false')
+
             // end widget content
         // end widget div

@@ -29,7 +29,7 @@ angular.module('dleduWebService')
                 return college.get(params);
             },
             getCollegeDropList: function (params) {
-                var majorList = $resource('api/College/getCollegeDropList');
+                var majorList = $resource('api/college/getCollegeDropList');
                 return majorList.get(params);
             },
         }
