@@ -62,6 +62,7 @@ angular.module('dleduWebApp')
                 if(that.handle=="edit"){
                     that.params.id=$state.params.id;
                     that.title="编辑院系信息";
+                    that.prompt="填写以下信息以修改院系",
                     that.getCollegeById();
                 };
 

@@ -13,8 +13,8 @@
                         .col-sm-2
                             label.control-label.text-center 选择学院：
                         .col-sm-10
-                            select.form-control(ng-model="handleFn.collegeId")
-                                option(ng-repeat="college in handleFn.collegeDropList" ng-value="college.id") {{college.name}}
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2)
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 专业名称：

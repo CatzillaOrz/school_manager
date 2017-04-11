@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassListCtrl', function ($scope, ClassService) {
+    .controller('ClassListCtrl', function ($scope, ClassService,AuthService) {
         $scope.classListFn={
             //班级列表
             classList: [],

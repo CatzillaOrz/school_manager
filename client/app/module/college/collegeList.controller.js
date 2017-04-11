@@ -13,27 +13,46 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
-            params: {},
+            params: {
+                name:""
+            },
 
             // 获取学院列表
             getCollegeList: function () {
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
-                }
+                    pageNumber: 0,
+                    pageSize: 10
+                };
+                params.name=that.params.name;
                 CollegeService.getCollegeList(params).$promise
                     .then(function (data) {
                         that.collegeList = data.data;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
             //根据名称查询
-            findCollegeByName: function () {
+            findCollegeByPage: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                params.name=that.params.name;
+                CollegeService.getCollegeList(params).$promise
+                    .then(function (data) {
+                        that.collegeList = data.data;
+                        that.page=data.page;
+                        that.page.pageNumber+=that.page.pageNumber;
+                    })
+                    .catch(function (error) {
 
+                    })
             },
             //删除
             deleteCollege: function () {

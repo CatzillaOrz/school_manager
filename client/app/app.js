@@ -14,7 +14,7 @@ angular.module('dleduWebApp', [
     'validation',
     'validation.rule',
     'ngFileUpload',
-    //'ngJcrop',
+    'ui.select2',
     'azx.swiper',
     'azx.common'
 ])

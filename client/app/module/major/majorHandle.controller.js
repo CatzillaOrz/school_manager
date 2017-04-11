@@ -90,6 +90,7 @@ angular.module('dleduWebApp')
                     that.params.id=$state.params.id;
                     that.getMajorById();
                     that.title="编辑院系信息";
+                    that.prompt="填写以下信息以修改专业",
                     that.getMajorById();
                 };
 
