@@ -73,7 +73,7 @@ var all = {
             port: process.env.SESSION_REDIS_PORT || 6379,
             pass: process.env.SESSION_REDIS_PASS || '',
             db: process.env.SESSION_REDIS_DB || 0,
-            prefix: process.env.SESSION_REDIS_PREFIX || 'aizhixin_frontend_session:',
+            prefix: process.env.SESSION_REDIS_PREFIX || 'aizhixin_frontend_session',
             domain: process.env.SESSION_DOMAIN || 'aizhixin.com'
         }
     }

@@ -19,6 +19,7 @@ angular.module('dleduWebApp')
             getMajorList: function () {
                 var that = this;
                 var params = {
+                    name:"",
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize

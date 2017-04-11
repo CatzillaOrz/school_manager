@@ -212,11 +212,11 @@ module.exports = function (grunt) {
 
         // Automatically inject Bower components into the app
         wiredep: {
-            target: {
-                src       : '<%= yeoman.client %>/index.html',
-                ignorePath: '<%= yeoman.client %>/',
-                exclude   : [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/]
-            }
+            // target: {
+            //     src       : '<%= yeoman.client %>/index.html',
+            //     ignorePath: '<%= yeoman.client %>/',
+            //     exclude   : [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/]
+            // }
         },
 
         // Renames files for browser caching purposes
@@ -632,7 +632,7 @@ module.exports = function (grunt) {
                 'injector:sass',
                 'concurrent:server',
                 //'injector',
-                'wiredep',
+              //  'wiredep',
                 'autoprefixer',
                 'concurrent:debug'
             ]);
@@ -644,7 +644,7 @@ module.exports = function (grunt) {
             'injector:sass',
             'concurrent:server',
             //'injector',
-            'wiredep',
+           // 'wiredep',
             'autoprefixer',
             'express:dev',
             'wait',
@@ -687,7 +687,7 @@ module.exports = function (grunt) {
                 'injector:sass',
                 'concurrent:test',
                 //'injector',
-                'wiredep',
+               // 'wiredep',
                 'autoprefixer',
                 'express:dev',
                 'protractor'
@@ -705,7 +705,7 @@ module.exports = function (grunt) {
         'injector:sass',
         'concurrent:dist',
         //'injector',
-        'wiredep',
+      //  'wiredep',
         'useminPrepare',
         'autoprefixer',
         //'ngtemplates',

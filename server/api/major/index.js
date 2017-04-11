@@ -16,5 +16,4 @@ router.delete('/deleteMajor',auth.isSignedIn, controller.deleteMajor);
 router.put('/updateMajor',auth.isSignedIn, controller.updateMajor);
 router.get('/getMajorById',auth.isSignedIn, controller.getMajorById);
 
-
 module.exports = router;
