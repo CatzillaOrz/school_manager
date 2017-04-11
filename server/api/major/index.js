@@ -11,6 +11,9 @@ var router = express.Router();
 
 
 router.get('/getMajorList',auth.isSignedIn, controller.getMajorList);
-
+router.post('/addMajor',auth.isSignedIn, controller.addMajor);
+router.delete('/deleteMajor',auth.isSignedIn, controller.deleteMajor);
+router.put('/updateMajor',auth.isSignedIn, controller.updateMajor);
+router.get('/getMajorById',auth.isSignedIn, controller.getMajorById);
 
 module.exports = router;

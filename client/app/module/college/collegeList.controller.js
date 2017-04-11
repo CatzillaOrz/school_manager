@@ -1,45 +1,66 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('CollegeListCtrl', function ($scope,AuthService, CollegeService,messageService) {
-        $scope.collegeListFn={
+    .controller('CollegeListCtrl', function ($scope, AuthService, CollegeService, messageService) {
+        $scope.collegeListFn = {
             //学院列表
-            collegeList:[],
+            collegeList: [],
+            //当前操作的college
+            currentCollege: {},
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
                 pageSize: 10
             },
-            params:{
-
+            params: {
+                name:""
             },
-            //当前操作的college
-            currentCollege:{},
-             // 获取学院列表
-            getCollegeList:function () {
-                var that=this;
-                var params={
+
+            // 获取学院列表
+            getCollegeList: function () {
+                var that = this;
+                var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber:that.page.pageNumber,
-                    pageSize:that.page.pageSize
-                }
+                    pageNumber: 0,
+                    pageSize: 10
+                };
+                params.name=that.params.name;
                 CollegeService.getCollegeList(params).$promise
                     .then(function (data) {
-                        that.collegeList=data.data;
+                        that.collegeList = data.data;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
             //根据名称查询
-            findCollegeByName:function () {
+            findCollegeByPage: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                params.name=that.params.name;
+                CollegeService.getCollegeList(params).$promise
+                    .then(function (data) {
+                        that.collegeList = data.data;
+                        that.page=data.page;
+                        that.page.pageNumber+=that.page.pageNumber;
+                    })
+                    .catch(function (error) {
 
+                    })
             },
             //删除
-            deleteCollege:function () {
-                var _this=this;
-                var params={id:_this.currentCollege.id}
+            deleteCollege: function () {
+                var _this = $scope.collegeListFn;
+                var params = {
+                    id: _this.currentCollege.id,
+                    userId: AuthService.getUser().id,
+                }
                 CollegeService.deleteCollege(params).$promise
                     .then(function (data) {
                         messageService.openMsg("学院删除成功！");
@@ -50,11 +71,11 @@ angular.module('dleduWebApp')
                     })
             },
             //删除提示
-            deletePrompt:function (entity) {
-                this.currentCollege=entity;
-                messageService.getMsg("您确定要删除此学院吗？",this.deleteCollege)
+            deletePrompt: function (entity) {
+                this.currentCollege = entity;
+                messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege)
             },
-            init:function () {
+            init: function () {
                 this.getCollegeList();
             }
         };

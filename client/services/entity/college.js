@@ -20,13 +20,17 @@ angular.module('dleduWebService')
                 return college.remove(params);
             },
             updateCollege: function (params) {
-                var college = $resource('api/college/getCollegeList','',{
+                var college = $resource('api/college/updateCollege','',{
                     update: {method:'PUT'}});
                 return college.update(params);
             },
             getCollegeById: function (params) {
                 var college = $resource('api/college/getCollegeById');
                 return college.get(params);
+            },
+            getCollegeDropList: function (params) {
+                var majorList = $resource('api/College/getCollegeDropList');
+                return majorList.get(params);
             },
         }
 
