@@ -107,10 +107,10 @@ angular.module('dleduWebApp', [
         $locationProvider.html5Mode(true);
     }])
     .run(function ($state, $rootScope, AuthService, $window) {
-        //站内页面的访问权限验证
-        // $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
-        //     if (toState.access.requiredLogin && !AuthService.authorize()) {
-        //         $window.location.href = '/login';
-        //     }
-        // });
+       // 站内页面的访问权限验证
+        $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+            if (toState.access.requiredLogin && !AuthService.authorize()) {
+                $window.location.href = '/login';
+            }
+        });
     });
