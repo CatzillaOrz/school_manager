@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope,CommonService,$rootScope,AuthService) {
+    .controller('LayoutCtrl', function ($scope,CommonService,$rootScope,AuthService,$window,$state) {
         $scope.subnav = CommonService.subnav;
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
@@ -59,4 +59,13 @@ angular.module('dleduWebApp')
                 }
             }
         };
+        $scope.layoutFn ={
+            lcReload:function(){
+                $window.location.reload();
+            }
+        };
+        console.log($state);
+        $scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+            console.log(evt);
+        });
     });

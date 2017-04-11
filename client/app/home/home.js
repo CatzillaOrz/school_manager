@@ -12,6 +12,9 @@ angular.module('dleduWebApp')
                         controller : 'HomeCtrl',
                         templateUrl: 'app/home/home.html'
                     }
+                },
+                ncyBreadcrumb: {
+                    label: '首页'
                 }
             })
     });
