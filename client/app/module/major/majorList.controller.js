@@ -13,28 +13,46 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
-            params: {},
+            params: {
+                name:"",
+            },
 
             // 获取专业列表
             getMajorList: function () {
                 var that = this;
                 var params = {
-                    name:"",
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
-                }
+                };
+                params.name=that.params.name;
                 MajorService.getMajorList(params).$promise
                     .then(function (data) {
                         that.majorList = data.data;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
             //根据名称查询
-            findMajorByName: function () {
+            findMajorByPage: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                params.name=that.params.name;
+                MajorService.getMajorList(params).$promise
+                    .then(function (data) {
+                        that.majorList = data.data;
+                        that.page=data.page;
+                        that.page.pageNumber+=that.page.pageNumber;
+                    })
+                    .catch(function (error) {
 
+                    })
             },
             //删除
             deleteMajor: function () {

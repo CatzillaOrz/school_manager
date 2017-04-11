@@ -20,9 +20,9 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    span.input-group-addon
+                                    input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder' ng-model="classListFn.params.name")
+                                    span.input-group-addon(ng-click="classListFn.getClassList()")
                                         i.glyphicon.glyphicon-search
-                                    input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder')
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.ColVis_Button.ColVis_MasterButton(ui-sref="classhandle({handle:'create'})")
@@ -36,86 +36,20 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 学生
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row')
+                            tr.odd(role='row' ng-repeat="class in classListFn.classList")
                                 td.sorting_1 1
                                 td.expand
-                                    span.responsiveExpander
-                                    | Jennifer
+                                    span.responsiveExpander {{class.name}}
                                 td 1-342-463-8341
                                 td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 2
-                                td.expand
-                                    span.responsiveExpander
-                                    | Clark
-                                td 1-516-859-1120
-                                td 7162
-                                td Machelen
-                            tr.odd(role='row')
-                                td.sorting_1 3
-                                td.expand
-                                    span.responsiveExpander
-                                    | Brendan
-                                td 1-724-406-2487
-                                td 98611
-                                td Norman
-                            tr.even(role='row')
-                                td.sorting_1 4
-                                td.expand
-                                    span.responsiveExpander
-                                    | Warren
-                                td 1-412-485-9725
-                                td 10312
-                                td Sautin
-                            tr.odd(role='row')
-                                td.sorting_1 5
-                                td.expand
-                                    span.responsiveExpander
-                                    | Rajah
-                                td 1-849-642-8777
-                                td 29131
-                                td Glovertown
-                            tr.even(role='row')
-                                td.sorting_1 6
-                                td.expand
-                                    span.responsiveExpander
-                                    | Demetrius
-                                td 1-470-329-9627
-                                td 1883
-                                td Kapolei
-                            tr.odd(role='row')
-                                td.sorting_1 7
-                                td.expand
-                                    span.responsiveExpander
-                                    | Keefe
-                                td 1-188-191-2346
-                                td 2211BM
-                                td Modena
-                            tr.even(role='row')
-                                td.sorting_1 8
-                                td.expand
-                                    span.responsiveExpander
-                                    | Leila
-                                td 1-663-655-8904
-                                td 75286
-                                td Hondelange
-                            tr.odd(role='row')
-                                td.sorting_1 9
-                                td.expand
-                                    span.responsiveExpander
-                                    | Fritz
-                                td 1-598-234-7837
-                                td 2324
-                                td Monte San Pietrangeli
-                            tr.even(role='row')
-                                td.sorting_1 10
-                                td.expand
-                                    span.responsiveExpander
-                                    | Cassady
-                                td 1-212-965-8381
-                                td 5898
-                                td Huntly
+                                td
+                                    a.handle(ui-sref="classhandle({handle:'edit',id:class.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle(ng-click="classListFn.deletePrompt(class)")
+                                        i.fa.fa-trash-o
+                                        span 删除
+
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
@@ -128,24 +62,6 @@
                                 |  entries
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination.pagination-sm
-                                    li#datatable_col_reorder_previous.paginate_button.previous.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Previous
-                                    li.paginate_button.active(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 1
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 2
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 3
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 4
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 5
-                                    li#datatable_col_reorder_ellipsis.paginate_button.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') …
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 10
-                                    li#datatable_col_reorder_next.paginate_button.next(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Next
+                                ul.pagination-sm(uib-pagination, total-items='classListFn.page.totalElements', max-size='classListFn.page.pageSize' ng-model='classListFn.page.pageNumber',ng-change="classListFn.findClassByPage()" boundary-link-numbers='true', rotate='false')
             // end widget content
         // end widget div

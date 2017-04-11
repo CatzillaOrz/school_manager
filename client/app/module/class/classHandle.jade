@@ -13,28 +13,20 @@
                         .col-sm-2
                             label.control-label.text-center 选择学院：
                         .col-sm-10
-                            select.form-control
-                                option 1
-                                option 2
-                                option 3
-                                option 4
-                                option 5
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2)
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 选择专业：
                         .col-sm-10
-                            select.form-control
-                                option 1
-                                option 2
-                                option 3
-                                option 4
-                                option 5
+                            select.form-control(ng-model="handleFn.majorId" ui-select2)
+                                option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}") {{major.name}}
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 专班级名称：
                         .col-sm-10
-                            input.form-control(placeholder="填写班级名称")
+                            input.form-control(placeholder="填写班级名称" ng-model="handleFn.params.name")
 
         .panel-footer
-            a.btn.btn-success 提交
+            a.btn.btn-success(ng-click="handleFn.submit()") 提交
             a.btn.btn-default(ui-sref="classlist") 取消
