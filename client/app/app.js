@@ -13,6 +13,7 @@ angular.module('dleduWebApp', [
     'ngDialog',
     'validation',
     'validation.rule',
+    'ncy-angular-breadcrumb',
     'ngFileUpload',
     //'ngJcrop',
     'azx.swiper',
@@ -45,16 +46,14 @@ angular.module('dleduWebApp', [
             }
         };
     }])
-    .config(['$urlRouterProvider', '$locationProvider', '$stateProvider', '$httpProvider', 'localStorageServiceProvider', function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, localStorageServiceProvider) {
-        console.log('============================');
-        console.log($httpProvider.defaults.headers.common);
+    .config(['$urlRouterProvider', '$locationProvider', '$stateProvider', '$httpProvider', 'localStorageServiceProvider','$breadcrumbProvider', function ($urlRouterProvider, $locationProvider, $stateProvider, $httpProvider, localStorageServiceProvider,$breadcrumbProvider) {
+
         //加载拦截器
         $httpProvider.interceptors.push('httpInterceptor');
         //$http请求头配置
         $httpProvider.defaults.headers.get = $httpProvider.defaults.headers.get || {};
         // $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-        // $httpProvider.defaults.headers.common["Accept"] = 'text/plain';
-        console.log($httpProvider.defaults.headers.common);
+
         //禁用 IE ajax request caching
         var browser = {
             versions: function () {
@@ -105,6 +104,10 @@ angular.module('dleduWebApp', [
                 access: {requiredLogin: false}
             });
         $locationProvider.html5Mode(true);
+
+        $breadcrumbProvider.setOptions({
+            prefixStateName: 'home'
+        });
     }])
     .run(function ($state, $rootScope, AuthService, $window) {
         //站内页面的访问权限验证

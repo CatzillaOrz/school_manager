@@ -25,7 +25,7 @@
                                     input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder')
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.ColVis_Button.ColVis_MasterButton(ui-sref="collegehandle({handle:'create'})")
+                                button.ColVis_Button.ColVis_MasterButton(ui-sref="collegeCreat")
                                     span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -48,7 +48,7 @@
                                 td Fogo
                                 td
                                     a.handle
-                                        i.fa.fa-pencil-square-o(ui-sref="collegehandle({handle:'edit',id:college.id})")
+                                        i.fa.fa-pencil-square-o(ui-sref="collegeEdit({id:4})")
                                         span 编辑
                                     a.handle(ng-click="collegeListFn.deletePrompt(college)")
                                         i.fa.fa-trash-o
