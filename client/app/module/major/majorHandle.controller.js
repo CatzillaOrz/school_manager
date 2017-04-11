@@ -1,35 +1,98 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('MajorHandleCtrl', function ($scope, $state) {
+    .controller('MajorHandleCtrl', function ($scope, $state,CollegeService,MajorService,AuthService,messageService) {
         $scope.handleFn={
-            title:"新建专业",
-            prompt:"填写以下信息以建立新的专业",
-            collegeId:"",
+            title:"新建院系",
+            prompt:"填写以下信息以建立新的院系",
+            handle:"create",
+            collegeDropList:[],
+            collegeId:0,
+            params:{
+                id:0,
+                orgId: AuthService.getUser().orgId,
+                name:"",
+                userId:AuthService.getUser().id
+            },
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 10
+            },
+            /**
+             *
+             */
+            addMajor:function () {
+                var that=this;
+                var params=that.params;
+                params.collegeId=that.collegeId;
+                MajorService.addMajor(that.params).$promise
+                    .then(function (data) {
+                        $state.go("majorfinish")
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("专业添加失败")
+                    })
+            },
+            getMajorById:function () {
+                var that= this;
+                var params={
+                    id: that.params.id
+                }
+                MajorService.getMajorById(params).$promise
+                    .then(function (data) {
+                        that.params.name=data.name;
+                    })
+                    .catch(function (error) {
+                        //messageService.openMsg("专业添加失败")
+                    })
+            },
+            updateMajor:function () {
+                var that=this;
+                var params=that.params;
+                params.collegeId=that.collegeId;
+                MajorService.updateMajor(this.params).$promise
+                    .then(function (data) {
+                        $state.go("majorfinish",{handle:"edit"})
+                    })
+                    .catch(function (error) {
+                        //messageService.openMsg("专业添加失败")
+                    })
+            },
+            submit:function () {
+                var that=this;
+                if(that.handle=="edit"){
+                    that.updateMajor();
+                }else {
+                    that.addMajor();
+                }
+            },
+            getCollegeDropList:function () {
+                var that=this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                }
+                CollegeService.getCollegeDropList(params).$promise
+                    .then(function (data) {
+                        that.collegeDropList=data.data;
+                    })
+                    .catch(function (error) {
+                    })
+            },
             init:function () {
                 var that=this;
-                var handle=$state.params.handle;
-                if(handle=="edit"){
-                    that.collegeId=$state.params.id;
-                    that.title="编辑专业信息"
+                that.handle=$state.params.handle;
+                that.getCollegeDropList();
+                if(that.handle=="edit"){
+                    that.params.id=$state.params.id;
+                    that.getMajorById();
+                    that.title="编辑院系信息";
+                    that.getMajorById();
                 };
-                $('.repeater').repeater({
-                    isFirstItemUndeletable: false,
-                    defaultValues: {
-                        'text-input': '',
-                    },
-                    show: function () {
-                        $(this).slideDown();
-                    },
-                    hide: function (deleteElement) {
-                        // if(confirm('Are you sure you want to delete this element?')) {
-                            $(this).slideUp(deleteElement);
-                        // }
-                    },
-                    ready: function (setIndexes) {
 
-                    }
-                });
             }
         };
         $scope.handleFn.init();
