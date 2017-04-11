@@ -46,6 +46,7 @@ var CollegeService = {
         RestClient.delete({
             host: 'gateway',
             path: '/v1/college/delete/'+params.id,
+            params:{userId:params.userId}
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -74,7 +75,22 @@ var CollegeService = {
     getCollegeById: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway',
-            path: '/v1/college/get',
+            path: '/v1/college/get/'+params.id,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                // callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    getCollegeDropList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/college/droplist',
             params,
             access_token: access_token
         }).then(function (res) {

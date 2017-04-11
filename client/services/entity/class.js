@@ -7,9 +7,26 @@ angular.module('dleduWebService')
     .factory('ClassService', function ($http, $q,$resource) {
 
         return {
-            getClassList: function () {
-                var classList = $resource('api/class/getClassList');
-                return classList.get();
+            getClassList: function (params) {
+                var classesList = $resource('api/classes/getClassList');
+                return classesList.get(params);
+            },
+            addClass:function (params) {
+                var classes=$resource('api/classes/addClass');
+                return classes.save(params);
+            },
+            deleteClass:function (params) {
+                var classes=$resource('api/classes/deleteClass');
+                return classes.remove(params);
+            },
+            updateClass: function (params) {
+                var classes = $resource('api/classes/updateClass','',{
+                    update: {method:'PUT'}});
+                return classes.update(params);
+            },
+            getClassById: function (params) {
+                var classes = $resource('api/classes/getClassById');
+                return classes.get(params);
             },
         }
 

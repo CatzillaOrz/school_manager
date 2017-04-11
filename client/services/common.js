@@ -5,7 +5,7 @@ angular.module('dleduWebService')
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.4.5.04'
+                version: '0.0.0.1'
             },
             subnav: {
                 index: 0,

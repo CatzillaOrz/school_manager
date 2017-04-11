@@ -11,6 +11,11 @@ var router = express.Router();
 
 
 router.get('/getClassList',auth.isSignedIn, controller.getClassList);
+router.post('/addClass',auth.isSignedIn, controller.addClass);
+router.delete('/deleteClass',auth.isSignedIn, controller.deleteClass);
+router.put('/updateClass',auth.isSignedIn, controller.updateClass);
+router.get('/getClassById',auth.isSignedIn, controller.getClassById);
+
 
 
 module.exports = router;

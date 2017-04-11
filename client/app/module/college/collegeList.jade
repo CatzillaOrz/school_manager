@@ -47,8 +47,8 @@
                                 td 35728
                                 td Fogo
                                 td
-                                    a.handle
-                                        i.fa.fa-pencil-square-o(ui-sref="collegehandle({handle:'edit',id:college.id})")
+                                    a.handle(ui-sref="collegehandle({handle:'edit',id:college.id})")
+                                        i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="collegeListFn.deletePrompt(college)")
                                         i.fa.fa-trash-o
@@ -66,6 +66,6 @@
                                 |  entries
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination='', total-items='"20"', ng-model='bigCurrentPage', max-size='"10"', boundary-link-numbers='true', rotate='false')
+                                ul.pagination-sm(uib-pagination='', total-items='collegeListFn.page.totalPages', ng-model='collegeListFn.page.pageNumber', max-size='"10"', boundary-link-numbers='true', rotate='false')
             // end widget content
         // end widget div
