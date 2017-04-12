@@ -20,9 +20,9 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    span.input-group-addon
+                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="teacherListFn.params.name")
+                                    span.input-group-addon(ng-click="teacherListFn.getTeacherList()")
                                         i.glyphicon.glyphicon-search
-                                    input.form-control(type='search', placeholder='', aria-controls='datatable_col_reorder')
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.ColVis_Button.ColVis_MasterButton(ui-sref="teacherhandle({handle:'create'})")
@@ -40,126 +40,24 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 手机号
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row')
+                            tr.odd(role='row' ng-repeat="teacher in teacherListFn.teacherList")
                                 td.sorting_1 1
                                 td.expand
                                     span.responsiveExpander
-                                    | Jennifer
+                                    | {{teacher.name}}
                                 td 1-342-463-8341
                                 td Et Rutrum Non Associates
                                 td 35728
                                 td Fogo
                                 td Et Rutrum Non Associates
                                 td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 2
-                                td.expand
-                                    span.responsiveExpander
-                                    | Clark
-                                td 1-516-859-1120
-                                td Nam Ac Inc.
-                                td 7162
-                                td Machelen
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.odd(role='row')
-                                td.sorting_1 3
-                                td.expand
-                                    span.responsiveExpander
-                                    | Brendan
-                                td 1-724-406-2487
-                                td Enim Commodo Limited
-                                td 98611
-                                td Norman
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 4
-                                td.expand
-                                    span.responsiveExpander
-                                    | Warren
-                                td 1-412-485-9725
-                                td Odio Etiam Institute
-                                td 10312
-                                td Sautin
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.odd(role='row')
-                                td.sorting_1 5
-                                td.expand
-                                    span.responsiveExpander
-                                    | Rajah
-                                td 1-849-642-8777
-                                td Neque Ltd
-                                td 29131
-                                td Glovertown
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 6
-                                td.expand
-                                    span.responsiveExpander
-                                    | Demetrius
-                                td 1-470-329-9627
-                                td Euismod In Ltd
-                                td 1883
-                                td Kapolei
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.odd(role='row')
-                                td.sorting_1 7
-                                td.expand
-                                    span.responsiveExpander
-                                    | Keefe
-                                td 1-188-191-2346
-                                td Molestie Industries
-                                td 2211BM
-                                td Modena
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 8
-                                td.expand
-                                    span.responsiveExpander
-                                    | Leila
-                                td 1-663-655-8904
-                                td Est LLC
-                                td 75286
-                                td Hondelange
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.odd(role='row')
-                                td.sorting_1 9
-                                td.expand
-                                    span.responsiveExpander
-                                    | Fritz
-                                td 1-598-234-7837
-                                td Et Ultrices Posuere Institute
-                                td 2324
-                                td Monte San Pietrangeli
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
-                            tr.even(role='row')
-                                td.sorting_1 10
-                                td.expand
-                                    span.responsiveExpander
-                                    | Cassady
-                                td 1-212-965-8381
-                                td Vitae Erat Vel Company
-                                td 5898
-                                td Huntly
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
+                                td
+                                    a.handle(ui-sref="teacherhandle({handle:'edit',id:teacher.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle(ng-click="teacherListFn.deletePrompt(teacher)")
+                                        i.fa.fa-trash-o
+                                        span 删除
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
@@ -171,25 +69,9 @@
                                 span.text-primary 100
                                 |  entries
                         .col-sm-6.col-xs-12
-                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination.pagination-sm
-                                    li#datatable_col_reorder_previous.paginate_button.previous.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Previous
-                                    li.paginate_button.active(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 1
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 2
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 3
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 4
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 5
-                                    li#datatable_col_reorder_ellipsis.paginate_button.disabled(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') …
-                                    li.paginate_button(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') 10
-                                    li#datatable_col_reorder_next.paginate_button.next(aria-controls='datatable_col_reorder', tabindex='0')
-                                        a(href='#') Next
+                                #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                    ul.pagination-sm(uib-pagination, total-items='teacherListFn.page.totalElements', max-size='teacherListFn.page.pageSize' ng-model='teacherListFn.page.pageNumber',ng-change="teacherListFn.findStudentByPage()" boundary-link-numbers='true', rotate='false')
+
+
             // end widget content
         // end widget div

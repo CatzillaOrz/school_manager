@@ -29,6 +29,13 @@ var ErrorCode = {
                 }
             });
         });
+    },
+    errorHandle:function(res){
+        const statusCode = res.status.code;
+        return {
+            code: statusCode,
+            message: res.entity.cause
+        };
     }
 };
 

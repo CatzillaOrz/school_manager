@@ -8,18 +8,20 @@
         .content-panel
             .prompt {{handleFn.prompt}}
             .content-form
-                form.form-horizontal.repeater
+                form.form-horizontal.repeater(name="majorForm")
                     .form-group
                         .col-sm-2
+                            lable.required *
                             label.control-label.text-center 选择学院：
                         .col-sm-10
                             select.form-control(ng-model="handleFn.collegeId" ui-select2)
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
                         .col-sm-2
+                            lable.required *
                             label.control-label.text-center 专业名称：
                         .col-sm-10
-                            input.form-control(placeholder="填写专业名称" ng-model="handleFn.params.name")
+                            input.form-control(placeholder="请填写不超过30个字专业名称" ng-model="handleFn.params.name" validator="required, maxlength=30")
         .panel-footer
-            a.btn.btn-success(ng-click="handleFn.submit()") 提交
+            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
             a.btn.btn-default(ui-sref="majorlist") 取消
