@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('ClassListCtrl', function ($scope, ClassService,AuthService,messageService) {
         $scope.classListFn={
-            //专业列表
+            //班级列表
             classList: [],
             //当前操作的class
             currentClass: {},
@@ -17,7 +17,7 @@ angular.module('dleduWebApp')
                 name:"",
             },
 
-            // 获取专业列表
+            // 获取班级列表
             getClassList: function () {
                 var that = this;
                 var params = {
@@ -56,25 +56,25 @@ angular.module('dleduWebApp')
             },
             //删除
             deleteClass: function () {
-                var _this = this;
+                var _this = $scope.classListFn;
                 var params = {
                     id: _this.currentClass.id,
                     userId: AuthService.getUser().id,
                 }
                 ClassService.deleteClass(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("专业删除成功！");
+                        messageService.openMsg("班级删除成功！");
                         _this.getClassList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("专业删除失败！");
+                        messageService.openMsg("班级删除失败！");
                     })
             },
             //删除提示
             deletePrompt: function (entity) {
                 var that=this;
                 that.currentClass = entity;
-                messageService.getMsg("您确定要删除此专业吗？", that.deleteClass())
+                messageService.getMsg("您确定要删除此班级吗？", that.deleteClass)
             },
             init: function () {
                 this.getClassList();

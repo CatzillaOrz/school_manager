@@ -28,6 +28,10 @@ angular.module('dleduWebService')
                 var classes = $resource('api/class/getClassById');
                 return classes.get(params);
             },
+            getClassDropList: function (params) {
+                var classes = $resource('api/class/geClassDropList');
+                return classes.get(params);
+            },
         }
 
     });

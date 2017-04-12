@@ -8,12 +8,13 @@
         .content-panel
             .prompt {{handleFn.prompt}}
             .content-form
-                form.form-horizontal.repeater
+                form.form-horizontal.repeater(name="collegeForm")
                     .form-group
                         .col-sm-2
+                            lable.required *
                             label.control-label.text-center 院系名称：
                         .col-sm-10
-                            input.form-control(placeholder="填写院系名称",ng-model="handleFn.params.name")
+                            input.form-control(placeholder="请填写不超过30个字院系名称",ng-model="handleFn.params.name" validator="required, maxlength=30")
         .panel-footer
-            a.btn.btn-success(ng-click="handleFn.submit()") 提交
+            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="collegeForm") 提交
             a.btn.btn-default(ui-sref="collegelist") 取消
