@@ -10,7 +10,7 @@ angular.module('dleduWebApp')
             page: {
                 totalElements: 0,
                 totalPages: 0,
-                pageNumber: 1,
+                pageNumber: 0,
                 pageSize: 10
             },
             params: {
