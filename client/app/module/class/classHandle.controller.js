@@ -75,7 +75,7 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: 100
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {
@@ -89,7 +89,7 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: 100
                 }
                 params.collegeId=that.collegeId;
                 MajorService.getMajorDropList(params).$promise
