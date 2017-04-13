@@ -26,21 +26,21 @@
                             lable.required *
                             label.control-label.text-center 选择学院：
                         .col-sm-10
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2)
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
                         .col-sm-2
                             lable.required *
                             label.control-label.text-center 选择专业：
                         .col-sm-10
-                            select.form-control(ng-model="handleFn.majorId" ui-select2)
+                            select.form-control(ng-model="handleFn.majorId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}") {{major.name}}
                     .form-group
                         .col-sm-2
                             lable.required *
                             label.control-label.text-center 选择班级：
                         .col-sm-10
-                            select.form-control(ng-model="handleFn.classId" ui-select2)
+                            select.form-control(ng-model="handleFn.classId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}") {{class.name}}
                     .form-group
                         .col-sm-2
