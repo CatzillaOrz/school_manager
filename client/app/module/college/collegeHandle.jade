@@ -1,20 +1,33 @@
 .college-handle-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
-            .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .content-panel
-            .prompt {{handleFn.prompt}}
-            .content-form
-                form.form-horizontal.repeater(name="collegeForm")
+        .widget-body
+            //h3.prompt {{handleFn.prompt}}
+            form.form-horizontal(name="collegeForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 院系名称：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 院系名称：
+                        .col-sm-7
                             input.form-control(placeholder="请填写不超过30个字院系名称",ng-model="handleFn.params.name" validator="required, maxlength=30")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="collegeForm") 提交
+                            a.btn.btn-default(ui-sref="collegelist") 取消
+
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{FinishFn.title}}
+        .finish-prompt
+            h3.prompt {{FinishFn.completeMSG}}
+            .icon
+                i.fa.fa-check-circle
         .panel-footer
-            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="collegeForm") 提交
-            a.btn.btn-default(ui-sref="collegelist") 取消
+            a.btn.btn-default(ui-sref="collegelist") 返回院系信息

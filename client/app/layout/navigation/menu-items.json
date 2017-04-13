@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "title":"首页",
+      "sref":"home",
+      "icon":"home"
+    },
+    {
+      "title":"学校信息管理",
+      "sref":"",
+      "icon":"file-text-o"
+    },
+    {
+      "title":"院系管理",
+      "sref":"collegelist",
+      "icon":"file-text-o"
+    },
+    {
+      "title":"专业管理",
+      "sref":"majorlist",
+      "icon":"file-text-o"
+    },
+    {
+      "title":"班级管理",
+      "sref":"classlist",
+      "icon":"file-text-o"
+    },
+    {
+      "title":"教师管理",
+      "sref":"teacherlist",
+      "icon":"file-text-o"
+    },
+    {
+      "title":"学生管理",
+      "sref":"studentlist",
+      "icon":"file-text-o"
+    }
+
+  ]
+}

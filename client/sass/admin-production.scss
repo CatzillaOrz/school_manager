@@ -11022,38 +11022,42 @@ h6 {
 }
 
 aside {
+  $bgcolorA:#2c3e50;
+  $bgcolorB:#2c3e50;
   display: block;
-  background: #3a3633;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI5NyUiIHN0b3AtY29sb3I9IiMzYTM2MzMiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMmEyNzI1IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-  background: -moz-linear-gradient(left, #3a3633 93%, #2a2725 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(93%, #3a3633), color-stop(100%, #2a2725));
-  background: -webkit-linear-gradient(left, #3a3633 93%, #2a2725 100%);
-  background: -o-linear-gradient(left, #3a3633 93%, #2a2725 100%);
-  background: -ms-linear-gradient(left, #3a3633 93%, #2a2725 100%);
-  background: linear-gradient(to right, #3a3633 93%, #2a2725 100%);
+  background: $bgcolorA;
+  background: -moz-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(93%, $bgcolorA), color-stop(100%, $bgcolorA));
+  background: -webkit-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
+  background: -o-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
+  background: -ms-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
+  background: linear-gradient(to right, $bgcolorA 93%, $bgcolorA 100%);
   min-height: 100%
 }
 
 #header {
+  $bgcolorA:#fff;
+  $bgcolorB:#fff;
   display: block;
-  height: 49px;
+  height: $navbar-height;
   margin: 0;
   padding: 0 13px 0 0;
-  background-color: #f3f3f3;
-  background-image: -moz-linear-gradient(top, #f3f3f3, #e2e2e2);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f3f3f3), to(#e2e2e2));
-  background-image: -webkit-linear-gradient(top, #f3f3f3, #e2e2e2);
-  background-image: -o-linear-gradient(top, #f3f3f3, #e2e2e2);
-  background-image: linear-gradient(to bottom, #f3f3f3, #e2e2e2);
+  background-color: $bgcolorA;
+  background-image: -moz-linear-gradient(top, $bgcolorA, $bgcolorB);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($bgcolorA), to($bgcolorB));
+  background-image: -webkit-linear-gradient(top, $bgcolorA, $bgcolorB);
+  background-image: -o-linear-gradient(top, $bgcolorA, $bgcolorB);
+  background-image: linear-gradient(to bottom, $bgcolorA, $bgcolorB);
   background-repeat: repeat-x;
   position: relative;
-  z-index: 905
+  z-index: 905;
+  box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
 }
 
 #header > div {
   display: inline-block;
   vertical-align: middle;
-  height: 49px;
+  height: $navbar-height;
   float: left
 }
 
@@ -11277,13 +11281,16 @@ aside {
 #header > :first-child, aside {
   width: 220px
 }
-
+#header>:first-child {
+  //background: $brand-primary;
+  background: #009768;
+}
 #left-panel {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 904;
-  padding-top: 49px
+  padding-top: $navbar-height;
 }
 
 #main {
@@ -11383,7 +11390,9 @@ aside {
 }
 
 nav ul li a:active {
-  background: #616161 !important
+  //background: #616161 !important;
+  background: $brand-primary;
+
 }
 
 nav ul {
@@ -11399,7 +11408,8 @@ nav ul {
 
 nav ul .active > a {
   color: #fff !important;
-  position: relative
+  position: relative;
+  background: $brand-primary;
 }
 
 nav ul li.active > a:before {
@@ -11410,9 +11420,10 @@ nav ul li.active > a:before {
   line-height: normal;
   width: 27px;
   position: absolute;
-  right: -21px;
+  right: -20px;
   font-size: 20px;
-  color: #eee
+  color: #2c3e50;
+  //color: #eee
 }
 
 nav ul li.active.open > a:before {
@@ -11427,6 +11438,7 @@ nav ul li a {
   line-height: normal;
   font-size: 14px;
   padding: 10px 10px 10px 11px;
+  margin: 0 10px;
   color: #c0bbb7;
   display: block;
   font-weight: 400;
@@ -11885,7 +11897,7 @@ fieldset {
   margin-left: -13px;
   margin-right: -13px;
   margin-bottom: -13px;
-  text-align: right
+  text-align: center;
 }
 
 .well .form-actions {
