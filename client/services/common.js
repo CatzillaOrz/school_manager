@@ -4,17 +4,8 @@ angular.module('dleduWebService')
     .factory('CommonService', function (ngDialog,$http) {
         return {
             product: {
-                name: '知新网综合平台',
+                name: '知新网学校管理平台',
                 version: '0.0.0.2'
-            },
-            subnav: {
-                index: 0,
-                navs: [
-                    {menu: '首页', path: '/'},
-                    {menu: '个人中心', path: '/userCenter'},
-                    {menu: '账号设置', path: '/account'}
-                    // {menu: '消息', path:'/'}
-                ]
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
