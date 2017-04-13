@@ -1,5 +1,5 @@
 .college-handle-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
@@ -28,9 +28,19 @@
                             lable.required *
                             label.control-label.text-center 班级名称：
                         .col-sm-10
-                            lable.required *
-                            input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" validator="required, maxlength=30")
+                            input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
 
         .panel-footer
             a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="classForm") 提交
             a.btn.btn-default(ui-sref="classlist") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .finish-prompt
+            h3.prompt {{handleFn.completeMSG}}
+            .icon
+                i.fa.fa-check-circle
+        .panel-footer
+            a.btn.btn-default(ui-sref="classlist") 返回班级信息

@@ -21,7 +21,7 @@
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按学院名称查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
-                                    span.input-group-addon(ng-click="collegeListFn.getCollegeList()")
+                                    span.input-group-addon.input-addon-right(ng-click="collegeListFn.getCollegeList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -39,7 +39,7 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="college in collegeListFn.collegeList")
-                                td.sorting_1 {{$index+1 + (collegeListFn.page.pageNumber)*10}}
+                                td.sorting_1 {{$index+1 + ((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander {{college.name}}
                                 td 1-342-463-8341
@@ -57,13 +57,13 @@
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                | Showing
-                                span.txt-color-darken 1
-                                |  to
-                                span.txt-color-darken 10
-                                |  of
-                                span.text-primary 100
-                                |  entries
+                                | 显示第
+                                span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+collegeListFn.collegeList.length}}
+                                |  条 总共
+                                span.text-primary {{collegeListFn.page.totalElements}}
+                                |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                 ul.pagination-sm(uib-pagination, total-items='collegeListFn.page.totalElements', max-size='collegeListFn.page.pageSize' ng-model='collegeListFn.page.pageNumber',ng-change="collegeListFn.findCollegeByPage()" boundary-link-numbers='true', rotate='false')

@@ -3,8 +3,8 @@
 angular.module('dleduWebApp')
     .controller('StudentHandleCtrl', function ($scope, $state,AuthService,StudentService,CollegeService,MajorService,messageService,ClassService) {
         $scope.handleFn={
-            title:"新建学生",
-            prompt:"填写以下信息以建立新的学生",
+            title:"",
+            prompt:"",
             handle:"create",
             collegeDropList:[],
             majorDropList:[],
@@ -28,6 +28,7 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
+            complete:false,
             /**
              *
              */
@@ -39,7 +40,7 @@ angular.module('dleduWebApp')
                 params.classesId=that.classId;
                 StudentService.addStudent(that.params).$promise
                     .then(function (data) {
-                        $state.go("studentfinish");
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         messageService.openMsg("学生添加失败")
@@ -64,7 +65,7 @@ angular.module('dleduWebApp')
                 params.professionalId=that.majorId;
                 StudentService.updateStudent(this.params).$promise
                     .then(function (data) {
-                        $state.go("studentfinish",{handle:"edit"})
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("学生添加失败")
@@ -72,7 +73,7 @@ angular.module('dleduWebApp')
             },
             submit:function () {
                 var that=this;
-                if(that.handle=="edit"){
+                if (that.handle == "编辑学生信息") {
                     that.updateStudent();
                 }else {
                     that.addStudent();
@@ -123,18 +124,33 @@ angular.module('dleduWebApp')
                     })
             },
             init:function () {
-                var that=this;
-                that.handle=$state.params.handle;
-                that.getCollegeDropList();
-                if(that.handle=="edit"){
-                    that.params.id=$state.params.id;
-                    that.getStudentById();
-                    that.title="编辑学生信息";
-                    that.prompt="填写以下信息以修改学生",
-                        that.getStudentById();
-                };
+            //     var that=this;
+            //     that.handle=$state.params.handle;
+            //     that.getCollegeDropList();
+            //     if(that.handle=="edit"){
+            //         that.params.id=$state.params.id;
+            //         that.getStudentById();
+            //         that.title="编辑学生信息";
+            //         that.prompt="填写以下信息以修改学生",
+            //             that.getStudentById();
+            //     };
+            //
+            // }
 
-            }
+             var that = this;
+             that.params.id = $state.params.id;
+             that.handle = $state.current.ncyBreadcrumbLabel;
+             that.getCollegeDropList();
+             if (that.handle == "编辑学生信息") {
+                    that.params.id = $state.params.id;
+                 that.getStudentById();
+                }
+             that.title = that.handle;
+             that.prompt = $state.current.data.prompt;
+             that.completeMSG = $state.current.data.completeMSG;
+
+             }
+
         };
         $scope.handleFn.init();
         $scope.$watch('handleFn.collegeId', function(newValue, oldValue) {

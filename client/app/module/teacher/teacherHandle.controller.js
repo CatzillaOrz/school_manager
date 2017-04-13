@@ -26,6 +26,7 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
+            complete:false,
             /**
              *
              */
@@ -35,7 +36,7 @@ angular.module('dleduWebApp')
                 params.collegeId=that.collegeId;
                 TeacherService.addTeacher(that.params).$promise
                     .then(function (data) {
-                        $state.go("teacherfinish");
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         messageService.openMsg("教师添加失败")
@@ -60,7 +61,7 @@ angular.module('dleduWebApp')
                 params.professionalId=that.majorId;
                 TeacherService.updateTeacher(this.params).$promise
                     .then(function (data) {
-                        $state.go("teacherfinish",{handle:"edit"})
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("教师添加失败")
@@ -68,7 +69,7 @@ angular.module('dleduWebApp')
             },
             submit:function () {
                 var that=this;
-                if(that.handle=="edit"){
+                if (that.handle == "编辑教师信息") {
                     that.updateTeacher();
                 }else {
                     that.addTeacher();
@@ -89,16 +90,17 @@ angular.module('dleduWebApp')
                     })
             },
             init:function () {
-                var that=this;
-                that.handle=$state.params.handle;
+
+                var that = this;
+                that.params.id = $state.params.id;
+                that.handle = $state.current.ncyBreadcrumbLabel;
                 that.getCollegeDropList();
-                if(that.handle=="edit"){
-                    that.params.id=$state.params.id;
+                if (that.handle == "编辑教师信息") {
                     that.getTeacherById();
-                    that.title="编辑教师信息";
-                    that.prompt="填写以下信息以修改教师",
-                        that.getTeacherById();
-                };
+                }
+                that.title = that.handle;
+                that.prompt = $state.current.data.prompt;
+                that.completeMSG = $state.current.data.completeMSG;
 
             }
         };

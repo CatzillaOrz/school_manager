@@ -20,7 +20,7 @@ angular.module('dleduWebApp')
                 var that=this;
                 CollegeService.addCollege(that.params).$promise
                     .then(function (data) {
-                        that.status = true;
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         messageService.openMsg("学院添加失败")
@@ -43,7 +43,7 @@ angular.module('dleduWebApp')
                 var that=this;
                 CollegeService.updateCollege(this.params).$promise
                     .then(function (data) {
-                        that.status = true;
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("学院添加失败")
@@ -59,12 +59,12 @@ angular.module('dleduWebApp')
             },
             init:function () {
                 var that=this;
+                that.params.id=$state.params.id;
                 that.handle=$state.current.ncyBreadcrumbLabel;
                 if(that.handle=="编辑院系信息"){
                     that.params.id=$state.params.id;
                     that.getCollegeById();
                 }
-
                 that.title=that.handle;
                 that.prompt=$state.current.data.prompt;
                 that.completeMSG=$state.current.data.completeMSG;

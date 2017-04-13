@@ -13,7 +13,7 @@
                     .form-group
                         label.col-sm-3.control-label * 院系名称：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过30个字院系名称",ng-model="handleFn.params.name" validator="required, maxlength=30")
+                            input.form-control(placeholder="请填写不超过30个字院系名称",ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
                 .form-actions
                     .row
                         .col-md-12
@@ -24,9 +24,9 @@
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{FinishFn.title}}
+            h2 {{handleFn.title}}
         .finish-prompt
-            h3.prompt {{FinishFn.completeMSG}}
+            h3.prompt {{handleFn.completeMSG}}
             .icon
                 i.fa.fa-check-circle
         .panel-footer

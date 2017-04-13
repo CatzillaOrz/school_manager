@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService) {
+    .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService) {
         $scope.studentListFn={
             //学生列表
             studentList: [],
@@ -63,7 +63,7 @@ angular.module('dleduWebApp')
                 }
                 StudentService.deleteStudent(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("学生删除成功！");
+                        CommonService.openMsg("学生删除成功！");
                         _this.getStudentList();
                     })
                     .catch(function (error) {

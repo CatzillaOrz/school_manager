@@ -4,8 +4,8 @@ angular.module('dleduWebService')
     .factory('CommonService', function (ngDialog,$http) {
         return {
             product: {
-                name: '知新网学校管理平台',
-                version: '0.0.0.2'
+                name: '知新网综合平台',
+                version: '0.0.0.3'
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
