@@ -37,7 +37,7 @@ angular.module('dleduWebApp')
             })
             .state('majorCreat', {
                 parent: 'base',
-                url   : '/collegcreat',
+                url   : '/majorcreate',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

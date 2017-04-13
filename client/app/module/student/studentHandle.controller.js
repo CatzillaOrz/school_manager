@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('StudentHandleCtrl', function ($scope, $state,AuthService,StudentService,CollegeService,MajorService,messageService,ClassService) {
+    .controller('StudentHandleCtrl', function ($scope, $state,AuthService,StudentService,CollegeService,MajorService,messageService,ClassService,$timeout) {
         $scope.handleFn={
             title:"",
             prompt:"",
@@ -124,19 +124,6 @@ angular.module('dleduWebApp')
                     })
             },
             init:function () {
-            //     var that=this;
-            //     that.handle=$state.params.handle;
-            //     that.getCollegeDropList();
-            //     if(that.handle=="edit"){
-            //         that.params.id=$state.params.id;
-            //         that.getStudentById();
-            //         that.title="编辑学生信息";
-            //         that.prompt="填写以下信息以修改学生",
-            //             that.getStudentById();
-            //     };
-            //
-            // }
-
              var that = this;
              that.params.id = $state.params.id;
              that.handle = $state.current.ncyBreadcrumbLabel;
@@ -152,15 +139,18 @@ angular.module('dleduWebApp')
              }
 
         };
-        $scope.handleFn.init();
-        $scope.$watch('handleFn.collegeId', function(newValue, oldValue) {
-            if (newValue!=oldValue){
-                $scope.handleFn.getMajorDropList();
-            }
-        });
-        $scope.$watch('handleFn.majorId', function(newValue, oldValue) {
-            if (newValue!=oldValue){
-                $scope.handleFn.getClassDropList();
-            }
-        });
+        $timeout(function () {
+            $scope.handleFn.init();
+            $scope.$watch('handleFn.collegeId', function(newValue, oldValue) {
+                if (newValue!=oldValue){
+                    $scope.handleFn.getMajorDropList();
+                }
+            });
+            $scope.$watch('handleFn.majorId', function(newValue, oldValue) {
+                if (newValue!=oldValue){
+                    $scope.handleFn.getClassDropList();
+                }
+            });
+        })
+
     });

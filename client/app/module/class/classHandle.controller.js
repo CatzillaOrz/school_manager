@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassHandleCtrl', function ($scope, $state, ClassService, CollegeService, MajorService, AuthService) {
+    .controller('ClassHandleCtrl', function ($scope, $state, ClassService, CollegeService, MajorService, AuthService,$timeout) {
         $scope.handleFn = {
             title: "",
             prompt: "",
@@ -110,16 +110,19 @@ angular.module('dleduWebApp')
                     that.params.id = $state.params.id;
                     that.getClassById();
                 }
-                that.title = that.handle;
+                that.title = $state.current.data.title;
                 that.prompt = $state.current.data.prompt;
                 that.completeMSG = $state.current.data.completeMSG;
 
             }
         };
-        $scope.handleFn.init();
-        $scope.$watch('handleFn.collegeId', function (newValue, oldValue) {
-            if (newValue != oldValue) {
-                $scope.handleFn.getMajorDropList();
-            }
-        });
+        $timeout(function () {
+            $scope.handleFn.init();
+            $scope.$watch('handleFn.collegeId', function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    $scope.handleFn.getMajorDropList();
+                }
+            });
+        })
+
     });
