@@ -27,6 +27,10 @@ angular.module('dleduWebApp')
                         templateUrl: 'app/module/college/collegeHandle.html'
                     }
                 },
+                data:{
+                    prompt:'填写以下信息以修改院系',
+                    completeMSG:'恭喜你，编辑院系成功！'
+                },
                 ncyBreadcrumb: {
                     label: '编辑院系信息'
                 }
@@ -41,8 +45,12 @@ angular.module('dleduWebApp')
                         templateUrl: 'app/module/college/collegeHandle.html'
                     }
                 },
+                data:{
+                    prompt:'填写以下信息以建立新的院系',
+                    completeMSG:'恭喜你，新建院系成功！'
+                },
                 ncyBreadcrumb: {
-                    label: '新院系信息'
+                    label: '新建院系信息'
                 }
             })
             .state('collegefinish', {

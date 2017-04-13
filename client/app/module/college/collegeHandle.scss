@@ -9,25 +9,15 @@
       padding-bottom: 15px;
       font-weight: 400;
     }
-    .content-form{
-      margin-top: 40px;
-      padding-left: 25%;
-      padding-right: 25%;
-      margin-bottom: 155px;
-    }
   }
   .panel-footer{
     text-align: center;
-    a{
-      margin: 20px;
-    }
-
   }
   .finish-prompt{
     padding: 103px;
     .prompt{
       text-align: center;
-      font-family: 'PingFangSC-Regular', 'PingFang SC';
+      font-family: $font-family-sans-serif;
       font-weight: 400;
       font-style: normal;
       font-size: 28px;
