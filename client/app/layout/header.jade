@@ -1,10 +1,36 @@
 header#header
     #logo-group
         span#logo
-            img(ng-src='{{layout.user.orgLogo}}', alt='{{layoutFn.user.orgName}}')
+            img(ng-src='{{layout.user.orgLogo}}' alt='{{layoutFn.user.orgName}}')
+
+    #logout.btn-header.transparent.pull-right
+        span
+            a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                i.fa.fa-sign-out
 
     .pull-right
-        #logout.btn-header.transparent.pull-right
-            span
-                a(ui-sref='login', title='Sign Out', data-action='userLogout', data-logout-msg='You can improve your security further after logging out by closing this opened browser')
-                    i.fa.fa-sign-out
+        ul.account(ng-if=' layoutFn.user')
+            li.user-menu(uib-dropdown='uib-dropdown' uib-dropdown-toggle='uib-dropdown-toggle')
+                span.user-avatar
+                    img.avatar-30.img-circle(ng-src='{{ layoutFn.user.avatar}}')
+                span#user-name.dropdown-toggle
+                    span {{ layoutFn.user.login | cutStr:8}}
+                    i.caret
+                ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu' aria-labelledby='user-name')
+                    li(ng-repeat='anav in navigation.accountNav' class='{{anav.name}}')
+                        a(ng-if="anav.name != 'split'" ng-click=' layoutFn.navigate(anav.host,anav.path)')
+                            i.fa(class='{{anav.icon}}')
+                            span {{anav.name}}
+                        li
+                            a(ng-click=" layoutFn.navigate(0,'/userCenter')")
+                                i.fa.fa-sun-o
+                                span 个人中心
+                        li
+                            a(ng-click=" layoutFn.navigate(0,'/account')")
+                                i.fa.fa-vcard-o
+                                span 账号设置
+                        li.split
+                        li
+                            a(ng-click=' layoutFn.signOut()')
+                                i.fa.fa-sign-out
+                                span 退出
