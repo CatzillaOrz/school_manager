@@ -23,7 +23,6 @@ angular.module('dleduWebApp')
         $rootScope.$watch('user', function () {
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
-            $scope.layoutFn.menuRoute();
         }, true);
     })
 
