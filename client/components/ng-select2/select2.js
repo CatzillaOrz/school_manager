@@ -32,6 +32,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
 
       return function (scope, elm, attrs, controller) {
         // instance-specific options
+          options.language="zh-CN";
         var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2));
 
         /*
