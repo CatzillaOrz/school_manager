@@ -22,16 +22,12 @@
   }
   .panel-footer{
     text-align: center;
-    a{
-      margin: 20px;
-    }
-
   }
   .finish-prompt{
     padding: 103px;
     .prompt{
       text-align: center;
-      font-family: 'PingFangSC-Regular', 'PingFang SC';
+      font-family: $font-family-sans-serif;
       font-weight: 400;
       font-style: normal;
       font-size: 28px;

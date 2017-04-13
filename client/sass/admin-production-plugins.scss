@@ -217,7 +217,7 @@
 
 .md-editor > textarea {
     font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-    font-size: 13px;
+
     outline: 0;
     margin: 0;
     display: block;
@@ -438,7 +438,7 @@
     width: 100%;
     min-height: 32px;
     padding: 1px 3px;
-    font-size: 13px;
+
     line-height: 1.428571429;
     color: #555;
     vertical-align: middle;
@@ -451,7 +451,7 @@
     border-radius: 0 !important;
     font-weight: 400;
     padding: 3px 28px 4px 8px;
-    font-size: 13px;
+
     border: 1px solid #285E8E;
     background: #3276B1
 }
@@ -1829,7 +1829,7 @@ table.dataTable thead > tr > th.hasinput {
 
 div.dataTables_info {
     padding-top: 9px;
-    font-size: 13px;
+
     font-weight: 700;
     font-style: italic;
     color: #969696
@@ -3476,7 +3476,7 @@ article.sortable-grid {
     float: left;
     width: 100%;
     position: relative;
-    font-size: 13px;
+
     -moz-border-radius: 0;
     -khtml-border-radius: 0;
     -webkit-border-radius: 0;
@@ -6054,7 +6054,6 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 
 .chat-users .display-users a[data-chat-id] {
     padding: 4px 6px;
-    font-size: 13px;
     margin: 1px 0
 }
 
@@ -6613,7 +6612,6 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 }
 
 .bigBox p {
-    font-size: 13px;
     margin-top: 10px
 }
 
@@ -6745,7 +6743,6 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 }
 
 .SmallBox p {
-    font-size: 13px;
     margin-top: 2px
 }
 
@@ -7328,7 +7325,7 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 
 .note-dialog .note-help-dialog .note-shortcut th {
     text-align: left;
-    font-size: 13px;
+
     color: #dd0
 }
 
@@ -7533,7 +7530,7 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 }
 
 .superbox-imageinfo span {
-    font-size: 13px;
+
     color: #a19994;
     margin-right: -2px;
     padding-top: 10px;

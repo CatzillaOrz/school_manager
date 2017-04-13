@@ -3,9 +3,9 @@
 angular.module('dleduWebApp')
     .controller('MajorHandleCtrl', function ($scope, $state,CollegeService,MajorService,AuthService,messageService) {
         $scope.handleFn={
-            title:"新建院系",
-            prompt:"填写以下信息以建立新的院系",
-            handle:"create",
+            title:"",
+            prompt:"",
+            handle:"",
             collegeDropList:[],
             collegeId:0,
             params:{
@@ -20,6 +20,7 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
+            complete:false,
             /**
              *
              */
@@ -29,7 +30,7 @@ angular.module('dleduWebApp')
                 params.collegeId=that.collegeId;
                 MajorService.addMajor(that.params).$promise
                     .then(function (data) {
-                        $state.go("majorfinish")
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         messageService.openMsg("专业添加失败")
@@ -54,7 +55,7 @@ angular.module('dleduWebApp')
                 params.collegeId=that.collegeId;
                 MajorService.updateMajor(this.params).$promise
                     .then(function (data) {
-                        $state.go("majorfinish",{handle:"edit"})
+                        that.complete = true;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("专业添加失败")
@@ -62,7 +63,7 @@ angular.module('dleduWebApp')
             },
             submit:function () {
                 var that=this;
-                if(that.handle=="edit"){
+                if(that.handle=="编辑专业信息"){
                     that.updateMajor();
                 }else {
                     that.addMajor();
@@ -84,15 +85,16 @@ angular.module('dleduWebApp')
             },
             init:function () {
                 var that=this;
-                that.handle=$state.params.handle;
+                that.params.id=$state.params.id;
+                that.handle=$state.current.ncyBreadcrumbLabel;
                 that.getCollegeDropList();
-                if(that.handle=="edit"){
+                if(that.handle=="编辑专业信息"){
                     that.params.id=$state.params.id;
                     that.getMajorById();
-                    that.title="编辑院系信息";
-                    that.prompt="填写以下信息以修改专业",
-                    that.getMajorById();
-                };
+                }
+                that.title=that.handle;
+                that.prompt=$state.current.data.prompt;
+                that.completeMSG=$state.current.data.completeMSG;
 
             }
         };

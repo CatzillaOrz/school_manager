@@ -25,7 +25,7 @@
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.ColVis_Button.ColVis_MasterButton(ui-sref="teacherhandle({handle:'create'})")
+                                button.ColVis_Button.ColVis_MasterButton(ui-sref="teacherCreat")
                                     span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -52,7 +52,7 @@
                                 td Et Rutrum Non Associates
                                 td 35728
                                 td
-                                    a.handle(ui-sref="teacherhandle({handle:'edit',id:teacher.id})")
+                                    a.handle(ui-sref="teacherEdit({id:teacher.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="teacherListFn.deletePrompt(teacher)")

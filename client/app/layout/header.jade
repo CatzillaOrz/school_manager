@@ -1,0 +1,10 @@
+header#header
+    #logo-group
+        span#logo
+            img(ng-src='{{layoutFn.user.orgLogo}}', alt='{{layoutFn.user.orgName}}')
+
+    .pull-right
+        #logout.btn-header.transparent.pull-right
+            span
+                a(ui-sref='login', title='Sign Out', data-action='userLogout', data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                    i.fa.fa-sign-out

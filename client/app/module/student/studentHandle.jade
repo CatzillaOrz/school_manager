@@ -1,5 +1,5 @@
 .college-handle-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
@@ -14,13 +14,13 @@
                             lable.required *
                             label.control-label.text-center 姓名：
                         .col-sm-10
-                            input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" validator="required, maxlength=10")
+                            input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
                     .form-group
                         .col-sm-2
                             lable.required *
                             label.control-label.text-center 学号：
                         .col-sm-10
-                            input.form-control(placeholder="请填写不超过10个字学生工号" ng-model="handleFn.params.jobNumber" validator="required, maxlength=10")
+                            input.form-control(placeholder="请填写不超过10个字学生工号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
                     .form-group
                         .col-sm-2
                             lable.required *
@@ -65,3 +65,14 @@
         .panel-footer
             a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="studentForm") 提交
             a.btn.btn-default(ui-sref="studentlist") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .finish-prompt
+            h3.prompt {{handleFn.completeMSG}}
+            .icon
+                i.fa.fa-check-circle
+        .panel-footer
+            a.btn.btn-default(ui-sref="studentlist") 返回学生信息
