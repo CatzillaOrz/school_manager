@@ -7,5 +7,7 @@ module.exports = function(app){
   app.use('/api/college', require('./api/college'));
   app.use('/api/major', require('./api/major'));
   app.use('/api/class', require('./api/class'));
+  app.use('/api/teacher', require('./api/teacher'));
+  app.use('/api/student', require('./api/student'));
 
 };

@@ -4,15 +4,14 @@
 'use strict';
 
 
-
 var Promise = require('bluebird'),
-  RestClient = require('./helper/RestClient'),
-  Config = require('../config/environment'),
-  ErrorCode  = require('../common/errorCode');
+    RestClient = require('./helper/RestClient'),
+    Config = require('../config/environment'),
+    ErrorCode = require('../common/errorCode');
 
 var ClassService = {
 
-    getClassList : function (params, access_token, callback) {
+    getClassList: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway',
             path: '/v1/classes/list',
@@ -21,7 +20,7 @@ var ClassService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                callback(ErrorCode.errorHandle(res));
             }
         })
             .catch(function (e) {
@@ -39,22 +38,22 @@ var ClassService = {
             } else {
                 // callback(ErrorCode.errorHandle(res));
             }
-        }) .catch(function (e) {
+        }).catch(function (e) {
             callback(e);
         });
     },
     deleteClass: function (params, access_token, callback) {
         RestClient.delete({
             host: 'gateway',
-            path: '/v1/classes/delete/'+params.id,
-            params:{userId:params.userId}
+            path: '/v1/classes/delete/' + params.id,
+            params: {userId: params.userId}
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
                 // callback(ErrorCode.errorHandle(res));
             }
-        }) .catch(function (e) {
+        }).catch(function (e) {
             callback(e);
         });
     },
@@ -69,14 +68,14 @@ var ClassService = {
             } else {
                 // callback(ErrorCode.errorHandle(res));
             }
-        }) .catch(function (e) {
+        }).catch(function (e) {
             callback(e);
         });
     },
     getClassById: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway',
-            path: '/v1/classes/get/'+params.id,
+            path: '/v1/classes/get/' + params.id,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -84,11 +83,26 @@ var ClassService = {
             } else {
                 // callback(ErrorCode.errorHandle(res));
             }
-        }) .catch(function (e) {
+        }).catch(function (e) {
             callback(e);
         });
     },
-
+    geClassDropList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/classes/droplist',
+            params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                // callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 

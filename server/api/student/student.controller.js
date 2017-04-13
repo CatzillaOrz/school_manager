@@ -2,11 +2,11 @@
 'use strict';
 
 var _ = require('lodash'),
-    MajorService = require('../../services/majorService');
+     StudentService = require('../../services/studentService');
 
 module.exports = {
-    getMajorList : function (req, res) {
-        MajorService.getMajorListSync(req.query, req.user.access_token)
+    getStudentList : function (req, res) {
+        StudentService.getStudentListSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -14,8 +14,8 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    addMajor:function (req,res) {
-        MajorService.addMajorSync(req.body, req.user.access_token)
+    addStudent:function (req,res) {
+        StudentService.addStudentSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -23,8 +23,8 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    deleteMajor:function (req,res) {
-        MajorService.deleteMajorSync(req.query, req.user.access_token)
+    deleteStudent:function (req,res) {
+        StudentService.deleteStudentSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -32,8 +32,8 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    updateMajor:function (req,res) {
-        MajorService.updateMajorSync(req.body, req.user.access_token)
+    updateStudent:function (req,res) {
+        StudentService.updateStudentSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -41,8 +41,8 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    getMajorById: function (req, res) {
-        MajorService.getMajorByIdSync(req.query, req.user.access_token)
+    getStudentById: function (req, res) {
+        StudentService.getStudentByIdSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -50,15 +50,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    getMajorDropList : function (req, res) {
-        MajorService.getMajorDropListSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
+
 
 };
 

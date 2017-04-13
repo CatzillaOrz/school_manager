@@ -21,7 +21,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                 callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
                 callback(e);
@@ -36,7 +36,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
             callback(e);
@@ -51,7 +51,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                 callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
             callback(e);
@@ -66,7 +66,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
             callback(e);
@@ -81,7 +81,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+               callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
             callback(e);
@@ -97,7 +97,7 @@ var CollegeService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
-                // callback(ErrorCode.errorHandle(res));
+                 callback(ErrorCode.errorHandle(res));
             }
         }) .catch(function (e) {
             callback(e);

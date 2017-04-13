@@ -10,28 +10,28 @@ var Promise = require('bluebird'),
   Config = require('../config/environment'),
   ErrorCode  = require('../common/errorCode');
 
-var MajorService = {
+var StudentService = {
 
-    getMajorList : function (params, access_token, callback) {
-    RestClient.get({
-      host: 'gateway',
-      path: '/v1/professionnal/list',
-        params
-    }).then(function (res) {
-      if (res.status.code == 200) {
-        callback(null, res.entity);
-      } else {
-       callback(ErrorCode.errorHandle(res));
-      }
-    })
-      .catch(function (e) {
-        callback(e);
-      });
-  },
-    addMajor: function (params, access_token, callback) {
+    getStudentList : function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/students/list',
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    addStudent: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway',
-            path: '/v1/professionnal/add',
+            path: '/v1/students/add',
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -43,10 +43,10 @@ var MajorService = {
             callback(e);
         });
     },
-    deleteMajor: function (params, access_token, callback) {
+    deleteStudent: function (params, access_token, callback) {
         RestClient.delete({
             host: 'gateway',
-            path: '/v1/professionnal/delete/'+params.id,
+            path: '/v1/students/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -58,10 +58,10 @@ var MajorService = {
             callback(e);
         });
     },
-    updateMajor: function (params, access_token, callback) {
+    updateStudent: function (params, access_token, callback) {
         RestClient.put({
             host: 'gateway',
-            path: '/v1/professionnal/update',
+            path: '/v1/students/update',
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -73,26 +73,10 @@ var MajorService = {
             callback(e);
         });
     },
-    getMajorById: function (params, access_token, callback) {
+    getStudentById: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway',
-            path: '/v1/professionnal/get/'+params.id,
-            access_token: access_token
-        }).then(function (res) {
-            if (res.status.code == 200) {
-                callback(null, res.entity);
-            } else {
-                callback(ErrorCode.errorHandle(res));
-            }
-        }) .catch(function (e) {
-            callback(e);
-        });
-    },
-    getMajorDropList: function (params, access_token, callback) {
-        RestClient.get({
-            host: 'gateway',
-            path: '/v1/professionnal/droplist',
-            params,
+            path: '/v1/students/get/'+params.id,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -108,6 +92,6 @@ var MajorService = {
 };
 
 
-Promise.promisifyAll(MajorService, {suffix: "Sync"});
+Promise.promisifyAll(StudentService, {suffix: "Sync"});
 
-module.exports = MajorService;
+module.exports = StudentService;

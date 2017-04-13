@@ -15,7 +15,6 @@ router.post('/addClass',auth.isSignedIn, controller.addClass);
 router.delete('/deleteClass',auth.isSignedIn, controller.deleteClass);
 router.put('/updateClass',auth.isSignedIn, controller.updateClass);
 router.get('/getClassById',auth.isSignedIn, controller.getClassById);
-
-
+router.get('/geClassDropList',auth.isSignedIn, controller.geClassDropList);
 
 module.exports = router;

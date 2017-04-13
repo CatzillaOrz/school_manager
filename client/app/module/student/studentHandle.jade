@@ -8,67 +8,60 @@
         .content-panel
             .prompt {{handleFn.prompt}}
             .content-form
-                form.form-horizontal.repeater
+                form.form-horizontal.repeater(name="studentForm")
                     .form-group
                         .col-sm-2
+                            lable.required *
                             label.control-label.text-center 姓名：
                         .col-sm-10
-                            input.form-control(placeholder="填写学生姓名")
+                            input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" validator="required, maxlength=10")
                     .form-group
                         .col-sm-2
+                            lable.required *
                             label.control-label.text-center 学号：
                         .col-sm-10
-                            input.form-control(placeholder="填写学生工号")
+                            input.form-control(placeholder="请填写不超过10个字学生工号" ng-model="handleFn.params.jobNumber" validator="required, maxlength=10")
                     .form-group
                         .col-sm-2
-                            label.control-label.text-center 院系：
+                            lable.required *
+                            label.control-label.text-center 选择学院：
                         .col-sm-10
-                            select.form-control
-                                option 1
-                                option 2
-                                option 3
-                                option 4
-                                option 5
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2)
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
                         .col-sm-2
-                            label.control-label.text-center 专业：
+                            lable.required *
+                            label.control-label.text-center 选择专业：
                         .col-sm-10
-                            select.form-control
-                                option 1
-                                option 2
-                                option 3
-                                option 4
-                                option 5
+                            select.form-control(ng-model="handleFn.majorId" ui-select2)
+                                option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}") {{major.name}}
                     .form-group
                         .col-sm-2
-                            label.control-label.text-center 班级：
+                            lable.required *
+                            label.control-label.text-center 选择班级：
                         .col-sm-10
-                            select.form-control
-                                option 1
-                                option 2
-                                option 3
-                                option 4
-                                option 5
+                            select.form-control(ng-model="handleFn.classId" ui-select2)
+                                option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}") {{class.name}}
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 性别：
                         .col-sm-10
                             label.radio-inline
-                                input#inlineRadio1(type='radio', name='inlineRadioOptions', value='option1')
+                                input#inlineRadio1(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='男')
                                 |  男
                             label.radio-inline
-                                input#inlineRadio2(type='radio', name='inlineRadioOptions', value='option2')
+                                input#inlineRadio2(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='女')
                                 |  女
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 手机号码：
                         .col-sm-10
-                            input.form-control(placeholder="填写学生手机号码")
+                            input.form-control(placeholder="填写学生手机号码" name="phone" ng-model="handleFn.params.phone")
                     .form-group
                         .col-sm-2
                             label.control-label.text-center 邮箱：
                         .col-sm-10
-                            input.form-control(placeholder="填写学生邮箱")
+                            input.form-control(placeholder="填写学生邮箱" name="email" ng-model="handleFn.params.email" )
         .panel-footer
-            a.btn.btn-success 提交
-            a.btn.btn-default(ui-sref="majorlist") 取消
+            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="studentForm") 提交
+            a.btn.btn-default(ui-sref="studentlist") 取消

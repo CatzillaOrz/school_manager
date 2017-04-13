@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassListCtrl', function ($scope, ClassService,AuthService) {
+    .controller('ClassListCtrl', function ($scope, ClassService,AuthService,messageService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -13,7 +13,9 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
-            params: {},
+            params: {
+                name:"",
+            },
 
             // 获取班级列表
             getClassList: function () {
@@ -22,18 +24,35 @@ angular.module('dleduWebApp')
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
-                }
+                };
+                params.name=that.params.name;
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
             //根据名称查询
-            findClassByName: function () {
+            findClassByPage: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                params.name=that.params.name;
+                ClassService.getClassList(params).$promise
+                    .then(function (data) {
+                        that.classList = data.data;
+                        that.page=data.page;
+                        that.page.pageNumber+=that.page.pageNumber;
+                    })
+                    .catch(function (error) {
 
+                    })
             },
             //删除
             deleteClass: function () {
@@ -53,8 +72,9 @@ angular.module('dleduWebApp')
             },
             //删除提示
             deletePrompt: function (entity) {
-                this.currentClass = entity;
-                messageService.getMsg("您确定要删除此班级吗？", this.deleteClass)
+                var that=this;
+                that.currentClass = entity;
+                messageService.getMsg("您确定要删除此班级吗？", that.deleteClass)
             },
             init: function () {
                 this.getClassList();
