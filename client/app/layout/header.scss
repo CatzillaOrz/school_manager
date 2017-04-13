@@ -1,4 +1,14 @@
 #header{
+  #logo{
+    height: 50px;
+    width: 50px;
+  }
+  #orgName{
+    color: $text-color-lightest;
+    line-height: 50px;
+    margin-left: 10px;
+    font-size: 16px;
+  }
   .account {
     height: $nav-container-height;
     float: right;

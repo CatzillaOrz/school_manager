@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('MajorHandleCtrl', function ($scope, $state,CollegeService,MajorService,AuthService,messageService) {
+    .controller('MajorHandleCtrl', function ($scope, $state,CollegeService,MajorService,AuthService,messageService,$timeout) {
         $scope.handleFn={
             title:"",
             prompt:"",
@@ -98,5 +98,8 @@ angular.module('dleduWebApp')
 
             }
         };
-        $scope.handleFn.init();
+
+        $timeout(function () {
+            $scope.handleFn.init();
+        })
     });

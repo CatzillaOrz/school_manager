@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService) {
+    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout) {
         $scope.handleFn={
             title:"新建教师",
             prompt:"填写以下信息以建立新的教师",
@@ -104,5 +104,7 @@ angular.module('dleduWebApp')
 
             }
         };
-        $scope.handleFn.init();
+        $timeout(function () {
+            $scope.handleFn.init();
+        })
     });

@@ -9598,7 +9598,7 @@ textarea.clone {
     padding: 0 5px !important
   }
   #extr-page #header #logo img {
-    width: 135px
+    width: 50px;
   }
   #extr-page #header #logo {
     margin-top: 22px
@@ -11141,13 +11141,14 @@ aside {
 #logo {
   display: inline-block;
   width: 175px;
-  margin-top: 13px;
+  //margin-top: 13px;
   margin-left: 9px
 }
 
 #logo img {
-  width: 110px;
-  height: auto;
+  width: 50px;
+
+  height: 50px;
   padding-left: 3px
 }
 

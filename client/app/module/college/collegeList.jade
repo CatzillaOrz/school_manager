@@ -25,7 +25,7 @@
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.ColVis_Button.ColVis_MasterButton(ui-sref="collegeCreat")
+                                button.btn.btn-success(ui-sref="collegeCreat")
                                     span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -42,10 +42,10 @@
                                 td.sorting_1 {{$index+1 + ((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander {{college.name}}
-                                td 1-342-463-8341
-                                td Et Rutrum Non Associates
-                                td 35728
-                                td Fogo
+                                td
+                                td
+                                td
+                                td
                                 td
                                     a.handle(ui-sref="collegeEdit({id:college.id})")
                                         i.fa.fa-pencil-square-o
