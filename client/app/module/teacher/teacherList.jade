@@ -21,7 +21,7 @@
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="teacherListFn.params.name")
-                                    span.input-group-addon(ng-click="teacherListFn.getTeacherList()")
+                                    span.input-group-addon.input-addon-right(ng-click="teacherListFn.getTeacherList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -41,7 +41,7 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="teacher in teacherListFn.teacherList")
-                                td.sorting_1 1
+                                td.sorting_1 {{$index+1 + ((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander
                                     | {{teacher.name}}
@@ -61,13 +61,13 @@
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                | Showing
-                                span.txt-color-darken 1
-                                |  to
-                                span.txt-color-darken 10
-                                |  of
-                                span.text-primary 100
-                                |  entries
+                                | 显示第
+                                span.txt-color-darken {{((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10+teacherListFn.teacherList.length}}
+                                |  条 总共
+                                span.text-primary {{teacherListFn.page.totalElements}}
+                                |  条记录
                         .col-sm-6.col-xs-12
                                 #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                     ul.pagination-sm(uib-pagination, total-items='teacherListFn.page.totalElements', max-size='teacherListFn.page.pageSize' ng-model='teacherListFn.page.pageNumber',ng-change="teacherListFn.findStudentByPage()" boundary-link-numbers='true', rotate='false')
