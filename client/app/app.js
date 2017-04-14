@@ -100,8 +100,7 @@ angular.module('dleduWebApp', [
                         templateUrl: 'app/layout/layout.html',
                         controller: 'LayoutCtrl'
                     }
-                },
-                access: {requiredLogin: false}
+                }
             });
         $locationProvider.html5Mode(true);
 

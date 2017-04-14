@@ -3,8 +3,12 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('collegelist', {
-                parent: 'base',
+            .state('college', {
+                abstract: true,
+                parent: 'base'
+            })
+            .state('college.list', {
+                parent: 'college',
                 url   : '/college/list',
                 access: {requiredLogin: true},
                 views : {
@@ -17,8 +21,8 @@ angular.module('dleduWebApp')
                     label: '院系管理'
                 }
             })
-            .state('collegeEdit', {
-                parent: 'base',
+            .state('college.edit', {
+                parent: 'college',
                 url   : '/collegedit/:id',
                 access: {requiredLogin: true},
                 views : {
@@ -35,8 +39,8 @@ angular.module('dleduWebApp')
                     label: '编辑院系信息'
                 }
             })
-            .state('collegeCreat', {
-                parent: 'base',
+            .state('college.creat', {
+                parent: 'college',
                 url   : '/collegecreate',
                 access: {requiredLogin: true},
                 views : {
@@ -51,17 +55,6 @@ angular.module('dleduWebApp')
                 },
                 ncyBreadcrumb: {
                     label: '新建院系信息'
-                }
-            })
-            .state('collegefinish', {
-                parent: 'base',
-                url   : '/college/finish/:handle',
-                access: {requiredLogin: true},
-                views : {
-                    'content@base': {
-                        controller : 'CollegeFinishCtrl',
-                        templateUrl: 'app/module/college/collegeHandleFinish.html'
-                    }
                 }
             })
     });

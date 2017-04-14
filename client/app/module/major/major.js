@@ -3,8 +3,12 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
+            .state('major', {
+                abstract: true,
+                parent: 'base'
+            })
             .state('majorlist', {
-                parent: 'base',
+                parent: 'major',
                 url   : '/major/list',
                 access: {requiredLogin: true},
                 views : {
@@ -18,7 +22,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('majorEdit', {
-                parent: 'base',
+                parent: 'major',
                 url   : '/majoredit/:id',
                 access: {requiredLogin: true},
                 views : {
@@ -36,7 +40,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('majorCreat', {
-                parent: 'base',
+                parent: 'major',
                 url   : '/majorcreate',
                 access: {requiredLogin: true},
                 views : {
@@ -54,7 +58,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('majorfinish', {
-                parent: 'base',
+                parent: 'major',
                 url   : '/major/finish/:handle',
                 access: {requiredLogin: true},
                 views : {

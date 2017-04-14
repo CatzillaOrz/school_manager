@@ -3,6 +3,10 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
+            .state('teacher', {
+                abstract: true,
+                parent: 'base'
+            })
             // .state('teacherlist', {
             //     parent: 'base',
             //     url   : '/teacher/list',
@@ -26,7 +30,7 @@ angular.module('dleduWebApp')
             //     }
             // })
             .state('teacherlist', {
-                parent: 'base',
+                parent: 'teacher',
                 url   : '/teacher/list',
                 access: {requiredLogin: true},
                 views : {
@@ -40,7 +44,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('teacherEdit', {
-                parent: 'base',
+                parent: 'teacher',
                 url   : '/teacheredit/:id',
                 access: {requiredLogin: true},
                 views : {
@@ -58,7 +62,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('teacherCreat', {
-                parent: 'base',
+                parent: 'teacher',
                 url   : '/teachercreate',
                 access: {requiredLogin: true},
                 views : {
@@ -76,7 +80,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('teacherfinish', {
-                parent: 'base',
+                parent: 'teacher',
                 url   : '/teacher/finish/:handle',
                 access: {requiredLogin: true},
                 views : {

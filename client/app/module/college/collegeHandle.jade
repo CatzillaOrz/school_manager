@@ -18,16 +18,17 @@
                     .row
                         .col-md-12
                             a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="collegeForm") 提交
-                            a.btn.btn-default(ui-sref="collegelist") 取消
+                            a.btn.btn-default(ui-sref="college.list") 取消
 
     .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .finish-prompt
-            h3.prompt {{handleFn.completeMSG}}
-            .icon
-                i.fa.fa-check-circle
-        .panel-footer
-            a.btn.btn-default(ui-sref="collegelist") 返回院系信息
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .widget-footer
+                a.btn.btn-default(ui-sref="college.list") 返回院系信息

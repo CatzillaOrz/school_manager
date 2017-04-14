@@ -3,8 +3,12 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
+            .state('student', {
+                abstract: true,
+                parent: 'base'
+            })
             .state('studentlist', {
-                parent: 'base',
+                parent: 'student',
                 url   : '/student/list',
                 access: {requiredLogin: true},
                 views : {
@@ -18,7 +22,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('studentEdit', {
-                parent: 'base',
+                parent: 'student',
                 url   : '/studentedit/:id',
                 access: {requiredLogin: true},
                 views : {
@@ -36,7 +40,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('studentCreat', {
-                parent: 'base',
+                parent: 'student',
                 url   : '/studentcreate',
                 access: {requiredLogin: true},
                 views : {
@@ -54,7 +58,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('studentfinish', {
-                parent: 'base',
+                parent: 'student',
                 url   : '/student/finish/:handle',
                 access: {requiredLogin: true},
                 views : {
