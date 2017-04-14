@@ -3,8 +3,12 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
+            .state('class', {
+                abstract: true,
+                parent: 'base'
+            })
             .state('classlist', {
-                parent: 'base',
+                parent: 'class',
                 url   : '/class/list',
                 access: {requiredLogin: true},
                 views : {
@@ -18,7 +22,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('classEdit', {
-                parent: 'base',
+                parent: 'class',
                 url   : '/classedit/:id',
                 access: {requiredLogin: true},
                 views : {
@@ -36,7 +40,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('classCreat', {
-                parent: 'base',
+                parent: 'class',
                 url   : '/classcreate',
                 access: {requiredLogin: true},
                 views : {
@@ -54,7 +58,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('classfinish', {
-                parent: 'base',
+                parent: 'class',
                 url   : '/class/finish/:handle',
                 access: {requiredLogin: true},
                 views : {
