@@ -14457,13 +14457,13 @@ img.away {
 
 .icon-addon.addon-lg .form-control {
   line-height: 1.33;
-  height: 46px;
+  height: $input-height-base;
   font-size: 18px;
   padding: 10px 16px 10px 40px
 }
 
 .input-group-lg .icon-addon.addon-lg + .input-group-btn > .btn {
-  height: 46px
+  height: $input-height-base
 }
 
 .icon-addon.addon-sm .form-control {

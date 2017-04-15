@@ -60,7 +60,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
+                        messageService.openMsg("班级添加失败")
                     })
             },
             submit: function () {

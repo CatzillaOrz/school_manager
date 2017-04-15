@@ -1,78 +1,72 @@
 .college-handle-container
     #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
-            .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .content-panel
-            .prompt {{handleFn.prompt}}
-            .content-form
-                form.form-horizontal.repeater(name="studentForm")
+        .widget-body
+            form.form-horizontal(name="studentForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 姓名：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 姓名：
+                        .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 学号：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 学号：
+                        .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字学生工号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 选择学院：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 选择学院：
+                        .col-sm-7
                             select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 选择专业：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 选择专业：
+                        .col-sm-7
                             select.form-control(ng-model="handleFn.majorId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}") {{major.name}}
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 选择班级：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 选择班级：
+                        .col-sm-7
                             select.form-control(ng-model="handleFn.classId" ui-select2="'{language: zh-CN}'")
                                 option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}") {{class.name}}
                     .form-group
-                        .col-sm-2
-                            label.control-label.text-center 性别：
-                        .col-sm-10
+                        label.col-sm-3.control-label 性别：
+                        .col-sm-7
                             label.radio-inline
-                                input#inlineRadio1(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='男')
+                                input(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='男')
                                 |  男
                             label.radio-inline
-                                input#inlineRadio2(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='女')
+                                input(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='女')
                                 |  女
                     .form-group
-                        .col-sm-2
-                            label.control-label.text-center 手机号码：
-                        .col-sm-10
+                        label.col-sm-3.control-label 手机号码：
+                        .col-sm-7
                             input.form-control(placeholder="填写学生手机号码" name="phone" ng-model="handleFn.params.phone")
                     .form-group
-                        .col-sm-2
-                            label.control-label.text-center 邮箱：
-                        .col-sm-10
+                        label.col-sm-3.control-label 邮箱：
+                        .col-sm-7
                             input.form-control(placeholder="填写学生邮箱" name="email" ng-model="handleFn.params.email" )
-        .panel-footer
-            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="studentForm") 提交
-            a.btn.btn-default(ui-sref="studentlist") 取消
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="studentForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="studentlist") 取消
+
     .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .finish-prompt
-            h3.prompt {{handleFn.completeMSG}}
-            .icon
-                i.fa.fa-check-circle
-        .panel-footer
-            a.btn.btn-default(ui-sref="studentlist") 返回学生信息
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="studentlist") 返回学生信息
