@@ -1,38 +1,42 @@
 .college-handle-container
     .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
-            .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .content-panel
-            .prompt {{handleFn.prompt}}
-            .content-form
-                form.form-horizontal.repeater(name="majorForm")
+        .widget-body
+            form.form-horizontal(name="majorForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 选择学院：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 选择学院：
+                        .col-sm-7
                             select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'" )
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                     .form-group
-                        .col-sm-2
-                            lable.required *
-                            label.control-label.text-center 专业名称：
-                        .col-sm-10
+                        label.col-sm-3.control-label * 专业名称：
+                        .col-sm-7
                             input.form-control(placeholder="请填写不超过30个字专业名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
-        .panel-footer
-            a.btn.btn-success(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
-            a.btn.btn-default(ui-sref="majorlist") 取消
+
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="majorlist") 取消
+
     .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .finish-prompt
-            h3.prompt {{handleFn.completeMSG}}
-            .icon
-                i.fa.fa-check-circle
-        .panel-footer
-            a.btn.btn-default(ui-sref="majorlist") 返回专业信息
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="majorlist") 返回专业信息
