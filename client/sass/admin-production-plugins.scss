@@ -7636,3 +7636,28 @@ a.clearsearchclass, a.g-menu-item, a.soptclass {
 .vc-title > small {
     font-size: 80%
 }
+
+//===== select2
+.select2-container--default {
+  .select2-selection--single {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 0;
+
+    .select2-selection__rendered {
+      color: #999999;
+      line-height: $input-height-base;
+    }
+  }
+  .select2-search--dropdown .select2-search__field {
+    border: 1px solid #cccccc;
+  }
+}
+.select2-container .select2-selection--single {
+  height: $input-height-base;
+}
+
+.select2-dropdown {
+  border: 1px solid #cccccc;
+  border-radius: $input-border-radius;
+}
