@@ -3,6 +3,7 @@
     {
       "title":"首页",
       "sref":"home",
+      "active":"home",
       "icon":"home"
     },
     {
@@ -12,27 +13,32 @@
     },
     {
       "title":"院系管理",
-      "sref":"collegelist",
+      "sref":"college.list",
+      "active":"college",
       "icon":"file-text-o"
     },
     {
       "title":"专业管理",
       "sref":"majorlist",
+      "active":"major",
       "icon":"file-text-o"
     },
     {
       "title":"班级管理",
       "sref":"classlist",
+      "active":"class",
       "icon":"file-text-o"
     },
     {
       "title":"教师管理",
       "sref":"teacherlist",
+      "active":"teacher",
       "icon":"file-text-o"
     },
     {
       "title":"学生管理",
       "sref":"studentlist",
+      "active":"student",
       "icon":"file-text-o"
     }
 

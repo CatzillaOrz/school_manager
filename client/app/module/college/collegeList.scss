@@ -1,11 +1,5 @@
 .college-list-container{
   margin: 10px;
-  .input-addon-right{
-    float: right;
-    color: #fff;
-    background-color: #10c469;
-    border-color: #0eac5c;
-  }
   .handle{
     color:$text-color-light;
     cursor: pointer;
@@ -18,5 +12,10 @@
   }
   .handle:hover{
     color: #35b8e0;
+  }
+  .search-btn{
+    color: #fff;
+    background-color: #29c192;
+    border-color: #25ac82;
   }
 }

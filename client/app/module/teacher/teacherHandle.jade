@@ -1,37 +1,35 @@
 .college-handle-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
         header(role='heading')
-            .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
         .widget-body
-            form.form-horizontal.repeater(name="teacherForm")
+            form.form-horizontal(name="teacherForm")
                 fieldset
                     legend {{handleFn.prompt}}
                 .short-form
                     .form-group
-                        .col-sm-3.control-label
-                            lable.required *
-                            label.text-center 姓名：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 姓名：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字教师姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
                     .form-group
-                        .col-sm-3.control-label
-                            lable.required *
-                            label.text-center 工号：
+                        label.col-sm-3.control-label
+                            span.required *
+                            |工号：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字教师工号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
                     .form-group
-                        .col-sm-3.control-label
-                            lable.required *
-                            label.text-center 选择学院：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择学院：
                         .col-sm-7
                             select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.select2Options")
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.params.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
-                        .col-sm-3.control-label
-                            label.text-center 性别：
+                        label.col-sm-3.control-label 性别：
                         .col-sm-7
                             label.radio-inline
                                 input(type='radio', name='sex',ng-model="handleFn.params.sex" value='男')
@@ -40,28 +38,32 @@
                                 input(type='radio', name='sex',ng-model="handleFn.params.sex" value='女')
                                 |  女
                     .form-group
-                        .col-sm-3.control-label
-                            label.text-center 手机号码：
+                        label.col-sm-3.control-label 手机号码：
                         .col-sm-7
                             input.form-control(placeholder="填写教师手机号码" name="phone" ng-model="handleFn.params.phone" validator="phone")
                     .form-group
-                        .col-sm-3.control-label
-                            label.text-center 邮箱：
+                        label.col-sm-3.control-label 邮箱：
                         .col-sm-7
                             input.form-control(placeholder="填写教师邮箱" name="email" ng-model="handleFn.params.email" validator="email")
+
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-success(type='submit'  ng-click="handleFn.submit()" validation-submit="teacherForm") 提交
+                            a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teacherForm") 提交
+                            .speace-10
                             a.btn.btn-default(ui-sref="teacherlist") 取消
+
     .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
             h2 {{handleFn.title}}
-        .finish-prompt
-            h3.prompt {{handleFn.completeMSG}}
-            .icon
-                i.fa.fa-check-circle
-        .panel-footer
-            a.btn.btn-default(ui-sref="teacherlist") 返回教师信息
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="teacherlist") 返回教师信息

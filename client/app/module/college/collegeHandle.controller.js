@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg("学院添加失败")
+                        messageService.openMsg(error.data)
                     })
             },
             getCollegeById:function () {
@@ -46,7 +46,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("学院添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             submit:function () {

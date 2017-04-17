@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg("教师添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             getTeacherById:function () {
@@ -81,7 +81,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("教师添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             submit:function () {

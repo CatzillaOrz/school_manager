@@ -45,7 +45,6 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
             var $body = $('body');
 
             var $collapsible = element.find('li[data-menu-collapse]');
-
             var bindEvents = function(){
                 $collapsible.each(function (idx, li) {
                     var $li = $(li);
@@ -59,9 +58,9 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
                             $li.smartCollapseToggle();
 
                             // add active marker to collapsed element if it has active childs
-                            if (!$li.hasClass('open') && $li.find('li.active').length > 0) {
-                                $li.addClass('active')
-                            }
+                            /*if (!$li.hasClass('open') && $li.find('li.active').length > 0) {
+                                $li.addClass('active');
+                            }*/
 
                             e.preventDefault();
                         })
@@ -70,12 +69,36 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
                     // initialization toggle
                     if ($li.find('li.active').length) {
                         $li.smartCollapseToggle();
-                        $li.find('li.active').parents('li').addClass('active');
+                        // $li.find('li.active').parents('li').addClass('active');
                     }
                 });
-            }
+            };
+            var activeMenu = function(tostate){
+                tostate = tostate || $state.current;
+                console.log($state.current);
+                var onstate = '';
+                if(tostate.parent != 'base'){
+                    // onstate = onstate;
+                    onstate = tostate.parent;
+                }else{
+                    onstate = tostate.name;
+                }
+                var active = element.find('li[data-menu-active]');
+                angular.forEach(active,function(li){
+                    var state = li.getAttribute("data-menu-active");
+                    if(state == onstate){
+                        $(li).addClass('active');
+                    }else{
+                        $(li).removeClass('active');
+                    }
+                });
+            };
             bindEvents();
-
+            activeMenu();
+            $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+                // console.log(toState);
+                activeMenu(toState);
+            });
 
             // click on route link
             element.on('click', 'a[data-ui-sref]', function (e) {

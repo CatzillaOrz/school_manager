@@ -51,7 +51,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg("专业添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             getMajorById:function () {
@@ -78,7 +78,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("专业添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             submit:function () {

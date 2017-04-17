@@ -1,5 +1,5 @@
 .college-list-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    .jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
@@ -21,11 +21,11 @@
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按学院名称查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
-                                    span.input-group-addon.input-addon-right(ng-click="collegeListFn.getCollegeList()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="collegeListFn.getCollegeList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.btn.btn-success(ui-sref="collegeCreat")
+                                button.btn.btn-primary(ui-sref="college.creat")
                                     span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -47,7 +47,7 @@
                                 td
                                 td
                                 td
-                                    a.handle(ui-sref="collegeEdit({id:college.id})")
+                                    a.handle(ui-sref="college.edit({id:college.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="collegeListFn.deletePrompt(college)")

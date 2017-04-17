@@ -244,10 +244,20 @@ angular.module("azx.common", ['ui.bootstrap'])
         };
         return ImageService;
     }])
+    /**
+     * select2 动态加载参数获取服务
+     */
     .factory('Select2LoadOptionsService', [function () {
 
         var Select2LoadOptionsService = {
 
+            /**
+             *
+             * @param url 关键字查询的url
+             * @param params 固定附加查询参数 注意此方法设置后就不可变
+             * @param keyWord 查询关键字
+             * @returns {{url: *, dataType: string, data: Select2LoadOptionsService.data, processResults: Select2LoadOptionsService.processResults, cache: boolean}}
+             */
            getLoadOptions:function (url,params,keyWord) {
                return {
                    url: url,
