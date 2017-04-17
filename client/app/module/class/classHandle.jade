@@ -21,7 +21,7 @@
                             span.required *
                             | 选择专业：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.majorId" ui-select2="handleFn.select2MajorOptions()")
+                            select.form-control(ng-model="handleFn.majorId" ui-select2="handleFn.select2MajorOptions()" )
                                 option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}" selected="{{handleFn.majorId==major.id?'selected':''}}") {{major.name}}
                     .form-group
                         label.col-sm-3.control-label

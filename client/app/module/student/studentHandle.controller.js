@@ -136,7 +136,12 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data);
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("添加失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
                     })
             },
             getStudentById:function () {
@@ -169,11 +174,26 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data);
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("更新失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
                     })
             },
             submit:function () {
                 var that=this;
+                if(!that.collegeId){
+                    messageService.openMsg("必须选择学院");
+                    return;
+                }else if(!that.majorId){
+                    messageService.openMsg("必须选择专业");
+                    return;
+                }else if(!that.classesId){
+                    messageService.openMsg("必须选择班级");
+                    return;
+                }
                 if (that.handle == "编辑学生信息") {
                     that.updateStudent();
                 }else {

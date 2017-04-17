@@ -23,7 +23,12 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data)
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("添加失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
                     })
             },
             getCollegeById:function () {
@@ -46,7 +51,12 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data);
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("更新失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
                     })
             },
             submit:function () {
