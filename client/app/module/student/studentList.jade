@@ -47,13 +47,13 @@
                                     span.responsiveExpander
                                     | {{student.jobNumber}}
                                 td {{student.name}}
+                                td {{student.sex}}
                                 td
                                 td
                                 td
                                 td
-                                td
-                                td
-                                td
+                                td {{student.email}}
+                                td {{student.phone}}
                                     a.handle(ui-sref="studentEdit({id:student.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑

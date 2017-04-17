@@ -20,7 +20,8 @@ angular.module('dleduWebApp')
                 phone: "",
                 email: "",
                 sex:"",
-                jobNumber:""
+                jobNumber:"",
+                collegeId:""
             },
             page: {
                 totalElements: 0,

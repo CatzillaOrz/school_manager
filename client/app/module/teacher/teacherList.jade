@@ -46,11 +46,11 @@
                                     span.responsiveExpander
                                     | {{teacher.jobNumber}}
                                 td {{teacher.name}}
+                                td {{teacher.sex}}
                                 td
                                 td
-                                td
-                                td
-                                td
+                                td {{teacher.email}}
+                                td {{teacher.phone}}
                                 td
                                     a.handle(ui-sref="teacherEdit({id:teacher.id})")
                                         i.fa.fa-pencil-square-o

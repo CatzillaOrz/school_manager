@@ -244,6 +244,34 @@ angular.module("azx.common", ['ui.bootstrap'])
         };
         return ImageService;
     }])
+    .factory('Select2LoadOptionsService', [function () {
+
+        var Select2LoadOptionsService = {
+
+           getLoadOptions:function (url,params,keyWord) {
+               return {
+                   url: url,
+                   dataType: 'json',
+                   //delay: 250,
+                   data: function (query) {
+                       params[keyWord]=query.term;
+                       return params;
+                   },
+                   processResults: function (data, params) {
+                       params.page = params.page || 1;
+                       return {
+                           results: data.data,
+                           pagination: {
+                               more: (params.page * 30) < data.total_count
+                           }
+                       };
+                   },
+                   cache: true
+               }
+           }
+        };
+        return Select2LoadOptionsService;
+    }])
     /**
      * azxHeader directive
      * @data-fluid 导航内容宽度扩展到100%，默认是最宽1200px
