@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout) {
+    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout,Select2LoadOptionsService) {
         $scope.handleFn={
             title:"新建教师",
             prompt:"填写以下信息以建立新的教师",
@@ -27,6 +27,21 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
             complete:false,
+            select2Options:{
+                ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 1,
+                    pageSize: 100
+                },"name"),
+
+                templateResult: function (data) {
+                    if (data.id === '') { // adjust for custom placeholder values
+                        return 'Custom styled placeholder text';
+                    }
+
+                    return data.name;
+                }
+            },
             /**
              *
              */
@@ -39,7 +54,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg("教师添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             getTeacherById:function () {
@@ -50,6 +65,8 @@ angular.module('dleduWebApp')
                 TeacherService.getTeacherById(params).$promise
                     .then(function (data) {
                         that.params=data
+                        that.collegeId=data.collegeId;
+                        that.getCollegeById(that.collegeId);
                     })
                     .catch(function (error) {
                         //messageService.openMsg("教师添加失败")
@@ -58,13 +75,13 @@ angular.module('dleduWebApp')
             updateTeacher:function () {
                 var that=this;
                 var params=that.params;
-                params.professionalId=that.majorId;
+                params.collegeId=that.collegeId;
                 TeacherService.updateTeacher(this.params).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("教师添加失败")
+                        messageService.openMsg(error.data);
                     })
             },
             submit:function () {
@@ -87,6 +104,25 @@ angular.module('dleduWebApp')
                         that.collegeDropList=data.data;
                     })
                     .catch(function (error) {
+                    })
+            },
+            getCollegeById:function (collegeId) {
+                var that= this;
+                var params={
+                    id: collegeId
+                };
+                CollegeService.getCollegeById(params).$promise
+                    .then(function (data) {
+                        var temp={
+                            id:data.id,
+                            name:data.name
+                        }
+                        that.collegeDropList.push(temp);
+                        that.collegeId=data.id;
+
+                    })
+                    .catch(function (error) {
+                        //messageService.openMsg("学院添加失败")
                     })
             },
             init:function () {

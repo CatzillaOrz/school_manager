@@ -79,15 +79,5 @@ angular.module('dleduWebApp')
                     label: '新建教师信息'
                 }
             })
-            .state('teacherfinish', {
-                parent: 'teacher',
-                url   : '/teacher/finish/:handle',
-                access: {requiredLogin: true},
-                views : {
-                    'content@base': {
-                        controller : 'TeacherFinishCtrl',
-                        templateUrl: 'app/module/teacher/teacherHandleFinish.html'
-                    }
-                }
-            })
+
     });

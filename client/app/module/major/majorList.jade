@@ -21,7 +21,7 @@
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按专业名称查询', aria-controls='datatable_col_reorder' ng-model="majorListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer(ng-click="majorListFn.getMajorList()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="majorListFn.getMajorList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis

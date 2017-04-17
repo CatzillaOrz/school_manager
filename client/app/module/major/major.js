@@ -57,15 +57,5 @@ angular.module('dleduWebApp')
                     label: '新建专业信息'
                 }
             })
-            .state('majorfinish', {
-                parent: 'major',
-                url   : '/major/finish/:handle',
-                access: {requiredLogin: true},
-                views : {
-                    'content@base': {
-                        controller : 'MajorFinishCtrl',
-                        templateUrl: 'app/module/major/majorHandleFinish.html'
-                    }
-                }
-            })
+
     });

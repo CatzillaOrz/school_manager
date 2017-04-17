@@ -21,7 +21,7 @@
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="teacherListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer(ng-click="teacherListFn.getTeacherList()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="teacherListFn.getTeacherList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -46,11 +46,11 @@
                                     span.responsiveExpander
                                     | {{teacher.jobNumber}}
                                 td {{teacher.name}}
+                                td {{teacher.sex}}
                                 td
                                 td
-                                td
-                                td
-                                td
+                                td {{teacher.email}}
+                                td {{teacher.phone}}
                                 td
                                     a.handle(ui-sref="teacherEdit({id:teacher.id})")
                                         i.fa.fa-pencil-square-o

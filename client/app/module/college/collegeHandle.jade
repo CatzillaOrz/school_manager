@@ -10,7 +10,9 @@
                     legend {{handleFn.prompt}}
                 .short-form
                     .form-group
-                        label.col-sm-3.control-label * 院系名称：
+                        .col-sm-3.control-label
+                            lable.required *
+                            label.text-center  院系名称：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过30个字院系名称",ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
                 .form-actions

@@ -10,18 +10,24 @@
                     legend {{handleFn.prompt}}
                 .short-form
                     .form-group
-                        label.col-sm-3.control-label * 姓名：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 姓名：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字教师姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
                     .form-group
-                        label.col-sm-3.control-label * 工号：
+                        label.col-sm-3.control-label
+                            span.required *
+                            |工号：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字教师工号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
                     .form-group
-                        label.col-sm-3.control-label * 选择学院：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择学院：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'")
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.select2Options")
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.params.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
                         label.col-sm-3.control-label 性别：
                         .col-sm-7

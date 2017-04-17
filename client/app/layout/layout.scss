@@ -181,4 +181,8 @@ a:focus {outline: none;}
   min-height:200px;
   width:400px;
   margin: 0 auto;
+  .required{
+    color:$red;
+    margin-right: 5px;
+  }
 }

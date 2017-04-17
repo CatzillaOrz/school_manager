@@ -57,15 +57,5 @@ angular.module('dleduWebApp')
                     label: '新建学生信息'
                 }
             })
-            .state('studentfinish', {
-                parent: 'student',
-                url   : '/student/finish/:handle',
-                access: {requiredLogin: true},
-                views : {
-                    'content@base': {
-                        controller : 'StudentFinishCtrl',
-                        templateUrl: 'app/module/student/studentHandleFinish.html'
-                    }
-                }
-            })
+
     });

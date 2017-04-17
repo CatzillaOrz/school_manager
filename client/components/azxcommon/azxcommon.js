@@ -245,6 +245,44 @@ angular.module("azx.common", ['ui.bootstrap'])
         return ImageService;
     }])
     /**
+     * select2 动态加载参数获取服务
+     */
+    .factory('Select2LoadOptionsService', [function () {
+
+        var Select2LoadOptionsService = {
+
+            /**
+             *
+             * @param url 关键字查询的url
+             * @param params 固定附加查询参数 注意此方法设置后就不可变
+             * @param keyWord 查询关键字
+             * @returns {{url: *, dataType: string, data: Select2LoadOptionsService.data, processResults: Select2LoadOptionsService.processResults, cache: boolean}}
+             */
+           getLoadOptions:function (url,params,keyWord) {
+               return {
+                   url: url,
+                   dataType: 'json',
+                   //delay: 250,
+                   data: function (query) {
+                       params[keyWord]=query.term;
+                       return params;
+                   },
+                   processResults: function (data, params) {
+                       params.page = params.page || 1;
+                       return {
+                           results: data.data,
+                           pagination: {
+                               more: (params.page * 30) < data.total_count
+                           }
+                       };
+                   },
+                   cache: true
+               }
+           }
+        };
+        return Select2LoadOptionsService;
+    }])
+    /**
      * azxHeader directive
      * @data-fluid 导航内容宽度扩展到100%，默认是最宽1200px
      * @data-inverse 深色导航条，默认是亮色

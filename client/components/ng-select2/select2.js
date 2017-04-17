@@ -33,6 +33,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
       return function (scope, elm, attrs, controller) {
         // instance-specific options
           options.language="zh-CN";
+
         var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2));
 
         /*
@@ -84,6 +85,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
         if (controller) {
           // Watch the model for programmatic changes
            scope.$watch(tAttrs.ngModel, function(current, old) {
+
             if (!current) {
               return;
             }
@@ -150,7 +152,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
             // Set the view and model value and update the angular template manually for the ajax/multiple select2.
             elm.bind("change", function (e) {
               e.stopImmediatePropagation();
-              
+
               if (scope.$$phase || scope.$root.$$phase) {
                 return;
               }

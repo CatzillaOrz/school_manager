@@ -10,28 +10,38 @@
                     legend {{handleFn.prompt}}
                 .short-form
                     .form-group
-                        label.col-sm-3.control-label * 姓名：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 姓名：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
                     .form-group
-                        label.col-sm-3.control-label * 学号：
+                        label.col-sm-3.control-label
+                            span.required *
+                            |学号：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过10个字学生工号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
+                            input.form-control(placeholder="请填写不超过10个字学生学号" ng-model="handleFn.params.jobNumber" name="jobNumber" validator="required, maxlength=10")
                     .form-group
-                        label.col-sm-3.control-label * 选择学院：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择学院：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'")
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2 ="handleFn.select2CollegeOptions")
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.params.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
-                        label.col-sm-3.control-label * 选择专业：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择专业：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.majorId" ui-select2="'{language: zh-CN}'")
-                                option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}") {{major.name}}
+                            select.form-control(ng-model="handleFn.majorId" ui-select2="handleFn.select2MajorOptions(handleFn.collegeId)"  )
+                                option(ng-repeat="major in handleFn.majorDropList" value="{{major.id}}" selected="{{handleFn.majorId==major.id?'selected':''}}") {{major.name}}
                     .form-group
-                        label.col-sm-3.control-label * 选择班级：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择班级：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.classId" ui-select2="'{language: zh-CN}'")
-                                option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}") {{class.name}}
+                            select.form-control(ng-model="handleFn.classesId" ui-select2="handleFn.select2ClassOptions(handleFn.majorId)")
+                                option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}" selected="{{handleFn.classesId==class.id?'selected':''}}") {{class.name}}
                     .form-group
                         label.col-sm-3.control-label 性别：
                         .col-sm-7

@@ -10,12 +10,16 @@
                     legend {{handleFn.prompt}}
                 .short-form
                     .form-group
-                        label.col-sm-3.control-label * 选择学院：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择学院：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="'{language: zh-CN}'" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
+                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.select2Options" )
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.params.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
-                        label.col-sm-3.control-label * 专业名称：
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 专业名称：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过30个字专业名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
 
