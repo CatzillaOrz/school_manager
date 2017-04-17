@@ -62,4 +62,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='classListFn.page.totalElements', max-size='classListFn.page.pageSize' ng-model='classListFn.page.pageNumber',ng-change="classListFn.findClassByPage()" boundary-link-numbers='true', rotate='false')
+                                ul.pagination-sm(uib-pagination, total-items='classListFn.page.totalElements', max-size='classListFn.page.pageSize' ng-model='classListFn.page.pageNumber',ng-change="classListFn.findClassByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

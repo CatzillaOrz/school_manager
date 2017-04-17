@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassHandleCtrl', function ($scope, $state, ClassService, CollegeService, MajorService, AuthService,$timeout,Select2LoadOptionsService) {
+    .controller('ClassHandleCtrl', function ($scope, $state, ClassService, CollegeService,messageService, MajorService, AuthService,$timeout,Select2LoadOptionsService) {
         $scope.handleFn = {
             title: "",
             prompt: "",
@@ -92,7 +92,13 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data);
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("添加失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
+
                     })
             },
             getClassById: function () {
@@ -122,11 +128,23 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        messageService.openMsg(error.data);
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("更新失败");
+                        }else {
+                            messageService.openMsg(error.data);
+                        }
                     })
             },
             submit: function () {
                 var that = this;
+                if(!that.collegeId){
+                    messageService.openMsg("必须选择学院");
+                    return;
+                }else if(!that.majorId){
+                    messageService.openMsg("必须选择专业");
+                    return;
+                }
                 if (that.handle == "编辑班级信息") {
                     that.updateClass();
                 } else {
