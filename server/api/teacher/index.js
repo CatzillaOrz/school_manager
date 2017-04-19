@@ -15,7 +15,7 @@ router.post('/addTeacher',auth.isSignedIn, controller.addTeacher);
 router.delete('/deleteTeacher',auth.isSignedIn, controller.deleteTeacher);
 router.put('/updateTeacher',auth.isSignedIn, controller.updateTeacher);
 router.get('/getTeacherById',auth.isSignedIn, controller.getTeacherById);
-
+router.get('/getTeacherDropListOrg',auth.isSignedIn, controller.getTeacherDropListOrg);
 
 
 module.exports = router;

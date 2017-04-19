@@ -57,5 +57,58 @@ angular.module('dleduWebApp')
                     label: '新建班级信息'
                 }
             })
-
+            .state('classDetail', {
+                parent: 'class',
+                url   : '/classdetail/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'ClassDetailCtrl',
+                        templateUrl: 'app/module/class/classDetail.html'
+                    }
+                },
+                data:{
+                    prompt:'填写以下信息以建立新的班级',
+                    completeMSG:'恭喜你，新建班级成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '班级详情'
+                }
+            })
+            .state('classTeacher', {
+                parent: 'class',
+                url   : '/classteacher/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'ClassTeacherCtrl',
+                        templateUrl: 'app/module/class/classTeacher.html'
+                    }
+                },
+                data:{
+                    prompt:'填写以下信息以建立新的班级',
+                    completeMSG:'恭喜你，新建班级成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '班级详情'
+                }
+            })
+            .state('importStudent', {
+                parent: 'class',
+                url   : '/importstudent/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'ImportStudentCtrl',
+                        templateUrl: 'app/module/class/importStudent.html'
+                    }
+                },
+                data:{
+                    prompt:'填写以下信息以建立新的班级',
+                    completeMSG:'恭喜你，新建班级成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '班级详情'
+                }
+            })
     });

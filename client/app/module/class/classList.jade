@@ -39,7 +39,7 @@
                             tr.odd(role='row' ng-repeat="class in classListFn.classList")
                                 td.sorting_1 {{$index+1 + ((classListFn.page.pageNumber==0?classListFn.page.pageNumber+1:classListFn.page.pageNumber)-1)*10}}
                                 td.expand
-                                    span.responsiveExpander {{class.name}}
+                                    a(ui-sref="classDetail({id:class.id})") {{class.name}}
                                 td {{class.collegeName}}
                                 td {{class.professionalName}}
                                 td
