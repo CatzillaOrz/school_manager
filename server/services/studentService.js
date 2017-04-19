@@ -88,7 +88,37 @@ var StudentService = {
             callback(e);
         });
     },
-
+    getSimpleStudents: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/students/simplestudents',
+            access_token: access_token,
+             params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    updateStudentToClasses: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway',
+            path: '/v1/students/batchupdateclasses',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 

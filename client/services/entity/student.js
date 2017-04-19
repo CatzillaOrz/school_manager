@@ -28,6 +28,14 @@ angular.module('dleduWebService')
                 var student = $resource('api/student/getStudentById');
                 return student.get(params);
             },
+            getSimpleStudents: function (params) {
+                var student = $resource('api/student/getSimpleStudents');
+                return student.get(params);
+            },
+            updateStudentToClasses: function (params) {
+                var student = $resource('api/student/updateStudentToClasses','',{
+                    update: {method:'PUT'}});
+                return student.update(params);
+            },
         }
-
     });
