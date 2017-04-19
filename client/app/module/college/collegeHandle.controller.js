@@ -25,9 +25,10 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg("添加失败");
-                        }else {
                             messageService.openMsg(error.data);
+                        }else {
+
+                            messageService.openMsg("添加失败");
                         }
                     })
             },
@@ -53,9 +54,10 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg("更新失败");
-                        }else {
                             messageService.openMsg(error.data);
+                        }else {
+
+                            messageService.openMsg("更新失败");
                         }
                     })
             },

@@ -88,6 +88,22 @@ var TeacherService = {
             callback(e);
         });
     },
+    getTeacherDropListOrg: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/teacher/droplistorg',
+            access_token: access_token,
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
 };
 

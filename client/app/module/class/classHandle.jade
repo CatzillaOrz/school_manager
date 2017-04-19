@@ -34,7 +34,7 @@
                         .col-md-12
                             a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="classForm") 提交
                             .speace-10
-                            a.btn.btn-default(ui-sref="classlist") 取消
+                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 取消
     .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
         header(role='heading')
             span.widget-icon
@@ -48,4 +48,4 @@
             .form-actions
                 .row
                     .col-md-12
-                        a.btn.btn-default(ui-sref="classlist") 返回班级信息
+                        a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 返回班级信息

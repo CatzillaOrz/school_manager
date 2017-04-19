@@ -16,5 +16,9 @@ router.delete('/deleteClass',auth.isSignedIn, controller.deleteClass);
 router.put('/updateClass',auth.isSignedIn, controller.updateClass);
 router.get('/getClassById',auth.isSignedIn, controller.getClassById);
 router.get('/geClassDropList',auth.isSignedIn, controller.geClassDropList);
+router.post('/saveClassTeacher',auth.isSignedIn, controller.saveClassTeacher);
+router.get('/getClassTeacherList',auth.isSignedIn, controller.getClassTeacherList);
+router.delete('/deleteClassTeacher',auth.isSignedIn, controller.deleteClassTeacher);
+
 
 module.exports = router;

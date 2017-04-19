@@ -32,6 +32,18 @@ angular.module('dleduWebService')
                 var classes = $resource('api/class/geClassDropList');
                 return classes.get(params);
             },
+            saveClassTeacher:function (params) {
+                var classes=$resource('api/class/saveClassTeacher');
+                return classes.save(params);
+            },
+            getClassTeacherList: function (params) {
+                var classesList = $resource('api/class/getClassTeacherList');
+                return classesList.get(params);
+            },
+            deleteClassTeacher:function (params) {
+                var classes=$resource('api/class/deleteClassTeacher');
+                return classes.remove(params);
+            },
         }
 
     });

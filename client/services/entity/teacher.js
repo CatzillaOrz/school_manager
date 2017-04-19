@@ -28,6 +28,10 @@ angular.module('dleduWebService')
                 var teacheres = $resource('api/teacher/getTeacherById');
                 return teacheres.get(params);
             },
+            getTeacherDropListOrg: function (params) {
+                var teacheres = $resource('api/teacher/getTeacherDropListOrg');
+                return teacheres.get(params);
+            },
         }
 
     });

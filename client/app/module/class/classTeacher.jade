@@ -1,0 +1,40 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{classTeacherFn.classes.name}}
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            .widget-body
+                fieldset
+                    legend
+                        span 班主任
+                .short-form
+                    .form-group.repeater
+                        label.control-label
+                        .col-sm-4
+                            span
+                            | 选择班主任：
+                        .col-sm-8
+                            .form-group(ng-repeat="teacherId in classTeacherFn.teacherIds")
+                                .col-sm-10
+                                    select.form-control(ng-model="classTeacherFn.teacherIds[$index]" ui-select2="classTeacherFn.select2Options()" )
+                                        option(ng-repeat="teacher in classTeacherFn.teacherDropList" value="{{teacher.id}}") {{teacher.name}}
+                                .col-sm-2
+                                    a.btn.btn-warning(ng-if="$index!=0" ng-click="classTeacherFn.removeOneClassTeacher($index)") 删除
+                            .form-group
+                                .col-sm-10
+                                    a.btn.btn-sm.btn-primary(ng-click="classTeacherFn.addOneClassTeacher()") 再增加一个班主任
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="classTeacherFn.submit()" ) 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 取消
+
+
+
