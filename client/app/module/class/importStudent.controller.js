@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ImportStudentCtrl', function ($scope,$state, ClassService,StudentService,AuthService,messageService,Select2LoadOptionsService) {
+    .controller('ImportStudentCtrl', function ($scope,$state, ClassService,StudentService,AuthService,messageService,Select2LoadOptionsService,$timeout) {
         $scope.importStudentFn={
             classes:{},
             studentList:[],
@@ -57,6 +57,9 @@ angular.module('dleduWebApp')
                     pageSize: _this.params.pageSize
                 };
                 params.name=_this.keyWord;
+                if(_this.params.classesId){
+                    params.classesId=_this.params.classesId;
+                }
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList=data.data;
@@ -113,12 +116,21 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+
             init:function () {
                 var _this=this;
                 _this.params.classesId = $state.params.id;
                 _this.getClassById();
             }
         };
-        $scope.importStudentFn.init();
+
+        $timeout(function () {
+            $scope.importStudentFn.init();
+            $scope.$watch('importStudentFn.params.classesId', function(newValue, oldValue) {
+                if (newValue!=oldValue){
+                    $scope.importStudentFn.findStudentByKey();
+                }
+            });
+        })
 
     });
