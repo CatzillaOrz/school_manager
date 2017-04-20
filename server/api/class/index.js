@@ -19,6 +19,6 @@ router.get('/geClassDropList',auth.isSignedIn, controller.geClassDropList);
 router.post('/saveClassTeacher',auth.isSignedIn, controller.saveClassTeacher);
 router.get('/getClassTeacherList',auth.isSignedIn, controller.getClassTeacherList);
 router.delete('/deleteClassTeacher',auth.isSignedIn, controller.deleteClassTeacher);
-
+router.get('/getClassDropListOrg',auth.isSignedIn, controller.getClassDropListOrg);
 
 module.exports = router;

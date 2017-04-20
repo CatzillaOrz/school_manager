@@ -9,51 +9,52 @@
                 i.fa.fa-refresh.fa-spin
         // widget div
         div(role='content')
-            .widget-body
+            .widget-body.container
                 .col-sm-5
                     fieldset
                         legend
-                            span 班主任
-                    .short-form
-                        .form-group.repeater
-                            label.control-label
-                            .col-sm-4
-                                span
-                                | 选择班主任：
-                            .col-sm-8
-                                .form-group(ng-repeat="teacherId in classTeacherFn.teacherIds")
-                                    .col-sm-10
-                                        select.form-control(ng-model="classTeacherFn.teacherIds[$index]" ui-select2="classTeacherFn.select2Options()" )
-                                            option(ng-repeat="teacher in classTeacherFn.teacherDropList" value="{{teacher.id}}") {{teacher.name}}
-                                    .col-sm-2
-                                        a.btn.btn-warning(ng-if="$index!=0" ng-click="classTeacherFn.removeOneClassTeacher($index)") 删除
-                                .form-group
-                                    .col-sm-10
-                                        a.btn.btn-sm.btn-primary(ng-click="classTeacherFn.addOneClassTeacher()") 再增加一个班主任
+                            span 选择要转入的学生
+                    .row
+                        .col-lg-6
+                            .input-group
+                                input.form-control(type='text', placeholder='按学号或姓名搜索' ng-model="importStudentFn.keyWord")
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button' ng-click="importStudentFn.findStudentByKey()")
+                                      i.fa.fa-search
+                        .col-lg-6
+                            select.form-control(ng-model="importStudentFn.params.classesId" ui-select2="importStudentFn.select2Options()" data-placeholder="按班级筛选" )
+                                option(ng-repeat="classes in importStudentFn.classesDropList" value="{{classes.id}}") {{classes.name}}
+                    .dt-toolbar-footer.student-list-class-detail
+                        .col-sm-6.col-xs-12.hidden-xs
+                            .dataTables_info(role='status', aria-live='polite')
+                                | 共 {{importStudentFn.studentList.length}} 条数据
+                    table.table.table-striped.table-bordered.table-hover.dataTable
+                        tbody
+                            tr.cursor-pointer(role='row' ng-repeat="student in importStudentFn.studentList" ng-click="importStudentFn.selectStudent(student)")
+                                td {{student.name}}
+                                td {{student.jobNumber}}
+                                td {{student.sex}}
                 .col-sm-1
                 .col-sm-4
                     fieldset
                         legend
-                            span 班主任
-                    .short-form
-                        .form-group.repeater
-                            label.control-label
-                            .col-sm-4
-                                span
-                                | 选择班主任：
-                            .col-sm-8
-                                .form-group(ng-repeat="teacherId in classTeacherFn.teacherIds")
-                                    .col-sm-10
-                                        select.form-control(ng-model="classTeacherFn.teacherIds[$index]" ui-select2="classTeacherFn.select2Options()" )
-                                            option(ng-repeat="teacher in classTeacherFn.teacherDropList" value="{{teacher.id}}") {{teacher.name}}
-                                    .col-sm-2
-                                        a.btn.btn-warning(ng-if="$index!=0" ng-click="classTeacherFn.removeOneClassTeacher($index)") 删除
-                                .form-group
-                                    .col-sm-10
-                                        a.btn.btn-sm.btn-primary(ng-click="classTeacherFn.addOneClassTeacher()") 再增加一个班主任
+                            span 已选择的学生
+                    .dt-toolbar-footer.student-list-class-detail
+                        .col-sm-6.col-xs-12.hidden-xs
+                            .dataTables_info(role='status', aria-live='polite')
+                                | 共 {{importStudentFn.selectedStudents.length}} 条数据
+                    table.table.table-striped.table-bordered.table-hover.dataTable
+                        tbody
+                            tr.odd(role='row' ng-repeat="student in importStudentFn.selectedStudents")
+                                td {{student.name}}
+                                td {{student.jobNumber}}
+                                td {{student.sex}}
+                                td.cursor-pointer(ng-click="importStudentFn.removeSelectedStudent(student)")
+                                    i.fa.fa-trash-o
+            form.form-horizontal()
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="classTeacherFn.submit()" ) 提交
+                            a.btn.btn-primary(ng-click="importStudentFn.submit()" ) 提交
                             .speace-10
-                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 取消
+                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.classesId})") 取消
