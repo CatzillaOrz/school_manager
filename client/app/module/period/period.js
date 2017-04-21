@@ -39,5 +39,23 @@ angular.module('dleduWebApp')
                     label: '学时管理'
                 }
             })
+            .state('semesterCreate', {
+                parent: 'period',
+                url   : '/semester/create',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SemesterHandlerCtrl',
+                        templateUrl: 'app/module/period/semesterHandle.html'
+                    }
+                },
+                data:{
+                    prompt:'新建课节',
+                    completeMSG:'恭喜你，新建课节成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '学时管理'
+                }
+            })
 
     });

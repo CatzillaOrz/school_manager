@@ -40,8 +40,13 @@
       "sref":"studentlist",
       "active":"student",
       "icon":"file-text-o"
-    }
-
+    },
+        {
+          "title":"学时管理",
+          "sref":"periodlist",
+          "active":"period",
+          "icon":"calendar"
+        }
 
   ]
 }
