@@ -1,79 +1,84 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('PeriodHandlerCtrl', function ($scope,$state, AuthService,StudentService,messageService,CommonService,NgTableParams) {
-        $scope.handleFn = {
-            title: "",
-            prompt: "",
-            handle: "create",
-            isInit:false,
-            collegeDropList: [],
-            majorDropList: [],
-            collegeId: 0,
-            majorId: 0,
-            params: {
-                id: 0,
+    .controller('PeriodHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, PeriodService) {
+        $scope.periodHandlerFn = {
+            params:{
+
+                id:"",
+                name:"",
                 orgId: AuthService.getUser().orgId,
-                name: "",
                 userId: AuthService.getUser().id,
-                collegeId:""
+                semesterList:[]
             },
-            page: {
-                totalElements: 0,
-                totalPages: 0,
-                pageNumber: 1,
-                pageSize: 10
+            semester:{
+                name:"",
+                startDate:"",
+                endDate:""
             },
             complete:false,
+            handle:"",
+            prompt:"",
+            datePick: {
+                inlineOptions: {
+                    //customClass: getDayClass,
+                    minDate: new Date(),
+                    showWeeks: true
+                },
+                dateOptions: {
+                    //dateDisabled: $scope.periodHandlerFn.datePick.disabled,
+                    formatYear: 'yy',
+                    maxDate: new Date(2020, 5, 22),
+                    minDate: new Date(),
+                    startingDay: 1
+                },
+                disabled: function (data) {
+                    var date = data.date,
+                        mode = data.mode;
+                    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+                },
+                toggleMin: function () {
+                    this.inlineOptions.minDate = this.inlineOptions.minDate ? null : new Date();
+                    this.dateOptions.minDate = this.inlineOptions.minDate;
+                },
+                open1: function () {
+                    this.popup1.opened = true;
+                },
+                open2: function () {
+                    this.popup2.opened = true;
+                },
+                popup1: {
+                    opened: false
+                },
 
-            select2MajorOptions:function(){
-                var that=this;
-                return {
-                    ajax: {
-                        url: "api/major/getMajorDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params={
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                collegeId:that.collegeId,
-
-                            }
-                            params.name=query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: true
-                    },
-
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            return 'Custom styled placeholder text';
-                        }
-
-                        return data.name;
-                    }}
+                popup2: {
+                    opened: false
+                },
             },
-            /**
-             *
-             *
-             */
-            addClass: function () {
+            submit: function () {
+                var that = this;
+                // if(!that.collegeId){
+                //     messageService.openMsg("必须选择学院");
+                //     return;
+                // }else if(!that.majorId){
+                //     messageService.openMsg("必须选择专业");
+                //     return;
+                // }
+                if (that.handle == "编辑班级信息") {
+                    that.updateClass();
+                } else {
+                    that.addPeriod();
+                }
+            },
+
+            addPeriod:function(){
                 var that = this;
                 var params = that.params;
-                params.collegeId = that.collegeId;
-                params.professionalId = that.majorId;
-                ClassService.addClass(that.params).$promise
+                if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
+                    params.semesterList.push(that.semester);
+                }
+
+                PeriodService.addPeriod(that.params).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
@@ -87,130 +92,9 @@ angular.module('dleduWebApp')
                         }
                     })
             },
-            getClassById: function () {
+            init:function () {
                 var that = this;
-                var params = {
-                    id: that.params.id
-                }
-                ClassService.getClassById(params).$promise
-                    .then(function (data) {
-                        that.params.name = data.name;
-                        that.collegeId=data.collegeId;
-                        that.majorId=data.professionalId;
-                        that.getCollegeById(that.collegeId);
-
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
-                    })
-            },
-            updateClass: function () {
-                var that = this;
-                var params = that.params;
-                params.collegeId = that.collegeId;
-                params.professionalId = that.majorId;
-                ClassService.updateClass(this.params).$promise
-                    .then(function (data) {
-                        that.complete = true;
-                    })
-                    .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg(error.data);
-                        }else {
-
-                            messageService.openMsg("更新失败");
-                        }
-                    })
-            },
-            submit: function () {
-                var that = this;
-                if(!that.collegeId){
-                    messageService.openMsg("必须选择学院");
-                    return;
-                }else if(!that.majorId){
-                    messageService.openMsg("必须选择专业");
-                    return;
-                }
-                if (that.handle == "编辑班级信息") {
-                    that.updateClass();
-                } else {
-                    that.addClass();
-                }
-            },
-            getCollegeDropList: function () {
-                var that = this;
-                var params = {
-                    orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: 100
-                }
-                CollegeService.getCollegeDropList(params).$promise
-                    .then(function (data) {
-                        that.collegeDropList =data.data;
-                    })
-                    .catch(function (error) {
-                    })
-            },
-            getCollegeById:function (collegeId) {
-                var that= this;
-                var params={
-                    id: collegeId
-                };
-                CollegeService.getCollegeById(params).$promise
-                    .then(function (data) {
-                        var temp={
-                            id:data.id,
-                            name:data.name
-                        }
-                        that.collegeDropList.push(temp);
-                        that.collegeId=data.id;
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("学院添加失败")
-                    })
-            },
-            getMajorDropList: function () {
-                var that = this;
-                var params = {
-                    orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: 100
-                }
-                params.collegeId = that.collegeId;
-                MajorService.getMajorDropList(params).$promise
-                    .then(function (data) {
-                        that.majorDropList = data.data;
-                        if(!that.isInit && $state.current.name=="classEdit"){
-                            that.getMajorById(that.majorId);
-                            that.isInit=true;
-                        }
-
-                    })
-                    .catch(function (error) {
-                    })
-            },
-            getMajorById:function (majorId) {
-                var that= this;
-                var params={
-                    id: majorId
-                }
-                MajorService.getMajorById(params).$promise
-                    .then(function (data) {
-                        var temp={
-                            id:data.id,
-                            name:data.name
-                        }
-                        that.majorDropList.splice(0,0,temp);
-                        that.majorId=data.id;
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("专业添加失败")
-                    })
-            },
-            init: function () {
-
-                var that = this;
+                this.datePick.toggleMin();
                 that.params.id = $state.params.id;
                 that.handle = $state.current.ncyBreadcrumbLabel;
                 if (that.handle == "编辑班级信息") {
@@ -221,7 +105,13 @@ angular.module('dleduWebApp')
                 that.completeMSG = $state.current.data.completeMSG;
                 console.log($state);
 
+
             }
         };
-        $scope.handleFn.init();
-    })
+        $scope.periodHandlerFn.init();
+
+
+
+
+    });
+

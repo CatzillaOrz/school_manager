@@ -67,10 +67,7 @@ angular.module('dleduWebApp')
                         templateUrl: 'app/module/class/classDetail.html'
                     }
                 },
-                data:{
-                    prompt:'填写以下信息以建立新的班级',
-                    completeMSG:'恭喜你，新建班级成功！'
-                },
+
                 ncyBreadcrumb: {
                     label: '班级详情'
                 }

@@ -10,7 +10,7 @@
  *              date-format='yyyy-MM-dd hh:mm:ss' //todo
  *
  */
-angular.module('EnrichMindApp')
+angular.module("azx.dateTimePicker", ['ui.bootstrap'])
   .directive('dateTimePicker', [function () {
     return {
       restrict: 'EA',

@@ -1,9 +1,9 @@
 .college-handle-container
-    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!periodHandlerFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{handleFn.prompt}}
+            h2 {{periodHandlerFn.prompt}}
         .widget-body
             form.form-horizontal(name="classForm")
                 fieldset
@@ -11,34 +11,51 @@
                         .short-form.height-auto
                             .form-group
                                 label.col-sm-3.control-label
-                                    span.required *
-                                    | 学年名称：
+                                    span.required.font-14 *
+                                    span.font-14 学年名称：
                                 .col-sm-7
-                                    input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                                    input.form-control(placeholder="请填写不超过30个字学年名称" ng-model="periodHandlerFn.params.name" name="name" validator="required, maxlength=30")
                 .short-form
                     .form-group
                         label.col-sm-3.control-label
-                            span.required *
                             | 学期：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                            input.form-control(placeholder="请填写不超过30个字学期名称" ng-model="periodHandlerFn.semester.name" name="name" )
+                    .form-group
+
+                        .col-sm-offset-3
+                            .col-sm-6
+                                p.input-group
+                                    input.form-control(type='text', uib-datepicker-popup='',ng-click='periodHandlerFn.datePick.open1()'  ng-model='periodHandlerFn.semester.startDate', is-open='periodHandlerFn.datePick.popup1.opened', datepicker-options='periodHandlerFn.datePick.dateOptions'  close-text='Close')
+                                    span.input-group-btn
+                                        button.btn.btn-default(type='button', ng-click='periodHandlerFn.datePick.open1()')
+                                            i.glyphicon.glyphicon-calendar
+                            //.col-sm-1 至
+                            .col-sm-6
+                                p.input-group
+                                    input.form-control(type='text', uib-datepicker-popup='', ng-model='periodHandlerFn.semester.endDate', is-open='periodHandlerFn.datePick.popup2.opened', datepicker-options='periodHandlerFn.datePick.dateOptions', close-text='Close')
+                                    span.input-group-btn
+                                        button.btn.btn-default(type='button', ng-click='periodHandlerFn.datePick.open2()')
+                                            i.glyphicon.glyphicon-calendar
+
+
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="classForm") 提交
+                            a.btn.btn-primary(ng-click="periodHandlerFn.submit()" validation-submit="classForm") 提交
                             .speace-10
-                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 取消
-    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+                            a.btn.btn-default(ui-sref="periodlist") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='periodHandlerFn.complete')
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{handleFn.title}}
+            h2 {{periodHandlerFn.title}}
         .widget-body
             .finish-prompt
-                h3.prompt {{handleFn.completeMSG}}
+                h3.prompt {{periodHandlerFn.completeMSG}}
                 .icon
                     i.fa.fa-check-circle
             .form-actions
                 .row
                     .col-md-12
-                        a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 返回班级信息
+                        a.btn.btn-default(ui-sref="periodlist") 学期信息
