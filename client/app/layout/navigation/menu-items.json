@@ -40,8 +40,13 @@
       "sref":"studentlist",
       "active":"student",
       "icon":"file-text-o"
+    },
+    {
+      "title":"课程管理",
+      "sref":"courselist",
+      "active":"course",
+      "icon":"file-text-o"
     }
-
 
   ]
 }
