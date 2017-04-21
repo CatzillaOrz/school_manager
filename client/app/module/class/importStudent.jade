@@ -22,12 +22,15 @@
                                     button.btn.btn-default(type='button' ng-click="importStudentFn.findStudentByKey()")
                                       i.fa.fa-search
                         .col-lg-6
-                            select.form-control(ng-model="importStudentFn.params.classesId" ui-select2="importStudentFn.select2Options()" data-placeholder="按班级筛选" )
+                            select.form-control(ng-model="importStudentFn.selectClassesId" ui-select2="importStudentFn.select2Options()"  )
                                 option(ng-repeat="classes in importStudentFn.classesDropList" value="{{classes.id}}") {{classes.name}}
                     .dt-toolbar-footer.student-list-class-detail
                         .col-sm-6.col-xs-12.hidden-xs
                             .dataTables_info(role='status', aria-live='polite')
                                 | 共 {{importStudentFn.studentList.length}} 条数据
+                        .col-sm-6.col-xs-12.hidden-xs
+                            .ColVis
+                                a.btn.btn-default(ng-click="importStudentFn.addAll()") 添加全部
                     table.table.table-striped.table-bordered.table-hover.dataTable
                         tbody
                             tr.cursor-pointer(role='row' ng-repeat="student in importStudentFn.studentList" ng-click="importStudentFn.selectStudent(student)")
@@ -41,8 +44,11 @@
                             span 已选择的学生
                     .dt-toolbar-footer.student-list-class-detail
                         .col-sm-6.col-xs-12.hidden-xs
-                            .dataTables_info(role='status', aria-live='polite')
-                                | 共 {{importStudentFn.selectedStudents.length}} 条数据
+                            a.btn.btn-default(ng-click="importStudentFn.removeAll()") 取消全部
+                        .col-sm-6.col-xs-12.hidden-xs
+                            .ColVis
+                                .dataTables_info(role='status', aria-live='polite')
+                                    | 共 {{importStudentFn.selectedStudents.length}} 条数据
                     table.table.table-striped.table-bordered.table-hover.dataTable
                         tbody
                             tr.odd(role='row' ng-repeat="student in importStudentFn.selectedStudents")
@@ -57,4 +63,4 @@
                         .col-md-12
                             a.btn.btn-primary(ng-click="importStudentFn.submit()" ) 提交
                             .speace-10
-                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.classesId})") 取消
+                            a.btn.btn-default(ui-sref="classDetail({id:importStudentFn.params.classesId})") 取消

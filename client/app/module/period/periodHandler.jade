@@ -1,0 +1,44 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.prompt}}
+        .widget-body
+            form.form-horizontal(name="classForm")
+                fieldset
+                    legend
+                        .short-form.height-auto
+                            .form-group
+                                label.col-sm-3.control-label
+                                    span.required *
+                                    | 学年名称：
+                                .col-sm-7
+                                    input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 学期：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="classForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="classDetail({id:handleFn.params.id})") 返回班级信息

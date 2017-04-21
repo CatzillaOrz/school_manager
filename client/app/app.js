@@ -17,7 +17,8 @@ angular.module('dleduWebApp', [
     'ngFileUpload',
     'ui.select2',
     'azx.swiper',
-    'azx.common'
+    'azx.common',
+    "ngTable"
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');
