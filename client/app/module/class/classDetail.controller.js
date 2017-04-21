@@ -180,11 +180,11 @@ angular.module('dleduWebApp')
                 }
                 ClassService.deleteClassTeacher(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("班主任删除成功！");
+                        messageService.openMsg("解除班主任成功！");
                         _this.getClassTeacherList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("班主任删除失败！");
+                        messageService.openMsg("解除班主任失败！");
                     })
             },
             //删除提示

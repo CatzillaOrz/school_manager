@@ -5,6 +5,7 @@ angular.module('dleduWebApp')
         $scope.importStudentFn={
             classes:{},
             studentList:[],
+            selectClassesId:"",
             params:{
                 classesId:"",
                 orgId: AuthService.getUser().orgId,
@@ -17,6 +18,11 @@ angular.module('dleduWebApp')
             select2Options:function () {
                 var _this=this;
                 return{
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: '按班级筛选'
+                    },
+                    allowClear: true,
                     ajax: Select2LoadOptionsService.getLoadOptions("api/class/getClassDropListOrg",{
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
@@ -27,12 +33,12 @@ angular.module('dleduWebApp')
 
                         if (data.id === '') { // adjust for custom placeholder values
                             _this.classesDropList=[];
-                            return 'Custom styled placeholder text';
+                            return '按班级筛选';
                         }
                         _this.classesDropList.push(data);
                         return data.name;
-                    },
-                    allowClear:true
+                    }
+
                 }
             },
             getClassById: function () {
@@ -57,8 +63,8 @@ angular.module('dleduWebApp')
                     pageSize: _this.params.pageSize
                 };
                 params.name=_this.keyWord;
-                if(_this.params.classesId){
-                    params.classesId=_this.params.classesId;
+                if(_this.selectClassesId){
+                    params.classesId=_this.selectClassesId;
                 }
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
@@ -116,17 +122,25 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
-
+            addAll:function () {
+                var _this=this;
+                _this.selectedStudents=_.union(_this.selectedStudents,this.studentList)
+            },
+            removeAll:function () {
+                var _this=this;
+                _this.selectedStudents= [];
+            },
             init:function () {
                 var _this=this;
                 _this.params.classesId = $state.params.id;
                 _this.getClassById();
+
             }
         };
 
         $timeout(function () {
             $scope.importStudentFn.init();
-            $scope.$watch('importStudentFn.params.classesId', function(newValue, oldValue) {
+            $scope.$watch('importStudentFn.selectClassesId', function(newValue, oldValue) {
                 if (newValue!=oldValue){
                     $scope.importStudentFn.findStudentByKey();
                 }

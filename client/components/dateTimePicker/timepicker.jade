@@ -1,0 +1,24 @@
+.choose-time
+  //改模板的时候,这个input元素和属性必须有
+  input.form-control.text-center(type='text', placeholder='HH', ng-model='hours', ng-change='updateHours()', ng-readonly='::readonlyInput', maxlength='2', tabindex='{{::tabindex}}', ng-disabled='noIncrementHours()', ng-blur='blur()')
+  i.time-interval :
+  //改模板的时候,这个input元素和属性必须有
+  input.form-control.text-center(type='text', placeholder='MM', ng-model='minutes', ng-change='updateMinutes()', ng-readonly='::readonlyInput', maxlength='2', tabindex='{{::tabindex}}', ng-disabled='noIncrementMinutes()', ng-blur='blur()')
+  //改模板的时候,这个a元素和属性必须有
+  .time-operation
+    a.btn-link(ng-click='incrementHours()', ng-class='{disabled: noIncrementHours()}', ng-disabled='noIncrementHours()', tabindex='{{::tabindex}}')
+      i.fa.fa-caret-up
+    //改模板的时候,这个a元素和属性必须有
+    a.btn-link(ng-click='decrementHours()', ng-class='{disabled: noDecrementHours()}', ng-disabled='noDecrementHours()', tabindex='{{::tabindex}}')
+      i.fa.fa-caret-down
+
+  .time-operation.time-operation-minutes
+    //改模板的时候,这个a元素和属性必须有
+    a.btn-link(ng-click='incrementMinutes()', ng-class='{disabled: noIncrementMinutes()}', ng-disabled='noIncrementMinutes()', tabindex='{{::tabindex}}')
+      i.fa.fa-caret-up
+    //AM PM 切换
+    //改模板的时候,这个a元素和属性必须有
+    a.btn-link(ng-click='decrementMinutes()', ng-class='{disabled: noDecrementMinutes()}', ng-disabled='noDecrementMinutes()', tabindex='{{::tabindex}}')
+      i.fa.fa-caret-down
+
+
