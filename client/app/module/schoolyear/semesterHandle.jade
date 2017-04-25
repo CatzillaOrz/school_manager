@@ -15,15 +15,15 @@
                             | 课程时段名称：
                         .col-sm-7
                             select.form-control(ng-model="semesterHandlerFn.params.no"  name="name" validator="required, maxlength=30")
-                                option(value="" )  请选择课节
-                                option(ng-repeat="op in semesterHandlerFn.coursePeriod" value="{{op.id}}") {{op.text}}
+                                option(value="" )  请选择课节 {{semesterHandlerFn.params.no}}
+                                option(ng-repeat="op in semesterHandlerFn.coursePeriod" value="{{op.id}}" ng-selected="semesterHandlerFn.params.no==op.id") {{op.text}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 上课时间：
                         .col-sm-7
                             .input-group.clockpicker
-                                input.form-control(type='text', value='09:30' ng-model="semesterHandlerFn.params.startDate")
+                                input.form-control(type='text', value='09:30' ng-model="semesterHandlerFn.params.startTime")
                                 span.input-group-addon
                                     span.glyphicon.glyphicon-time
                     .form-group
@@ -32,7 +32,7 @@
                             | 下课时间：
                         .col-sm-7
                             .input-group.clockpicker
-                                input.form-control(type='text', value='10:30' ng-model="semesterHandlerFn.params.endDate")
+                                input.form-control(type='text', value='10:30' ng-model="semesterHandlerFn.params.endTime")
                                 span.input-group-addon
                                     span.glyphicon.glyphicon-time
                 .form-actions
@@ -54,4 +54,4 @@
             .form-actions
                 .row
                     .col-md-12
-                        a.btn.btn-default(ui-sref="periodlist") 返回班级信息
+                        a.btn.btn-default(ui-sref="periodlist") 返回学时管理信息

@@ -186,6 +186,15 @@ a:focus {outline: none;}
     margin-right: 5px;
   }
 }
+.md-form{
+  min-height:200px;
+  width:600px;
+  margin: 0 auto;
+  .required{
+    color:$red;
+    margin-right: 5px;
+  }
+}
 .height-auto{
   height: auto;
   min-height: 50px;

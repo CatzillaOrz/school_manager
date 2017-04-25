@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('PeriodHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, PeriodService) {
+    .controller('PeriodHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, SchoolYearService) {
         $scope.periodHandlerFn = {
             params:{
 
@@ -16,6 +16,7 @@ angular.module('dleduWebApp')
                 startDate:"",
                 endDate:""
             },
+            semesterList:[],
             complete:false,
             handle:"",
             prompt:"",
@@ -41,19 +42,6 @@ angular.module('dleduWebApp')
                     this.inlineOptions.minDate = this.inlineOptions.minDate ? null : new Date();
                     this.dateOptions.minDate = this.inlineOptions.minDate;
                 },
-                open1: function () {
-                    this.popup1.opened = true;
-                },
-                open2: function () {
-                    this.popup2.opened = true;
-                },
-                popup1: {
-                    opened: false
-                },
-
-                popup2: {
-                    opened: false
-                },
             },
             submit: function () {
                 var that = this;
@@ -64,21 +52,21 @@ angular.module('dleduWebApp')
                 //     messageService.openMsg("必须选择专业");
                 //     return;
                 // }
-                if (that.handle == "编辑班级信息") {
-                    that.updateClass();
+                if (that.handle == "编辑学期") {
+                    that.updateSchoolYear();
                 } else {
-                    that.addPeriod();
+                    that.addSchoolYear();
                 }
             },
 
-            addPeriod:function(){
+            addSchoolYear:function(){
                 var that = this;
                 var params = that.params;
-                if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
-                    params.semesterList.push(that.semester);
-                }
+               // if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
+                    params.semesterList=that.semesterList;
+              //  }
 
-                PeriodService.addPeriod(that.params).$promise
+                SchoolYearService.addSchoolYear(params).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
@@ -92,13 +80,60 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            updateSchoolYear:function(){
+                var that = this;
+                var params = that.params;
+                // if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
+                params.semesterList=that.semesterList;
+                //  }
+
+                SchoolYearService.updateSchoolYear(params).$promise
+                    .then(function (data) {
+                        that.complete = true;
+                    })
+                    .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg(error.data);
+                        }else {
+
+                            messageService.openMsg("更新失败");
+                        }
+                    })
+            },
+            getSchoolYearById:function (params) {
+                var _this=this;
+                SchoolYearService.getSchoolYearById(params).$promise
+                    .then(function (data) {
+                        _this.params.name=data.name;
+                        _this.semesterList=data.semesterList
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            addOneSemester:function () {
+                var _this=this;
+                var semester=_.clone(_this.semester)
+                _this.semesterList.push(semester)
+            },
+            removeOneSemester:function (index) {
+                var _this=this;
+                _this.semesterList.splice(index,1)
+            },
             init:function () {
                 var that = this;
                 this.datePick.toggleMin();
-                that.params.id = $state.params.id;
                 that.handle = $state.current.ncyBreadcrumbLabel;
-                if (that.handle == "编辑班级信息") {
+                if (that.handle == "编辑学期") {
                     that.params.id = $state.params.id;
+                    var params={
+                        id:that.params.id
+                    }
+                    that.getSchoolYearById(params);
+                }else {
+                    var semester=_.clone(that.semester)
+                    that.semesterList.push(semester)
                 }
                 that.title = $state.current.data.title;
                 that.prompt = $state.current.data.prompt;

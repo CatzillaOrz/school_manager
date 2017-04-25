@@ -9,6 +9,6 @@ module.exports = function(app){
   app.use('/api/class', require('./api/class'));
   app.use('/api/teacher', require('./api/teacher'));
   app.use('/api/student', require('./api/student'));
-  app.use('/api/period', require('./api/period'));
+  app.use('/api/schoolyear', require('./api/schoolyear'));
 
 };
