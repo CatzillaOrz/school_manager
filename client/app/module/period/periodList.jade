@@ -35,8 +35,8 @@
                             .col-xs-12.col-sm-6.no-padding.margin-bottom-10
                                 .col-sm-6.no-padding
                                     .input-group
-                                        input.form-control(type='text', placeholder='Search for...')
-                                        span.input-group-btn
+                                        input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称')
+                                        span.input-group-btn(ng-click="preiodFn.findPeriodByPage()")
                                             button.btn.btn-primary(type='button')
                                                 i.glyphicon.glyphicon-search
                             .col-sm-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
@@ -45,36 +45,32 @@
                                         span 新建
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
 
-                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
+                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.periodList')
                                     td(colspan='4')
                                         a(href='', ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }")
                                             strong {{ schoolYear.name }}
-                                tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.schoolTermList', ng-repeat-end='')
-                                    td(sortable="'country'", data-title="'学期'", groupable="'country'")
+                                            span.margin-left-10(ng-click="preiodFn.deletePrompt(schoolYear)") 删除
+                                tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
+                                    td(sortable="'name'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
-                                    td(sortable="'name'", data-title="'开始日期'", groupable="'name'")
-                                        | {{schoolTerm.startTime}}
-                                    td(sortable="'age'", data-title="'结束日期'", groupable="'age'")
-                                        | {{schoolTerm.endTime}}
-                                    td(sortable="'money'", data-title="'学周'")
-                                        | {{user.money}}
+                                    td(sortable="'startDate'", data-title="'开始日期'", groupable="'name'")
+                                        | {{schoolTerm.startDate}}
+                                    td(sortable="'endDate'", data-title="'结束日期'", groupable="'age'")
+                                        | {{schoolTerm.endDate}}
+                                    td(sortable="'numWeek'", data-title="'学周'")
+                                        span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
+                                        span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
 
                 #hr2.tab-pane
                     .tabbable.tabs-below
                         .tab-content.padding-10
                             .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
                                 .ColVis
-                                    button.btn.btn-primary(ui-sref="classCreat")
+                                    button.btn.btn-primary(ui-sref="semesterCreate")
                                         span 添加新的时段
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
-
-                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
-                                    td(colspan='4')
-                                        a(href='', ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
-                                            span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }")
-                                            strong {{ schoolYear.name }}
-                                tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.schoolTermList', ng-repeat-end='')
+                                tr( ng-repeat='schoolTerm in preiodFn.schoolYearList', ng-repeat-end='')
                                     td(sortable="'country'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
                                     td(sortable="'name'", data-title="'开始日期'", groupable="'name'")

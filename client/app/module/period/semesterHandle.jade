@@ -1,0 +1,57 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!semesterHandlerFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{semesterHandlerFn.title}}
+        .widget-body
+            form.form-horizontal(name="classForm")
+                fieldset
+                    legend {{semesterHandlerFn.prompt}}
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 课程时段名称：
+                        .col-sm-7
+                            select.form-control(ng-model="semesterHandlerFn.params.no"  name="name" validator="required, maxlength=30")
+                                option(value="" )  请选择课节
+                                option(ng-repeat="op in semesterHandlerFn.coursePeriod" value="{{op.id}}") {{op.text}}
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 上课时间：
+                        .col-sm-7
+                            .input-group.clockpicker
+                                input.form-control(type='text', value='09:30' ng-model="semesterHandlerFn.params.startDate")
+                                span.input-group-addon
+                                    span.glyphicon.glyphicon-time
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 下课时间：
+                        .col-sm-7
+                            .input-group.clockpicker
+                                input.form-control(type='text', value='10:30' ng-model="semesterHandlerFn.params.endDate")
+                                span.input-group-addon
+                                    span.glyphicon.glyphicon-time
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="semesterHandlerFn.submit()" validation-submit="classForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="periodlist") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='semesterHandlerFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{semesterHandlerFn.title}}
+        .widget-body
+            .finish-prompt
+                h3.prompt {{semesterHandlerFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="periodlist") 返回班级信息

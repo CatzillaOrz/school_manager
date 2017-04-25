@@ -41,6 +41,13 @@
       "active":"student",
       "icon":"file-text-o"
     },
+
+    {
+      "title":"学时管理",
+      "sref":"periodlist",
+       "active":"period",
+       "icon":"calendar"
+    },
     {
       "title":"课程管理",
       "sref":"courselist",
