@@ -45,12 +45,13 @@
                                         span 新建
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
 
-                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.periodList')
+                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
                                     td(colspan='4')
                                         a(href='', ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }")
                                             strong {{ schoolYear.name }}
-                                            span.margin-left-10(ng-click="preiodFn.deletePrompt(schoolYear)") 删除
+                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
+                                            span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
                                     td(sortable="'name'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
@@ -70,13 +71,18 @@
                                     button.btn.btn-primary(ui-sref="semesterCreate")
                                         span 添加新的时段
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
-                                tr( ng-repeat='schoolTerm in preiodFn.schoolYearList', ng-repeat-end='')
+                                tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
                                     td(sortable="'country'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
                                     td(sortable="'name'", data-title="'开始日期'", groupable="'name'")
                                         | {{schoolTerm.startTime}}
                                     td(sortable="'age'", data-title="'结束日期'", groupable="'age'")
                                         | {{schoolTerm.endTime}}
-                                    td(sortable="'money'", data-title="'学周'")
-                                        | {{user.money}}
+                                    td(sortable="'money'", data-title="'操作'")
+                                        a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})")
+                                            i.fa.fa-pencil-square-o
+                                            span 编辑
+                                        a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)")
+                                            i.fa.fa-trash-o
+                                            span 删除
     // end widget div

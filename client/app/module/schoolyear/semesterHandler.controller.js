@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SemesterHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, PeriodService,$timeout) {
+    .controller('SemesterHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, SchoolYearService,$timeout) {
         $scope.semesterHandlerFn = {
             params:{
 
@@ -9,8 +9,8 @@ angular.module('dleduWebApp')
                 no:"",
                 orgId: AuthService.getUser().orgId,
                 userId: AuthService.getUser().id,
-                startDate:"",
-                endDate:""
+                startTime:"",
+                endTime:""
             },
             semester:{
                 name:"",
@@ -105,21 +105,14 @@ angular.module('dleduWebApp')
 
             submit: function () {
                 var that = this;
-                // if(!that.collegeId){
-                //     messageService.openMsg("必须选择学院");
-                //     return;
-                // }else if(!that.majorId){
-                //     messageService.openMsg("必须选择专业");
-                //     return;
-                // }
-                if (that.handle == "编辑课节信息") {
-                    that.updateClass();
+                if (that.handle == "编辑课节") {
+                    that.updatePeriod();
                 } else {
-                    that.addCoursePeriod();
+                    that.addPeriod();
                 }
             },
 
-            addCoursePeriod:function(){
+            addPeriod:function(){
                 var that = this;
                 var params = that.params;
                     if(params.no==-1){
@@ -128,7 +121,7 @@ angular.module('dleduWebApp')
                     }
 
 
-                PeriodService.addCoursePeriod(that.params).$promise
+                SchoolYearService.addPeriod(that.params).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
@@ -142,13 +135,53 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            updatePeriod:function(){
+                var that = this;
+                var params = that.params;
+                if(params.no==-1){
+                    messageService.openMsg("您还没有选择课程节");
+                    return;
+                }
+
+
+                SchoolYearService.updatePeriod(that.params).$promise
+                    .then(function (data) {
+                        that.complete = true;
+                    })
+                    .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("添加失败!请检查你的输入");
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
+                    })
+            },
+            getPeriodById:function (params) {
+                var _this=this;
+                SchoolYearService.getPeriodById(params).$promise
+                    .then(function (data) {
+                        _this.params.id=data.id;
+                        _this.params.no=data.no;
+                        _this.params.startTime=data.startTime;
+                        _this.params.endTime=data.endTime;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
             init:function () {
                 var that = this;
 
                 that.params.id = $state.params.id;
                 that.handle = $state.current.ncyBreadcrumbLabel;
-                if (that.handle == "编辑班级信息") {
+                if (that.handle == "编辑课节") {
                     that.params.id = $state.params.id;
+                    var params={
+                        id:that.params.id
+                    }
+                    that.getPeriodById(params);
                 }
                 that.title = $state.current.data.title;
                 that.prompt = $state.current.data.prompt;
@@ -163,6 +196,8 @@ angular.module('dleduWebApp')
        $timeout(function(){
            $('.clockpicker').clockpicker();
        })
+
+
 
 
     });

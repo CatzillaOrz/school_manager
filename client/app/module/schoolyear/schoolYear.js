@@ -13,8 +13,8 @@ angular.module('dleduWebApp')
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
-                        controller : 'PeriodListCtrl',
-                        templateUrl: 'app/module/period/periodList.html'
+                        controller : 'SchoolYearListCtrl',
+                        templateUrl: 'app/module/schoolyear/schoolYearList.html'
                     }
                 },
                 ncyBreadcrumb: {
@@ -28,7 +28,7 @@ angular.module('dleduWebApp')
                 views : {
                     'content@base': {
                         controller : 'PeriodHandlerCtrl',
-                        templateUrl: 'app/module/period/periodHandler.html'
+                        templateUrl: 'app/module/schoolyear/schoolYearHandler.html'
                     }
                 },
                 data:{
@@ -39,6 +39,24 @@ angular.module('dleduWebApp')
                     label: '学时管理'
                 }
             })
+            .state('periodEdit', {
+                parent: 'period',
+                url   : '/period/edit/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'PeriodHandlerCtrl',
+                        templateUrl: 'app/module/schoolyear/schoolYearHandler.html'
+                    }
+                },
+                data:{
+                    prompt:'编辑学期',
+                    completeMSG:'恭喜你，编辑学期成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '编辑学期'
+                }
+            })
             .state('semesterCreate', {
                 parent: 'period',
                 url   : '/semester/create',
@@ -46,7 +64,7 @@ angular.module('dleduWebApp')
                 views : {
                     'content@base': {
                         controller : 'SemesterHandlerCtrl',
-                        templateUrl: 'app/module/period/semesterHandle.html'
+                        templateUrl: 'app/module/schoolyear/semesterHandle.html'
                     }
                 },
                 data:{
@@ -57,5 +75,23 @@ angular.module('dleduWebApp')
                     label: '学时管理'
                 }
             })
+        .state('semesterEdit', {
+            parent: 'period',
+            url   : '/semester/edit/:id',
+            access: {requiredLogin: true},
+            views : {
+                'content@base': {
+                    controller : 'SemesterHandlerCtrl',
+                    templateUrl: 'app/module/schoolyear/semesterHandle.html'
+                }
+            },
+            data:{
+                prompt:'编辑课节',
+                completeMSG:'恭喜你，编辑课节成功！'
+            },
+            ncyBreadcrumb: {
+                label: '编辑课节'
+            }
+        })
 
     });
