@@ -27,7 +27,7 @@
                             .col-sm-offset-3
                                 .col-sm-6
                                     p.input-group
-                                        input.form-control(type='text', uib-datepicker-popup='',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]'  ng-model='semester.startDate', is-open='opened[$index][0]', datepicker-options='periodHandlerFn.datePick.dateOptions'  close-text='Close')
+                                        input.form-control(type='text', uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]'  ng-model='semester.startDate', is-open='opened[$index][0]', datepicker-options='periodHandlerFn.datePick.dateOptions'  close-text='Close')
                                         span.input-group-btn
                                             button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
                                                 i.glyphicon.glyphicon-calendar
@@ -38,6 +38,7 @@
                                         span.input-group-btn
                                             button.btn.btn-default(type='button', ng-click='opened[$index][1]=!opened[$index][1]')
                                                 i.glyphicon.glyphicon-calendar
+
                     div.text-center
                         .btn.btn-primary(ng-click="periodHandlerFn.addOneSemester()")
                             i.fa.fa-plus

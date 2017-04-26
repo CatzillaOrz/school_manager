@@ -36,7 +36,7 @@
                                 .col-sm-6.no-padding
                                     .input-group
                                         input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称')
-                                        span.input-group-btn(ng-click="preiodFn.findPeriodByPage()")
+                                        span.input-group-btn(ng-click="preiodFn.findSchoolYearByPage()")
                                             button.btn.btn-primary(type='button')
                                                 i.glyphicon.glyphicon-search
                             .col-sm-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
@@ -47,9 +47,9 @@
 
                                 tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
                                     td(colspan='4')
-                                        a(href='', ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
-                                            span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }")
-                                            strong {{ schoolYear.name }}
+                                        a(href='', )
+                                            span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
+                                            strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
                                             span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
                                             span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')

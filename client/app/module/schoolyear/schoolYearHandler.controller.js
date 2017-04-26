@@ -107,10 +107,17 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.params.name=data.name;
                         _this.semesterList=data.semesterList
+                        _this.stringToDate(_this.semesterList);
                     })
                     .catch(function (error) {
 
                     })
+            },
+            stringToDate:function (list) {
+                angular.forEach(list,function (data) {
+                    data.startDate=new Date(data.startDate);
+                    data.endDate=new Date(data.endDate);
+                })
             },
             addOneSemester:function () {
                 var _this=this;
