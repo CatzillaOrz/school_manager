@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-	TeachClassService = require('../../services/TeachClassService');
+	TeachClassService = require('../../services/teachClassService');
 
 module.exports = {
 	getTeachClassList: function (req, res) {
