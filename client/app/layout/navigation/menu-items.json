@@ -1,59 +1,63 @@
 {
-  "items": [
-    {
-      "title":"首页",
-      "sref":"home",
-      "active":"home",
-      "icon":"home"
-    },
-    {
-      "title":"学校信息管理",
-      "sref":"",
-      "icon":"file-text-o"
-    },
-    {
-      "title":"院系管理",
-      "sref":"college.list",
-      "active":"college",
-      "icon":"file-text-o"
-    },
-    {
-      "title":"专业管理",
-      "sref":"majorlist",
-      "active":"major",
-      "icon":"file-text-o"
-    },
-    {
-      "title":"班级管理",
-      "sref":"classlist",
-      "active":"class",
-      "icon":"file-text-o"
-    },
-    {
-      "title":"教师管理",
-      "sref":"teacherlist",
-      "active":"teacher",
-      "icon":"file-text-o"
-    },
-    {
-      "title":"学生管理",
-      "sref":"studentlist",
-      "active":"student",
-      "icon":"file-text-o"
-    },
-
-    {
-      "title":"学时管理",
-      "sref":"periodlist",
-       "active":"period",
-       "icon":"calendar"
-    },
-    {
-      "title":"课程管理",
-      "sref":"courselist",
-      "active":"course",
-      "icon":"file-text-o"
-    }
-
-  ]
+    "items": [
+        {
+            "title": "首页",
+            "sref": "home",
+            "active": "home",
+            "icon": "home"
+        },
+        {
+            "title": "学校信息管理",
+            "sref": "",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "院系管理",
+            "sref": "college.list",
+            "active": "college",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "专业管理",
+            "sref": "majorlist",
+            "active": "major",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "班级管理",
+            "sref": "classlist",
+            "active": "class",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "教师管理",
+            "sref": "teacherlist",
+            "active": "teacher",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "学生管理",
+            "sref": "studentlist",
+            "active": "student",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "学时管理",
+            "sref": "periodlist",
+            "active": "period",
+            "icon": "calendar"
+        },
+        {
+            "title": "课程管理",
+            "sref": "courselist",
+            "active": "course",
+            "icon": "file-text-o"
+        },
+        {
+            "title": "教学班管理",
+            "sref": "teachclasslist",
+            "active": "teachclass",
+            "icon": "file-text-o"
+        }
+    ]
 }
