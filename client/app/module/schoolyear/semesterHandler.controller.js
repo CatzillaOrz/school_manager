@@ -115,8 +115,16 @@ angular.module('dleduWebApp')
             addPeriod:function(){
                 var that = this;
                 var params = that.params;
+                var time1=new Date("2017-04-25 "+that.params.startTime);
+                var time2=new Date("2017-04-25 "+that.params.endTime);
                     if(params.no==-1){
                         messageService.openMsg("您还没有选择课程节");
+                        return;
+                    }else if(!that.params.startTime||!that.params.endTime){
+                        messageService.openMsg("课节开始时间和结束时间不能为空！");
+                        return;
+                    }else if(time1.getTime()>time2.getTime()){
+                        messageService.openMsg("您选择课程节开始时间有误！");
                         return;
                     }
 
@@ -128,9 +136,9 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg("添加失败!请检查你的输入");
-                        }else {
                             messageService.openMsg(error.data);
+                        }else {
+                            messageService.openMsg("添加失败!请检查你的输入");
 
                         }
                     })

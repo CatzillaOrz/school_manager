@@ -62,10 +62,22 @@ angular.module('dleduWebApp')
             addSchoolYear:function(){
                 var that = this;
                 var params = that.params;
-               // if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
-                    params.semesterList=that.semesterList;
-              //  }
-
+               if(!that.semesterList[0].name){
+                   messageService.openMsg("学期名称必须填写");
+                   return;
+                   //&& that.semester.startDate&&that.semester.endDate
+               }else if(!that.semesterList[0].startDate||!that.semesterList[0].endDate){
+                   messageService.openMsg("学期开始时间和结束时间必须填写");
+                   return;
+               }else if(that.semesterList[0].startDate&&that.semesterList[0].endDate){
+                   var startDate=new Date(that.semesterList[0].startDate).getTime();
+                   var endDate=new Date(that.semesterList[0].endDate).getTime();
+                   if(startDate>=endDate){
+                       messageService.openMsg("您填写的时间有误，结束日期小于开始日期");
+                       return;
+                   }
+               }
+                params.semesterList=that.semesterList;
                 SchoolYearService.addSchoolYear(params).$promise
                     .then(function (data) {
                         that.complete = true;
@@ -74,9 +86,11 @@ angular.module('dleduWebApp')
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
                             messageService.openMsg(error.data);
+
                         }else {
 
                             messageService.openMsg("添加失败");
+
                         }
                     })
             },
@@ -107,10 +121,17 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.params.name=data.name;
                         _this.semesterList=data.semesterList
+                        _this.stringToDate(_this.semesterList);
                     })
                     .catch(function (error) {
 
                     })
+            },
+            stringToDate:function (list) {
+                angular.forEach(list,function (data) {
+                    data.startDate=new Date(data.startDate);
+                    data.endDate=new Date(data.endDate);
+                })
             },
             addOneSemester:function () {
                 var _this=this;
