@@ -43,15 +43,15 @@
                                 .ColVis
                                     button.btn.btn-primary(ui-sref="periodCreate")
                                         span 新建
-                            table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
+                            table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
 
                                 tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
                                     td(colspan='4')
                                         a(href='', )
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
-                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
                                             span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
+                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
                                     td(sortable="'name'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
@@ -62,6 +62,19 @@
                                     td(sortable="'numWeek'", data-title="'学周'")
                                         span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
                                         span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
+                            .dt-toolbar-footer
+                                .col-sm-6.col-xs-12.hidden-xs
+                                    #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                        | 显示第
+                                        span.txt-color-darken {{((preiodFn.page.pageNumber==0?preiodFn.page.pageNumber+1:preiodFn.page.pageNumber)-1)*10+1}}
+                                        |  到
+                                        span.txt-color-darken {{((preiodFn.page.pageNumber==0?preiodFn.page.pageNumber+1:preiodFn.page.pageNumber)-1)*10+preiodFn.schoolYearList.length}}
+                                        |  条 总共
+                                        span.text-primary {{preiodFn.page.totalElements}}
+                                        |  条记录
+                                .col-sm-6.col-xs-12
+                                    #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                        ul.pagination-sm(uib-pagination, total-items='preiodFn.page.totalElements', max-size='preiodFn.page.pageSize' ng-model='preiodFn.page.pageNumber',ng-change="preiodFn.findSchoolYearByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
                 #hr2.tab-pane
                     .tabbable.tabs-below
@@ -72,11 +85,11 @@
                                         span 添加新的时段
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
                                 tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
-                                    td(sortable="'country'", data-title="'学期'", groupable="'country'")
+                                    td(sortable="'country'", data-title="'课节'", groupable="'country'")
                                         | {{schoolTerm.name}}
-                                    td(sortable="'name'", data-title="'开始日期'", groupable="'name'")
+                                    td(sortable="'name'", data-title="'上课时间'", groupable="'name'")
                                         | {{schoolTerm.startTime}}
-                                    td(sortable="'age'", data-title="'结束日期'", groupable="'age'")
+                                    td(sortable="'age'", data-title="'下课时间'", groupable="'age'")
                                         | {{schoolTerm.endTime}}
                                     td(sortable="'money'", data-title="'操作'")
                                         a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})")

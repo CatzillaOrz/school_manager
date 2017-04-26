@@ -129,7 +129,6 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         that.periodList = data.data;
                         that.periodDataHandler(that.periodList);
-                        that.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -161,6 +160,7 @@ angular.module('dleduWebApp')
                         that.schoolYearList = data.data;
                         that.page=data.page;
                         that.page.pageNumber+=that.page.pageNumber;
+                        that.page.totalElements=data.page.totalElements;
                     })
                     .catch(function (error) {
 
