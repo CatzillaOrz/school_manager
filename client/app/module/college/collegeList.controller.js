@@ -5,14 +5,16 @@ angular.module('dleduWebApp')
         $scope.collegeListFn = {
             //学院列表
             collegeList: [],
-            //当前操作的college
+            //当前操作的学院
             currentCollege: {},
+            //分页参数
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 0,
                 pageSize: 10
             },
+            //查询参数
             params: {
                 name:""
             },
@@ -70,7 +72,7 @@ angular.module('dleduWebApp')
                         messageService.openMsg("学院删除失败！");
                     })
             },
-            //删除提示
+            //删除提示弹出框
             deletePrompt: function (entity) {
                 this.currentCollege = entity;
                 messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege)

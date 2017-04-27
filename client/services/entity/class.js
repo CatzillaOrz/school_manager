@@ -48,6 +48,7 @@ angular.module('dleduWebService')
                 var classes = $resource('api/class/getClassDropListOrg');
                 return classes.get(params);
             },
+
         }
 
     });

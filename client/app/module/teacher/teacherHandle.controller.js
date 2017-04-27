@@ -2,14 +2,26 @@
 
 angular.module('dleduWebApp')
     .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout,Select2LoadOptionsService) {
+        /**
+         * 此控制层是创建和编辑共用
+         * @type {{title: string, prompt: string, handle: string, collegeDropList: Array, majorDropList: Array, collegeId: number, majorId: number, params: {id: number, orgId, name: string, userId, phone: string, email: string, jobNumber: string, sex: string}, page: {totalElements: number, totalPages: number, pageNumber: number, pageSize: number}, complete: boolean, select2Options: {ajax: (*), templateResult: templateResult}, addTeacher: addTeacher, getTeacherById: getTeacherById, updateTeacher: updateTeacher, submit: submit, getCollegeDropList: getCollegeDropList, getCollegeById: getCollegeById, init: init}}
+         */
         $scope.handleFn={
+            //提示title
             title:"新建教师",
+            //提示信息
             prompt:"填写以下信息以建立新的教师",
+            //操作标识
             handle:"create",
+            //学院下拉列表
             collegeDropList:[],
+            //专业下拉列表
             majorDropList:[],
+            //学院id
             collegeId:0,
+            //专业id
             majorId:0,
+            //提交参数
             params:{
                 id:0,
                 orgId: AuthService.getUser().orgId,
@@ -20,13 +32,16 @@ angular.module('dleduWebApp')
                 jobNumber:"",
                 sex:""
             },
+            //分页
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
                 pageSize: 10
             },
+            //操作完成标识
             complete:false,
+            //学院下拉列表配置
             select2Options:{
                 ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
                     orgId: AuthService.getUser().orgId,
@@ -42,9 +57,7 @@ angular.module('dleduWebApp')
                     return data.name;
                 }
             },
-            /**
-             *
-             */
+           //添加老师
             addTeacher:function () {
                 var that=this;
                 var params=that.params;
@@ -63,6 +76,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //根据id查询老师
             getTeacherById:function () {
                 var that= this;
                 var params={
@@ -78,6 +92,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("教师添加失败")
                     })
             },
+            //更新老师
             updateTeacher:function () {
                 var that=this;
                 var params=that.params;
@@ -96,6 +111,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //提交
             submit:function () {
                 var that=this;
                 if (that.handle == "编辑教师信息") {
@@ -104,6 +120,7 @@ angular.module('dleduWebApp')
                     that.addTeacher();
                 }
             },
+            //学院下拉列表查询
             getCollegeDropList:function () {
                 var that=this;
                 var params = {
@@ -118,6 +135,7 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                     })
             },
+            //通过学院id查询学院
             getCollegeById:function (collegeId) {
                 var that= this;
                 var params={
@@ -137,6 +155,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("学院添加失败")
                     })
             },
+            //初始化
             init:function () {
 
                 var that = this;

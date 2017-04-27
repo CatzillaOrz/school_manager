@@ -7,12 +7,14 @@ angular.module('dleduWebApp')
             majorList: [],
             //当前操作的major
             currentMajor: {},
+            //分页
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
                 pageSize: 10
             },
+            //查询参数
             params: {
                 name:"",
             },

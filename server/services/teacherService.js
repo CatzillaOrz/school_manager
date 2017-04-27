@@ -32,7 +32,8 @@ var TeacherService = {
         RestClient.post({
             host: 'gateway',
             path: '/v1/teacher/add',
-            entity: params
+            entity: params,
+            access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -104,7 +105,22 @@ var TeacherService = {
             callback(e);
         });
     },
-
+    getSimpleTeachers: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/teacher/simpleteachers',
+            access_token: access_token,
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 

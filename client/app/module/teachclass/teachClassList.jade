@@ -30,8 +30,6 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 教学班编号
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 班级名称
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 学期
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 课程
@@ -39,9 +37,10 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 100px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="teachClass in teachClassListFn.teachClassList")
-                                td.sorting_1 {{$index+1 + ((teachClassListFn.page.pageNumber==0?teachClassListFn.page.pageNumber+1:teachClassListFn.page.pageNumber)-1)*10}}
                                 td {{teachClass.name}}
-                                td {{teachClass.courseDesc}}
+                                td {{teachClass.semesterName}}
+                                td {{teachClass.courseName}}
+                                td
                                 td
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})")
                                         i.fa.fa-pencil-square-o

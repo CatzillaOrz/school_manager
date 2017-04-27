@@ -2,20 +2,27 @@
 
 angular.module('dleduWebApp')
     .controller('CollegeHandleCtrl', function ($scope,AuthService,CollegeService, $state,messageService,$timeout) {
+        /**
+         * 此控制层是创建和编辑共用
+         * @type {{title: string, prompt: string, handle: string, params: {id: number, orgId, name: string, userId}, complete: boolean, addCollege: addCollege, getCollegeById: getCollegeById, updateCollege: updateCollege, submit: submit, init: init}}
+         */
         $scope.handleFn={
+            //提示title
             title:"",
+            //提示信息
             prompt:"",
+            //操作类型
             handle:"",
+            //参数
             params:{
                 id:0,
                 orgId: AuthService.getUser().orgId,
                 name:"",
                 userId:AuthService.getUser().id
             },
+            //操作完成标识
             complete:false,
-            /**
-             *
-             */
+            //添加学院
             addCollege:function () {
                 var that=this;
                 CollegeService.addCollege(that.params).$promise
@@ -32,6 +39,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //通过学院id查询学院信息
             getCollegeById:function () {
                 var that= this;
                 var params={
@@ -45,6 +53,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("学院添加失败")
                     })
             },
+            //更新学院信息
             updateCollege:function () {
                 var that=this;
                 CollegeService.updateCollege(this.params).$promise
@@ -61,6 +70,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //表单提交
             submit:function () {
                 var that=this;
                 if(that.handle=="编辑院系信息"){
@@ -69,6 +79,7 @@ angular.module('dleduWebApp')
                     that.addCollege();
                 }
             },
+            //页面初始化
             init:function () {
                 var that=this;
                 that.params.id=$state.params.id;
