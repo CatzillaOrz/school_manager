@@ -2,10 +2,18 @@
 
 angular.module('dleduWebApp')
 	.controller('courseHandleCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout) {
+        /**
+		 * 此控制层是创建和编辑共用
+         * @type {{title: string, prompt: string, handle: string, params: {id: number, orgId, name: string, userId, courseDesc: string, courseProp: string}, page: {totalElements: number, totalPages: number, pageNumber: number, pageSize: number}, complete: boolean, addCourse: addCourse, getCourseById: getCourseById, updateCourse: updateCourse, submit: submit, init: init}}
+         */
 		$scope.handleFn = {
+			//提示title
 			title: "新建课程",
+			//提示信息
 			prompt: "填写以下信息以建立新的课程",
+			//操作类型
 			handle: "create",
+			//提交参数
 			params: {
 				id: 0,
 				orgId: AuthService.getUser().orgId,
@@ -14,12 +22,7 @@ angular.module('dleduWebApp')
 				courseDesc: "",
 				courseProp: ""
 			},
-			page: {
-				totalElements: 0,
-				totalPages: 0,
-				pageNumber: 1,
-				pageSize: 10
-			},
+			//操作完成标识
 			complete: false,
 			/**
 			 *新增课程
@@ -53,6 +56,7 @@ angular.module('dleduWebApp')
 					.catch(function (error) {
 					})
 			},
+			//更新课程
 			updateCourse: function () {
 				var that = this;
 				var params = that.params;
@@ -72,6 +76,7 @@ angular.module('dleduWebApp')
 						}
 					})
 			},
+			//表单提交
 			submit: function () {
 				var that = this;
 				if (that.handle == "编辑课程信息") {
@@ -80,6 +85,7 @@ angular.module('dleduWebApp')
 					that.addCourse();
 				}
 			},
+			//页面初始化
 			init: function () {
 				var that = this;
 				that.params.id = $state.params.id;

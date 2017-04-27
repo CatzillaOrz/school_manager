@@ -3,6 +3,7 @@
 angular.module('dleduWebApp')
     .controller('SemesterHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, SchoolYearService,$timeout) {
         $scope.semesterHandlerFn = {
+            //参数
             params:{
 
                 id:"",
@@ -12,11 +13,7 @@ angular.module('dleduWebApp')
                 startTime:"",
                 endTime:""
             },
-            semester:{
-                name:"",
-                startDate:"",
-                endDate:""
-            },
+            //字典
             coursePeriod:[
                 {
                     id:0,
@@ -99,10 +96,13 @@ angular.module('dleduWebApp')
                     text:"第二十节"
                 },
             ],
+            //操作完成标识
             complete:false,
+            //操作
             handle:"",
+            //提示
             prompt:"",
-
+            //表单提交
             submit: function () {
                 var that = this;
                 if (that.handle == "编辑课节") {
@@ -111,7 +111,7 @@ angular.module('dleduWebApp')
                     that.addPeriod();
                 }
             },
-
+            //增加课节
             addPeriod:function(){
                 var that = this;
                 var params = that.params;
@@ -143,6 +143,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //更新课节
             updatePeriod:function(){
                 var that = this;
                 var params = that.params;
@@ -166,6 +167,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //根据id查询课节
             getPeriodById:function (params) {
                 var _this=this;
                 SchoolYearService.getPeriodById(params).$promise
@@ -179,6 +181,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //初始化
             init:function () {
                 var that = this;
 

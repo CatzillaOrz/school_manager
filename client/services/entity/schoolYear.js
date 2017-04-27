@@ -57,6 +57,7 @@ angular.module('dleduWebService')
                 var schoolyear = $resource('api/schoolyear/getSchoolYearDropList');
                 return schoolyear.get(params);
             },
+
         }
 
     });

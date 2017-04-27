@@ -3,21 +3,28 @@
 angular.module('dleduWebApp')
     .controller('SchoolYearListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService,NgTableParams,SchoolYearService) {
         $scope.preiodFn={
+            //查询参数
             params:{
 
                 id:"",
                 orgId: AuthService.getUser().orgId,
             },
+            //分页
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 0,
                 pageSize: 10
             },
+            //当前操作的学年对象
             currentSchoolYear:{},
+            //课节列表
             periodList:[],
+            //学年列表
             schoolYearList:[],
+            //当前操作的课节对象
             currentPeriod:{},
+            //课节翻译字典
             coursePeriod:[
                 {
                     id:0,
@@ -100,6 +107,7 @@ angular.module('dleduWebApp')
                     text:"第二十节"
                 },
             ],
+            //学年查询
             getSchoolYearList: function () {
                 var that = this;
                 var params = {
@@ -117,6 +125,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //课节查询
             getPeriodList: function () {
                 var that = this;
                 var params = {
@@ -134,6 +143,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //展示数据预处理
             periodDataHandler:function (periodList) {
                 var _this=this;
                 angular.forEach(periodList,function (period) {
@@ -166,6 +176,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //生成学周
             addSemesterWeek:function (id) {
                 var _this=this;
                 var params={
@@ -188,7 +199,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //删除
+            //删除学年
             deleteSchoolYear: function () {
                 var _this = $scope.preiodFn;
                 var params = {
@@ -212,6 +223,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //删除课节
             deletePeriod: function () {
                 var _this = $scope.preiodFn;
                 var params = {
@@ -235,38 +247,24 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //删除提示
+            //学年删除提示
             deleteSchoolYearPrompt: function (entity) {
                 this.currentSchoolYear = entity;
                 messageService.getMsg("您确定要删除此学期吗？", this.deleteSchoolYear)
             },
-
+            //课节删除提示
             deletePeriodPrompt: function (entity) {
                 this.currentPeriod = entity;
                 messageService.getMsg("您确定要删除此课节吗？", this.deletePeriod)
             },
+            //初始化
             init:function () {
                 var _this=this;
                 _this.getSchoolYearList();
                 _this.getPeriodList();
 
             },
-            // schoolYearList:[
-            //
-            //             {
-            //                 name:"第一学期",
-            //                 startTime:"2017-09-01",
-            //                 endTime:"2017-09-01"
-            //
-            //             },
-            //             {
-            //                 name:"第一学期",
-            //                 startTime:"2017-09-01",
-            //                 endTime:"2017-09-01"
-            //
-            //             }
-            //
-            // ]
+
         };
         $scope.preiodFn.init();
 

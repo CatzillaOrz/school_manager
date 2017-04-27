@@ -2,7 +2,13 @@
 
 angular.module('dleduWebApp')
     .controller('PeriodHandlerCtrl', function ($scope, $state, AuthService, StudentService, messageService, CommonService, SchoolYearService) {
+        /**
+         * 此控制层是创建和编辑共用
+         * 主要是学期，学年操作
+         * @type {{params: {id: string, name: string, orgId, userId, semesterList: Array}, semester: {name: string, startDate: string, endDate: string}, semesterList: Array, complete: boolean, handle: string, prompt: string, datePick: {inlineOptions: {minDate: Date, showWeeks: boolean}, dateOptions: {formatYear: string, maxDate: Date, minDate: Date, startingDay: number}, disabled: disabled, toggleMin: toggleMin}, submit: submit, addSchoolYear: addSchoolYear, updateSchoolYear: updateSchoolYear, getSchoolYearById: getSchoolYearById, stringToDate: stringToDate, addOneSemester: addOneSemester, removeOneSemester: removeOneSemester, init: init}}
+         */
         $scope.periodHandlerFn = {
+            //提交参数
             params:{
 
                 id:"",
@@ -11,15 +17,21 @@ angular.module('dleduWebApp')
                 userId: AuthService.getUser().id,
                 semesterList:[]
             },
+            //学期参数
             semester:{
                 name:"",
                 startDate:"",
                 endDate:""
             },
+            //学期列表
             semesterList:[],
+            //操作完成标识
             complete:false,
+            //操作标识
             handle:"",
+            //提示
             prompt:"",
+            //时间组件配置
             datePick: {
                 inlineOptions: {
                     //customClass: getDayClass,
@@ -43,22 +55,17 @@ angular.module('dleduWebApp')
                     this.dateOptions.minDate = this.inlineOptions.minDate;
                 },
             },
+            //表单提交
             submit: function () {
                 var that = this;
-                // if(!that.collegeId){
-                //     messageService.openMsg("必须选择学院");
-                //     return;
-                // }else if(!that.majorId){
-                //     messageService.openMsg("必须选择专业");
-                //     return;
-                // }
+
                 if (that.handle == "编辑学期") {
                     that.updateSchoolYear();
                 } else {
                     that.addSchoolYear();
                 }
             },
-
+            //学院增加
             addSchoolYear:function(){
                 var that = this;
                 var params = that.params;
@@ -94,6 +101,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //学年更新
             updateSchoolYear:function(){
                 var that = this;
                 var params = that.params;
@@ -115,6 +123,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //通过id查询学年
             getSchoolYearById:function (params) {
                 var _this=this;
                 SchoolYearService.getSchoolYearById(params).$promise
@@ -127,21 +136,26 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //字符串转换为日期对象
             stringToDate:function (list) {
                 angular.forEach(list,function (data) {
                     data.startDate=new Date(data.startDate);
                     data.endDate=new Date(data.endDate);
                 })
             },
+
+            //增加学期
             addOneSemester:function () {
                 var _this=this;
                 var semester=_.clone(_this.semester)
                 _this.semesterList.push(semester)
             },
+            //移除学期
             removeOneSemester:function (index) {
                 var _this=this;
                 _this.semesterList.splice(index,1)
             },
+            //初始化
             init:function () {
                 var that = this;
                 this.datePick.toggleMin();
