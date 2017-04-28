@@ -101,67 +101,14 @@
                             td {{student.sex}}
                             td {{student.email}}
                             td {{student.phone}}
-                            td.handle(ng-click="classDetailFn.transferOut(student)")
+                            td.handle(ng-click="teachClassDetailFn.deleteStudentPrompt(student)")
                                 i.fa.fa-sign-out
                                 span 删除
                 .dt-toolbar-footer
                     .col-sm-6.col-xs-12.hidden-xs
                         .dataTables_info(role='status', aria-live='polite')
-                            |共 {{classDetailFn.classStudentList.length}} 条数据
+                            |共 {{teachClassDetailFn.teachClassStudentList.length}} 条数据
 
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if="classDetailFn.isTransfer")
-        header(role='heading')
-            .jarviswidget-ctrls(role='menu')
-            span.widget-icon
-                i.fa.fa-table
-            h2 {{importStudentFn.classes.name}}
-            span.jarviswidget-loader
-                i.fa.fa-refresh.fa-spin
-        // widget div
-        div(role='content')
-            .widget-body.container
-                .col-sm-5
-                    fieldset
-                        legend
-                            span 已选择的学生
-                    .dt-toolbar-footer.student-list-class-detail
-                        .col-sm-6.col-xs-12.hidden-xs
-                            .dataTables_info(role='status', aria-live='polite')
-                                | 共 {{classDetailFn.transferStudentList.length}} 条数据
-                    table.table.table-striped.table-bordered.table-hover.dataTable
-                        tbody
-                            tr.cursor-pointer(role='row' ng-repeat="student in classDetailFn.transferStudentList" ng-click="importStudentFn.selectStudent(student)")
-                                td {{student.name}}
-                                td {{student.jobNumber}}
-                                td {{student.sex}}
-                .col-sm-1
-                .col-sm-4
-                    form.form-horizontal(name="studentForm")
-                        fieldset
-                            legend
-                                span 选择要转出的班级
-                        .short-form
-                            .form-group
-                                label.col-sm-3.control-label
-                                    span.required *
-                                    | 选择学院：
-                                .col-sm-7
-                                    select.form-control(ng-model="classDetailFn.collegeId" ui-select2 ="classDetailFn.select2CollegeOptions()")
-                                        option(ng-repeat="college in classDetailFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                            .form-group
-                                label.col-sm-3.control-label
-                                    span.required *
-                                    | 选择专业：
-                                .col-sm-7
-                                    select.form-control(ng-model="classDetailFn.majorId" ui-select2="classDetailFn.select2MajorOptions(classDetailFn.collegeId)"  )
-                                        option(ng-repeat="major in classDetailFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                            .form-group
-                                label.col-sm-3.control-label
-                                    span.required *
-                                    | 选择班级：
-                                .col-sm-7
-                                    select.form-control(ng-model="classDetailFn.classesId" ui-select2="classDetailFn.select2ClassOptions(classDetailFn.majorId)")
-                                        option(ng-repeat="class in classDetailFn.classDropList" value="{{class.id}}" ) {{class.name}}
 
             form.form-horizontal()
                 .form-actions

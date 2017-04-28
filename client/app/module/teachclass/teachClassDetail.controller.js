@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
             teachClassTeacherList: [],
             teachClassStudentList: [],
             currentTeacher:{},
+            currentStudent:{},
             getTeachClassById: function () {
                 var _this = this;
                 TeachClassService.getTeachClassById(_this.params).$promise
@@ -71,6 +72,35 @@ angular.module('dleduWebApp')
                 _this.currentTeacher = entity;
                 messageService.getMsg("您确定要删除此教学班老师吗？", _this.deleteTeachClassTeacher)
             },
+
+
+            deleteTeachClassStudent: function () {
+                var _this = $scope.teachClassDetailFn;
+                var params = {
+                    teachingClassId: _this.params.id,
+                    ids:[]
+                };
+                params.ids.push(_this.currentStudent.id);
+                TeachClassService.deleteTeachClassStudent(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("删除学生成功");
+                        _this.getTeachClassTeacherList();
+
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("删除学生失败");
+                    })
+            },
+            //删除提示
+            deleteStudentPrompt: function (entity) {
+                var _this=this;
+                _this.currentStudent = entity;
+                messageService.getMsg("您确定要删除此教学班学生吗？", _this.deleteTeachClassStudent)
+            },
+
+
+
+
             //初始化
             init: function () {
                 var that = this;

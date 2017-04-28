@@ -45,6 +45,10 @@ angular.module('dleduWebService')
                 var deleteTeachClass = $resource('api/teachclass/deleteTeachClassTeacher');
                 return deleteTeachClass.remove(params);
             },
+            deleteTeachClassStudent: function (params) {
+                var deleteTeachClass = $resource('api/teachclass/deleteTeachClassStudent');
+                return deleteTeachClass.remove(params);
+            },
 		}
 
 	});
