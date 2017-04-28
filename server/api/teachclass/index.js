@@ -18,5 +18,6 @@ router.get('/getTeachClassById', auth.isSignedIn, controller.getTeachClassById);
 router.get('/getTeachClassDropListOrg', auth.isSignedIn, controller.getTeachClassDropListOrg);
 router.get('/getTeachClassTeacherList', auth.isSignedIn, controller.getTeachClassTeacherList);
 router.get('/getTeachClassStudentList', auth.isSignedIn, controller.getTeachClassStudentList);
+router.delete('/deleteTeachClassTeacher', auth.isSignedIn, controller.deleteTeachClassTeacher);
 
 module.exports = router;

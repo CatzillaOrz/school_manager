@@ -23,7 +23,7 @@ angular.module('dleduWebService')
 				var updateTeachClass = $resource('api/teachclass/updateTeachClass', '', {
 					update: {method: 'PUT'}
 				});
-				return updateteachclass.update(params);
+				return updateTeachClass.update(params);
 			},
 			getTeachClassById: function (params) {
 				var getTeachClassById = $resource('api/teachclass/getTeachClassById');
@@ -40,7 +40,11 @@ angular.module('dleduWebService')
             getTeachClassStudentList: function (params) {
                 var list = $resource('api/teachclass/getTeachClassStudentList');
                 return list.get(params);
-            }
+            },
+            deleteTeachClassTeacher: function (params) {
+                var deleteTeachClass = $resource('api/teachclass/deleteTeachClassTeacher');
+                return deleteTeachClass.remove(params);
+            },
 		}
 
 	});

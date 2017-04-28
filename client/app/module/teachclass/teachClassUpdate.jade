@@ -1,0 +1,53 @@
+
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            form.form-horizontal(name="classForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择学期：
+                        .col-sm-7
+                            select.form-control(ng-model="teachClassUpdateFn.params.semesterId" ui-select2="teachClassUpdateFn.select2SemesterOptions()")
+                                optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassUpdateFn.schoolYearDropList")
+                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassUpdateFn.params.semesterId==semester.id?'selected':''}}") {{semester.text}}
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 选择课程：
+                        .col-sm-7
+                            select.form-control(ng-model="teachClassUpdateFn.params.courseId" ui-select2="teachClassUpdateFn.select2CourseOptions()" )
+                                option(ng-repeat="course in teachClassUpdateFn.courseDropList" value="{{course.id}}" selected="{{teachClassUpdateFn.params.courseId==course.id?'selected':''}}") {{course.name}}
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 教学班名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字教学班级名称" ng-model="teachClassUpdateFn.params.name" name="name" validator="required, maxlength=30")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="teachClassUpdateFn.updateTeachClass()" validation-submit="classForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="teachClassDetail({id:teachClassUpdateFn.params.id})") 取消
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="classlist") 返回班级信息

@@ -76,6 +76,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    deleteTeachClassTeacher: function (req, res) {
+        TeachClassService.deleteTeachClassTeacherSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

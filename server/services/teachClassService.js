@@ -135,6 +135,21 @@ var TeachClassService = {
             callback(e);
         });
     },
+    deleteTeachClassTeacher: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway',
+            path: '/v1/teachingclassteacher/delete/' + params.teachingClassId,
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 
