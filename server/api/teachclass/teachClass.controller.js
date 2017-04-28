@@ -57,8 +57,25 @@ module.exports = {
 			.catch(function (e) {
 				res.status(e.code).send(e.message);
 			})
-	}
-
+	},
+    getTeachClassTeacherList: function (req, res) {
+        TeachClassService.getTeachClassTeacherListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getTeachClassStudentList: function (req, res) {
+        TeachClassService.getTeachClassStudentListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 
