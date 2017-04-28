@@ -27,22 +27,40 @@ angular.module('dleduWebApp')
                 userId:AuthService.getUser().id,
                 collegeId:""
             },
+            //分页参数
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
            //操作完成标识
             complete:false,
             //select2动态关键字查询列表配置
-            select2Options:{
-                ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
-                    orgId: AuthService.getUser().orgId,
-                    pageNumber: 1,
-                    pageSize: 100
-                },"name"),
+            selectCollege2Options:function () {
+                var _this=this;
+                return{
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: '按班级筛选'
+                    },
+                   // allowClear: true,
+                    ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
+                        orgId: AuthService.getUser().orgId,
+                        pageNumber: 1,
+                        pageSize: 100
+                    },"name"),
 
-                templateResult: function (data) {
-                    if (data.id === '') { // adjust for custom placeholder values
-                        return 'Custom styled placeholder text';
+                    templateResult: function (data) {
+
+                        if (data.id === '') { // adjust for custom placeholder values
+                            _this.collegeDropList=[];
+                            return '按班级筛选';
+                        }
+                        _this.collegeDropList.push(data);
+                        return data.name;
                     }
 
-                    return data.name;
                 }
             },
             //添加专业
@@ -80,7 +98,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("专业添加失败")
                     })
             },
-            //专业更新
+
             updateMajor:function () {
                 var that=this;
                 var params=that.params;
@@ -99,7 +117,6 @@ angular.module('dleduWebApp')
                         }
                     })
             },
-            //表单提交
             submit:function () {
                 var that=this;
                 if(!that.collegeId){
@@ -112,7 +129,6 @@ angular.module('dleduWebApp')
                     that.addMajor();
                 }
             },
-            //学院下拉列表查询
             getCollegeDropList:function () {
                 var that=this;
                 var params = {
@@ -128,7 +144,6 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                     })
             },
-            //更具id查询学院
             getCollegeById:function (collegeId) {
                 var that= this;
                 var params={
@@ -148,7 +163,6 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("学院添加失败")
                     })
             },
-            //初始化
             init:function () {
                 var that=this;
                 that.params.id=$state.params.id;
