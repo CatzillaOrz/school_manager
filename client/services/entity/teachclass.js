@@ -32,7 +32,15 @@ angular.module('dleduWebService')
 			getTeachClassDropListOrg: function (params) {
 				var getTeachClassDropListOrg = $resource('api/teachclass/getTeachClassDropListOrg');
 				return getTeachClassDropListOrg.get(params);
-			}
+			},
+            getTeachClassTeacherList: function (params) {
+                var list = $resource('api/teachclass/getTeachClassTeacherList');
+                return list.get(params);
+            },
+            getTeachClassStudentList: function (params) {
+                var list = $resource('api/teachclass/getTeachClassStudentList');
+                return list.get(params);
+            }
 		}
 
 	});

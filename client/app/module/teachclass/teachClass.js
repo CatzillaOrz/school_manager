@@ -39,6 +39,24 @@ angular.module('dleduWebApp')
 					label: '新建教学班'
 				}
 			})
+            .state('teachClassDetail', {
+                parent: 'teachclass',
+                url: '/teachclass/detail/:id',
+                access: {requiredLogin: true},
+                views: {
+                    'content@base': {
+                        controller: 'TeachClassDetailCtrl',
+                        templateUrl: 'app/module/teachclass/teachClassDetail.html'
+                    }
+                },
+                data: {
+                    prompt: '选择学期与课程',
+                    completeMSG: '恭喜你，新建教学班成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '教学班详情'
+                }
+            })
 			/*.state('courseEdit', {
 				parent: 'course',
 				url: '/courseedit/:id',
