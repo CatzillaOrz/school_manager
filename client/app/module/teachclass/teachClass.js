@@ -14,7 +14,7 @@ angular.module('dleduWebApp')
 				views: {
 					'content@base': {
 						controller: 'TeachClassListCtrl',
-						templateUrl: 'app/module/teachclass/TeachClassList.html'
+						templateUrl: 'app/module/teachclass/teachClassList.html'
 					}
 				},
 				ncyBreadcrumb: {
