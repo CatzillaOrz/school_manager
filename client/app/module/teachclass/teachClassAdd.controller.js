@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeachClassAddCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService,TeacherService,TeachClassService) {
+    .controller('TeachClassAddCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService,StudentService,TeacherService,TeachClassService) {
         $scope.handleFn = {
             title: "新建教学班",
             prompt: "填写以下信息以建立新的教学班",
@@ -188,6 +188,7 @@ angular.module('dleduWebApp')
                         },
                         cache: true
                     },
+                    allowClear: true,
                     templateResult: function (data) {
                         if (data.id === '') { // adjust for custom placeholder values
                             return 'Custom styled placeholder text';
@@ -233,7 +234,7 @@ angular.module('dleduWebApp')
             getSimpleStudents:function () {
                 var _this=this;
                 var params=_this.searchStudentParams;
-                TeacherService.getSimpleTeachers(params).$promise
+                StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList = data.data;
 
@@ -301,7 +302,7 @@ angular.module('dleduWebApp')
             step3Select:function (str) {
                 var _this=this;
                 if(str=="class"){
-                    that.params.classesIds.push("0.default");
+                    _this.params.classesIds.push("0.default");
                     _this.selectStudentList=[];
                 }else if(str=="students"){
 

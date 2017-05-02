@@ -1,0 +1,33 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{classesUpdateFn.title}}
+        .widget-body
+            div
+                form.form-horizontal(name="teachClassForm")
+                    fieldset
+                        legend 关联班级
+                    .md-form
+                        .form-group(ng-repeat="classse in classesUpdateFn.teacherIds")
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 请选择班级：
+                            .col-sm-7
+                                select.form-control(ng-model="classesUpdateFn.teacherIds[$index]" ui-select2="classesUpdateFn.select2ClassOptions()")
+                                    option(ng-repeat="teacher in classesUpdateFn.classDropList" value="{{teacher.id}}" ) {{teacher.name}}
+                        div.text-center
+                            .btn.btn-primary(ng-click="classesUpdateFn.addOneClass()")
+                                i.fa.fa-plus
+                                | 添加多个
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-primary(type='submit' ng-click="classesUpdateFn.submit()" ) 保存
+                        .speace-10
+                        a.btn.btn-default(ui-sref="teachClassDetail({id:classesUpdateFn.params.teachingClassId})") 取消
+
+
+
+
