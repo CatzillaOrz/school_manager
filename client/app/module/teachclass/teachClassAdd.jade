@@ -168,7 +168,7 @@
                                             i.fa.fa-times
                                             span 撤销
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
-                form.form-horizontal(name="")
+                form.form-horizontal(name="teachClassForm")
                     fieldset
                         legend 给教学班设置名称
                     .md-form
@@ -177,9 +177,9 @@
                                 span.required *
                                 | 教学班级：
                             .col-sm-6
-                                input.form-control(ng-model="handleFn.params.name" type="text")
+                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" validator="required, maxlength=30")
                             .col-sm-3
-                                a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" ) 创建
+                                a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
                 fieldset
                     legend 教学班信息预览
                 .row
@@ -213,13 +213,13 @@
                                 tr.cursor-pointer(role='row' ng-repeat="classes in handleFn.selectClassesList" )
                                     td {{classes.name}}
 
-                .row(ng-if="handleFn.params.classesIds")
+                .row(ng-if="handleFn.params.classOrStudents==20")
                     .col-sm-3 学生信息：
                     .col-sm-7
                         table.table.table-striped.table-bordered.table-hover.dataTable
                             thead
                                 tr(role='row')
-                                    th.sorting_asc 工号
+                                    th.sorting_asc 学号
                                     th.expand.sorting 姓名
                                     th.sorting 院系
                             tbody
@@ -236,6 +236,6 @@
                         a.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ) 下一步
 
                     .col-md-12(ng-if="handleFn.step==4")
-                        a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" ) 创建
+                        a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
 
 
