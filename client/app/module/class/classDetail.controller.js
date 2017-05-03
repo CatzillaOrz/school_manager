@@ -230,10 +230,13 @@ angular.module('dleduWebApp')
                 })
             },
             transferOut:function (entity) {
+                var _this=this;
                 if(entity){
                     entity.state=true;
+                    _this.transferStudentList.push(entity);
+                    _this.isTransfer=true;
+                    return;
                 }
-                var _this=this;
                 _this.transferStudentList= _.filter(_this.classStudentList, function(value) {
                     if(value.state){
                         return value;
