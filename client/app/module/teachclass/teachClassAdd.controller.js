@@ -16,10 +16,10 @@ angular.module('dleduWebApp')
             params: {
                 classOrStudents: 0,
                 classesIds: [],
-                courseId: 0,
+                courseId: "",
                 courseName: "",
                 semesterEnd: "",
-                semesterId: 0,
+                semesterId: "",
                 semesterName: "",
                 semesterStart: "",
                 studentIds: [],
@@ -358,6 +358,21 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            validateStep3:function () {
+              var _this=this;
+                //((handleFn.selectStudentList.length==0||(handleFn.params.classesIds[0]&&handleFn.params.classesIds[0]=='0.default')) )
+                if(_this.selectStudentList.length==0){
+                    if(_this.params.classesIds[0]&&_this.params.classesIds[0]=='0.default'){
+                        return false
+                    }else if(!_this.params.classesIds[0]){
+                        return false
+                    }else if(_this.params.classesIds[0]&&_this.params.classesIds[0]!='0.default'){
+                        return true;
+                    }
+                }else {
+                    return true;
+                }
+            },
             submit: function () {
                 var that = this;
                 that.addTeachClass();
@@ -395,7 +410,7 @@ angular.module('dleduWebApp')
                            })
                         })
                     }
-                $scope.handleFn.selectClassesList= _.uniqBy($scope.handleFn.selectClassesList,'id');
+                $scope.handleFn.selectClassesList= _.uniq($scope.handleFn.selectClassesList,'id');
             },true);
 
 

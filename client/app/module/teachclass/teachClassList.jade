@@ -30,17 +30,17 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 班级名称
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 学期
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 课程
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 教师数量
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 100px;') 操作
+                                th 班级名称
+                                th 学期
+                                th 课程
+                                th 学生数量
+                                th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="teachClass in teachClassListFn.teachClassList")
                                 td {{teachClass.name}}
                                 td {{teachClass.semesterName}}
                                 td {{teachClass.courseName}}
-                                td
+                                td {{teachClass.studentsCount}}
                                 td
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})")
                                         i.fa.fa-pencil-square-o
@@ -54,7 +54,7 @@
                                 | 显示第
                                 span.txt-color-darken {{((teachClassListFn.page.pageNumber==0?teachClassListFn.page.pageNumber+1:teachClassListFn.page.pageNumber)-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((teachClassListFn.page.pageNumber==0?teachClassListFn.page.pageNumber+1:teachClassListFn.page.pageNumber)-1)*10+teachClassListFn.courseList.length}}
+                                span.txt-color-darken {{((teachClassListFn.page.pageNumber==0?teachClassListFn.page.pageNumber+1:teachClassListFn.page.pageNumber)-1)*10+teachClassListFn.teachClassList.length}}
                                 |  条 总共
                                 span.text-primary {{teachClassListFn.page.totalElements}}
                                 |  条记录
