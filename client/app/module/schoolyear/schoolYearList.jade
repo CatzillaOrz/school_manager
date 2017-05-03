@@ -59,7 +59,7 @@
                                         | {{schoolTerm.startDate}}
                                     td(sortable="'endDate'", data-title="'结束日期'", groupable="'age'")
                                         | {{schoolTerm.endDate}}
-                                    td(sortable="'numWeek'", data-title="'学周'")
+                                    td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
                                         span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
                                         span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
                             .dt-toolbar-footer
