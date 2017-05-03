@@ -2,15 +2,28 @@
 
 angular.module('dleduWebApp')
     .controller('ClassHandleCtrl', function ($scope, $state, ClassService, CollegeService,messageService, MajorService, AuthService,$timeout,Select2LoadOptionsService) {
+        /**
+         * 此控制层是创建和编辑共用
+         * @type {{title: string, prompt: string, handle: string, isInit: boolean, collegeDropList: Array, majorDropList: Array, collegeId: number, majorId: number, params: {id: number, orgId, name: string, userId, collegeId: string}, page: {totalElements: number, totalPages: number, pageNumber: number, pageSize: number}, complete: boolean, select2CollegeOptions: {ajax: (*), templateResult: templateResult}, select2MajorOptions: select2MajorOptions, addClass: addClass, getClassById: getClassById, updateClass: updateClass, submit: submit, getCollegeDropList: getCollegeDropList, getCollegeById: getCollegeById, getMajorDropList: getMajorDropList, getMajorById: getMajorById, init: init}}
+         */
         $scope.handleFn = {
+            //提示title
             title: "",
+            //提示
             prompt: "",
+            //操作标识
             handle: "create",
+            //专业下拉列表数据初始化标识
             isInit:false,
+            //学院下拉列表
             collegeDropList: [],
+            //专业下拉列表
             majorDropList: [],
+            //学院id
             collegeId: 0,
+            //专业id
             majorId: 0,
+            //参数
             params: {
                 id: 0,
                 orgId: AuthService.getUser().orgId,
@@ -18,13 +31,16 @@ angular.module('dleduWebApp')
                 userId: AuthService.getUser().id,
                 collegeId:""
             },
+            //分页
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
                 pageSize: 10
             },
+            //操作完成标识
             complete:false,
+            //学院下拉列表
             select2CollegeOptions:{
                 ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
                     orgId: AuthService.getUser().orgId,
@@ -40,6 +56,7 @@ angular.module('dleduWebApp')
                     return data.name;
                 }
             },
+            //专业下拉列表
             select2MajorOptions:function(){
                 var that=this;
                 return {
@@ -80,7 +97,7 @@ angular.module('dleduWebApp')
             },
             /**
              *
-             *
+             *添加班级
              */
             addClass: function () {
                 var that = this;
@@ -101,6 +118,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //通过id查询班级
             getClassById: function () {
                 var that = this;
                 var params = {
@@ -118,6 +136,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //更新班级
             updateClass: function () {
                 var that = this;
                 var params = that.params;
@@ -137,6 +156,7 @@ angular.module('dleduWebApp')
                         }
                     })
             },
+            //提交
             submit: function () {
                 var that = this;
                 if(!that.collegeId){
@@ -152,6 +172,7 @@ angular.module('dleduWebApp')
                     that.addClass();
                 }
             },
+            //学院下拉列表查询
             getCollegeDropList: function () {
                 var that = this;
                 var params = {
@@ -166,6 +187,7 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                     })
             },
+            //通过id查询学院
             getCollegeById:function (collegeId) {
                 var that= this;
                 var params={
@@ -184,6 +206,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("学院添加失败")
                     })
             },
+            //查询专业列表
             getMajorDropList: function () {
                 var that = this;
                 var params = {
@@ -204,6 +227,7 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                     })
             },
+            //通过专业id查询专业
             getMajorById:function (majorId) {
                 var that= this;
                 var params={

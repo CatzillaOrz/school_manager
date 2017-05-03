@@ -2,19 +2,31 @@
 
 angular.module('dleduWebApp')
     .controller('TeachClassStudentUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,StudentService,ClassService) {
+        /**
+         * 更新教学班下的学生
+         * @type {{classes: {}, studentList: Array, selectClassesId: string, params: {classesId: string, orgId, pageNumber: number, pageSize: number}, keyWord: string, classesDropList: Array, selectedStudents: Array, select2Options: select2Options, getClassById: getClassById, findStudentByKey: findStudentByKey, selectStudent: selectStudent, removeSelectedStudent: removeSelectedStudent, submit: submit, addTeachClassStudent: addTeachClassStudent, addAll: addAll, removeAll: removeAll, init: init}}
+         */
         $scope.studentUpdateFn = {
+            //教学班对象
             classes:{},
+            //学生对象
             studentList:[],
+            //选择的班级id
             selectClassesId:"",
+            //参数
             params:{
                 classesId:"",
                 orgId: AuthService.getUser().orgId,
                 pageNumber: 1,
                 pageSize: 100
             },
+            //关键字
             keyWord:"",
+            //班级下拉列表
             classesDropList:[],
+            //选择的学生
             selectedStudents:[],
+            //班级下拉列表
             select2Options:function () {
                 var _this=this;
                 return{
@@ -41,6 +53,7 @@ angular.module('dleduWebApp')
 
                 }
             },
+            //或去班级
             getClassById: function () {
                 var that = this;
                 var params = {
@@ -55,6 +68,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //通过关键字查询学生
             findStudentByKey:function () {
                 var _this=this;
                 var params={
@@ -75,6 +89,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //选择学生
             selectStudent:function (entity) {
                 var _this=this;
                 var temp= _.filter(_this.selectedStudents, function(value) {
@@ -86,6 +101,7 @@ angular.module('dleduWebApp')
                     _this.selectedStudents.splice(0,0,entity);
                 }
             },
+            //移除学生
             removeSelectedStudent:function (entity) {
                 var _this=this;
                 _this.selectedStudents= _.filter(_this.selectedStudents, function(value) {
@@ -94,10 +110,12 @@ angular.module('dleduWebApp')
                     }
                 });
             },
+            //提交
             submit:function () {
                 var _this=this;
                 _this.addTeachClassStudent();
             },
+            //保存
             addTeachClassStudent:function () {
                 var _this=this;
                 var params={
@@ -122,10 +140,12 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //添加所有
             addAll:function () {
                 var _this=this;
                 _this.selectedStudents=_.union(_this.selectedStudents,this.studentList)
             },
+            //移除所有
             removeAll:function () {
                 var _this=this;
                 _this.selectedStudents= [];

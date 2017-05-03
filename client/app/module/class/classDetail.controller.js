@@ -3,31 +3,47 @@
 angular.module('dleduWebApp')
     .controller('ClassDetailCtrl', function ($scope,$state, ClassService,AuthService,messageService,StudentService) {
         $scope.classDetailFn={
+            //学生转出操作标识
             isTransfer:false,
+            //班级对象
             classes:{},
+            //基本参数
             params:{
                 id:0,
                 orgId: AuthService.getUser().orgId,
                 pageNumber: 1,
                 pageSize: 100
             },
+            //分页
             page: {
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
                 pageSize: 10
             },
+            //全选标识
             selectAll:false,
+            //当前操作的班主任对象
             currentTeacher:{},
+            //班主任列表
             classTeacherList:[],
+            //班级学生列表
             classStudentList:[],
+            //选择的转出的学生列表
             transferStudentList:[],
+            //学院下拉列表
             collegeDropList:[],
+            //专业下拉列表
             majorDropList:[],
+            //班级下拉列表
             classDropList:[],
+            //学院id
             collegeId:0,
+            //专业id
             majorId:0,
+            //班级id
             classesId:0,
+            //学院下拉搜索
             select2CollegeOptions:function () {
                 var _this=this;
                 return {
@@ -65,6 +81,7 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            //专业下拉搜索
             select2MajorOptions:function(){
                 var _this=this;
                 return {
@@ -103,6 +120,7 @@ angular.module('dleduWebApp')
                         return data.name;
                     }}
             },
+            //班级下拉搜索
             select2ClassOptions:function(){
                 var _this=this;
                 return {
@@ -141,6 +159,7 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            //通过id查询班级
             getClassById: function () {
                 var that = this;
                 var params = {
@@ -155,6 +174,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //查询班主任列表
             getClassTeacherList:function () {
                 var _this=this;
                 var params={
@@ -169,7 +189,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
-            //删除
+            //删除班主任
             deleteClassTeacher: function () {
                 var _this = $scope.classDetailFn;
                 var ids=[];
@@ -193,6 +213,7 @@ angular.module('dleduWebApp')
                 that.currentTeacher = entity;
                 messageService.getMsg("您确定要删除此班主任吗？", that.deleteClassTeacher)
             },
+            //查找学生
             findClassStudent:function () {
                 var _this=this;
                 var params={
@@ -211,6 +232,7 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
+            //对查询数据进行处理
             dataHandler:function (list) {
                 var result=[];
                 angular.forEach(list,function (data) {
@@ -219,6 +241,7 @@ angular.module('dleduWebApp')
                 });
                 return result;
             },
+            //选择所有
             all:function (m) {
                 var _this=this;
                 angular.forEach(_this.classStudentList,function (data) {
@@ -229,6 +252,7 @@ angular.module('dleduWebApp')
                     }
                 })
             },
+            //学生转出
             transferOut:function (entity) {
                 var _this=this;
                 if(entity){
@@ -244,6 +268,7 @@ angular.module('dleduWebApp')
                 });
                 _this.isTransfer=true;
             },
+            //更新班级学生
             updateStudentToClasses:function () {
                 var _this=this;
                 var params={

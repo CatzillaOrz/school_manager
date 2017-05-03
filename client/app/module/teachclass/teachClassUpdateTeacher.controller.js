@@ -2,13 +2,21 @@
 
 angular.module('dleduWebApp')
     .controller('TeachClassTeacherUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
+        /**
+         * 更新教学班老师
+         * @type {{params: {ids: Array, teachingClassId: number}, teacherIds: [*], teacherDropList: Array, select2Options: select2Options, submit: submit, addTeachClassTeacher: addTeachClassTeacher, addOneClassTeacher: addOneClassTeacher, removeOneClassTeacher: removeOneClassTeacher, init: init}}
+         */
         $scope.teacherUpdateFn = {
+            //参数
             params: {
                 ids: [],
                 teachingClassId: 0
             },
+            //模拟教师数据
             teacherIds:["0.default"],
+            //教师下拉列表
             teacherDropList: [],
+            //下拉列表
             select2Options: function () {
                 var _this = this;
                 return {
@@ -29,6 +37,7 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            //提交
             submit:function () {
                 var _this=this;
                 var ids=_.filter(_this.teacherIds, function(value) {
@@ -46,6 +55,7 @@ angular.module('dleduWebApp')
                 }
                 _this.addTeachClassTeacher(params);
             },
+            //保存
             addTeachClassTeacher:function (params) {
                 var _this=this;
                 TeachClassService.addTeachClassTeacher(params).$promise
@@ -67,11 +77,12 @@ angular.module('dleduWebApp')
                     })
 
             },
-
+            //增加一个老师
             addOneClassTeacher:function () {
                 var _this=this;
                 _this.teacherIds.push(_this.teacherIds.length+".default")
             },
+            //移除一个老师
             removeOneClassTeacher:function (index) {
                 var _this=this;
                 _this.teacherIds.splice(index,1)

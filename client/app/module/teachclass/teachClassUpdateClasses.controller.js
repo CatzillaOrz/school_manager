@@ -2,11 +2,17 @@
 
 angular.module('dleduWebApp')
     .controller('TeachClassClassesUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
+        /**
+         * 更新教学班关联的行政班
+         * @type {{params: {ids: Array, teachingClassId: number}, teacherIds: [*], classDropList: Array, select2ClassOptions: select2ClassOptions, submit: submit, addTeachClassClasses: addTeachClassClasses, addOneClass: addOneClass, removeOneClassTeacher: removeOneClassTeacher, init: init}}
+         */
         $scope.classesUpdateFn = {
+            //参数
             params: {
                 ids: [],
                 teachingClassId: 0
             },
+            //模拟教师数据
             teacherIds:["0.default"],
             classDropList: [],
             //班级下拉列表配置
@@ -49,6 +55,7 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            //提交
             submit:function () {
                 var _this=this;
                 var ids=_.filter(_this.teacherIds, function(value) {
@@ -66,6 +73,7 @@ angular.module('dleduWebApp')
                 }
                 _this.addTeachClassClasses(params);
             },
+            //保存
             addTeachClassClasses:function (params) {
                 var _this=this;
                 TeachClassService.addTeachClassClasses(params).$promise
@@ -87,11 +95,12 @@ angular.module('dleduWebApp')
                     })
 
             },
-
+            //增加行政班
             addOneClass:function () {
                 var _this=this;
                 _this.teacherIds.push(_this.teacherIds.length+".default")
             },
+            //移除一个行政班
             removeOneClassTeacher:function (index) {
                 var _this=this;
                 _this.teacherIds.splice(index,1)
