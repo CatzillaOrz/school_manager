@@ -2,7 +2,12 @@
 
 angular.module('dleduWebApp')
     .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
+        /**
+         * 教学班基本信息更新
+         * @type {{params: {userId, id: string, semesterId: string, name: string, courseId: string}, schoolYearDropList: Array, courseDropList: Array, select2CourseOptions: select2CourseOptions, select2SemesterOptions: select2SemesterOptions, select2GroupFormat: select2GroupFormat, getTeachClassById: getTeachClassById, getCourseDropListOrg: getCourseDropListOrg, getSchoolYearDropList: getSchoolYearDropList, updateTeachClass: updateTeachClass, init: init}}
+         */
         $scope.teachClassUpdateFn = {
+            //参数
             params: {
                 userId:AuthService.getUser().id,
                 id: "",
@@ -11,8 +16,11 @@ angular.module('dleduWebApp')
                 courseId:""
 
             },
+            //学期列表
             schoolYearDropList: [],
+            //课程列表
             courseDropList:[],
+            //课程下拉搜素
             select2CourseOptions:function(){
                 var that=this;
                 return {
@@ -50,6 +58,7 @@ angular.module('dleduWebApp')
                         return data.name;
                     }}
             },
+            //学期下拉搜素
             select2SemesterOptions: function () {
                 var _this = this;
                 return {
@@ -87,6 +96,7 @@ angular.module('dleduWebApp')
 
                 }
             },
+            //分组格式化
             select2GroupFormat: function (dataList) {
                 var result = []
                 angular.forEach(dataList, function (data) {
@@ -105,6 +115,7 @@ angular.module('dleduWebApp')
                 })
                 return result;
             },
+            //查询教学班
             getTeachClassById: function () {
                 var _this = this;
                 TeachClassService.getTeachClassById(_this.params).$promise
@@ -118,6 +129,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //获取课程下拉列表数据
             getCourseDropListOrg:function () {
                 var _this=this;
                 var params={
@@ -136,6 +148,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //学期下拉列表获取
             getSchoolYearDropList:function () {
                 var _this=this;
                 var params={
@@ -154,6 +167,7 @@ angular.module('dleduWebApp')
 
                     })
             },
+            //更新教学班
             updateTeachClass:function () {
                 var _this=this;
                 var params=_this.params;
