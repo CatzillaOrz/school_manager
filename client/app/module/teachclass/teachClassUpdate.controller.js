@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
+    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,SchoolYearService) {
         /**
          * 教学班基本信息更新
          * @type {{params: {userId, id: string, semesterId: string, name: string, courseId: string}, schoolYearDropList: Array, courseDropList: Array, select2CourseOptions: select2CourseOptions, select2SemesterOptions: select2SemesterOptions, select2GroupFormat: select2GroupFormat, getTeachClassById: getTeachClassById, getCourseDropListOrg: getCourseDropListOrg, getSchoolYearDropList: getSchoolYearDropList, updateTeachClass: updateTeachClass, init: init}}
@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
             courseDropList:[],
             //课程下拉搜素
             select2CourseOptions:function(){
-                var that=this;
+                var _this=this;
                 return {
                     ajax: {
                         url: "api/course/getCourseDropListOrg",
@@ -40,7 +40,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            that.courseDropList=data.data;
+                            _this.courseDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -123,10 +123,56 @@ angular.module('dleduWebApp')
                         _this.params.name = data.name;
                         _this.params.semesterId = data.semesterId;
                         _this.params.courseId = data.courseId;
-
+                       _this.getCourseById(_this.params.courseId);
+                       // _this.getSchoolYearById(_this.params.semesterId);
                     })
                     .catch(function (error) {
 
+                    })
+            },
+            getCourseById:function (id) {
+                var _this= this;
+                var params={
+                    id: id
+                };
+                CourseService.getCourseById(params).$promise
+                    .then(function (data) {
+                        var temp={
+                            id:data.id,
+                            name:data.name
+                        }
+                        _this.courseDropList.push(temp);
+                        _this.params.courseId=data.id;
+
+                    })
+                    .catch(function (error) {
+                        //messageService.openMsg("学院添加失败")
+                    })
+            },
+            getSchoolYearById:function (id) {
+                var _this= this;
+                var params={
+                    id: id
+                };
+                SchoolYearService.getSchoolYearById(params).$promise
+                    .then(function (data) {
+                        var obj = {
+                            text: data.name,
+                            children: []
+                        };
+                        angular.forEach(data.semesterIdNameList, function (sememster) {
+                            var objChild = {
+                                id: sememster.id,
+                                text: sememster.name
+                            };
+                            obj.children.push(objChild);
+                        })
+                        _this.schoolYearDropList.push(obj);
+                        _this.params.semesterId=data.id;
+
+                    })
+                    .catch(function (error) {
+                        //messageService.openMsg("学院添加失败")
                     })
             },
             //获取课程下拉列表数据
@@ -140,8 +186,8 @@ angular.module('dleduWebApp')
                 }
                 CourseService.getCourseDropListOrg(params).$promise
                     .then(function (data) {
-                        _this.schoolYearDropList = _this.select2GroupFormat(data.data);
-
+                        _this.courseDropList = data.data;
+                       // console.log(_this.courseDropList)
 
                     })
                     .catch(function (error) {
@@ -157,9 +203,9 @@ angular.module('dleduWebApp')
                     pageSize: 100,
 
                 }
-                TeachClassService.getSchoolYearDropList(params).$promise
+                SchoolYearService.getSchoolYearDropList(params).$promise
                     .then(function (data) {
-                        _this.courseDropList = data.data;
+                        _this.schoolYearDropList = _this.select2GroupFormat(data.data);
 
 
                     })
@@ -186,13 +232,15 @@ angular.module('dleduWebApp')
             },
             //初始化
             init: function () {
-                var that = this;
-                that.params.id = $state.params.id;
-                that.getTeachClassById();
-                that.getCourseDropListOrg();
+                var _this = this;
+                _this.params.id = $state.params.id;
+                _this.getCourseDropListOrg();
+                _this.getSchoolYearDropList();
+                _this.getTeachClassById();
+                
             }
         };
         $timeout(function () {
             $scope.teachClassUpdateFn.init();
-        })
+      })
     });
