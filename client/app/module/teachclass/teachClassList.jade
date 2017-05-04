@@ -37,7 +37,8 @@
                                 th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="teachClass in teachClassListFn.teachClassList")
-                                td {{teachClass.name}}
+                                td
+                                    a.handle(ui-sref="teachClassDetail({id:teachClass.id})") {{teachClass.name}}
                                 td {{teachClass.semesterName}}
                                 td {{teachClass.courseName}}
                                 td {{teachClass.studentsCount}}

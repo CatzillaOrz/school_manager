@@ -133,11 +133,18 @@ angular.module('dleduWebApp')
                 }
                 TeachClassService.addTeachClassStudent(params).$promise
                     .then(function (data) {
+                        messageService.openMsg("添加成功");
                         $state.go("teachClassDetail",{id:_this.params.teachingClassId});
 
                     })
                     .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("添加失败");
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
                     })
             },
             //添加所有

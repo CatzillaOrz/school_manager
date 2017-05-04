@@ -17,6 +17,8 @@
                             .col-sm-7
                                 select.form-control(ng-model="teacherUpdateFn.teacherIds[$index]" ui-select2="teacherUpdateFn.select2Options()")
                                     option(ng-repeat="teacher in teacherUpdateFn.teacherDropList" value="{{teacher.id}}" ) {{teacher.name}}
+                            .col-sm-2
+                                a.btn.btn-warning(ng-if="$index!=0" ng-click="teacherUpdateFn.removeOneClassTeacher($index)") 删除
                         div.text-center
                             .btn.btn-primary(ng-click="teacherUpdateFn.addOneClassTeacher()")
                                 i.fa.fa-plus

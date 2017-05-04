@@ -169,7 +169,17 @@ angular.module('dleduWebApp')
                     _this.currentStudent = entity;
                     messageService.getMsg("您确定要删除此学生吗？", _this.deleteTeachClassStudent)
                 }else {
-                    messageService.getMsg("您确定要删除选中的所有学生吗？", _this.deleteTeachClassAllStudent)
+                    var objList= _.filter(_this.teachClassStudentList, function(value) {
+                        if(value.state){
+                            return value.id;
+                        }
+                    });
+                    if(!objList){
+                        messageService.getMsg("您确定要删除选中的所有学生吗？", _this.deleteTeachClassAllStudent);
+                    }else {
+                        messageService.openMsg("请选择需要删除的学生");
+                    }
+
                 }
 
             },
