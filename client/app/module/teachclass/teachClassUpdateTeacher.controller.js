@@ -80,6 +80,10 @@ angular.module('dleduWebApp')
             //增加一个老师
             addOneClassTeacher:function () {
                 var _this=this;
+                var temp=_.uniq(_this.teacherIds);
+                if(temp.length!=_this.teacherIds.length){
+                   return;
+                }
                 _this.teacherIds.push(_this.teacherIds.length+".default")
             },
             //移除一个老师
@@ -96,5 +100,11 @@ angular.module('dleduWebApp')
         ;
         $timeout(function () {
             $scope.teacherUpdateFn.init();
+            $scope.$watch('teacherUpdateFn.teacherIds', function(newValue, oldValue) {
+                   var temp=_.uniq($scope.teacherUpdateFn.teacherIds);
+                   if(temp.length!=$scope.teacherUpdateFn.teacherIds.length){
+                       messageService.openMsg("您选择的老师重复了！");
+                   }
+            },true);
         })
     });

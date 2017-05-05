@@ -4,7 +4,7 @@ angular.module('dleduWebApp')
     .controller('TeachClassClassesUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
         /**
          * 更新教学班关联的行政班
-         * @type {{params: {ids: Array, teachingClassId: number}, teacherIds: [*], classDropList: Array, select2ClassOptions: select2ClassOptions, submit: submit, addTeachClassClasses: addTeachClassClasses, addOneClass: addOneClass, removeOneClassTeacher: removeOneClassTeacher, init: init}}
+         * @type {{params: {ids: Array, teachingClassId: number}, classesIds: [*], classDropList: Array, select2ClassOptions: select2ClassOptions, submit: submit, addTeachClassClasses: addTeachClassClasses, addOneClass: addOneClass, removeOneClassTeacher: removeOneClassTeacher, init: init}}
          */
         $scope.classesUpdateFn = {
             //参数
@@ -13,7 +13,7 @@ angular.module('dleduWebApp')
                 teachingClassId: 0
             },
             //模拟教师数据
-            teacherIds:["0.default"],
+            classesIds:["0.default"],
             classDropList: [],
             //班级下拉列表配置
             select2ClassOptions:function(){
@@ -58,7 +58,7 @@ angular.module('dleduWebApp')
             //提交
             submit:function () {
                 var _this=this;
-                var ids=_.filter(_this.teacherIds, function(value) {
+                var ids=_.filter(_this.classesIds, function(value) {
                     if(value.indexOf(".default")==-1){
                         return value;
                     }
@@ -87,10 +87,11 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg(error.data);
+                            messageService.openMsg("更新失败");
+
                         }else {
 
-                            messageService.openMsg("更新失败");
+                            messageService.openMsg(error.data);
                         }
                     })
 
@@ -98,12 +99,16 @@ angular.module('dleduWebApp')
             //增加行政班
             addOneClass:function () {
                 var _this=this;
-                _this.teacherIds.push(_this.teacherIds.length+".default")
+                var temp=_.uniq(_this.classesIds);
+                if(temp.length!=_this.classesIds.length){
+                    return;
+                }
+                _this.classesIds.push(_this.classesIds.length+".default")
             },
             //移除一个行政班
-            removeOneClassTeacher:function (index) {
+            removeOneClass:function (index) {
                 var _this=this;
-                _this.teacherIds.splice(index,1)
+                _this.classesIds.splice(index,1)
             },
             init: function () {
                 var _this = this;
@@ -113,5 +118,11 @@ angular.module('dleduWebApp')
         ;
         $timeout(function () {
             $scope.classesUpdateFn.init();
+            $scope.$watch('classesUpdateFn.classesIds', function(newValue, oldValue) {
+                var temp=_.uniq($scope.classesUpdateFn.classesIds);
+                if(temp.length!=$scope.classesUpdateFn.classesIds.length){
+                    messageService.openMsg("您选择的班级重复了！");
+                }
+            },true);
         })
     });
