@@ -13,112 +13,34 @@
 
 > 补充：如果npm安装比较慢的话，可以使用cnpm(淘宝提供)代替。 安装：`npm install -g cnpm` 。安装完成后，以下部署命令中的npm都可以使用cnpm代替
 
-### For Dev
+### Jenkins build
+    npm install
+    bower install
+    grunt serve
+## 开发配置
+    export OPENSHIFT_NODEJS_PORT=9009
+    export NODE_ENV=production
+    export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api
+    export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api
+    export API_GATEWAY=http://172.16.23.120:3333/org-manager
+    export SESSION_REDIS_HOST=172.16.23.30
+    export SESSION_REDIS_PORT=6379
+    export SESSION_REDIS_DB='0'
+    export SESSION_REDIS_PREFIX=dledu_web_session:
+    export SESSION_DOMAIN=aizhixin.com
+    pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
+## 测试配置
+    export OPENSHIFT_NODEJS_PORT=9009
+    export NODE_ENV=production
+    export BACKEND_API=http://dledutest.aizhixin.com/zhixin_api
+    export DIANDIAN_API=http://ddtest.aizhixin.com/diandian_api
+    export API_GATEWAY=http://172.16.23.122:3333/org-manager
+    export SESSION_REDIS_HOST=172.16.23.32
+    export SESSION_REDIS_PORT=6379 
+    export SESSION_REDIS_PASS= 
+    export SESSION_REDIS_DB=0
+    export SESSION_REDIS_PREFIX=dledu_web_session
+    export SESSION_DOMAIN=aizhixin.com
+    pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
+## 伪生产配置
 
-* 修改业务服务接口等环境变量配置，可以复制 server/config/local.env.sample.js 为 server/config/local.env.js。 如添加变量：BACKEND_API: 'http://172.16.40.62:8080/dledu'
-
-> $ npm install
-
-> $ bower install
-
-> $ grunt serve
-
-### For Test
-
-> $ pm2 delete school_manager    // 如果school_manager不在pm2的list中（$ pm2 list 查看）则不执行此命令
-
-> $ npm install
-
-> $ bower install --allow-root
-
-> $ grunt build
-
-> $ cd dist
-
-> $ export OPENSHIFT_NODEJS_PORT={PORT}     // 端口自定,不设置此变量则默认为8080
-
-> $ export NODE_ENV=production
-
-> $ export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api   // 知新登录验证api
-
-> $ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api   // 点点api
-
-> $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
-
-> $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
-
-> $ export SESSION_REDIS_PORT=6379   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
-
-> $ export SESSION_REDIS_PASS=   // 用于缓存Session的Redis服务密码， 缺省值：``
-
-> $ export SESSION_REDIS_DB=0                // 用于缓存Session的Redis服务DB的index， 缺省值：`0`
-
-> $ export SESSION_REDIS_PREFIX=dledu_web_session   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`dledu_web_session`
-
-> $ pm2 start server/app.js -i max --name 'school_manager'
-
-### For Production
-
-> $ grunt build              // 开发环境或测试环境build
-
-> $ cp dist {target folder}    // 打包或直接拷贝dist目录下文件至部署服务器上
-
-> //以下命令在部署服务器终端执行
-
-> $ pm2 delete DLEDU_Web     // 如果DLEDU_Web不在pm2的list中（$ pm2 list 查看）则不执行此命令
-
-> $ export OPENSHIFT_NODEJS_PORT={PORT}     // 端口自定,不设置此变量则默认为8080
-
-> $ export NODE_ENV=production
-
-> $ export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api   // 知新登录验证api
-
-> $ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api   // 点点api
-
-> $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
-
-> $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
-
-> $ export SESSION_REDIS_PORT=6379   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
-
-> $ export SESSION_REDIS_PASS=   // 用于缓存Session的Redis服务密码， 缺省值：``
-
-> $ export SESSION_REDIS_DB=0                // 用于缓存Session的Redis服务DB的index， 缺省值：`0`
-
-> $ export SESSION_REDIS_PREFIX=dledu_web_session   // 用于缓存Session的Redis中保存session值key的前缀， 缺省值：`dledu_web_session`
-
-> $ npm install --production
-
-> $ pm2 start server/app.js -i max --name 'school_manager'
-
-## Main Stack
-
-> * Node.js
-
-> * Express
-  
-> * Angular.js
-  
-> * Jade
-  
-> * Socket.io
-  
-> * Grunt
-
-> * Bower
-
-> * moment
-
-> * bluebird
-
-> * rest
-
-> * bootstrap
-
-> * lodash
-
-> * flexpaper
-
-> * kindeditor
-
-> * echarts
