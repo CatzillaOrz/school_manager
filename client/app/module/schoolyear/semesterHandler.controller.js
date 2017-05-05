@@ -123,8 +123,8 @@ angular.module('dleduWebApp')
                     }else if(!that.params.startTime||!that.params.endTime){
                         messageService.openMsg("课节开始时间和结束时间不能为空！");
                         return;
-                    }else if(time1.getTime()>time2.getTime()){
-                        messageService.openMsg("您选择课程节开始时间有误！");
+                    }else if(time1.getTime()>=time2.getTime()){
+                        messageService.openMsg("您选择课程节开始时间与结束时间有误！");
                         return;
                     }
 
@@ -187,7 +187,7 @@ angular.module('dleduWebApp')
 
                 that.params.id = $state.params.id;
                 that.handle = $state.current.ncyBreadcrumbLabel;
-                if (that.handle == "编辑课节") {
+                if ($state.params.id) {
                     that.params.id = $state.params.id;
                     var params={
                         id:that.params.id

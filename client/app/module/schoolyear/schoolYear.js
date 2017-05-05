@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
             })
             .state('periodlist', {
                 parent: 'period',
-                url   : '/period/list',
+                url   : '/period/list/:position',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
@@ -21,6 +21,7 @@ angular.module('dleduWebApp')
                     label: '学时管理'
                 }
             })
+
             .state('periodCreate', {
                 parent: 'period',
                 url   : '/period/create',

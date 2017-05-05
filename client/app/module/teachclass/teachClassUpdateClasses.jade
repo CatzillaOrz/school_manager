@@ -10,13 +10,15 @@
                     fieldset
                         legend 关联班级
                     .md-form
-                        .form-group(ng-repeat="classse in classesUpdateFn.teacherIds")
+                        .form-group(ng-repeat="classse in classesUpdateFn.classesIds")
                             label.col-sm-3.control-label
                                 span.required *
                                 | 请选择班级：
                             .col-sm-7
-                                select.form-control(ng-model="classesUpdateFn.teacherIds[$index]" ui-select2="classesUpdateFn.select2ClassOptions()")
+                                select.form-control(ng-model="classesUpdateFn.classesIds[$index]" ui-select2="classesUpdateFn.select2ClassOptions()")
                                     option(ng-repeat="teacher in classesUpdateFn.classDropList" value="{{teacher.id}}" ) {{teacher.name}}
+                            .col-sm-2
+                                a.btn.btn-warning(ng-if="$index!=0" ng-click="classesUpdateFn.removeOneClass($index)") 删除
                         div.text-center
                             .btn.btn-primary(ng-click="classesUpdateFn.addOneClass()")
                                 i.fa.fa-plus
