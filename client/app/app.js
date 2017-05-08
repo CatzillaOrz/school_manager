@@ -16,6 +16,7 @@ angular.module('dleduWebApp', [
     'ncy-angular-breadcrumb',
     'ngFileUpload',
     'ui.select2',
+    'courseSchedule',
     'azx.swiper',
     'azx.common',
     "ngTable",
