@@ -1,0 +1,46 @@
+.college-list-container{
+  margin: 10px;
+  .handle{
+    color:$text-color-light;
+    cursor: pointer;
+    i{
+      margin: 0px 5px;
+    }
+    span{
+       margin-right: 10px;
+    }
+  }
+  .handle:hover{
+    color: #35b8e0;
+  }
+  .search-btn{
+    color: #fff;
+    background-color: #29c192;
+    border-color: #25ac82;
+  }
+  .btn-class-detail{
+    margin-left: 20px;
+    height: 30px;
+  }
+  .title-class-detail{
+    font-size: 18px;
+    color: black;
+    font-weight: 400;
+  }
+  .student-list-class-detail{
+    margin-top: 10px;
+    border-top: none;
+  }
+
+}
+.margin-left-10 {
+  margin-left: 10px !important
+}
+.font-14{
+  font-size: 14px
+}
+.font-color-black-24{
+  font-size: 24px;
+  color: black;
+
+}
