@@ -19,7 +19,8 @@ angular.module('dleduWebApp', [
     'courseSchedule',
     'azx.swiper',
     'azx.common',
-    "ngTable"
+    "ngTable",
+    'ngJcrop'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');

@@ -8,8 +8,17 @@
         },
         {
             "title": "学校信息管理",
-            "sref": "",
-            "icon": "file-text-o"
+            "sref": "setlogo",
+            "icon": "file-text-o",
+            "active": "school",
+            "items":[
+                {
+                    "title": "设置学校LOGO",
+                    "sref": "setlogo",
+                    "active": "school",
+                    "icon": "home"
+                }
+            ]
         },
         {
             "title": "院系管理",
