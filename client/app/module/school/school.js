@@ -3,19 +3,22 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('major', {
+            .state('school', {
                 abstract: true,
                 parent: 'base'
             })
-            .state('useraccount', {
-                parent: 'base',
-                url   : '/account/useraccount',
+            .state('setlogo', {
+                parent: 'school',
+                url   : '/setlogo',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
-                        // controller : 'UserAccountCtrl',
-                        templateUrl: 'app/account/userAccount.html'
+                         controller : 'SetLogoCtrl',
+                        templateUrl: 'app/module/school/setLogo.html'
                     }
+                },
+                ncyBreadcrumb: {
+                    label: '设置学校Logo'
                 }
             })
     });
