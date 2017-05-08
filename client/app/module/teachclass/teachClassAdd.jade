@@ -7,7 +7,7 @@
         .widget-body
             step-line.step-line.margin-bottom-10(on-step="handleFn.step" steps="handleFn.steps")
             div.margin-top-10.padding-10(ng-if="handleFn.step==1")
-                form.form-horizontal
+                form.form-horizontal(name="teachClassForm")
                     fieldset
                         legend {{handleFn.prompt}}
                     .short-form
@@ -16,7 +16,7 @@
                                 span.required *
                                 | 选择学期：
                             .col-sm-7
-                                select.form-control(ng-model="handleFn.params.semesterId" ui-select2="handleFn.select2SemesterOptions()" )
+                                select.form-control(ng-model="handleFn.params.semesterId" ui-select2="handleFn.select2SemesterOptions()")
                                     optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in handleFn.schoolYearDropList")
                                         option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
 
@@ -97,7 +97,7 @@
                                 span 按学生添加
                             p  适合选修课创建教学班，可以关联一个或者多个学生，只能在教学班编辑的操作中调换学生。
                 div(ng-if="handleFn.step3Tooggle=='class'")
-                    form.form-horizontal
+                    form.form-horizontal(name="teachClassForm")
                         fieldset
                             legend 添加整个行政班到教学班
                         .md-form
@@ -111,7 +111,7 @@
                             div.text-center
                                 .btn.btn-primary(ng-click="handleFn.addOneClasses()")
                                     i.fa.fa-plus
-                                    | 添加新的行政班
+                                    | 添加新时段
                 div(ng-if="handleFn.step3Tooggle=='students'")
                     .col-sm-5
                         fieldset
@@ -168,7 +168,7 @@
                                             i.fa.fa-times
                                             span 撤销
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
-                form.form-horizontal(name="teachClassForm")
+                form.form-horizontal(name="")
                     fieldset
                         legend 给教学班设置名称
                     .md-form
@@ -177,67 +177,65 @@
                                 span.required *
                                 | 教学班级：
                             .col-sm-6
-                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" validator="required, maxlength=30")
+                                input.form-control(ng-model="handleFn.params.name" type="text")
                             .col-sm-3
-                                a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
-                    fieldset
-                        legend 教学班信息预览
-                    .row
-                        .col-sm-3 学期信息：
-                        .col-sm-5 {{handleFn.semesterName}}
-                    .row
-                        .col-sm-3 课程信息：
-                        .col-sm-5 {{handleFn.courseName}}
-                    .row
-                        .col-sm-3 教师信息：
-                        .col-sm-7
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 工号
-                                        th.expand.sorting 姓名
-                                        th.sorting 院系
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
-                                        td {{teacher.jobNumber}}
-                                        td {{teacher.name}}
-                                        td {{teacher.collegeName}}
-                    .row(ng-if="!handleFn.params.classesIds")
-                        .col-sm-3 班级信息：
-                        .col-sm-7
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 行政班名称
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="classes in handleFn.selectClassesList" )
-                                        td {{classes.name}}
+                                a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" ) 创建
+                fieldset
+                    legend 教学班信息预览
+                .row
+                    .col-sm-3 学期信息：
+                    .col-sm-5 {{handleFn.semesterName}}
+                .row
+                    .col-sm-3 课程信息：
+                    .col-sm-5 {{handleFn.courseName}}
+                .row
+                    .col-sm-3 教师信息：
+                    .col-sm-7
+                        table.table.table-striped.table-bordered.table-hover.dataTable
+                            thead
+                                tr(role='row')
+                                    th.sorting_asc 工号
+                                    th.expand.sorting 姓名
+                                    th.sorting 院系
+                            tbody
+                                tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
+                                    td {{teacher.jobNumber}}
+                                    td {{teacher.name}}
+                                    td {{teacher.collegeName}}
+                .row(ng-if="!handleFn.params.classesIds")
+                    .col-sm-3 班级信息：
+                    .col-sm-7
+                        table.table.table-striped.table-bordered.table-hover.dataTable
+                            thead
+                                tr(role='row')
+                                    th.sorting_asc 行政班名称
+                            tbody
+                                tr.cursor-pointer(role='row' ng-repeat="classes in handleFn.selectClassesList" )
+                                    td {{classes.name}}
 
-                    .row(ng-if="handleFn.params.classOrStudents==20")
-                        .col-sm-3 学生信息：
-                        .col-sm-7
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 学号
-                                        th.expand.sorting 姓名
-                                        th.sorting 院系
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
-                                        td {{student.jobNumber}}
-                                        td {{student.name}}
-                                        td {{student.collegeName}}
+                .row(ng-if="handleFn.params.classesIds")
+                    .col-sm-3 学生信息：
+                    .col-sm-7
+                        table.table.table-striped.table-bordered.table-hover.dataTable
+                            thead
+                                tr(role='row')
+                                    th.sorting_asc 工号
+                                    th.expand.sorting 姓名
+                                    th.sorting 院系
+                            tbody
+                                tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
+                                    td {{student.jobNumber}}
+                                    td {{student.name}}
+                                    td {{student.collegeName}}
 
-                    .col-md-12.text-center.margin-top-10(ng-if="handleFn.step==4")
-                        a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
             .form-actions
                 .row
                     .col-md-12(ng-if="handleFn.step!=4")
                         a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
                         .speace-10
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1" ng-disabled="(!handleFn.params.semesterId)&&(!handleFn.params.courseId)") 下一步
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2" ng-disabled="handleFn.selectTeacherList.length==0") 下一步
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="!handleFn.validateStep3()") 下一步
+                        a.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ) 下一步
 
+                    .col-md-12(ng-if="handleFn.step==4")
+                        a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" ) 创建
 
 

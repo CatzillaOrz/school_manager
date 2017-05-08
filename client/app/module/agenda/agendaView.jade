@@ -1,0 +1,122 @@
+.agenda-container
+    .row
+        .col-sm-12.col-md-12.col-lg-3
+            // new widget
+            .jarviswidget.jarviswidget-color-blueDark
+                header
+                    span.widget-icon
+                        i.fa.fa-edit
+                    h2  添加排课信息
+                div
+                    .widget-body
+                        form
+                            fieldset
+                                .form-group
+                                    label 选择教学班
+                                    input.form-control(name='title', maxlength='40', type='text', placeholder='选择教学班')
+                                    //.btn-group.btn-group-sm.btn-group-justified(data-toggle='buttons')
+                                        label.btn.btn-default.active
+                                            input#icon-1(type='radio', name='iconselect', value='fa-info', checked='')
+                                            i.fa.fa-info.text-muted
+                                        label.btn.btn-default
+                                            input#icon-2(type='radio', name='iconselect', value='fa-warning')
+                                            i.fa.fa-warning.text-muted
+                                        label.btn.btn-default
+                                            input#icon-3(type='radio', name='iconselect', value='fa-check')
+                                            i.fa.fa-check.text-muted
+                                        label.btn.btn-default
+                                            input#icon-4(type='radio', name='iconselect', value='fa-user')
+                                            i.fa.fa-user.text-muted
+                                        label.btn.btn-default
+                                            input#icon-5(type='radio', name='iconselect', value='fa-lock')
+                                            i.fa.fa-lock.text-muted
+                                        label.btn.btn-default
+                                            input#icon-6(type='radio', name='iconselect', value='fa-clock-o')
+                                            i.fa.fa-clock-o.text-muted
+                                .form-group
+                                    label 选择学周范围
+                                    input.form-control(name='title', maxlength='40', type='text', placeholder='选择学周范围')
+                                .form-group
+                                    label 选择上课日程1
+                                    .btn-group.btn-group-sm.btn-group-justified(data-toggle='buttons')
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect1' value='1')
+                                            span 周一
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect2' value='2')
+                                            span 周二
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect3' value='3')
+                                            span 周三
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect4' value='4')
+                                            span 周四
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect5' value='5')
+                                            span 周五
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect6' value='6')
+                                            span 周六
+                                        label.btn.btn-default
+                                            input(type='radio' name='iconselect7' value='7')
+                                            span 周日
+                                .form-group
+                                    label 选择课节
+                                    input.form-control(name='title', maxlength='40', type='text', placeholder='选择课节')
+
+                                .form-group
+                                    label 填写上课地点
+                                    input.form-control(name='title', maxlength='40', type='text', placeholder='填写上课地点')
+
+                                .form-group
+                                    label 备注
+                                    textarea.form-control(placeholder='填写课程备注信息', rows='3', maxlength='40')
+                                    p.note 不要超过40个字符
+                            .form-actions
+                                .row
+                                    .col-md-12
+                                        button.btn.btn-default(type='button' ng-click='addEvent()') 将上面的课程添加到课表
+
+
+            //.well.well-sm
+                form
+                    legend
+                        | Draggable Events
+                    ul#external-events.list-unstyled
+                        li.ui-draggable(style='position: relative;')
+                            span.bg-color-darken.txt-color-white(data-description='Currently busy', data-icon='fa-time') Office Meeting
+                        li.ui-draggable(style='position: relative;')
+                            span.bg-color-blue.txt-color-white(data-description='No Description', data-icon='fa-pie') Lunch Break
+                        li.ui-draggable(style='position: relative;')
+                            span.bg-color-red.txt-color-white(data-description='Urgent Tasks', data-icon='fa-alert') URGENT
+                    .checkbox
+                        label
+                            input#drop-remove.checkbox.style-0(type='checkbox', checked='checked')
+                            span remove after drop
+        .col-sm-12.col-md-12.col-lg-9
+            .jarviswidget.jarviswidget-color-blueDark
+                header
+                    span.widget-icon
+                        i.fa.fa-calendar
+                    h2  排课日程
+                    .widget-toolbar
+                        //.btn-group
+                            button.btn.dropdown-toggle.btn-xs.btn-default(data-toggle='dropdown', aria-expanded='false')
+                                | Showing
+                                i.fa.fa-caret-down
+                            ul.dropdown-menu.js-status-update.pull-right
+                                li
+                                    a#mt(href='javascript:void(0);') 按月查看
+                                li
+                                    a#ag(href='javascript:void(0);') 按课表查看
+                div
+                    .widget-body.no-padding
+                        .widget-body-toolbar
+                            #calendar-buttons
+                                .btn.btn-primary 保存排课
+                                //.btn.btn-default(ng-click="changeView('scheduleWeek', 'myCalendar1')") scheduleWeek
+                                //.btn.btn-default(ng-click="changeView('agendaWeek', 'myCalendar1')") AgendaWeek
+                                //.btn.btn-default(ng-click="changeView('month', 'myCalendar1')") Month
+
+                        .span8
+                            .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-calendar='myCalendar1')
