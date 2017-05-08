@@ -1,282 +1,284 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassDetailCtrl', function ($scope,$state, ClassService,AuthService,messageService,StudentService) {
-        $scope.classDetailFn={
-            isTransfer:false,
-            classes:{},
-            params:{
-                id:0,
-                orgId: AuthService.getUser().orgId,
-                pageNumber: 1,
-                pageSize: 100
-            },
-            page: {
-                totalElements: 0,
-                totalPages: 0,
-                pageNumber: 1,
-                pageSize: 10
-            },
-            selectAll:false,
-            currentTeacher:{},
-            classTeacherList:[],
-            classStudentList:[],
-            transferStudentList:[],
-            collegeDropList:[],
-            majorDropList:[],
-            classDropList:[],
-            collegeId:0,
-            majorId:0,
-            classesId:0,
-            select2CollegeOptions:function () {
-                var _this=this;
-                return {
-                    ajax: {
-                        url: "api/college/getCollegeDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params={
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
+    .controller('AgendaCtrl', function ($scope, $state, ClassService, AuthService, messageService, $compile, csCalendarConfig) {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        var w = date.getDay();
 
-                            }
-                            params.name=query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: true
-                    },
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            return 'Custom styled placeholder text';
-                        }
-                        _this.collegeDropList.push(data);
-                        return data.name;
-                    }
+
+        //模拟课节api数据
+        var period = [
+            {
+                "id": 1,
+                "orgId": 214,
+                "startTime": "07:00",
+                "endTime": "08:00",
+                "no": 1,
+                "createdDate": "2017-04-25 16:15:53",
+                "userId": null
+            },
+            {
+                "id": 2,
+                "orgId": 214,
+                "startTime": "09:00",
+                "endTime": "10:00",
+                "no": 2,
+                "createdDate": "2017-04-25 16:10:45",
+                "userId": null
+            },
+            {
+                "id": 3,
+                "orgId": 214,
+                "startTime": "12:00",
+                "endTime": "13:00",
+                "no": 3,
+                "createdDate": "2017-04-25 16:14:48",
+                "userId": null
+            },
+            {
+                "id": 4,
+                "orgId": 214,
+                "startTime": "14:00",
+                "endTime": "15:00",
+                "no": 4,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            },
+            {
+                "id": 5,
+                "orgId": 214,
+                "startTime": "16:00",
+                "endTime": "17:00",
+                "no": 5,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            },
+            {
+                "id": 6,
+                "orgId": 214,
+                "startTime": "18:00",
+                "endTime": "19:00",
+                "no": 6,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            },
+            {
+                "id": 7,
+                "orgId": 214,
+                "startTime": "20:00",
+                "endTime": "21:00",
+                "no": 7,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            },
+            {
+                "id": 8,
+                "orgId": 214,
+                "startTime": "22:00",
+                "endTime": "23:00",
+                "no": 8,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            }/*,
+            {
+                "id": 9,
+                "orgId": 214,
+                "startTime": "21:10",
+                "endTime": "21:40",
+                "no": 9,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            },
+            {
+                "id": 10,
+                "orgId": 214,
+                "startTime": "22:00",
+                "endTime": "22:40",
+                "no": 10,
+                "createdDate": "2017-04-25 18:09:18",
+                "userId": null
+            }*/
+        ];
+        //模拟排课api数据
+        var data = {
+            "teachingClassId": 4,
+            "teachingClassName": "大学英语03教学班",
+            "userId": 0,
+            "timePeriod": [
+                {
+                    "classroom": "电教楼409教室",
+                    "endWeekId": 3,
+                    "endWeekNo": 7,
+                    "periodId": 0,
+                    "periodMo": 0,
+                    "periodNum": 2,
+                    "remark": "备注信息……",
+                    "singleOrDouble": 10,
+                    "startWeekId": 1,
+                    "startWeekNo": 2,
+                    "dayOfWeek": 3
+                },
+                {
+                    "classroom": "英语楼201教室",
+                    "endWeekId": 3,
+                    "endWeekNo": 7,
+                    "periodId": 0,
+                    "periodMo": 2,
+                    "periodNum": 1,
+                    "remark": "备注信息……",
+                    "singleOrDouble": 30,
+                    "startWeekId": 1,
+                    "startWeekNo": 2,
+                    "dayOfWeek": 6
+                },
+                {
+                    "classroom": "英语楼204教室",
+                    "endWeekId": 3,
+                    "endWeekNo": 7,
+                    "periodId": 0,
+                    "periodMo": 5,
+                    "periodNum": 1,
+                    "remark": "备注信息……",
+                    "singleOrDouble": 20,
+                    "startWeekId": 1,
+                    "startWeekNo": 2,
+                    "dayOfWeek": 6
+                }
+            ]
+        };
+
+        $scope.schedule = {
+            //排课日程参数设置
+            scheduleConfig : {
+                height: 580,
+                editable: true,
+                header: {
+                    left: '',
+                    center: '',
+                    right: ''
+                },
+                //在agenda开头的视图里，是否显示最上面all-day那一栏
+                allDaySlot: false,
+                columnFormat: {
+                    month: 'ddd',
+                    week: 'ddd',
+                    day: 'dddd'
+                },
+                defaultView: 'agendaWeek',
+                displayEventTime: false,
+                slotDuration : "01:00:00",
+                snapDuration : "01:00:00",
+                axisFormat: 'HH:mm',
+                //第一列显示周几 0:周日，1:周一 ……
+                firstDay: 0,
+                //拖拽时课程卡透明度
+                dragOpacity:0.5,
+                //设定课节数量
+                minTime : "0:00",
+                maxTime : period.length + ':00',
+                //限制拖拽拖放的位置（即限制有些地方拖不进去）
+                eventConstraint : {
+                    start: "0:00",
+                    end: period.length + ':00'
+                },
+                eventClick: function (courseCard, jsEvent, view) {
+                    //todo 点击课程卡事件
+                    console.log(courseCard.title + ' was clicked ');
+                },
+                eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
+                    //todo 拖动课程卡时，周的换算与课节的调整换算
+                    console.log(delta/1000/60/60);
+                },
+                eventResize: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
+                    //更改课程卡的课节数
+                    courseCard.periodNum = courseCard.periodNum + delta/1000/60/60;
+                },
+                eventRender: function (event, element, view) {
+                 element.attr({
+                 'tooltip': event.title,
+                 'tooltip-append-to-body': true
+                 });
+                 $compile(element)($scope);
+                 },
+                eventMouseover: function(calEvent, jsEvent, view) {
+
+                },
+                eventMouseout: function (calEvent, jsEvent, view) {
+
                 }
             },
-            select2MajorOptions:function(){
-                var _this=this;
-                return {
-                    ajax: {
-                        url: "api/major/getMajorDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params={
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                collegeId:_this.collegeId,
-
-                            }
-                            params.name=query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: true
-                    },
-
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            return 'Custom styled placeholder text';
-                        }
-                        _this.majorDropList.push(data);
-                        return data.name;
-                    }}
+            eventSources : null,
+            onCourseClick: function (courseCard, jsEvent, view) {
+                // $scope.alertMessage = (date.title + ' was clicked ');
+                console.log(courseCard.title + ' was clicked ');
             },
-            select2ClassOptions:function(){
-                var _this=this;
-                return {
-                    ajax: {
-                        url: "api/class/geClassDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params={
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                professionalId:_this.majorId,
-
-                            }
-                            params.name=query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: true
-                    },
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            return 'Custom styled placeholder text';
-                        }
-                        _this.classDropList.push(data);
-                        return data.name;
-                    }
-                }
+            OnCourseDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
+                console.log(courseCard);
+                console.log(jsEvent);
+                $scope.alertMessage = ('Event Dropped to make dayDelta ' + delta);
+                console.log('Event Dropped to make dayDelta ' + delta);
             },
-            getClassById: function () {
-                var that = this;
-                var params = {
-                    id: that.params.id
-                }
-                ClassService.getClassById(params).$promise
-                    .then(function (data) {
-                       that.classes=data;
-
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
-                    })
+            OnCourseResize: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+                console.log('Event Resized to make dayDelta ' + delta);
             },
-            getClassTeacherList:function () {
-                var _this=this;
-                var params={
-                    classesId: _this.params.id
-                };
-                ClassService.getClassTeacherList(params).$promise
-                    .then(function (data) {
-                        _this.classTeacherList=data.data;
-
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
-                    })
-            },
-            //删除
-            deleteClassTeacher: function () {
-                var _this = $scope.classDetailFn;
-                var ids=[];
-                ids.push( _this.currentTeacher.id);
-                var params = {
-                    ids:ids,
-                    classesId: _this.params.id,
-                }
-                ClassService.deleteClassTeacher(params).$promise
-                    .then(function (data) {
-                        messageService.openMsg("解除班主任成功！");
-                        _this.getClassTeacherList();
-                    })
-                    .catch(function (error) {
-                        messageService.openMsg("解除班主任失败！");
-                    })
-            },
-            //删除提示
-            deletePrompt: function (entity) {
-                var that=this;
-                that.currentTeacher = entity;
-                messageService.getMsg("您确定要删除此班主任吗？", that.deleteClassTeacher)
-            },
-            findClassStudent:function () {
-                var _this=this;
-                var params={
-                    orgId:_this.params.orgId,
-                    classesId:_this.params.id,
-                    pageNumber:_this.page.pageNumber,
-                    pageSize:_this.pageSize
-                };
-                params.name=_this.keyWord;
-                StudentService.getSimpleStudents(params).$promise
-                    .then(function (data) {
-                        _this.classStudentList=_this.dataHandler(data.data);
-
-                    })
-                    .catch(function (error) {
-                        //messageService.openMsg("班级添加失败")
-                    })
-            },
-            dataHandler:function (list) {
-                var result=[];
-                angular.forEach(list,function (data) {
-                    data.state=false;
-                    result.push(data);
-                });
-                return result;
-            },
-            all:function (m) {
-                var _this=this;
-                angular.forEach(_this.classStudentList,function (data) {
-                    if(m===true){
-                        data.state=true;
-                    }else {
-                        data.state=false;
-                    }
-                })
-            },
-            transferOut:function (entity) {
-                if(entity){
-                    entity.state=true;
-                }
-                var _this=this;
-                _this.transferStudentList= _.filter(_this.classStudentList, function(value) {
-                    if(value.state){
-                        return value;
+            addRemoveCourseSource: function (sources, source) {
+                var canAdd = 0;
+                angular.forEach(sources, function (value, key) {
+                    if (sources[key] === source) {
+                        sources.splice(key, 1);
+                        canAdd = 1;
                     }
                 });
-                _this.isTransfer=true;
-            },
-            updateStudentToClasses:function () {
-                var _this=this;
-                var params={
-                    classesId:_this.classesId,
-                    ids:[]
-                };
-                var ids=[];
-                angular.forEach(_this.transferStudentList,function (value) {
-                    ids.push(value.id);
-                });
-                params.ids=ids;
-                if(params.ids.length==0){
-                    messageService.openMsg("您还没有选择学生！");
-                    return;
-                }else if(_this.classesId==0){
-                    messageService.openMsg("您还没有选择班级！");
-                    return;
+                if (canAdd === 0) {
+                    sources.push(source);
                 }
-                StudentService.updateStudentToClasses(params).$promise
-                    .then(function (data) {
-                        _this.findClassStudent();
-                       _this.isTransfer=false;
-
-                    })
-                    .catch(function (error) {
-                        messageService.openMsg("转出班级失败")
-                    })
             },
-        init:function () {
-                var _this=this;
-                _this.params.id = $state.params.id;
-                _this.getClassById();
-                _this.getClassTeacherList();
-                _this.findClassStudent();
+            changeView : function (view, calendar) {
+                csCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+            },
+            renderCalendar : function (calendar) {
+                $timeout(function () {
+                    if (csCalendarConfig.calendars[calendar]) {
+                        csCalendarConfig.calendars[calendar].fullCalendar('render');
+                    }
+                });
+            },
+            courseRender : function (event, element, view) {
+                element.attr({
+                    'tooltip': event.title,
+                    'tooltip-append-to-body': true
+                });
+                $compile(element)($scope);
+            },
+            courseMouseover:function(calEvent, jsEvent, view) {
+
+            },
+            courseMouseout: function (calEvent, jsEvent, view) {
+
             }
         };
-        $scope.classDetailFn.init();
 
+
+        //初始化课节数组
+        var periodArr = [];
+        angular.forEach(period, function (period, index) {
+            var periodCp = {};
+            periodCp.stH = parseInt(period.startTime.split(":")[0]);
+            periodCp.stM = parseInt(period.startTime.split(":")[1]);
+            periodCp.etH = parseInt(period.endTime.split(":")[0]);
+            periodCp.etM = parseInt(period.endTime.split(":")[1]);
+            periodArr.push(periodCp);
+        });
+        //初始化排课可视化数据
+        var newArr = angular.copy(data.timePeriod);
+        angular.forEach(newArr, function (obj, index) {
+            obj.title = '第'+obj.startWeekNo +'-' + obj.endWeekNo+'学周';
+            obj.start = new Date(y, m, d - w + obj.dayOfWeek, obj.periodMo, 0);
+            obj.end = new Date(y, m, d - w + obj.dayOfWeek, obj.periodMo+obj.periodNum,0);
+        });
+        $scope.schedule.eventSources = [newArr];
     });
