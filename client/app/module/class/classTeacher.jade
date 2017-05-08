@@ -21,13 +21,13 @@
                             | 选择班主任：
                         .col-sm-8
                             .form-group(ng-repeat="teacherId in classTeacherFn.teacherIds")
-                                .col-sm-10.margin-bottom-10
+                                .col-sm-10
                                     select.form-control(ng-model="classTeacherFn.teacherIds[$index]" ui-select2="classTeacherFn.select2Options()" )
                                         option(ng-repeat="teacher in classTeacherFn.teacherDropList" value="{{teacher.id}}") {{teacher.name}}
                                 .col-sm-2
                                     a.btn.btn-warning(ng-if="$index!=0" ng-click="classTeacherFn.removeOneClassTeacher($index)") 删除
                             .form-group
-                                .col-sm-10.margin-top-10
+                                .col-sm-10
                                     a.btn.btn-sm.btn-primary(ng-click="classTeacherFn.addOneClassTeacher()") 再增加一个班主任
                 .form-actions
                     .row

@@ -75,60 +75,6 @@ angular.module('dleduWebApp')
                     label: '教学班详情'
                 }
             })
-            .state('teachClassTeacherUpdate', {
-                parent: 'teachclass',
-                url: '/teachclass/updateteacher/:id',
-                access: {requiredLogin: true},
-                views: {
-                    'content@base': {
-                        controller: 'TeachClassTeacherUpdateCtrl',
-                        templateUrl: 'app/module/teachclass/teachClassUpdateTeacher.html'
-                    }
-                },
-                data: {
-                    prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
-                },
-                ncyBreadcrumb: {
-                    label: '教学班详情'
-                }
-            })
-            .state('teachClassStudentUpdate', {
-                parent: 'teachclass',
-                url: '/teachclass/updatestudent/:id',
-                access: {requiredLogin: true},
-                views: {
-                    'content@base': {
-                        controller: 'TeachClassStudentUpdateCtrl',
-                        templateUrl: 'app/module/teachclass/teachClassUpdateStudent.html'
-                    }
-                },
-                data: {
-                    prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
-                },
-                ncyBreadcrumb: {
-                    label: '教学班详情'
-                }
-            })
-            .state('teachClassClassesUpdate', {
-                parent: 'teachclass',
-                url: '/teachclass/updateclasses/:id',
-                access: {requiredLogin: true},
-                views: {
-                    'content@base': {
-                        controller: 'TeachClassClassesUpdateCtrl',
-                        templateUrl: 'app/module/teachclass/teachClassUpdateClasses.html'
-                    }
-                },
-                data: {
-                    prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
-                },
-                ncyBreadcrumb: {
-                    label: '教学班详情'
-                }
-            })
 			/*.state('courseEdit', {
 				parent: 'course',
 				url: '/courseedit/:id',

@@ -2,22 +2,13 @@
 
 angular.module('dleduWebApp')
     .controller('ClassTeacherCtrl', function ($scope,$state, ClassService,AuthService,messageService,Select2LoadOptionsService) {
-        /**
-         * 班主任操作
-         * @type {{classes: {}, params: {id: number}, teacherIds: [*], teacherDropList: Array, select2Options: select2Options, getClassById: getClassById, submit: submit, saveClassTeacher: saveClassTeacher, addOneClassTeacher: addOneClassTeacher, removeOneClassTeacher: removeOneClassTeacher, init: init}}
-         */
         $scope.classTeacherFn={
-            //班级对象
             classes:{},
-            //参数
             params:{
                 id:0
             },
-            //构造添加多个版主人对象id数组
             teacherIds:["0.default"],
-            //教师下拉列表
             teacherDropList:[],
-            //下拉搜索
             select2Options:function () {
                 var _this=this;
                 return{
@@ -38,7 +29,6 @@ angular.module('dleduWebApp')
                 }
                 }
             },
-            //获取班级信息
             getClassById: function () {
                 var that = this;
                 var params = {
@@ -53,7 +43,6 @@ angular.module('dleduWebApp')
                         //messageService.openMsg("班级添加失败")
                     })
             },
-            //提交
             submit:function () {
                 var _this=this;
                 var ids=_.filter(_this.teacherIds, function(value) {
@@ -71,7 +60,6 @@ angular.module('dleduWebApp')
                 }
                 _this.saveClassTeacher(params);
             },
-            //保存班主任
             saveClassTeacher:function (params) {
                 var _this=this;
                 ClassService.saveClassTeacher(params).$promise
@@ -88,12 +76,10 @@ angular.module('dleduWebApp')
                         }
                     })
             },
-            //再增加一个班主任
             addOneClassTeacher:function () {
                 var _this=this;
                 _this.teacherIds.push(_this.teacherIds.length+".default")
             },
-            //移除一个班主任
             removeOneClassTeacher:function (index) {
                 var _this=this;
                 _this.teacherIds.splice(index,1)

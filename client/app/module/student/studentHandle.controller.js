@@ -355,13 +355,11 @@ angular.module('dleduWebApp')
         };
         $timeout(function () {
             $scope.handleFn.init();
-            //联动
             $scope.$watch('handleFn.collegeId', function(newValue, oldValue) {
                 if (newValue!=oldValue){
                     $scope.handleFn.getMajorDropList();
                 }
             });
-            //联动
             $scope.$watch('handleFn.majorId', function(newValue, oldValue) {
                 if (newValue!=oldValue){
                     $scope.handleFn.getClassDropList();

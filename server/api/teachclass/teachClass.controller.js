@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-	TeachClassService = require('../../services/TeachClassService');
+	TeachClassService = require('../../services/teachClassService');
 
 module.exports = {
 	getTeachClassList: function (req, res) {
@@ -87,69 +87,6 @@ module.exports = {
     },
     deleteTeachClassStudent: function (req, res) {
         TeachClassService.deleteTeachClassStudentSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    getTeachClassClassesListById: function (req, res) {
-        TeachClassService.getTeachClassClassesListByIdSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    addTeachClassClasses: function (req, res) {
-        TeachClassService.addTeachClassClassesSync(req.body, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    deleteTeachClassClasses: function (req, res) {
-        TeachClassService.deleteTeachClassClassesSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    addTeachClassTeacher: function (req, res) {
-        TeachClassService.addTeachClassTeacherSync(req.body, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    addTeachClassStudent: function (req, res) {
-        TeachClassService.addTeachClassStudentSync(req.body, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    deleteTeachClassOneStudent: function (req, res) {
-        TeachClassService.deleteTeachClassOneStudentSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
-    getTeachClassClassesList: function (req, res) {
-        TeachClassService.getTeachClassClassesListSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

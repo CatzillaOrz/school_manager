@@ -1706,7 +1706,6 @@ angular.module('validation.directive', ['validation.provider']);
                 },
                 phone: function (value) {
                     var phonereg = /^1(3|4|5|7|8)\d{9}$/;
-
                     return !value || phonereg.test(value);
                 },
                 repassword: function (value, scope, element, attrs, param) {
