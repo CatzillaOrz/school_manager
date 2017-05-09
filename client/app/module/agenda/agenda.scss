@@ -110,17 +110,17 @@
     background: #fff !important;
   }
   .fc-time-grid .fc-slats td {
-    height: 5em;
+    height: 5em !important;
     border-bottom: 0;
   }
   .fc th:first-child, .fc td:first-child {
-    border-left: 0;
+    border-left: 0 !important;
   }
   .fc th:last-child, .fc td:last-child {
-    border-right: 0;
+    border-right: 0 !important;
   }
   .fc tr:last-child {
-    border-bottom: 0;
+    border-bottom: 0 !important;
 
   }
   .fc-toolbar {
