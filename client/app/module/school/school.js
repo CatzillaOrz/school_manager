@@ -21,4 +21,18 @@ angular.module('dleduWebApp')
                     label: '设置学校Logo'
                 }
             })
+            .state('setplayview', {
+                parent: 'school',
+                url   : '/setplayview',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SetPlayViewCtrl',
+                        templateUrl: 'app/module/school/setPlayView.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '设置轮播图与学校简介'
+                }
+            })
     });
