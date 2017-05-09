@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SchoolYearListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService,NgTableParams,SchoolYearService) {
+    .controller('SchoolYearListCtrl', function ($scope, $state,AuthService,StudentService,messageService,CommonService,NgTableParams,SchoolYearService) {
         $scope.preiodFn={
             //查询参数
             params:{
@@ -262,6 +262,10 @@ angular.module('dleduWebApp')
                 var _this=this;
                 _this.getSchoolYearList();
                 _this.getPeriodList();
+                if($state.params.position==2){
+                    $("#myTab  a:last").tab("show");
+                }
+
 
             },
 
