@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
+    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService,SchoolYearService, TeachClassService) {
         $scope.teachClassUpdateFn = {
             params: {
                 userId:AuthService.getUser().id,
@@ -14,7 +14,7 @@ angular.module('dleduWebApp')
             schoolYearDropList: [],
             courseDropList:[],
             select2CourseOptions:function(){
-                var that=this;
+                var _this=this;
                 return {
                     ajax: {
                         url: "api/course/getCourseDropListOrg",
@@ -32,7 +32,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            that.courseDropList=data.data;
+                            _this.courseDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -128,7 +128,7 @@ angular.module('dleduWebApp')
                 }
                 CourseService.getCourseDropListOrg(params).$promise
                     .then(function (data) {
-                        _this.schoolYearDropList = _this.select2GroupFormat(data.data);
+                        _this.courseDropList  = data.data;
 
 
                     })
@@ -144,9 +144,9 @@ angular.module('dleduWebApp')
                     pageSize: 100,
 
                 }
-                TeachClassService.getSchoolYearDropList(params).$promise
+                SchoolYearService.getSchoolYearDropList(params).$promise
                     .then(function (data) {
-                        _this.courseDropList = data.data;
+                        _this.schoolYearDropList =  _this.select2GroupFormat(data.data);
 
 
                     })
@@ -172,10 +172,11 @@ angular.module('dleduWebApp')
             },
             //初始化
             init: function () {
-                var that = this;
-                that.params.id = $state.params.id;
-                that.getTeachClassById();
-                that.getCourseDropListOrg();
+                var _this = this;
+                _this.params.id = $state.params.id;
+                _this.getTeachClassById();
+                _this.getCourseDropListOrg();
+                _this.getSchoolYearDropList();
             }
         };
         $timeout(function () {

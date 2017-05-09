@@ -78,8 +78,8 @@ angular.module('dleduWebApp')
     .config(function (ngJcropConfigProvider) {
 
         ngJcropConfigProvider.setPreviewStyle('upload', {
-            'width': '120px',
-            'height': '120px',
+            // 'width': '120px',
+            // 'height': '120px',
             'overflow': 'hidden',
             'margin-left': '80px'
         });
@@ -87,7 +87,7 @@ angular.module('dleduWebApp')
         ngJcropConfigProvider.setJcropConfig('upload', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 1
+            aspectRatio: 16/9
             // maxWidth: 250,
             // maxHeight: 250
         });
