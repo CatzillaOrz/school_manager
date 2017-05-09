@@ -49,6 +49,15 @@
     line-height: 1;
   }
 
+  .btn-group{
+    input[type='radio']{
+      position: absolute;
+      //clip: rect(0px 0px 0px 0px);
+      pointer-events: none;
+    }
+  }
+
+
   /* Allows .modal-backdrop to remain on the page without blocking */
   .modal-backdrop {
     overflow: hidden;

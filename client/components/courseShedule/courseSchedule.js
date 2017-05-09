@@ -280,7 +280,8 @@ angular.module('courseSchedule', [])
                 scope: {
                     period: '=',
                     eventSources: '=ngModel',
-                    calendarWatchEvent: '&'
+                    calendarWatchEvent: '&',
+                    destroyStatus:'='
                 },
                 controller: 'csCalendarCtrl',
                 link: function (scope, elm, attrs, controller) {
@@ -614,10 +615,21 @@ angular.module('courseSchedule', [])
                     };
 
                     /**
-                     * 清除事件冒泡
+                     * 清除课程表视图事件冒泡
                      */
-                    scope.$on('$destroy', function () {
-                        scope.destroyCalendar();
+                    scope.$watch('destroyStatus', function () {
+                        console.log(scope.destroyStatus);
+                        console.log('================');
+                        // scope.destroyCalendar();
+                        // scope.initCalendar();
+
+                        if (calendar && calendar.fullCalendar) {
+                            calendar.fullCalendar('refetchEvents');
+                            sourcesChanged = true;
+                        }
+                        scope.initCalendar();
+                        scope.destroyStatus = 2;
+                        console.log(scope.destroyStatus);
                     });
 
                     /**
