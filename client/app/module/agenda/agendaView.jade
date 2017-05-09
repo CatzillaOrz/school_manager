@@ -8,7 +8,7 @@
                     h2  添加排课信息
                 div
                     .widget-body
-                        form
+                        form(name="creatCourseCard")
                             fieldset
                                 .form-group
                                     label 选择教学班
@@ -16,54 +16,53 @@
                                 .form-group.row
                                     label.col-sm-12 选择学周范围
                                     div.col-sm-6
-                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListA track by item.id" ng-change='schedule.weekChangeB(schedule.courseCardForm.startWeek)' ng-model="schedule.courseCardForm.startWeek")
-                                            option(value="") --选择起始周--
+                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListA track by item.id" data-ng-change='schedule.weekChangeB(schedule.courseCardForm.startWeek)' ng-model="schedule.courseCardForm.startWeek")
                                     div.col-sm-6
-                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListB track by item.id" ng-change='schedule.weekChangeA(schedule.courseCardForm.endWeek)' ng-model="schedule.courseCardForm.endWeek")
-                                            option(value="") --选择结束周--
+                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListB track by item.id" data-ng-change='schedule.weekChangeA(schedule.courseCardForm.endWeek)' ng-model="schedule.courseCardForm.endWeek")
                                 .form-group
                                     label 选择单双周
-                                    .btn-group.btn-group-sm.btn-group-justified(data-toggle='buttons')
-                                        label.btn.btn-default.active
-                                            input(type='radio' name='iconselect1' value='10')
+                                    .btn-group.btn-group-sm.btn-group-justified
+                                        label.btn.btn-default
+                                            input(type='radio' name='singleOrDouble' value='10' ng-model="schedule.courseCardForm.singleOrDouble")
                                             span 每周上课
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect2' value='20')
+                                            input(type='radio' name='singleOrDouble' value='20' ng-model="schedule.courseCardForm.singleOrDouble")
                                             span 单周上课
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect3' value='30')
+                                            input(type='radio' name='singleOrDouble' value='30' ng-model="schedule.courseCardForm.singleOrDouble")
                                             span 双周上课
                                 .form-group
+                                    label {{schedule.courseCardForm.dayOfWeek}}
                                     label 选择上课日程
-                                    .btn-group.btn-group-sm.btn-group-justified(data-toggle='buttons')
-                                        label.btn.btn-default.active
-                                            input(type='radio' name='iconselect1' value='1')
+                                    .btn-group.btn-group-sm.btn-group-justified
+                                        label.btn.btn-default
+                                            input(type='radio' name='dayOfWeek' value='1' ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周一
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect2' value='2')
+                                            input(type='radio' name='dayOfWeek' value='2' ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周二
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect3' value='3')
+                                            input(type='radio' name='dayOfWeek' value='3'  ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周三
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect4' value='4')
+                                            input(type='radio' name='dayOfWeek' value='4'  ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周四
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect5' value='5')
+                                            input(type='radio' name='dayOfWeek' value='5'  ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周五
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect6' value='6')
+                                            input(type='radio' name='dayOfWeek' value='6'  ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周六
                                         label.btn.btn-default
-                                            input(type='radio' name='iconselect7' value='7')
+                                            input(type='radio' name='dayOfWeek' value='7'  ng-model="schedule.courseCardForm.dayOfWeek")
                                             span 周日
                                 .form-group.row
                                     label.col-sm-6 起始课节
                                     label.col-sm-6 持续时长
                                     div.col-sm-6
-                                        select.form-control()
+                                        select.form-control(ng-options="item.no for item in schedule.periodA" data-ng-change='schedule.periodChange(schedule.courseCardForm.period)' ng-model="schedule.courseCardForm.period")
                                     div.col-sm-6
-                                        select.form-control()
+                                        select.form-control(ng-options="item.no for item in schedule.periodB" ng-model="schedule.courseCardForm.periodNu")
 
                                 .form-group
                                     label 填写上课地点
@@ -79,6 +78,7 @@
                                     .col-md-12
                                         button.btn.btn-default(type='button' ng-click='schedule.addCourseCard()') 添加该课程到课程表
 
+
         .col-sm-12.col-md-12.col-lg-9
             .jarviswidget.jarviswidget-color-blueDark
                 header
@@ -90,9 +90,9 @@
                     .widget-body.no-padding
                         .widget-body-toolbar
                             #calendar-buttons
-                                .btn.btn-default 清除所有课程
+                                .btn.btn-default(ng-click='schedule.removeAllCourseCard()') 清除所有课程
                                 .btn.btn-primary 保存排课
 
                         .span8
-                            .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period')
+                            .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')
                             //.calendar(ui-calendar="schedule.uiConfig" data-calendar="myCalendar" data-ng-model="eventSources")
