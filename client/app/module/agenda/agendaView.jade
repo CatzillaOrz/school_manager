@@ -12,13 +12,15 @@
                             fieldset
                                 .form-group
                                     label 选择教学班
-                                    input.form-control(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='teachingClassName')
+                                    input.form-control(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
                                 .form-group.row
                                     label.col-sm-12 选择学周范围
                                     div.col-sm-6
-                                        select.form-control()
+                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListA track by item.id" ng-change='schedule.weekChangeB(schedule.courseCardForm.startWeek)' ng-model="schedule.courseCardForm.startWeek")
+                                            option(value="") --选择起始周--
                                     div.col-sm-6
-                                        select.form-control()
+                                        select.form-control(ng-options="item as item.no for item in schedule.teachWeekListB track by item.id" ng-change='schedule.weekChangeA(schedule.courseCardForm.endWeek)' ng-model="schedule.courseCardForm.endWeek")
+                                            option(value="") --选择结束周--
                                 .form-group
                                     label 选择单双周
                                     .btn-group.btn-group-sm.btn-group-justified(data-toggle='buttons')

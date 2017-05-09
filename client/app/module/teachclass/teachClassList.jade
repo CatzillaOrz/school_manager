@@ -42,6 +42,9 @@
                                 td {{teachClass.courseName}}
                                 td
                                 td
+                                    a.handle(ui-sref="agendaWeek({id:teachClass.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 排课
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})")
                                         i.fa.fa-pencil-square-o
                                         span 详情

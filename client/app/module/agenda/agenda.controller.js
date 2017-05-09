@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('AgendaCtrl', function ($scope, $state, ClassService, AuthService, messageService, $compile, csCalendarConfig) {
+    .controller('AgendaCtrl', function ($scope, $state, AuthService, SchoolYearService, $compile, csCalendarConfig, TeachClassService) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -10,7 +10,7 @@ angular.module('dleduWebApp')
 
         $scope.schedule = {
             //模拟课节api数据
-            period : [
+            /*period: [
                 {
                     "id": 1,
                     "orgId": 214,
@@ -82,7 +82,7 @@ angular.module('dleduWebApp')
                     "no": 8,
                     "createdDate": "2017-04-25 18:09:18",
                     "userId": null
-                }/*,
+                }/!*,
                  {
                  "id": 9,
                  "orgId": 214,
@@ -100,9 +100,9 @@ angular.module('dleduWebApp')
                  "no": 10,
                  "createdDate": "2017-04-25 18:09:18",
                  "userId": null
-                 }*/
-            ],
-            teachingClass:{
+                 }*!/
+            ],*/
+            /*teachingClass: {
                 "teachingClassId": 4,
                 "teachingClassName": "大学英语03教学班",
                 "userId": 0,
@@ -151,7 +151,12 @@ angular.module('dleduWebApp')
                         "dayOfWeek": 6
                     }
                 ]
-            },
+            },*/
+            period:[],
+            teachingClass:[],
+            teachWeekList: [],
+            teachWeekListA: [],
+            teachWeekListB: [],
             courseCardForm: {
                 classroom: "",
                 endWeekId: null,
@@ -168,7 +173,9 @@ angular.module('dleduWebApp')
             //课程表数据
             eventSources: [],
             //课程卡数据
-            timePeriod:[],
+            timePeriod: [],
+
+
             //排课日程参数设置
             scheduleConfig: {
                 eventClick: function (courseCard, jsEvent, view) {
@@ -212,6 +219,8 @@ angular.module('dleduWebApp')
 
                 }
             },
+
+
             /**
              * 改变排课日程视图，默认按课表渲染
              * @param view
@@ -221,6 +230,8 @@ angular.module('dleduWebApp')
                 //todo 按月份显示排课
                 csCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
             },
+
+
             /**
              * 重新渲染课程表视图
              * @param calendar  cs-calendar 的 attr: data-calendar="calendarName"
@@ -234,6 +245,8 @@ angular.module('dleduWebApp')
             courseMouseout: function (calEvent, jsEvent, view) {
 
             },
+
+
             /**
              * 用表单数据建立新的课程卡
              */
@@ -244,6 +257,44 @@ angular.module('dleduWebApp')
                 obj.end = new Date(y, m, d - w + obj.dayOfWeek, obj.periodMo + obj.periodNum, 0);
                 this.timePeriod.push(obj);
             },
+
+
+            /**
+             * 过滤起始学周选择范围
+             * @param item
+             */
+            weekChangeA: function (item) {
+                console.log(item);
+                var _this = this;
+                var number = null;
+                !!item && angular.forEach(_this.teachWeekList, function (souce, index) {
+                    if (souce.no == item.no) {
+                        number = index;
+                    }
+                });
+                _this.teachWeekListA = angular.copy(_this.teachWeekList);
+                !!item && (_this.teachWeekListA = _this.teachWeekListB.slice(0, number+1));
+            },
+
+
+            /**
+             * 过滤结束学周选择范围
+             * @param item
+             */
+            weekChangeB: function (item) {
+                var _this = this;
+                var number = null;
+                !!item && angular.forEach(_this.teachWeekList, function (souce, index) {
+                    if (souce.no == item.no) {
+                        number = index;
+                        console.log(number);
+                    }
+                });
+                _this.teachWeekListB = angular.copy(_this.teachWeekList);
+                !!item && (_this.teachWeekListB = _this.teachWeekListB.slice(number));
+            },
+
+
             /**
              * 重构课程卡数据
              * @param source
@@ -255,8 +306,76 @@ angular.module('dleduWebApp')
                     obj.end = new Date(y, m, d - w + obj.dayOfWeek, obj.periodMo + obj.periodNum, 0);
                 });
             },
+
+            /**
+             * 获取学周数据
+             */
+            getTeachWeek: function () {
+                var _this = this;
+                var params = {
+                    semesterId: _this.teachingClass.semesterId
+                };
+                SchoolYearService.getTeachWeekList(params).$promise
+                    .then(function (data) {
+                        _this.teachWeekList = data.data;
+                        _this.teachWeekListA = angular.copy(_this.teachWeekList);
+                        _this.teachWeekListB = angular.copy(_this.teachWeekList);
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            /**
+             * 获取课节数据
+             */
+            getPeriod: function () {
+                var _this = this;
+                var params = {
+                    orgId: $scope.user.orgId
+                };
+                SchoolYearService.getPeriodList(params).$promise
+                    .then(function (data) {
+                        _this.period = data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            /**
+             * 获取教学班信息
+             * @param id
+             */
+            getTeachClassInfo: function (id) {
+                var _this = this;
+                var params = {
+                    id: id
+                };
+                TeachClassService.getTeachClassById(params).$promise
+                    .then(function (data) {
+                        _this.teachingClass.teachingClassId = data.id;
+                        _this.teachingClass.teachingClassName = data.name;
+                        _this.teachingClass.semesterId = data.semesterId;
+                        _this.teachingClass.semesterName = data.semesterName;
+                        _this.teachingClass.courseName = data.courseName;
+
+                        _this.getTeachWeek();
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+
             init: function () {
-                this.timePeriod = angular.copy(this.teachingClass.timePeriod);
+                $scope.user = AuthService.getUser();
+                console.log($scope.user);
+                if (!!$state.params.id) {
+                    this.getTeachClassInfo($state.params.id);
+                }
+                this.getPeriod();
+                this.timePeriod = angular.copy(this.teachingClass.timePeriod) || [];
                 this.render(this.timePeriod);
                 this.eventSources = [this.timePeriod];
             }
