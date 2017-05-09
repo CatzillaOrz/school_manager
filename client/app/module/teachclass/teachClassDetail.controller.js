@@ -69,8 +69,8 @@ angular.module('dleduWebApp')
             getTeachClassTeacherList: function () {
                 var _this = this;
                 var params = {
-                    teachingClassId: _this.params.id
-                };
+                        teachingClassId: _this.params.id
+                    };
                 TeachClassService.getTeachClassTeacherList(params).$promise
                     .then(function (data) {
                         _this.teachClassTeacherList = data.data;
@@ -203,8 +203,8 @@ angular.module('dleduWebApp')
             },
             deleteClassesPrompt: function (entity) {
                 var _this=this;
-                _this.currentClasses = entity;
-                messageService.getMsg("您确定要删除此行政班吗？", _this.deleteTeachClassClasses)
+                    _this.currentClasses = entity;
+                    messageService.getMsg("您确定要删除此行政班吗？", _this.deleteTeachClassClasses)
 
             },
 

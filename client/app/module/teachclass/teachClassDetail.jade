@@ -29,7 +29,7 @@
             .widget-body
                 fieldset
                     span.title-class-detail 代课教师
-                    button.btn.btn-primary.btn-class-detail(ui-sref="classTeacher({id:classDetailFn.classes.id})")
+                    button.btn.btn-primary.btn-class-detail(ui-sref="teachClassTeacherUpdate({id:teachClassDetailFn.params.id})")
                         i.fa.fa-plus
                         span 添加代课教师
                 table#dt_basic.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
@@ -40,7 +40,7 @@
                                 |  姓名
                             th
                                 |  工号
-                            th
+                            th 性别
                             th
                                 | 邮箱
                             th
@@ -63,21 +63,21 @@
                 .dt-toolbar-footer
                     .col-sm-6.col-xs-12.hidden-xs
                         #datatable_fixed_column_info.dataTables_info(role='status', aria-live='polite')
-                            |共 {{classDetailFn.classTeacherList.length}} 条数据
-            .widget-body
+                            |共 {{teachClassDetailFn.teachClassTeacherList.length}} 条数据
+            .widget-body(ng-if="teachClassDetailFn.teachClass.classOrStudents==20")
                 fieldset
                     span 本班学生
-                    button.btn.btn-primary.btn-class-detail(ui-sref="importStudent({id:classDetailFn.classes.id})")
+                    button.btn.btn-primary.btn-class-detail(ui-sref="teachClassStudentUpdate({id:teachClassDetailFn.params.id})")
                         i.fa.fa-sign-out
                         span 添加
-                    button.btn.btn-primary.btn-class-detail(ng-click="classDetailFn.transferOut()")
+                    button.btn.btn-primary.btn-class-detail(ng-click="teachClassDetailFn.deleteStudentPrompt()")
                         i.fa.fa-sign-out
                         span 批量删除学生
                 table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
                     thead
                         tr(role='row')
                             th.text-left
-                                input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll")
+                                input(type="checkbox" ng-click="teachClassDetailFn.all(teachClassDetailFn.selectAll)" ng-model="teachClassDetailFn.selectAll")
                                 | 全选
                             th
                                 i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
@@ -95,7 +95,7 @@
                     tbody
                         tr.odd(role='row' ng-repeat="student in teachClassDetailFn.teachClassStudentList")
                             td
-                                input(type="checkbox" ng-checked="classDetailFn.selectAll" ng-model="student.state")
+                                input(type="checkbox" ng-checked="teachClassDetailFn.selectAll" ng-model="student.state")
                             td {{student.name}}
                             td {{student.jobNumber}}
                             td {{student.sex}}
@@ -110,12 +110,38 @@
                             |共 {{teachClassDetailFn.teachClassStudentList.length}} 条数据
 
 
-            form.form-horizontal()
-                .form-actions
-                    .row
-                        .col-md-12
-                            a.btn.btn-primary(ng-click="classDetailFn.updateStudentToClasses()" ) 提交
-                            .speace-10
-                            a.btn.btn-default(ng-click="classDetailFn.isTransfer=false") 取消
+            .widget-body(ng-if="teachClassDetailFn.teachClass.classOrStudents==10")
+                fieldset
+                    span 关联的行政班
+                    button.btn.btn-primary.btn-class-detail(ui-sref="teachClassClassesUpdate({id:teachClassDetailFn.params.id})")
+                        i.fa.fa-sign-out
+                        span 添加
+                    //button.btn.btn-primary.btn-class-detail(ng-click="teachClassDetailFn.deleteStudentPrompt()")
+                    //    i.fa.fa-sign-out
+                    //    span 批量删除班级
+                table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
+                    thead
+                        tr(role='row')
+                            //th.text-left
+                                input(type="checkbox" ng-click="teachClassDetailFn.all(teachClassDetailFn.selectAll)" ng-model="teachClassDetailFn.selectAll")
+                                | 全选
+                            th
+                                i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
+                                |  班级名称
 
+                            th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='dt_basic', rowspan='1', colspan='1', aria-label=' Date: activate to sort column ascending', style='width: 81px;')
+                                |  操作
+                    tbody
+                        tr.odd(role='row' ng-repeat="classes in teachClassDetailFn.teachClassClassesList")
+                            //td
+                            //    input(type="checkbox" ng-checked="teachClassDetailFn.selectAll" ng-model="classes.state")
+                            td {{classes.name}}
+
+                            td.handle(ng-click="teachClassDetailFn.deleteClassesPrompt(classes)")
+                                i.fa.fa-sign-out
+                                span 删除
+                .dt-toolbar-footer
+                    .col-sm-6.col-xs-12.hidden-xs
+                        .dataTables_info(role='status', aria-live='polite')
+                            |共 {{teachClassDetailFn.teachClassClassesList.length}} 条数据
 
