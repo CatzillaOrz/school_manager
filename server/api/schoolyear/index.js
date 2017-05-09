@@ -22,6 +22,7 @@ router.get('/getPeriodList',auth.isSignedIn, controller.getPeriodList);
 router.put('/updatePeriod',auth.isSignedIn, controller.updatePeriod);
 router.delete('/deletePeriod',auth.isSignedIn, controller.deletePeriod);
 router.get('/getPeriodById',auth.isSignedIn, controller.getPeriodById);
+router.get('/getTeachWeekList',auth.isSignedIn, controller.getTeachWeekList);
 
 
 
