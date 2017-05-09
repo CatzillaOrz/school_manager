@@ -174,7 +174,7 @@ angular.module('dleduWebApp')
                             return value.id;
                         }
                     });
-                    if(objList){
+                    if(objList.length!=0){
                         messageService.getMsg("您确定要删除选中的所有学生吗？", _this.deleteTeachClassAllStudent);
                     }else {
                         messageService.openMsg("请选择需要删除的学生");

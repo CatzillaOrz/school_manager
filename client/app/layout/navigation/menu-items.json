@@ -15,7 +15,13 @@
                 {
                     "title": "设置学校LOGO",
                     "sref": "setlogo",
-                    "active": "school",
+                    "active": "setlogo",
+                    "icon": "home"
+                },
+                {
+                    "title": "设置轮播图与简介",
+                    "sref": "setplayview",
+                    "active": "setplayview",
                     "icon": "home"
                 }
             ]

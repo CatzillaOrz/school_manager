@@ -16,7 +16,7 @@ angular.module('dleduWebApp')
             //字典
             coursePeriod:[
                 {
-                    id:0,
+                    id:1,
                     text:"第一节"
                 },
                 {

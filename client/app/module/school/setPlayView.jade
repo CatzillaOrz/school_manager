@@ -1,0 +1,32 @@
+.logo-container
+    .container(ng-if="!bannerFn.isSetBanner")
+        div 设置轮播图：
+            small 最多设置6张轮播图
+        .row
+            .col-sm-4.margin-top-10.margin-bottom-10(ng-repeat="ban in bannerFn.bannerList")
+                .logo-image-view
+                    .col-sm-10(ng-click='bannerFn.setToggle($index)' )
+                        img.logo(ng-src="{{ban.banner}}")
+                    .col-sm-2
+                        //i.float-right.fa.fa-times
+                        .banner-order {{$index+1}}
+            .col-sm-12.margin-top-10.text-center
+                button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
+        div 设置学校简介：
+            small 最多600个字
+        .row
+            .col-sm-12.margin-top-10.margin-bottom-10
+                textarea.school-introduce(ng-model="bannerFn.schoolIntroduce" ng-if="bannerFn.isSetIntroduce")
+                .school-introduce(ng-if="!bannerFn.isSetIntroduce") {{bannerFn.schoolIntroduce}}
+            .col-sm-12.margin-top-10.text-center
+                button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ng-if="!bannerFn.isSetIntroduce") 设置
+                button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ng-if="bannerFn.isSetIntroduce") 保存
+    .container(ng-if="bannerFn.isSetBanner")
+        .logo-setting
+            .btn-upload
+                input(type="file"  ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+            .splie-line
+            button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
+            .speace-10
+            button.button.btn-defulat.button-rounded(type='submit' ng-click='bannerFn.setToggle()') 取消
+
