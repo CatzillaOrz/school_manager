@@ -157,6 +157,33 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getCourseSchedule: function (req, res) {
+        TeachClassService.getCourseScheduleSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    saveCourseSchedule: function (req, res) {
+        TeachClassService.saveCourseScheduleSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delCourseSchedule: function (req, res) {
+        TeachClassService.delCourseScheduleSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    }
 };
 
 

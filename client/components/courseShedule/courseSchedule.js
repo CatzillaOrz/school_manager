@@ -47,7 +47,7 @@ angular.module('courseSchedule', [])
              * @return {string}
              */
             this.eventFingerprint = function (e) {
-                if (!e._id) {
+                if (e && !e._id) {
                     e._id = eventSerialId++;
                 }
                 var extraSignature = extraEventSignature({
@@ -281,7 +281,7 @@ angular.module('courseSchedule', [])
                     period: '=',
                     eventSources: '=ngModel',
                     calendarWatchEvent: '&',
-                    destroyStatus:'='
+                    destroyStatus: '='
                 },
                 controller: 'csCalendarCtrl',
                 link: function (scope, elm, attrs, controller) {
@@ -444,6 +444,17 @@ angular.module('courseSchedule', [])
                             var timeText;
                             var fullTimeText;
                             var startTimeText; //
+                            var coursePopover = {
+                                content: 'Hello, World!',
+                                template: '' +
+                                '<div>'+this.content+'</div>' +
+                                '   <div class="form-group">' +
+                                '       <label>Popup Title:</label>' +
+                                '   <input type="text" ng-model="coursePopover.title" class="form-control">' +
+                                '</div>' +
+                                '',
+                                title: 'Title'
+                            };
 
                             classes.unshift('fc-time-grid-event', 'fc-v-event');
 
@@ -529,7 +540,7 @@ angular.module('courseSchedule', [])
                         var period = scope.period.length || 0;
                         //默认配置
                         var defaultSettings = {
-                            height: 580,
+                            height: 555,
                             editable: true,
                             header: {
                                 left: '',
@@ -613,24 +624,6 @@ angular.module('courseSchedule', [])
                             csCalendarConfig.calendars[attrs.calendar] = calendar;
                         }
                     };
-
-                    /**
-                     * 清除课程表视图事件冒泡
-                     */
-                    scope.$watch('destroyStatus', function () {
-                        console.log(scope.destroyStatus);
-                        console.log('================');
-                        // scope.destroyCalendar();
-                        // scope.initCalendar();
-
-                        if (calendar && calendar.fullCalendar) {
-                            calendar.fullCalendar('refetchEvents');
-                            sourcesChanged = true;
-                        }
-                        scope.initCalendar();
-                        scope.destroyStatus = 2;
-                        console.log(scope.destroyStatus);
-                    });
 
                     /**
                      * 增加某教学班课程表事件

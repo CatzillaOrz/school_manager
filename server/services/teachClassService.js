@@ -281,6 +281,51 @@ var TeachClassService = {
             callback(e);
         });
     },
+    getCourseSchedule: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway',
+            path: '/v1/schooltimetable/get/' + params.teachingClassId,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    saveCourseSchedule: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway',
+            path: '/v1/schooltimetable/add',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    delCourseSchedule: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway',
+            path: '/v1/schooltimetable/delete',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    }
 };
 
 
