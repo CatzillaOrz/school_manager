@@ -72,11 +72,13 @@ angular.module('dleduWebApp')
             },
             setIntroduceToggle: function (entity) {
                 var _this=this;
+                console.log(_this.schoolIntroduce);
+                alert(_this.schoolIntroduce);
                 _this.isSetIntroduce = !_this.isSetIntroduce;
             },
             removeBanner:function (index) {
                 var _this=this;
-                _this.bannerList=_this.bannerList.splice(0,0,index);
+                _this.bannerList.splice(index,1);
 
             }
         }

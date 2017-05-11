@@ -23,6 +23,24 @@
                     "sref": "setplayview",
                     "active": "setplayview",
                     "icon": "home"
+                },
+                {
+                    "title": "设置热门专业",
+                    "sref": "sethotmajor",
+                    "active": "sethotmajor",
+                    "icon": "home"
+                },
+                {
+                    "title": "设置优秀老师",
+                    "sref": "setexcellentteacher",
+                    "active": "setexcellentteacher",
+                    "icon": "home"
+                },
+                {
+                    "title": "设置精品课程",
+                    "sref": "setboutiquecourse",
+                    "active": "setboutiquecourse",
+                    "icon": "home"
                 }
             ]
         },

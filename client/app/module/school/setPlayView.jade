@@ -8,7 +8,7 @@
                     .col-sm-10(ng-click='bannerFn.setToggle($index)' )
                         img.logo(ng-src="{{ban.banner}}")
                     .col-sm-2
-                        //i.float-right.fa.fa-times
+                        i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
                         .banner-order {{$index+1}}
             .col-sm-12.margin-top-10.text-center
                 button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
