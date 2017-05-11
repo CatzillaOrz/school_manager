@@ -35,4 +35,46 @@ angular.module('dleduWebApp')
                     label: '设置轮播图与学校简介'
                 }
             })
+            .state('sethotmajor', {
+                parent: 'school',
+                url   : '/sethotmajor',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SetHotMajorCtrl',
+                        templateUrl: 'app/module/school/setHotMajor.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '设置热门专业'
+                }
+            })
+            .state('setexcellentteacher', {
+                parent: 'school',
+                url   : '/setexcellentteacher',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SetExcellentTeacherCtrl',
+                        templateUrl: 'app/module/school/setExcellentTeacher.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '设置优秀教师'
+                }
+            })
+            .state('setboutiquecourse', {
+                parent: 'school',
+                url   : '/setboutiquecourse',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SetBoutiqueCourseCtrl',
+                        templateUrl: 'app/module/school/setBoutiqueCourse.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '设置精品课程'
+                }
+            })
     });
