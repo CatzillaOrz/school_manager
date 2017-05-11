@@ -44,9 +44,8 @@ angular.module('dleduWebApp')
 
             //排课日程参数设置
             scheduleConfig: {
+
                 eventClick: function (courseCard, jsEvent, view) {
-                    //todo 点击课程卡事件
-                    console.log(courseCard);
                     var _this = $scope.schedule;
                     _this.courseCard = courseCard;
                     angular.forEach(_this.teachWeekListA,function(item,index){
@@ -64,8 +63,8 @@ angular.module('dleduWebApp')
                         scope: $scope
                     });
                 },
-                eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
 
+                eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
                     //拖动课程卡时，周的换算与课节的调整换算
                     var arr = $scope.schedule.timePeriod;
                     var period = $scope.schedule.period;
@@ -97,6 +96,7 @@ angular.module('dleduWebApp')
                         }
                     });
                 },
+
                 eventResize: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
                     var arr = $scope.schedule.timePeriod;
                     //更改课程卡的课节数
@@ -105,11 +105,12 @@ angular.module('dleduWebApp')
                     angular.forEach(arr, function (item, index) {
                         if (item._id == courseCard._id) {
                             item.periodNum = courseCard.periodNum;
+                            console.log('更改为：连上' + courseCard.periodNum + '节');
+                            console.log('同步为：连上' + arr[index].periodNum + '节');
                         }
                     });
-                    console.log('更改为：连上' + courseCard.periodNum + '节');
-                    console.log('同步为：连上' + arr[0].periodNum + '节');
                 },
+
                 eventRender: function (event, element, view) {
                     //todo 课程卡提示
                     /*element.attr({
@@ -167,7 +168,7 @@ angular.module('dleduWebApp')
              * @param item
              */
             weekChange: function (item) {
-                console.log(item);
+                // console.log(item);
                 var _this = this;
                 var number = null;
                 _this.teachWeekListB = angular.copy(_this.teachWeekList);
@@ -330,8 +331,7 @@ angular.module('dleduWebApp')
                         item.end = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
                     }
                 });
-                console.log(_this.timePeriod);
-                _this.timePeriod = _this.timePeriod;
+                // console.log(_this.timePeriod);
             },
             /**
              * 保存排课数据到api
