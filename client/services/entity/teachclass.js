@@ -77,6 +77,18 @@ angular.module('dleduWebService')
                 var list = $resource('api/teachclass/getTeachClassClassesList');
                 return list.get(params);
             },
+            getCourseSchedule: function (params) {
+                var courseSchedule = $resource('api/teachclass/getCourseSchedule');
+                return courseSchedule.get(params);
+            },
+            saveCourseSchedule: function (params) {
+                var courseSchedule = $resource('api/teachclass/saveCourseSchedule');
+                return courseSchedule.save(params);
+            },
+            delCourseSchedule: function (params) {
+                var courseSchedule = $resource('api/teachclass/delCourseSchedule');
+                return courseSchedule.remove(params);
+            }
 		}
 
 	});

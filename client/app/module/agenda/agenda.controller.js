@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('AgendaCtrl', function ($scope, $state, AuthService, SchoolYearService, $compile, csCalendarConfig, TeachClassService) {
+    .controller('AgendaCtrl', function ($scope, $state, AuthService, SchoolYearService,ngDialog, $compile, messageService, csCalendarConfig, TeachClassService) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -10,158 +10,217 @@ angular.module('dleduWebApp')
 
         $scope.schedule = {
             //模拟课节api数据
-            /*period: [
-             {
-             "id": 1,
-             "orgId": 214,
-             "startTime": "07:00",
-             "endTime": "08:00",
-             "no": 1,
-             "createdDate": "2017-04-25 16:15:53",
-             "userId": null
-             },
-             {
-             "id": 2,
-             "orgId": 214,
-             "startTime": "09:00",
-             "endTime": "10:00",
-             "no": 2,
-             "createdDate": "2017-04-25 16:10:45",
-             "userId": null
-             },
-             {
-             "id": 3,
-             "orgId": 214,
-             "startTime": "12:00",
-             "endTime": "13:00",
-             "no": 3,
-             "createdDate": "2017-04-25 16:14:48",
-             "userId": null
-             },
-             {
-             "id": 4,
-             "orgId": 214,
-             "startTime": "14:00",
-             "endTime": "15:00",
-             "no": 4,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             },
-             {
-             "id": 5,
-             "orgId": 214,
-             "startTime": "16:00",
-             "endTime": "17:00",
-             "no": 5,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             },
-             {
-             "id": 6,
-             "orgId": 214,
-             "startTime": "18:00",
-             "endTime": "19:00",
-             "no": 6,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             },
-             {
-             "id": 7,
-             "orgId": 214,
-             "startTime": "20:00",
-             "endTime": "21:00",
-             "no": 7,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             },
-             {
-             "id": 8,
-             "orgId": 214,
-             "startTime": "22:00",
-             "endTime": "23:00",
-             "no": 8,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             }/!*,
-             {
-             "id": 9,
-             "orgId": 214,
-             "startTime": "21:10",
-             "endTime": "21:40",
-             "no": 9,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             },
-             {
-             "id": 10,
-             "orgId": 214,
-             "startTime": "22:00",
-             "endTime": "22:40",
-             "no": 10,
-             "createdDate": "2017-04-25 18:09:18",
-             "userId": null
-             }*!/
-             ],*/
-            /*teachingClass: {
-             "teachingClassId": 4,
-             "teachingClassName": "大学英语03教学班",
-             "userId": 0,
-             //模拟排课api数据
-             "timePeriod": [
-             {
-             "courseCardId": 0,
-             "classroom": "电教楼409教室",
-             "endWeekId": 3,
-             "endWeekNo": 7,
-             "periodId": 0,
-             "periodMo": 0,
-             "periodNum": 2,
-             "remark": "备注信息……",
-             "singleOrDouble": 10,
-             "startWeekId": 1,
-             "startWeekNo": 2,
-             "dayOfWeek": 3
-             },
-             {
-             "courseCardId": 1,
-             "classroom": "英语楼201教室",
-             "endWeekId": 3,
-             "endWeekNo": 7,
-             "periodId": 0,
-             "periodMo": 2,
-             "periodNum": 1,
-             "remark": "备注信息……",
-             "singleOrDouble": 30,
-             "startWeekId": 1,
-             "startWeekNo": 2,
-             "dayOfWeek": 1
-             },
-             {
-             "courseCardId": 2,
-             "classroom": "英语楼204教室",
-             "endWeekId": 3,
-             "endWeekNo": 7,
-             "periodId": 0,
-             "periodMo": 5,
-             "periodNum": 1,
-             "remark": "备注信息……",
-             "singleOrDouble": 20,
-             "startWeekId": 1,
-             "startWeekNo": 2,
-             "dayOfWeek": 6
-             }
-             ]
-             },*/
             period: [
                 {
-                    "startTime": "00:00",
-                    "endTime": "24:00"
-                }
+                    "id": 1,
+                    "orgId": 214,
+                    "startTime": "07:00",
+                    "endTime": "08:00",
+                    "no": 1,
+                    "createdDate": "2017-04-25 16:15:53",
+                    "userId": null
+                },
+                {
+                    "id": 2,
+                    "orgId": 214,
+                    "startTime": "09:00",
+                    "endTime": "10:00",
+                    "no": 2,
+                    "createdDate": "2017-04-25 16:10:45",
+                    "userId": null
+                },
+                {
+                    "id": 3,
+                    "orgId": 214,
+                    "startTime": "12:00",
+                    "endTime": "13:00",
+                    "no": 3,
+                    "createdDate": "2017-04-25 16:14:48",
+                    "userId": null
+                },
+                {
+                    "id": 4,
+                    "orgId": 214,
+                    "startTime": "14:00",
+                    "endTime": "15:00",
+                    "no": 4,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 5,
+                    "orgId": 214,
+                    "startTime": "16:00",
+                    "endTime": "17:00",
+                    "no": 5,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 6,
+                    "orgId": 214,
+                    "startTime": "18:00",
+                    "endTime": "19:00",
+                    "no": 6,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 7,
+                    "orgId": 214,
+                    "startTime": "20:00",
+                    "endTime": "21:00",
+                    "no": 7,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 8,
+                    "orgId": 214,
+                    "startTime": "22:00",
+                    "endTime": "23:00",
+                    "no": 8,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                }/*,
+                 {
+                 "id": 9,
+                 "orgId": 214,
+                 "startTime": "21:10",
+                 "endTime": "21:40",
+                 "no": 9,
+                 "createdDate": "2017-04-25 18:09:18",
+                 "userId": null
+                 },
+                 {
+                 "id": 10,
+                 "orgId": 214,
+                 "startTime": "22:00",
+                 "endTime": "22:40",
+                 "no": 10,
+                 "createdDate": "2017-04-25 18:09:18",
+                 "userId": null
+                 }*/
             ],
+            teachingClass: {
+                "teachingClassId": 8,
+                "teachingClassName": "测试教学班A",
+                "timePeriod": [{
+                    "dayOfWeek": 1,
+                    "periodId": null,
+                    "periodMo": 0,
+                    "periodNum": 1,
+                    "startWeekId": null,
+                    "endWeekId": null,
+                    "startWeekNo": 1,
+                    "endWeekNo": 1,
+                    "singleOrDouble": 10,
+                    "classroom": "409",
+                    "remark": "",
+                    "color": null
+                }]
+            },
+            /*period: [
+             {
+             "startTime": "00:00",
+             "endTime": "24:00"
+             }
+             ],*/
             periodA: [],
             periodB: [],
-            teachingClass: [],
-            teachWeekList: [],
+            // teachingClass: [],
+            teachWeekList: [
+                {
+                    "id": 1,
+                    "orgId": 214,
+                    "startTime": "07:00",
+                    "endTime": "08:00",
+                    "no": 1,
+                    "createdDate": "2017-04-25 16:15:53",
+                    "userId": null
+                },
+                {
+                    "id": 2,
+                    "orgId": 214,
+                    "startTime": "09:00",
+                    "endTime": "10:00",
+                    "no": 2,
+                    "createdDate": "2017-04-25 16:10:45",
+                    "userId": null
+                },
+                {
+                    "id": 3,
+                    "orgId": 214,
+                    "startTime": "12:00",
+                    "endTime": "13:00",
+                    "no": 3,
+                    "createdDate": "2017-04-25 16:14:48",
+                    "userId": null
+                },
+                {
+                    "id": 4,
+                    "orgId": 214,
+                    "startTime": "14:00",
+                    "endTime": "15:00",
+                    "no": 4,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 5,
+                    "orgId": 214,
+                    "startTime": "16:00",
+                    "endTime": "17:00",
+                    "no": 5,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 6,
+                    "orgId": 214,
+                    "startTime": "18:00",
+                    "endTime": "19:00",
+                    "no": 6,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 7,
+                    "orgId": 214,
+                    "startTime": "20:00",
+                    "endTime": "21:00",
+                    "no": 7,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                },
+                {
+                    "id": 8,
+                    "orgId": 214,
+                    "startTime": "22:00",
+                    "endTime": "23:00",
+                    "no": 8,
+                    "createdDate": "2017-04-25 18:09:18",
+                    "userId": null
+                }/*,
+                 {
+                 "id": 9,
+                 "orgId": 214,
+                 "startTime": "21:10",
+                 "endTime": "21:40",
+                 "no": 9,
+                 "createdDate": "2017-04-25 18:09:18",
+                 "userId": null
+                 },
+                 {
+                 "id": 10,
+                 "orgId": 214,
+                 "startTime": "22:00",
+                 "endTime": "22:40",
+                 "no": 10,
+                 "createdDate": "2017-04-25 18:09:18",
+                 "userId": null
+                 }*/
+            ],
             teachWeekListA: [],
             teachWeekListB: [],
             courseCardForm: {
@@ -177,21 +236,30 @@ angular.module('dleduWebApp')
                 startWeekNo: null,
                 dayOfWeek: 1
             },
-            destroyStatus:2,
+            destroyStatus: 2,
             //课程表数据
             eventSources: [],
-            //课程卡数据
+            //课程卡数组数据
             timePeriod: [],
-
+            //当前课程卡数据
+            courseCard:{},
 
             //排课日程参数设置
             scheduleConfig: {
                 eventClick: function (courseCard, jsEvent, view) {
                     //todo 点击课程卡事件
                     console.log(courseCard);
+                    $scope.schedule.courseCard = courseCard;
+                    /*ngDialog.open({
+                        template: 'app/module/agenda/editCourseCard.html',
+                        showClose:false,
+                        width:600,
+                        scope: $scope
+                    });*/
                 },
                 eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
                     //拖动课程卡时，周的换算与课节的调整换算
+                    var arr = $scope.schedule.timePeriod;
                     var remainder = delta / 1000 / 60 / 60 % 24;
                     var divisor = delta / 1000 / 60 / 60 / 24;
                     if (remainder > $scope.schedule.period.length) {
@@ -203,22 +271,39 @@ angular.module('dleduWebApp')
                         divisor = divisor - 1;
                     }
                     divisor = parseInt(divisor);
-                    courseCard.periodMo = courseCard.periodMo-1 + remainder;
+                    courseCard.periodMo = courseCard.periodMo + remainder;
                     courseCard.dayOfWeek = courseCard.dayOfWeek + divisor;
+                    // arr[courseCard._id] = courseCard;
+
+                    angular.forEach(arr,function(item,index){
+                        if(item._id == courseCard._id){
+                            item.periodMo = courseCard.periodMo;
+                            item.dayOfWeek = courseCard.dayOfWeek;
+                        }
+                    });
                     console.log('更改为：周' + courseCard.dayOfWeek + '第' + parseInt(courseCard.periodMo) + '节上课');
+                    console.log('同步为：周' + arr[0].dayOfWeek + '第' + parseInt(arr[0].periodMo) + '节上课');
                 },
                 eventResize: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
+                    var arr = $scope.schedule.timePeriod;
                     //更改课程卡的课节数
                     courseCard.periodNum = courseCard.periodNum + delta / 1000 / 60 / 60;
+
+                    angular.forEach(arr,function(item,index){
+                        if(item._id == courseCard._id){
+                            item.periodNum = courseCard.periodNum;
+                        }
+                    });
                     console.log('更改为：连上' + courseCard.periodNum + '节');
+                    console.log('同步为：连上' + arr[0].periodNum + '节');
                 },
                 eventRender: function (event, element, view) {
                     //todo 课程卡提示
-                    element.attr({
-                        'tooltip': event.title,
+                    /*element.attr({
+                        'tooltip': '点击课程卡可编辑',
                         'tooltip-append-to-body': true
                     });
-                    $compile(element)($scope);
+                    $compile(element)($scope);*/
                 },
                 eventMouseover: function (calEvent, jsEvent, view) {
 
@@ -259,15 +344,9 @@ angular.module('dleduWebApp')
              * 用表单数据建立新的课程卡
              */
             addCourseCard: function () {
-                var obj = angular.copy(this.courseCardForm);
-                !obj.periodMo && (obj.periodMo = 1);
-                !obj.periodNum && (obj.periodNum =1);
-
-                obj.title = '第' + parseInt(obj.startWeekNo) + '-' + parseInt(obj.endWeekNo) + '学周';
-                obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo-1), 0);
-                obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo-1) + parseInt(obj.periodNum), 0);
-
-                this.timePeriod.push(obj);
+                var newObj = angular.copy(this.courseCardForm);
+                newObj.periodNum = newObj.periodNu.no;
+                this.renderSource(newObj);
             },
 
 
@@ -320,31 +399,35 @@ angular.module('dleduWebApp')
                     angular.forEach(_this.period, function (souce, index) {
                         if (souce.no == item.no) {
                             number = index;
-                            console.log(number);
                         }
                     });
-                    _this.periodB = _this.periodB.slice(0,-number);
+                    number != 0 ? _this.periodB = _this.periodB.slice(0, -number) : _this.periodB;
                     _this.courseCardForm.periodId = item.id;
                     _this.courseCardForm.periodMo = item.no;
+                    if (_this.periodB.length && _this.periodB[_this.periodB.length - 1].no < _this.courseCardForm.periodNu.no) {
+                        _this.courseCardForm.periodNu = _this.periodB[0];
+                    }
                 }
             },
 
-            checkDayOfWeek:function(day){
-                this.courseCardForm.dayOfWeek= parseInt(day);
+            checkDayOfWeek: function (day) {
+                this.courseCardForm.dayOfWeek = parseInt(day);
             },
 
             /**
              * 重构课程卡数据
-             * @param source
+             * @param obj
              */
-            render: function (source) {
-                angular.forEach(source, function (obj, index) {
-                    !obj.periodMo && (obj.periodMo = 1);
-                    !obj.periodNum && (obj.periodNum =1);
-                    obj.title = '第' + obj.startWeekNo + '-' + obj.endWeekNo + '学周';
-                    obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo)-1, 0);
-                    obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo)-1 + parseInt(obj.periodNum), 0);
-                });
+            renderSource: function (obj) {
+                var _this = this;
+                !obj.periodMo && (obj.periodMo = 1);
+                !obj.periodNum && (obj.periodNum = 1);
+
+                obj.title = '第' + parseInt(obj.startWeekNo) + '-' + parseInt(obj.endWeekNo) + '学周';
+                obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
+                obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
+                _this.timePeriod.push(obj);
+                // });
             },
 
             /**
@@ -383,6 +466,11 @@ angular.module('dleduWebApp')
                 SchoolYearService.getPeriodList(params).$promise
                     .then(function (data) {
                         _this.period = data.data;
+                        angular.forEach(_this.period, function (per, index) {
+                            if (per.no == 0) {
+                                per.no = 1;
+                            }
+                        });
                         _this.periodA = angular.copy(_this.period);
                         _this.periodB = angular.copy(_this.period);
                         _this.courseCardForm.period = _this.periodA[0];
@@ -407,6 +495,7 @@ angular.module('dleduWebApp')
                 };
                 TeachClassService.getTeachClassById(params).$promise
                     .then(function (data) {
+
                         _this.teachingClass.teachingClassId = data.id;
                         _this.teachingClass.teachingClassName = data.name;
                         _this.teachingClass.semesterId = data.semesterId;
@@ -414,26 +503,108 @@ angular.module('dleduWebApp')
                         _this.teachingClass.courseName = data.courseName;
 
                         _this.getTeachWeek();
+                        _this.getCourseSchedule();
+
                     })
                     .catch(function (error) {
 
                     })
             },
 
-            removeAllCourseCard:function(){
-                this.timePeriod.splice(0,this.timePeriod.length);
+            /**
+             * 清除课程表视图上所有数据
+             */
+            removeAllCourseCard: function () {
+                this.timePeriod.splice(0, this.timePeriod.length);
             },
+
+            /**
+             * 保存排课数据到api
+             */
+            saveCourseSchedule: function () {
+                var _this = this;
+                var params = {
+                    teachingClassId: _this.teachingClass.teachingClassId,
+                    teachingClassName: _this.teachingClass.teachingClassName,
+                    userId: $scope.user.id,
+                    timePeriod: _this.timePeriod
+                };
+                console.log(params);
+                TeachClassService.saveCourseSchedule(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("保存成功")
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            getCourseSchedule: function () {
+                var _this = this;
+                var params = {
+                    teachingClassId: _this.teachingClass.teachingClassId
+                };
+                TeachClassService.getCourseSchedule(params).$promise
+                    .then(function (data) {
+                        _this.teachingClass = data;
+                        angular.forEach(_this.teachingClass.timePeriod, function (obj, index) {
+                            _this.renderSource(obj);
+                        });
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            /**
+             * 页面初始化
+             */
             init: function () {
+                var _this = this;
                 $scope.user = AuthService.getUser();
-                console.log($scope.user);
+                _this.getPeriod();
+
+/*
+
+                //temp
+                angular.forEach(_this.period, function (per, index) {
+                    if (per.no == 0) {
+                        per.no = 1;
+                    }
+                });
+                _this.periodA = angular.copy(_this.period);
+                _this.periodB = angular.copy(_this.period);
+                _this.courseCardForm.period = _this.periodA[0];
+                _this.courseCardForm.periodId = _this.periodA[0].id;
+                _this.courseCardForm.periodMo = _this.periodA[0].no;
+                _this.courseCardForm.periodNu = _this.periodB[0];
+                _this.courseCardForm.periodNum = _this.periodB[0].no;
+
+
+                _this.teachWeekListA = angular.copy(_this.teachWeekList);
+                _this.teachWeekListB = angular.copy(_this.teachWeekList);
+                _this.courseCardForm.startWeek = _this.teachWeekListA[0];
+                _this.courseCardForm.startWeekId = _this.teachWeekListA[0].id;
+                _this.courseCardForm.startWeekNo = _this.teachWeekListA[0].no;
+                _this.courseCardForm.endWeek = _this.teachWeekListB[0];
+                _this.courseCardForm.endWeekId = _this.teachWeekListB[0].id;
+                _this.courseCardForm.endWeekNo = _this.teachWeekListB[0].no;
+                //temp end
+*/
+
+
+
                 if (!!$state.params.id) {
-                    this.getTeachClassInfo($state.params.id);
+
+                    _this.getTeachClassInfo($state.params.id);
                 }
-                this.getPeriod();
-                this.timePeriod = angular.copy(this.teachingClass.timePeriod) || [];
-                this.timePeriod && this.render(this.timePeriod);
-                this.timePeriod && (this.eventSources = [this.timePeriod]);
+
+                angular.forEach(_this.timePeriod, function (obj, index) {
+                    _this.renderSource(obj);
+                });
+                _this.eventSources = [_this.timePeriod];
+
             }
         };
         $scope.schedule.init();
+
     });
