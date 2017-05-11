@@ -1,0 +1,43 @@
+.modal-header
+    button.close(type='button' data-dismiss='modal' aria-hidden='true' ng-click='closeThisDialog()')
+        | ×
+    h4#myModalLabel.modal-title 修改排课
+.modal-body
+    form.smart-form(name="editCourseCard")
+        fieldset
+            section
+                label.label.col-xs-6 起始学周
+                label.label.col-xs-6 结束学周
+                label.select.col-xs-6
+                    select(ng-options="item.no for item in schedule.teachWeekListA track by item.id" data-ng-change='schedule.weekChange(schedule.courseCard)' ng-model="schedule.courseCard.startWeek")
+                    i
+                label.select.col-xs-6
+                    select(ng-options="item.no for item in schedule.teachWeekListB track by item.id" ng-model="schedule.courseCard.endWeek")
+                    i
+                .clearfix
+            section
+                label.label 选择单双周
+                .btn-group.btn-group-sm.btn-group-justified
+                    label.btn.btn-default
+                        input(type='radio' name='singleOrDouble' value='10' ng-model="schedule.courseCard.singleOrDouble")
+                        span 每周上课
+                    label.btn.btn-default
+                        input(type='radio' name='singleOrDouble' value='20' ng-model="schedule.courseCard.singleOrDouble")
+                        span 单周上课
+                    label.btn.btn-default
+                        input(type='radio' name='singleOrDouble' value='30' ng-model="schedule.courseCard.singleOrDouble")
+                        span 双周上课
+            section
+                label.label 填写上课地点
+                textarea.form-control(name='classroom' placeholder='填写上课地点' rows='2' maxlength='40' ng-model='schedule.courseCard.classroom')
+                p.note 不要超过40个字符
+
+            //section
+                label.label 备注
+                textarea.form-control(name='remark' placeholder='填写课程备注信息' rows='2' maxlength='40' ng-model='schedule.courseCardForm.remark')
+                p.note 不要超过40个字符
+.modal-footer
+    button.btn.btn-default(type='button' data-dismiss='modal' ng-click='closeThisDialog()')
+        | 取消
+    button.btn.btn-primary(type='button' ng-click='schedule.editedCourseCard() ; closeThisDialog()')
+        | 确定

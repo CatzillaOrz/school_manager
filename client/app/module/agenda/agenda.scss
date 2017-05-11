@@ -49,6 +49,22 @@
     line-height: 1;
   }
 
+  .btn-group.btn-group-justified{
+    label.btn{
+      input[type='radio']{
+        position: absolute;
+        //clip: rect(0px 0px 0px 0px);
+        pointer-events: none;
+        top:5px;
+        margin-left:-10px;
+      }
+      span{
+        margin-left:8px;
+      }
+    }
+  }
+
+
   /* Allows .modal-backdrop to remain on the page without blocking */
   .modal-backdrop {
     overflow: hidden;
