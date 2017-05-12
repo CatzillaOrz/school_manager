@@ -1,4 +1,4 @@
-.college-list-container
+.college-list-container.logo-container
     .jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(ng-if="!excellentTeacherFn.isSetExcellent")
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
@@ -71,31 +71,55 @@
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{handleFn.title}}
+            h2 {{excellentTeacherFn.title}}
         .widget-body
             form.form-horizontal(name="majorForm")
                 fieldset
-                    legend {{handleFn.prompt}}
-                .short-form
-                    .form-group
-                        label.col-sm-3.control-label
-                            span.required *
-                            | 选择学院：
-                        .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
-                    .form-group
-                        label.col-sm-3.control-label
-                            span.required *
-                            | 选择老师：
-                        .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
-
+                    legend {{excellentTeacherFn.prompt}}
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 选择老师：
+                    .col-sm-7
+                        select.form-control(ng-model="excellentTeacherFn.params.teacherId" ui-select2="excellentTeacherFn.select2TeacherOptions()" )
+                            option(ng-repeat="teacher in excellentTeacherFn.teacherDropList" value="{{teacher.id}}" selected="{{excellentTeacherFn.params.teacherId==teacher.id?'selected':''}}") {{teacher.name}}
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 介绍：
+                    .col-sm-7
+                        textarea.introduce
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 介绍图片：
+                    .col-sm-7
+                        img.introduce-image(ng-src="{{excellentTeacherFn.params.image || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 展示模板：
+                    .col-sm-7
+                        .col-sm-6
+                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateId==1]" ng-click="excellentTeacherFn.params.templateId=1")
+                                .media
+                                    .media-left
+                                        a(href='#')
+                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
+                                    .media-body
+                                        h4.media-heading 知新大学教授jone
+                        .col-sm-6
+                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateId==2]" ng-click="excellentTeacherFn.params.templateId=2")
+                                .media
+                                    .media-body
+                                        h4.media-heading 知新大学教授jone
+                                    .media-right
+                                        a(href='#')
+                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
+                            a.btn.btn-primary(ng-click="excellentTeacherFn.submit()" validation-submit="majorForm") 提交
                             .speace-10
                             a.btn.btn-default(ng-click="excellentTeacherFn.setMajorToggle()") 取消
             // end widget content

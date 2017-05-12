@@ -1,4 +1,4 @@
-.college-list-container
+.college-list-container.logo-container
     .jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(ng-if="!boutiqueCourseFn.isSetBoutique")
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
@@ -69,24 +69,56 @@
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{handleFn.title}}
+            h2 {{boutiqueCourseFn.title}}
         .widget-body
             form.form-horizontal(name="majorForm")
                 fieldset
-                    legend {{handleFn.prompt}}
-                .short-form
-                    .form-group
-                        label.col-sm-3.control-label
-                            span.required *
-                            | 选择课程：
-                        .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                    legend {{boutiqueCourseFn.prompt}}
 
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 选择课程：
+                    .col-sm-7
+                        select.form-control(ng-model="boutiqueCourseFn.params.courseId" ui-select2="boutiqueCourseFn.select2CourseOptions()" )
+                            option(ng-repeat="course in boutiqueCourseFn.courseDropList" value="{{course.id}}" selected="{{boutiqueCourseFn.params.courseId==course.id?'selected':''}}") {{course.name}}
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 介绍：
+                    .col-sm-7
+                        textarea.introduce
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 介绍图片：
+                    .col-sm-7
+                        img.introduce-image(ng-src="{{boutiqueCourseFn.params.image || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="boutiqueCourseFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                .form-group
+                    label.col-sm-3.control-label
+                        span.required *
+                        | 展示模板：
+                    .col-sm-7
+                        .col-sm-6
+                            .view-template(ng-class="{true:'select-active'}[boutiqueCourseFn.params.templateId==1]" ng-click="boutiqueCourseFn.params.templateId=1")
+                                .media
+                                    .media-left
+                                        a(href='#')
+                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
+                                    .media-body
+                                        h4.media-heading Web前端angularjs基础
+                        .col-sm-6
+                            .view-template(ng-class="{true:'select-active'}[boutiqueCourseFn.params.templateId==2]" ng-click="boutiqueCourseFn.params.templateId=2")
+                                .media
+                                    .media-body
+                                        h4.media-heading Web前端angularjs基础
+                                    .media-right
+                                        a(href='#')
+                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
+                            a.btn.btn-primary(ng-click="boutiqueCourseFn.submit()" validation-submit="majorForm") 提交
                             .speace-10
                             a.btn.btn-default(ng-click="boutiqueCourseFn.setBoutiqueToggle()") 取消
             // end widget content
