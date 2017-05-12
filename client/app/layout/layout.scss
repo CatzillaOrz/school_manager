@@ -203,3 +203,7 @@ a:focus {outline: none;}
 .ngdialog.ngdialog-theme-default .ngdialog-content{
   background:#fff;
 }
+.required{
+  color:$red;
+  margin-right: 5px;
+}

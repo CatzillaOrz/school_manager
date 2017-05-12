@@ -1,4 +1,4 @@
-.college-list-container
+.college-list-container.logo-container
     .jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(ng-if="!hotMajorFn.isSetMajor")
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
@@ -69,37 +69,63 @@
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{handleFn.title}}
+            h2 {{hotMajorFn.title}}
         .widget-body
             form.form-horizontal(name="majorForm")
                 fieldset
-                    legend {{handleFn.prompt}}
+                    legend {{hotMajorFn.prompt}}
 
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 选择学院：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                            select.form-control(ng-model="hotMajorFn.collegeId" ui-select2="hotMajorFn.select2CollegeOptions()" )
+                                option(ng-repeat="college in hotMajorFn.collegeDropList" value="{{college.id}}" selected="{{hotMajorFn.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 选择专业：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                            select.form-control(ng-model="hotMajorFn.majorId" ui-select2="hotMajorFn.select2MajorOptions()" )
+                                option(ng-repeat="major in hotMajorFn.majorDropList" value="{{major.id}}" selected="{{hotMajorFn.majorId==major.id?'selected':''}}") {{major.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 介绍：
                         .col-sm-7
-                            textarea.school-introduce
-
+                            textarea.introduce
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 介绍图片：
+                        .col-sm-7
+                            img.introduce-image(ng-src="{{hotMajorFn.params.image || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="hotMajorFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            |展示模板：
+                        .col-sm-7
+                           .col-sm-6
+                               .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateId==1]" ng-click="hotMajorFn.params.templateId=1")
+                                   .media
+                                       .media-left
+                                           a(href='#')
+                                               img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
+                                       .media-body
+                                           h4.media-heading 知新大学Web前端专业
+                           .col-sm-6
+                                .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateId==2]" ng-click="hotMajorFn.params.templateId=2")
+                                    .media
+                                        .media-body
+                                            h4.media-heading 知新大学Web前端专业
+                                        .media-right
+                                            a(href='#')
+                                                img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="majorForm") 提交
+                            a.btn.btn-primary(ng-click="hotMajorFn.submit()" validation-submit="majorForm") 提交
                             .speace-10
                             a.btn.btn-default(ng-click="hotMajorFn.setMajorToggle()") 取消
             // end widget content
