@@ -8,7 +8,7 @@ angular.module('dleduWebApp')
                 parent: 'base'
             })
             .state('setlogo', {
-                parent: 'school',
+                parent: 'base',
                 url   : '/setlogo',
                 access: {requiredLogin: true},
                 views : {
@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('setplayview', {
-                parent: 'school',
+                parent: 'base',
                 url   : '/setplayview',
                 access: {requiredLogin: true},
                 views : {
@@ -36,7 +36,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('sethotmajor', {
-                parent: 'school',
+                parent: 'base',
                 url   : '/sethotmajor',
                 access: {requiredLogin: true},
                 views : {
@@ -50,7 +50,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('setexcellentteacher', {
-                parent: 'school',
+                parent: 'base',
                 url   : '/setexcellentteacher',
                 access: {requiredLogin: true},
                 views : {
@@ -64,7 +64,7 @@ angular.module('dleduWebApp')
                 }
             })
             .state('setboutiquecourse', {
-                parent: 'school',
+                parent: 'base',
                 url   : '/setboutiquecourse',
                 access: {requiredLogin: true},
                 views : {
