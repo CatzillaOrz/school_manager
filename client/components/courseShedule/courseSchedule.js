@@ -281,7 +281,8 @@ angular.module('courseSchedule', [])
                     period: '=',
                     eventSources: '=ngModel',
                     calendarWatchEvent: '&',
-                    destroyStatus: '='
+                    destroyStatus: '=',
+                    delCourse: '&'
                 },
                 controller: 'csCalendarCtrl',
                 link: function (scope, elm, attrs, controller) {
@@ -303,6 +304,40 @@ angular.module('courseSchedule', [])
                     cssToStr = FC.cssToStr;
                     isInt = FC.isInt;
                     divideDurationByDuration = FC.divideDurationByDuration;
+
+                    // View视图原型链扩展
+                    View.mixin({});
+
+                    // Grid原型链扩展
+                    Grid.mixin({
+                        /*
+                        // 为课程卡绑定新的自定义事件
+                        bindSegHandlers: function () {
+                            this.bindSegHandler('touchstart', this.handleSegTouchStart);
+                            this.bindSegHandler('touchend', this.handleSegTouchEnd);
+                            this.bindSegHandler('mouseenter', this.handleSegMouseover);
+                            this.bindSegHandler('mouseleave', this.handleSegMouseout);
+                            this.bindSegHandler('mousedown', this.handleSegMousedown);
+                            this.bindSegHandler('click', this.handleSegClick);
+                            this.bindSegHandlerMenu('click', this.handleSegMenu);
+                        },
+                        bindSegHandlerMenu: function (name, handler) {
+                            var _this = this;
+
+                            this.el.find('fc-menu').on(name, '.fc-event-container > *', function (ev) {
+                                var seg = $(this).data('fc-seg');
+
+                                if (seg && !_this.isDraggingSeg && !_this.isResizingSeg) {
+                                    return handler.call(_this, seg, ev);
+                                }
+                            });
+                        },
+                        handleSegMenu: function (seg, ev) {
+                            return this.view.trigger('eventClick', seg.el[0], seg.event, ev);
+                        }*/
+
+                    });
+
 
                     // TimeGrid原型链扩展
                     TimeGrid.mixin({
@@ -443,18 +478,8 @@ angular.module('courseSchedule', [])
                             //TODO课节时间的显示
                             var timeText;
                             var fullTimeText;
-                            var startTimeText; //
-                            var coursePopover = {
-                                content: 'Hello, World!',
-                                template: '' +
-                                '<div>'+this.content+'</div>' +
-                                '   <div class="form-group">' +
-                                '       <label>Popup Title:</label>' +
-                                '   <input type="text" ng-model="coursePopover.title" class="form-control">' +
-                                '</div>' +
-                                '',
-                                title: 'Title'
-                            };
+                            var startTimeText;
+
 
                             classes.unshift('fc-time-grid-event', 'fc-v-event');
 
@@ -526,11 +551,14 @@ angular.module('courseSchedule', [])
                                         '<div class="fc-resizer fc-end-resizer" />' :
                                         ''
                                 ) +
+                                '<div class="fc-menu">' +
+                                    '<i class="fa fa-trash-o fc-btn-del" ng-click="schedule.delCourseCard()"></i>' +
+                                    '<i class="fa fa-edit fc-btn-edit" ng-click="schedule.toEditCourse()"></i>' +
+                                '</div>' +
                                 '</a>';
                         }
 
                     });
-
 
                     /**
                      * 获取自定义指令属性里的课程表视图参数配置
@@ -715,8 +743,9 @@ angular.module('courseSchedule', [])
                             scope.initCalendar();
                         }
                     });
+
+
                 }
             };
         }]
-    );
-
+    )
