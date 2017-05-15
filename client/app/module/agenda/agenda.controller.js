@@ -151,6 +151,9 @@ angular.module('dleduWebApp')
                 this.renderSource(newObj);
             },
 
+            /**
+             * 从排课列表中删除课程卡
+             */
             delCourseCard:function(){
                 var _this = this;
                 console.log(_this.courseCard._id);
@@ -186,6 +189,11 @@ angular.module('dleduWebApp')
                     item.endWeekNo = item.endWeek.no;
                 }
             },
+
+            /**
+             * 过滤课节选择范围
+             * @param item
+             */
             periodChange: function (item) {
                 var _this = this;
                 var number = null;
@@ -217,6 +225,8 @@ angular.module('dleduWebApp')
                 !obj.periodNum && (obj.periodNum = 1);
 
                 obj.title = '第' + parseInt(obj.startWeekNo) + '-' + parseInt(obj.endWeekNo) + '学周';
+
+                //将课程卡参数换算成当日时间相对应周几的时间戳，起始时间和结束时间都已课节为单位。
                 obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
                 obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
                 _this.timePeriod.push(obj);
@@ -345,6 +355,8 @@ angular.module('dleduWebApp')
                         item.singleOrDouble = _this.courseCard.singleOrDouble;
                         item.remark = _this.courseCard.remark;
                         item.title = '第' + parseInt(item.startWeekNo) + '-' + parseInt(item.endWeekNo) + '学周';
+
+                        //将课程卡参数换算成当日时间相对应周几的时间戳，起始时间和结束时间都已课节为单位。
                         item.start = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
                         item.end = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
                     }
