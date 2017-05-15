@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('AgendaCtrl', function ($scope, $state, AuthService, SchoolYearService, ngDialog, $compile, messageService, csCalendarConfig, TeachClassService) {
+    .controller('AgendaCtrl', function ($scope, $state, $document, AuthService, SchoolYearService, ngDialog, $compile, messageService, csCalendarConfig, TeachClassService) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
         var w = date.getDay();
 
+/*
+        $scope.delCourse=function(){
+            console.log('111111');
+        };*/
         $scope.schedule = {
             period: [
                 {
@@ -46,22 +50,7 @@ angular.module('dleduWebApp')
             scheduleConfig: {
 
                 eventClick: function (courseCard, jsEvent, view) {
-                    var _this = $scope.schedule;
-                    _this.courseCard = courseCard;
-                    angular.forEach(_this.teachWeekListA,function(item,index){
-                        if(item.no == _this.courseCard.startWeekNo){
-                            _this.courseCard.startWeek = _this.teachWeekListA[index];
-                        }
-                    });
-                    _this.teachWeekListB = angular.copy(_this.teachWeekList);
-                    _this.courseCard.endWeekNo != 1 ? _this.teachWeekListB = _this.teachWeekListB.slice(_this.courseCard.endWeekNo -1) : _this.teachWeekListB;
-                    _this.courseCard.endWeek = _this.teachWeekListB[0];
-                    ngDialog.open({
-                        template: 'app/module/agenda/editCourseCard.html',
-                        showClose: false,
-                        width: 600,
-                        scope: $scope
-                    });
+                    // $scope.schedule.toEditCourse(courseCard, jsEvent, view);
                 },
 
                 eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
@@ -112,18 +101,18 @@ angular.module('dleduWebApp')
                 },
 
                 eventRender: function (event, element, view) {
-                    //todo 课程卡提示
                     /*element.attr({
-                     'tooltip': '点击课程卡可编辑',
-                     'tooltip-append-to-body': true
-                     });
-                     $compile(element)($scope);*/
+                        "uib-popover":event.title + ',' + event.classroom + ',' + event.remark,
+                        "popover-trigger":"'mouseenter'",
+                        "popover-placement":"left"
+                    });
+                    $compile(element)($scope);*/
                 },
                 eventMouseover: function (calEvent, jsEvent, view) {
-
+                    $scope.schedule.courseCard = calEvent;
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
-
+                    // $scope.schedule.courseCard = null;
                 }
             },
 
@@ -162,6 +151,20 @@ angular.module('dleduWebApp')
                 this.renderSource(newObj);
             },
 
+            /**
+             * 从排课列表中删除课程卡
+             */
+            delCourseCard:function(){
+                var _this = this;
+                console.log(_this.courseCard._id);
+                console.log(_this.timePeriod);
+                angular.forEach(_this.timePeriod,function(item,index){
+                    if(item._id == _this.courseCard._id){
+                        _this.timePeriod.splice(index,1);
+                    }
+                })
+
+            },
 
             /**
              * 过滤结束学周选择范围
@@ -186,6 +189,11 @@ angular.module('dleduWebApp')
                     item.endWeekNo = item.endWeek.no;
                 }
             },
+
+            /**
+             * 过滤课节选择范围
+             * @param item
+             */
             periodChange: function (item) {
                 var _this = this;
                 var number = null;
@@ -217,6 +225,8 @@ angular.module('dleduWebApp')
                 !obj.periodNum && (obj.periodNum = 1);
 
                 obj.title = '第' + parseInt(obj.startWeekNo) + '-' + parseInt(obj.endWeekNo) + '学周';
+
+                //将课程卡参数换算成当日时间相对应周几的时间戳，起始时间和结束时间都已课节为单位。
                 obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
                 obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
                 _this.timePeriod.push(obj);
@@ -312,9 +322,33 @@ angular.module('dleduWebApp')
             },
 
             /**
+             * 打开课程卡编辑页面，并回填该课程卡数据到表单。
+             * @param courseCard
+             * @param jsEvent
+             * @param view
+             */
+            toEditCourse:function(courseCard, jsEvent, view){
+                var _this = this;
+                angular.forEach(_this.teachWeekListA, function (item, index) {
+                    if (item.no == _this.courseCard.startWeekNo) {
+                        _this.courseCard.startWeek = _this.teachWeekListA[index];
+                    }
+                });
+                _this.teachWeekListB = angular.copy(_this.teachWeekList);
+                _this.courseCard.endWeekNo != 1 ? _this.teachWeekListB = _this.teachWeekListB.slice(_this.courseCard.endWeekNo - 1) : _this.teachWeekListB;
+                _this.courseCard.endWeek = _this.teachWeekListB[0];
+                ngDialog.open({
+                    template: 'app/module/agenda/editCourseCard.html',
+                    showClose: false,
+                    width: 600,
+                    scope: $scope
+                });
+            },
+
+            /**
              * 修改课程卡信息
              */
-            editedCourseCard: function () {
+            updateCourseCard: function () {
                 var _this = this;
                 console.log(_this.courseCard);
                 angular.forEach(_this.timePeriod, function (item, index) {
@@ -327,6 +361,8 @@ angular.module('dleduWebApp')
                         item.singleOrDouble = _this.courseCard.singleOrDouble;
                         item.remark = _this.courseCard.remark;
                         item.title = '第' + parseInt(item.startWeekNo) + '-' + parseInt(item.endWeekNo) + '学周';
+
+                        //将课程卡参数换算成当日时间相对应周几的时间戳，起始时间和结束时间都已课节为单位。
                         item.start = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
                         item.end = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
                     }
