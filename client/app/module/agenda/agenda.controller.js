@@ -321,6 +321,12 @@ angular.module('dleduWebApp')
                 this.timePeriod.splice(0, this.timePeriod.length);
             },
 
+            /**
+             * 打开课程卡编辑页面，并回填该课程卡数据到表单。
+             * @param courseCard
+             * @param jsEvent
+             * @param view
+             */
             toEditCourse:function(courseCard, jsEvent, view){
                 var _this = this;
                 angular.forEach(_this.teachWeekListA, function (item, index) {
