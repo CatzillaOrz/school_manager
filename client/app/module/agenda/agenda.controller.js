@@ -147,7 +147,16 @@ angular.module('dleduWebApp')
              * 用表单数据建立新的课程卡
              */
             addCourseCard: function () {
+                console.log(this.courseCardForm);
                 var newObj = angular.copy(this.courseCardForm);
+                newObj.periodId = newObj.period.id;
+                newObj.periodMo = newObj.period.no;
+                newObj.periodNum = newObj.periodNu.no;
+                newObj.startWeekId = newObj.startWeek.id;
+                newObj.startWeekNo = newObj.startWeek.no;
+                newObj.endWeekId = newObj.endWeek.id;
+                newObj.endWeekNo = newObj.endWeek.no;
+
                 this.renderSource(newObj);
             },
 
@@ -230,6 +239,7 @@ angular.module('dleduWebApp')
                 obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
                 obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
                 _this.timePeriod.push(obj);
+                console.log(obj);
             },
 
             /**
