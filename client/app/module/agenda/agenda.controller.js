@@ -8,10 +8,6 @@ angular.module('dleduWebApp')
         var y = date.getFullYear();
         var w = date.getDay();
 
-/*
-        $scope.delCourse=function(){
-            console.log('111111');
-        };*/
         $scope.schedule = {
             period: [
                 {
@@ -102,10 +98,16 @@ angular.module('dleduWebApp')
 
                 eventRender: function (event, element, view) {
                     /*element.attr({
-                        "uib-popover":event.title + ',' + event.classroom + ',' + event.remark,
-                        "popover-trigger":"'mouseenter'",
-                        "popover-placement":"left"
-                    });*/
+                     "uib-popover":event.title + ',' + event.classroom + ',' + event.remark,
+                     "popover-trigger":"'mouseenter'",
+                     "popover-placement":"left"
+                     });*/
+                    // console.log(event);
+                    element.append(
+                        '<div class="fc-menu">' +
+                        '<i class="fa fa-trash-o fc-btn-del" ng-click="schedule.delCourseCard()"></i>' +
+                        '<i class="fa fa-edit fc-btn-edit" ng-click="schedule.toEditCourse($event)"></i>' +
+                        '</div>');
                     $compile(element)($scope);
                 },
                 eventMouseover: function (calEvent, jsEvent, view) {
@@ -245,10 +247,10 @@ angular.module('dleduWebApp')
             /**
              * 获取学周数据
              */
-            getTeachWeek: function () {
+            getTeachWeek: function (semesterId) {
                 var _this = this;
                 var params = {
-                    semesterId: _this.teachingClass.semesterId
+                    semesterId: semesterId
                 };
                 SchoolYearService.getTeachWeekList(params).$promise
                     .then(function (data) {
@@ -316,8 +318,8 @@ angular.module('dleduWebApp')
                         _this.teachingClass.courseName = data.courseName;
 
 
-                        _this.getTeachWeek();
-                        _this.getCourseSchedule();
+                        _this.getTeachWeek(_this.teachingClass.semesterId);
+                        _this.getCourseSchedule(_this.teachingClass.teachingClassId);
                     })
                     .catch(function (error) {
 
@@ -333,12 +335,12 @@ angular.module('dleduWebApp')
 
             /**
              * 打开课程卡编辑页面，并回填该课程卡数据到表单。
-             * @param courseCard
              * @param jsEvent
-             * @param view
              */
-            toEditCourse:function(courseCard, jsEvent, view){
+            toEditCourse:function(jsEvent){
                 var _this = this;
+                console.log(jsEvent);
+                console.log(_this.courseCard);
                 angular.forEach(_this.teachWeekListA, function (item, index) {
                     if (item.no == _this.courseCard.startWeekNo) {
                         _this.courseCard.startWeek = _this.teachWeekListA[index];
@@ -403,10 +405,10 @@ angular.module('dleduWebApp')
             /**
              * 从api获取该教学班排课数据
              */
-            getCourseSchedule: function () {
+            getCourseSchedule: function (teachingClassId) {
                 var _this = this;
                 var params = {
-                    teachingClassId: _this.teachingClass.teachingClassId
+                    teachingClassId: teachingClassId
                 };
                 TeachClassService.getCourseSchedule(params).$promise
                     .then(function (data) {
@@ -431,6 +433,10 @@ angular.module('dleduWebApp')
 
                 if (!!$state.params.id) {
                     _this.getTeachClassInfo($state.params.id);
+                }
+                //获取批量排课的教学班id,默认初始化第一个
+                if (!!$state.params.ids) {
+                    _this.getTeachClassInfo($state.params.ids[0]);
                 }
 
                 angular.forEach(_this.timePeriod, function (obj, index) {

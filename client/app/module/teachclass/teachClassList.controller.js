@@ -17,9 +17,9 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 			params: {
-				name: "",
+				name: ""
 			},
-
+            agendaWeeks:[10,11],
 			// 获取教学班列表
 			getTeachClassList: function () {
 				var that = this;

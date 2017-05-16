@@ -21,4 +21,18 @@ angular.module('dleduWebApp')
                     label: '排课管理'
                 }
             })
+            .state('agendaWeeks', {
+                parent: 'agenda',
+                url   : '/agenda/view/:ids',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'AgendaCtrl',
+                        templateUrl: 'app/module/agenda/agendaView.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '批量排课'
+                }
+            })
     });
