@@ -12,8 +12,11 @@
                             fieldset
                                 section
                                     label.label 教学班
-                                    label.input
-                                        input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
+                                    label.select.col-xs-12
+                                        //input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
+                                        select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.teachingClass)' ng-model="schedule.teachingClass")
+                                        i
+                                    .clearfix
                             fieldset
                                 section
                                     label.label 选择周几上课
@@ -90,14 +93,17 @@
                 header
                     span.widget-icon
                         i.fa.fa-calendar
-                    h2  {{schedule.teachingClass.teachingClassName}} 排课表
+                    h2  教学班排课表
                     .widget-toolbar
                 div
                     .widget-body.no-padding
                         .widget-body-toolbar
-                            #calendar-buttons
-                                .btn.btn-default(ng-click='schedule.removeAllCourseCard()') 清除所有课程
-                                .btn.btn-primary(ng-click='schedule.saveCourseSchedule()') 保存排课
+                            .row
+                                .col-xs-6.col-sm-6
+                                    .btn.btn-default(ng-click='schedule.removeAllCourseCard()') 全部重排
+                                    .speace-10
+                                    .btn.btn-primary(ng-click='schedule.saveCourseSchedule()') 保存排课
+                                .col-xs-6.col-sm-6.text-right
 
                         .span8
                             .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')

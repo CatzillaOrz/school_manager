@@ -45,7 +45,7 @@
                                 td {{teachClass.courseName}}
                                 td {{teachClass.studentsCount}}
                                 td
-                                    a.handle(ui-sref="agendaWeek({id:teachClass.id})")
+                                    a.handle(ui-sref="agendaWeek({id:teachClass.id,name:teachClass.name})")
                                         i.fa.fa-pencil-square-o
                                         span 排课
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})")

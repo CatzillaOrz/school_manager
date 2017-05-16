@@ -17,7 +17,7 @@ angular.module('dleduWebApp')
             ],
             periodA: [],
             periodB: [],
-            teachingClass: [],
+            teachingClass: {},
             teachWeekList: [],
             teachWeekListA: [],
             teachWeekListB: [],
@@ -47,6 +47,9 @@ angular.module('dleduWebApp')
 
                 eventClick: function (courseCard, jsEvent, view) {
                     // $scope.schedule.toEditCourse(courseCard, jsEvent, view);
+
+                    var _this = $scope.schedule;
+                    console.log(_this.timePeriod);
                 },
 
                 eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
@@ -178,6 +181,13 @@ angular.module('dleduWebApp')
             },
 
             /**
+             * 重新选择教学班后调取教学班学期信息
+             */
+            classChange:function(item){
+                this.getTeachClassInfo(item.id)
+            },
+
+            /**
              * 过滤结束学周选择范围
              * @param item
              */
@@ -241,7 +251,7 @@ angular.module('dleduWebApp')
                 obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
                 obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
                 _this.timePeriod.push(obj);
-                console.log(obj);
+                // console.log(obj);
             },
 
             /**
@@ -432,17 +442,22 @@ angular.module('dleduWebApp')
                 _this.getPeriod();
 
                 if (!!$state.params.id) {
+                    console.log($state.params.id);
+                    _this.teachClasses = [{id:$state.params.id,name:$state.params.name}];
+                    _this.teachingClass = {id:$state.params.id};
                     _this.getTeachClassInfo($state.params.id);
                 }
                 //获取批量排课的教学班id,默认初始化第一个
                 if (!!$state.params.ids) {
-                    _this.getTeachClassInfo($state.params.ids[0]);
+                    _this.teachClasses = angular.fromJson($state.params.ids);
+                    _this.teachingClass = _this.teachClasses[0];
+                    // _this.getTeachClassesInfo(_this.teachClasses[0].id);
                 }
-
                 angular.forEach(_this.timePeriod, function (obj, index) {
                     _this.renderSource(obj);
                 });
 
+                console.log(_this.timePeriod);
                 _this.eventSources = [_this.timePeriod];
             }
         };
