@@ -105,8 +105,8 @@ angular.module('dleduWebApp')
                         "uib-popover":event.title + ',' + event.classroom + ',' + event.remark,
                         "popover-trigger":"'mouseenter'",
                         "popover-placement":"left"
-                    });
-                    $compile(element)($scope);*/
+                    });*/
+                    $compile(element)($scope);
                 },
                 eventMouseover: function (calEvent, jsEvent, view) {
                     $scope.schedule.courseCard = calEvent;
