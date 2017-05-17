@@ -13,7 +13,7 @@ var ClassService = {
 
     getClassList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/list',
             params
         }).then(function (res) {
@@ -29,7 +29,7 @@ var ClassService = {
     },
     addClass: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/add',
             entity: params
         }).then(function (res) {
@@ -44,7 +44,7 @@ var ClassService = {
     },
     deleteClass: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/delete/' + params.id,
             params: {userId: params.userId}
         }).then(function (res) {
@@ -59,7 +59,7 @@ var ClassService = {
     },
     updateClass: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/update',
             entity: params
         }).then(function (res) {
@@ -74,7 +74,7 @@ var ClassService = {
     },
     getClassById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/get/' + params.id,
             access_token: access_token
         }).then(function (res) {
@@ -89,7 +89,7 @@ var ClassService = {
     },
     geClassDropList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/droplist',
             params,
             access_token: access_token
@@ -105,7 +105,7 @@ var ClassService = {
     },
     saveClassTeacher: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classesteacher/add',
             entity: params
         }).then(function (res) {
@@ -120,7 +120,7 @@ var ClassService = {
     },
     getClassTeacherList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classesteacher/list',
             params,
             access_token: access_token
@@ -136,7 +136,7 @@ var ClassService = {
     },
     deleteClassTeacher: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classesteacher/delete',
             entity:{
                 classesId:params.classesId,
@@ -154,7 +154,7 @@ var ClassService = {
     },
     getClassDropListOrg: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/classes/droplistorg',
             params,
             access_token: access_token

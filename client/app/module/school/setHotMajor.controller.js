@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SetHotMajorCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,$timeout,Select2LoadOptionsService) {
+    .controller('SetHotMajorCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,$timeout,SchoolService,CollegeService) {
         $scope.hotMajorFn = {
             isSetMajor:false,
             imgFile: null,
@@ -13,13 +13,30 @@ angular.module('dleduWebApp')
             collegeDropList:[],
             //专业下拉列表
             majorDropList:[],
+            currentMajor:{},
+            //分页
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 10
+            },
+            hotMajorList:[],
             params:{
-                image:"",
-                templateId:1
+                collegeId:"",
+                specialtyId:"",
+                inUrl:"",
+                templateShow:1,
+                introduction:"",
+                orgId: AuthService.getUser().orgId,
+                userId:AuthService.getUser().id,
+            },
+            findParams:{
+                name:""
             },
             //学院下拉列表配置
             select2CollegeOptions:function(){
-                var that=this;
+                var _this=this;
                 return {
                 ajax:{
                     url: "api/college/getCollegeDropList",
@@ -30,7 +47,7 @@ angular.module('dleduWebApp')
                             orgId: AuthService.getUser().orgId,
                             pageNumber: 1,
                             pageSize: 100,
-                            collegeId:that.collegeId,
+                            collegeId:_this.collegeId,
 
                         }
                         params.name=query.term;
@@ -38,7 +55,7 @@ angular.module('dleduWebApp')
                     },
                     processResults: function (data, params) {
                         params.page = params.page || 1;
-                        that.collegeDropList=data.data;
+                        _this.collegeDropList=data.data;
                         return {
                             results: data.data,
                             pagination: {
@@ -59,7 +76,7 @@ angular.module('dleduWebApp')
             }},
             //专业下拉列表配置
             select2MajorOptions:function(){
-                var that=this;
+                var _this=this;
                 return {
                     ajax: {
                         url: "api/major/getMajorDropList",
@@ -70,7 +87,7 @@ angular.module('dleduWebApp')
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
                                 pageSize: 100,
-                                collegeId:that.collegeId,
+                                collegeId:_this.collegeId,
 
                             }
                             params.name=query.term;
@@ -78,7 +95,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            that.majorDropList=data.data;
+                            _this.majorDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -99,34 +116,31 @@ angular.module('dleduWebApp')
             },
             //学院下拉列表查询
             getCollegeDropList:function () {
-                var that=this;
+                var _this=this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
+                    pageNumber: _this.page.pageNumber,
                     pageSize: 100
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {
-                        that.collegeDropList=data.data;
+                        _this.collegeDropList=data.data;
                     })
                     .catch(function (error) {
                     })
             },
             //专业下拉列表查询
             getMajorDropList:function () {
-                var that=this;
+                var _this=this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
+                    pageNumber: _this.page.pageNumber,
                     pageSize: 100
                 }
-                params.collegeId=that.collegeId;
+                params.collegeId=_this.collegeId;
                 MajorService.getMajorDropList(params).$promise
                     .then(function (data) {
-                        that.majorDropList=data.data;
-                        if(!that.isInit&& $state.current.name=="studentEdit"){
-                            that.getMajorById(that.majorId);
-                        }
+                        _this.majorDropList=data.data;
 
                     })
                     .catch(function (error) {
@@ -134,6 +148,9 @@ angular.module('dleduWebApp')
             },
             setMajorToggle:function () {
               var _this=this;
+              if(_this.isSetMajor){
+                  _this.resetParams();
+              }
               _this.isSetMajor=!_this.isSetMajor;
             },
             uploadImage: function () {
@@ -146,7 +163,7 @@ angular.module('dleduWebApp')
                         .then(function (resp) {
                             //resp.data.url
 
-                            _this.params.image=resp.data.url;
+                            _this.params.inUrl=resp.data.url;
 
                             // $event.currentTarget.disabled=true;
 
@@ -170,18 +187,144 @@ angular.module('dleduWebApp')
                 _this.imgFile = $file;
                 _this.uploadImage();
             },
+            addHotMajor:function (params) {
+                var _this=this;
+                SchoolService.addHotMajor(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("添加成功");
+                        _this.getHotMajorList();
+                        _this.isSetMajor=false;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            resetParams:function () {
+                this.params={
+                    collegeId:"",
+                    specialtyId:"",
+                    inUrl:"",
+                    templateShow:1,
+                    introduction:"",
+                    orgId: AuthService.getUser().orgId,
+                    userId:AuthService.getUser().id,
+                };
+                this.collegeId="";
+                this.majorId="";
+            },
+            updateHotMajor:function (params) {
+                var _this=this;
+                SchoolService.updateHotMajor(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("修改成功");
+                        _this.getHotMajorList();
+                        _this.isSetMajor=false;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            getHotMajorList:function () {
+                var _this=this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                params.name=_this.findParams.name;
+                SchoolService.getHotMajorList(params).$promise
+                    .then(function (data) {
+                        _this.page=data.page;
+                        _this.hotMajorList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            //根据名称查询
+            findHotMajorByPage: function () {
+                var _this = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                params.name=_this.findParams.name;
+                SchoolService.getHotMajorList(params).$promise
+                    .then(function (data) {
+                        _this.majorList = data.data;
+                        _this.page=data.page;
+                        _this.page.pageNumber+=_this.page.pageNumber;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            submit:function () {
+              var _this=this;
+              var params=_this.params;
+              params.collegeId=_this.collegeId;
+              params.specialtyId=_this.majorId;
+              params.userId=AuthService.getUser().id;
+              if(_this.params.id){
+                  _this.updateHotMajor(params);
+              }else {
+                  _this.addHotMajor(params);
+              }
+
+
+            },
+            editHotMajor:function (entity) {
+                var _this=this;
+                _this.isSetMajor=true;
+                _this.params=entity;
+                _this.collegeId=entity.collegeId;
+                _this.majorId=entity.specialtyId;
+                _this.getCollegeDropList();
+
+                $timeout(function () {
+                    var $ddd = $("#select2").select2();
+                    $ddd.val(_this.params.teacherId).trigger("change");
+                })
+            },
+            //删除
+            deleteHotMajor: function () {
+                var _this = $scope.hotMajorFn;
+                var params = {
+                    id: _this.currentMajor.id,
+                    userId: AuthService.getUser().id,
+                }
+                SchoolService.deleteHotMajor(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("专业删除成功！");
+                        _this.getHotMajorList();
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("专业删除失败！");
+                    })
+            },
+            //删除提示
+            deletePrompt: function (entity) {
+                this.currentMajor = entity;
+                messageService.getMsg("您确定要删除此热门专业吗？", this.deleteHotMajor)
+            },
+            init:function () {
+                var _this=this;
+                _this.getHotMajorList();
+            }
         };
         $timeout(function () {
-           // $scope.hotMajorFn.init();
-            $scope.$watch('handleFn.collegeId', function(newValue, oldValue) {
+            $scope.hotMajorFn.init();
+            $scope.$watch('hotMajorFn.collegeId', function(newValue, oldValue) {
                 if (newValue!=oldValue){
                     $scope.hotMajorFn.getMajorDropList();
                 }
             });
-            $scope.$watch('hotMajorFn.majorId', function(newValue, oldValue) {
-                if (newValue!=oldValue){
-                    $scope.hotMajorFn.getClassDropList();
-                }
-            });
+            // $scope.$watch('hotMajorFn.majorId', function(newValue, oldValue) {
+            //     if (newValue!=oldValue){
+            //         $scope.hotMajorFn.getClassDropList();
+            //     }
+            // });
         })
     })

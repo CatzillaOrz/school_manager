@@ -14,7 +14,7 @@ var MajorService = {
 
     getMajorList : function (params, access_token, callback) {
     RestClient.get({
-      host: 'gateway',
+      host: 'gateway-org',
       path: '/v1/professionnal/list',
         params
     }).then(function (res) {
@@ -30,7 +30,7 @@ var MajorService = {
   },
     addMajor: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/professionnal/add',
             entity: params
         }).then(function (res) {
@@ -45,7 +45,7 @@ var MajorService = {
     },
     deleteMajor: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/professionnal/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -60,7 +60,7 @@ var MajorService = {
     },
     updateMajor: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/professionnal/update',
             entity: params
         }).then(function (res) {
@@ -75,7 +75,7 @@ var MajorService = {
     },
     getMajorById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/professionnal/get/'+params.id,
             access_token: access_token
         }).then(function (res) {
@@ -90,7 +90,7 @@ var MajorService = {
     },
     getMajorDropList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/professionnal/droplist',
             params,
             access_token: access_token

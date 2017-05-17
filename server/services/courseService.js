@@ -13,7 +13,7 @@ var CourseService = {
 
 	getCourseList: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/list',
 			params: params
 		}).then(function (res) {
@@ -29,7 +29,7 @@ var CourseService = {
 	},
 	addCourse: function (params, access_token, callback) {
 		RestClient.post({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/add',
 			entity: params
 		}).then(function (res) {
@@ -44,7 +44,7 @@ var CourseService = {
 	},
 	deleteCourse: function (params, access_token, callback) {
 		RestClient.delete({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/delete/' + params.id,
 			params: {userId: params.userId}
 		}).then(function (res) {
@@ -59,7 +59,7 @@ var CourseService = {
 	},
 	updateCourse: function (params, access_token, callback) {
 		RestClient.put({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/update',
 			entity: params
 		}).then(function (res) {
@@ -74,7 +74,7 @@ var CourseService = {
 	},
 	getCourseById: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/get/' + params.id,
 			access_token: access_token
 		}).then(function (res) {
@@ -89,7 +89,7 @@ var CourseService = {
 	},
 	getCourseDropListOrg: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/course/droplist',
 			access_token: access_token,
 			params: params

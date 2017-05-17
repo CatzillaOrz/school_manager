@@ -13,7 +13,7 @@ var CollegeService = {
 
     getCollegeList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/list',
             params,
             access_token: access_token
@@ -29,7 +29,7 @@ var CollegeService = {
     },
     addCollege: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/add',
             entity: params
         }).then(function (res) {
@@ -44,7 +44,7 @@ var CollegeService = {
     },
     deleteCollege: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -59,7 +59,7 @@ var CollegeService = {
     },
     updateCollege: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/update',
             entity: params
         }).then(function (res) {
@@ -74,7 +74,7 @@ var CollegeService = {
     },
     getCollegeById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/get/'+params.id,
             access_token: access_token
         }).then(function (res) {
@@ -89,7 +89,7 @@ var CollegeService = {
     },
     getCollegeDropList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/college/droplist',
             params,
             access_token: access_token

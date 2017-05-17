@@ -14,7 +14,7 @@ var StudentService = {
 
     getStudentList : function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/list',
             params
         }).then(function (res) {
@@ -30,7 +30,7 @@ var StudentService = {
     },
     addStudent: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/add',
             entity: params
         }).then(function (res) {
@@ -45,7 +45,7 @@ var StudentService = {
     },
     deleteStudent: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -60,7 +60,7 @@ var StudentService = {
     },
     updateStudent: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/update',
             entity: params
         }).then(function (res) {
@@ -75,7 +75,7 @@ var StudentService = {
     },
     getStudentById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/get/'+params.id,
             access_token: access_token
         }).then(function (res) {
@@ -90,7 +90,7 @@ var StudentService = {
     },
     getSimpleStudents: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/simplestudents',
             access_token: access_token,
              params
@@ -106,7 +106,7 @@ var StudentService = {
     },
     updateStudentToClasses: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/students/batchupdateclasses',
             entity: params
         }).then(function (res) {

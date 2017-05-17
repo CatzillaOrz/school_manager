@@ -13,7 +13,7 @@ var TeachClassService = {
 
 	getTeachClassList: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/list',
 			params: params
 		}).then(function (res) {
@@ -29,7 +29,7 @@ var TeachClassService = {
 	},
 	addTeachClass: function (params, access_token, callback) {
 		RestClient.post({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/add',
 			entity: params
 		}).then(function (res) {
@@ -44,7 +44,7 @@ var TeachClassService = {
 	},
 	deleteTeachClass: function (params, access_token, callback) {
 		RestClient.delete({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/delete/' + params.id,
 			params: {userId: params.userId}
 		}).then(function (res) {
@@ -59,7 +59,7 @@ var TeachClassService = {
 	},
 	updateTeachClass: function (params, access_token, callback) {
 		RestClient.put({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/update',
 			entity: params
 		}).then(function (res) {
@@ -74,7 +74,7 @@ var TeachClassService = {
 	},
 	getTeachClassById: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/get/' + params.id,
 			access_token: access_token
 		}).then(function (res) {
@@ -89,7 +89,7 @@ var TeachClassService = {
 	},
 	getTeachClassDropListOrg: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway',
+			host: 'gateway-org',
 			path: '/v1/teachingclass/droplist',
 			access_token: access_token,
 			params: params
@@ -105,7 +105,7 @@ var TeachClassService = {
 	},
     getTeachClassTeacherList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassteacher/list',
             access_token: access_token,
             params: params
@@ -121,7 +121,7 @@ var TeachClassService = {
     },
     getTeachClassStudentList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassstudent/list',
             access_token: access_token,
             params: params
@@ -137,7 +137,7 @@ var TeachClassService = {
     },
     deleteTeachClassTeacher: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassteacher/delete/' + params.teachingClassId,
             params
         }).then(function (res) {
@@ -158,7 +158,7 @@ var TeachClassService = {
             ids=params.ids.split(",");
         }
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassstudent/delete',
 
             entity: {
@@ -177,7 +177,7 @@ var TeachClassService = {
     },
     getTeachClassClassesListById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassclasses/list',
             access_token: access_token,
             params: params
@@ -193,7 +193,7 @@ var TeachClassService = {
     },
     addTeachClassClasses: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassclasses/add',
             entity: params
         }).then(function (res) {
@@ -208,7 +208,7 @@ var TeachClassService = {
     },
     deleteTeachClassClasses: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassclasses/delete/' + params.teachingClassId,
             params
         }).then(function (res) {
@@ -223,7 +223,7 @@ var TeachClassService = {
     },
     addTeachClassTeacher: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassteacher/add',
             entity: params
         }).then(function (res) {
@@ -238,7 +238,7 @@ var TeachClassService = {
     },
     addTeachClassStudent: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassstudent/add',
             entity: params
         }).then(function (res) {
@@ -253,7 +253,7 @@ var TeachClassService = {
     },
     deleteTeachClassOneStudent: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassstudent/delete/' + params.teachingClassId+"?studentId="+params.studentId
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -267,7 +267,7 @@ var TeachClassService = {
     },
     getTeachClassClassesList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teachingclassclasses/list',
             access_token: access_token,
             params: params
@@ -283,7 +283,7 @@ var TeachClassService = {
     },
     getCourseSchedule: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/schooltimetable/get/' + params.teachingClassId,
             access_token: access_token
         }).then(function (res) {
@@ -298,7 +298,7 @@ var TeachClassService = {
     },
     saveCourseSchedule: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/schooltimetable/add',
             entity: params
         }).then(function (res) {
@@ -313,7 +313,7 @@ var TeachClassService = {
     },
     delCourseSchedule: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/schooltimetable/delete',
             params: params
         }).then(function (res) {
