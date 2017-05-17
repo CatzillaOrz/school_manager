@@ -14,7 +14,7 @@
                                     label.label 教学班
                                     label.select.col-xs-12
                                         //input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
-                                        select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.teachingClass)' ng-model="schedule.teachingClass")
+                                        select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.teachingClass)' ng-model="schedule.teachingClass" ng-disabled='schedule.bulk')
                                         i
                                     .clearfix
                             fieldset
@@ -104,6 +104,7 @@
                                     .speace-10
                                     .btn.btn-primary(ng-click='schedule.saveCourseSchedule()') 保存排课
                                 .col-xs-6.col-sm-6.text-right
+                                    .btn.btn-default(ui-sref='teachclasslist') 返回教学班管理
 
                         .span8
                             .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')
