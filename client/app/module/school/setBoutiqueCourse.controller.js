@@ -1,15 +1,31 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SetBoutiqueCourseCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService) {
+    .controller('SetBoutiqueCourseCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,SchoolService,CourseService,$timeout) {
         $scope.boutiqueCourseFn = {
             isSetBoutique:false,
             courseDropList:[],
             imgFile:"",
+
             params:{
                 courseId:"",
-                templateId:1,
-                image:""
+                inUrl:"",
+                templateShow:"",
+                introduction:"",
+                orgId: AuthService.getUser().orgId,
+                userId:AuthService.getUser().id,
+            },
+            //分页
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 10
+            },
+            boutiqueCourseList:[],
+            currentEntity:{},
+            findParams:{
+                name:""
             },
             //课程下拉搜索
             select2CourseOptions:function(){
@@ -59,7 +75,7 @@ angular.module('dleduWebApp')
                         .then(function (resp) {
                             //resp.data.url
 
-                            _this.params.image=resp.data.url;
+                            _this.params.inUrl=resp.data.url;
 
                             // $event.currentTarget.disabled=true;
 
@@ -85,8 +101,155 @@ angular.module('dleduWebApp')
             },
             setBoutiqueToggle:function () {
                 var _this=this;
+                if(_this.isSetBoutique){
+                    _this.resetParams();
+                }
                 _this.isSetBoutique=!_this.isSetBoutique;
             },
+            getCourseDropListOrg:function () {
+                var _this=this;
+                var params={
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 1,
+                    pageSize: 10000,
 
-        }
+                }
+                CourseService.getCourseDropListOrg(params).$promise
+                    .then(function (data) {
+                        _this.courseDropList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            addBoutiqueCourse:function (params) {
+                var _this=this;
+                SchoolService.addBoutiqueCourse(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("添加成功");
+                        _this.getBoutiqueCourseList();
+                        _this.isSetBoutique=false;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            resetParams:function () {
+                this.params={
+                    teacherId:"",
+                    inUrl:"",
+                    templateShow:"",
+                    introduction:"",
+                    orgId: AuthService.getUser().orgId,
+                    userId:AuthService.getUser().id,
+                };
+            },
+            updateBoutiqueCourse:function (params) {
+                var _this=this;
+                SchoolService.updateBoutiqueCourse(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("修改成功");
+                        _this.getBoutiqueCourseList();
+                        _this.isSetBoutique=false;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            getBoutiqueCourseList:function () {
+                var _this=this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                params.courseName=_this.findParams.name;
+                SchoolService.getBoutiqueCourseList(params).$promise
+                    .then(function (data) {
+                        _this.page=data.page;
+                        _this.boutiqueCourseList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            //根据名称查询
+            findBoutiqueCourseByPage: function () {
+                var _this = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                params.courseName=_this.findParams.name;
+                SchoolService.getBoutiqueCourseList(params).$promise
+                    .then(function (data) {
+                        _this.boutiqueCourseList = data.data;
+                        _this.page=data.page;
+                        _this.page.pageNumber+=_this.page.pageNumber;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            submit:function () {
+                var _this=this;
+                var params=_this.params;
+                params.userId=AuthService.getUser().id;
+                if(_this.params.id){
+                    _this.updateBoutiqueCourse(params);
+                }else {
+                    _this.addBoutiqueCourse(params);
+                }
+
+
+            },
+            editBoutiqueCourse:function (entity) {
+                var _this=this;
+                _this.isSetBoutique=true;
+                _this.params=entity;
+               $timeout(function () {
+                   var $ddd = $("#select2").select2();
+                   $ddd.val(_this.params.courseId).trigger("change");
+               })
+
+            },
+            //删除
+            deleteBoutiqueCourse: function () {
+                var _this =$scope.boutiqueCourseFn;
+                var params = {
+                    id: _this.currentEntity.id,
+                    userId: AuthService.getUser().id,
+                }
+                SchoolService.deleteBoutiqueCourse(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("精品课程删除成功！");
+                        _this.getBoutiqueCourseList();
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("精品课程删除失败！");
+                    })
+            },
+            //删除提示
+            deletePrompt: function (entity) {
+                this.currentEntity = entity;
+                messageService.getMsg("您确定要删除此精品课程吗？", this.deleteBoutiqueCourse)
+            },
+            selected:function (list) {
+               // var resultList=[];
+                var _this=this;
+               angular.forEach(list,function (data) {
+                   if(data.id==_this.params.courseId){
+                       data.selected="selected";
+                   }
+               })
+            },
+            init:function () {
+                var _this=this;
+                _this.getBoutiqueCourseList();
+                _this.getCourseDropListOrg();
+            }
+        };
+        $scope.boutiqueCourseFn.init();
     })

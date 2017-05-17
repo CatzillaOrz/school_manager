@@ -5,7 +5,7 @@ angular.module('dleduWebService')
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.0.1.7'
+                version: '0.0.1.9'
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);

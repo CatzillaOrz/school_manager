@@ -1,12 +1,17 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SetLogoCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService) {
+    .controller('SetLogoCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,SchoolService) {
         $scope.logoFn = {
             imgFile: null,
             isSetLogo: false,
             currentObjIndex: {},
             obj: {src: "", selection: [], thumbnail: true},
+            params:{
+                id:0,
+                orgId: AuthService.getUser().orgId,
+                userId:AuthService.getUser().id,
+            },
             logoList: [
                 {
                     logo: "http://7xpscc.com1.z0.glb.clouddn.com/2010082184033657.JPG"
@@ -22,7 +27,7 @@ angular.module('dleduWebApp')
                 }
             ],
             uploadImage: function ($event) {
-                $event.target.disabled = true;
+
                 //  $event.currentTarget.disabled=false;
                 var _this = this;
                 var _cropParamsStr = [];
@@ -38,19 +43,27 @@ angular.module('dleduWebApp')
                 }
                 if (_this.imgFile) {
                     ImageService.convertFileToImage(_this.imgFile, function (image) {
-                        var cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
+                        var cutImage = ImageService.getCutImage(image, actionParams, 400, 150);
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
-                                //resp.data.url
-                                _this.logoList[_this.currentObjIndex].logo = resp.data.url;
-                                _this.isSetLogo=false;
+                                //resp.data.url 80*400  150*150
+                                var params;
+                                if(_this.logoList[_this.currentObjIndex]){
+                                    //更新
+                                    params=_this.logoList[_this.currentObjIndex];
+                                    params.logoUrl=resp.data.url;
+                                    params.userId=_this.params.userId;
+
+                                }else {
+                                    //增加
+                                    params=_this.params;
+                                    params.logoUrl=resp.data.url;
+                                }
+                                _this.addLogo(params)
                                 // $event.currentTarget.disabled=true;
 
                             }, function (resp) {
-                                console.log('Error status: ' + resp.status);
-                                if (resp.status == '500' || resp.status == '404') {
-                                    _this.loadingFlag = false;
-                                }
+                                CommonService.msgDialog('上传失败！！', 2);
                             }, function (evt) {
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                 //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -60,8 +73,38 @@ angular.module('dleduWebApp')
 
                 } else {
                     CommonService.msgDialog('您没有选择文件！！', 2);
-                    $event.target.disabled = false;
                 }
+            },
+            addLogo:function (params) {
+                var _this=this;
+                SchoolService.addLogo(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("更新成功");
+                        _this.getLogoList();
+                        _this.isSetLogo=false;
+                    })
+                    .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg(error.data);
+                        }else {
+
+                            messageService.openMsg("更新失败");
+                        }
+                    })
+            },
+            getLogoList:function () {
+                var _this=this;
+                var params={
+                    orgId:_this.params.orgId
+                };
+                SchoolService.getLogoList(params).$promise
+                    .then(function (data) {
+                        _this.logoList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
             },
             selectFile: function ($file) {
                 var _this = this;
@@ -70,10 +113,14 @@ angular.module('dleduWebApp')
             setToggle: function (entity) {
                 var _this=this;
                 _this.currentObjIndex = entity;
-               // _this.obj.src=_this.logoList[_this.currentObjIndex].logo;
                 _this.isSetLogo = !this.isSetLogo;
+            },
+            init:function () {
+                var _this=this;
+                _this.getLogoList();
             }
-        }
+        };
+        $scope.logoFn.init();
     })
     .config(function (ngJcropConfigProvider) {
 

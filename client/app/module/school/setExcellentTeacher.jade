@@ -20,8 +20,8 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="excellentTeacherFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="excellentTeacherFn.getMajorList()")
+                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="excellentTeacherFn.findParams.name")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="excellentTeacherFn.getExcellentTeacherList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -38,18 +38,20 @@
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 手机号
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat="major in excellentTeacherFn.majorList")
+                            tr.odd(role='row' ng-repeat="teacher in excellentTeacherFn.excellentTeacherList")
                                 td.sorting_1 {{$index+1 + ((excellentTeacherFn.page.pageNumber==0?excellentTeacherFn.page.pageNumber+1:excellentTeacherFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander
-                                    | {{major.name}}
-                                td  {{major.collegeName}}
-                                td  {{major.createdDate}}
+                                    | {{teacher.jobNumber}}
+                                td  {{teacher.teacherName}}
+                                td  {{teacher.sex}}
+                                td  {{teacher.email}}
+                                td  {{teacher.phone}}
                                 td
-                                    a.handle(ui-sref="majorEdit({id:major.id})")
+                                    a.handle(ng-click="excellentTeacherFn.editExcellentTeacher(teacher)")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="excellentTeacherFn.deletePrompt(major)")
+                                    a.handle(ng-click="excellentTeacherFn.deletePrompt(teacher)")
                                         i.fa.fa-trash-o
                                         span 删除
 
@@ -65,7 +67,7 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='excellentTeacherFn.page.totalElements', max-size='excellentTeacherFn.page.pageSize' ng-model='excellentTeacherFn.page.pageNumber',ng-change="excellentTeacherFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='excellentTeacherFn.page.totalElements', max-size='excellentTeacherFn.page.pageSize' ng-model='excellentTeacherFn.page.pageNumber',ng-change="excellentTeacherFn.findExcellentTeacherByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
     .jarviswidget.jarviswidget-color-blueDark(ng-if="excellentTeacherFn.isSetExcellent")
         header(role='heading')
@@ -81,27 +83,27 @@
                         span.required *
                         | 选择老师：
                     .col-sm-7
-                        select.form-control(ng-model="excellentTeacherFn.params.teacherId" ui-select2="excellentTeacherFn.select2TeacherOptions()" )
-                            option(ng-repeat="teacher in excellentTeacherFn.teacherDropList" value="{{teacher.id}}" selected="{{excellentTeacherFn.params.teacherId==teacher.id?'selected':''}}") {{teacher.name}}
+                        select#select2.form-control(ng-model="excellentTeacherFn.params.teacherId" ui-select2="excellentTeacherFn.select2TeacherOptions()" )
+                            option(ng-repeat="teacher in excellentTeacherFn.teacherDropList" value="{{teacher.id}}" selected="{{ excellentTeacherFn.params.teacherId==teacher.id?'selected':'' }}") {{teacher.name}}
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
                         | 介绍：
                     .col-sm-7
-                        textarea.introduce
+                        textarea.introduce(ng-model="excellentTeacherFn.params.introduction")
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
                         | 介绍图片：
                     .col-sm-7
-                        img.introduce-image(ng-src="{{excellentTeacherFn.params.image || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                        img.introduce-image(ng-src="{{excellentTeacherFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
                         | 展示模板：
                     .col-sm-7
                         .col-sm-6
-                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateId==1]" ng-click="excellentTeacherFn.params.templateId=1")
+                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==1]" ng-click="excellentTeacherFn.params.templateShow=1")
                                 .media
                                     .media-left
                                         a(href='#')
@@ -109,7 +111,7 @@
                                     .media-body
                                         h4.media-heading 知新大学教授jone
                         .col-sm-6
-                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateId==2]" ng-click="excellentTeacherFn.params.templateId=2")
+                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==2]" ng-click="excellentTeacherFn.params.templateShow=2")
                                 .media
                                     .media-body
                                         h4.media-heading 知新大学教授jone

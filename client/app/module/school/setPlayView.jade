@@ -6,7 +6,7 @@
             .col-sm-4.margin-top-10.margin-bottom-10(ng-repeat="ban in bannerFn.bannerList")
                 .logo-image-view
                     .col-sm-10(ng-click='bannerFn.setToggle($index)' )
-                        img.logo(ng-src="{{ban.banner}}")
+                        img.logo(ng-src="{{ban.imageUrl}}")
                     .col-sm-2
                         i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
                         .banner-order {{$index+1}}

@@ -20,8 +20,8 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按专业名称查询', aria-controls='datatable_col_reorder' ng-model="hotMajorFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="hotMajorFn.getMajorList()")
+                                    input.form-control(type='search', placeholder='按专业名称查询', aria-controls='datatable_col_reorder' ng-model="hotMajorFn.findParams.name")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="hotMajorFn.getHotMajorList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -36,15 +36,15 @@
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 创建时间
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat="major in hotMajorFn.majorList")
+                            tr.odd(role='row' ng-repeat="major in hotMajorFn.hotMajorList")
                                 td.sorting_1 {{$index+1 + ((hotMajorFn.page.pageNumber==0?hotMajorFn.page.pageNumber+1:hotMajorFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander
-                                    | {{major.name}}
+                                    | {{major.specialtyName}}
                                 td  {{major.collegeName}}
-                                td  {{major.createdDate}}
+                                td  {{major.createDate| date:'yyyy-MM-dd HH:mm:ss'}}
                                 td
-                                    a.handle(ui-sref="majorEdit({id:major.id})")
+                                    a.handle(ng-click="hotMajorFn.editHotMajor(major)")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="hotMajorFn.deletePrompt(major)")
@@ -63,7 +63,7 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='hotMajorFn.page.totalElements', max-size='hotMajorFn.page.pageSize' ng-model='hotMajorFn.page.pageNumber',ng-change="hotMajorFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='hotMajorFn.page.totalElements', max-size='hotMajorFn.page.pageSize' ng-model='hotMajorFn.page.pageNumber',ng-change="hotMajorFn.findHotMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
     .jarviswidget.jarviswidget-color-blueDark(ng-if="hotMajorFn.isSetMajor")
         header(role='heading')
@@ -87,27 +87,27 @@
                             span.required *
                             | 选择专业：
                         .col-sm-7
-                            select.form-control(ng-model="hotMajorFn.majorId" ui-select2="hotMajorFn.select2MajorOptions()" )
+                            select#select2.form-control(ng-model="hotMajorFn.majorId" ui-select2="hotMajorFn.select2MajorOptions()" )
                                 option(ng-repeat="major in hotMajorFn.majorDropList" value="{{major.id}}" selected="{{hotMajorFn.majorId==major.id?'selected':''}}") {{major.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 介绍：
                         .col-sm-7
-                            textarea.introduce
+                            textarea.introduce(ng-model="hotMajorFn.params.introduction")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 介绍图片：
                         .col-sm-7
-                            img.introduce-image(ng-src="{{hotMajorFn.params.image || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="hotMajorFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                            img.introduce-image(ng-src="{{hotMajorFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="hotMajorFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             |展示模板：
                         .col-sm-7
                            .col-sm-6
-                               .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateId==1]" ng-click="hotMajorFn.params.templateId=1")
+                               .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==1]" ng-click="hotMajorFn.params.templateShow=1")
                                    .media
                                        .media-left
                                            a(href='#')
@@ -115,7 +115,7 @@
                                        .media-body
                                            h4.media-heading 知新大学Web前端专业
                            .col-sm-6
-                                .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateId==2]" ng-click="hotMajorFn.params.templateId=2")
+                                .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==2]" ng-click="hotMajorFn.params.templateShow=2")
                                     .media
                                         .media-body
                                             h4.media-heading 知新大学Web前端专业

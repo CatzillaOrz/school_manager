@@ -12,4 +12,5 @@ module.exports = function(app){
   app.use('/api/schoolyear', require('./api/schoolyear'));
   app.use('/api/course', require('./api/course'));
   app.use('/api/teachclass', require('./api/teachclass'));
+  app.use('/api/school', require('./api/school'));
 };
