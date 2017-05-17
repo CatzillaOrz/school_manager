@@ -25,8 +25,11 @@
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
+                                button.btn.btn-default(ui-sref="agendaWeeks({ids:teachClassListFn.agendaWeeks})")
+                                    span 批量排课
+                                .speace-10
                                 button.btn.btn-primary(ui-sref="teachClassCreat")
-                                    span 新建
+                                    span 新建教学班
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -43,7 +46,7 @@
                                 td {{teachClass.courseName}}
                                 td {{teachClass.studentsCount}}
                                 td
-                                    a.handle(ui-sref="agendaWeek({id:teachClass.id})")
+                                    a.handle(ui-sref="agendaWeek({id:teachClass.id,name:teachClass.name})")
                                         i.fa.fa-pencil-square-o
                                         span 排课
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})")

@@ -551,10 +551,6 @@ angular.module('courseSchedule', [])
                                         '<div class="fc-resizer fc-end-resizer" />' :
                                         ''
                                 ) +
-                                '<div class="fc-menu">' +
-                                    '<i class="fa fa-trash-o fc-btn-del" ng-click="schedule.delCourseCard()"></i>' +
-                                    '<i class="fa fa-edit fc-btn-edit" ng-click="schedule.toEditCourse()"></i>' +
-                                '</div>' +
                                 '</a>';
                         }
 
@@ -586,6 +582,7 @@ angular.module('courseSchedule', [])
                             displayEventTime: false,
                             slotDuration: "01:00:00",
                             snapDuration: "01:00:00",
+                            scrollTime:'00:00:00',
                             axisFormat: 'HH:mm',
                             //第一列显示周几 0:周日，1:周一 ……
                             firstDay: 1,
@@ -748,4 +745,4 @@ angular.module('courseSchedule', [])
                 }
             };
         }]
-    )
+    );
