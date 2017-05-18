@@ -281,12 +281,14 @@ angular.module('dleduWebApp')
                 _this.params=entity;
                 _this.collegeId=entity.collegeId;
                 _this.majorId=entity.specialtyId;
-                _this.getCollegeDropList();
+
 
                 $timeout(function () {
-                    var $ddd = $("#select2").select2();
-                    $ddd.val(_this.params.teacherId).trigger("change");
-                })
+                    var collegeSelect2 = $("#collegeSelect2").select2();
+                    collegeSelect2.val(_this.collegeId).trigger("change");
+                    var majorSelect2 = $("#majorSelect2").select2();
+                    majorSelect2.val(_this.majorId).trigger("change");
+                },500)
             },
             //删除
             deleteHotMajor: function () {
@@ -311,6 +313,7 @@ angular.module('dleduWebApp')
             },
             init:function () {
                 var _this=this;
+                _this.getCollegeDropList();
                 _this.getHotMajorList();
             }
         };
