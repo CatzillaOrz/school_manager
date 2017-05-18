@@ -80,14 +80,14 @@
                             span.required *
                             | 选择学院：
                         .col-sm-7
-                            select.form-control(ng-model="hotMajorFn.collegeId" ui-select2="hotMajorFn.select2CollegeOptions()" )
+                            select#collegeSelect2.form-control(ng-model="hotMajorFn.collegeId" ui-select2="hotMajorFn.select2CollegeOptions()" )
                                 option(ng-repeat="college in hotMajorFn.collegeDropList" value="{{college.id}}" selected="{{hotMajorFn.collegeId==college.id?'selected':''}}") {{college.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 选择专业：
                         .col-sm-7
-                            select#select2.form-control(ng-model="hotMajorFn.majorId" ui-select2="hotMajorFn.select2MajorOptions()" )
+                            select#majorSelect2.form-control(ng-model="hotMajorFn.majorId" ui-select2="hotMajorFn.select2MajorOptions()" )
                                 option(ng-repeat="major in hotMajorFn.majorDropList" value="{{major.id}}" selected="{{hotMajorFn.majorId==major.id?'selected':''}}") {{major.name}}
                     .form-group
                         label.col-sm-3.control-label
