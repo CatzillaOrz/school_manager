@@ -1,0 +1,308 @@
+.index-container {
+  min-width: 1000px;
+  width: 100%;
+  background-color: $navbar-default-bg;
+  font-family: $font-family-sans-serif;
+  .top-nav-container {
+    height: 68px;
+    .top-nav {
+      min-width: 1000px;
+      width: 1000px;
+      margin: auto;
+      .school-logo {
+        margin-top: 24px;
+        float: left;
+        .logo {
+          height: 30px;
+        }
+      }
+      .azx-logo {
+        height: 40px;
+        // width: 116px;
+        margin-top: 14px;
+        /* display: table; */
+        float: right;
+        min-width: 116px;
+        max-width: 200px;
+      }
+      .login-button {
+        float: right;
+        margin-top: 10px;
+        .btn-login {
+          height: 30px;
+          margin-top: 8px;
+          margin-left: 20px;
+          padding: 4px 20px;
+          min-width: 100px;
+          float: right;
+          color: #ffffff;
+          font-family: $font-family-sans-serif;
+          background-color: $brand-primary;
+          border-color: darken($brand-primary, 0.1);
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 1em;
+          text-decoration: none;
+          text-align: center;
+          display: inline-block;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          cursor: pointer;
+          border: none;
+          box-sizing: border-box;
+          transition-property: all;
+          transition-duration: .3s;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+  .nav-bar {
+    background-color: #04855b;
+    height: 60px;
+    width: 100%;
+    .navigation {
+      height: 60px;
+      width: 1000px;
+      margin: 0px auto;
+      ul {
+        padding: 0;
+        li {
+          text-align: center;
+          width: 100px;
+          height: 60px;
+          font-family: $font-family-sans-serif;
+          float: left;
+          padding: 9px 20px;
+          line-height: 30px;
+          font-size: 14px;
+          overflow: hidden;
+          border: 1px solid rgba(#ffffff, 0);
+          color: #ffffff;
+          &:hover {
+            background: $brand-primary;
+
+            //color: lighten($brand-logo, 5%);
+            cursor: pointer;
+            border: 1px solid $brand-logo;
+            //border-radius: 25px!important;
+          }
+        }
+        .active{
+          background: #29c192;
+          cursor: pointer;
+          border: 1px solid #58b5a2;
+          height: 66px;
+        }
+      }
+
+    }
+  }
+  .content-container {
+    margin: 0px auto;
+    width: 1000px;
+    .shuff-image {
+      margin-top: 10px;
+      .img {
+        height: 400px;
+        width: 1000px;
+      }
+    }
+    .feature-block {
+      border-bottom: 1px solid #e7e7e7;
+      margin-top: 40px;
+      overflow: hidden;
+      .title {
+        color: $brand-primary;
+        font-size: 20px;
+        font-family: $font-family-sans-serif;
+        width: 114px;
+        border-bottom: 3px solid $brand-primary;
+        text-align: center;
+        display: inline-block;
+      }
+      .more {
+        float: right;
+        font-size: 14px;
+        font-family: $font-family-sans-serif;
+        display: inline-block;
+        position: relative;
+        color: $text-color-light;
+        margin-top: 9px;
+      }
+    }
+    .boutique-course-content {
+      font-family: $font-family-sans-serif;
+      width: 1036px;
+      /* margin: 0 auto; */
+      margin: -14px -36px 0 0;
+      .course-card {
+        cursor: pointer;
+        height: 226px;
+        width: 223px;
+        margin: 24px 36px 0 0px;
+        background-color: $sub-navbar-bg;
+        display: inline-block;
+        border-radius: 4px !important;
+        //
+        .course-image {
+          height: 140px;
+        }
+        .course-name {
+          margin-top: 20px;
+          padding-left: 14px;
+          font-size: 18px;
+          color: #333333;
+        }
+        .course-teacher {
+          margin-top: 12px;
+          padding-left: 14px;
+          color: #999999;
+          font-size: 14px;
+
+        }
+        &:hover{
+          @include box-shadow2(0px,0px,8px,rgba(0,0,0,0.4));
+        }
+
+      }
+    }
+    .introduce-container {
+      vertical-align: top;
+      margin-bottom: 50px;
+      .excellent-teacher {
+        vertical-align: top;
+        width: 576px;
+        display: inline-block;
+        .teacher-card-container{
+          width: 600px;
+          .teacher-card {
+            cursor: pointer;
+            height: 212px;
+            width: 176px;
+            margin: 24px 24px 0 0px;
+            background-color: $sub-navbar-bg;
+            display: inline-block;
+            border-radius: 4px !important;
+            // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
+            .teacher-image {
+              margin: 18px auto;
+              text-align: center;
+              border-radius:50%;
+              overflow:hidden;
+              height: 56px;
+              width: 56px;
+              border: 1px solid #dddddd;
+            }
+            .teacher-name {
+              margin-top: 2px;
+              text-align: center;
+              font-size: 18px;
+              color: #333333;
+            }
+            .teacher-detail {
+              margin-top: 12px;
+              padding-left: 14px;
+              color: #999999;
+              font-size: 14px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              height: 68px;
+
+            }
+            //&:hover{
+            //  background: #000000;
+            //  opacity: 0.4;
+            //  filter:alpha(opacity=40); /* IE */
+            //  -moz-opacity:0.4; /* 老版Mozilla */
+            //  -khtml-opacity:0.4; /* 老版Safari */
+            //}
+            .shade{
+              background: #000000;
+              opacity: 0.4;
+              filter:alpha(opacity=40); /* IE */
+              -moz-opacity:0.4; /* 老版Mozilla */
+              -khtml-opacity:0.4; /* 老版Safari */
+              height: 212px;
+              width: 176px;
+              position: absolute;
+
+            }
+            .detail-button{
+              position: absolute;
+              margin: 94px auto auto auto;
+              .btn-detail{
+                height: 30px;
+                /* margin-top: 8px; */
+                /* margin-left: 20px; */
+                margin: 0 auto;
+                padding: 8px 20px;
+                min-width: 100px;
+                float: right;
+                color: #ffffff;
+                font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+                background-color: #29c192;
+                border-color: #29c192;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 1em;
+                text-decoration: none;
+                text-align: center;
+                display: inline-block;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: none;
+                box-sizing: border-box;
+                transition-property: all;
+                transition-duration: .3s;
+                border-radius: 5px;
+              }
+            }
+          }
+        }
+      }
+      .hot-msg {
+        margin-left: 40px;
+        width: 384px;
+        display: inline-block;
+        vertical-align: top;
+        .hot-major-container{
+          padding: 8px 11px;
+          margin-top: 24px;
+         height: 448px;
+          background-color: $sub-navbar-bg;
+          .btn-major{
+            margin: 10px 5px;
+            cursor: pointer;
+            height: 42px;
+            padding: 8px;
+            font-size: 16px;
+            color: #888888;
+            border: 1px solid #dddddd;
+            border-radius: 42px;
+            display: inline-block;
+            &:hover{
+              border: 1px solid $brand-primary;
+              color:$brand-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    height: 100px;
+    width: 100%;
+    line-height: 100px;
+    background-color: #666666;
+    text-align: center;
+    font-size: 14px;
+    color: #e6e5e5;
+
+  }
+
+}

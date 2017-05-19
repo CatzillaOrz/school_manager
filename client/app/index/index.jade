@@ -1,0 +1,144 @@
+.index-container
+    .top-nav-container
+        .top-nav
+            .school-logo
+                img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495078273034' }}")
+            .login-button
+                button.btn-login(ui-sref='login')
+                    i.fa.fa-user.fa-fw
+                    |  登录
+            a.azx-logo
+                azx-logo
+
+
+    .nav-bar
+        .navigation
+            ul
+                li.active()
+                    | 首页
+                li()
+                    | 学校概况
+                li()
+                    | 本校课程
+    .content-container
+        .shuff-image(azx-swiper data-slides='indexFn.shuffImageList' data-full-screen='false')
+
+        .feature-block
+            .title 精品课程
+            .more 更多>>
+        .boutique-course-content
+            .course-card(ng-repeat="course in indexFn.boutiqueCourseList")
+                img.course-image(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495097620394'}}")
+                .course-name
+                    | {{course.courseName}}
+                .course-teacher
+                    | 12课时 | 刘建平
+
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+            //.course-card
+            //    img.course-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1495097620394")
+            //    .course-name
+            //        | 嵌入式处理器应用基础
+            //    .course-teacher
+            //        | 12课时 | 刘建平
+        .introduce-container
+            .excellent-teacher
+                .feature-block
+                    .title 优秀教师
+                    .more 更多>>
+                .teacher-card-container
+                    //{"id":1,"userId":null,"orgId":null,"teacherId":6,"introduction":"分隔符","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494986499287","templateShow":2,"teacherName":"驱蚊器","phone":"","jobNumber":"12345","sex":"男","email":""}
+                    .teacher-card(ng-repeat="teacher in indexFn.excellentTeacherList")
+                        .teacher-image
+                            img.img(ng-src="{{ teacher.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495114226205'}}")
+                        .teacher-name
+                            | {{teacher.teacherName}}
+                        .teacher-detail
+                            | {{teacher.introduction}}
+                    //.teacher-card
+                    //    .teacher-image
+                    //        img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
+                    //    .teacher-name
+                    //        | 刘建平
+                    //    .teacher-detail
+                    //        | 毕业于北京理工大学，搞死教育物理专职教师。
+                    //.teacher-card
+                    //    .teacher-image
+                    //        img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
+                    //    .teacher-name
+                    //        | 刘建平
+                    //    .teacher-detail
+                    //        | 毕业于北京理工大学，搞死教育物理专职教师。
+                    //.teacher-card
+                    //    .teacher-image
+                    //        img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
+                    //    .teacher-name
+                    //        | 刘建平
+                    //    .teacher-detail
+                    //        | 毕业于北京理工大学，搞死教育物理专职教师。
+                    .teacher-card
+                        //.shade
+                        //.detail-button
+                        //    a.btn-detail
+                        //        | 教师详情>>
+                        .teacher-image
+                            img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
+                        .teacher-name
+                            | 刘建平
+                        .teacher-detail
+                            | 毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。
+
+            .hot-msg
+                .feature-block
+                    .title 热门专业
+                    .more 更多>>
+                .hot-major-container
+                    //{"id":2,"specialtyName":"222222222222222","userId":null,"orgId":null,"collegeId":6,"collegeName":"噢噢噢噢噢噢噢噢123","specialtyId":7,"introduction":"顶顶顶顶顶顶顶顶顶大大大12","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494933552215","templateShow":2,"createDate":1494933440000}
+                    .btn-major(ng-repeat="major in indexFn.hotMajorList")
+                        | {{major.specialtyName}}
+                    //.btn-major
+                    //    | 网络通讯
+                    //.btn-major
+                    //    | 网络通
+                    //.btn-major
+                    //    | 操作系统
+
+
+    .footer
+        | 地址：北京市海淀区133号   邮箱：www.sichuanshifanxuanyuan@qq.com  邮编：10000

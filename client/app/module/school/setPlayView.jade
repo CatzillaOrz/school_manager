@@ -1,17 +1,16 @@
 .logo-container
-    .container(ng-if="!bannerFn.isSetBanner")
+    .shuff-image-card-container(ng-if="!bannerFn.isSetBanner")
         div 设置轮播图：
             small 最多设置6张轮播图
-        .row
-            .col-sm-4.margin-top-10.margin-bottom-10(ng-repeat="ban in bannerFn.bannerList")
-                .logo-image-view
-                    .col-sm-10(ng-click='bannerFn.setToggle($index)' )
-                        img.logo(ng-src="{{ban.imageUrl}}")
-                    .col-sm-2
-                        i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
-                        .banner-order {{$index+1}}
-            .col-sm-12.margin-top-10.text-center
-                button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
+
+        .shuff-image-view(ng-repeat="ban in bannerFn.bannerList")
+            .title
+                | 第{{$index+1}}张
+                i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
+            .shuff-block(ng-click='bannerFn.setToggle($index)' )
+                img.img(ng-src="{{ban.imageUrl}}")
+        .col-sm-12.margin-top-10.text-center
+            button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
         div 设置学校简介：
             small 最多600个字
         .row
@@ -24,7 +23,9 @@
     .container(ng-if="bannerFn.isSetBanner")
         .logo-setting
             .btn-upload
-                input(type="file"  ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                input(type="file" ng-jcrop-input="longBlock" ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+            .upload-pic
+                div(ng-jcrop="bannerFn.obj.src" ng-jcrop-config-name="longBlock" data-ng-jcrop-config-name="longBlock" data-selection="bannerFn.obj.selection" data-thumbnail="bannerFn.obj.thumbnail")
             .splie-line
             button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
             .speace-10

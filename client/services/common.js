@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('dleduWebService')
-    .factory('CommonService', function (ngDialog,$http) {
+    .factory('CommonService', function (ngDialog,$http,localStorageService,SchoolService,$location) {
         return {
             product: {
                 name: '知新网综合平台',
 
-                version: '0.0.1.9'
+                version: '0.0.2.0'
 
             },
             isMSIE789: function () {
@@ -52,6 +52,31 @@ angular.module('dleduWebService')
                 setTimeout(function () {
                     ngDialog.closeAll();
                 }, 1500);
+            },
+            getSchool:function () {
+                var school= localStorageService.get('school');
+                var _this=this;
+                if(school){
+                    return  school;
+                }else {
+                    var  url =$location.host().split('.')[0];
+                    url="kjkf";
+                    var params={
+                        domainname:url
+                    };
+                    SchoolService.getSchoolByDomain(params).$promise
+                        .then(function (data) {
+                            school=data;
+                            _this.setSchool(school);
+                            return school;
+                        })
+                        .catch(function (error) {
+
+                        })
+                }
+            },
+            setSchool:function (school) {
+                localStorageService.set("school",school)
             }
         }
     });

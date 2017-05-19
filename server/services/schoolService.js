@@ -10,7 +10,7 @@ var Promise = require('bluebird'),
     ErrorCode = require('../common/errorCode');
 
 var SchoolService = {
-    getLogoList: function (params, access_token, callback) {
+    getLogoList: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/school/infomanager/findschoollogoinfo',
@@ -56,7 +56,7 @@ var SchoolService = {
             callback(e);
         });
     },
-    getShuffImageList: function (params, access_token, callback) {
+    getShuffImageList: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/school/intrductionandimage/findimage',
@@ -117,7 +117,7 @@ var SchoolService = {
             callback(e);
         });
     },
-    getSchoolInfo: function (params, access_token, callback) {
+    getSchoolInfo: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/school/intrductionandimage/findintroduction',
@@ -148,7 +148,7 @@ var SchoolService = {
             callback(e);
         });
     },
-    getHotMajor: function (params, access_token, callback) {
+    getHotMajor: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/schoolhotspecialty/findinfo',
@@ -212,7 +212,7 @@ var SchoolService = {
             callback(e);
         });
     },
-    getExcellentTeacherList: function (params, access_token, callback) {
+    getExcellentTeacherList: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/schoolexcellentteacher/findteacherinfo',
@@ -274,7 +274,7 @@ var SchoolService = {
             callback(e);
         });
     },
-    getBoutiqueCourseList: function (params, access_token, callback) {
+    getBoutiqueCourseList: function (params, callback) {
         RestClient.get({
             host: 'gateway-school',
             path: '/v1/schoolcourse/findcourse',
@@ -320,6 +320,26 @@ var SchoolService = {
             callback(e);
         });
     },
+    getSchoolByDomain: function(params, callback){
+        RestClient.get({
+            host:"dd",
+            path: 'api/web/v1/organ/getbydomainname',
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+
+                callback(null, res.entity);
+            } else {
+                ErrorCode.getErrorSync(res.entity)
+                    .then(function(err){
+                        callback(err);
+                    });
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    }
 };
 
 
