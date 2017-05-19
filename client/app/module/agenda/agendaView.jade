@@ -1,6 +1,6 @@
 .agenda-container
     .row
-        .col-sm-12.col-md-12.col-lg-3
+        .col-xs-12.col-sm-4.col-lg-3
             .jarviswidget.jarviswidget-color-blueDark
                 header
                     span.widget-icon
@@ -14,7 +14,7 @@
                                     label.label 教学班
                                     label.select.col-xs-12
                                         //input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
-                                        select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.teachingClass)' ng-model="schedule.teachingClass" ng-disabled='schedule.bulk')
+                                        select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.courseCardForm.teachingClass)' ng-model="schedule.courseCardForm.teachingClass" ng-disabled='schedule.bulk')
                                         i
                                     .clearfix
                             fieldset
@@ -88,7 +88,7 @@
                                 button.btn.btn-default(type='submit' ng-click='schedule.addCourseCard()') 添加该课程到课程表
 
 
-        .col-sm-12.col-md-12.col-lg-9
+        .col-xs-12.col-sm-8.col-lg-9
             .jarviswidget.jarviswidget-color-blueDark
                 header
                     span.widget-icon
@@ -109,3 +109,6 @@
                         .span8
                             .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')
 
+        .col-xs-12.col-sm-8.col-lg-9.col-sm-offset-4.col-lg-offset-3
+            .well
+                .label 123123
