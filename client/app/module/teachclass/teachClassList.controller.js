@@ -19,7 +19,7 @@ angular.module('dleduWebApp')
 			params: {
 				name: ""
 			},
-            agendaWeeks:angular.toJson([{id:10,name:'安卓1班'},{id:11,name:'安卓2班'}]),
+            agendaWeeks:angular.toJson([{id:10,name:'安卓1班',semesterId:14},{id:11,name:'安卓2班',semesterId:14}]),
 			// 获取教学班列表
 			getTeachClassList: function () {
 				var that = this;

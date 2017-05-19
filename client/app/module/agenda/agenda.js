@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
             })
             .state('agendaWeek', {
                 parent: 'agenda',
-                url   : '/agenda/view/:id/:name',
+                url   : '/agenda/view/:id/:name/:semesterId',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

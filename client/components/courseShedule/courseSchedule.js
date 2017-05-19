@@ -47,9 +47,9 @@ angular.module('courseSchedule', [])
              * @return {string}
              */
             this.eventFingerprint = function (e) {
-                if (e && !e._id) {
+                /*if (!e._id) {
                     e._id = eventSerialId++;
-                }
+                }*/
                 var extraSignature = extraEventSignature({
                         event: e
                     }) || '';
