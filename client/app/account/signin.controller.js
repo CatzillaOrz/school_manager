@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
                 username: '',
                 password: ''
             },
-            redirectURL: null,
+            redirectURL: "home",
             keyPressHandle: function ($event) {
                 var that = this;
                 if ($event.keyCode == 13) {

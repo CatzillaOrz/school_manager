@@ -5,7 +5,7 @@ var _ = require('lodash'),
 
 module.exports = {
     getLogoList: function (req, res) {
-        SchoolService.getLogoListSync(req.query, req.user.access_token)
+        SchoolService.getLogoListSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -23,7 +23,7 @@ module.exports = {
             })
     },
     getShuffImageList: function (req, res) {
-        SchoolService.getShuffImageListSync(req.query, req.user.access_token)
+        SchoolService.getShuffImageListSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -68,7 +68,7 @@ module.exports = {
             })
     },
     getSchoolInfo: function (req, res) {
-        SchoolService.getSchoolInfoSync(req.query, req.user.access_token)
+        SchoolService.getSchoolInfoSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -86,7 +86,7 @@ module.exports = {
             })
     },
     getHotMajor: function (req, res) {
-        SchoolService.getHotMajorSync(req.query, req.user.access_token)
+        SchoolService.getHotMajorSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -123,7 +123,7 @@ module.exports = {
             })
     },
     getExcellentTeacherList: function (req, res) {
-        SchoolService.getExcellentTeacherListSync(req.query, req.user.access_token)
+        SchoolService.getExcellentTeacherListSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -161,7 +161,7 @@ module.exports = {
             })
     },
     getBoutiqueCourseList: function (req, res) {
-        SchoolService.getBoutiqueCourseListSync(req.query, req.user.access_token)
+        SchoolService.getBoutiqueCourseListSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -187,7 +187,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-
+    getSchoolByDomain: function (req, res) {
+        SchoolService.getSchoolByDomainSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

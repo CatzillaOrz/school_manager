@@ -7,6 +7,7 @@ angular.module('dleduWebApp')
             isSetLogo: false,
             currentObjIndex: {},
             obj: {src: "", selection: [], thumbnail: true},
+            jcropType:"block",
             params:{
                 id:0,
                 orgId: AuthService.getUser().orgId,
@@ -43,7 +44,12 @@ angular.module('dleduWebApp')
                 }
                 if (_this.imgFile) {
                     ImageService.convertFileToImage(_this.imgFile, function (image) {
-                        var cutImage = ImageService.getCutImage(image, actionParams, 400, 150);
+                        var cutImage=null;
+                        if(_this.currentObjIndex==0|| _this.currentObjIndex==0){
+                            cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
+                        }else {
+                            cutImage = ImageService.getCutImage(image, actionParams, 420, 60);
+                        }
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
                                 //resp.data.url 80*400  150*150
@@ -53,11 +59,13 @@ angular.module('dleduWebApp')
                                     params=_this.logoList[_this.currentObjIndex];
                                     params.logoUrl=resp.data.url;
                                     params.userId=_this.params.userId;
+                                    params.logoSort=_this.currentObjIndex+1;
 
                                 }else {
                                     //增加
                                     params=_this.params;
                                     params.logoUrl=resp.data.url;
+                                    params.logoSort=_this.currentObjIndex+1;
                                 }
                                 _this.addLogo(params)
                                 // $event.currentTarget.disabled=true;
@@ -112,6 +120,11 @@ angular.module('dleduWebApp')
             },
             setToggle: function (entity) {
                 var _this=this;
+                if(entity==0||entity==1){
+                    _this.jcropType="block";
+                }else {
+                    _this.jcropType="longBlock";
+                }
                 _this.currentObjIndex = entity;
                 _this.isSetLogo = !this.isSetLogo;
             },
@@ -131,10 +144,17 @@ angular.module('dleduWebApp')
             'margin-left': '80px'
         });
 
-        ngJcropConfigProvider.setJcropConfig('upload', {
+        ngJcropConfigProvider.setJcropConfig('block', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 16/9
+            aspectRatio: 1/1
+            // maxWidth: 250,
+            // maxHeight: 250
+        });
+        ngJcropConfigProvider.setJcropConfig('longBlock', {
+            bgColor: 'black',
+            bgOpacity: .4,
+            aspectRatio: 7/3
             // maxWidth: 250,
             // maxHeight: 250
         });

@@ -7,6 +7,7 @@ angular.module('dleduWebApp')
             isSetBanner: false,
             isSetIntroduce:false,
             currentObjIndex: {},
+            obj: {src: "", selection: [], thumbnail: true},
             params:{
                 orgId: AuthService.getUser().orgId,
                 userId:AuthService.getUser().id,
@@ -15,12 +16,19 @@ angular.module('dleduWebApp')
             bannerList: [],
             uploadImage: function ($event) {
                 $event.target.disabled = true;
-                //  $event.currentTarget.disabled=false;
                 var _this = this;
-
+                var _cropParamsStr = [];
+                var actionParams = {
+                    "offsetX": _this.obj.selection[0],
+                    "offsetY": _this.obj.selection[1],
+                    "width": _this.obj.selection[4],
+                    "height": _this.obj.selection[5]
+                };
                 _this.loadingFlag = true;
                 if (_this.imgFile) {
-                        UploadService.blobUploadToQiNiu(_this.imgFile)
+                    ImageService.convertFileToImage(_this.imgFile, function (image) {
+                        var cutImage=ImageService.getCutImage(image, actionParams, 1000, 400);
+                        UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
                                 //resp.data.url
                                 if(_.isNumber(_this.currentObjIndex)){
@@ -46,7 +54,7 @@ angular.module('dleduWebApp')
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                 //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                             })
-                    //
+                    })
 
                 } else {
                     CommonService.msgDialog('您没有选择文件！！', 2);
@@ -64,9 +72,10 @@ angular.module('dleduWebApp')
                 _this.isSetBanner = !_this.isSetBanner;
             },
             addShuffImage:function (params) {
+                var _this=this;
                 SchoolService.addShuffImage(params).$promise
                     .then(function (data) {
-
+                        _this.getShuffImageList();
                     })
                     .catch(function (error) {
 
@@ -93,9 +102,10 @@ angular.module('dleduWebApp')
                     })
             },
             updateShuffImage:function (params) {
+                var _this=this;
                 SchoolService.deleteShuffImage(params).$promise
                     .then(function (data) {
-
+                        _this.getShuffImageList();
                     })
                     .catch(function (error) {
 
@@ -120,9 +130,10 @@ angular.module('dleduWebApp')
                 _this.isSetIntroduce = !_this.isSetIntroduce;
             },
             addSchoolInfo:function (params) {
+                var _this=this;
                 SchoolService.addSchoolInfo(params).$promise
                     .then(function (data) {
-
+                        _this.getSchoolInfo();
                     })
                     .catch(function (error) {
 
@@ -147,3 +158,27 @@ angular.module('dleduWebApp')
         };
         $scope.bannerFn.init();
     })
+    .config(function (ngJcropConfigProvider) {
+
+        ngJcropConfigProvider.setPreviewStyle('upload', {
+            // 'width': '120px',
+            // 'height': '120px',
+            'overflow': 'hidden',
+            'margin-left': '80px'
+        });
+
+        ngJcropConfigProvider.setJcropConfig('block', {
+            bgColor: 'black',
+            bgOpacity: .4,
+            aspectRatio: 1/1
+            // maxWidth: 250,
+            // maxHeight: 250
+        });
+        ngJcropConfigProvider.setJcropConfig('longBlock', {
+            bgColor: 'black',
+            bgOpacity: .4,
+            aspectRatio: 10/4
+            // maxWidth: 250,
+            // maxHeight: 250
+        });
+    });

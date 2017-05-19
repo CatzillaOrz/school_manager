@@ -1,26 +1,105 @@
 .logo-container{
-  margin-top: 50px;
-  .logo-image-view{
-    border: 1px solid #d2d2d2;
-    @include box-shadow2(0px,0px,8px,rgba(0,0,0,0.4));
-    height: 150px;
-    .logo{
-      height: 100px;
-      margin-top: 20px;
+  padding: 50px;
+  font-family: $font-family-sans-serif;
+  .logo-card-container{
+    .logo-image-view{
+      height: 180px;
+      width: 420px;
+      border: 1px solid #d2d2d2;
+      -khtml-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      -ms-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      /* height: 150px; */
+      display: inline-block;
+      margin-left: 30px;
+      margin-top: 30px;
+      vertical-align: top;
+      .title{
+        border-bottom: 1px dashed #d2d2d2;
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+        margin-left: 10px;
+
+      }
+      .logo-block{
+        height: 100px;
+        width: 100px;
+        margin-top: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        overflow: hidden;
+        margin-left: 20px;
+        vertical-align: top;
+        margin-bottom: 24px;
+      }
+      .logo-long-block{
+        overflow: hidden;
+        vertical-align: top;
+        margin: 20px 20px 10px 20px;
+      }
+      .logo-long-block-introduce{
+        margin-bottom: 20px;
+        color: #999999;
+        font-size: 14px;
+        vertical-align: top;
+        padding: 0px 30px;
+      }
+      .logo-block-introduce{
+        margin-bottom: 20px;
+        display: inline-block;
+        color: #999999;
+        font-size: 14px;
+        width: 270px;
+        vertical-align: top;
+        padding: 30px;
+      }
+      .banner-order{
+        margin-top: 25px;
+        margin-bottom: 20px;
+        color: #39d409;
+        font-size: 24px;
+      }
+      .float-right{
+        float:right;
+      }
     }
-    .logo-introduce{
-      margin-top: 25px;
-      margin-bottom: 20px;
-      color:#a7a4a4;
-    }
-    .banner-order{
-      margin-top: 25px;
-      margin-bottom: 20px;
-      color: #39d409;
-      font-size: 24px;
-    }
-    .float-right{
-      float:right;
+  }
+  .shuff-image-card-container{
+    .shuff-image-view{
+      height: 136px;
+      width: 290px;
+      border: 1px solid #d2d2d2;
+      -khtml-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      -ms-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      /* height: 150px; */
+      display: inline-block;
+      margin-left: 30px;
+      margin-top: 30px;
+      vertical-align: top;
+      .title{
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+        margin: 0 10px;
+
+      }
+      .shuff-block{
+        display: inline-block;
+        vertical-align: top;
+        padding: 5px;
+
+        .img{
+          width: 278px;
+          height: 90px;
+        }
+      }
+      .float-right{
+        float:right;
+      }
     }
   }
   .school-introduce{
@@ -49,6 +128,7 @@
     border: 1px solid  #39d409;
   }
   .logo-image-view:hover{
+
     cursor: pointer;
 
     @include box-shadow2(0px,0px,10px, rgba(0, 0, 0, 0.71));

@@ -97,6 +97,10 @@ angular.module('dleduWebService')
                 var boutiqueCourse=$resource('api/school/deleteBoutiqueCourse');
                 return boutiqueCourse.remove(params);
             },
+            getSchoolByDomain:function (params) {
+                var school = $resource('api/school/getSchoolByDomain');
+                return school.get(params);
+            },
         }
 
     });
