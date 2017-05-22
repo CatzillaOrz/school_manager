@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('TeachClassListCtrl', function ($scope, TeachClassService, AuthService, messageService) {
+	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -16,10 +16,39 @@ angular.module('dleduWebApp')
 				pageNumber: 1,
 				pageSize: 10
 			},
+            allChedked:false,
 			params: {
 				name: ""
 			},
-            agendaWeeks:angular.toJson([{id:10,name:'安卓1班',semesterId:14},{id:11,name:'安卓2班',semesterId:14}]),
+            allCheck:function(){
+			    var _this = this;
+                _this.allChedked = !_this.allChedked;
+			  if(_this.allChedked){
+                    angular.forEach(_this.teachClassList,function(item,index){
+                        item.checked = true;
+                    })
+              }else{
+                  angular.forEach(_this.teachClassList,function(item,index){
+                      item.checked = false;
+                  })
+              }
+            },
+            schedules:function(){
+                var _this = this;
+                var arr= [];
+                angular.forEach(_this.teachClassList,function(item,index){
+                    if(item.checked){
+                        var newObj = {};
+                        newObj.id = item.id;
+                        newObj.name = item.name;
+                        newObj.semesterId = item.semesterId;
+                        arr.push(newObj);
+                    }
+                });
+                if(arr.length >0){
+                    $state.go('agendaWeeks',{ids:angular.toJson(arr)});
+                }
+            },
 			// 获取教学班列表
 			getTeachClassList: function () {
 				var that = this;

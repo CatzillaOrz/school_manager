@@ -102,7 +102,7 @@
                                 .col-xs-6.col-sm-6
                                     .btn.btn-default(ng-click='schedule.removeAllCourseCard()') 全部重排
                                     .speace-10
-                                    .btn.btn-primary(ng-click='schedule.saveCourseSchedule()') 保存排课
+                                    .btn.btn-primary(ng-click='schedule.saveCourseSchedules()') 保存排课
                                 .col-xs-6.col-sm-6.text-right
                                     .btn.btn-default(ui-sref='teachclasslist') 返回教学班管理
 
@@ -110,5 +110,8 @@
                             .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')
 
         .col-xs-12.col-sm-8.col-lg-9.col-sm-offset-4.col-lg-offset-3
-            .well
-                .label 123123
+            ul.well.courseEx
+                h6 教学班颜色图示：
+                li(ng-repeat='item in schedule.eventSources')
+                    span.label(ng-style="{'background':item.color}") {{item.teachingClassName}}
+                .clearfix

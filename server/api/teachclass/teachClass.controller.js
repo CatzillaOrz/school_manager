@@ -183,6 +183,24 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
+    },
+    getCourseSchedules: function (req, res) {
+        TeachClassService.getCourseSchedulesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    saveCourseSchedules: function (req, res) {
+        TeachClassService.saveCourseSchedulesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
     }
 };
 
