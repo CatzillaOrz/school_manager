@@ -148,7 +148,7 @@ angular.module('dleduWebApp')
             },
             setMajorToggle:function () {
               var _this=this;
-              if(_this.isSetMajor){
+              if(!_this.isSetMajor){
                   _this.resetParams();
               }
               _this.isSetMajor=!_this.isSetMajor;
@@ -267,6 +267,14 @@ angular.module('dleduWebApp')
               params.collegeId=_this.collegeId;
               params.specialtyId=_this.majorId;
               params.userId=AuthService.getUser().id;
+              if(!params.collegeId){
+                  messageService.openMsg("请选择学院！");
+                  return;
+              }
+            if(!params.specialtyId){
+                messageService.openMsg("请选择专业！");
+                return;
+            }
               if(_this.params.id){
                   _this.updateHotMajor(params);
               }else {
