@@ -30,5 +30,7 @@ router.get('/getTeachClassClassesList', auth.isSignedIn, controller.getTeachClas
 router.get('/getCourseSchedule', auth.isSignedIn, controller.getCourseSchedule);
 router.post('/saveCourseSchedule', auth.isSignedIn, controller.saveCourseSchedule);
 router.delete('/delCourseSchedule', auth.isSignedIn, controller.delCourseSchedule);
+router.put('/getCourseSchedules', auth.isSignedIn, controller.getCourseSchedules);
+router.post('/saveCourseSchedules', auth.isSignedIn, controller.saveCourseSchedules);
 //getTeachClassClassesList
 module.exports = router;

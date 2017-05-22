@@ -9,98 +9,6 @@ angular.module('dleduWebApp')
         var w = date.getDay();
         var eventSerialId = 1;
 
-        var tempData = [
-            {
-                "teachingClassId": 11,
-                "teachingClassName": "安卓A4班",
-                "timePeriod": [{
-                    "dayOfWeek": 1,
-                    "periodId": 16,
-                    "periodMo": 1,
-                    "periodNum": 1,
-                    "startWeekId": 88,
-                    "endWeekId": 97,
-                    "startWeekNo": 1,
-                    "endWeekNo": 10,
-                    "singleOrDouble": 10,
-                    "classroom": "",
-                    "remark": "",
-                    "color": null
-                }, {
-                    "dayOfWeek": 3,
-                    "periodId": 16,
-                    "periodMo": 1,
-                    "periodNum": 1,
-                    "startWeekId": 94,
-                    "endWeekId": 106,
-                    "startWeekNo": 7,
-                    "endWeekNo": 19,
-                    "singleOrDouble": 10,
-                    "classroom": "",
-                    "remark": "",
-                    "color": null
-                }, {
-                    "dayOfWeek": 5,
-                    "periodId": 20,
-                    "periodMo": 5,
-                    "periodNum": 1,
-                    "startWeekId": 88,
-                    "endWeekId": 101,
-                    "startWeekNo": 1,
-                    "endWeekNo": 14,
-                    "singleOrDouble": 10,
-                    "classroom": "",
-                    "remark": "",
-                    "color": null
-                }, {
-                    "dayOfWeek": 5,
-                    "periodId": 18,
-                    "periodMo": 3,
-                    "periodNum": 1,
-                    "startWeekId": 88,
-                    "endWeekId": 103,
-                    "startWeekNo": 1,
-                    "endWeekNo": 16,
-                    "singleOrDouble": 30,
-                    "classroom": "",
-                    "remark": "",
-                    "color": null
-                }],
-                "userId": null
-            },
-            {
-                "teachingClassId": 10,
-                "teachingClassName": "2017第二学期Java开发班",
-                "timePeriod": [{
-                    "dayOfWeek": 1,
-                    "periodId": 16,
-                    "periodMo": 1,
-                    "periodNum": 2,
-                    "startWeekId": 88,
-                    "endWeekId": 107,
-                    "startWeekNo": 1,
-                    "endWeekNo": 20,
-                    "singleOrDouble": 10,
-                    "classroom": "5#402",
-                    "remark": "",
-                    "color": null
-                }, {
-                    "dayOfWeek": 6,
-                    "periodId": 16,
-                    "periodMo": 1,
-                    "periodNum": 1,
-                    "startWeekId": 92,
-                    "endWeekId": 96,
-                    "startWeekNo": 5,
-                    "endWeekNo": 9,
-                    "singleOrDouble": 20,
-                    "classroom": "",
-                    "remark": "",
-                    "color": null
-                }],
-                "userId": null
-            }
-        ];
 
         $scope.schedule = {
             period: [
@@ -370,7 +278,7 @@ angular.module('dleduWebApp')
             },
 
             /**
-             * 获取学周数据 todo 等学周数量从教学班页面传递真实数据后，删除这个方法。
+             * 获取学周数据
              */
             getTeachWeek: function (semesterId) {
                 var _this = this;
@@ -471,7 +379,6 @@ angular.module('dleduWebApp')
                         angular.forEach(timePeriod, function (item, index) {
 
                             if (item._id === _this.courseCard._id) {
-
                                 console.log(_this.courseCard);
                                 item.classroom = _this.courseCard.classroom;
                                 item.startWeekId = _this.courseCard.startWeek.id;
@@ -492,15 +399,19 @@ angular.module('dleduWebApp')
             /**
              * 保存排课数据到api
              */
-            saveCourseSchedule: function () {
+            saveCourseSchedules: function () {
                 var _this = this;
-                //todo 用新的批量排课接口重写保存
-                var params = {
-                    teachingClassId: _this.teachClasses[0].id,
-                    userId: $scope.user.id,
-                    timePeriod: _this.eventSources[0]
-                };
-                TeachClassService.saveCourseSchedule(params).$promise
+                var arr = [];
+                angular.forEach(_this.eventSources,function(item,index){
+                    console.log(item);
+                    var obj = {};
+                    obj.teachingClassId = item.teachingClassId;
+                    obj.userId = $scope.user.id;
+                    obj.timePeriod = item;
+                    arr.push(obj);
+                });
+                // console.log(arr);
+                TeachClassService.saveCourseSchedules(arr).$promise
                     .then(function (data) {
                         messageService.openMsg("保存成功")
                     })
@@ -510,58 +421,39 @@ angular.module('dleduWebApp')
             },
 
             /**
-             * 从api获取该教学班排课数据 todo 统一用新的批量排课接口
+             * 从api获取多个教学班排课数据
              */
-            getCourseSchedule: function (classes) {
+            getCourseSchedules: function ( ids) {
+                // console.log(ids);
                 var _this = this;
-                var params = {
-                    teachingClassId: classes[0].id
-                };
-                TeachClassService.getCourseSchedule(params).$promise
+                var params = {teachingClassIds:ids};
+                TeachClassService.getCourseSchedules(params).$promise
                     .then(function (data) {
+                        angular.forEach(data, function (obj, index) {
+                            var arr = [];
+                            if(obj.timePeriod.length > 0){
+                                angular.forEach(obj.timePeriod, function (item, num) {
+                                    item.teachingClassId = obj.teachingClassId;
+                                    item.color = _this.groupColors[index];
+                                    arr.teachingClassId = obj.teachingClassId;
+                                    arr.teachingClassName = obj.teachingClassName;
+                                    arr.color = _this.groupColors[index];
+                                    _this.renderSource(item, arr);
+                                });
+                            }else{
+                                // console.log(obj.teachingClassId);
+                                arr.teachingClassId = obj.teachingClassId;
+                                arr.teachingClassName = obj.teachingClassName;
+                                arr.color = _this.groupColors[index];
+                            }
+                            _this.eventSources.push(arr);
 
-                        var arr = [];
-                        angular.forEach(data.timePeriod, function (item, num) {
-                            item.teachingClassId = data.teachingClassId;
-                            item.color = _this.groupColors[0];
-                            arr.teachingClassId = data.teachingClassId;
-                            arr.color = _this.groupColors[0];
-                            _this.renderSource(item, arr);
                         });
-
-                        // console.log(arr);
-                        _this.eventSources.push(arr);
+                        // console.log(_this.eventSources);
                     })
                     .catch(function (error) {
 
                     })
-            },
-
-
-            /**
-             * 从api获取多个教学班排课数据
-             * todo 对接api并测试渲染后的数据
-             */
-            getCourseSchedules: function () {
-                var _this = this;
-                var params = {};
-
-                console.log(tempData);
-
-                //todo 获取接口数据替换临时数据
-                angular.forEach(tempData, function (obj, index) {
-                    var arr = [];
-                    angular.forEach(obj.timePeriod, function (item, num) {
-                        item.teachingClassId = obj.teachingClassId;
-                        item.color = _this.groupColors[index];
-                        arr.teachingClassId = obj.teachingClassId;
-                        arr.color = _this.groupColors[index];
-                        _this.renderSource(item, arr);
-                    });
-                    // console.log(arr);
-                    _this.eventSources.push(arr);
-                });
-
             },
             /**
              * 页面初始化
@@ -573,6 +465,7 @@ angular.module('dleduWebApp')
                 _this.getPeriod();
                 _this.eventSources = [];
                 //单教学班排课
+                var newArr = [];
                 if (!!$state.params.id) {
                     _this.bulk = true;
                     _this.teachClasses = [{
@@ -580,13 +473,20 @@ angular.module('dleduWebApp')
                         name: $state.params.name,
                         semesterId: $state.params.semesterId
                     }];
-                    _this.getCourseSchedule(_this.teachClasses);
+                    angular.forEach(_this.teachClasses,function(item,index){
+                        newArr.push(item.id);
+                    });
+                    // _this.getCourseSchedule(_this.teachClasses);
+                    _this.getCourseSchedules(newArr);
                 }
                 //多教学班批量排课，获取批量排课的教学班id,默认初始化第一个
                 if (!!$state.params.ids) {
                     _this.bulk = false;
                     _this.teachClasses = angular.fromJson($state.params.ids);
-                    _this.getCourseSchedules(_this.teachClasses);
+                    angular.forEach(_this.teachClasses,function(item,index){
+                        newArr.push(item.id);
+                    });
+                    _this.getCourseSchedules(newArr);
                 }
                 _this.courseCardForm.teachingClass = _this.teachClasses[0];
                 _this.semesterId = _this.teachClasses[0].semesterId;

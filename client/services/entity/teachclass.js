@@ -88,6 +88,16 @@ angular.module('dleduWebService')
             delCourseSchedule: function (params) {
                 var courseSchedule = $resource('api/teachclass/delCourseSchedule');
                 return courseSchedule.remove(params);
+            },
+            getCourseSchedules:function(params){
+                var courseSchedules = $resource('api/teachclass/getCourseSchedules', '', {
+                    update: {method: 'PUT', isArray: true}
+                });
+                return courseSchedules.update(params);
+            },
+            saveCourseSchedules: function (params) {
+                var courseSchedule = $resource('api/teachclass/saveCourseSchedules');
+                return courseSchedule.save(params);
             }
 		}
 

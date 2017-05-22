@@ -325,6 +325,36 @@ var TeachClassService = {
         }).catch(function (e) {
             callback(e);
         });
+    },
+    getCourseSchedules: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway',
+            path: '/v1/schooltimetable/get',
+            entity: params.teachingClassIds
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    saveCourseSchedules: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway',
+            path: '/v1/schooltimetable/addbatch',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
     }
 };
 
