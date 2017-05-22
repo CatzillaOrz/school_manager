@@ -94,7 +94,7 @@ angular.module('dleduWebApp', [
 
         //入口路由配置
         $urlRouterProvider
-            .otherwise('/login');
+            .otherwise('/index');
         $stateProvider
             .state('base', {
                 abstract: true,

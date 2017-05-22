@@ -99,6 +99,14 @@
 
     }
   }
+  .sub-nav{
+    margin: 30px auto 0 auto;
+    width: 1000px;
+    font-size: 12px;
+    .active{
+      color: $brand-primary;
+    }
+  }
   .content-container {
     margin: 0px auto;
     width: 1000px;
@@ -148,6 +156,7 @@
         //
         .course-image {
           height: 140px;
+          width: 223px;
         }
         .course-name {
           margin-top: 20px;

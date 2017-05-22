@@ -1,0 +1,18 @@
+.sub-nav
+  span.cursor-pointer(ui-sref="index") 首页
+  span >>
+  span.cursor-pointer.active 精品课程
+.content-container
+    .feature-block
+        .title 精品课程
+    .boutique-course-content
+        .course-card(ng-repeat="course in boutiqueFn.boutiqueCourseList")
+            img.course-image(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495097620394'}}")
+            .course-name
+                | {{course.courseName}}
+            .course-teacher
+                | 12课时 | 刘建平
+
+    .dt-toolbar-footer
+        #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+            ul.pagination-sm(uib-pagination, total-items='boutiqueFn.page.totalElements',items-per-page="boutiqueFn.page.pageSize" max-size='boutiqueFn.page.pageSize' ng-model='boutiqueFn.page.pageNumber',ng-change="boutiqueFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")

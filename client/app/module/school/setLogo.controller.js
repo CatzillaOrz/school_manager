@@ -120,7 +120,7 @@ angular.module('dleduWebApp')
             },
             setToggle: function (entity) {
                 var _this=this;
-                if(entity==0||entity==1){
+                if(entity==0){
                     _this.jcropType="block";
                 }else {
                     _this.jcropType="longBlock";
@@ -154,8 +154,8 @@ angular.module('dleduWebApp')
         ngJcropConfigProvider.setJcropConfig('longBlock', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 7/3
-            // maxWidth: 250,
-            // maxHeight: 250
+            aspectRatio: 3/7,
+            maxWidth: 420,
+            maxHeight: 60
         });
     });
