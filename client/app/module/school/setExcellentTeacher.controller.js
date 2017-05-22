@@ -100,7 +100,7 @@ angular.module('dleduWebApp')
             },
             setMajorToggle:function () {
                 var _this=this;
-                if(_this.isSetExcellent){
+                if(!_this.isSetExcellent){
                     _this.resetParams();
                 }
                 _this.isSetExcellent=!_this.isSetExcellent;
@@ -196,6 +196,10 @@ angular.module('dleduWebApp')
             submit:function () {
                 var _this=this;
                 var params=_this.params;
+                if(!params.teacherId){
+                    messageService.openMsg("请选择教师");
+                    return;
+                }
                 params.userId=AuthService.getUser().id;
                 if(_this.params.id){
                     _this.updateExcellentTeacher(params);

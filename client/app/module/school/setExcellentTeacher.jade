@@ -61,7 +61,7 @@
                                 | 显示第
                                 span.txt-color-darken {{((excellentTeacherFn.page.pageNumber==0?excellentTeacherFn.page.pageNumber+1:excellentTeacherFn.page.pageNumber)-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((excellentTeacherFn.page.pageNumber==0?excellentTeacherFn.page.pageNumber+1:excellentTeacherFn.page.pageNumber)-1)*10+excellentTeacherFn.majorList.length}}
+                                span.txt-color-darken {{((excellentTeacherFn.page.pageNumber==0?excellentTeacherFn.page.pageNumber+1:excellentTeacherFn.page.pageNumber)-1)*10+excellentTeacherFn.excellentTeacherList.length}}
                                 |  条 总共
                                 span.text-primary {{excellentTeacherFn.page.totalElements}}
                                 |  条记录
@@ -75,7 +75,7 @@
                 i.fa.fa-table
             h2 {{excellentTeacherFn.title}}
         .widget-body
-            form.form-horizontal(name="majorForm")
+            form.form-horizontal(name="teacherForm")
                 fieldset
                     legend {{excellentTeacherFn.prompt}}
                 .form-group
@@ -90,7 +90,7 @@
                         span.required *
                         | 介绍：
                     .col-sm-7
-                        textarea.introduce(ng-model="excellentTeacherFn.params.introduction")
+                        textarea.introduce(ng-model="excellentTeacherFn.params.introduction" validator="required" name="introduce")
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
@@ -121,7 +121,7 @@
                 .form-actions
                     .row
                         .col-md-12
-                            a.btn.btn-primary(ng-click="excellentTeacherFn.submit()" validation-submit="majorForm") 提交
+                            a.btn.btn-primary(ng-click="excellentTeacherFn.submit()" validation-submit="teacherForm") 提交
                             .speace-10
                             a.btn.btn-default(ng-click="excellentTeacherFn.setMajorToggle()") 取消
             // end widget content

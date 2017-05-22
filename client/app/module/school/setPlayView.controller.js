@@ -7,6 +7,7 @@ angular.module('dleduWebApp')
             isSetBanner: false,
             isSetIntroduce:false,
             currentObjIndex: {},
+            buttonView:"设置",
             obj: {src: "", selection: [], thumbnail: true},
             params:{
                 orgId: AuthService.getUser().orgId,
@@ -122,12 +123,18 @@ angular.module('dleduWebApp')
             },
             setIntroduceToggle: function (entity) {
                 var _this=this;
+
                 if(_this.isSetIntroduce){
                     var params=_this.params;
                     params.introduction=_this.schoolIntroduce;
                     _this.addSchoolInfo(params);
                 }
                 _this.isSetIntroduce = !_this.isSetIntroduce;
+                if(_this.isSetIntroduce){
+                    _this.buttonView="保存";
+                }else {
+                    _this.buttonView="设置";
+                }
             },
             addSchoolInfo:function (params) {
                 var _this=this;

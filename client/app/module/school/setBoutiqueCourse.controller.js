@@ -101,7 +101,7 @@ angular.module('dleduWebApp')
             },
             setBoutiqueToggle:function () {
                 var _this=this;
-                if(_this.isSetBoutique){
+                if(!_this.isSetBoutique){
                     _this.resetParams();
                 }
                 _this.isSetBoutique=!_this.isSetBoutique;
@@ -196,6 +196,9 @@ angular.module('dleduWebApp')
             submit:function () {
                 var _this=this;
                 var params=_this.params;
+                if(!params.courseId){
+                    messageService.openMsg("请选择课程！");
+                }
                 params.userId=AuthService.getUser().id;
                 if(_this.params.id){
                     _this.updateBoutiqueCourse(params);

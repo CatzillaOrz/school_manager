@@ -57,7 +57,7 @@
                                 | 显示第
                                 span.txt-color-darken {{((hotMajorFn.page.pageNumber==0?hotMajorFn.page.pageNumber+1:hotMajorFn.page.pageNumber)-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((hotMajorFn.page.pageNumber==0?hotMajorFn.page.pageNumber+1:hotMajorFn.page.pageNumber)-1)*10+hotMajorFn.majorList.length}}
+                                span.txt-color-darken {{((hotMajorFn.page.pageNumber==0?hotMajorFn.page.pageNumber+1:hotMajorFn.page.pageNumber)-1)*10+hotMajorFn.hotMajorList.length}}
                                 |  条 总共
                                 span.text-primary {{hotMajorFn.page.totalElements}}
                                 |  条记录
@@ -94,7 +94,7 @@
                             span.required *
                             | 介绍：
                         .col-sm-7
-                            textarea.introduce(ng-model="hotMajorFn.params.introduction")
+                            textarea.introduce(ng-model="hotMajorFn.params.introduction" validator="required" name="introduce")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
