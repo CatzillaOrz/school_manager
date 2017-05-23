@@ -5,6 +5,7 @@ angular.module('dleduWebApp')
         $scope.indexFn={
             schoolInfo:{},
             schoolLogo:"",
+            currentActive:"index",
             params:{
                 orgId: "",
                 pageNumber:1,
@@ -109,7 +110,9 @@ angular.module('dleduWebApp')
            }
         };
         $timeout(function () {
-
+            $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+                $scope.indexFn.currentActive=toState.name;
+            });
             $scope.indexFn.init();
         })
 

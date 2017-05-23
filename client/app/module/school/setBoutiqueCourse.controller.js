@@ -131,7 +131,14 @@ angular.module('dleduWebApp')
                         _this.isSetBoutique=false;
                     })
                     .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("设置精品课程失败！");
 
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
                     })
             },
             resetParams:function () {

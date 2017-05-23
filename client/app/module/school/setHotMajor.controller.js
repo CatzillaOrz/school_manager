@@ -196,7 +196,14 @@ angular.module('dleduWebApp')
                         _this.isSetMajor=false;
                     })
                     .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("设置热门专业失败！");
 
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
                     })
             },
             resetParams:function () {
