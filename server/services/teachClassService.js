@@ -328,7 +328,7 @@ var TeachClassService = {
     },
     getCourseSchedules: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/schooltimetable/get',
             entity: params.teachingClassIds
         }).then(function (res) {
@@ -343,7 +343,7 @@ var TeachClassService = {
     },
     saveCourseSchedules: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/schooltimetable/addbatch',
             entity: params
         }).then(function (res) {
