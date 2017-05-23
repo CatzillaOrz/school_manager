@@ -14,11 +14,11 @@
     .nav-bar
         .navigation
             ul
-                li.active(ui-sref="index")
+                li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
                     | 首页
                 //li()
                 //    | 学校概况
-                li(ui-sref="boutique")
+                li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
                     | 精品课程
     div(ui-view="content")
     .footer

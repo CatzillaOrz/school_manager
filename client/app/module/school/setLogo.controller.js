@@ -147,15 +147,15 @@ angular.module('dleduWebApp')
         ngJcropConfigProvider.setJcropConfig('block', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 1/1
+            aspectRatio: 1 / 1
             // maxWidth: 250,
             // maxHeight: 250
         });
         ngJcropConfigProvider.setJcropConfig('longBlock', {
-            bgColor: 'black',
-            bgOpacity: .4,
-            aspectRatio: 3/7,
-            maxWidth: 420,
-            maxHeight: 60
+            // bgColor: 'black',
+            // bgOpacity: .4,
+            // aspectRatio:7 / 3,
+            // maxWidth: 420,
+            // maxHeight: 60
         });
     });
