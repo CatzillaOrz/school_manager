@@ -1,28 +1,29 @@
-.logo-container
-    .logo-card-container(ng-if="!logoFn.isSetLogo")
-        .logo-image-view(ng-click='logoFn.setToggle(0)')
-            .title
-                | 第一张
-            .logo-block
-                img.logo(ng-src="{{logoFn.logoList[0].logoUrl}}")
-            .logo-block-introduce
-               .logo-introduce 需要透明背景的200*200png图片，主要用于学校首页以及登录个性化的个性化展示。
-        .logo-image-view(ng-click='logoFn.setToggle(1)')
-            .title
-                | 第二张
-            .logo-long-block
-                img.logo(ng-src="{{logoFn.logoList[1].logoUrl}}")
-            .logo-long-block-introduce
-                .logo-introduce 需要透明背景的60*420png图片，主要用于学校首页以及登录个性化的个性化展示。
+.widget-body.no-padding
+    .logo-container
+        .logo-card-container(ng-if="!logoFn.isSetLogo")
+            .logo-image-view(ng-click='logoFn.setToggle(0)')
+                .title
+                    | 第一张
+                .logo-block
+                    img.logo(ng-src="{{logoFn.logoList[0].logoUrl}}")
+                .logo-block-introduce
+                   .logo-introduce 需要透明背景的200*200png图片，主要用于学校首页以及登录个性化的个性化展示。
+            .logo-image-view(ng-click='logoFn.setToggle(1)')
+                .title
+                    | 第二张
+                .logo-long-block
+                    img.logo(ng-src="{{logoFn.logoList[1].logoUrl}}")
+                .logo-long-block-introduce
+                    .logo-introduce 需要透明背景的60*420png图片，主要用于学校首页以及登录个性化的个性化展示。
 
-    .container(ng-if="logoFn.isSetLogo")
-        .logo-setting
-            .btn-upload
-                input(type="file" ng-jcrop-input="{{logoFn.jcropType}}" ngf-select="logoFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
-            .upload-pic
-                div(ng-jcrop="logoFn.obj.src" ng-jcrop-config-name="{{logoFn.jcropType}}" data-ng-jcrop-config-name="{{logoFn.jcropType}}" data-selection="logoFn.obj.selection" data-thumbnail="logoFn.obj.thumbnail")
+        .container(ng-if="logoFn.isSetLogo")
+            .logo-setting
+                .btn-upload
+                    input(type="file" ng-jcrop-input="{{logoFn.jcropType}}" ngf-select="logoFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                .upload-pic
+                    div(ng-jcrop="logoFn.obj.src" ng-jcrop-config-name="{{logoFn.jcropType}}" data-ng-jcrop-config-name="{{logoFn.jcropType}}" data-selection="logoFn.obj.selection" data-thumbnail="logoFn.obj.thumbnail")
 
-            .splie-line
-            button.button.button-primary.button-rounded(type='submit' ng-click='logoFn.uploadImage($event)') 保存
-            .speace-10
-            button.button.btn-defulat.button-rounded(type='submit' ng-click='logoFn.setToggle()') 取消
+                .splie-line
+                button.button.button-primary.button-rounded(type='submit' ng-click='logoFn.uploadImage($event)') 保存
+                .speace-10
+                button.button.btn-defulat.button-rounded(type='submit' ng-click='logoFn.setToggle()') 取消

@@ -339,7 +339,23 @@ var SchoolService = {
             .catch(function (e) {
                 callback(e);
             });
-    }
+    },
+    getBoutiqueCourseDropList: function (params, callback) {
+        RestClient.get({
+            host: 'em',
+            path: '/api/web/v1/bteacher/course/getboutique',
+            params:{schoolId:params.orgId}
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
 };
 
 
