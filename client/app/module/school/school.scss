@@ -135,7 +135,21 @@
     @include box-shadow2(0px,0px,10px, rgba(0, 0, 0, 0.71));
   }
   .logo-setting{
+    margin-top: 50px;
     text-align: center;
   }
+ .shuff-image-setting{
+   margin-top: 50px;
+   text-align: center;
+   .shuff-image-jcorp{
 
+   }
+   .shuff-image-href{
+     width: 400px;
+   }
+   .btn-bars{
+     margin-bottom: 20px;
+     margin-top: 136px;
+   }
+ }
 }

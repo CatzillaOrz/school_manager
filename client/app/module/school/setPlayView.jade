@@ -21,13 +21,22 @@
                 .col-sm-12.margin-top-10.text-center
                     button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ) {{bannerFn.buttonView}}
         .container(ng-if="bannerFn.isSetBanner")
-            .logo-setting
-                .btn-upload
-                    input(type="file" ng-jcrop-input="longBlock" ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
-                .upload-pic
-                    div(ng-jcrop="bannerFn.obj.src" ng-jcrop-config-name="longBlock" data-ng-jcrop-config-name="longBlock" data-selection="bannerFn.obj.selection" data-thumbnail="bannerFn.obj.thumbnail")
-                .splie-line
-                button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
-                .speace-10
-                button.button.btn-defulat.button-rounded(type='submit' ng-click='bannerFn.setToggle()') 取消
+            .shuff-image-setting
+                .short-form
+                    .shuff-image-jcorp
+                        .btn-upload
+                            input(type="file" ng-jcrop-input="longBlock" ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                        .upload-pic
+                            div(ng-jcrop="bannerFn.obj.src" ng-jcrop-config-name="longBlock" data-ng-jcrop-config-name="longBlock" data-selection="bannerFn.obj.selection" data-thumbnail="bannerFn.obj.thumbnail")
+                    .shuff-image-href.row
+                        label.col-sm-3
+                            span
+                            | 轮播图链接:
+                        .col-sm-7
+                            input.form-control(placeholder="" ng-model="bannerFn.params.href" name="name" )
+                .btn-bars
+                    .splie-line
+                    button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
+                    .speace-10
+                    button.button.btn-defulat.button-rounded(type='submit' ng-click='bannerFn.setToggle()') 取消
 
