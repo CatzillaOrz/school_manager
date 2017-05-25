@@ -47,7 +47,7 @@ angular.module('dleduWebApp')
             //单教学班排课还是批量排课的状态
             bulk: true,
             //批量排课用的教学班课程颜色组
-            groupColors: ['#739E73', '#6E587A', '#CDE0C4', '#44565C'],
+            groupColors: ['#57889C', '#A8829F', '#356E35', '#6E587A', '#A57225', '#A90329', '#71843F', '#6E3671', '#AC5287', '#4C4F53', '#A65858', '#C79121'],
             //排课日程参数设置
             scheduleConfig: {
 
