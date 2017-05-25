@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope, CommonService, $rootScope, AuthService, $window, $state) {
+    .controller('LayoutCtrl', function ($scope, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
@@ -17,9 +17,26 @@ angular.module('dleduWebApp')
             },
             lcReload: function () {
                 $window.location.reload();
-            }
-        };
+            },
+            getLogoList:function () {
+                var _this=this;
+                var params={
+                    orgId:AuthService.getUser().orgId
+                };
+                SchoolService.getLogoList(params).$promise
+                    .then(function (data) {
+                        angular.forEach(data.data,function (temp) {
+                            if(temp.logoSort==1){
+                                _this.user.orgLogo=temp.logoUrl;
+                            }
+                        })
+                    })
+                    .catch(function (error) {
 
+                    })
+            },
+        };
+        $scope.layoutFn.getLogoList();
         $rootScope.$watch('user', function () {
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;

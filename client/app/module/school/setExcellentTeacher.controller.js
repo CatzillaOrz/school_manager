@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
             params:{
                 teacherId:"",
                 inUrl:"",
-                templateShow:"",
+                templateShow:"1",
                 introduction:"",
                 orgId: AuthService.getUser().orgId,
                 userId:AuthService.getUser().id,
@@ -205,6 +205,10 @@ angular.module('dleduWebApp')
                 var params=_this.params;
                 if(!params.teacherId){
                     messageService.openMsg("请选择教师");
+                    return;
+                }
+                if(!params.inUrl){
+                    messageService.openMsg("您还没有上传介绍图片！");
                     return;
                 }
                 params.userId=AuthService.getUser().id;

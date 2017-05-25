@@ -2,6 +2,9 @@
   #logo{
     height: 50px;
     width: 50px;
+    img{
+      border-radius: 50%;
+    }
   }
   #orgName{
     color: $text-color-lightest;

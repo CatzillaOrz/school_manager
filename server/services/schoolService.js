@@ -343,7 +343,7 @@ var SchoolService = {
     getBoutiqueCourseDropList: function (params, callback) {
         RestClient.get({
             host: 'em',
-            path: '/api/web/v1/bteacher/course/getboutique',
+            path: '/api/web/v1/school/course/getschoolcourse',
             params:{schoolId:params.orgId}
         }).then(function (res) {
             if (res.status.code == 200) {
