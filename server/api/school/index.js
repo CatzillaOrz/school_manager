@@ -29,11 +29,15 @@ router.delete('/deleteExcellentTeacher',auth.isSignedIn, controller.deleteExcell
 
 //
 router.post('/addBoutiqueCourse',auth.isSignedIn, controller.addBoutiqueCourse);
+//从平台课程中获取
 router.get('/getBoutiqueCourseList', controller.getBoutiqueCourseList);
 router.put('/updateBoutiqueCourse',auth.isSignedIn, controller.updateBoutiqueCourse);
 router.delete('/deleteBoutiqueCourse',auth.isSignedIn, controller.deleteBoutiqueCourse);
 
 router.get('/getSchoolByDomain', controller.getSchoolByDomain);
+
+//从开卷课程中获取
+router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);
 
 
 module.exports = router;

@@ -39,5 +39,17 @@ angular.module('dleduWebApp')
                 },
 
             })
+            .state('overview', {
+                url   : '/overview',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'overViewCtrl',
+                        templateUrl: 'app/index/overView.html'
+                    }
+                },
+
+            })
 
     });

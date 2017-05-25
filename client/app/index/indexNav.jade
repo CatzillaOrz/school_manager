@@ -4,7 +4,7 @@
             .school-logo
                 img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495078273034' }}")
             .login-button
-                button.btn-login(ui-sref='login')
+                button.btn-login(ng-click='indexFn.signIn()')
                     i.fa.fa-user.fa-fw
                     |  登录
             a.azx-logo
@@ -16,7 +16,7 @@
             ul
                 li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
                     | 首页
-                //li()
+                //li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
                 //    | 学校概况
                 li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
                     | 精品课程

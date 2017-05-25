@@ -196,6 +196,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getBoutiqueCourseDropList: function (req, res) {
+        SchoolService.getBoutiqueCourseDropListSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

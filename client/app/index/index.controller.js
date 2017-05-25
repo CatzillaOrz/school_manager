@@ -15,6 +15,17 @@ angular.module('dleduWebApp')
             excellentTeacherList:[],
             hotMajorList:[],
             shuffImageList:[],
+            signIn: function () {
+                var _pathName = '';
+                if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
+                    _pathName = '/login?redirectUrl=' + $scope.redirectUrl;
+                } else if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") == -1) {
+                    _pathName = '/login?redirectUrl=' + $window.location.protocol + '//' + $window.location.host + $scope.redirectUrl;
+                } else {
+                    _pathName = '/login';
+                }
+                AuthService.navigation(0, _pathName);
+            },
             //精品课程查询
             getBoutiqueCourseList:function () {
                 var _this=this;
@@ -102,6 +113,7 @@ angular.module('dleduWebApp')
                 var _this=this;
                _this.schoolInfo=  CommonService.getSchool();
                _this.params.orgId=_this.schoolInfo.id;
+               _this.currentActive=$state.name;
                 _this.getShuffImageList();
                _this.getHotMajorList();
                _this.getExcellentTeacherList();

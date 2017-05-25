@@ -1,32 +1,33 @@
-.logo-container
-    .shuff-image-card-container(ng-if="!bannerFn.isSetBanner")
-        div 设置轮播图：
-            small 最多设置6张轮播图
+.widget-body.no-padding
+    .logo-container
+        .shuff-image-card-container(ng-if="!bannerFn.isSetBanner")
+            div 设置轮播图：
+                small 最多设置6张轮播图
 
-        .shuff-image-view(ng-repeat="ban in bannerFn.bannerList")
-            .title
-                | 第{{$index+1}}张
-                i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
-            .shuff-block(ng-click='bannerFn.setToggle($index)' )
-                img.img(ng-src="{{ban.imageUrl}}")
-        .col-sm-12.margin-top-10.text-center
-            button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
-        div 设置学校简介：
-            small 最多600个字
-        .row
-            .col-sm-12.margin-top-10.margin-bottom-10
-                textarea.school-introduce(ng-model="bannerFn.schoolIntroduce" ng-if="bannerFn.isSetIntroduce")
-                .school-introduce(ng-if="!bannerFn.isSetIntroduce") {{bannerFn.schoolIntroduce}}
+            .shuff-image-view(ng-repeat="ban in bannerFn.bannerList")
+                .title
+                    | 第{{$index+1}}张
+                    i.float-right.fa.fa-times(ng-click="bannerFn.removeBanner($index)")
+                .shuff-block(ng-click='bannerFn.setToggle($index)' )
+                    img.img(ng-src="{{ban.imageUrl}}")
             .col-sm-12.margin-top-10.text-center
-                button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ) {{bannerFn.buttonView}}
-    .container(ng-if="bannerFn.isSetBanner")
-        .logo-setting
-            .btn-upload
-                input(type="file" ng-jcrop-input="longBlock" ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
-            .upload-pic
-                div(ng-jcrop="bannerFn.obj.src" ng-jcrop-config-name="longBlock" data-ng-jcrop-config-name="longBlock" data-selection="bannerFn.obj.selection" data-thumbnail="bannerFn.obj.thumbnail")
-            .splie-line
-            button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
-            .speace-10
-            button.button.btn-defulat.button-rounded(type='submit' ng-click='bannerFn.setToggle()') 取消
+                button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
+            div 设置学校简介：
+                small 最多600个字
+            .row
+                .col-sm-12.margin-top-10.margin-top-10.margin-bottom-10
+                    textarea.school-introduce(ng-model="bannerFn.schoolIntroduce" ng-if="bannerFn.isSetIntroduce")
+                    .school-introduce(ng-if="!bannerFn.isSetIntroduce") {{bannerFn.schoolIntroduce}}
+                .col-sm-12.margin-top-10.text-center
+                    button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ) {{bannerFn.buttonView}}
+        .container(ng-if="bannerFn.isSetBanner")
+            .logo-setting
+                .btn-upload
+                    input(type="file" ng-jcrop-input="longBlock" ngf-select="bannerFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                .upload-pic
+                    div(ng-jcrop="bannerFn.obj.src" ng-jcrop-config-name="longBlock" data-ng-jcrop-config-name="longBlock" data-selection="bannerFn.obj.selection" data-thumbnail="bannerFn.obj.thumbnail")
+                .splie-line
+                button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.uploadImage($event)') 保存
+                .speace-10
+                button.button.btn-defulat.button-rounded(type='submit' ng-click='bannerFn.setToggle()') 取消
 

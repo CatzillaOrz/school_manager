@@ -101,6 +101,10 @@ angular.module('dleduWebService')
                 var school = $resource('api/school/getSchoolByDomain');
                 return school.get(params);
             },
+            getBoutiqueCourseDropList:function (params) {
+                var boutiqueCourse = $resource('api/school/getBoutiqueCourseDropList');
+                return boutiqueCourse.get(params);
+            },
         }
 
     });

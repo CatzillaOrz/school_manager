@@ -1,5 +1,5 @@
 .logo-container{
-  padding: 50px;
+//  padding: 50px;
   font-family: $font-family-sans-serif;
   .logo-card-container{
     .logo-image-view{
@@ -67,6 +67,7 @@
     }
   }
   .shuff-image-card-container{
+    margin: 35px;
     .shuff-image-view{
       height: 136px;
       width: 290px;

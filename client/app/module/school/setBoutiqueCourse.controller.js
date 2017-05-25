@@ -32,7 +32,7 @@ angular.module('dleduWebApp')
                 var that=this;
                 return {
                     ajax: {
-                        url: "api/course/getCourseDropListOrg",
+                        url: "api/school/getBoutiqueCourseDropList",
                         dataType: 'json',
                         //delay: 250,
                         data: function (query) {
@@ -115,6 +115,23 @@ angular.module('dleduWebApp')
 
                 }
                 CourseService.getCourseDropListOrg(params).$promise
+                    .then(function (data) {
+                        _this.courseDropList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //从开卷获取
+            getBoutiqueCourseDropList:function () {
+                var _this=this;
+                var params={
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 1,
+                    pageSize: 10000,
+
+                }
+                SchoolService.getBoutiqueCourseDropList(params).$promise
                     .then(function (data) {
                         _this.courseDropList=data.data;
                     })
@@ -258,7 +275,8 @@ angular.module('dleduWebApp')
             init:function () {
                 var _this=this;
                 _this.getBoutiqueCourseList();
-                _this.getCourseDropListOrg();
+                //_this.getCourseDropListOrg();
+                _this.getBoutiqueCourseDropList();
             }
         };
         $scope.boutiqueCourseFn.init();
