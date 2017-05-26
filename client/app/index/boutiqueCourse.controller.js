@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('BoutiqueCourseCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService) {
+    .controller('BoutiqueCourseCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
         $scope.boutiqueFn={
             schoolInfo:{},
+            emHost:"http://emdev.aizhixin.com",
             params:{
                 orgId: "",
                 pageNumber:1,
@@ -35,11 +36,29 @@ angular.module('dleduWebApp')
                     })
             },
 
+            toEmHostInit:function () {
+                var _this=this;
+                var urlArr=$location.host().split('.');
+                var  url ="";
+                if(urlArr.length=2){
+                    url =$location.host().split('.')[1];
+                    if(url=="emtest"){
+                        _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
+                    }else if(url=="em"){
+                        _this.emHost="http://em.dlztc.com/classicalCourse/";
+                    }else {
+                        _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                    }
+                }else {
+                    _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                }
 
+            },
 
 
             init:function () {
                 var _this=this;
+                _this.toEmHostInit();
                 _this.schoolInfo=  CommonService.getSchool();
                 _this.params.orgId=_this.schoolInfo.id;
                 _this.getBoutiqueCourseList();

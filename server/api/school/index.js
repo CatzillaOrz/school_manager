@@ -35,6 +35,9 @@ router.put('/updateBoutiqueCourse',auth.isSignedIn, controller.updateBoutiqueCou
 router.delete('/deleteBoutiqueCourse',auth.isSignedIn, controller.deleteBoutiqueCourse);
 
 router.get('/getSchoolByDomain', controller.getSchoolByDomain);
+router.get('/getHotMajorById', controller.getHotMajorById);
+router.get('/getExcellentTeacherById', controller.getExcellentTeacherById);
+
 
 //从开卷课程中获取
 router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);

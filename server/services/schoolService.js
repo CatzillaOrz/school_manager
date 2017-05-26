@@ -356,6 +356,38 @@ var SchoolService = {
                 callback(e);
             });
     },
+    getHotMajorById: function (params, callback) {
+        RestClient.get({
+            host: 'gateway-school',
+            path: '/v1/schoolhotspecialty/findid',
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    getExcellentTeacherById: function (params, callback) {
+        RestClient.get({
+            host: 'gateway-school',
+            path: '/v1/schoolexcellentteacher/findid',
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
 };
 
 

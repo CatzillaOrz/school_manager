@@ -51,5 +51,52 @@ angular.module('dleduWebApp')
                 },
 
             })
+            .state('hotmajordetail', {
+                url   : '/hotmajordetail/:id',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'hotMajorDetailCtrl',
+                        templateUrl: 'app/index/hotMajorDetail.html'
+                    }
+                },
 
+            })
+            .state('hotmajorlist', {
+                url   : '/hotmajorlist',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'hotMajorListCtrl',
+                        templateUrl: 'app/index/hotMajorList.html'
+                    }
+                },
+
+            })
+            .state('excellentteacherdetail', {
+                url   : '/excellentteacherdetail/:id',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'excellentTeacherDetailCtrl',
+                        templateUrl: 'app/index/excellentTeacherDetail.html'
+                    }
+                },
+
+            })
+            .state('excellentteacherlist', {
+                url   : '/excellentteacherlist',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'excellentTeacherListCtrl',
+                        templateUrl: 'app/index/excellentTeacherList.html'
+                    }
+                },
+
+            })
     });

@@ -111,6 +111,7 @@
   .content-container {
     margin: 0px auto;
     width: 1000px;
+    min-height: 635px;
     .shuff-image {
       margin-top: 10px;
       .img {
@@ -177,6 +178,9 @@
           padding-left: 14px;
           font-size: 18px;
           color: #333333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .course-teacher {
           margin-top: 12px;
@@ -256,6 +260,7 @@
             .detail-button{
               position: absolute;
               margin: 94px auto auto auto;
+              margin-left: 32px;
               .btn-detail{
                 height: 30px;
                 /* margin-top: 8px; */
@@ -319,6 +324,96 @@
     .school-introduce{
       margin-top: 20px;
     }
+    .teacher-card-container-bg{
+      width: 1036px;
+    .teacher-card-bg {
+      cursor: pointer;
+      height: 290px;
+      width: 240px;
+      margin: 24px 12px 0 0px;
+      background-color: #ffffff;
+      display: inline-block;
+      border-radius: 4px !important;
+      // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
+      .teacher-image {
+        margin: 22px auto;
+        text-align: center;
+        border-radius:50%;
+        overflow:hidden;
+        height: 76px;
+        width: 76px;
+        border: 1px solid #dddddd;
+      }
+      .teacher-name {
+        margin-top: 8px;
+        text-align: center;
+        font-size: 20px;
+        color: #333333;
+      }
+      .teacher-detail {
+        margin-top: 18px;
+        padding-left: 14px;
+        color: #999999;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 68px;
+
+      }
+      //&:hover{
+      //  background: #000000;
+      //  opacity: 0.4;
+      //  filter:alpha(opacity=40); /* IE */
+      //  -moz-opacity:0.4; /* 老版Mozilla */
+      //  -khtml-opacity:0.4; /* 老版Safari */
+      //}
+      .shade{
+        background: #000000;
+        opacity: 0.4;
+        filter:alpha(opacity=40); /* IE */
+        -moz-opacity:0.4; /* 老版Mozilla */
+        -khtml-opacity:0.4; /* 老版Safari */
+        height: 290px;
+        width: 240px;
+        position: absolute;
+
+      }
+      .detail-button{
+        position: absolute;
+        margin: 120px auto auto auto;
+        margin-left: 60px;
+        .btn-detail{
+          height: 30px;
+          /* margin-top: 8px; */
+          /* margin-left: 20px; */
+          margin: 0 auto;
+          padding: 8px 20px;
+          min-width: 100px;
+          float: right;
+          color: #ffffff;
+          font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+          background-color: #29c192;
+          border-color: #29c192;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 1em;
+          text-decoration: none;
+          text-align: center;
+          display: inline-block;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          cursor: pointer;
+          border: none;
+          box-sizing: border-box;
+          transition-property: all;
+          transition-duration: .3s;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
   }
   .footer {
     height: 100px;
