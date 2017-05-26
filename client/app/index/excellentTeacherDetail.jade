@@ -1,0 +1,8 @@
+.sub-nav
+    span.cursor-pointer(ui-sref="index") 首页
+    span >>
+    span.cursor-pointer.active 优秀老师
+.content-container
+    .feature-block
+        .title 优秀老师
+    .school-introduce(ng-bind-html="excellentTeacherDetailFn.trustAsHtml(excellentTeacherDetailFn.excellentTeacher.introduction)")

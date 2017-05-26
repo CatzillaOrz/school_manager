@@ -6,7 +6,7 @@ angular.module('dleduWebService')
             product: {
                 name: '知新网综合平台',
 
-                version: '0.0.2.3'
+                version: '0.0.2.4'
 
             },
             isMSIE789: function () {
@@ -60,7 +60,7 @@ angular.module('dleduWebService')
                     return  school;
                 }else {
                     var  url =$location.host().split('.')[0];
-                    //url="kjkf";
+                   // url="kjkf";
                     var params={
                         domainname:url
                     };
@@ -77,6 +77,34 @@ angular.module('dleduWebService')
             },
             setSchool:function (school) {
                 localStorageService.set("school",school)
-            }
+            },
+            strCut: function (strs, len) {
+                var str_length = 0;
+                if (strs != null) {
+                    var str = strs.replace(/<img.+?>/ig, '[图片]');
+                    var str_len = str.length;
+                    var text;
+                    var cut = [];
+                    str = str.replace(/(\n)/g, "");
+                    str = str.replace(/(\t)/g, "");
+                    str = str.replace(/(\r)/g, "");
+                    str = str.replace(/<\/?[^>]*>/g, "");
+                    str = str.replace(/\s*/g, "");
+                    str = str.replace(/<[^>]*>/g, "");
+                    str = str.replace(/&nbsp;/g, "");
+                    if (str_len < len) {
+                        return str;
+                    }
+                    for (var i = 0; i < str_len; i++) {
+                        text = str.charAt(i);
+                        cut = cut.concat(text);
+                        str_length++;
+                        if (str_length >= len) {
+                            cut = cut.concat('...');
+                            return cut.join('');
+                        }
+                    }
+                }
+            },
         }
     });

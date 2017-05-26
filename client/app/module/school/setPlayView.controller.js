@@ -161,7 +161,14 @@ angular.module('dleduWebApp')
                         _this.getSchoolInfo();
                     })
                     .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("设置学校简介失败！");
 
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
                     })
             },
             getSchoolInfo:function () {
@@ -172,7 +179,14 @@ angular.module('dleduWebApp')
                         _this.schoolIntroduce=data.data.introduction;
                     })
                     .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("设置学校简介失败！");
 
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
                     })
             },
             init:function () {

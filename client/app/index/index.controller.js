@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService) {
+    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
         $scope.indexFn={
             schoolInfo:{},
             schoolLogo:"",
@@ -11,6 +11,7 @@ angular.module('dleduWebApp')
                 pageNumber:1,
                 pageSize: 10
             },
+            emHost:"http://emdev.aizhixin.com",
             boutiqueCourseList:[],
             excellentTeacherList:[],
             hotMajorList:[],
@@ -99,11 +100,33 @@ angular.module('dleduWebApp')
 
                     })
             },
+            cutHtml:function (str) {
+                return CommonService.strCut(str,50)
+            },
+            toEmHostInit:function () {
+                var _this=this;
+                var urlArr=$location.host().split('.');
+                var  url ="";
+                if(urlArr.length=2){
+                    url =$location.host().split('.')[1];
+                    if(url=="emtest"){
+                        _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
+                    }else if(url=="em"){
+                        _this.emHost="http://em.dlztc.com/classicalCourse/";
+                    }else {
+                        _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                    }
+                }else {
+                    _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                }
+
+            },
            init:function () {
                 var _this=this;
+               _this.toEmHostInit();
                _this.schoolInfo=  CommonService.getSchool();
                _this.params.orgId=_this.schoolInfo.id;
-               _this.currentActive=$state.name;
+               _this.currentActive=$state.current.name;
                 _this.getShuffImageList();
                _this.getHotMajorList();
                _this.getExcellentTeacherList();
@@ -113,7 +136,13 @@ angular.module('dleduWebApp')
         };
         $timeout(function () {
             $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
-                $scope.indexFn.currentActive=toState.name;
+                if(toState.name=="excellentteacherdetail"){
+                    $scope.indexFn.currentActive="excellentteacherlist";
+                }else if(toState.name=="hotmajordetail"){
+                    $scope.indexFn.currentActive="hotmajorlist";
+                }else {
+                    $scope.indexFn.currentActive=toState.name;
+                }
             });
             $scope.indexFn.init();
         })

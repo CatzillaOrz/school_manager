@@ -13,11 +13,11 @@
             .col-sm-12.margin-top-10.text-center
                 button.button.button-primary.button-rounded(ng-click='bannerFn.setToggle()' ng-disabled="bannerFn.bannerList.length==6") 增加一张
             div 设置学校简介：
-                small 最多600个字
+                small 最多1000个字
             .row
                 .col-sm-12.margin-top-10.margin-top-10.margin-bottom-10
-                    .school-introduce(ng-model="bannerFn.schoolIntroduce" ng-if="bannerFn.isSetIntroduce" ueditor id='bannerFn.editorid' uec='bannerFn.schoolIntroduce' editor='bannerFn.editor' config='bannerFn.editorConf')
-                    .school-introduce(ng-if="!bannerFn.isSetIntroduce" ng-bind-html='bannerFn.trustAsHtml(bannerFn.schoolIntroduce)')
+                    .school-introduce(ng-model="bannerFn.schoolIntroduce" ng-show="bannerFn.isSetIntroduce" ueditor id='bannerFn.editorid' uec='bannerFn.schoolIntroduce' editor='bannerFn.editor' config='bannerFn.editorConf')
+                    .school-introduce(ng-show="!bannerFn.isSetIntroduce" ng-bind-html='bannerFn.trustAsHtml(bannerFn.schoolIntroduce)')
                 .col-sm-12.margin-top-10.text-center
                     button.button.button-primary.button-rounded(type='submit' ng-click='bannerFn.setIntroduceToggle()' ) {{bannerFn.buttonView}}
         .container(ng-if="bannerFn.isSetBanner")

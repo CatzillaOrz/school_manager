@@ -205,6 +205,24 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getHotMajorById: function (req, res) {
+        SchoolService.getHotMajorByIdSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getExcellentTeacherById: function (req, res) {
+        SchoolService.getExcellentTeacherByIdSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

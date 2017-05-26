@@ -5,7 +5,7 @@
         .title 精品课程
         .more.cursor-pointer(ui-sref="boutique") 更多>>
     .boutique-course-content
-        .course-card(ng-repeat="course in indexFn.boutiqueCourseList")
+        a.course-card(ng-repeat="course in indexFn.boutiqueCourseList"  href="{{indexFn.emHost}}{{course.id}}" target="_blank")
             img.course-image(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495700370783'}}")
             .course-name
                 | {{course.courseName}}
@@ -17,22 +17,26 @@
         .excellent-teacher
             .feature-block
                 .title 优秀教师
-                .more 更多>>
+                .more.cursor-pointer(ui-sref="excellentteacherlist") 更多>>
             .teacher-card-container
                 //{"id":1,"userId":null,"orgId":null,"teacherId":6,"introduction":"分隔符","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494986499287","templateShow":2,"teacherName":"驱蚊器","phone":"","jobNumber":"12345","sex":"男","email":""}
-                .teacher-card(ng-repeat="teacher in indexFn.excellentTeacherList")
+                .teacher-card(ng-repeat="teacher in indexFn.excellentTeacherList" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
+                    .shade(ng-show="a")
+                    .detail-button(ng-show="a")
+                        a.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})")
+                            | 教师详情>>
                     .teacher-image
                         img.img(ng-src="{{ teacher.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495114226205'}}")
                     .teacher-name
                         | {{teacher.teacherName}}
                     .teacher-detail
-                        | {{teacher.introduction}}
+                        | {{indexFn.cutHtml(teacher.introduction)}}
 
-                //.teacher-card
-                //    //.shade
-                //    //.detail-button
-                //    //    a.btn-detail
-                //    //        | 教师详情>>
+                //.teacher-card(ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
+                //    .shade(ng-show="a")
+                //    .detail-button(ng-show="a")
+                //        a.btn-detail
+                //            | 教师详情>>
                 //    .teacher-image
                 //        img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
                 //    .teacher-name
@@ -43,10 +47,10 @@
         .hot-msg
             .feature-block
                 .title 热门专业
-                .more 更多>>
+                .more.cursor-pointer(ui-sref="hotmajorlist") 更多>>
             .hot-major-container
                 //{"id":2,"specialtyName":"222222222222222","userId":null,"orgId":null,"collegeId":6,"collegeName":"噢噢噢噢噢噢噢噢123","specialtyId":7,"introduction":"顶顶顶顶顶顶顶顶顶大大大12","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494933552215","templateShow":2,"createDate":1494933440000}
-                .btn-major(ng-repeat="major in indexFn.hotMajorList")
+                .btn-major(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})")
                     | {{major.specialtyName}}
                 //.btn-major
                 //    | 网络通讯

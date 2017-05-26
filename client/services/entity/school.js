@@ -105,6 +105,14 @@ angular.module('dleduWebService')
                 var boutiqueCourse = $resource('api/school/getBoutiqueCourseDropList');
                 return boutiqueCourse.get(params);
             },
+            getHotMajorById:function (params) {
+                var major = $resource('api/school/getHotMajorById');
+                return major.get(params);
+            },
+            getExcellentTeacherById:function (params) {
+                var teacher = $resource('api/school/getExcellentTeacherById');
+                return teacher.get(params);
+            },
         }
 
     });
