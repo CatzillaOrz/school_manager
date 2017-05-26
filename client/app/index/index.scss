@@ -120,7 +120,7 @@
     }
     .feature-block {
       border-bottom: 1px solid #e7e7e7;
-      margin-top: 40px;
+      margin-top: 30px;
       overflow: hidden;
       .title {
         color: $brand-primary;
@@ -316,6 +316,9 @@
         }
       }
     }
+    .school-introduce{
+      margin-top: 20px;
+    }
   }
   .footer {
     height: 100px;
@@ -325,7 +328,7 @@
     text-align: center;
     font-size: 14px;
     color: #e6e5e5;
-    position: absolute;
+   // position: absolute;
     bottom: 0;
   }
 

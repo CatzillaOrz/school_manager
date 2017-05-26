@@ -3,6 +3,15 @@
 angular.module('dleduWebApp')
     .controller('SetHotMajorCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,$timeout,SchoolService,CollegeService) {
         $scope.hotMajorFn = {
+            editorid: 'introduce',
+            editor: {},
+            editorConf: {
+                autoHeight: false,
+                autoHeightEnabled: false,
+                autoFloatEnabled: false,
+                initialFrameWidth: '100%',
+                initialFrameHeight: '100%'
+            },
             isSetMajor:false,
             imgFile: null,
             //学院id

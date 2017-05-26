@@ -3,6 +3,15 @@
 angular.module('dleduWebApp')
     .controller('SetExcellentTeacherCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService,TeacherService, $timeout,CommonService,SchoolService) {
         $scope.excellentTeacherFn = {
+            editorid: 'introduce',
+            editor: {},
+            editorConf: {
+                autoHeight: false,
+                autoHeightEnabled: false,
+                autoFloatEnabled: false,
+                initialFrameWidth: '100%',
+                initialFrameHeight: '100%'
+            },
             isSetExcellent:false,
             teacherDropList:[],
             imgFile:"",

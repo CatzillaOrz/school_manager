@@ -2,6 +2,7 @@
 
 module.exports = function(app){
   // Insert routes below
+  app.use('/api/ueditor', require('./api/ueditor'));
   app.use('/api/account', require('./api/account'));
   app.use('/api/upload', require('./api/upload'));
   app.use('/api/college', require('./api/college'));

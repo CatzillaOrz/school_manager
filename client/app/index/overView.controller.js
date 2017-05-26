@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('overViewCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService) {
+    .controller('overViewCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$sce) {
         $scope.overViewFn={
             schoolInfo:{},
             introduction:{},
@@ -14,7 +14,7 @@ angular.module('dleduWebApp')
 
                 SchoolService.getSchoolInfo(params).$promise
                     .then(function (data) {
-                        _this.introduction=data.data.introduction;
+                        _this.introduction=$sce.trustAsHtml(data.data.introduction);
                     })
                     .catch(function (error) {
 

@@ -94,34 +94,34 @@
                             span.required *
                             | 介绍：
                         .col-sm-7
-                            textarea.introduce(ng-model="hotMajorFn.params.introduction" validator="required" name="introduce")
+                            .introduce(ng-model="hotMajorFn.params.introduction" validator="required" name="introduce" ueditor id='hotMajorFn.editorid' uec='hotMajorFn.schoolIntroduce' editor='hotMajorFn.editor' config='hotMajorFn.editorConf')
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 介绍图片：
                         .col-sm-7
                             img.introduce-image(ng-src="{{hotMajorFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="hotMajorFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
-                    .form-group
-                        label.col-sm-3.control-label
-                            span.required *
-                            |展示模板：
-                        .col-sm-7
-                           .col-sm-6
-                               .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==1]" ng-click="hotMajorFn.params.templateShow=1")
-                                   .media
-                                       .media-left
-                                           a(href='#')
-                                               img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
-                                       .media-body
-                                           h4.media-heading 知新大学Web前端专业
-                           .col-sm-6
-                                .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==2]" ng-click="hotMajorFn.params.templateShow=2")
-                                    .media
-                                        .media-body
-                                            h4.media-heading 知新大学Web前端专业
-                                        .media-right
-                                            a(href='#')
-                                                img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
+                    //.form-group
+                    //    label.col-sm-3.control-label
+                    //        span.required *
+                    //        |展示模板：
+                    //    .col-sm-7
+                    //       .col-sm-6
+                    //           .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==1]" ng-click="hotMajorFn.params.templateShow=1")
+                    //               .media
+                    //                   .media-left
+                    //                       a(href='#')
+                    //                           img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
+                    //                   .media-body
+                    //                       h4.media-heading 知新大学Web前端专业
+                    //       .col-sm-6
+                    //            .view-template(ng-class="{true:'select-active'}[hotMajorFn.params.templateShow==2]" ng-click="hotMajorFn.params.templateShow=2")
+                    //                .media
+                    //                    .media-body
+                    //                        h4.media-heading 知新大学Web前端专业
+                    //                    .media-right
+                    //                        a(href='#')
+                    //                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
                 .form-actions
                     .row
                         .col-md-12

@@ -1,8 +1,17 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SetPlayViewCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,SchoolService) {
+    .controller('SetPlayViewCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService, CommonService,SchoolService,$sce) {
         $scope.bannerFn = {
+            editorid: 'introduce',
+            editor: {},
+            editorConf: {
+                autoHeight: false,
+                autoHeightEnabled: false,
+                autoFloatEnabled: false,
+                initialFrameWidth: '100%',
+                initialFrameHeight: '100%'
+            },
             imgFile: null,
             isSetBanner: false,
             isSetIntroduce:false,
@@ -64,6 +73,9 @@ angular.module('dleduWebApp')
                     CommonService.msgDialog('您没有选择文件！！', 2);
                     $event.target.disabled = false;
                 }
+            },
+            trustAsHtml:function (str) {
+                return $sce.trustAsHtml(str);
             },
             selectFile: function ($file) {
                 var _this = this;
