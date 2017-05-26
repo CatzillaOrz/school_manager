@@ -90,34 +90,34 @@
                         span.required *
                         | 介绍：
                     .col-sm-7
-                        textarea.introduce(ng-model="excellentTeacherFn.params.introduction" validator="required" name="introduce")
+                        .introduce(ng-model="excellentTeacherFn.params.introduction" validator="required" name="introduce" ueditor id='excellentTeacherFn.editorid' uec='excellentTeacherFn.schoolIntroduce' editor='excellentTeacherFn.editor' config='excellentTeacherFn.editorConf')
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
                         | 介绍图片：
                     .col-sm-7
                         img.introduce-image(ng-src="{{excellentTeacherFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
-                .form-group
-                    label.col-sm-3.control-label
-                        span.required *
-                        | 展示模板：
-                    .col-sm-7
-                        .col-sm-6
-                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==1]" ng-click="excellentTeacherFn.params.templateShow=1")
-                                .media
-                                    .media-left
-                                        a(href='#')
-                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
-                                    .media-body
-                                        h4.media-heading 知新大学教授jone
-                        .col-sm-6
-                            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==2]" ng-click="excellentTeacherFn.params.templateShow=2")
-                                .media
-                                    .media-body
-                                        h4.media-heading 知新大学教授jone
-                                    .media-right
-                                        a(href='#')
-                                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
+                //.form-group
+                //    label.col-sm-3.control-label
+                //        span.required *
+                //        | 展示模板：
+                //    .col-sm-7
+                //        .col-sm-6
+                //            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==1]" ng-click="excellentTeacherFn.params.templateShow=1")
+                //                .media
+                //                    .media-left
+                //                        a(href='#')
+                //                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570228403")
+                //                    .media-body
+                //                        h4.media-heading 知新大学教授jone
+                //        .col-sm-6
+                //            .view-template(ng-class="{true:'select-active'}[excellentTeacherFn.params.templateShow==2]" ng-click="excellentTeacherFn.params.templateShow=2")
+                //                .media
+                //                    .media-body
+                //                        h4.media-heading 知新大学教授jone
+                //                    .media-right
+                //                        a(href='#')
+                //                            img.media-object.template-image(src="http://7xpscc.com1.z0.glb.clouddn.com/1494570310980")
                 .form-actions
                     .row
                         .col-md-12

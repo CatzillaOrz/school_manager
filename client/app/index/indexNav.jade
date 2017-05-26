@@ -16,8 +16,8 @@
             ul
                 li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
                     | 首页
-                //li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
-                //    | 学校概况
+                li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
+                    | 学校概况
                 li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
                     | 精品课程
     div(ui-view="content")
