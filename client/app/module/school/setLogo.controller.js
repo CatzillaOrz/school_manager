@@ -120,6 +120,8 @@ angular.module('dleduWebApp')
             },
             setToggle: function (entity) {
                 var _this=this;
+                _this.obj.src=null;
+                _this.imgFile=null;
                 if(entity==0){
                     _this.jcropType="block";
                 }else {
