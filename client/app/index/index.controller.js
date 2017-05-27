@@ -106,13 +106,19 @@ angular.module('dleduWebApp')
             toEmHostInit:function () {
                 var _this=this;
                 var urlArr=$location.host().split('.');
-                var  url ="";
+                var  urlOne ="";
+                var  urlTwo ="";
                 if(urlArr.length=2){
-                    url =$location.host().split('.')[1];
-                    if(url=="emtest"){
+                    urlOne =$location.host().split('.')[0];
+                    urlTwo =$location.host().split('.')[1];
+                    if(urlOne=="emtest"){
                         _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
-                    }else if(url=="em"){
-                        _this.emHost="http://em.dlztc.com/classicalCourse/";
+                    }else if(urlOne=="em"){
+                        if(urlTwo ="dlztc"){
+                            _this.emHost="http://em.dlztc.com/classicalCourse/";
+                        }else {
+                            _this.emHost="http://em.aizhixin.com/classicalCourse/";
+                        }
                     }else {
                         _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
                     }
