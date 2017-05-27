@@ -17,5 +17,11 @@ export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api #知新api
 
 export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api #企业管理api（目前的点点）
 
-export API_GATEWAY=http://172.16.23.120:3333/org-manager
+export API_GATEWAY=http://172.16.23.120:3333/
+
+export EM_API=http://emdev.aizhixin.com/em_api2
 node dist/server/app.js
+
+
+
+
