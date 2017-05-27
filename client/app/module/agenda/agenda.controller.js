@@ -8,6 +8,7 @@ angular.module('dleduWebApp')
         var y = date.getFullYear();
         var w = date.getDay();
         var eventSerialId = 1;
+        var initNum = 0;
 
 
         $scope.schedule = {
@@ -58,7 +59,7 @@ angular.module('dleduWebApp')
                 },
 
                 eventDrop: function (courseCard, delta, revertFunc, jsEvent, ui, view) {
-                    console.log(courseCard);
+                    // console.log(courseCard);
                     //拖动课程卡时，周的换算与课节的调整换算
                     var arr = $scope.schedule.eventSources;
                     var period = $scope.schedule.period;
@@ -134,7 +135,7 @@ angular.module('dleduWebApp')
                     $compile(element)($scope);
                 },
                 eventMouseover: function (calEvent, jsEvent, view) {
-                    console.log(calEvent._id);
+                    // console.log(calEvent._id);
                     $scope.schedule.courseCard = calEvent;
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
@@ -159,7 +160,8 @@ angular.module('dleduWebApp')
              */
             addCourseCard: function () {
                 var _this = this;
-                console.log(_this.courseCardForm);
+                // console.log(_this.eventSources);
+                // console.log(_this.courseCardForm);
                 var newObj = angular.copy(_this.courseCardForm);
                 newObj.periodId = newObj.period.id;
                 newObj.periodMo = newObj.period.no;
@@ -172,11 +174,25 @@ angular.module('dleduWebApp')
 
 
                 angular.forEach(_this.eventSources, function (group, num) {
+                    // console.log(group.teachingClassId);
+                    // console.log(newObj.teachingClassId);
                     if (group.teachingClassId == newObj.teachingClassId) {
-                        _this.renderSource(newObj, group);
+                        //如果该教学班排课为空，需要先删除它在数组中的位置，再重新添加进去，否则event监听不起作用。
+                        if(initNum == 0 && group.length ==0){
+                            initNum++;
+                            var arr = [];
+                            arr.teachingClassId = group.teachingClassId;
+                            arr.teachingClassName = group.teachingClassName;
+                            arr.color = group.color;
+                            _this.eventSources.splice(num, 1,arr);
+                            // _this.eventSources.push(arr);
+                            _this.renderSource(newObj, arr);
+                        }else{
+                            _this.renderSource(newObj, group);
+                        }
                     }
                 });
-                console.log(_this.eventSources);
+                // console.log(_this.eventSources);
             },
 
             /**
@@ -199,6 +215,9 @@ angular.module('dleduWebApp')
              * 重新选择教学班后如果学期有变化就重新获取学周信息。
              */
             classChange: function (item) {
+                // console.log(item);
+                // item.teachingClassId = item.id;
+                this.courseCardForm.teachingClassId = item.id;
                 if (this.semesterId != item.semesterId) {
                     this.semesterId = item.semesterId;
                     this.getTeachWeek(item.semesterId);
@@ -239,10 +258,11 @@ angular.module('dleduWebApp')
                 _this.periodB = angular.copy(_this.period);
                 if (!!item) {
                     angular.forEach(_this.period, function (souce, index) {
-                        if (souce.no == item.no) {
+                        if (souce.no == item.period.no) {
                             number = index;
                         }
                     });
+                    // console.log(number);
                     number != 0 ? _this.periodB = _this.periodB.slice(0, -number) : _this.periodB;
                     if (_this.periodB.length && _this.periodB[_this.periodB.length - 1].no < _this.courseCardForm.periodNu.no) {
                         _this.courseCardForm.periodNu = _this.periodB[0];
@@ -260,7 +280,6 @@ angular.module('dleduWebApp')
              * @param arr
              */
             renderSource: function (obj, arr) {
-                var _this = this;
                 arr.color && (obj.color = arr.color);
                 !obj.periodMo && (obj.periodMo = 1);
                 !obj.periodNum && (obj.periodNum = 1);
@@ -327,6 +346,7 @@ angular.module('dleduWebApp')
                         _this.courseCardForm.periodMo = _this.periodA[0].no;
                         _this.courseCardForm.periodNu = _this.periodB[0];
                         _this.courseCardForm.periodNum = _this.periodB[0].no;
+                        // console.log(_this.courseCardForm);
                     })
                     .catch(function (error) {
 
@@ -372,14 +392,12 @@ angular.module('dleduWebApp')
              */
             updateCourseCard: function () {
                 var _this = this;
-                var group = _this.courseCard.teachingClassId;
                 angular.forEach(_this.eventSources, function (timePeriod, num) {
 
                     if (timePeriod.teachingClassId == _this.courseCard.teachingClassId) {
                         angular.forEach(timePeriod, function (item, index) {
 
                             if (item._id === _this.courseCard._id) {
-                                console.log(_this.courseCard);
                                 item.classroom = _this.courseCard.classroom;
                                 item.startWeekId = _this.courseCard.startWeek.id;
                                 item.startWeekNo = _this.courseCard.startWeek.no;
@@ -403,7 +421,7 @@ angular.module('dleduWebApp')
                 var _this = this;
                 var arr = [];
                 angular.forEach(_this.eventSources,function(item,index){
-                    console.log(item);
+                    // console.log(item);
                     var obj = {};
                     obj.teachingClassId = item.teachingClassId;
                     obj.userId = $scope.user.id;
@@ -432,6 +450,7 @@ angular.module('dleduWebApp')
                         angular.forEach(data, function (obj, index) {
                             var arr = [];
                             if(obj.timePeriod.length > 0){
+                                initNum++;
                                 angular.forEach(obj.timePeriod, function (item, num) {
                                     item.teachingClassId = obj.teachingClassId;
                                     item.color = _this.groupColors[index];

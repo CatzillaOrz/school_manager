@@ -46,7 +46,7 @@
                                     label.label.col-xs-6 起始课节
                                     label.label.col-xs-6 持续时长
                                     label.select.col-xs-6
-                                        select(ng-options="item.no for item in schedule.periodA track by item.id" data-ng-change='schedule.periodChange(schedule.courseCardForm.period)' ng-model="schedule.courseCardForm.period")
+                                        select(ng-options="item.no for item in schedule.periodA track by item.id" data-ng-change='schedule.periodChange(schedule.courseCardForm)' ng-model="schedule.courseCardForm.period")
                                         i
                                     label.select.col-xs-6
                                         select(ng-options="item.no for item in schedule.periodB track by item.id" ng-model="schedule.courseCardForm.periodNu")
