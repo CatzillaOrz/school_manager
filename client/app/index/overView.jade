@@ -1,0 +1,8 @@
+.sub-nav
+    span.cursor-pointer(ui-sref="index") 首页
+    span >>
+    span.cursor-pointer.active 学校概况
+.content-container
+    .feature-block
+        .title 学校概况
+    .school-introduce(ng-bind-html="overViewFn.introduction")

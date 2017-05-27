@@ -1,4 +1,5 @@
 .college-list-container{
+  font-family: $font-family-sans-serif;
   margin: 10px;
   .handle{
     color:$text-color-light;
@@ -30,6 +31,11 @@
   .student-list-class-detail{
     margin-top: 10px;
     border-top: none;
+  }
+  .introduce{
+    margin: 0px;
+    width: 679px;
+    height: 300px;
   }
 
 }

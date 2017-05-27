@@ -2,6 +2,7 @@
 
 module.exports = function(app){
   // Insert routes below
+  app.use('/api/ueditor', require('./api/ueditor'));
   app.use('/api/account', require('./api/account'));
   app.use('/api/upload', require('./api/upload'));
   app.use('/api/college', require('./api/college'));
@@ -12,4 +13,5 @@ module.exports = function(app){
   app.use('/api/schoolyear', require('./api/schoolyear'));
   app.use('/api/course', require('./api/course'));
   app.use('/api/teachclass', require('./api/teachclass'));
+  app.use('/api/school', require('./api/school'));
 };

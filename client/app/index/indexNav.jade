@@ -1,0 +1,29 @@
+.index-container
+    .top-nav-container
+        .top-nav
+            .school-logo
+                img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495078273034' }}")
+            //.login-button
+            //    button.btn-login(ng-click='indexFn.signIn()')
+            //        i.fa.fa-user.fa-fw
+            //        |  登录
+            //a.azx-logo
+            //    azx-logo
+
+
+    .nav-bar
+        .navigation
+            ul
+                li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
+                    | 首页
+                li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
+                    | 学校概况
+                li(ui-sref="hotmajorlist" ng-class="{'active':indexFn.currentActive=='hotmajorlist'}")
+                    | 热门专业
+                li(ui-sref="excellentteacherlist" ng-class="{'active':indexFn.currentActive=='excellentteacherlist'}")
+                    | 优秀老师
+                li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
+                    | 精品课程
+    div(ui-view="content")
+    .footer
+        | 地址：北京市海淀区133号   邮箱：www.sichuanshifanxuanyuan@qq.com  邮编：10000

@@ -63,7 +63,7 @@ angular.module('dleduWebApp')
                 }
                 StudentService.deleteStudent(params).$promise
                     .then(function (data) {
-                        CommonService.openMsg("学生删除成功！");
+                        messageService.openMsg("学生删除成功！");
                         _this.getStudentList();
                     })
                     .catch(function (error) {

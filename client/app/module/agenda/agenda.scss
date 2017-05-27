@@ -49,6 +49,22 @@
     line-height: 1;
   }
 
+  .btn-group.btn-group-justified{
+    label.btn{
+      input[type='radio']{
+        position: absolute;
+        //clip: rect(0px 0px 0px 0px);
+        pointer-events: none;
+        top:5px;
+        margin-left:-10px;
+      }
+      span{
+        margin-left:8px;
+      }
+    }
+  }
+
+
   /* Allows .modal-backdrop to remain on the page without blocking */
   .modal-backdrop {
     overflow: hidden;
@@ -138,7 +154,35 @@
   .fc-double-class {
 
   }
+  .fc-content{
+    margin-top:20px;
+  }
+  .fc-menu{
+    position: absolute;
+    width:100%;
+    background:rgba(#000,0.5);
+    padding: 2px 5px;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    i{
+      margin-right: 5px;
+      line-height: 0.2em;
+      vertical-align: middle;
+      &:hover{
+        color:#f5f5f5;
+        font-size: 14px;
+      }
+    }
+  }
   .span8 {
     //margin: 30px 15px;
+  }
+  .courseEx{
+    li{
+      list-style: none;
+      float:left;
+      margin-right:20px;
+    }
   }
 }

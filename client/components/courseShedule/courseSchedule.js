@@ -47,9 +47,9 @@ angular.module('courseSchedule', [])
              * @return {string}
              */
             this.eventFingerprint = function (e) {
-                if (!e._id) {
+                /*if (!e._id) {
                     e._id = eventSerialId++;
-                }
+                }*/
                 var extraSignature = extraEventSignature({
                         event: e
                     }) || '';
@@ -280,7 +280,9 @@ angular.module('courseSchedule', [])
                 scope: {
                     period: '=',
                     eventSources: '=ngModel',
-                    calendarWatchEvent: '&'
+                    calendarWatchEvent: '&',
+                    destroyStatus: '=',
+                    delCourse: '&'
                 },
                 controller: 'csCalendarCtrl',
                 link: function (scope, elm, attrs, controller) {
@@ -302,6 +304,40 @@ angular.module('courseSchedule', [])
                     cssToStr = FC.cssToStr;
                     isInt = FC.isInt;
                     divideDurationByDuration = FC.divideDurationByDuration;
+
+                    // View视图原型链扩展
+                    View.mixin({});
+
+                    // Grid原型链扩展
+                    Grid.mixin({
+                        /*
+                        // 为课程卡绑定新的自定义事件
+                        bindSegHandlers: function () {
+                            this.bindSegHandler('touchstart', this.handleSegTouchStart);
+                            this.bindSegHandler('touchend', this.handleSegTouchEnd);
+                            this.bindSegHandler('mouseenter', this.handleSegMouseover);
+                            this.bindSegHandler('mouseleave', this.handleSegMouseout);
+                            this.bindSegHandler('mousedown', this.handleSegMousedown);
+                            this.bindSegHandler('click', this.handleSegClick);
+                            this.bindSegHandlerMenu('click', this.handleSegMenu);
+                        },
+                        bindSegHandlerMenu: function (name, handler) {
+                            var _this = this;
+
+                            this.el.find('fc-menu').on(name, '.fc-event-container > *', function (ev) {
+                                var seg = $(this).data('fc-seg');
+
+                                if (seg && !_this.isDraggingSeg && !_this.isResizingSeg) {
+                                    return handler.call(_this, seg, ev);
+                                }
+                            });
+                        },
+                        handleSegMenu: function (seg, ev) {
+                            return this.view.trigger('eventClick', seg.el[0], seg.event, ev);
+                        }*/
+
+                    });
+
 
                     // TimeGrid原型链扩展
                     TimeGrid.mixin({
@@ -442,7 +478,8 @@ angular.module('courseSchedule', [])
                             //TODO课节时间的显示
                             var timeText;
                             var fullTimeText;
-                            var startTimeText; //
+                            var startTimeText;
+
 
                             classes.unshift('fc-time-grid-event', 'fc-v-event');
 
@@ -519,7 +556,6 @@ angular.module('courseSchedule', [])
 
                     });
 
-
                     /**
                      * 获取自定义指令属性里的课程表视图参数配置
                      */
@@ -528,7 +564,7 @@ angular.module('courseSchedule', [])
                         var period = scope.period.length || 0;
                         //默认配置
                         var defaultSettings = {
-                            height: 580,
+                            height: 555,
                             editable: true,
                             header: {
                                 left: '',
@@ -546,6 +582,7 @@ angular.module('courseSchedule', [])
                             displayEventTime: false,
                             slotDuration: "01:00:00",
                             snapDuration: "01:00:00",
+                            scrollTime:'00:00:00',
                             axisFormat: 'HH:mm',
                             //第一列显示周几 0:周日，1:周一 ……
                             firstDay: 1,
@@ -612,13 +649,6 @@ angular.module('courseSchedule', [])
                             csCalendarConfig.calendars[attrs.calendar] = calendar;
                         }
                     };
-
-                    /**
-                     * 清除事件冒泡
-                     */
-                    scope.$on('$destroy', function () {
-                        scope.destroyCalendar();
-                    });
 
                     /**
                      * 增加某教学班课程表事件
@@ -710,8 +740,9 @@ angular.module('courseSchedule', [])
                             scope.initCalendar();
                         }
                     });
+
+
                 }
             };
         }]
     );
-

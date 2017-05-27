@@ -94,6 +94,114 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getTeachClassClassesListById: function (req, res) {
+        TeachClassService.getTeachClassClassesListByIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTeachClassClasses: function (req, res) {
+        TeachClassService.addTeachClassClassesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteTeachClassClasses: function (req, res) {
+        TeachClassService.deleteTeachClassClassesSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTeachClassTeacher: function (req, res) {
+        TeachClassService.addTeachClassTeacherSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTeachClassStudent: function (req, res) {
+        TeachClassService.addTeachClassStudentSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteTeachClassOneStudent: function (req, res) {
+        TeachClassService.deleteTeachClassOneStudentSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getTeachClassClassesList: function (req, res) {
+        TeachClassService.getTeachClassClassesListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getCourseSchedule: function (req, res) {
+        TeachClassService.getCourseScheduleSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    saveCourseSchedule: function (req, res) {
+        TeachClassService.saveCourseScheduleSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delCourseSchedule: function (req, res) {
+        TeachClassService.delCourseScheduleSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getCourseSchedules: function (req, res) {
+        TeachClassService.getCourseSchedulesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    saveCourseSchedules: function (req, res) {
+        TeachClassService.saveCourseSchedulesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    }
 };
 
 

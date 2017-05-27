@@ -48,6 +48,8 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
             var bindEvents = function(){
                 $collapsible.each(function (idx, li) {
                     var $li = $(li);
+                    $li.siblings('.open').smartCollapseToggle();
+                    $li.smartCollapseToggle();
                     $li
                         .on('click', '>a', function (e) {
 

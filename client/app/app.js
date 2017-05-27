@@ -20,7 +20,8 @@ angular.module('dleduWebApp', [
     'azx.swiper',
     'azx.common',
     "ngTable",
-    'ngJcrop'
+    'ngJcrop',
+    'ngUeditor'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');
@@ -94,7 +95,7 @@ angular.module('dleduWebApp', [
 
         //入口路由配置
         $urlRouterProvider
-            .otherwise('/login');
+            .otherwise('/index');
         $stateProvider
             .state('base', {
                 abstract: true,
@@ -111,7 +112,9 @@ angular.module('dleduWebApp', [
             prefixStateName: 'home'
         });
     }])
-    .run(function ($state, $rootScope, AuthService, $window) {
+    .run(function ($state, $rootScope, AuthService, $window,CommonService,localStorageService) {
+        localStorageService.remove('school');
+        CommonService.getSchool();
        // 站内页面的访问权限验证
         $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
             if (toState.access.requiredLogin && !AuthService.authorize()) {

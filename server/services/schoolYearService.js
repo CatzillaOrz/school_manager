@@ -12,7 +12,7 @@ var Promise = require('bluebird'),
 var SchoolYearService = {
     addSchoolYear: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/add',
             entity: params
         }).then(function (res) {
@@ -27,7 +27,7 @@ var SchoolYearService = {
     },
     getSchoolYearList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/list',
             params,
             access_token: access_token
@@ -43,7 +43,7 @@ var SchoolYearService = {
     },
     deleteSchoolYear: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -58,7 +58,7 @@ var SchoolYearService = {
     },
     getSchoolYearById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/get/'+params.id,
             params,
             access_token: access_token
@@ -74,7 +74,7 @@ var SchoolYearService = {
     },
     addSemesterWeek: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/week/addsemesterweek',
              params
         }).then(function (res) {
@@ -89,7 +89,7 @@ var SchoolYearService = {
     },
     addPeriod: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/period/add',
             entity:params
         }).then(function (res) {
@@ -104,7 +104,7 @@ var SchoolYearService = {
     },
     getPeriodList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/period/list',
             params,
             access_token: access_token
@@ -120,7 +120,7 @@ var SchoolYearService = {
     },
     updatePeriod: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/period/update',
             entity: params
         }).then(function (res) {
@@ -135,7 +135,7 @@ var SchoolYearService = {
     },
     updateSchoolYear: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/update',
             entity: params
         }).then(function (res) {
@@ -150,7 +150,7 @@ var SchoolYearService = {
     },
     deletePeriod: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/period/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -165,7 +165,7 @@ var SchoolYearService = {
     },
     getPeriodById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/period/get/'+params.id,
             params,
             access_token: access_token
@@ -181,7 +181,7 @@ var SchoolYearService = {
     },
     getSchoolYearDropList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/year/droplist',
             params,
             access_token: access_token
@@ -195,6 +195,22 @@ var SchoolYearService = {
             callback(e);
         });
     },
+    getTeachWeekList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/week/list',
+            params:params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    }
 };
 
 

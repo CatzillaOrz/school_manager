@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('dleduWebService')
-    .factory('CommonService', function (ngDialog,$http) {
+    .factory('CommonService', function (ngDialog,$http,localStorageService,SchoolService,$location) {
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.0.1.4'
+
+                version: '0.0.2.4'
 
             },
             isMSIE789: function () {
@@ -51,6 +52,59 @@ angular.module('dleduWebService')
                 setTimeout(function () {
                     ngDialog.closeAll();
                 }, 1500);
-            }
+            },
+            getSchool:function () {
+                var school= localStorageService.get('school');
+                var _this=this;
+                if(school){
+                    return  school;
+                }else {
+                    var  url =$location.host().split('.')[0];
+                   url="kjkf";
+                    var params={
+                        domainname:url
+                    };
+                    SchoolService.getSchoolByDomain(params).$promise
+                        .then(function (data) {
+                            school=data;
+                            _this.setSchool(school);
+                            return school;
+                        })
+                        .catch(function (error) {
+
+                        })
+                }
+            },
+            setSchool:function (school) {
+                localStorageService.set("school",school)
+            },
+            strCut: function (strs, len) {
+                var str_length = 0;
+                if (strs != null) {
+                    var str = strs.replace(/<img.+?>/ig, '[图片]');
+                    var str_len = str.length;
+                    var text;
+                    var cut = [];
+                    str = str.replace(/(\n)/g, "");
+                    str = str.replace(/(\t)/g, "");
+                    str = str.replace(/(\r)/g, "");
+                    str = str.replace(/<\/?[^>]*>/g, "");
+                    str = str.replace(/\s*/g, "");
+                    str = str.replace(/<[^>]*>/g, "");
+                    str = str.replace(/&nbsp;/g, "");
+                    if (str_len < len) {
+                        return str;
+                    }
+                    for (var i = 0; i < str_len; i++) {
+                        text = str.charAt(i);
+                        cut = cut.concat(text);
+                        str_length++;
+                        if (str_length >= len) {
+                            cut = cut.concat('...');
+                            return cut.join('');
+                        }
+                    }
+                }
+            },
         }
     });

@@ -40,7 +40,7 @@
                         .col-md-12
                             a.btn.btn-primary(ng-click="semesterHandlerFn.submit()" validation-submit="classForm") 提交
                             .speace-10
-                            a.btn.btn-default(ui-sref="periodlist") 取消
+                            a.btn.btn-default(ui-sref="periodlist({position:2})") 取消
     .jarviswidget.jarviswidget-color-blueDark(ng-if='semesterHandlerFn.complete')
         header(role='heading')
             span.widget-icon
@@ -54,4 +54,4 @@
             .form-actions
                 .row
                     .col-md-12
-                        a.btn.btn-default(ui-sref="periodlist") 返回学时管理信息
+                        a.btn.btn-default(ui-sref="periodlist({position:2})") 返回学时管理信息

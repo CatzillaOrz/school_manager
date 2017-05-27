@@ -14,7 +14,7 @@ var TeacherService = {
 
     getTeacherList : function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/list',
             params
         }).then(function (res) {
@@ -30,7 +30,7 @@ var TeacherService = {
     },
     addTeacher: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/add',
             entity: params,
             access_token: access_token
@@ -46,7 +46,7 @@ var TeacherService = {
     },
     deleteTeacher: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/delete/'+params.id,
             params:{userId:params.userId}
         }).then(function (res) {
@@ -61,7 +61,7 @@ var TeacherService = {
     },
     updateTeacher: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/update',
             entity: params
         }).then(function (res) {
@@ -76,7 +76,7 @@ var TeacherService = {
     },
     getTeacherById: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/get/'+params.id,
             access_token: access_token
         }).then(function (res) {
@@ -91,7 +91,7 @@ var TeacherService = {
     },
     getTeacherDropListOrg: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/droplistorg',
             access_token: access_token,
             params
@@ -107,7 +107,7 @@ var TeacherService = {
     },
     getSimpleTeachers: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway',
+            host: 'gateway-org',
             path: '/v1/teacher/simpleteachers',
             access_token: access_token,
             params

@@ -199,3 +199,19 @@ a:focus {outline: none;}
   height: auto;
   min-height: 50px;
 }
+
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+  background:#fff;
+}
+.required{
+  color:$red;
+  margin-right: 5px;
+}
+.all-check{
+  width:50px;
+  input[type=checkbox]{
+    float: left;
+    width: 20px !important;
+
+  }
+}

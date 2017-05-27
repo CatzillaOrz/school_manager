@@ -65,26 +65,16 @@ angular.module('dleduWebApp')
                     that.addSchoolYear();
                 }
             },
-            //学院增加
+            //增加
             addSchoolYear:function(){
                 var that = this;
                 var params = that.params;
-               if(!that.semesterList[0].name){
-                   messageService.openMsg("学期名称必须填写");
-                   return;
-                   //&& that.semester.startDate&&that.semester.endDate
-               }else if(!that.semesterList[0].startDate||!that.semesterList[0].endDate){
-                   messageService.openMsg("学期开始时间和结束时间必须填写");
-                   return;
-               }else if(that.semesterList[0].startDate&&that.semesterList[0].endDate){
-                   var startDate=new Date(that.semesterList[0].startDate).getTime();
-                   var endDate=new Date(that.semesterList[0].endDate).getTime();
-                   if(startDate>=endDate){
-                       messageService.openMsg("您填写的时间有误，结束日期小于开始日期");
-                       return;
-                   }
-               }
-                params.semesterList=that.semesterList;
+
+                params.semesterList=_.filter(that.semesterList, function(entity) {
+                    if(entity.name&&entity.startDate&&entity.endDate){
+                       return entity
+                    }
+                });
                 SchoolYearService.addSchoolYear(params).$promise
                     .then(function (data) {
                         that.complete = true;
@@ -92,11 +82,12 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg(error.data);
+
+                            messageService.openMsg("添加失败");
 
                         }else {
 
-                            messageService.openMsg("添加失败");
+                            messageService.openMsg(error.data);
 
                         }
                     })
@@ -105,10 +96,11 @@ angular.module('dleduWebApp')
             updateSchoolYear:function(){
                 var that = this;
                 var params = that.params;
-                // if(that.semester.name&& that.semester.startDate&&that.semester.endDate){
-                params.semesterList=that.semesterList;
-                //  }
-
+                params.semesterList=_.filter(that.semesterList, function(entity) {
+                    if(entity.name&&entity.startDate&&entity.endDate){
+                        return entity
+                    }
+                });
                 SchoolYearService.updateSchoolYear(params).$promise
                     .then(function (data) {
                         that.complete = true;
@@ -116,10 +108,10 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg(error.data);
-                        }else {
-
                             messageService.openMsg("更新失败");
+                        }else {
+                            messageService.openMsg(error.data);
+
                         }
                     })
             },
@@ -160,7 +152,7 @@ angular.module('dleduWebApp')
                 var that = this;
                 this.datePick.toggleMin();
                 that.handle = $state.current.ncyBreadcrumbLabel;
-                if (that.handle == "编辑学期") {
+                if ($state.params.id) {
                     that.params.id = $state.params.id;
                     var params={
                         id:that.params.id

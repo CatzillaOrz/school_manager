@@ -20,5 +20,17 @@ router.get('/getTeachClassTeacherList', auth.isSignedIn, controller.getTeachClas
 router.get('/getTeachClassStudentList', auth.isSignedIn, controller.getTeachClassStudentList);
 router.delete('/deleteTeachClassTeacher', auth.isSignedIn, controller.deleteTeachClassTeacher);
 router.delete('/deleteTeachClassStudent', auth.isSignedIn, controller.deleteTeachClassStudent);
-
+router.get('/getTeachClassClassesListById', auth.isSignedIn, controller.getTeachClassClassesListById);
+router.post('/addTeachClassClasses', auth.isSignedIn, controller.addTeachClassClasses);
+router.delete('/deleteTeachClassClasses', auth.isSignedIn, controller.deleteTeachClassClasses);
+router.post('/addTeachClassTeacher', auth.isSignedIn, controller.addTeachClassTeacher);
+router.post('/addTeachClassStudent', auth.isSignedIn, controller.addTeachClassStudent);
+router.delete('/deleteTeachClassOneStudent', auth.isSignedIn, controller.deleteTeachClassOneStudent);
+router.get('/getTeachClassClassesList', auth.isSignedIn, controller.getTeachClassClassesList);
+router.get('/getCourseSchedule', auth.isSignedIn, controller.getCourseSchedule);
+router.post('/saveCourseSchedule', auth.isSignedIn, controller.saveCourseSchedule);
+router.delete('/delCourseSchedule', auth.isSignedIn, controller.delCourseSchedule);
+router.put('/getCourseSchedules', auth.isSignedIn, controller.getCourseSchedules);
+router.post('/saveCourseSchedules', auth.isSignedIn, controller.saveCourseSchedules);
+//getTeachClassClassesList
 module.exports = router;
