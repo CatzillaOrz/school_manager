@@ -47,6 +47,8 @@ angular.module('dleduWebApp')
                 });
                 if(arr.length >0){
                     $state.go('agendaWeeks',{ids:angular.toJson(arr)});
+                }else{
+                    messageService.openMsg("请先勾选需要排课的教学班。");
                 }
             },
 			// 获取教学班列表
