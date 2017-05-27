@@ -10,7 +10,7 @@ angular.module('dleduWebApp')
                 autoHeightEnabled: false,
                 autoFloatEnabled: false,
                 initialFrameWidth: '100%',
-                initialFrameHeight: '100%'
+                initialFrameHeight: '500px'
             },
             imgFile: null,
             isSetBanner: false,
@@ -158,6 +158,7 @@ angular.module('dleduWebApp')
                 var _this=this;
                 SchoolService.addSchoolInfo(params).$promise
                     .then(function (data) {
+                        messageService.openMsg("设置学校简介成功！");
                         _this.getSchoolInfo();
                     })
                     .catch(function (error) {

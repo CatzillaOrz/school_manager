@@ -222,6 +222,7 @@ angular.module('dleduWebApp')
                 var params=_this.params;
                 if(!params.courseId){
                     messageService.openMsg("请选择课程！");
+                    return;
                 }
                 params.userId=AuthService.getUser().id;
                 if(_this.params.id){

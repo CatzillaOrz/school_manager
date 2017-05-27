@@ -135,10 +135,10 @@ angular.module("azx.common", ['ui.bootstrap'])
             contrastDomain: function (host) {
                 //各开发环境域名配置
                 var _headerLink = {
-                    DEV: ['dledudev.aizhixin.com', 'emdev.aizhixin.com', 'ptdev.aizhixin.com', 'hydev.aizhixin.com', 'dddev.aizhixin.com'],
-                    TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com'],
-                    PDE: ['www.dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com'],
-                    SDE: ['www.aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com']
+                    DEV: ['dledudev.aizhixin.com', 'emdev.aizhixin.com', 'ptdev.aizhixin.com', 'hydev.aizhixin.com', 'dddev.aizhixin.com','schooldev.aizhixin.com'],
+                    TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com','schooltest.aizhixin.com'],
+                    PDE: ['www.dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com','school.dlztc.com'],
+                    SDE: ['www.aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com','school.aizhixin.com']
                 };
                 var _urlarr = [];
                 for (var _k in _headerLink) {
@@ -258,27 +258,27 @@ angular.module("azx.common", ['ui.bootstrap'])
              * @param keyWord 查询关键字
              * @returns {{url: *, dataType: string, data: Select2LoadOptionsService.data, processResults: Select2LoadOptionsService.processResults, cache: boolean}}
              */
-           getLoadOptions:function (url,params,keyWord) {
-               return {
-                   url: url,
-                   dataType: 'json',
-                   //delay: 250,
-                   data: function (query) {
-                       params[keyWord]=query.term;
-                       return params;
-                   },
-                   processResults: function (data, params) {
-                       params.page = params.page || 1;
-                       return {
-                           results: data.data,
-                           pagination: {
-                               more: (params.page * 30) < data.total_count
-                           }
-                       };
-                   },
-                   cache: true
-               }
-           }
+            getLoadOptions:function (url,params,keyWord) {
+                return {
+                    url: url,
+                    dataType: 'json',
+                    //delay: 250,
+                    data: function (query) {
+                        params[keyWord]=query.term;
+                        return params;
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                }
+            }
         };
         return Select2LoadOptionsService;
     }])
@@ -322,7 +322,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '                       <img ng-src="{{headerFn.user.avatar}}" class="avatar-30 img-circle"/>' +
             '                   </span>' +
             '                   <span id="user-name" class="dropdown-toggle">' +
-            '                       <span>{{headerFn.user.login | cutStr:8}}</span>' +
+            '                       <span>{{headerFn.user.name | cutStr:8}}</span>' +
             '                       <i class="caret"></i>' +
             '                   </span>' +
             '               <ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
@@ -473,22 +473,22 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }
 
                 /*$http.get('http://oli56k5b0.bkt.clouddn.com/api/navigation.json').then(function (res) {
-                    $scope.navigation = res.data;
-                });
-*/
+                 $scope.navigation = res.data;
+                 });
+                 */
                 /*$http({
-                    method:  'GET' ,
-                    url:  'http://oli56k5b0.bkt.clouddn.com/api/navigation.json' ,
-                    headers: {
-                        'Content-Type' :  'text/html,application/xhtml+xml,application/xml',
-                        'X-Requested-With':null
-                    }
-                }).success(function (data) {
-                    console.log(data);
-                });*/
+                 method:  'GET' ,
+                 url:  'http://oli56k5b0.bkt.clouddn.com/api/navigation.json' ,
+                 headers: {
+                 'Content-Type' :  'text/html,application/xhtml+xml,application/xml',
+                 'X-Requested-With':null
+                 }
+                 }).success(function (data) {
+                 console.log(data);
+                 });*/
                 /*$http.get('http://oli56k5b0.bkt.clouddn.com/api/navigation.json' + new Date().getTime()).then(function (res) {
-                    $scope.navigation = res.data;
-                });*/
+                 $scope.navigation = res.data;
+                 });*/
                 $rootScope.$watch('user', function () {
                     // console.log($rootScope.user);
                     $scope.headerFn.user = $rootScope.user;
