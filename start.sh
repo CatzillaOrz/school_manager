@@ -20,6 +20,7 @@ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api #企业管理api（�
 export API_GATEWAY=http://172.16.23.120:3333/
 
 export EM_API=http://emdev.aizhixin.com/em_api2
+
 node dist/server/app.js
 
 
