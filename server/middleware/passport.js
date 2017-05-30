@@ -12,9 +12,9 @@ module.exports = function (app) {
 
 // refresh access token
     app.use(function (req, res, next) {
-        res.clearCookie('dledu.sid',{path:'/',domain:'pt.aizhixin.com'});
-        res.clearCookie('dledu.sid',{path:'/',domain:'ptdev.aizhixin.com'});
-        res.clearCookie('dledu.sid',{path:'/',domain:'pttest.aizhixin.com'});
+        res.clearCookie('dledu.sid',{path:'/',domain:'school.aizhixin.com'});
+        res.clearCookie('dledu.sid',{path:'/',domain:'schooldev.aizhixin.com'});
+        res.clearCookie('dledu.sid',{path:'/',domain:'schooltest.aizhixin.com'});
         if (req.session.oauth && !req.session._refresh_token && API_REGX.test(req.url)) {
             var _time_offset = new Date().getTime() - req.session.oauth.timestamp;
             if (_time_offset > req.session.oauth.timestamp_left) {
@@ -72,6 +72,6 @@ module.exports = function (app) {
             };
             res.cookie('authorize', 'true', {path: '/'});
             res.cookie('getuserflag', 'true', {path: '/'});
-            res.redirect('/dashboard');
+            res.redirect('/home');
         });
 };
