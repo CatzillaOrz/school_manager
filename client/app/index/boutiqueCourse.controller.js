@@ -41,12 +41,12 @@ angular.module('dleduWebApp')
                 var urlArr=$location.host().split('.');
                 var  urlOne ="";
                 var  urlTwo ="";
-                if(urlArr.length=2){
-                    urlOne =$location.host().split('.')[0];
-                    urlTwo =$location.host().split('.')[1];
-                    if(urlOne=="emtest"){
+                if(urlArr.length==4){
+                    urlOne =urlArr[1];
+                    urlTwo =urlArr[2];
+                    if(urlOne=="schooltest"){
                         _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
-                    }else if(urlOne=="em"){
+                    }else if(urlOne=="school"){
                         if(urlTwo ="dlztc"){
                             _this.emHost="http://em.dlztc.com/classicalCourse/";
                         }else {
