@@ -45,6 +45,8 @@
 
 > $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
 
+> $ export EM_API=http://emdev.aizhixin.com/em_api2
+
 > $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
 
 > $ export SESSION_REDIS_PORT=6379   // 用于缓存Session的Redis服务端口， 缺省值：`6479`
@@ -76,6 +78,8 @@
 > $ export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api   // 点点api
 
 > $ export API_GATEWAY=http://172.16.23.120:3333/org-manager   // org-manage api
+
+> $ export EM_API=http://emdev.aizhixin.com/em_api2
 
 > $ export SESSION_REDIS_HOST=172.16.23.32   // 用于缓存Session的Redis服务地址， 缺省值：`172.16.23.32`
 
