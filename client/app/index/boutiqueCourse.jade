@@ -11,7 +11,7 @@
             .course-name
                 | {{course.courseName}}
             .course-teacher
-                | 12课时 | 刘建平
+            //    | 12课时 | 刘建平
 
     .page
         ul.pagination-sm(uib-pagination, total-items='boutiqueFn.page.totalElements',items-per-page="boutiqueFn.page.pageSize" max-size='boutiqueFn.page.pageSize' ng-model='boutiqueFn.page.pageNumber',ng-change="boutiqueFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
