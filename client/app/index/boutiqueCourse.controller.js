@@ -46,7 +46,7 @@ angular.module('dleduWebApp')
                     urlTwo =urlArr[2];
                     if(urlOne=="schooltest"){
                         _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
-                    }else if(urlOne=="school"){
+                    }else if(urlOne=="school" || urlOne=="schooluat"){
                         if(urlTwo ="dlztc"){
                             _this.emHost="http://em.dlztc.com/classicalCourse/";
                         }else {
