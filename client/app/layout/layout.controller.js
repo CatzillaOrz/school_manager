@@ -35,6 +35,10 @@ angular.module('dleduWebApp')
 
                     })
             },
+            toIndex:function () {
+                //$window.location.href
+                window.open( 'http://' +$window.location.host, "_blank")
+            }
         };
         $scope.layoutFn.getLogoList();
         $rootScope.$watch('user', function () {
