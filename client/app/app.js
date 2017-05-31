@@ -31,7 +31,7 @@ angular.module('dleduWebApp', [
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
                     AuthService.clearUser();
-                    _location.$$path != '/login' && (AuthService.navigation(0, '/login'));
+                    // _location.$$path != '/login' && (AuthService.navigation(0, '/login'));
                 } else if (response.status === 404) {
                     // _window.location.href = '/404';
                 } else if (response.status >= 500) {
