@@ -10,7 +10,7 @@ var auth = require('../../middleware/auth');
 var router = express.Router();
 
 
-router.get('/getMajorList', controller.getMajorList);
+router.get('/getMajorList',auth.isSignedIn, controller.getMajorList);
 router.post('/addMajor',auth.isSignedIn, controller.addMajor);
 router.delete('/deleteMajor',auth.isSignedIn, controller.deleteMajor);
 router.put('/updateMajor',auth.isSignedIn, controller.updateMajor);
