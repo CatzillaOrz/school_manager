@@ -103,7 +103,10 @@ angular.module('dleduWebApp')
             },
             getShuffImageList:function () {
                 var _this=this;
-                var params=_this.params;
+                var params={
+                        orgId: AuthService.getUser().orgId,
+                        userId:AuthService.getUser().id,
+                    }
                 SchoolService.getShuffImageList(params).$promise
                     .then(function (data) {
                         _this.bannerList=data.data;
