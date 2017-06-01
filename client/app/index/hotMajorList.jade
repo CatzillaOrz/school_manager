@@ -11,7 +11,7 @@
             .course-name
                 | {{major.specialtyName}}
             .course-teacher
-                | 12课时 | 刘建平
+            //    | 12课时 | 刘建平
 
     .page
         ul.pagination-sm(uib-pagination, total-items='hotMajorListFn.page.totalElements',items-per-page="hotMajorListFn.page.pageSize" max-size='hotMajorListFn.page.pageSize' ng-model='hotMajorListFn.page.pageNumber',ng-change="hotMajorListFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
