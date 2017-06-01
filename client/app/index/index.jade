@@ -5,7 +5,7 @@
         .title 精品课程
         .more.cursor-pointer(ui-sref="boutique") 更多>>
     .boutique-course-content
-        a.course-card(ng-repeat="course in indexFn.boutiqueCourseList"  href="{{indexFn.emHost}}{{course.id}}" target="_blank")
+        a.course-card(ng-repeat="course in indexFn.boutiqueCourseList"  href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
             img.course-image(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495700370783'}}")
             .course-name
                 | {{course.courseName}}
