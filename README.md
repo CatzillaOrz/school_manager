@@ -13,11 +13,11 @@
 
 > 补充：如果npm安装比较慢的话，可以使用cnpm(淘宝提供)代替。 安装：`npm install -g cnpm` 。安装完成后，以下部署命令中的npm都可以使用cnpm代替
 
-### Jenkins  build
+## Jenkins  build
     bower install --allow-root
     npm install
     gulp prod
-###开发配置
+## 开发配置
     export OPENSHIFT_NODEJS_PORT=9009
     export NODE_ENV=production
     export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api
@@ -30,7 +30,7 @@
     export SESSION_REDIS_PREFIX=dledu_web_session
     export SESSION_DOMAIN=aizhixin.com
     pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
-###测测试配置
+##  测试配置
     export OPENSHIFT_NODEJS_PORT=9009
     export NODE_ENV=production
     export BACKEND_API=http://dledutest.aizhixin.com/zhixin_api
@@ -44,7 +44,7 @@
     export SESSION_REDIS_PREFIX=dledu_web_session
     export SESSION_DOMAIN=aizhixin.com
     pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
-###伪生产配置 
+## 伪生产配置 
     export OPENSHIFT_NODEJS_PORT=9009
     export NODE_ENV=production
     export BACKEND_API=http://dledu.dlztc.com/zhixin_api
