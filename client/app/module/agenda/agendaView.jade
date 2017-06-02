@@ -93,7 +93,8 @@
                 header
                     span.widget-icon
                         i.fa.fa-calendar
-                    h2  教学班排课表
+                    h2(ng-if='!schedule.bulk')  教学班排课表
+                    h2(ng-if='schedule.bulk')  {{schedule.teachClasses[0].name}} 排课表
                     .widget-toolbar
                 div
                     .widget-body.no-padding
@@ -109,7 +110,7 @@
                         .span8
                             .calendar(cs-calendar='schedule.scheduleConfig' data-ng-model='schedule.eventSources' data-period='schedule.period' data-destroy-status='schedule.destroyStatus')
 
-        .col-xs-12.col-sm-8.col-lg-9.col-sm-offset-4.col-lg-offset-3
+        .col-xs-12.col-sm-8.col-lg-9.col-sm-offset-4.col-lg-offset-3(ng-if='!schedule.bulk')
             ul.well.courseEx
                 h6 教学班颜色图示：
                 li(ng-repeat='item in schedule.eventSources')
