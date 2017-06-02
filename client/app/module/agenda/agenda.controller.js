@@ -495,7 +495,6 @@ angular.module('dleduWebApp')
                     angular.forEach(_this.teachClasses,function(item,index){
                         newArr.push(item.id);
                     });
-                    // _this.getCourseSchedule(_this.teachClasses);
                     _this.getCourseSchedules(newArr);
                 }
                 //多教学班批量排课，获取批量排课的教学班id,默认初始化第一个
@@ -510,7 +509,7 @@ angular.module('dleduWebApp')
                 _this.courseCardForm.teachingClass = _this.teachClasses[0];
                 _this.semesterId = _this.teachClasses[0].semesterId;
                 _this.getTeachWeek(_this.teachClasses[0].semesterId);
-
+                console.log(_this.bulk);
             }
         };
         $scope.schedule.init();
