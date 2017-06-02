@@ -74,8 +74,8 @@ angular.module('dleduWebApp')
                         divisor = divisor - 1;
                     }
                     divisor = parseInt(divisor);
-                    courseCard.periodMo = courseCard.periodMo + remainder;
-                    courseCard.dayOfWeek = courseCard.dayOfWeek + divisor;
+                    courseCard.periodMo = parseInt(courseCard.periodMo) + parseInt(remainder);
+                    courseCard.dayOfWeek = parseInt(courseCard.dayOfWeek) + parseInt(divisor);
                     angular.forEach(period, function (item, index) {
                         if (courseCard.periodMo == item.no) {
                             courseCard.periodId = item.id;
@@ -87,12 +87,12 @@ angular.module('dleduWebApp')
                                 if (item._id == courseCard._id) {
                                     item.periodMo = courseCard.periodMo;
                                     item.periodId = courseCard.periodId;
-                                    item.dayOfWeek = courseCard.dayOfWeek;
+                                    item.dayOfWeek = parseInt(courseCard.dayOfWeek);
                                     console.log('更改为：周' + courseCard.dayOfWeek + '第' + parseInt(courseCard.periodMo) + '节上课');
                                     console.log('同步为：周' + obj[index].dayOfWeek + '第' + parseInt(obj[index].periodMo) + '节上课');
 
-                                    item.start = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
-                                    item.end = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
+                                    item.start = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
+                                    item.end = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
                                 }
                             });
                         }
@@ -111,8 +111,8 @@ angular.module('dleduWebApp')
                                     item.periodNum = courseCard.periodNum;
                                     console.log('更改为：连上' + courseCard.periodNum + '节');
                                     console.log('同步为：连上' + obj[index].periodNum + '节');
-                                    item.start = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
-                                    item.end = new Date(y, m, d - w + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
+                                    item.start = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1), 0);
+                                    item.end = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(item.dayOfWeek), parseInt(item.periodMo - 1) + parseInt(item.periodNum), 0);
                                 }
                             });
                         }
@@ -290,8 +290,8 @@ angular.module('dleduWebApp')
                 obj.title = '第' + parseInt(obj.startWeekNo) + '-' + parseInt(obj.endWeekNo) + '学周';
 
                 //将课程卡参数换算成当日时间相对应周几的时间戳，起始时间和结束时间都已课节为单位。
-                obj.start = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
-                obj.end = new Date(y, m, d - w + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
+                obj.start = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1), 0);
+                obj.end = new Date(y, m, parseInt(d) - parseInt(w) + parseInt(obj.dayOfWeek), parseInt(obj.periodMo - 1) + parseInt(obj.periodNum), 0);
                 arr.push(obj);
                 // console.log(arr);
             },
