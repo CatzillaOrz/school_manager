@@ -6,7 +6,7 @@ angular.module('dleduWebService')
             product: {
                 name: '知新网综合平台',
 
-                version: '0.0.2.5'
+                version: '0.0.2.6'
 
             },
             isMSIE789: function () {
@@ -60,7 +60,7 @@ angular.module('dleduWebService')
                     return  school;
                 }else {
                     var  url =$location.host().split('.')[0];
-                  // url="kjkf";
+                 // url="kjkf";
                     var params={
                         domainname:url
                     };
