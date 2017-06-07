@@ -94,9 +94,14 @@
                 .form-group
                     label.col-sm-3.control-label
                         span.required *
-                        | 介绍图片：
+                        | 教师头像：
                     .col-sm-7
-                        img.introduce-image(ng-src="{{excellentTeacherFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  )
+                        //img.introduce-image(ng-src="{{excellentTeacherFn.params.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1494570366662'}}" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  )
+                        .btn-upload
+                            input(type="file" ng-jcrop-input="upload" ngf-select="excellentTeacherFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                        .upload-pic
+                            div(ng-jcrop="excellentTeacherFn.obj.src" ng-jcrop-config-name="upload" data-ng-jcrop-config-name="upload" data-selection="excellentTeacherFn.obj.selection" data-thumbnail="excellentTeacherFn.obj.thumbnail")
+
                 //.form-group
                 //    label.col-sm-3.control-label
                 //        span.required *

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SetExcellentTeacherCtrl', function ($scope, MajorService, AuthService, messageService, ImageService, UploadService,TeacherService, $timeout,CommonService,SchoolService) {
+    .controller('SetExcellentTeacherCtrl', function ($scope,$q, MajorService, AuthService, messageService, ImageService, UploadService,TeacherService, $timeout,CommonService,SchoolService) {
         $scope.excellentTeacherFn = {
             editorid: 'introduce',
             editor: {},
@@ -12,6 +12,7 @@ angular.module('dleduWebApp')
                 initialFrameWidth: '100%',
                 initialFrameHeight: '100%'
             },
+            obj: {src: "", selection: [], thumbnail: true},
             isSetExcellent:false,
             teacherDropList:[],
             imgFile:"",
@@ -74,43 +75,60 @@ angular.module('dleduWebApp')
                     }}
             },
             uploadImage: function () {
-                //  $event.currentTarget.disabled=false;
+                var deferred = $q.defer();
                 var _this = this;
-
+                var _this = this;
+                var _cropParamsStr = [];
+                var actionParams = {
+                    "offsetX": _this.obj.selection[0],
+                    "offsetY": _this.obj.selection[1],
+                    "width": _this.obj.selection[4],
+                    "height": _this.obj.selection[5]
+                };
                 _this.loadingFlag = true;
+                for (var key in actionParams) {
+                    _cropParamsStr.push(key + '=' + actionParams[key]);
+                }
                 if (_this.imgFile) {
-                    UploadService.blobUploadToQiNiu(_this.imgFile)
-                        .then(function (resp) {
-                            //resp.data.url
+                    ImageService.convertFileToImage(_this.imgFile, function (image) {
+                        var cutImage = null;
+                         cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
+                        UploadService.blobUploadToQiNiu(cutImage)
+                            .then(function (resp) {
+                                //resp.data.url
 
-                            _this.params.inUrl=resp.data.url;
+                                _this.params.inUrl = resp.data.url;
+                                deferred.resolve(resp);
+                                // $event.currentTarget.disabled=true;
 
-                            // $event.currentTarget.disabled=true;
+                            }, function (resp) {
+                                console.log('Error status: ' + resp.status);
+                                if (resp.status == '500' || resp.status == '404') {
+                                    _this.loadingFlag = false;
+                                };
+                                deferred.reject(resp);
+                            }, function (evt) {
+                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                                //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 
-                        }, function (resp) {
-                            console.log('Error status: ' + resp.status);
-                            if (resp.status == '500' || resp.status == '404') {
-                                _this.loadingFlag = false;
-                            }
-                        }, function (evt) {
-                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                        })
-                    //
+                            })
+                    })
 
                 } else {
                     CommonService.msgDialog('您没有选择文件！！', 2);
                 }
+                return deferred.promise;
             },
             selectFile: function ($file) {
                 var _this = this;
                 _this.imgFile = $file;
-                _this.uploadImage();
+               // _this.uploadImage();
             },
             setMajorToggle:function () {
                 var _this=this;
                 if(!_this.isSetExcellent){
                     _this.resetParams();
+                    _this.obj.src="";
                 }
                 _this.isSetExcellent=!_this.isSetExcellent;
             },
@@ -216,15 +234,20 @@ angular.module('dleduWebApp')
                     messageService.openMsg("请选择教师");
                     return;
                 }
-                if(!params.inUrl){
-                    messageService.openMsg("您还没有上传介绍图片！");
-                    return;
-                }
+                // if(!params.inUrl){
+                //     messageService.openMsg("您还没有上传介绍图片！");
+                //     return;
+                // }
                 params.userId=AuthService.getUser().id;
                 if(_this.params.id){
-                    _this.updateExcellentTeacher(params);
+                    _this.uploadImage().then(function () {
+                        _this.updateExcellentTeacher(params);
+                    })
+
                 }else {
-                    _this.addExcellentTeacher(params);
+                    _this.uploadImage().then(function () {
+                        _this.addExcellentTeacher(params);
+                    })
                 }
 
 
@@ -233,11 +256,19 @@ angular.module('dleduWebApp')
                 var _this=this;
                 _this.isSetExcellent=true;
                 _this.params=entity;
+                _this.obj.src=entity.inUrl;
+                getBase64(entity.inUrl)
+                    .then(function(base64){
+                        _this.imgFile=convertBase64UrlToBlob(base64);
+                    },function(err){
+                        console.log(err);
+                    });
                 $timeout(function () {
                     var $ddd = $("#select2").select2();
                     $ddd.val(_this.params.teacherId).trigger("change");
                 })
             },
+
             //删除
             deleteExcellentTeacher: function () {
                 var _this =$scope.excellentTeacherFn;
@@ -266,4 +297,62 @@ angular.module('dleduWebApp')
             }
         };
         $scope.excellentTeacherFn.init();
-    })
+        function convertBase64UrlToBlob(urlData){
+
+            var bytes=window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte
+            var mime = urlData.split(',')[0].match(/:(.*?);/)[1];
+            //处理异常,将ascii码小于0的转换为大于0
+            var ab = new ArrayBuffer(bytes.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < bytes.length; i++) {
+                ia[i] = bytes.charCodeAt(i);
+            }
+
+            return new Blob( [ab] , {type : mime,name:'temp.jpg'});
+        }
+
+        function getBase64(img){//传入图片路径，返回base64
+            function getBase64Image(img,width,height) {//width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+                var canvas = document.createElement("canvas");
+                canvas.width = width ? width : img.width;
+                canvas.height = height ? height : img.height;
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img,0, 0, canvas.width, canvas.height);
+                var dataURL = canvas.toDataURL();
+                return dataURL;
+            }
+            var image = new Image();
+            image.crossOrigin = '';
+            image.src = img;
+            var deferred=$.Deferred();
+            if(img){
+                image.onload =function (){
+                    deferred.resolve(getBase64Image(image));//将base64传给done上传处理
+                }
+                return deferred.promise();//问题要让onload完成后再return sessionStorage['imgTest']
+            }
+        }
+    }).config(function (ngJcropConfigProvider) {
+
+    ngJcropConfigProvider.setPreviewStyle('upload', {
+        // 'width': '120px',
+        // 'height': '120px',
+        'overflow': 'hidden',
+        'margin-left': '80px'
+    });
+
+    ngJcropConfigProvider.setJcropConfig('block', {
+        bgColor: 'black',
+        bgOpacity: .4,
+        aspectRatio: 1 / 1
+        // maxWidth: 250,
+        // maxHeight: 250
+    });
+})
+
+
+
+var imgSrc = "https://img.alicdn.com/bao/uploaded/TB1qimQIpXXXXXbXFXXSutbFXXX.jpg";
+//    var imgSrc = "img/1.jpg";
+

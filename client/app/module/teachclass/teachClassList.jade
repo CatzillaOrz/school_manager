@@ -34,8 +34,8 @@
                         thead
                             tr(role='row')
                                 th.all-check
-                                    a(ng-click='teachClassListFn.allCheck()')
-                                        input(type='checkbox' ng-model='teachClassListFn.allChedked')
+
+                                        input(type='checkbox'  ng-model="teachClassListFn.allChedked" ng-click='teachClassListFn.allCheck(teachClassListFn.allChedked)' )
                                         span 全选
                                 th 班级名称
                                 th 学期
@@ -45,7 +45,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat="teachClass in teachClassListFn.teachClassList")
                                 td
-                                    input(type='checkbox' ng-model='teachClass.checked')
+                                    input(type='checkbox' ng-model='teachClass.checked' ng-checked="teachClassListFn.allChedked")
                                 td
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})") {{teachClass.name}}
                                 td {{teachClass.semesterName}}

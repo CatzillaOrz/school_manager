@@ -20,18 +20,26 @@ angular.module('dleduWebApp')
 			params: {
 				name: ""
 			},
-            allCheck:function(){
+            allCheck:function(m){
 			    var _this = this;
-                _this.allChedked = !_this.allChedked;
-			  if(_this.allChedked){
-                    angular.forEach(_this.teachClassList,function(item,index){
+                //_this.allChedked = !_this.allChedked;
+                angular.forEach(_this.teachClassList,function (item) {
+                    if(m===true){
                         item.checked = true;
-                    })
-              }else{
-                  angular.forEach(_this.teachClassList,function(item,index){
-                      item.checked = false;
-                  })
-              }
+                    }else {
+                        item.checked = false;
+                    }
+                })
+              // if(entity){
+              //       angular.forEach(_this.teachClassList,function(item,index){
+              //           item.checked = true;
+              //       })
+              // }else{
+              //     angular.forEach(_this.teachClassList,function(item,index){
+              //         item.checked = false;
+              //     })
+              // }
+
             },
             schedules:function(){
                 var _this = this;
