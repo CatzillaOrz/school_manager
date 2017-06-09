@@ -23,6 +23,7 @@
     export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api
     export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api
     export EM_API=http://emdev.aizhixin.com/em_api2
+    export HY_API=http://hy.aizhixindev.com/ew_api
     export IO_API=http://iodev.aizhixin.com
     export API_GATEWAY=http://172.16.23.120:3333/
     export SESSION_REDIS_HOST=172.16.23.30
@@ -37,6 +38,7 @@
     export BACKEND_API=http://dledutest.aizhixin.com/zhixin_api
     export DIANDIAN_API=http://ddtest.aizhixin.com/diandian_api
     export EM_API=http://em2.aizhixintest.com/em_api2
+    export HY_API=http://hy.aizhixintest.com/ew_api
     export IO_API=http://iodev.aizhixin.com
     export IO_API=http://iotest.aizhixin.com
     export API_GATEWAY=http://172.16.23.122:3333/
@@ -53,6 +55,7 @@
     export BACKEND_API=http://dledu.dlztc.com/zhixin_api
     export DIANDIAN_API=http://dd.dlztc.com/diandian_api
     export EM_API=http://em.dlztc.com/em_api2
+    export HY_API=http://hy.dlztc.com/ew_api
     export IO_API=http://io.dlztc.com
     export API_GATEWAY=http://apigateway.dlztc.com/
     export SESSION_REDIS_HOST=172.16.23.31
