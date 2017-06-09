@@ -12,7 +12,7 @@
                 .year-month {{ noticeListFn.formatDate(notice.publishDate,'yyyy/MM') }}
             .notice-content
                 .title {{notice.title}}
-                .content {{noticeListFn.cutHtml(notice.content,200)}}
+                .content {{noticeListFn.cutHtml(notice.content,110)}}
             .notice-right >
     .page
         ul.pagination-sm(uib-pagination, total-items='noticeListFn.page.totalElements',items-per-page="noticeListFn.page.pageSize" max-size='noticeListFn.page.pageSize' ng-model='noticeListFn.page.pageNumber',ng-change="noticeListFn.getNoticeList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
