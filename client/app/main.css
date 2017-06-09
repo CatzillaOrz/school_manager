@@ -1269,6 +1269,18 @@ a:focus {
       .index-container .content-container .shuff-image .img {
         height: 400px;
         width: 1000px; }
+    .index-container .content-container .notice-title {
+      margin-top: 25px; }
+      .index-container .content-container .notice-title .title {
+        font-size: 24px;
+        color: #333333;
+        text-align: center; }
+      .index-container .content-container .notice-title .date {
+        font-size: 14px;
+        padding-top: 10px;
+        padding-bottom: 21px;
+        color: #999999;
+        text-align: center; }
     .index-container .content-container .feature-block {
       border-bottom: 1px solid #e7e7e7;
       margin-top: 30px;
@@ -1300,6 +1312,69 @@ a:focus {
       margin-bottom: 150px; }
       .index-container .content-container .page a {
         margin: 0 5px; }
+    .index-container .content-container .notice-container {
+      font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+      width: 1000px; }
+      .index-container .content-container .notice-container .notice-item {
+        cursor: pointer;
+        margin-top: 20px;
+        background-color: #ffffff;
+        width: 100%;
+        height: 100px; }
+        .index-container .content-container .notice-container .notice-item .notice-left {
+          display: inline-block;
+          height: 70px;
+          width: 70px;
+          margin: 14px 4px 14px 20px;
+          background-color: #29c192;
+          vertical-align: top; }
+          .index-container .content-container .notice-container .notice-item .notice-left .day {
+            width: 70px;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 24px;
+            color: #ffffff; }
+          .index-container .content-container .notice-container .notice-item .notice-left .year-month {
+            width: 70px;
+            text-align: center;
+            margin-top: 0px;
+            font-size: 12px;
+            color: #ffffff; }
+        .index-container .content-container .notice-container .notice-item .notice-content {
+          display: inline-block;
+          display: inline-block;
+          vertical-align: top;
+          padding-top: 14px;
+          width: 895px; }
+          .index-container .content-container .notice-container .notice-item .notice-content .title {
+            color: #333333;
+            padding-left: 10px;
+            font-size: 20px; }
+          .index-container .content-container .notice-container .notice-item .notice-content .content {
+            color: #999999;
+            padding-left: 10px;
+            font-size: 14px; }
+        .index-container .content-container .notice-container .notice-item .notice-right {
+          display: inline-block;
+          padding-top: 33px;
+          vertical-align: top;
+          font-size: 16px;
+          background-color: #a9e6d3;
+          color: #ffffff;
+          width: 11px;
+          height: 100px; }
+        .index-container .content-container .notice-container .notice-item:hover .notice-content {
+          display: inline-block;
+          vertical-align: top;
+          padding-top: 14px; }
+          .index-container .content-container .notice-container .notice-item:hover .notice-content .title {
+            color: #29c192;
+            padding-left: 10px;
+            font-size: 20px; }
+          .index-container .content-container .notice-container .notice-item:hover .notice-content .content {
+            color: #29c192;
+            padding-left: 10px;
+            font-size: 14px; }
     .index-container .content-container .boutique-course-content {
       font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
       width: 1036px;
@@ -1426,12 +1501,34 @@ a:focus {
         width: 384px;
         display: inline-block;
         vertical-align: top; }
-        .index-container .content-container .introduce-container .hot-msg .hot-major-container {
+        .index-container .content-container .introduce-container .hot-msg .feature-block {
+          border-bottom: 1px solid #e7e7e7;
+          margin-top: 30px;
+          overflow: hidden; }
+          .index-container .content-container .introduce-container .hot-msg .feature-block .tab {
+            cursor: pointer;
+            font-size: 20px;
+            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+            width: 114px;
+            text-align: center;
+            display: inline-block; }
+          .index-container .content-container .introduce-container .hot-msg .feature-block .more {
+            float: right;
+            font-size: 14px;
+            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+            display: inline-block;
+            position: relative;
+            color: #999999;
+            margin-top: 9px; }
+          .index-container .content-container .introduce-container .hot-msg .feature-block .active {
+            color: #29c192;
+            border-bottom: 3px solid #29c192; }
+        .index-container .content-container .introduce-container .hot-msg .hot-container {
           padding: 8px 11px;
           margin-top: 24px;
           height: 448px;
           background-color: #ffffff; }
-          .index-container .content-container .introduce-container .hot-msg .hot-major-container .btn-major {
+          .index-container .content-container .introduce-container .hot-msg .hot-container .btn-major {
             margin: 10px 5px;
             cursor: pointer;
             height: 42px;
@@ -1441,9 +1538,59 @@ a:focus {
             border: 1px solid #dddddd;
             border-radius: 42px;
             display: inline-block; }
-            .index-container .content-container .introduce-container .hot-msg .hot-major-container .btn-major:hover {
+            .index-container .content-container .introduce-container .hot-msg .hot-container .btn-major:hover {
               border: 1px solid #29c192;
               color: #29c192; }
+          .index-container .content-container .introduce-container .hot-msg .hot-container .notice {
+            cursor: pointer;
+            margin: 18px 5px 0px 5px;
+            background-color: #f5f5f5;
+            height: 68px;
+            width: 352px; }
+            .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-left {
+              display: inline-block;
+              height: 68px;
+              width: 68px;
+              background-color: #29c192;
+              vertical-align: top; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-left .day {
+                width: 68px;
+                text-align: center;
+                margin-top: 8px;
+                font-size: 24px;
+                color: #ffffff; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-left .year-month {
+                width: 68px;
+                text-align: center;
+                margin-top: 0px;
+                font-size: 12px;
+                color: #ffffff; }
+            .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-right {
+              display: inline-block;
+              display: inline-block;
+              vertical-align: top;
+              padding-top: 18px; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-right .title {
+                color: #333333;
+                padding-left: 10px;
+                font-size: 16px; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-right .content {
+                color: #999999;
+                padding-left: 10px;
+                font-size: 12px; }
+            .index-container .content-container .introduce-container .hot-msg .hot-container .notice:hover .notice-right {
+              display: inline-block;
+              display: inline-block;
+              vertical-align: top;
+              padding-top: 18px; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice:hover .notice-right .title {
+                color: #29c192;
+                padding-left: 10px;
+                font-size: 16px; }
+              .index-container .content-container .introduce-container .hot-msg .hot-container .notice:hover .notice-right .content {
+                color: #29c192;
+                padding-left: 10px;
+                font-size: 12px; }
     .index-container .content-container .school-introduce {
       margin-top: 20px; }
     .index-container .content-container .teacher-card-container-bg {

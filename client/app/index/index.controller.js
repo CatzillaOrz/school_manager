@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
+    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
         $scope.indexFn={
             schoolInfo:{},
             schoolLogo:"",
@@ -16,7 +16,8 @@ angular.module('dleduWebApp')
             excellentTeacherList:[],
             hotMajorList:[],
             shuffImageList:[],
-
+            noticeList:[],
+            currentTab:"notice",
             //精品课程查询
             getBoutiqueCourseList:function () {
                 var _this=this;
@@ -82,6 +83,27 @@ angular.module('dleduWebApp')
 
                     })
             },
+            getNoticeList:function () {
+                var _this=this;
+                var params = _this.params;
+                params.pageNumber= 1,
+                params.pageSize= 5,
+                NoticeService.getNoticeList(params).$promise
+                    .then(function (data) {
+                        _this.noticeList=data.data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            formatDate:function (date,format) {
+               var arr=date.split("-");
+               if(format=="yyyy/MM"){
+                   return arr[0]+"/"+ arr[1];
+               }else {
+                   return arr[2];
+               }
+            },
             //logo
             getLogoList:function () {
                 var _this=this;
@@ -100,8 +122,8 @@ angular.module('dleduWebApp')
 
                     })
             },
-            cutHtml:function (str) {
-                return CommonService.strCut(str,50)
+            cutHtml:function (str,len) {
+                return CommonService.strCut(str,len)
             },
             toEmHostInit:function () {
                 var _this=this;
@@ -127,6 +149,16 @@ angular.module('dleduWebApp')
                 }
 
             },
+            tabToggle:function(entity){
+                this.currentTab=entity;
+            },
+            tabToDetail:function(){
+                if(this.currentTab=="notice"){
+                    $state.go("noticelist");
+                }else {
+                    $state.go("hotmajorlist");
+                }
+            },
            init:function () {
                 var _this=this;
                _this.toEmHostInit();
@@ -138,6 +170,7 @@ angular.module('dleduWebApp')
                _this.getExcellentTeacherList();
                _this.getBoutiqueCourseList();
                _this.getLogoList();
+               _this.getNoticeList();
            }
         };
         $timeout(function () {
@@ -146,6 +179,8 @@ angular.module('dleduWebApp')
                     $scope.indexFn.currentActive="excellentteacherlist";
                 }else if(toState.name=="hotmajordetail"){
                     $scope.indexFn.currentActive="hotmajorlist";
+                }else if(toState.name=="noticedetail"){
+                    $scope.indexFn.currentActive="noticelist";
                 }else {
                     $scope.indexFn.currentActive=toState.name;
                 }

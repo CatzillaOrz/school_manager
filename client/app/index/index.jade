@@ -30,33 +30,19 @@
                     .teacher-name
                         | {{teacher.teacherName}}
                     .teacher-detail
-                        | {{indexFn.cutHtml(teacher.introduction)}}
-
-                //.teacher-card(ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
-                //    .shade(ng-show="a")
-                //    .detail-button(ng-show="a")
-                //        a.btn-detail
-                //            | 教师详情>>
-                //    .teacher-image
-                //        img.img(src="http://7xpscc.com1.z0.glb.clouddn.com/1495114226205")
-                //    .teacher-name
-                //        | 刘建平
-                //    .teacher-detail
-                //        | 毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。毕业于北京理工大学，搞死教育物理专职教师。
-
+                        | {{indexFn.cutHtml(teacher.introduction,50)}}
         .hot-msg
             .feature-block
-                .title 热门专业
-                .more.cursor-pointer(ui-sref="hotmajorlist") 更多>>
-            .hot-major-container
-                //{"id":2,"specialtyName":"222222222222222","userId":null,"orgId":null,"collegeId":6,"collegeName":"噢噢噢噢噢噢噢噢123","specialtyId":7,"introduction":"顶顶顶顶顶顶顶顶顶大大大12","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494933552215","templateShow":2,"createDate":1494933440000}
-                .btn-major(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})")
+                .tab(ng-class="{'active':indexFn.currentTab=='notice'}" ng-click="indexFn.tabToggle('notice')")  最新活动
+                .tab(ng-class="{'active':indexFn.currentTab=='major'}" ng-click="indexFn.tabToggle('major')")  热门专业
+                .more.cursor-pointer(ng-click="indexFn.tabToDetail()") 更多>>
+            .hot-container
+                .btn-major(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" ng-if="indexFn.currentTab=='major'")
                     | {{major.specialtyName}}
-                //.btn-major
-                //    | 网络通讯
-                //.btn-major
-                //    | 网络通
-                //.btn-major
-                //    | 操作系统
-
-
+                .notice(ng-if="indexFn.currentTab=='notice'" ui-sref="noticedetail({id:notice.id})" ng-repeat="notice in indexFn.noticeList")
+                    .notice-left
+                        .day {{ indexFn.formatDate(notice.publishDate,'dd') }}
+                        .year-month {{ indexFn.formatDate(notice.publishDate,'yyyy/MM') }}
+                    .notice-right
+                        .title {{notice.title}}
+                        .content {{indexFn.cutHtml(notice.content,30)}}

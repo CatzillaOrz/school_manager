@@ -99,4 +99,28 @@ angular.module('dleduWebApp')
                 },
 
             })
+            .state('noticelist', {
+                url   : '/noticelist',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'noticeListCtrl',
+                        templateUrl: 'app/index/noticeList.html'
+                    }
+                },
+
+            })
+            .state('noticedetail', {
+                url   : '/noticedetail/:id',
+                parent: 'indexnav',
+                access: {requiredLogin: false},
+                views : {
+                    'content@indexnav': {
+                        controller : 'noticeDetailCtrl',
+                        templateUrl: 'app/index/noticeDetail.html'
+                    }
+                },
+
+            })
     });

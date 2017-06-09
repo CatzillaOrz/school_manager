@@ -20,10 +20,12 @@
                     | 学校概况
                 li(ui-sref="hotmajorlist" ng-class="{'active':indexFn.currentActive=='hotmajorlist'}")
                     | 热门专业
+                li(ui-sref="noticelist" ng-class="{'active':indexFn.currentActive=='noticelist'}")
+                    | 最新活动
                 li(ui-sref="excellentteacherlist" ng-class="{'active':indexFn.currentActive=='excellentteacherlist'}")
                     | 优秀老师
                 li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
                     | 精品课程
     div(ui-view="content")
     .footer
-        | Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · 京ICP备16006959号-1 · ver0.0.2.5
+        | Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · 京ICP备16006959号-1 · ver0.0.2.7

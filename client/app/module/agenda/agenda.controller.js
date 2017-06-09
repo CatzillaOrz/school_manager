@@ -302,7 +302,8 @@ angular.module('dleduWebApp')
             getTeachWeek: function (semesterId) {
                 var _this = this;
                 var params = {
-                    semesterId: semesterId
+                    semesterId: semesterId,
+                    pageSize:40,
                 };
                 SchoolYearService.getTeachWeekList(params).$promise
                     .then(function (data) {
