@@ -330,10 +330,7 @@ var SchoolService = {
 
                 callback(null, res.entity);
             } else {
-                ErrorCode.getErrorSync(res.entity)
-                    .then(function(err){
-                        callback(err);
-                    });
+                callback(e);
             }
         })
             .catch(function (e) {

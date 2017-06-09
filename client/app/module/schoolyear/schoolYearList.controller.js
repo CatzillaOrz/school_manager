@@ -131,7 +131,7 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: 0,
-                    pageSize: 10
+                    pageSize: 20
                 };
                 params.name=that.params.name;
                 SchoolYearService.getPeriodList(params).$promise

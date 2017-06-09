@@ -1,0 +1,19 @@
+.sub-nav
+    span.cursor-pointer(ui-sref="index") 首页
+    span >>
+    span.cursor-pointer.active 最新活动
+.content-container
+    .feature-block
+        .title 最新活动
+    .notice-container
+        .notice-item(ng-repeat="notice in noticeListFn.noticeList" ui-sref="noticedetail({id:notice.id})")
+            .notice-left
+                .day {{ noticeListFn.formatDate(notice.publishDate,'dd') }}
+                .year-month {{ noticeListFn.formatDate(notice.publishDate,'yyyy/MM') }}
+            .notice-content
+                .title {{notice.title}}
+                .content {{noticeListFn.cutHtml(notice.content,200)}}
+            .notice-right >
+    .page
+        ul.pagination-sm(uib-pagination, total-items='noticeListFn.page.totalElements',items-per-page="noticeListFn.page.pageSize" max-size='noticeListFn.page.pageSize' ng-model='noticeListFn.page.pageNumber',ng-change="noticeListFn.getNoticeList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+
