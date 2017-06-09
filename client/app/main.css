@@ -1349,7 +1349,11 @@ a:focus {
           .index-container .content-container .notice-container .notice-item .notice-content .title {
             color: #333333;
             padding-left: 10px;
-            font-size: 20px; }
+            font-size: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 850px; }
           .index-container .content-container .notice-container .notice-item .notice-content .content {
             color: #999999;
             padding-left: 10px;
@@ -1573,7 +1577,11 @@ a:focus {
               .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-right .title {
                 color: #333333;
                 padding-left: 10px;
-                font-size: 16px; }
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 275px; }
               .index-container .content-container .introduce-container .hot-msg .hot-container .notice .notice-right .content {
                 color: #999999;
                 padding-left: 10px;
