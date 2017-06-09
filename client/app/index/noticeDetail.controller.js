@@ -9,7 +9,8 @@ angular.module('dleduWebApp')
         $scope.noticeDetailFn={
             notice:{},
             params:{
-                articleId:""
+                articleId:"",
+                published:1
             },
             //精品课程查询
             getNoticeById:function () {
