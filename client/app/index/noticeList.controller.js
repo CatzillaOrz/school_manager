@@ -7,7 +7,8 @@ angular.module('dleduWebApp')
             params:{
                 orgId: "",
                 pageNumber:1,
-                pageSize: 10
+                pageSize: 10 ,
+                published:1
             },
             noticeList:[],
             //分页
