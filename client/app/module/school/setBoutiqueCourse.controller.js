@@ -210,8 +210,8 @@ angular.module('dleduWebApp')
                 SchoolService.getBoutiqueCourseList(params).$promise
                     .then(function (data) {
                         _this.boutiqueCourseList = data.data;
-                        _this.page=data.page;
-                        _this.page.pageNumber+=_this.page.pageNumber;
+                        _this.page.totalElements=data.page.totalElements;
+                        _this.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
 
