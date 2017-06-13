@@ -7,7 +7,9 @@ common scss
 /**
 所有子页面的独立样式都放这里
 */
-
+body{
+  font-family: $font-family-sans-serif;
+}
 @import '../app/layout/layout.scss';
 @import "../app/layout/header.scss";
 @import '../app/account/signin.scss';

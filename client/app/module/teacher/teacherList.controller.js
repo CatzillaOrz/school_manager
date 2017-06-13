@@ -47,8 +47,8 @@ angular.module('dleduWebApp')
                 TeacherService.getTeacherList(params).$promise
                     .then(function (data) {
                         that.teacherList = data.data;
-                        that.page=data.page;
-                        that.page.pageNumber+=that.page.pageNumber;
+                        that.page.totalElements=data.page.totalElements;
+                        that.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
 

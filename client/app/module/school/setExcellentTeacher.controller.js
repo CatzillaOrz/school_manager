@@ -220,8 +220,8 @@ angular.module('dleduWebApp')
                 SchoolService.getExcellentTeacherList(params).$promise
                     .then(function (data) {
                         _this.excellentTeacherList = data.data;
-                        _this.page=data.page;
-                        _this.page.pageNumber+=_this.page.pageNumber;
+                        _this.page.totalElements=data.page.totalElements;
+                        _this.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
 
