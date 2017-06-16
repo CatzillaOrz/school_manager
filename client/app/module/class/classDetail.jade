@@ -77,7 +77,8 @@
                     thead
                         tr(role='row')
                             th.text-left
-                              input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll")
+                              input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll" style="width: 10% !important;")
+                              | 全选
                             th
                                 i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
                                 |  姓名

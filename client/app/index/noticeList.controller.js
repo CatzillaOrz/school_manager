@@ -5,7 +5,7 @@ angular.module('dleduWebApp')
         $scope.noticeListFn={
             schoolInfo:{},
             params:{
-                orgId: "",
+               organId:"",
                 pageNumber:1,
                 pageSize: 10 ,
                 published:1
@@ -53,7 +53,7 @@ angular.module('dleduWebApp')
             init:function () {
                 var _this=this;
                 _this.schoolInfo=  CommonService.getSchool();
-                _this.params.orgId=_this.schoolInfo.id;
+                _this.params.organId=_this.schoolInfo.id;
                 _this.getNoticeList();
             }
         };

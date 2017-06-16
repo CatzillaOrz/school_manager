@@ -957,6 +957,9 @@ a:focus {
   font-size: 24px;
   color: black; }
 
+.width-percent-10 {
+  width: 10% !important; }
+
 .logo-container {
   font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
   .logo-container .logo-card-container .logo-image-view {
