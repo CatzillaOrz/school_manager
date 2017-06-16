@@ -14,7 +14,7 @@ var NoticeService = {
     getNoticeList: function (params, callback) {
         RestClient.get({
             host: 'hy',
-            path: '/api/web/v1/news/newsShow/newsLists',
+            path: '/api/web/v1/news/newsShow/newsListForOrgan',
 
             params
         }).then(function (res) {

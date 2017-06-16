@@ -189,7 +189,7 @@ angular.module('dleduWebApp')
                             messageService.openMsg("设置学校简介失败！");
 
                         }else {
-                            messageService.openMsg(error.data);
+                           // messageService.openMsg(error.data);
 
                         }
                     })

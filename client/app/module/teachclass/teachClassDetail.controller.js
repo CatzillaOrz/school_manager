@@ -28,6 +28,13 @@ angular.module('dleduWebApp')
             //学生全选标识
             selectAll:false,
             //选择所有
+            //分页
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 10
+            },
             all:function (m) {
                 var _this=this;
                 angular.forEach(_this.teachClassStudentList,function (data) {
@@ -84,11 +91,15 @@ angular.module('dleduWebApp')
             getTeachClassStudentList: function () {
                 var _this = this;
                 var params = {
-                    teachingClassId: _this.params.id
+                    teachingClassId: _this.params.id,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
                 };
                 TeachClassService.getTeachClassStudentList(params).$promise
                     .then(function (data) {
                         _this.teachClassStudentList = data.data;
+                        _this.page.totalElements=data.page.totalElements;
+                        _this.page.totalPages=data.page.totalPages;
 
                     })
                     .catch(function (error) {

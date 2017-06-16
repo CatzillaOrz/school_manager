@@ -88,7 +88,8 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 params.pageNumber= 1,
                 params.pageSize= 5,
-                params.published=1
+                params.published=1,
+                params.organId=_this.params.orgId;
                 NoticeService.getNoticeList(params).$promise
                     .then(function (data) {
                         _this.noticeList=data.data;

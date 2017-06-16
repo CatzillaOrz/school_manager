@@ -9,38 +9,38 @@
         {
             "title": "学校信息管理",
             "sref": "setlogo",
-            "icon": "file-text-o",
+            "icon": "university",
             "active": "school",
             "items":[
                 {
                     "title": "设置学校LOGO",
                     "sref": "setlogo",
                     "active": "setlogo",
-                    "icon": "home"
+                    "icon": "cog"
                 },
                 {
                     "title": "设置轮播图与简介",
                     "sref": "setplayview",
                     "active": "setplayview",
-                    "icon": "home"
+                    "icon": "cogs"
                 },
                 {
                     "title": "设置热门专业",
                     "sref": "sethotmajor",
                     "active": "sethotmajor",
-                    "icon": "home"
+                    "icon": "wrench"
                 },
                 {
                     "title": "设置优秀老师",
                     "sref": "setexcellentteacher",
                     "active": "setexcellentteacher",
-                    "icon": "home"
+                    "icon": "gavel"
                 },
                 {
                     "title": "设置精品课程",
                     "sref": "setboutiquecourse",
                     "active": "setboutiquecourse",
-                    "icon": "home"
+                    "icon": "magic"
                 }
             ]
         },
@@ -48,31 +48,31 @@
             "title": "院系管理",
             "sref": "college.list",
             "active": "college",
-            "icon": "file-text-o"
+            "icon": "building-o"
         },
         {
             "title": "专业管理",
             "sref": "majorlist",
             "active": "major",
-            "icon": "file-text-o"
+            "icon": "bookmark-o"
         },
         {
             "title": "班级管理",
             "sref": "classlist",
             "active": "class",
-            "icon": "file-text-o"
+            "icon": "users"
         },
         {
             "title": "教师管理",
             "sref": "teacherlist",
             "active": "teacher",
-            "icon": "file-text-o"
+            "icon": "id-card-o"
         },
         {
             "title": "学生管理",
             "sref": "studentlist",
             "active": "student",
-            "icon": "file-text-o"
+            "icon": "graduation-cap"
         },
         {
             "title": "学时管理",
@@ -84,13 +84,13 @@
             "title": "课程管理",
             "sref": "courselist",
             "active": "course",
-            "icon": "file-text-o"
+            "icon": "book"
         },
         {
             "title": "教学班管理",
             "sref": "teachclasslist",
             "active": "teachclass",
-            "icon": "file-text-o"
+            "icon": "th"
         }
     ]
 }
