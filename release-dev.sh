@@ -5,7 +5,7 @@ export NODE_ENV=production
 export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api
 export DIANDIAN_API=http://dddev.aizhixin.com/diandian_api
 export EM_API=http://emdev.aizhixin.com/em_api2
-export HY_API=http://hydev.aizhixin.com /ew_api
+export HY_API=http://hydev.aizhixin.com/ew_api
 export IO_API=http://iodev.aizhixin.com
 export API_GATEWAY=http://172.16.23.120:3333/
 
