@@ -1,21 +1,28 @@
-#header{
-  #logo{
-    height: 50px;
-    width: 50px;
-    img{
-      border-radius: 50%;
+#header {
+
+  #logo-group {
+    padding: 22px 10px 22px 20px;
+    height: 100px;
+    #logo {
+      width: 66px;
+      height: 66px;
+      img {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+      }
     }
-  }
-  #orgName{
-    color: $text-color-lightest;
-    line-height: 50px;
-    margin-left: 10px;
-    font-size: 16px;
+    #orgName {
+      color: $text-color-lightest;
+      line-height: 50px;
+      margin-left: 10px;
+      font-size: 20px;
+    }
   }
   .account {
     height: $nav-container-height;
     float: right;
-    margin: 0 30px 0 8px;
+    margin: 26px 30px 26px 10px;
     display: table;
 
     li {
@@ -31,12 +38,12 @@
       height: $nav-container-height;
       display: table-cell;
       vertical-align: middle;
-      a{
+      a {
         color: $gray-dark;
-        i{
+        i {
           margin-right: 10px;
         }
-        span{
+        span {
           margin-right: 15px;
         }
       }

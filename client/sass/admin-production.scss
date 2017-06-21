@@ -11280,7 +11280,7 @@ aside {
 }
 
 #header > :first-child, aside {
-  width: 220px
+  width: 290px
 }
 #header>:first-child {
   //background: $brand-primary;
@@ -11295,7 +11295,7 @@ aside {
 }
 
 #main {
-  margin-left: 220px;
+  margin-left: 290px;
   padding: 0;
   padding-bottom: 52px;
   min-height: 500px;
@@ -11437,9 +11437,9 @@ nav > ul > li:last-child.open {
 
 nav ul li a {
   line-height: normal;
-  font-size: 14px;
+  font-size: 18px;
   padding: 10px 10px 10px 11px;
-  margin: 0 10px;
+  margin: 10px 10px;
   color: #c0bbb7;
   display: block;
   font-weight: 400;
@@ -11571,8 +11571,19 @@ nav > ul > li:hover > ul::before, nav > ul > li:hover > ul > li::before {
 nav ul ul {
   margin: 0;
   display: none;
-  background: rgba(69, 69, 69, .6);
-  padding: 7px 0
+  background: #999999;
+  padding: 7px 0;
+
+
+  $subbgcolor:#2c3e50;
+
+  background: $subbgcolor;
+  background: -moz-linear-gradient(left, $subbgcolor 93%, $subbgcolor 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(93%, $subbgcolor), color-stop(100%, $subbgcolor));
+  background: -webkit-linear-gradient(left, $subbgcolor 93%, $subbgcolor 100%);
+  background: -o-linear-gradient(left, $subbgcolor 93%, $subbgcolor 100%);
+  background: -ms-linear-gradient(left, $subbgcolor 93%, $subbgcolor 100%);
+  background: linear-gradient(to right, $subbgcolor 93%, $subbgcolor 100%);
 }
 
 nav ul ul ul {
@@ -11587,7 +11598,7 @@ nav ul ul li {
 
 nav ul ul li > a {
   padding-left: 42px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   outline: 0
 }
