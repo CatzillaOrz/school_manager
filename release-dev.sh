@@ -1,4 +1,5 @@
-##此脚本用于本机模拟服务器发布
+#!/bin/bash
+########################## For develop env ######################################
 export OPENSHIFT_NODEJS_PORT=9009
 export NODE_ENV=production
 export BACKEND_API=http://dledudev.aizhixin.com/zhixin_api
@@ -16,8 +17,5 @@ export SESSION_REDIS_PASS=
 export SESSION_REDIS_PREFIX=dledu_web_session
 export SESSION_DOMAIN=aizhixin.com
 
-node dist/server/app.js
-
-
-
+pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
 

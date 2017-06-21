@@ -60,7 +60,7 @@ angular.module('dleduWebService')
                     return  school;
                 }else {
                     var  url =$location.host().split('.')[0];
-                    //url="kjkf";
+                    url="kjkf";
                     var params={
                         domainname:url
                     };
@@ -68,6 +68,7 @@ angular.module('dleduWebService')
                         .then(function (data) {
                             school=data;
                             document.title=school.name;
+
                             _this.setSchool(school);
                             return school;
                         })
