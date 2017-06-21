@@ -1,5 +1,5 @@
 #!/bin/bash
-########################## For prod env ######################################
+########################## For test env ######################################
 
 export OPENSHIFT_NODEJS_PORT=9009
 export NODE_ENV=production
