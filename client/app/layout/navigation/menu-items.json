@@ -91,6 +91,38 @@
             "sref": "teachclasslist",
             "active": "teachclass",
             "icon": "th"
+        },
+        {
+            "title": "教务管理",
+            "sref": "attendlist",
+            "icon": "navicon",
+            "active": "eduman",
+            "items":[
+                {
+                    "title": "考勤记录",
+                    "sref": "attendlist",
+                    "active": "attendlist",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "课程评分",
+                    "sref": "coursescore",
+                    "active": "coursescore",
+                    "icon": "signal"
+                },
+                {
+                    "title": "评教问卷",
+                    "sref": "evaquestion",
+                    "active": "evaquestion",
+                    "icon": "question-circle"
+                },
+                {
+                    "title": "电子围栏",
+                    "sref": "elecfence",
+                    "active": "elecfence",
+                    "icon": "barcode"
+                }
+            ]
         }
     ]
 }
