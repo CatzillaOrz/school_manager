@@ -11,9 +11,9 @@ export IO_API=http://iotest.aizhixin.com
 export API_GATEWAY=http://172.16.23.122:3333/
 
 export SESSION_REDIS_HOST=172.16.23.32
-export SESSION_REDIS_PORT=6379 
+export SESSION_REDIS_PORT=6379
 export SESSION_REDIS_DB='0'
-export SESSION_REDIS_PASS= 
+export SESSION_REDIS_PASS=
 export SESSION_REDIS_PREFIX=dledu_web_session
 export SESSION_DOMAIN=aizhixin.com
 pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
