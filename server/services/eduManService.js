@@ -79,7 +79,25 @@ var EduManService = {
         }).catch(function (e) {
             callback(e);
         });
-    }
+    },
+
+    //查询评教问卷列表
+    getEvaQuesInfo: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/classes/list',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
 
 };
 
