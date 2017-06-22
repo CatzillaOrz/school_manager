@@ -11571,11 +11571,10 @@ nav > ul > li:hover > ul::before, nav > ul > li:hover > ul > li::before {
 nav ul ul {
   margin: 0;
   display: none;
-  background: #999999;
   padding: 7px 0;
 
 
-  $subbgcolor:#2c3e50;
+  $subbgcolor:#1c2b3a;
 
   background: $subbgcolor;
   background: -moz-linear-gradient(left, $subbgcolor 93%, $subbgcolor 100%);

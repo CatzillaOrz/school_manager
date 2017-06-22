@@ -4,7 +4,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./eduman.controller');
+var controller = require('./eduMan.controller');
 var auth = require('../../middleware/auth');
 
 var router = express.Router();
