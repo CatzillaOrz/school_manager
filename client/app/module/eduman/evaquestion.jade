@@ -22,8 +22,8 @@
                         .col-xs-12.col-sm-6
                             //#datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按问卷名称查询', aria-controls='datatable_col_reorder' ng-model="classListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="classListFn.getClassList()")
+                                    input.form-control(type='search', placeholder='按问卷名称查询', aria-controls='datatable_col_reorder' ng-model="evaQuesListFn.params.name")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="evaQuesListFn.getClassList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -42,25 +42,23 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 分配到教学班数量
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 200px;') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat="record in classListFn.records")
-                                td.sorting_1 {{$index+1 + ((classListFn.page.pageNumber==0?classListFn.page.pageNumber+1:classListFn.page.pageNumber)-1)*10}}
-                                td.expand
-                                    a(ui-sref="classDetail({id:record.id})") {{record.name}}
-                                td {{record.collegeName}}
-                                td {{record.professionalName}}
-                                td.expand
-                                    a(ui-sref="classDetail({id:record.id})") {{record.name}}
-                                td {{record.collegeName}}
-                                td {{record.collegeName}}
-                                td {{record.professionalName}}
+                            tr.odd(role='row' ng-repeat="record in evaQuesListFn.records")
+                                td.sorting_1 {{$index+1 + ((evaQuesListFn.page.pageNumber==0?evaQuesListFn.page.pageNumber+1:evaQuesListFn.page.pageNumber)-1)*10}}
+                                td {{record.name}}
+                                td {{record.startTime}}
+                                td {{record.endTime}}
+                                td {{record.status}}
+                                td {{record.count}}
+                                td {{record.allScore}}
+                                td {{record.classNumber}}
                                 td
                                     a.handle(ui-sref="classEdit({id:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ng-click="classListFn.deletePrompt(record)")
+                                    a.handle(ng-click="evaQuesListFn.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 编辑
-                                    a.handle(ui-sref="classEdit({id:record.id})")
+                                    a.handle(ui-sref="evaquesshow({id:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 查看
                                     a.handle(ui-sref="classEdit({id:record.id})")
@@ -71,12 +69,12 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((classListFn.page.pageNumber==0?classListFn.page.pageNumber+1:classListFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{((evaQuesListFn.page.pageNumber==0?evaQuesListFn.page.pageNumber+1:evaQuesListFn.page.pageNumber)-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((classListFn.page.pageNumber==0?classListFn.page.pageNumber+1:classListFn.page.pageNumber)-1)*10+classListFn.records.length}}
+                                span.txt-color-darken {{((evaQuesListFn.page.pageNumber==0?evaQuesListFn.page.pageNumber+1:evaQuesListFn.page.pageNumber)-1)*10+evaQuesListFn.records.length}}
                                 |  条 总共
-                                span.text-primary {{classListFn.page.totalElements}}
+                                span.text-primary {{evaQuesListFn.page.totalElements}}
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='classListFn.page.totalElements', max-size='classListFn.page.pageSize' ng-model='classListFn.page.pageNumber',ng-change="classListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='evaQuesListFn.page.totalElements', max-size='evaQuesListFn.page.pageSize' ng-model='evaQuesListFn.page.pageNumber',ng-change="evaQuesListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
