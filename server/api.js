@@ -15,4 +15,5 @@ module.exports = function(app){
   app.use('/api/teachclass', require('./api/teachclass'));
   app.use('/api/school', require('./api/school'));
   app.use('/api/notice', require('./api/notice'));
+  app.use('/api/eduman', require('./api/eduman')); //教务管理
 };
