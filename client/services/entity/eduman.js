@@ -33,6 +33,16 @@ angular.module('dleduWebService')
 				return eduman.update(params);
 			},
 
+			getEvaQuesDist: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesDist');
+				return eduman.get(params);
+			},
+
+			getEvaQuesUnDist: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesUnDist');
+				return eduman.get(params);
+			},
+
 		}
 
 	});

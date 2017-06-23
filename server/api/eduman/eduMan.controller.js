@@ -106,6 +106,88 @@ module.exports = {
             })
     },
 
+    getEvaQuesDist : function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 212,
+                    "code": "12433333",
+                    "college": "计算机",
+                    "coursename": "语文",
+                    "uncomplete": 40,
+                    "complete": 60,
+                    "allScore": 100,
+                    "teachername": '张三',
+                    "startTime": '2017-04-23'
+                },
+
+                {
+                    "id": 211,
+                    "code": "12433333",
+                    "college": "体育",
+                    "coursename": "语文",
+                    "teachername": '张三',
+                    "uncomplete": 40,
+                    "complete": 60,
+                    "allScore": 100,
+                    "startTime": '2017-04-23'
+                },
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 1,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesDistSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getEvaQuesUnDist : function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 212,
+                    "code": "12433333",
+                    "college": "计算机",
+                    "coursename": "语文",
+                    "teachername": '张三',
+                },
+
+                {
+                    "id": 211,
+                    "code": "12433333",
+                    "college": "体育",
+                    "coursename": "语文",
+                    "teachername": '张三',
+                },
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 1,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesDistSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     addEvaQues:function (req,res) {
         EduManService.addEvaQuesSync(req.body, req.user.access_token)
             .then(function (data) {
