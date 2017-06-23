@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
 				}
 			})
 			.state('evaquesshow', {
-				parent: 'base',
+				parent: 'evaquestion',
 				url   : '/evaquesshow/:id',
 				access: {requiredLogin: true},
 				views : {
@@ -78,6 +78,20 @@ angular.module('dleduWebApp')
 				},
 				ncyBreadcrumb: {
 					label: '评教问卷详情'
+				}
+			})
+			.state('distributelist', {
+				parent: 'evaquestion',
+				url   : '/distributelist/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'DistributeListCtrl',
+						templateUrl: 'app/module/eduman/distributelist.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '评教问卷分配页面'
 				}
 			})
 			.state('elecfence', {

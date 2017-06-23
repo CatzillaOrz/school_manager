@@ -15,5 +15,7 @@ router.post('/addEvaQues',auth.isSignedIn, controller.addEvaQues);
 router.delete('/deleteEvaQues',auth.isSignedIn, controller.deleteEvaQues);
 router.put('/updateEvaQues',auth.isSignedIn, controller.updateEvaQues);
 router.get('/getEvaQuesInfo',auth.isSignedIn, controller.getEvaQuesInfo);
+router.get('/getEvaQuesDist',auth.isSignedIn, controller.getEvaQuesDist);
+router.get('/getEvaQuesUnDist',auth.isSignedIn, controller.getEvaQuesUnDist);
 
 module.exports = router;
