@@ -24,6 +24,20 @@ angular.module('dleduWebApp')
 					label: '考勤记录'
 				}
 			})
+            .state('attenddetail', {
+                parent: 'attendlist',
+                url   : '/attenddetail/:id/:classes',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'AttendDetailCtrl',
+                        templateUrl: 'app/module/eduman/attendDetail.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '考勤记录'
+                }
+            })
 			.state('coursescore', {
 				parent: 'base',
 				url   : '/coursescore',
