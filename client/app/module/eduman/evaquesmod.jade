@@ -1,4 +1,100 @@
 //
    Created by Administrator on 2017/6/21.
 
-div 新增
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{'评教问卷信息'}}
+        .widget-body
+            form.form-horizontal(name="evaquesForm")
+                .md-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 评教名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字的评教名称" ng-model="evaQuesModFn.params.name" name="name" validator="required, maxlength=30")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 问卷总分：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.allScore" name="name" validator="required, number")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 截止时间：
+                        .col-sm-7
+                            p.input-group
+                                input.form-control(type='text', uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]'  ng-model='semester.startDate', is-open='opened[$index][0]', datepicker-options='periodHandlerFn.datePick.dateOptions'  close-text='Close')
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
+                                        i.glyphicon.glyphicon-calendar
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{'评教题目'}}
+        .widget-body(style='padding-bottom:40px;border:0;')
+            .dataTables_wrapper.form-inline(role='grid')
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 评测题目
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 分值
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 200px;') 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="record in evaQuesInfoFn.data")
+                                td.sorting_1 {{$index+1}}
+                                td
+                                    textarea.form-control(ng-model="evaQuesModFn.content")
+                                td
+                                    input.form-control(type="text" ng-model="evaQuesModFn.score")
+                                td
+                                    a.handle(ui-sref="distributelist({id:0})")
+                                        i.fa.fa-pencil-square-o
+                                        span 上移
+                                    a.handle(ui-sref="distributelist({id:0})")
+                                        i.fa.fa-pencil-square-o
+                                        span 下移
+                                    a.handle(ui-sref="distributelist({id:0})")
+                                        i.fa.fa-pencil-square-o
+                                        span 删除
+                            tr.odd(role='row' )
+                                td {{'新增题目'}}
+                                td
+                                    textarea.form-control(ng-model="evaQuesModFn.content")
+                                td
+                                    input.form-control(type="text" ng-model="evaQuesModFn.score")
+                                td
+        .widget-body(style="border:none")
+            button.btn.btn-success(ng-click='evaQuesModFn.saveQues()') 保存题目
+
+    .jarviswidget.jarviswidget-color-blueDark
+        button.btn.btn-success(ng-click='evaQuesModFn.submit()' validation-submit="evaquesForm") 保存评教问卷
+
+                //.form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="evaquestion") 取消
+
+    //.jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="classlist") 返回班级信息

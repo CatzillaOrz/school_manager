@@ -69,22 +69,6 @@
                                             button.btn.btn-primary(ui-sref="majorCreat")
                                                 span 查询
 
-                                //#datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
-                                    .dt-toolbar
-                                        .col-xs-12.col-sm-2
-                                            label 学期选择：
-                                            input.form-control(type='search', placeholder='按问卷名称查询', aria-controls='datatable_col_reorder' ng-model="distributeListFn.params.name")
-                                        .col-xs-12.col-sm-2
-                                            label 开课学院：
-                                            input.form-control(style="padding:6px 0" type='search', placeholder='按问卷名称查询', aria-controls='datatable_col_reorder' ng-model="distributeListFn.params.name")
-                                        .col-xs-12.col-sm-2
-                                            label 课程名称：
-                                            input.form-control(style="padding:6px 0" type='search', placeholder='请输入课程名称', aria-controls='datatable_col_reorder' ng-model="distributeListFn.params.name")
-                                        .col-xs-12.col-sm-2
-                                            label 授课教师：
-                                            input.form-control(style="padding:6px 0" type='search', placeholder='请输入授课教师', aria-controls='datatable_col_reorder' ng-model="distributeListFn.params.name")
-                                        .col-xs-12.col-sm-2
-                                            button.btn.btn-primary(ui-sref="classCreat")(ng-click="distributeListFn.getClassList()") 查询
                     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
@@ -194,14 +178,14 @@
                                         thead
                                             tr(role='row')
                                                     th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 选课编号
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 开课学院
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 课程名称
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 授课教师
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 目前综合评分
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 已评教人数/总数
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 分配时间
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 操作
+                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 100px;') 开课学院
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 课程名称
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 目前综合评分
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 已评教人数/总数
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 分配时间
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 操作
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
@@ -210,12 +194,12 @@
                                                 td {{record.coursename}}
                                                 td {{record.teachername}}
                                                 td {{record.allScore}}
-                                                td {{record.uncomplete/record.complete}}
+                                                td {{record.uncomplete+'/'+record.complete}}
                                                 td {{record.startTime}}
                                                 td
-                                                    a.handle(ui-sref="distributelist({id:0})")
+                                                    a.handle(ng-click="deletePrompt(record)")
                                                         i.fa.fa-pencil-square-o
-                                                        span 撤销分配
+                                                        span 撤销分配&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")
                                                         i.fa.fa-trash-o
                                                         span 统计
