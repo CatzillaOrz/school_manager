@@ -1,2 +1,172 @@
-//
-   Created by Administrator on 2017/6/21.
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul#myTab.nav.nav-tabs.pull-left.in
+                li.active
+                    a(data-toggle='tab', href='#hr1', aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  教学班考勤
+                li
+                    a(data-toggle='tab', href='#hr2', aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 行政班考勤
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body
+                .tab-content
+                    #hr1.tab-pane.active
+                        .tabbable.tabs-below
+                            .tab-content
+                                .widget-body.no-padding
+                                    #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-10
+                                                #datatable_col_reorder_filter
+                                                    form.form-inline
+                                                        .form-group.col-sm-3
+                                                            label 学期选择：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 2017年第一学期
+                                                                option 2017年第二学期
+                                                        .form-group.col-sm-3
+                                                            label 开课学院：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 电信学院
+                                                                option 计算机学院
+                                                        .form-group.col-sm-3
+                                                            label 课程名称：
+                                                            input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                        .form-group.col-sm-3
+                                                            label 授课教师：
+                                                            input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+
+                                            .col-sm-2.col-xs-6.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                        span 查询
+                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                        span 导出
+                                        table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 选课编号
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 开课学院
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 课程名称
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 授课教师
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生应出勤次数
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 实际出勤次数
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 学生综合出勤率
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                            tbody
+                                                tr.odd(role='row')
+                                                    td.sorting_1 {{$index+1 + ((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10}}
+                                                    td.expand 20178956
+
+                                                    td  计算机学院
+                                                    td  java面向对象编程
+                                                    td  朝晖
+                                                    td  220
+                                                    td  220
+                                                    td  100%
+                                                    td
+                                                        a.handle(ui-sref="attenddetail({id:1,classes:1})")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 详情
+                                                        a.handle(ng-click="majorListFn.deletePrompt(major)")
+                                                            i.fa.fa-trash-o
+                                                            span 趋势
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+majorListFn.majorList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{majorListFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='majorListFn.page.totalElements', max-size='majorListFn.page.pageSize' ng-model='majorListFn.page.pageNumber',ng-change="majorListFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr2.tab-pane
+                        .tabbable.tabs-below
+                            .tab-content
+                                .widget-body.no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-10
+                                                form.form-inline
+                                                        .form-group.col-sm-3
+                                                            label 学期选择：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 2017年第一学期
+                                                                option 2017年第二学期
+                                                        .form-group.col-sm-3
+                                                            label 开课学院：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 电信学院
+                                                                option 计算机学院
+                                                        .form-group.col-sm-3
+                                                            label 专业：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 信息管理
+                                                        .form-group.col-sm-3
+                                                            label 行政班级：
+                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                option 计算机技术一班
+
+                                            .col-sm-2.col-xs-6.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                        span 查询
+                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                        span 导出
+                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                        span 学周趋势
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学院
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 行政班级
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生应出勤次数
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 学生实际出勤次数
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学期综合出勤率
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                            tbody
+                                                tr.odd(role='row' )
+                                                    td.sorting_1 {{$index+1 + ((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10}}
+                                                    td.expand 计算机学院
+                                                    td  计算机技术01205
+                                                    td  320
+                                                    td  300
+                                                    td  85%
+                                                    td
+                                                        a.handle(ui-sref="attenddetail({id:1,classes:2})")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 查看详情
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+majorListFn.majorList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{majorListFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='majorListFn.page.totalElements', max-size='majorListFn.page.pageSize' ng-model='majorListFn.page.pageNumber',ng-change="majorListFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
