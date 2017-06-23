@@ -8,6 +8,15 @@ angular.module('dleduWebApp')
 			//问卷信息
 			record: null,
 			id: $state.params.id,
+			params: {
+				name: '',
+				allScore: '',
+				quesLists: []
+			},
+			question:{
+				content: '',
+				score: 0,
+			},
 
 			// 获取评教问卷信息
 			getEvaQuesInfo: function () {
@@ -25,9 +34,20 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//保存题目
+			saveQues: function(){
+
+			},
+
+			//保存文件
+			submit: function(){
+
+			},
 
 			init: function () {
-				this.getEvaQuesInfo();
+				if($state.params.id){
+					this.getEvaQuesInfo($state.params.id);
+				}
 			}
 		};
 		$scope.evaQuesInfoFn.init();

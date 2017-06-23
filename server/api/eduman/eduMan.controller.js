@@ -188,6 +188,133 @@ module.exports = {
             })
     },
 
+    getEvaQuesUnNormalStatic : function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 212,
+                    "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
+                    'static':[
+                        {"score": 10, count: 20, percent: 90.90},
+                        {"score": 8, count: 20, percent: 90.90}
+                    ]
+                },
+
+                {
+                    "id": 212,
+                    "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
+                    'static':[
+                        {"score": 10, count: 20, percent: 90.90},
+                        {"score": 8, count: 20, percent: 90.90}
+                    ]
+                },
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 1,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesNormalStaticSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getEvaQuesNormalStatic : function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 212,
+                    "className": "物联网一班",
+                    "name": "王亮",
+                    "score": 80,
+                    "submitTime": '2017-05-10',
+                },
+
+                {
+                    "id": 212,
+                    "className": "物联网一班",
+                    "name": "王亮",
+                    "score": 80,
+                    "submitTime": '2017-05-10',
+                },
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 1,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesUnNormalStaticSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getEvaQuesStaticInfo : function (req, res) {
+        var data = {
+            'college': '计算机',
+            'courseName': 'java程序设计',
+            'code': '1000155',
+            'teacherName': '张三',
+            'allNumber': 50,
+            'complete': 45,
+            'avgScore': 96
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesStaticInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getEvaQuesResult : function (req, res) {
+        var data = {
+            "totalActualScore": 90,
+            "questions": [
+                {
+                    "id": 212,
+                    "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
+                    'score': 10,
+                    'actualScore': 8
+                },
+
+                {
+                    "id": 212,
+                    "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
+                    'score': 10,
+                    'actualScore': 8
+                },
+            ],
+        }
+        res.json(data);
+        return;
+        EduManService.getEvaQuesResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     addEvaQues:function (req,res) {
         EduManService.addEvaQuesSync(req.body, req.user.access_token)
             .then(function (data) {
@@ -214,7 +341,8 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
-    }
+    },
+
 };
 
 

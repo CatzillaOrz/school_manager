@@ -3,7 +3,7 @@
  * 分配页面
  */
 angular.module('dleduWebApp')
-	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService) {
+	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService) {
 		$scope.distributeListFn={
 			//问卷列表
 			records: [],
@@ -70,7 +70,6 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
-				//params.name = that.params.name;
 				EduManService.getEvaQuesList(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -82,9 +81,37 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//撤销分配
+			cancleDist: function(index){
+				var params = {
+					id: this.currentRecord.id,
+					userId: AuthService.getUser().id,
+				}
+				EduManService.deleteEvaQues(params).$promise
+					.then(function (data) {
+						messageService.openMsg("学生删除成功！");
+						_this.getStudentList();
+					})
+					.catch(function (error) {
+						messageService.openMsg("学生删除失败！");
+					})
+			},
+
+			//删除提示
+			deletePrompt: function (entity) {
+				var that = this;
+				that.currentRecord = entity;
+				messageService.getMsg("您确定要撤销问卷吗？", that.cancleDist)
+			},
+
 
 			init: function () {
-				this.getEvaQuesUnDist();
+				if($state.params.id == 1){
+					$("#myTab  a:last").tab("show");
+					this.getEvaQuesDist();
+				}else{
+					this.getEvaQuesUnDist();
+				}
 			}
 		};
 		$scope.distributeListFn.init();
