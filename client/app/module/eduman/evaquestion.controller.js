@@ -3,8 +3,8 @@
  */
 angular.module('dleduWebApp')
 	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService) {
-		$scope.evqQuesListFn={
-			//班级列表
+		$scope.evaQuesListFn={
+			//问卷列表
 			records: [],
 			//当前操作的class
 			currentRecord: {},
@@ -13,9 +13,6 @@ angular.module('dleduWebApp')
 				totalPages: 0,
 				pageNumber: 1,
 				pageSize: 10
-			},
-			params: {
-				name:"",
 			},
 
 			// 获取评教问卷列表
@@ -26,10 +23,9 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
-				params.name = that.params.name;
 				EduManService.getEvaQuesList(params).$promise
 					.then(function (data) {
-						that.Records = data.data;
+						that.records = data.data;
 						that.page = data.page;
 					})
 					.catch(function (error) {
@@ -46,7 +42,7 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
-				params.name = that.params.name;
+				//params.name = that.params.name;
 				EduManService.getEvaQuesList(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -57,9 +53,15 @@ angular.module('dleduWebApp')
 
 					})
 			},
+
+			//查看问卷的详情
+			showEvaQues: function(){
+
+			},
+
 			init: function () {
 				this.getEvaQuesList();
 			}
 		};
-		$scope.evqQuesListFn.init();
+		$scope.evaQuesListFn.init();
 	});

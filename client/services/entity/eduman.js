@@ -12,6 +12,11 @@ angular.module('dleduWebService')
 				return eduman.get(params);
 			},
 
+			getEvaQuesInfo: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesInfo');
+				return eduman.get(params);
+			},
+
 			addEvaQues:function (params) {
 				var eduman = $resource('api/eduman/addEvaQues');
 				return eduman.save(params);

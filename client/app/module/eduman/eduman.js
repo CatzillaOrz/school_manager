@@ -66,6 +66,20 @@ angular.module('dleduWebApp')
 					label: '评教问卷'
 				}
 			})
+			.state('evaquesshow', {
+				parent: 'base',
+				url   : '/evaquesshow/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesShowCtrl',
+						templateUrl: 'app/module/eduman/evaquesshow.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '评教问卷详情'
+				}
+			})
 			.state('elecfence', {
 				parent: 'base',
 				url   : '/elecfence',
