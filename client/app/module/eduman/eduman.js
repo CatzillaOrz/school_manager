@@ -83,7 +83,7 @@ angular.module('dleduWebApp')
 				}
 			})
 			.state('evaquesshow', {
-				parent: 'base',
+				parent: 'evaquestion',
 				url   : '/evaquesshow/:id',
 				access: {requiredLogin: true},
 				views : {
@@ -94,6 +94,62 @@ angular.module('dleduWebApp')
 				},
 				ncyBreadcrumb: {
 					label: '评教问卷详情'
+				}
+			})
+			.state('distributelist', {
+				parent: 'evaquestion',
+				url   : '/distributelist/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'DistributeListCtrl',
+						templateUrl: 'app/module/eduman/distributelist.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '评教问卷分配页面'
+				}
+			})
+			.state('evaquestatic', {
+				parent: 'evaquestion',
+				url   : '/evaquestatic/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticCtrl',
+						templateUrl: 'app/module/eduman/evaquestatic.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '评教统计'
+				}
+			})
+			.state('evaquesadd', {
+				parent: 'evaquestion',
+				url   : '/evaquesadd',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticCtrl',
+						templateUrl: 'app/module/eduman/evaquesmod.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '新增评教问卷'
+				}
+			})
+			.state('evaquesedit', {
+				parent: 'evaquestion',
+				url   : '/evaquesedit/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticCtrl',
+						templateUrl: 'app/module/eduman/evaquesmod.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '编辑评教问卷'
 				}
 			})
 			.state('elecfence', {

@@ -33,6 +33,36 @@ angular.module('dleduWebService')
 				return eduman.update(params);
 			},
 
+			getEvaQuesDist: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesDist');
+				return eduman.get(params);
+			},
+
+			getEvaQuesUnDist: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesUnDist');
+				return eduman.get(params);
+			},
+
+			getEvaQuesNormalStatic: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesNormalStatic');
+				return eduman.get(params);
+			},
+
+			getEvaQuesStaticInfo: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesStaticInfo');
+				return eduman.get(params);
+			},
+
+			getEvaQuesUnNormalStatic: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesUnNormalStatic');
+				return eduman.get(params);
+			},
+
+			getEvaQuesResult: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesResult');
+				return eduman.get(params);
+			},
+
 		}
 
 	});
