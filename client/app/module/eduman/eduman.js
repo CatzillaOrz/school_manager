@@ -35,7 +35,7 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '考勤记录'
+                    label: '考勤详情'
                 }
             })
 			.state('coursescore', {
@@ -52,6 +52,22 @@ angular.module('dleduWebApp')
 					label: '课程评分'
 				}
 			})
+            .state('coursescoredetail', {
+                parent: 'coursescore',
+                url   : '/coursescoredetail/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'CourseScoreDetailCtrl',
+                        templateUrl: 'app/module/eduman/courseCoreDetail.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '课程评分详情'
+                }
+            })
+
+
 			.state('evaquestion', {
 				parent: 'base',
 				url   : '/evaquestion',
