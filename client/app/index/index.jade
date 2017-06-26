@@ -1,5 +1,5 @@
 .content-container
-    .shuff-image(azx-swiper data-slides='indexFn.shuffImageList' data-full-screen='false')
+    .shuff-image(azx-swiper data-slides='indexFn.shuffImageList' data-full-screen='false' data-show-nav-buttons='indexFn.showSlidNav')
 
     .feature-block
         .title 精品课程
@@ -30,7 +30,7 @@
                     .teacher-name
                         | {{teacher.teacherName}}
                     .teacher-detail
-                        | {{indexFn.cutHtml(teacher.introduction,50)}}
+                        | {{indexFn.cutHtml(teacher.introduction,34)}}
         .hot-msg
             .feature-block
                 .tab(ng-class="{'active':indexFn.currentTab=='notice'}" ng-click="indexFn.tabToggle('notice')")  最新活动

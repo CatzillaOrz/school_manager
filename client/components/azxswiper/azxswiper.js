@@ -20,18 +20,19 @@ angular.module("azx.swiper", [])
             '       </div>' +
             '   </div>' +
             '   <div class="swiper-pagination" ng-show="params.showPagination"></div>' +
-            '   <div class="swiper-button-next" ng-show="params.showNavButtons"></div>' +
-            '   <div class="swiper-button-prev" ng-show="params.showNavButtons"></div>' +
+            '   <div class="swiper-button-next" ng-if="params.showNavButtons"></div>' +
+            '   <div class="swiper-button-prev" ng-if="params.showNavButtons"></div>' +
             '</div>',
             transclude: true,
             scope: {
                 fullScreen: '@',
-                slides:'='
+                slides:'=',
+                showNavButtons:'='
             },
             link: function (scope, element, attr, ctrl) {
 
                 scope.params = {
-                    showNavButtons: true,
+                    showNavButtons: false,
                     showPagination: true,
                     pagination: '.swiper-pagination',
                     paginationClickable: true,
@@ -44,7 +45,7 @@ angular.module("azx.swiper", [])
                     autoplay: 5000,
                     autoplayDisableOnInteraction: false
                 };
-
+               // console.log(scope.params);
                 var winHeight;
                 var imgHeight;
                 function onResize(e) {
@@ -103,7 +104,7 @@ angular.module("azx.swiper", [])
                 }
                 scope.$watch('slides',function(){
                     console.log(scope.slides);
-                    if(scope.slides){
+                    if(scope.showNavButtons&&scope.slides){
                         /*var ramdon = new Date().getTime();
                         angular.forEach(scope.slides,function(data){
                             data.background = data.background + '?' + ramdon;
@@ -113,7 +114,7 @@ angular.module("azx.swiper", [])
                         scope.params.showPagination =  scope.slides.length > 1;
                     }else{
                         scope.params.showNavButtons = false;
-                        scope.params.showPagination = false;
+                       // scope.params.showPagination = false;
                     }
                     loadSwiper();
                     // console.log(scope.params.showNavButtons);

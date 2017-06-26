@@ -16,6 +16,7 @@ angular.module('dleduWebApp')
             excellentTeacherList:[],
             hotMajorList:[],
             shuffImageList:[],
+            showSlidNav:false,
             noticeList:[],
             currentTab:"notice",
             //精品课程查询
