@@ -80,15 +80,15 @@
 .placeholder-left-panel(data-smart-include='app/layout/navigation/navigation.html')
 
 #main(role='main')
-    //#ribbon
-    //    //span.ribbon-button-alignment.pull-right
-    //        span.btn.btn-ribbon.hidden-xs
-    //            i.fa.fa-gear
-    //            |  设置
-    //    span.ribbon-button-alignment
-    //        span#refresh.btn.btn-ribbon(ng-click='layoutFn.lcReload();')
-    //            i.fa.fa-refresh
-    //    span(ncy-breadcrumb)
+    #ribbon
+        //span.ribbon-button-alignment.pull-right
+            span.btn.btn-ribbon.hidden-xs
+                i.fa.fa-gear
+                |  设置
+        span.ribbon-button-alignment
+            span#refresh.btn.btn-ribbon(ng-click='layoutFn.lcReload();')
+                i.fa.fa-refresh
+        span(ncy-breadcrumb)
 
     div(data-smart-router-animation-wrap='content content@app', data-wrap-for='#content')
         div(data-ui-view='content', data-autoscroll='false')

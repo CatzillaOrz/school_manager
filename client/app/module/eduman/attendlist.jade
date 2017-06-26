@@ -31,21 +31,25 @@
                                                 #datatable_col_reorder_filter
                                                     form.form-inline
                                                         .form-group.col-sm-3
-                                                            label 学期选择：
-                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                                option 2017年第一学期
-                                                                option 2017年第二学期
+                                                            label.col-sm-4.control-label 学期选择：
+                                                            .col-sm-8
+                                                                select.form-control(ng-model="handleFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
+                                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                                                         .form-group.col-sm-3
-                                                            label 开课学院：
-                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                                option 电信学院
-                                                                option 计算机学院
+                                                            label.col-sm-4.control-label  开课学院：
+                                                            .col-sm-8
+                                                                select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                                    option 电信学院
+                                                                    option 计算机学院
                                                         .form-group.col-sm-3
-                                                            label 课程名称：
-                                                            input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                            label.col-sm-4.control-label  课程名称：
+                                                            .col-sm-8
+                                                                input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
                                                         .form-group.col-sm-3
-                                                            label 授课教师：
-                                                            input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                            label.col-sm-4.control-label 授课教师：
+                                                            .col-sm-8
+                                                                input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
 
                                             .col-sm-2.col-xs-6.hidden-xs
                                                 .ColVis
@@ -107,10 +111,12 @@
                                                 form.form-inline
                                                         .form-group.col-sm-3
                                                             label 学期选择：
-                                                            select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                                option 2017年第一学期
-                                                                option 2017年第二学期
-                                                        .form-group.col-sm-3
+                                                            select.form-control(ng-model="handleFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                                option 请选择学期
+                                                                optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
+                                                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+
+                                                .form-group.col-sm-3
                                                             label 开课学院：
                                                             select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
                                                                 option 电信学院
