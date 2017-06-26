@@ -10,6 +10,18 @@ common scss
 body{
   font-family: $font-family-sans-serif;
 }
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  background: #29c192 !important;
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 100%;
+  background:#eeeeee;
+  opacity: 1;
+}
 @import '../app/layout/layout.scss';
 @import "../app/layout/header.scss";
 @import '../app/account/signin.scss';

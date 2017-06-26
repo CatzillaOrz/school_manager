@@ -83,7 +83,7 @@ angular.module('dleduWebService')
             strCut: function (strs, len) {
                 var str_length = 0;
                 if (strs != null) {
-                    var str = strs.replace(/<img.+?>/ig, '[图片]');
+                    var str = strs.replace(/<img.+?>/ig, '');
                     var str_len = str.length;
                     var text;
                     var cut = [];
