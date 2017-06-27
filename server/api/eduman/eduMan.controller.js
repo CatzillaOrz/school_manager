@@ -69,9 +69,9 @@ module.exports = {
     getEvaQuesInfo: function (req, res) {
         var data = {
             "name": '17年春季学期期末评教',
-            'allScore': 80,
+            'totalScore': 80,
             'endTime': '2017-5-27',
-            "data": [
+            "questions": [
                 {
                     "id": 1,
                     "name": "讲课通俗易懂",
@@ -495,6 +495,15 @@ module.exports = {
     },
     updateEvaQues: function (req, res) {
         EduManService.updateEvaQuesSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    distQuestionaire:function (req,res) {
+        EduManService.distQuestionaireSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

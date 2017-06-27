@@ -62,6 +62,12 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/getEvaQuesResult');
 				return eduman.get(params);
 			},
+
+			distQuestionaire:function (params) {
+				var eduman = $resource('api/eduman/distQuestionaire');
+				return eduman.save(params);
+			},
+
             getTeachClassAttendList: function (params) {
                 var eduman = $resource('api/eduman/getTeachClassAttendList');
                 return eduman.get(params);

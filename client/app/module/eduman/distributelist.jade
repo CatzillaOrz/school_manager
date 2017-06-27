@@ -47,26 +47,25 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter
                                             form.form-inline
-                                                .form-group.col-sm-3
+                                                .form-group.col-md-3
                                                     label 学期选择：
-                                                    select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                        option 2017年第一学期
-                                                        option 2017年第二学期
-                                                .form-group.col-sm-3
+                                                    select.col-md-8(ng-model="distributeListFn.queryOption.semesterId" ui-select2="distributeListFn.select2SemesterOptions()" )
+                                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in distributeListFn.schoolYearDropList")
+                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+                                                .form-group.col-md-3
                                                     label 开课学院：
-                                                    select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                        option 电信学院
-                                                        option 计算机学院
-                                                .form-group.col-sm-3
+                                                    select.col-md-8(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                                                .form-group.col-md-3
                                                     label 课程名称：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                .form-group.col-sm-3
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
+                                                .form-group.col-md-3
                                                     label 授课教师：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs
                                         .ColVis
-                                            button.btn.btn-primary(ui-sref="majorCreat")
+                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption()")
                                                 span 查询
 
                     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
@@ -118,6 +117,8 @@
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                            .panel.panel-default.no-border
+                                button.btn.btn-primary(ng-click="distQuestionaire()") 分配问卷
 
                 #hr2.tab-pane
                     #wid-id-5.jarviswidget.jarviswidget-color-blueDark
@@ -140,21 +141,19 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter1
                                             form.form-inline
-                                                .form-group.col-sm-3
-                                                    label 开课学院：
-                                                    select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                                        option 电信学院
-                                                        option 计算机学院
+                                                label 开课学院：
+                                                    select.col-md-8(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
                                                 .form-group.col-sm-3
                                                     label 课程名称：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
                                                 .form-group.col-sm-3
                                                     label 授课教师：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs
                                         .ColVis
-                                            button.btn.btn-primary(ui-sref="majorCreat")
+                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption()")
                                                 span 查询
 
                     #wid-id-10.jarviswidget.jarviswidget-color-blueDark
@@ -197,7 +196,7 @@
                                                 td {{record.uncomplete+'/'+record.complete}}
                                                 td {{record.startTime}}
                                                 td
-                                                    a.handle(ng-click="deletePrompt(record)")
+                                                    a.handle(ng-click="distributeListFn.deletePrompt(record)")
                                                         i.fa.fa-pencil-square-o
                                                         span 撤销分配&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")
