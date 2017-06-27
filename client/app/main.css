@@ -282,6 +282,9 @@ a:focus {
     color: #e7505a;
     margin-right: 5px; }
 
+.form-inline .form-control {
+  width: 200px; }
+
 .height-auto {
   height: auto;
   min-height: 50px; }

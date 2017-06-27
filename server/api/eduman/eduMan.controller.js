@@ -1,11 +1,10 @@
-
 'use strict';
 
 var _ = require('lodash'),
     EduManService = require('../../services/eduManService');
 
 module.exports = {
-    getEvaQuesList : function (req, res) {
+    getEvaQuesList: function (req, res) {
         var data = {
             "data": [
                 {
@@ -67,7 +66,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesInfo : function (req, res) {
+    getEvaQuesInfo: function (req, res) {
         var data = {
             "name": '17年春季学期期末评教',
             'allScore': 80,
@@ -106,7 +105,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesDist : function (req, res) {
+    getEvaQuesDist: function (req, res) {
         var data = {
             "data": [
                 {
@@ -151,7 +150,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesUnDist : function (req, res) {
+    getEvaQuesUnDist: function (req, res) {
         var data = {
             "data": [
                 {
@@ -188,13 +187,13 @@ module.exports = {
             })
     },
 
-    getEvaQuesUnNormalStatic : function (req, res) {
+    getEvaQuesUnNormalStatic: function (req, res) {
         var data = {
             "data": [
                 {
                     "id": 212,
                     "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
-                    'static':[
+                    'static': [
                         {"score": 10, count: 20, percent: 90.90},
                         {"score": 8, count: 20, percent: 90.90}
                     ]
@@ -203,7 +202,7 @@ module.exports = {
                 {
                     "id": 212,
                     "content": '适当放松放松放松放松发顺丰舒服撒的方式水电费,sdfsf是对方身份',
-                    'static':[
+                    'static': [
                         {"score": 10, count: 20, percent: 90.90},
                         {"score": 8, count: 20, percent: 90.90}
                     ]
@@ -227,7 +226,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesNormalStatic : function (req, res) {
+    getEvaQuesNormalStatic: function (req, res) {
         var data = {
             "data": [
                 {
@@ -264,7 +263,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesStaticInfo : function (req, res) {
+    getEvaQuesStaticInfo: function (req, res) {
         var data = {
             'college': '计算机',
             'courseName': 'java程序设计',
@@ -285,7 +284,7 @@ module.exports = {
             })
     },
 
-    getEvaQuesResult : function (req, res) {
+    getEvaQuesResult: function (req, res) {
         var data = {
             "totalActualScore": 90,
             "questions": [
@@ -314,8 +313,169 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-
-    addEvaQues:function (req,res) {
+    getTeachClassAttendList: function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 14,
+                    "courseName": "Java开发基础",
+                    "courseNumber": "20170456",
+                    "collegeName": "计算机",
+                    "teacher": "老潘",
+                    "mustAttend": 220,
+                    "factAttend": "210",
+                    "prent": "90%"
+                },
+                {
+                    "id": 15,
+                    "courseName": "开发基础",
+                    "collegeName": "计算机",
+                    "courseNumber": "20170451",
+                    "teacher": "朝晖",
+                    "mustAttend": 220,
+                    "factAttend": "220",
+                    "prent": "100%"
+                }
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 0,
+                "pageSize": 10
+            }
+        };
+        res.json(data);
+        return;
+        EduManService.getTeachClassAttendListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getClassAttendList: function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 14,
+                    "className": "计算机科学技术01班",
+                    "collegeName": "计算机",
+                    "mustAttend": 220,
+                    "factAttend": "210",
+                    "prent": "90%"
+                },
+                {
+                    "id": 15,
+                    "className": "计算机科学技术01班",
+                    "collegeName": "计算机",
+                    "mustAttend": 220,
+                    "factAttend": "220",
+                    "prent": "100%"
+                }
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 0,
+                "pageSize": 10
+            }
+        };
+        res.json(data);
+        return;
+        EduManService.getClassAttendListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getStudentAttendByTeachClassId: function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 14,
+                    "studentNo": "20170908114",
+                    "name": "新刚",
+                    "register": 220,
+                    "leave": 3,
+                    "cutting": 1,
+                    "late": "5",
+                    "leaveE": "1"
+                },
+                {
+                    "id": 12,
+                    "studentNo": "20170908115",
+                    "name": "老潘",
+                    "register": 220,
+                    "leave": 3,
+                    "cutting": 1,
+                    "late": "5",
+                    "leaveE": "1"
+                }
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 0,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getStudentAttendByTeachClassIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getStudentAttendByClassId: function (req, res) {
+        var data = {
+            "data": [
+                {
+                    "id": 14,
+                    "studentNo": "20170908114",
+                    "name": "新刚",
+                    "className":"计算机一班",
+                    "register": 220,
+                    "leave": 3,
+                    "cutting": 1,
+                    "late": "5",
+                    "leaveE": "1"
+                },
+                {
+                    "id": 12,
+                    "studentNo": "20170908115",
+                    "name": "老潘",
+                    "className":"计算机一班",
+                    "register": 220,
+                    "leave": 3,
+                    "cutting": 1,
+                    "late": "5",
+                    "leaveE": "1"
+                }
+            ],
+            "page": {
+                "totalElements": 2,
+                "totalPages": 1,
+                "pageNumber": 0,
+                "pageSize": 10
+            }
+        }
+        res.json(data);
+        return;
+        EduManService.getStudentAttendByClassIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addEvaQues: function (req, res) {
         EduManService.addEvaQuesSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -324,7 +484,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    deleteEvaQues:function (req,res) {
+    deleteEvaQues: function (req, res) {
         EduManService.deleteEvaQuesSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -333,7 +493,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    updateEvaQues:function (req,res) {
+    updateEvaQues: function (req, res) {
         EduManService.updateEvaQuesSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
