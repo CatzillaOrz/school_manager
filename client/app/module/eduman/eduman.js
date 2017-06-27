@@ -130,7 +130,7 @@ angular.module('dleduWebApp')
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
-						controller : 'EvaQueStaticCtrl',
+						controller : 'EvaQuesModCtrl',
 						templateUrl: 'app/module/eduman/evaquesmod.html'
 					}
 				},
@@ -144,7 +144,7 @@ angular.module('dleduWebApp')
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
-						controller : 'EvaQueStaticCtrl',
+						controller : 'EvaQuesModCtrl',
 						templateUrl: 'app/module/eduman/evaquesmod.html'
 					}
 				},

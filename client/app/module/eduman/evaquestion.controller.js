@@ -54,11 +54,6 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//查看问卷的详情
-			showEvaQues: function(){
-
-			},
-
 			init: function () {
 				this.getEvaQuesList();
 			}

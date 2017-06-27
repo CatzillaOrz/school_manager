@@ -18,7 +18,7 @@
                 .row(style="margin-bottom:15px;")
                     .col-sm-4
                         span 问卷总分：
-                        span {{evaQuesInfoFn.record.allScore}}
+                        span {{evaQuesInfoFn.record.totalScore}}
                 .row(style="margin-bottom:15px;")
                     .col-sm-4
                         span 截止时间：
@@ -42,7 +42,7 @@
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 题目
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 分值
                         tbody
-                            tr.odd(role='row' ng-repeat="record in evaQuesInfoFn.record.data")
+                            tr.odd(role='row' ng-repeat="record in evaQuesInfoFn.record.questions")
                                 td.sorting_1 {{$index+1}}
                                 td {{record.name}}
                                 td {{record.score}}
