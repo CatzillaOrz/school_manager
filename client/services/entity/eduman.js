@@ -62,7 +62,23 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/getEvaQuesResult');
 				return eduman.get(params);
 			},
-
+            getTeachClassAttendList: function (params) {
+                var eduman = $resource('api/eduman/getTeachClassAttendList');
+                return eduman.get(params);
+            },
+            getClassAttendList: function (params) {
+                var eduman = $resource('api/eduman/getClassAttendList');
+                return eduman.get(params);
+            },
+            getStudentAttendByTeachClassId: function (params) {
+                var eduman = $resource('api/eduman/getStudentAttendByTeachClassId');
+                return eduman.get(params);
+            },
+            //通过行政班级查询学生考勤
+            getStudentAttendByClassId: function (params) {
+                var eduman = $resource('api/eduman/getStudentAttendByClassId');
+                return eduman.get(params);
+            },
 		}
 
 	});
