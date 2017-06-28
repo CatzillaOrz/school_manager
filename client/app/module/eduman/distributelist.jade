@@ -48,19 +48,19 @@
                                         #datatable_col_reorder_filter
                                             form.form-inline
                                                 .form-group.col-md-3
-                                                    label 学期选择：
-                                                    select.col-md-8(ng-model="distributeListFn.queryOption.semesterId" ui-select2="distributeListFn.select2SemesterOptions()" )
+                                                    label.control-label 学期选择：
+                                                    select.form-control(ng-model="distributeListFn.queryOption.semesterId" ui-select2="distributeListFn.select2SemesterOptions()" )
                                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in distributeListFn.schoolYearDropList")
                                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                                                 .form-group.col-md-3
-                                                    label 开课学院：
-                                                    select.col-md-8(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                    label.control-label 开课学院：
+                                                    select.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
                                                         option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
                                                 .form-group.col-md-3
-                                                    label 课程名称：
+                                                    label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
                                                 .form-group.col-md-3
-                                                    label 授课教师：
+                                                    label.control-label 授课教师：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs
@@ -97,7 +97,7 @@
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
-                                                    input(type="checkbox")
+                                                    input(type="checkbox" )
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
                                                 td {{record.code}}
                                                 td {{record.college}}
@@ -141,14 +141,15 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter1
                                             form.form-inline
-                                                label 开课学院：
-                                                    select.col-md-8(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                .form-group.col-md-3
+                                                    label.control-label 开课学院：
+                                                    select.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
                                                         option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
-                                                .form-group.col-sm-3
-                                                    label 课程名称：
+                                                .form-group.col-md-3
+                                                    label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
-                                                .form-group.col-sm-3
-                                                    label 授课教师：
+                                                .form-group.col-md-3
+                                                    label.control-label 授课教师：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs

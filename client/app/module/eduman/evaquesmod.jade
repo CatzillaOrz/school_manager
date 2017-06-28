@@ -15,23 +15,26 @@
                             span.required *
                             | 评教名称：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过30个字的评教名称" ng-model="evaQuesModFn.params.name" name="name" validator="required")
+                            input.form-control(placeholder="请填写不超过50个字的评教名称" ng-model="evaQuesModFn.params.name" name="name" validator="required, maxlength=50")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 问卷总分：
                         .col-sm-7
-                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  validator="required, number")
+                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  name="alltotal" validator="required, number")
                     .form-group
-                        label.col-sm-3.control-label
+                        label.col-sm-3.control-label(ng-class="{'date-label-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}")
                             span.required *
                             | 截止时间：
                         .col-sm-7
                             p.input-group
-                                input.form-control(type='text', uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]'  ng-model='evaQuesModFn.params.endTime',  is-open='opened[$index][0]', datepicker-options='evaQuesModFn.datePick.dateOptions'  close-text='Close')
+                                input.form-control(type='text', ng-class="{'date-input-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}" uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]' ng-model='evaQuesModFn.params.endTime',name="date" required is-open='opened[$index][0]', datepicker-options='evaQuesModFn.datePick.dateOptions'  close-text='Close')
                                 span.input-group-btn
                                     button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
                                         i.glyphicon.glyphicon-calendar
+                                .tooltip.top-right.ng-scope(role='tooltip' ng-show='evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required')
+                                    .tooltip-arrow
+                                    .tooltip-inner 必填项
                 .panel.panel-default.no-border
                     .jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
@@ -54,17 +57,17 @@
                                         td.sorting_1 {{$index+1}}
                                         td
                                             .form-group
-                                                textarea.form-control(ng-model="record.name" validator="required")
+                                                textarea.form-control(ng-model="record.name" name="{{'textarea'+$index}}" validator="required, maxlength=200")
                                         td
                                             .form-group
-                                                input.form-control(type="text" ng-model="record.score" validator="required")
+                                                input.form-control(type="text" ng-model="record.score" name="{{'score'+$index}}" validator="required, number")
                                         td
                                             a.handle(ng-click="evaQuesModFn.delQues($index)")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
                 .form-actions
                     .row
                         .col-md-12(style="text-align:left")
-                            a.btn.btn-primary(ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 保存评教问卷
+                            a.btn.btn-primary(ng-disabled="form.$invalid" ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 保存评教问卷
     //.jarviswidget.jarviswidget-color-blueDark
         button.btn.btn-success(ng-click='evaQuesModFn.saveQues()') 保存评教问卷
 
