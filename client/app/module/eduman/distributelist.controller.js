@@ -3,7 +3,7 @@
  * 分配页面
  */
 angular.module('dleduWebApp')
-	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService, Select2LoadOptionsService) {
+	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService, Select2LoadOptionsService, CollegeService) {
 		$scope.distributeListFn={
 			//学期列表
 			schoolYearDropList: [],
@@ -73,6 +73,7 @@ angular.module('dleduWebApp')
 				EduManService.getEvaQuesUnDist(params).$promise
 					.then(function (data) {
 						that.records = data.data;
+						//增加check属性
 						that.page = data.page;
 					})
 					.catch(function (error) {
@@ -253,13 +254,11 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				var _this=this;
+				var _this = this;
 				if($state.params.id == 1){
 					$("#myTab  a:last").tab("show");
-					_this.getSchoolYearList();
-					_this.getPeriodList();
-					this.getCollegeDropList();
 					this.getEvaQuesDist();
+					this.getCollegeDropList();
 				}else{
 					this.getEvaQuesUnDist();
 				}

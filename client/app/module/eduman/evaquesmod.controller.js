@@ -9,11 +9,12 @@ angular.module('dleduWebApp')
 			//问卷信息
 			record: null,
 			id: $state.params.id,
+			checkDate: false,
 			params: {
 				name: '',
 				totalScore: '',
 				questions: [],
-				endTime: new Date('2017-07-05')
+				endTime: ''
 			},
 
 			quesLists: [],//临时保存题目
@@ -45,6 +46,14 @@ angular.module('dleduWebApp')
 					this.inlineOptions.minDate = this.inlineOptions.minDate ? null : new Date();
 					this.dateOptions.minDate = this.inlineOptions.minDate;
 				},
+			},
+
+			checkDate: function(value){
+				if(value == ''){
+					this.checkDate = true;
+				}else{
+					this.checkDate = false;
+				}
 			},
 
 			// 获取评教问卷信息
