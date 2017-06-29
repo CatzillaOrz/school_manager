@@ -105,7 +105,7 @@ angular.module('dleduWebApp')
             //表单提交
             submit: function () {
                 var that = this;
-                if (that.handle == "编辑课节") {
+                if ($state.current.name == "semesterEdit") {
                     that.updatePeriod();
                 } else {
                     that.addPeriod();
