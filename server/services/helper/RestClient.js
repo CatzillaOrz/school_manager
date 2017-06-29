@@ -19,10 +19,10 @@ var Headers = {
 function request(options) {
     if (!/^\//.test(options.path)) {
         options.path = '/' + options.path;
-    }
+    }//
     var _host = "";
     if (options.host && options.host == 'dd') {
-        _host = Config.backend_api.diandian_host;
+        _host = Config.backend_api.api_gateway+"diandian";
     } else if (options.host && options.host == 'em') {
         _host = Config.backend_api.em_host;
     } else  if (options.host && options.host == 'pt') {

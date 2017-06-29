@@ -193,7 +193,7 @@ module.exports = {
                 res.json(data);
             })
             .catch(function (e) {
-                res.status(e.code).send(e.message);
+               // res.status(e.code).send(e.message);
             })
     },
     getBoutiqueCourseDropList: function (req, res) {

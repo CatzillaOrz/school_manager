@@ -14,8 +14,8 @@
                             span.required *
                             | 课程时段名称：
                         .col-sm-7
-                            select.form-control(ng-model="semesterHandlerFn.params.no"  name="name" validator="required, maxlength=30")
-                                option(value="" )  请选择课节 {{semesterHandlerFn.params.no}}
+                            select.form-control(ng-model="semesterHandlerFn.params.no"  name="name" validator="required")
+                                option(value="" )  请选择课节
                                 option(ng-repeat="op in semesterHandlerFn.coursePeriod" value="{{op.id}}" ng-selected="semesterHandlerFn.params.no==op.id") {{op.text}}
                     .form-group
                         label.col-sm-3.control-label
