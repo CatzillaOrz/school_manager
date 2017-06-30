@@ -74,26 +74,6 @@ angular.module('dleduWebService')
                     .catch(function (error) {
 
                     })
-                    //if(url=='gzyd'){
-                    //    $state.go('apprenticeship');
-                    //}else{
-                    //    // url="kjkf";
-                    //    var params={
-                    //        domainname:url
-                    //    };
-                    //    SchoolService.getSchoolByDomain(params).$promise
-                    //    .then(function (data) {
-                    //        school=data;
-                    //        document.title=school.name;
-                    //
-                    //        _this.setSchool(school);
-                    //        return school;
-                    //    })
-                    //    .catch(function (error) {
-                    //
-                    //    })
-                    //}
-
                 }
             },
             setSchool:function (school) {
