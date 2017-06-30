@@ -322,8 +322,8 @@ var SchoolService = {
     },
     getSchoolByDomain: function(params, callback){
         RestClient.get({
-            host:"dd",
-            path: 'api/web/v1/organ/getbydomainname',
+            host: 'gateway-org',
+            path: '/v1/org/getbydomainname',
             params:params
         }).then(function (res) {
             if (res.status.code == 200) {
