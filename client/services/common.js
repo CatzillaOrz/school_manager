@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-    .factory('CommonService', function (ngDialog,$http,localStorageService,SchoolService,$location,$state) {
+    .factory('CommonService', function ($window,ngDialog,$http,localStorageService,SchoolService,$location,$state) {
         return {
             product: {
                 name: '知新网综合平台',
@@ -61,8 +61,7 @@ angular.module('dleduWebService')
                 }else {
                     var  url =$location.host().split('.')[0];
                     if(url=='gzyd'){
-                        //$state.go('apprenticeship');
-                        $window.location.href = '/apprenticeship';
+                        $state.go('apprenticeship');
                     }else{
                         // url="kjkf";
                         var params={
