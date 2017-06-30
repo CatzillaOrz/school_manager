@@ -94,6 +94,7 @@ angular.module('dleduWebApp', [
         localStorageServiceProvider.setPrefix('aizhixin').setStorageType('localStorage').setNotify(true, true);
         var  url = window.location.hostname;
         //url="gzyd.schooltest.aizhixin.com";
+
         var domain = url.split('.')[0];
         console.log(domain);
         if(domain=='gzyd') {
