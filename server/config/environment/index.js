@@ -32,7 +32,7 @@ var all = {
     backend_api: {
         host: process.env.BACKEND_API || 'http://172.16.23.58:9093/dledu',
         //host: process.env.BACKEND_API || 'http://127.0.0.1:8080/dledu',
-        diandian_host: process.env.DIANDIAN_API ||  'http://dddev.aizhixin.com/diandian_api',
+        diandian_host: process.env.DIANDIAN_API || 'http://dddev.aizhixin.com/diandian_api',
         em_host: process.env.EM_API ||  'http://emdev.aizhixin.com/em_api2',
         pt_host: process.env.PT_API ||  'http://ptdev.aizhixin.com/pt_api',
         hy_host: process.env.HY_API ||  'http://hy.aizhixindev.com/ew_api',
