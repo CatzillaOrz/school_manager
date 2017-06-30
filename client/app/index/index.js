@@ -123,4 +123,14 @@ angular.module('dleduWebApp')
                 },
 
             })
+            .state('apprenticeship', {
+                url   : '/apprenticeship',
+                access: {requiredLogin: false},
+                views : {
+                    root: {
+                        controller : 'apprenticeshipCtrl',
+                        templateUrl: 'app/index/apprenticeship.html'
+                    }
+                },
+            })
     });
