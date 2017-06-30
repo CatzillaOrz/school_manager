@@ -95,7 +95,7 @@ angular.module('dleduWebApp', [
         var  url = window.location.href;
         var domain = url.split('.')[0];
         console.log(domain);
-        if(domain=='gzyd') {
+        if(domain=='http://gzyd') {
             //入口路由配置
             $urlRouterProvider
                 .otherwise('/apprenticeship');
