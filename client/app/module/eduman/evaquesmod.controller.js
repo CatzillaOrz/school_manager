@@ -48,13 +48,13 @@ angular.module('dleduWebApp')
 				},
 			},
 
-			checkDate: function(value){
-				if(value == ''){
-					this.checkDate = true;
-				}else{
-					this.checkDate = false;
-				}
-			},
+			// checkDate: function(value){
+			// 	if(value == ''){
+			// 		this.checkDate = true;
+			// 	}else{
+			// 		this.checkDate = false;
+			// 	}
+			// },
 
 			// 获取评教问卷信息
 			getEvaQuesInfo: function () {
