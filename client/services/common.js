@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-    .factory('CommonService', function (ngDialog,$http,localStorageService,SchoolService,$location) {
+    .factory('CommonService', function (ngDialog,$http,localStorageService,SchoolService,$location,$state) {
         return {
             product: {
                 name: '知新网综合平台',
@@ -60,11 +60,15 @@ angular.module('dleduWebService')
                     return  school;
                 }else {
                     var  url =$location.host().split('.')[0];
-                   // url="kjkf";
-                    var params={
-                        domainname:url
-                    };
-                    SchoolService.getSchoolByDomain(params).$promise
+                    if(url=='gzyd'){
+                        //$state.go('apprenticeship');
+                        $window.location.href = '/apprenticeship';
+                    }else{
+                        // url="kjkf";
+                        var params={
+                            domainname:url
+                        };
+                        SchoolService.getSchoolByDomain(params).$promise
                         .then(function (data) {
                             school=data;
                             document.title=school.name;
@@ -75,6 +79,8 @@ angular.module('dleduWebService')
                         .catch(function (error) {
 
                         })
+                    }
+
                 }
             },
             setSchool:function (school) {
