@@ -63,7 +63,7 @@ angular.module('dleduWebService')
                     if(url=='gzyd'){
                         $state.go('apprenticeship');
                     }else{
-                        // url="kjkf";
+                        url="kjkf";
                         var params={
                             domainname:url
                         };
