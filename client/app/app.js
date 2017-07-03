@@ -96,6 +96,7 @@ angular.module('dleduWebApp', [
         //url="gzyd.schooltest.aizhixin.com";
         var domain = url.split('.')[0];
         console.log(domain);
+
         if(domain=='gzyd') {
             //入口路由配置
             $urlRouterProvider
@@ -105,8 +106,6 @@ angular.module('dleduWebApp', [
             $urlRouterProvider
                 .otherwise('/index');
         }
-        $urlRouterProvider
-            .otherwise('/index');
         $stateProvider
             .state('base', {
                 abstract: true,
