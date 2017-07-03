@@ -24,7 +24,7 @@ angular.module('dleduWebApp')
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                          //$state.go('index');
-                        if("ROLE_ADMIN".indexOf(user.roleNames.toString())>-1){
+                        if("ROLE_ADMIN".indexOf(user.roleNames.toString())>-1||"ROLE_ORG_ADMIN".indexOf(user.roleNames.toString())>-1){//
                             that.toRedirectUrl();
                         }else {
                             messageService.openMsg("您没有管理员权限！")
