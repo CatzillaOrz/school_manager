@@ -14,32 +14,26 @@
                 // This area used as dropdown edit box
             // end widget edit box
             // widget content
-            .widget-body.no-padding
+            .widget-body.no-padding 
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar.padding-bottom-10
-                        .col-xs-10
+                        .col-xs-11
                             form.form-inline
-                                .form-group.col-sm-3
-                                    label 学期选择：
-                                    select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                        option 2017年第一学期
-                                        option 2017年第二学期
-                                .form-group.col-sm-3
-                                    label 开课学院：
-                                    select.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                        option 电信学院
-                                        option 计算机学院
-                                .form-group.col-sm-3
-                                    label 开课名称：
-                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-                                .form-group.col-sm-3
-                                    label 授课教师：
-                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" )
-
-                        .col-xs-2.hidden-xs
+                                .form-group.col-sm-4
+                                    label.control-label 学期选择：
+                                        select.form-control(ng-model="courseListFn.params.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
+                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in courseListFn.schoolYearDropList")
+                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}     
+                                .form-group.col-sm-4
+                                    label.control-label 课程名称：
+                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.className")
+                                .form-group.col-sm-4
+                                    label.control-label 授课教师：
+                                    input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
+                        .col-xs-1.hidden-xs
                                 .ColVis
-                                    button.btn.btn-primary(ui-sref="majorCreat")
-                                        span 新建
+                                    button.btn.btn-primary(ng-click="courseListFn.getCourseListIn()")
+                                        span 查询
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -51,32 +45,32 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 目前综合评分
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row' )
-                                td.sorting_1 {{$index+1 + ((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10}}
-                                td 20170809
-                                td  计算机
-                                td  面向对象
-                                td  老潘
-                                td  4.9
+                            tr.odd(role='row' ng-repeat="score in courseListFn.scoreList")
+                                td.sorting_1 {{$index+1 + ((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10}}
+                                td {{score.id}}
+                                td 1
+                                td {{score.name}}
+                                td {{score.teacherName}}
+                                td {{score.grade}}
                                 td
-                                    a.handle(ui-sref="coursescoredetail({id:1})")
+                                    a.handle(ui-sref="coursescoredetail({id:score.id})")
                                         i.fa.fa-pencil-square-o
                                         span 查看详情
 
 
-                    .dt-toolbar-footer
+                   .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+majorListFn.majorList.length}}
+                                span.txt-color-darken {{((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10+courseListFn.scoreList.length}}
                                 |  条 总共
-                                span.text-primary {{majorListFn.page.totalElements}}
+                                span.text-primary {{courseListFn.page.totalElements}}
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='majorListFn.page.totalElements', max-size='majorListFn.page.pageSize' ng-model='majorListFn.page.pageNumber',ng-change="majorListFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='courseListFn.page.totalElements', max-size='courseListFn.page.pageSize' ng-model='courseListFn.page.pageNumber',ng-change="courseListFn.findCourseByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
             // end widget content
         // end widget div

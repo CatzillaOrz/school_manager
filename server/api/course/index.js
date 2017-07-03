@@ -11,6 +11,9 @@ var router = express.Router();
 
 
 router.get('/getCourseList', auth.isSignedIn, controller.getCourseList);
+router.get('/getCourseListIn', auth.isSignedIn, controller.getCourseListIn);
+router.get('/getDetailInfo', auth.isSignedIn, controller.getDetailInfo);
+router.get('/getCsdInfo', auth.isSignedIn, controller.getCsdInfo);
 router.post('/addCourse', auth.isSignedIn, controller.addCourse);
 router.delete('/deleteCourse', auth.isSignedIn, controller.deleteCourse);
 router.put('/updateCourse', auth.isSignedIn, controller.updateCourse);
