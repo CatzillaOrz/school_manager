@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-    .factory('CommonService', function ($window,ngDialog,$http,localStorageService,SchoolService,$location,$state) {
+    .factory('CommonService', function ($window, ngDialog, $http, localStorageService, SchoolService, $location, $state) {
         return {
             product: {
                 name: '知新网综合平台',
@@ -12,7 +12,7 @@ angular.module('dleduWebService')
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
             },
-            browser:{
+            browser: {
                 versions: function () {
                     var u = navigator.userAgent, app = navigator.appVersion;
                     console.log(u);
@@ -29,48 +29,45 @@ angular.module('dleduWebService')
                         iPad: u.indexOf('iPad') > -1, //是否iPad
                         webApp: u.indexOf('Safari') == -1,//是否web应该程序，没有头部与底部
                         google: u.indexOf('Chrome') > -1,
-                        weixin:u.match(/MicroMessenger/i)=="MicroMessenger"
+                        weixin: u.match(/MicroMessenger/i) == "MicroMessenger"
                     };
                 }(),
                 language: (navigator.browserLanguage || navigator.language).toLowerCase()
             },
-            msgDialog:function(message,type) {
+            msgDialog: function (message, type) {
                 var _class = 'text-info';
-                if(type == 1){
+                if (type == 1) {
                     _class = 'text-success';
-                }else if(type == 2){
+                } else if (type == 2) {
                     _class = 'text-warning';
-                }else if(type == 3){
+                } else if (type == 3) {
                     _class = 'text-danger';
-                }else{
+                } else {
                     _class = 'text-info';
                 }
                 ngDialog.open({
-                    template: '<span class="'+_class+'">' + message + '</span>',
-                    plain   : true
+                    template: '<span class="' + _class + '">' + message + '</span>',
+                    plain: true
                 });
                 setTimeout(function () {
                     ngDialog.closeAll();
                 }, 1500);
             },
-            getSchool:function () {
-                var school= localStorageService.get('school');
-                var _this=this;
-                if(school){
-                    return  school;
-                }else {
-                    var  url =$location.host().split('.')[0];
-                    if(url=='gzyd'){
-                        $state.go('apprenticeship');
-                    }else{
-                        url="kjkf";
-                        var params={
-                            domainname:url
-                        };
-                        SchoolService.getSchoolByDomain(params).$promise
+            getSchool: function () {
+                var school = localStorageService.get('school');
+                var _this = this;
+                if (school) {
+                    return school;
+                } else {
+                    var url = $location.host().split('.')[0];
+                    url = "kjkf";
+                    var params = {
+                        domainname: url
+                    };
+                    SchoolService.getSchoolByDomain(params).$promise
                         .then(function (data) {
-                            school=data;
-                            document.title=school.name;
+                            school = data;
+                            document.title = school.name;
 
                             _this.setSchool(school);
                             return school;
@@ -78,12 +75,10 @@ angular.module('dleduWebService')
                         .catch(function (error) {
 
                         })
-                    }
-
                 }
             },
-            setSchool:function (school) {
-                localStorageService.set("school",school)
+            setSchool: function (school) {
+                localStorageService.set("school", school)
             },
             strCut: function (strs, len) {
                 var str_length = 0;

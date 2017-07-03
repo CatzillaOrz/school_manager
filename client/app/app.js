@@ -92,10 +92,20 @@ angular.module('dleduWebApp', [
 
         //localStorageService本地存储配置
         localStorageServiceProvider.setPrefix('aizhixin').setStorageType('localStorage').setNotify(true, true);
+        var  url = window.location.hostname;
+        //url="gzyd.schooltest.aizhixin.com";
 
-        //入口路由配置
-        $urlRouterProvider
-            .otherwise('/index');
+        var domain = url.split('.')[0];
+        console.log(domain);
+        if(domain=='gzyd') {
+            //入口路由配置
+            $urlRouterProvider
+                .otherwise('/apprenticeship');
+        }else{
+            //入口路由配置
+            $urlRouterProvider
+                .otherwise('/index');
+        }
         $stateProvider
             .state('base', {
                 abstract: true,

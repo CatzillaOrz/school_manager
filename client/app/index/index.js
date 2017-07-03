@@ -16,7 +16,7 @@ angular.module('dleduWebApp')
 
             })
             .state('index', {
-                url   : '/',
+                url   : '/index',
                 parent: 'indexnav',
                 access: {requiredLogin: false},
                 views : {

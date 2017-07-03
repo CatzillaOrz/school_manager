@@ -16,4 +16,4 @@ export SESSION_REDIS_DB='0'
 export SESSION_REDIS_PASS=
 export SESSION_REDIS_PREFIX=dledu_web_session
 export SESSION_DOMAIN=aizhixin.com
-pm2 start server/app.js -i 1 --name 'DLEDU_school_manager'
+pm2 start dist/server/app.js -i 1 --name 'DLEDU_school_manager'
