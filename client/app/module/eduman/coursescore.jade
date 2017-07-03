@@ -17,7 +17,7 @@
             .widget-body.no-padding 
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar.padding-bottom-10
-                        .col-xs-11
+                        .col-xs-10
                             form.form-inline
                                 .form-group.col-sm-4
                                     label.control-label 学期选择：
@@ -30,7 +30,7 @@
                                 .form-group.col-sm-4
                                     label.control-label 授课教师：
                                     input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
-                        .col-xs-1.hidden-xs
+                        .col-xs-2.hidden-xs
                                 .ColVis
                                     button.btn.btn-primary(ng-click="courseListFn.getCourseListIn()")
                                         span 查询
