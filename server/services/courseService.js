@@ -27,6 +27,60 @@ var CourseService = {
 				callback(e);
 			});
 	},
+
+	//查询课程评分
+	getCourseListIn: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/course/list',
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
+
+	//查询课程详情
+	getCsdInfo: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/course/list',
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
+
+	//查询课程评教详情
+	getDetailInfo: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/course/list',
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
 	addCourse: function (params, access_token, callback) {
 		RestClient.post({
 			host: 'gateway-org',
