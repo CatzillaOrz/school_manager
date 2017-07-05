@@ -2,11 +2,12 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('AttendDetailCtrl', function ($scope,$state,EduManService) {
+    .controller('AttendDetailCtrl', function ($scope,$state,EduManService,tempStorageService) {
         $scope.attendDetailFn={
             show:1,
             classStudentList:[],
             teachClassStudentList:[],
+            selected:{},
             params:{
                 classId:"",
                 teachClassId:""
@@ -22,14 +23,14 @@ angular.module('dleduWebApp')
             getStudentAttendByTeachClassId:function () {
                 var _this = this;
                 var params = {
-                    teachClassId: _this.params.teachClassId,
+                    classId: _this.params.teachClassId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
                 EduManService.getStudentAttendByTeachClassId(params).$promise
                     .then(function (data) {
-                        _this.teachClassStudentList = data.data;
-                        _this.page=data.page;
+                        _this.teachClassStudentList = data;
+                        //_this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -45,8 +46,37 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getStudentAttendByClassId(params).$promise
                     .then(function (data) {
-                        _this.classStudentList = data.data;
-                        _this.page=data.page;
+                        _this.classStudentList = data;
+                        //_this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //教学班考勤详情记录导出
+            teachClassAttendInfoExport:function () {
+                var _this = this;
+                var params = {
+                    classId: _this.params.teachClassId
+
+                };
+                EduManService.teachClassAttendInfoExport(params).$promise
+                    .then(function (data) {
+                        location.href=data.message;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //行政班考勤详情记录导出
+            classAttendInfoExport:function () {
+                var _this = this;
+                var params = {
+                    classId: _this.params.classId
+                };
+                EduManService.classAttendInfoExport(params).$promise
+                    .then(function (data) {
+                        location.href=data.message;
                     })
                     .catch(function (error) {
 
@@ -58,9 +88,11 @@ angular.module('dleduWebApp')
                 if($state.params.classes==2){
                     _this.show=2;
                     _this.params.classId=$state.params.id;
+                    _this.selected=tempStorageService.getter();
                     _this.getStudentAttendByClassId();
                 }else {
                     _this.params.teachClassId=$state.params.id;
+                    _this.selected=tempStorageService.getter();
                     _this.getStudentAttendByTeachClassId();
                 }
             },

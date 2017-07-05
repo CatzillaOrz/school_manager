@@ -26,5 +26,10 @@ router.get('/getTeachClassAttendList',auth.isSignedIn, controller.getTeachClassA
 router.get('/getClassAttendList',auth.isSignedIn, controller.getClassAttendList);
 router.get('/getStudentAttendByTeachClassId',auth.isSignedIn, controller.getStudentAttendByTeachClassId);
 router.get('/getStudentAttendByClassId',auth.isSignedIn, controller.getStudentAttendByClassId);
+router.get('/teachClassAttendExport',auth.isSignedIn, controller.teachClassAttendExport);
+router.get('/classAttendExport',auth.isSignedIn, controller.classAttendExport);
+router.get('/teachClassAttendInfoExport',auth.isSignedIn, controller.teachClassAttendInfoExport);
+router.get('/classAttendInfoExport',auth.isSignedIn, controller.classAttendInfoExport);
+
 
 module.exports = router;

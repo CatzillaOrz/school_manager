@@ -36,7 +36,10 @@ angular.module('dleduWebApp')
                 },
                 ncyBreadcrumb: {
                     label: '考勤详情'
-                }
+                },
+				data:{
+                	teacherName:""
+				}
             })
 			.state('coursescore', {
 				parent: 'base',
