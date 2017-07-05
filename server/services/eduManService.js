@@ -243,9 +243,10 @@ var EduManService = {
     //按教学班查询考勤列表
     getTeachClassAttendList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAttendance',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -260,9 +261,10 @@ var EduManService = {
     //按行政班查询考勤列表
     getClassAttendList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAdministrative',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -277,9 +279,10 @@ var EduManService = {
     //通过教学班id查询学生考勤
     getStudentAttendByTeachClassId: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAttendanceInfo',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -294,9 +297,78 @@ var EduManService = {
     //通过行政班id查询学生考勤
     getStudentAttendByClassId: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAdministrativeInfo',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    teachClassAttendExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAttendanceClass',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    classAttendExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAdministrativeClass',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    teachClassAttendInfoExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAttendanceClassInfo',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    classAttendInfoExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAdministrativeClassInfo',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);

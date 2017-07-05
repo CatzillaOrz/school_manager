@@ -314,38 +314,6 @@ module.exports = {
             })
     },
     getTeachClassAttendList: function (req, res) {
-        var data = {
-            "data": [
-                {
-                    "id": 14,
-                    "courseName": "Java开发基础",
-                    "courseNumber": "20170456",
-                    "collegeName": "计算机",
-                    "teacher": "老潘",
-                    "mustAttend": 220,
-                    "factAttend": "210",
-                    "prent": "90%"
-                },
-                {
-                    "id": 15,
-                    "courseName": "开发基础",
-                    "collegeName": "计算机",
-                    "courseNumber": "20170451",
-                    "teacher": "朝晖",
-                    "mustAttend": 220,
-                    "factAttend": "220",
-                    "prent": "100%"
-                }
-            ],
-            "page": {
-                "totalElements": 2,
-                "totalPages": 1,
-                "pageNumber": 0,
-                "pageSize": 10
-            }
-        };
-        res.json(data);
-        return;
         EduManService.getTeachClassAttendListSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -355,34 +323,6 @@ module.exports = {
             })
     },
     getClassAttendList: function (req, res) {
-        var data = {
-            "data": [
-                {
-                    "id": 14,
-                    "className": "计算机科学技术01班",
-                    "collegeName": "计算机",
-                    "mustAttend": 220,
-                    "factAttend": "210",
-                    "prent": "90%"
-                },
-                {
-                    "id": 15,
-                    "className": "计算机科学技术01班",
-                    "collegeName": "计算机",
-                    "mustAttend": 220,
-                    "factAttend": "220",
-                    "prent": "100%"
-                }
-            ],
-            "page": {
-                "totalElements": 2,
-                "totalPages": 1,
-                "pageNumber": 0,
-                "pageSize": 10
-            }
-        };
-        res.json(data);
-        return;
         EduManService.getClassAttendListSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -392,38 +332,6 @@ module.exports = {
             })
     },
     getStudentAttendByTeachClassId: function (req, res) {
-        var data = {
-            "data": [
-                {
-                    "id": 14,
-                    "studentNo": "20170908114",
-                    "name": "新刚",
-                    "register": 220,
-                    "leave": 3,
-                    "cutting": 1,
-                    "late": "5",
-                    "leaveE": "1"
-                },
-                {
-                    "id": 12,
-                    "studentNo": "20170908115",
-                    "name": "老潘",
-                    "register": 220,
-                    "leave": 3,
-                    "cutting": 1,
-                    "late": "5",
-                    "leaveE": "1"
-                }
-            ],
-            "page": {
-                "totalElements": 2,
-                "totalPages": 1,
-                "pageNumber": 0,
-                "pageSize": 10
-            }
-        }
-        res.json(data);
-        return;
         EduManService.getStudentAttendByTeachClassIdSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -433,41 +341,43 @@ module.exports = {
             })
     },
     getStudentAttendByClassId: function (req, res) {
-        var data = {
-            "data": [
-                {
-                    "id": 14,
-                    "studentNo": "20170908114",
-                    "name": "新刚",
-                    "className":"计算机一班",
-                    "register": 220,
-                    "leave": 3,
-                    "cutting": 1,
-                    "late": "5",
-                    "leaveE": "1"
-                },
-                {
-                    "id": 12,
-                    "studentNo": "20170908115",
-                    "name": "老潘",
-                    "className":"计算机一班",
-                    "register": 220,
-                    "leave": 3,
-                    "cutting": 1,
-                    "late": "5",
-                    "leaveE": "1"
-                }
-            ],
-            "page": {
-                "totalElements": 2,
-                "totalPages": 1,
-                "pageNumber": 0,
-                "pageSize": 10
-            }
-        }
-        res.json(data);
-        return;
         EduManService.getStudentAttendByClassIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    teachClassAttendExport: function (req, res) {
+        EduManService.teachClassAttendExportSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    classAttendExport: function (req, res) {
+        EduManService.classAttendExportSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    teachClassAttendInfoExport: function (req, res) {
+        EduManService.teachClassAttendInfoExportSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    classAttendInfoExport: function (req, res) {
+        EduManService.classAttendInfoExportSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

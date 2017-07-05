@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, EduManService) {
+    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, EduManService,tempStorageService) {
         $scope.attendFn = {
             //学年下拉数据列表
             schoolYearDropList: [],
@@ -17,12 +17,12 @@ angular.module('dleduWebApp')
             //行政班考勤列表
             classAttendList: [],
             params: {
-                majorId: "",
-                collegeId: "",
-                semesterId: "",
-                classId: "",
-                courseName: "",
-                teacherName: ""
+                majorId: null,
+                collegeId: null,
+                semesterId: null,
+                classId: null,
+                courseName: null,
+                teacherName: null
             },
             //分页参数
             page: {
@@ -204,7 +204,7 @@ angular.module('dleduWebApp')
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
-                EduManService.getTeachClassAttendList().$promise
+                EduManService.getTeachClassAttendList(params).$promise
                     .then(function (data) {
                         _this.teachClassAttendList = data.data;
                         _this.page = data.page;
@@ -220,14 +220,52 @@ angular.module('dleduWebApp')
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
                     majorId: _this.params.majorId,
-                    classId: _this.params.classId,
+                    classAdministrativeId: _this.params.classId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
-                EduManService.getClassAttendList().$promise
+                EduManService.getClassAttendList(params).$promise
                     .then(function (data) {
                         _this.classAttendList = data.data;
                         _this.page = data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //教学班考勤记录导出
+            teachClassAttendExport:function () {
+                var _this = this;
+                var params = {
+                    collegeId: _this.params.collegeId,
+                    semesterId: _this.params.semesterId,
+                    courseName: _this.params.courseName,
+                    teacherName: _this.params.teacherName,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                EduManService.teachClassAttendExport(params).$promise
+                    .then(function (data) {
+                       location.href=data.message;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //行政班考勤记录导出
+            classAttendExport:function () {
+                var _this = this;
+                var params = {
+                    collegeId: _this.params.collegeId,
+                    semesterId: _this.params.semesterId,
+                    majorId: _this.params.majorId,
+                    classAdministrativeId: _this.params.classId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
+                };
+                EduManService.classAttendExport(params).$promise
+                    .then(function (data) {
+                        location.href=data.message;
                     })
                     .catch(function (error) {
 
@@ -237,12 +275,12 @@ angular.module('dleduWebApp')
             resetParams: function (index) {
                 var _this = this;
                 _this.params = {
-                    majorId: "",
-                    collegeId: "",
-                    semesterId: "",
-                    classId: "",
-                    courseName: "",
-                    teacherName: ""
+                    majorId: null,
+                    collegeId: null,
+                    semesterId: null,
+                    classId: null,
+                    courseName: null,
+                    teacherName: null
                 };
                 //分页参数
                 _this.page = {
@@ -256,6 +294,24 @@ angular.module('dleduWebApp')
                 }else {
                     _this.getClassAttendList();
                 }
+            },
+            toDetail:function (entity,classes) {
+                if(classes===1){
+                    var data={
+                        courseName:entity.courseName,
+                        code:entity.code,
+                        teacherName:entity.teacherName
+                    };
+                    tempStorageService.setter(data);
+                }else {
+                    var data={
+                        courseName:entity.courseName,
+                        code:entity.code,
+                        teacherName:entity.teacherName
+                    };
+                    tempStorageService.setter();
+                }
+                $state.go("attenddetail",{id:entity.classId,classes:classes})
             },
             //初始化
             init: function () {
