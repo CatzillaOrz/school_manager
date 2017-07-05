@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('CollegeListCtrl', function ($scope, AuthService, CollegeService, messageService) {
+    .controller('CollegeListCtrl', function ($scope, AuthService, CollegeService, messageService,CommonService) {
         $scope.collegeListFn = {
             //学院列表
             collegeList: [],
@@ -69,13 +69,13 @@ angular.module('dleduWebApp')
                         _this.getCollegeList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("学院删除失败！");
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"学院删除失败！"));
                     })
             },
             //删除提示弹出框
             deletePrompt: function (entity) {
                 this.currentCollege = entity;
-                messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege)
+                messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege);
             },
             init: function () {
                 this.getCollegeList();

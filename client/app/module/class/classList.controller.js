@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassListCtrl', function ($scope, ClassService,AuthService,messageService) {
+    .controller('ClassListCtrl', function ($scope, ClassService,AuthService,messageService,CommonService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
                         _this.getClassList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("班级删除失败！");
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"班级删除失败！"));
                     })
             },
             //删除提示

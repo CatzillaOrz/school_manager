@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('MajorListCtrl', function ($scope, MajorService,AuthService,messageService) {
+    .controller('MajorListCtrl', function ($scope, MajorService,AuthService,messageService,CommonService) {
         $scope.majorListFn={
             //专业列表
             majorList: [],
@@ -70,7 +70,7 @@ angular.module('dleduWebApp')
                         _this.getMajorList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("专业删除失败！");
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"专业删除失败！"));
                     })
             },
             //删除提示

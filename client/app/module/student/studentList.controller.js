@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
                         _this.getStudentList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg("学生删除失败！");
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"学生删除失败！"));
                     })
             },
             //删除提示
