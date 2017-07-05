@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	getCourseListIn: function (req, res) {
-		var data = {
+		/*var data = {
             "data": [
                 {
                     "id": 210,
@@ -44,7 +44,7 @@ module.exports = {
             }
         }
         res.json(data);
-        return;
+        return;*/
 		CourseService.getCourseListInSync(req.query, req.user.access_token)
 			.then(function (data) {
 				res.json(data);
@@ -56,7 +56,7 @@ module.exports = {
 
 	//获取课程信息
 	getCsdInfo: function (req, res) {
-		var data = {
+		/*var data = {
 			"data":{
 				"id": '20170903',
 	            "schoolYear": '16-17第1学期',
@@ -105,7 +105,7 @@ module.exports = {
             
         }
         res.json(data);
-        return;
+        return;*/
 		CourseService.getCsdInfoSync(req.query, req.user.access_token)
 			.then(function (data) {
 				res.json(data);
@@ -118,7 +118,7 @@ module.exports = {
 
 	//获取课程评教信息
 	getDetailInfo: function (req, res) {
-		var data = {
+		/*var data = {
             "data": {
                 "major": "信息技术",
                 "id": 201313,
@@ -155,7 +155,7 @@ module.exports = {
             }         
         }
         res.json(data);
-        return;
+        return;*/
 		CourseService.getDetailInfoSync(req.query, req.user.access_token)
 			.then(function (data) {
 				res.json(data);

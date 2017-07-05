@@ -10,9 +10,9 @@ angular.module('dleduWebApp')
 
 			//查询参数
             params: {
-                semesterId:"",
-                className:"",
-                teacherName:"",
+                semesterId: " ",
+                className: null,
+                teacherName: null
             },
 
 			//分页

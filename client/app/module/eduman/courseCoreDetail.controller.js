@@ -2,15 +2,22 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('CourseScoreDetailCtrl', function ($scope, $state, AuthService, CourseService) {
+    .controller('CourseScoreDetailCtrl', function ($scope, $stateParams, AuthService, CourseService) {
         $scope.cSDFn={
             show:1,
             //课程信息
             course: null,
             //课程评教信息
             content: null,
-            id: $state.params.id,
-            pitch: "",
+            params: {
+                id: $stateParams.id,
+                averageScore: $stateParams.averageScore,
+                teachingClassCode:$stateParams.teachingClassCode,
+                courseName:$stateParams.courseName,
+                teacherName: $stateParams.teacherName,
+                pitch: ""
+            },
+            
 
             //分页
             page: {
@@ -28,11 +35,11 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.id=that.params.id;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
-                        that.course = data.data;
-                        that.page = data.page;
+                        that.course = data.pageData.data;
+                        that.page = data.pageData.page;
                     })
                     .catch(function(error) {
 
@@ -47,12 +54,12 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.id=that.params.id;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
-                        that.course = data.data;
-                        that.page.totalElements = data.page.totalElements;
-                        that.page.totalPages = data.page.totalPages;
+                        that.course = data.pageData.data;
+                        that.page.totalElements = data.pageData.page.totalElements;
+                        that.page.totalPages = data.pageData.page.totalPages;
                     })
                     .catch(function(error) {
 
@@ -68,7 +75,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.id=that.params.id;
                 params.pitch = that.pitch;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
@@ -88,7 +95,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.id=that.params.id;
                 params.pitch = that.pitch;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
