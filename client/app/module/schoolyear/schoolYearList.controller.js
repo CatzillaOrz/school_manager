@@ -187,14 +187,8 @@ angular.module('dleduWebApp')
                         _this.getSchoolYearList();
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg("生成学周失败！");
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"生成学周失败！"));
 
-                        }else {
-                            messageService.openMsg(error.data);
-
-                        }
 
                     })
             },
@@ -211,15 +205,7 @@ angular.module('dleduWebApp')
                         _this.getSchoolYearList();
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg("学期删除失败！");
-
-                        }else {
-                            messageService.openMsg(error.data);
-
-                        }
-
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"学期删除失败！"));
                     })
             },
             //删除课节
