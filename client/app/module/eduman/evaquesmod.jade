@@ -23,18 +23,22 @@
                         .col-sm-7
                             input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  name="alltotal" validator="required, number")
                     .form-group
-                        label.col-sm-3.control-label(ng-class="{'date-label-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}")
+                        label.col-sm-3.control-label
                             span.required *
                             | 截止时间：
                         .col-sm-7
-                            p.input-group
-                                input.form-control(type='text', ng-class="{'date-input-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}" uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]' ng-model='evaQuesModFn.params.endTime',name="date" required is-open='opened[$index][0]', datepicker-options='evaQuesModFn.datePick.dateOptions'  close-text='Close')
+                            //p.input-group
+                                input.form-control(type='text', ng-class="{'date-input-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}" uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]' ng-model='evaQuesModFn.params.endDate',name="date" required is-open='opened[$index][0]', datepicker-options='evaQuesModFn.datePick.dateOptions'  close-text='Close')
                                 span.input-group-btn
                                     button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
                                         i.glyphicon.glyphicon-calendar
                                 .tooltip.top-right.ng-scope(role='tooltip' ng-show='evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required')
                                     .tooltip-arrow
                                     .tooltip-inner 必填项
+                            .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                input.form-control(size='16', ng-disabled='true' name="date" placeholder='请选择截止时间' type='text' ng-model="evaQuesModFn.params.endDate" validator="required")
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
                 .panel.panel-default.no-border
                     .jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
@@ -64,10 +68,10 @@
                                         td
                                             a.handle(ng-click="evaQuesModFn.delQues($index)")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
-                .form-actions
+                .form-actions(style="border-top:none;margin:0")
                     .row
                         .col-md-12(style="text-align:left")
-                            a.btn.btn-primary(ng-disabled="form.$invalid" ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 保存评教问卷
+                            a.btn.btn-primary(ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 保存评教问卷
     //.jarviswidget.jarviswidget-color-blueDark
         button.btn.btn-success(ng-click='evaQuesModFn.saveQues()') 保存评教问卷
 

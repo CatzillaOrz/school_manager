@@ -77,14 +77,52 @@ angular.module('dleduWebService')
                 return eduman.get(params);
             },
             getStudentAttendByTeachClassId: function (params) {
-                var eduman = $resource('api/eduman/getStudentAttendByTeachClassId');
-                return eduman.get(params);
+                var eduman = $resource('api/eduman/getStudentAttendByTeachClassId',null,{
+                    query: {method: 'get', isArray: true, cancellable: true}
+                });
+                return eduman.query(params);
             },
             //通过行政班级查询学生考勤
             getStudentAttendByClassId: function (params) {
-                var eduman = $resource('api/eduman/getStudentAttendByClassId');
+                var eduman = $resource('api/eduman/getStudentAttendByClassId',null,{
+                    query: {method: 'get', isArray: true, cancellable: true}
+                });
+                return eduman.query(params);
+            },
+            teachClassAttendExport:function (params) {
+                var eduman = $resource('api/eduman/teachClassAttendExport');
                 return eduman.get(params);
             },
+            //行政班考勤记录导出
+            classAttendExport:function (params) {
+                var eduman = $resource('api/eduman/classAttendExport');
+                return eduman.get(params);
+            },
+            //教学班详情考勤记录导出
+            teachClassAttendInfoExport:function (params) {
+                var eduman = $resource('api/eduman/teachClassAttendInfoExport');
+                return eduman.get(params);
+            },
+            //行政班详情考勤记录导出
+            classAttendInfoExport:function (params) {
+                var eduman = $resource('api/eduman/classAttendInfoExport');
+                return eduman.get(params);
+            },
+
+			getElecFenceList: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceList');
+				return eduman.get(params);
+			},
+
+			getElecFenceHistory: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceHistory');
+				return eduman.get(params);
+			},
+
+			getElecFenceCurrent: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceCurrent');
+				return eduman.get(params);
+			},
 		}
 
 	});

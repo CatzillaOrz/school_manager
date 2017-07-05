@@ -15,8 +15,9 @@ var EduManService = {
     //查询评教问卷列表
     getEvaQuesList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/query',
+            access_token: access_token,
             params: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -33,8 +34,9 @@ var EduManService = {
     //新增评教问卷
     addEvaQues: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway-org',
-            path: '/v1/classes/add',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/create',
+            access_token: access_token,
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -50,8 +52,9 @@ var EduManService = {
     //撤销评教问卷
     deleteEvaQues: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway-org',
-            path: '/v1/classes/delete/' + params.id,
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/cancelAssigned/' + params.id,
+            access_token: access_token,
             params: {userId: params.userId}
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -67,8 +70,9 @@ var EduManService = {
     //编辑评教问卷
     updateEvaQues: function (params, access_token, callback) {
         RestClient.put({
-            host: 'gateway-org',
-            path: '/v1/classes/update',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/update',
+            access_token: access_token,
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -84,8 +88,9 @@ var EduManService = {
     //查询评教问卷列表
     getEvaQuesInfo: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/queryDetail',
+            access_token: access_token,
             params: params
         }).then(function (res) {
                 if (res.status.code == 200) {
@@ -102,8 +107,9 @@ var EduManService = {
     //查询已经分配的列表
     getEvaQuesDist: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/assignQuesniare/query',
+            access_token: access_token,
             params: params
         }).then(function (res) {
                 if (res.status.code == 200) {
@@ -120,8 +126,9 @@ var EduManService = {
     //查询未分配的列表
     getEvaQuesUnDist: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/organ/listTeachingClasses',
+            access_token: access_token,
             params: params
         }).then(function (res) {
                 if (res.status.code == 200) {
@@ -138,8 +145,9 @@ var EduManService = {
     //查询常规统计
     getEvaQuesNormalStatic: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/Quesniare/regularStatistics',
+            access_token: access_token,
             params: params
         }).then(function (res) {
                 if (res.status.code == 200) {
@@ -156,8 +164,9 @@ var EduManService = {
     //查询分题统计
     getEvaQuesUnNormalStatic: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/Quesniare/partStatistics',
+            access_token: access_token,
             params: params
         }).then(function (res) {
                 if (res.status.code == 200) {
@@ -174,9 +183,10 @@ var EduManService = {
     //查询问卷统计基本信息
     getEvaQuesStaticInfo: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/assignQuesniare/queryById',
+            params: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
@@ -192,9 +202,10 @@ var EduManService = {
     //查询学生答题详情
     getEvaQuesResult: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/student/getQuestionsInfo',
+            params: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
@@ -207,27 +218,12 @@ var EduManService = {
             });
     },
 
-    //撤销分配
-    cancleDist: function (params, access_token, callback) {
-        RestClient.delete({
-            host: 'gateway-org',
-            path: '/v1/students/delete/'+params.id,
-            params:{userId:params.userId}
-        }).then(function (res) {
-            if (res.status.code == 200) {
-                callback(null, res.entity);
-            } else {
-                callback(ErrorCode.errorHandle(res));
-            }
-        }) .catch(function (e) {
-            callback(e);
-        });
-    },
     //分配评教问卷
     distQuestionaire: function (params, access_token, callback) {
         RestClient.post({
-            host: 'gateway-org',
-            path: '/v1/classes/add',
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/assigned',
+            access_token: access_token,
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -243,9 +239,10 @@ var EduManService = {
     //按教学班查询考勤列表
     getTeachClassAttendList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAttendance',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -260,9 +257,10 @@ var EduManService = {
     //按行政班查询考勤列表
     getClassAttendList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAdministrative',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -277,9 +275,10 @@ var EduManService = {
     //通过教学班id查询学生考勤
     getStudentAttendByTeachClassId: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAttendanceInfo',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -294,9 +293,10 @@ var EduManService = {
     //通过行政班id查询学生考勤
     getStudentAttendByClassId: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd',
+            path: '/api/web/v1/classes/ClassAdministrativeInfo',
+            params: params,
+            access_token:access_token
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -304,6 +304,128 @@ var EduManService = {
                 callback(ErrorCode.errorHandle(res));
             }
         })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    teachClassAttendExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAttendanceClass',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    classAttendExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAdministrativeClass',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    teachClassAttendInfoExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAttendanceClassInfo',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    classAttendInfoExport: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAdministrativeClassInfo',
+            params: params,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //获取电子围栏列表页面
+    getElecFenceList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/classes/list',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //获取电子围栏历史记录
+    getElecFenceHistory: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/classes/list',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //获取电子围栏历史记录
+    getElecFenceCurrent: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/classes/list',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
             .catch(function (e) {
                 callback(e);
             });

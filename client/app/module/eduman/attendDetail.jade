@@ -23,19 +23,19 @@
                                     label 学期选择：
                                     .form-control.no-border 2017年第一学期
                                 .form-group.col-sm-3
-                                    label 开课学院：
-                                    .form-control.no-border 电信学院
+                                    label 课程名称：
+                                    .form-control.no-border {{attendDetailFn.selected.courseName}}
                                 .form-group.col-sm-3
-                                    label 专业：
-                                    .form-control.no-border 信息管理
+                                    label 课程编号：
+                                    .form-control.no-border {{attendDetailFn.selected.code}}
                                 .form-group.col-sm-3
-                                    label 行政班级：
-                                    .form-control.no-border 计算机技术一班
+                                    label 授课教师：
+                                    .form-control.no-border {{attendDetailFn.selected.teacherName}}
 
                         .col-sm-2.col-xs-6.hidden-xs
                             .ColVis
-                                //button.btn.btn-primary(ui-sref="majorCreat")
-                                //    span 新建
+                                button.btn.btn-primary(ng-click="attendDetailFn.teachClassAttendInfoExport()")
+                                    span 导出
                     table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -51,14 +51,14 @@
                         tbody
                             tr.odd(role='row' ng-repeat="stuAttend in attendDetailFn.teachClassStudentList")
                                 td.sorting_1 {{$index+1 + ((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10}}
-                                td.expand {{stuAttend.studentNo}}
-                                td  {{stuAttend.name}}
+                                td.expand {{stuAttend.studentId}}
+                                td  {{stuAttend.studentName}}
                                 td {{stuAttend.className}}
-                                td  {{stuAttend.register}}
-                                td {{stuAttend.leave}}
-                                td {{stuAttend.cutting}}
+                                td  {{stuAttend.arrvied}}
+                                td {{stuAttend.beg}}
+                                td {{stuAttend.crunk}}
                                 td {{stuAttend.late}}
-                                td {{stuAttend.leaveE}}
+                                td {{stuAttend.early}}
 
 
                     .dt-toolbar-footer
@@ -109,8 +109,8 @@
                                     .form-control.no-border 计算机技术一班
                         .col-sm-2.col-xs-6.hidden-xs
                             .ColVis
-                                //button.btn.btn-primary(ui-sref="majorCreat")
-                                //    span 新建
+                                button.btn.btn-primary(ng-click="attendDetailFn.classAttendInfoExport()")
+                                    span 导出
                     table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -125,13 +125,13 @@
                         tbody
                             tr.odd(role='row' ng-repeat="stuAttend in attendDetailFn.classStudentList")
                                 td.sorting_1 {{$index+1 + ((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10}}
-                                td.expand {{stuAttend.studentNo}}
-                                td  {{stuAttend.name}}
-                                td  {{stuAttend.register}}
-                                td {{stuAttend.leave}}
-                                td {{stuAttend.cutting}}
+                                td.expand {{stuAttend.studentId}}
+                                td  {{stuAttend.studentName}}
+                                td  {{stuAttend.arrvied}}
+                                td {{stuAttend.beg}}
+                                td {{stuAttend.crunk}}
                                 td {{stuAttend.late}}
-                                td {{stuAttend.leaveE}}
+                                td {{stuAttend.early}}
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs

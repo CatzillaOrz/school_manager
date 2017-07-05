@@ -32,7 +32,7 @@
                                                     form.form-inline
                                                         .form-group.col-sm-3
                                                             label.control-label 学期选择：
-                                                            select.form-control(ng-model="attendFn.params.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            select.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
                                                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                                                         .form-group.col-sm-3
@@ -42,23 +42,22 @@
 
                                                         .form-group.col-sm-3
                                                             label.control-label  课程名称：
-                                                            input.form-control(type="text" placeholder="请输入课程名称" )
+                                                            input.form-control(type="text" ng-model="attendFn.params.courseName" placeholder="请输入课程名称" )
                                                         .form-group.col-sm-3
                                                             label.control-label 授课教师：
-                                                            input.form-control(type="text" placeholder="请输入授课教师" )
+                                                            input.form-control(type="text" ng-model="attendFn.params.teacherName" placeholder="请输入授课教师" )
 
                                             .col-sm-2.col-xs-6.hidden-xs
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="attendFn.getTeachClassAttendList()")
                                                         span 查询
-                                                    button.btn.btn-primary()
+                                                    button.btn.btn-primary(ng-click="attendFn.teachClassAttendExport()")
                                                         span 导出
                                         table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
                                                     th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                     th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 选课编号
-                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 开课学院
                                                     th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 课程名称
                                                     th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 授课教师
                                                     th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生应出勤次数
@@ -68,15 +67,14 @@
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendFn.teachClassAttendList")
                                                     td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
-                                                    td.expand {{attend.courseNumber}}
-                                                    td  {{attend.collegeName}}
+                                                    td.expand {{attend.code}}
                                                     td  {{attend.courseName}}
-                                                    td  {{attend.teacher}}
-                                                    td  {{attend.mustAttend}}
-                                                    td  {{attend.factAttend}}
-                                                    td  {{attend.prent}}
+                                                    td  {{attend.teacherName}}
+                                                    td  {{attend.participationCount}}
+                                                    td  {{attend.practical}}
+                                                    td  {{attend.proportion}}
                                                     td
-                                                        a.handle(ui-sref="attenddetail({id:attend.id,classes:1})")
+                                                        a.handle(ng-click="attendFn.toDetail(attend,1)")
                                                             i.fa.fa-pencil-square-o
                                                             span 详情
                                                         a.handle(ng-click="attendFn.deletePrompt(major)")
@@ -89,7 +87,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.majorList.length}}
+                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.teachClassAttendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendFn.page.totalElements}}
                                                     |  条记录
@@ -128,10 +126,10 @@
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
                                                         span 查询
-                                                    button.btn.btn-primary(ui-sref="majorCreat")
+                                                    button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
                                                         span 导出
-                                                    button.btn.btn-primary(ui-sref="majorCreat")
-                                                        span 学周趋势
+                                                    //button.btn.btn-primary(ui-sref="majorCreat")
+                                                    //    span 学周趋势
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
@@ -147,11 +145,11 @@
                                                     td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
                                                     td.expand {{attend.collegeName}}
                                                     td  {{attend.className}}
-                                                    td  {{attend.mustAttend}}
-                                                    td  {{attend.factAttend}}
-                                                    td  {{attend.prent}}
+                                                    td  {{attend.participationCount}}
+                                                    td  {{attend.practical}}
+                                                    td  {{attend.proportion}}
                                                     td
-                                                        a.handle(ui-sref="attenddetail({id:1,classes:2})")
+                                                        a.handle(ng-click="attendFn.toDetail(attend,2)")
                                                             i.fa.fa-pencil-square-o
                                                             span 查看详情
 
@@ -162,7 +160,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.majorList.length}}
+                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendFn.page.totalElements}}
                                                     |  条记录

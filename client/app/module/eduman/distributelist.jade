@@ -18,7 +18,7 @@
         span.jarviswidget-loader
             i.fa.fa-refresh.fa-spin
     // widget div
-    div(role='content')
+    div(role='content').no-border
         // widget edit box
         .jarviswidget-editbox
             // This area used as dropdown edit box
@@ -27,7 +27,7 @@
         .widget-body
             .tab-content
                 #hr1.tab-pane.active
-                    #wid-id-2.jarviswidget.jarviswidget-color-blueDark
+                    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
                             span.widget-icon
@@ -47,25 +47,16 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter
                                             form.form-inline
-                                                .form-group.col-md-3
-                                                    label.control-label 学期选择：
-                                                    select.form-control(ng-model="distributeListFn.queryOption.semesterId" ui-select2="distributeListFn.select2SemesterOptions()" )
-                                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in distributeListFn.schoolYearDropList")
-                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
-                                                .form-group.col-md-3
-                                                    label.control-label 开课学院：
-                                                    select.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
-                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
-                                                .form-group.col-md-3
+                                                .form-group.col-md-4
                                                     label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
-                                                .form-group.col-md-3
+                                                .form-group.col-md-4
                                                     label.control-label 授课教师：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs
                                         .ColVis
-                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption()")
+                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
                                                 span 查询
 
                     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
@@ -88,21 +79,21 @@
                                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
                                             tr(role='row')
-                                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 全选
-                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 选课编号
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 开课学院
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 课程名称
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 授课教师
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 全选
+                                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
+                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 120px;') 开课学院
+                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 课程名称
+                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
-                                                    input(type="checkbox" )
+                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
-                                                td {{record.code}}
-                                                td {{record.college}}
-                                                td {{record.coursename}}
-                                                td {{record.teachername}}
+                                                td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
+                                                td {{record.collegeName=='null'? '--':record.collegeName}}
+                                                td {{record.courseName=='null'? '--':record.courseName}}
+                                                td {{record.teacherName=='null'? '--':record.teacherName}}
 
                                     .dt-toolbar-footer
                                         .col-sm-6.col-xs-12.hidden-xs
@@ -117,11 +108,11 @@
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-                            .panel.panel-default.no-border
-                                button.btn.btn-primary(ng-click="distQuestionaire()") 分配问卷
+                            .panel.panel-default.no-border(style="box-shadow:none!important;")
+                                button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
 
                 #hr2.tab-pane
-                    #wid-id-5.jarviswidget.jarviswidget-color-blueDark
+                    #wid-id-5.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
                             span.widget-icon
@@ -141,20 +132,16 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter1
                                             form.form-inline
-                                                .form-group.col-md-3
-                                                    label.control-label 开课学院：
-                                                    select.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
-                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" selected="{{distributeListFn.collegeId==college.id?'selected':''}}") {{college.name}}
-                                                .form-group.col-md-3
+                                                .form-group.col-md-4
                                                     label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
-                                                .form-group.col-md-3
+                                                .form-group.col-md-4
                                                     label.control-label 授课教师：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.teacherName")
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName")
 
                                     .col-sm-2.col-xs-6.hidden-xs
                                         .ColVis
-                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption()")
+                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption('complete')")
                                                 span 查询
 
                     #wid-id-10.jarviswidget.jarviswidget-color-blueDark
@@ -179,7 +166,7 @@
                                             tr(role='row')
                                                     th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                     th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 100px;') 开课学院
+                                                    //th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 100px;') 开课学院
                                                     th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 课程名称
                                                     th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
                                                     th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 目前综合评分
@@ -189,17 +176,20 @@
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
-                                                td {{record.code}}
-                                                td {{record.college}}
-                                                td {{record.coursename}}
-                                                td {{record.teachername}}
-                                                td {{record.allScore}}
-                                                td {{record.uncomplete+'/'+record.complete}}
-                                                td {{record.startTime}}
+                                                td {{record.teachingClassCode}}
+                                                //td {{record.collegeName}}
+                                                td {{record.courseName}}
+                                                td {{record.teacherName}}
+                                                td {{record.avageScore}}
+                                                td {{record.assessCount+'/'+record.totalCount}}
+                                                td {{record.assginDate}}
                                                 td
-                                                    a.handle(ng-click="distributeListFn.deletePrompt(record)")
+                                                    a.handle(ng-show="record.status=='20'" ng-click="distributeListFn.deletePrompt(record)")
                                                         i.fa.fa-pencil-square-o
                                                         span 撤销分配&nbsp;&nbsp;
+                                                    a.handle.disable-style(ng-show="record.status=='10'")
+                                                        i.fa.fa-pencil-square-o
+                                                        span 已撤销&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")
                                                         i.fa.fa-trash-o
                                                         span 统计

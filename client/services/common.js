@@ -6,7 +6,7 @@ angular.module('dleduWebService')
             product: {
                 name: '知新网综合平台',
 
-                version: '0.0.3.1'
+                version: '0.0.3.2'
 
             },
             isMSIE789: function () {
@@ -108,5 +108,20 @@ angular.module('dleduWebService')
                     }
                 }
             },
+            /**
+             * api调用异常提示
+             * @param error api错误返回值
+             * @param defualt 默认提示
+             * @returns {*}
+             */
+            exceptionPrompt:function (error,defualt) {
+                var re = /[^\u4e00-\u9fa5]/;
+                if(re.test(error.data)){
+                   return defualt
+                }else {
+                    return error.data;
+
+                }
+            }
         }
     });
