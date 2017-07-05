@@ -105,12 +105,6 @@
                     "icon": "pencil-square-o"
                 },
                 {
-                    "title": "课程评分",
-                    "sref": "coursescore",
-                    "active": "coursescore",
-                    "icon": "signal"
-                },
-                {
                     "title": "评教问卷",
                     "sref": "evaquestion",
                     "active": "evaquestion",
