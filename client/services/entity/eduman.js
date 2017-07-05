@@ -108,6 +108,21 @@ angular.module('dleduWebService')
                 var eduman = $resource('api/eduman/classAttendInfoExport');
                 return eduman.get(params);
             },
+
+			getElecFenceList: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceList');
+				return eduman.get(params);
+			},
+
+			getElecFenceHistory: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceHistory');
+				return eduman.get(params);
+			},
+
+			getElecFenceCurrent: function (params) {
+				var eduman = $resource('api/eduman/getElecFenceCurrent');
+				return eduman.get(params);
+			},
 		}
 
 	});

@@ -4,3 +4,339 @@
 .date-input-error{
     border-color: #b94a48!important;
 }
+
+#elecmap{
+    height: 750px;
+    border-radius: 4px;
+    border:1px solid #CCCCCC;
+    z-index: 1000;
+    .tipmapset{
+        position: absolute;
+        z-index: 100;
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        top: 20px;
+        left: 20px;
+        height: 50px;
+        padding: 15px;
+        background: #f2f2f2;
+        opacity: 0.8;
+        cursor: hand;
+        a{
+            padding-left: 10px
+        }
+    }
+    .tipmapquery{
+        z-index: 200;
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: hand;
+        background: #f2f2f2;
+        >input{
+            height: 36px;
+            margin-bottom: 0;
+            width: 260px;
+            border: none;
+            padding-left: 10px;
+            background: #f2f2f2;
+        }
+        >i{
+            padding: 0 10px;
+            cursor: pointer;
+        }
+    }
+    .querylist{
+        z-index: 100;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        border-radius: 3px;
+        width: 295px;
+        max-height: 360px;
+        overflow-y:auto;
+        position: absolute;
+        top: 58px;
+        left: 20px;
+        cursor: hand;
+        background: #f2f2f2;
+        .query-item{
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+        .query-item:hover{
+            background: #999999;
+        }
+    }
+    .tipmapstatus{
+        z-index: 100;
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        line-height: 36px;
+        background: #f5f5f5;
+        span{
+            padding: 0 12px;
+            cursor: pointer;
+            display: inline-block;
+            border-right: 1px dashed #ccc;
+            color: #00aaff;
+            text-align: center;
+        }
+        span:hover{
+            color: #6B5ACC;
+        }
+        span:last-child{
+            border-right: none;
+        }
+        >i{
+            cursor: pointer;
+        }
+    }
+    .queryDialog{
+        z-index: 1000;
+        border: 1px solid #CCCCCC;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        line-height: 36px;
+        width: 470px;
+        background: #ffffff;
+        padding: 0 10px;
+        cursor: pointer;
+        .form-horizontal{
+            .control-group{
+                >label{
+                    width: 80px;
+                    padding-top: 10px;
+                }
+                >.controls{
+                    margin-left: 90px;
+                    button{
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
+        .queryDialog-close{
+            position: absolute;
+            right: 0px;
+        }
+    }
+    .queryDialog-close:before{
+        background: transparent;
+        border-radius: 3px;
+        color: #bbb;
+        content: '\00D7';
+        font-size: 26px;
+        font-weight: 400;
+        height: 30px;
+        line-height: 26px;
+        position: absolute;
+        right: 3px;
+        text-align: center;
+        top: 3px;
+        width: 30px;
+        cursor: pointer;
+    }
+    .mapedit{
+        position: relative;
+        z-index: 1000;
+        /*float: left;*/
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        top: 20px;
+        left: 20px;
+        width: 100px;
+        height: 37px;
+        padding: 15px;
+        opacity: 1;
+        padding: 10px 26px;
+        background: #f2f2f2;
+        font-weight: 800;
+    }
+    .operationmap{
+        position: absolute;
+        z-index: 1000;
+        border: 1px solid #CCCCCC;
+        background: #ffffff;
+        top: 20px;
+        left: 20px;
+        height: 50px;
+        padding: 10px 20px;
+        opacity: 0.9;
+    }
+}
+#mapset{
+    .span12{
+        margin-left: 0;
+    }
+}
+
+.elecmap-info{
+    border: solid 1px silver;
+    width: 255px;
+    position: relative;
+    z-index: 1001;
+    div.info-top {
+        position: relative;
+        background: none repeat scroll 0 0 #F9F9F9;
+        border-bottom: 1px solid #CCC;
+        border-radius: 5px 5px 0 0;
+        div{
+            display: inline-block;
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 30px;
+            padding: 0 10px;
+        }
+        img{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            transition-duration: 0.25s;
+        }
+        img:hover{
+            box-shadow: 0px 0px 5px #000;
+        }
+    }
+    div.info-middle {
+        font-size: 14px;
+        padding: 6px;
+        line-height: 30px;
+        button{
+            margin-bottom: 5px;
+            margin-left: 70px;
+        }
+    }
+    div.info-bottom {
+        height: 0px;
+        width: 100%;
+        clear: both;
+        text-align: center;
+    }
+}
+
+.newwrap{
+    position: absolute;
+    width: 100%;
+}
+
+.elecmap-tip{
+    img{
+        display: block;
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+    }
+    span{
+        font-size: 12px;
+        width:40px;
+        line-height: 20px;
+        display: inline-block;
+        text-align: center;
+        font-weight: 500;
+        color: #00aaff;
+    }
+}
+
+.select-eleccount{
+    color: #6B5ACC!important;
+    background: #ccc;
+}
+
+.term-weekday{
+    background: #4fef4f;
+    opacity: 0.8;
+}
+.term-weekday:hover{
+    border: 1px solid #007aff;
+}
+.term-weekendday{
+    background: #e8e4e4;
+    opacity: 0.8;
+}
+.term-weekendday:hover{
+    border: 1px solid #007aff;
+}
+td.term-disable{
+}
+.datepicker-my td.term-disable:hover {
+    text-decoration: none;
+    color: #cccccc;
+    cursor: not-allowed !important;
+}
+
+.disable-style{
+    color: #cccccc;
+}
+.disable-style:hover{
+    text-decoration: none;
+    color: #cccccc;
+    cursor: not-allowed;
+}
+.margin-bottom0-eduman{
+    margin-bottom: 0;
+}
+.col-sm-7 .input-append{
+    margin-bottom: 0;
+}
+.col-sm-7 input {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.input-append, .input-prepend {
+    margin-bottom: 5px;
+    font-size: 0;
+    white-space: nowrap;
+}
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    width: 30px;
+    height: 30px;
+}
+
+
+.input-append .add-on, .input-append .btn, .input-append .btn-group {
+    margin-left: -1px;
+}
+
+.input-append .add-on, .input-prepend .add-on, .input-append .btn, .input-prepend .btn, .input-append .btn-group > .dropdown-toggle, .input-prepend .btn-group > .dropdown-toggle {
+    vertical-align: top;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    display: inline-block;
+    width: auto;
+    height: 20px;
+    min-width: 16px;
+    padding: 4px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: center;
+    text-shadow: 0 1px 0 #ffffff;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+}
+.input-append .add-on, .input-prepend .add-on {
+    height: 34px;
+    width: 30px;
+}
+.set-elecfence{
+    float: right;
+    margin-right: 20px;
+}

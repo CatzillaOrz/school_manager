@@ -101,7 +101,7 @@ angular.module('dleduWebApp')
 			})
 			.state('distributelist', {
 				parent: 'evaquestion',
-				url   : '/distributelist/:id',
+				url   : '/distributelist/:quesId/:id',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
@@ -114,7 +114,7 @@ angular.module('dleduWebApp')
 				}
 			})
 			.state('evaquestatic', {
-				parent: 'evaquestion',
+				parent: 'distributelist',
 				url   : '/evaquestatic/:id',
 				access: {requiredLogin: true},
 				views : {
@@ -167,6 +167,62 @@ angular.module('dleduWebApp')
 				},
 				ncyBreadcrumb: {
 					label: '电子围栏'
+				}
+			})
+			.state('elecfencehistory', {
+				parent: 'elecfence',
+				url   : '/elecfencehistory',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'ElecFenceHistroyCtrl',
+						templateUrl: 'app/module/eduman/elecfencehistory.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '学生历史记录'
+				}
+			})
+			.state('elecfencecurrent', {
+				parent: 'elecfence',
+				url   : '/elecfencecurrent/:id/:date',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'ElecFenceCurrentCtrl',
+						templateUrl: 'app/module/eduman/elecfenceCurrent.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '当天轨迹'
+				}
+			})
+			.state('elecfencecreate', {
+				parent: 'elecfence',
+				url   : '/elecfencecreate',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'ElecFenceCreateCtrl',
+						templateUrl: 'app/module/eduman/elecfenceCreate.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '电子围栏设置'
+				}
+			})
+			.state('elecfencemapset', {
+				parent: 'elecfence',
+				url   : '/elecfencemapset',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'ElecFenceMapEditCtrl',
+						templateUrl: 'app/module/eduman/elecfenceMapEdit.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '电子围栏设置'
 				}
 			})
 	});

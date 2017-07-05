@@ -1,0 +1,56 @@
+//
+   Created by Administrator on 2017/6/21.
+.college-list-container
+    .row-fluid(style="background:#fff")
+        .span12(style="margin-top: 10px;margin-left:20px;font-weight:bolder") 学校范围设定：
+        #elecmap(style="height:300px")
+            .mapedit
+                //a(ui-sref="elecfencemapset") {{operation}}
+                a(ui-sref="elecfencemapset") {{'去修改'}}
+    .row-fluid
+        .widget-body#mapset(style="padding:20px 0 20px 20px;")
+            .widget-forms.clearfix
+                form.form-horizontal
+                    .span12(ng-show='verifyObj.isExistPoly === false')
+                        span.text-danger 请绘制多边形
+                    //.control-group
+                        h5 警报设定：
+                        .span12
+                            input(type='checkbox' name='time', ng-model="elecSet.selectTeacher")
+                            |  学生超出规定范围后，给班主任发送警报提醒
+                    .control-group
+                        h5 监控时间设定：
+                        .span12
+                            span 请选择学期：
+                            select.span3(ng-model="elecSet.termSelected" ng-options="obj.name for obj in elecSet.terms" ng-change='vertifyParams(elecSet.termSelected, "term")')
+                            span.text-danger(ng-show="verifyObj.isSelTerm === false") 请选择学期
+                        .span12(style="margin-top:20px;")
+                            .span6
+                                .span6 学期日历：
+                                div#mydate(style="height:450px;position: relative;")
+                                    .input-append.date.datepicker.datepicker-basic#starttime(ng-show="false" data-date='', data-date-format='yyyy-mm-dd' )
+                                        input(size='16',  type='text' )
+                                        span.add-on
+                                            i.icon-calendar
+                            //.span6
+                                .span12 警报有效时间段：
+                                .span12(style="margin-bottom: 15px;" ng-repeat='obj in elecSet.timeSections')
+                                    span {{obj.startTime}} &nbsp;----&nbsp;{{obj.endTime}}
+                                    button.btn.btn-default(style="margin-left:20px;", ng-click="delTimeSection($index)") 删除
+                                .span12
+                                    select.span3(ng-model="elecSet.startTimeSection" ng-options="obj.name for obj in timeSections"
+                                    ng-change='vertifyParams(elecSet.startTimeSection, "timeSection")')
+                                    span &nbsp;----&nbsp;
+                                    select.span3(ng-model="elecSet.endTimeSection" ng-options="obj.name for obj in timeSections"
+                                    ng-change='vertifyParams(elecSet.endTimeSection, "timeSection")')
+                                    button.btn.btn-success(style="margin-left:20px;", ng-click="addTimeSection()" ) 添加
+                                .span12
+                                    span.text-danger(ng-show="verifyObj.isSelTimeSection === false") 请选择监控时间段
+                                    span.text-danger(ng-show="verifyObj.startLEEnd === false") 开始时间应该小于结束时间
+                                    span.text-danger(ng-show="verifyObj.isCross === false") 时间段不能交叉
+                                    span.text-danger(ng-show="verifyObj.isExistTimeSection === false") 请添加监控时间段
+
+    .row-fluid(style="margin-top: 15px;")
+        .span12
+            button.btn.btn-success#success(style="width:100px", ng-click="saveSet()") 保存
+

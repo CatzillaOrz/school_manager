@@ -30,6 +30,9 @@ router.get('/teachClassAttendExport',auth.isSignedIn, controller.teachClassAtten
 router.get('/classAttendExport',auth.isSignedIn, controller.classAttendExport);
 router.get('/teachClassAttendInfoExport',auth.isSignedIn, controller.teachClassAttendInfoExport);
 router.get('/classAttendInfoExport',auth.isSignedIn, controller.classAttendInfoExport);
+router.get('/getElecFenceList',auth.isSignedIn, controller.getElecFenceList);
+router.get('/getElecFenceHistory',auth.isSignedIn, controller.getElecFenceHistory);
+router.get('/getElecFenceCurrent',auth.isSignedIn, controller.getElecFenceCurrent);
 
 
 module.exports = router;
