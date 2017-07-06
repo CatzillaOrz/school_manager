@@ -21,12 +21,12 @@
                             form.form-inline
                                 .form-group.col-sm-4
                                     label.control-label 学期选择：
-                                        select.form-control(ng-model="courseListFn.params.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
+                                        select.form-control(ng-model="courseListFn.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
                                             optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in courseListFn.schoolYearDropList")
                                                 option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}     
                                 .form-group.col-sm-4
                                     label.control-label 课程名称：
-                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.className")
+                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.courseName")
                                 .form-group.col-sm-4
                                     label.control-label 授课教师：
                                     input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
@@ -51,7 +51,7 @@
                                 td {{score.teacherName}}
                                 td {{score.averageScore}}
                                 td
-                                    a.handle(ui-sref="coursescoredetail({id:score.semesterId,teacherName:score.teacherName,courseName:score.courseName,teachingClassCode:score.teachingClassCode,averageScore:score.averageScore})")
+                                    a.handle(ui-sref="coursescoredetail({teachingClassId:score.teachingClassId,teacherName:score.teacherName,averageScore:score.averageScore,semesterName:score.semesterName})")
                                         i.fa.fa-pencil-square-o
                                         span 查看详情
 

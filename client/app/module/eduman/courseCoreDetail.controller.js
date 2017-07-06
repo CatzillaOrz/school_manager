@@ -10,12 +10,13 @@ angular.module('dleduWebApp')
             //课程评教信息
             content: null,
             params: {
-                id: $stateParams.id,
+                teachingClassId: $stateParams.teachingClassId,
+                semesterName: $stateParams.semesterName,
                 averageScore: $stateParams.averageScore,
-                teachingClassCode:$stateParams.teachingClassCode,
-                courseName:$stateParams.courseName,
+                //teachingClassCode:$stateParams.teachingClassCode,
+                //courseName:$stateParams.courseName,
                 teacherName: $stateParams.teacherName,
-                pitch: ""
+                scheduleId: null
             },
             
 
@@ -35,11 +36,11 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.params.id;
+                params.teachingClassId=that.params.teachingClassId;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
-                        that.course = data.pageData.data;
-                        that.page = data.pageData.page;
+                        that.course = data.data;
+                        that.page = data.page;
                     })
                     .catch(function(error) {
 
@@ -54,12 +55,12 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.params.id;
+                params.teachingClassId=that.params.teachingClassId;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
-                        that.course = data.pageData.data;
-                        that.page.totalElements = data.pageData.page.totalElements;
-                        that.page.totalPages = data.pageData.page.totalPages;
+                        that.course = data.data;
+                        that.page.totalElements = data.page.totalElements;
+                        that.page.totalPages = data.page.totalPages;
                     })
                     .catch(function(error) {
 
@@ -67,7 +68,7 @@ angular.module('dleduWebApp')
             },
 
             //获取课程评教信息
-            getDetailInfo:function(){
+            getDetailInfo:function(scheduleId){
                 var that = this;
                 that.show = 2;
                 var params = {
@@ -75,8 +76,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.params.id;
-                params.pitch = that.pitch;
+                params.scheduleId = scheduleId;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
                         that.content = data.data;
@@ -88,15 +88,14 @@ angular.module('dleduWebApp')
             },
 
             //按需求查询课程评教信息
-            findDetailByPage:function(){
+            findDetailByPage:function(scheduleId){
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.params.id;
-                params.pitch = that.pitch;
+                params.scheduleId=scheduleId;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
                         that.content = data.data;

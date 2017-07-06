@@ -21,13 +21,13 @@
                             form.form-inline
                                 .form-group.col-sm-4
                                     label 学期选择：
-                                    .form-control.no-border {{cSDFn.params.xy}}
+                                    .form-control.no-border {{cSDFn.params.semesterName}}
                                 .form-group.col-sm-4
                                     label 课程名称：
-                                    .form-control.no-border {{cSDFn.params.courseName}}
+                                    .form-control.no-border {{cSDFn.course[0].courseName}}
                                 .form-group.col-sm-4
                                     label 选择编号：
-                                    .form-control.no-border {{cSDFn.params.teachingClassCode}}
+                                    .form-control.no-border {{cSDFn.course[0].teachingClassCode}}
                                 .form-group.col-sm-4
                                     label 授课教师：
                                     .form-control.no-border {{cSDFn.params.teacherName}}
@@ -50,7 +50,7 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 1星
                                 th.sorting(data-hide='phone,tablet', tabindex='0', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat="i in cSDFn.course.data" )
+                            tr.odd(role='row' ng-repeat="i in cSDFn.course" )
                                 td.sorting_1 {{$index+1 + ((cSDFn.page.pageNumber==0?cSDFn.page.pageNumber+1:cSDFn.page.pageNumber)-1)*10}}
                                 td.expand  {{i.courseName}}
                                 td  {{i.teachDate}}
@@ -63,7 +63,7 @@
                                 td {{i.star2}}
                                 td {{i.star1}}
                                 td
-                                    a.handle(ng-click="cSDFn.getDetailInfo(1)")
+                                    a.handle(ng-click="cSDFn.getDetailInfo(i.scheduleId)" )
                                         i.fa.fa-pencil-square-o
                                         span 查看
 
@@ -103,13 +103,13 @@
                             form.form-inline
                                 .form-group.col-sm-4
                                     label 课程名称：
-                                    .form-control.no-border {{cSDFn.params.courseName}}
+                                    .form-control.no-border {{cSDFn.course[0].courseName}}
                                 .form-group.col-sm-4
                                     label 选课编号：
-                                    .form-control.no-border {{cSDFn.params.id}}
+                                    .form-control.no-border {{cSDFn.course[0].teachingClassCode}}
                                 .form-group.col-sm-4
                                     label 上课日期：
-                                    .form-control.no-border {{cSDFn.content.time}}
+                                    .form-control.no-border {{cSDFn.content[0].teachDate}}
                     table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -121,9 +121,9 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0',  rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 评教时间
                                 th.sorting(data-hide='phone,tablet', tabindex='0',  rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 文字评教
                         tbody
-                            tr.odd(role='row' ng-repeat="i in cSDFn.content.data")
+                            tr.odd(role='row' ng-repeat="i in cSDFn.content")
                                 td.sorting_1 {{$index+1 + ((cSDFn.page.pageNumber==0?cSDFn.page.pageNumber+1:cSDFn.page.pageNumber)-1)*10}}
-                                td.expand  {{cSDFn.params.courseName}}
+                                td.expand  {{i.teachingClassName}}
                                 td  {{i.teachDate}}
                                 td  {{i.periodNo}}
                                 td  {{i.score}}
