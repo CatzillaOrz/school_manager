@@ -21,12 +21,12 @@
                             form.form-inline
                                 .form-group.col-sm-4
                                     label.control-label 学期选择：
-                                        select.form-control(ng-model="courseListFn.params.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
+                                        select.form-control(ng-model="courseListFn.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
                                             optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in courseListFn.schoolYearDropList")
                                                 option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}     
                                 .form-group.col-sm-4
                                     label.control-label 课程名称：
-                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.className")
+                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.courseName")
                                 .form-group.col-sm-4
                                     label.control-label 授课教师：
                                     input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
@@ -39,7 +39,6 @@
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 选择编号
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 开课学院
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 课程名称
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 授课教师
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 目前综合评分
@@ -47,13 +46,12 @@
                         tbody
                             tr.odd(role='row' ng-repeat="score in courseListFn.scoreList")
                                 td.sorting_1 {{$index+1 + ((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10}}
-                                td {{score.id}}
-                                td 1
-                                td {{score.name}}
+                                td {{score.teachingClassCode}}
+                                td {{score.courseName}}
                                 td {{score.teacherName}}
-                                td {{score.grade}}
+                                td {{score.averageScore}}
                                 td
-                                    a.handle(ui-sref="coursescoredetail({id:score.id})")
+                                    a.handle(ui-sref="coursescoredetail({teachingClassId:score.teachingClassId,teacherName:score.teacherName,averageScore:score.averageScore,semesterName:score.semesterName})")
                                         i.fa.fa-pencil-square-o
                                         span 查看详情
 

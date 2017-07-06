@@ -10,9 +10,9 @@ angular.module('dleduWebApp')
 
 			//查询参数
             params: {
-                semesterId:"",
-                className:"",
-                teacherName:"",
+                semesterId: null,
+                courseName: null,
+                teacherName: null
             },
 
 			//分页
@@ -91,7 +91,7 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.semsterId=that.params.semesterId;
-                params.className=that.params.className;
+                params.courseName=that.params.courseName;
                 params.teacherName=that.params.teacherName;
                 CourseService.getCourseListIn(params).$promise
                     .then(function (data) {
@@ -111,7 +111,7 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.semsterId=that.params.semesterId;
-                params.className=that.params.className;
+                params.courseName=that.params.courseName;
                 params.teacherName=that.params.teacherName;
                 CourseService.getCourseListIn(params).$promise
                     .then(function (data) {

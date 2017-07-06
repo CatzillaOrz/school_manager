@@ -31,8 +31,9 @@ var CourseService = {
 	//查询课程评分
 	getCourseListIn: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway-org',
-			path: '/v1/course/list',
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryCourseAssess',
+			access_token: access_token,
 			params: params
 		}).then(function (res) {
 				if (res.status.code == 200) {
@@ -49,8 +50,9 @@ var CourseService = {
 	//查询课程详情
 	getCsdInfo: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway-org',
-			path: '/v1/course/list',
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryCourseAssessDetails',
+			access_token: access_token,
 			params: params
 		}).then(function (res) {
 				if (res.status.code == 200) {
@@ -67,9 +69,10 @@ var CourseService = {
 	//查询课程评教详情
 	getDetailInfo: function (params, access_token, callback) {
 		RestClient.get({
-			host: 'gateway-org',
-			path: '/v1/course/list',
-			params: params
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryOneCourseAssess',
+			access_token: access_token,
+			params: params,		
 		}).then(function (res) {
 				if (res.status.code == 200) {
 					callback(null, res.entity);

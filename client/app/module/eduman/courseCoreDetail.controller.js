@@ -2,15 +2,23 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('CourseScoreDetailCtrl', function ($scope, $state, AuthService, CourseService) {
+    .controller('CourseScoreDetailCtrl', function ($scope, $stateParams, AuthService, CourseService) {
         $scope.cSDFn={
             show:1,
             //课程信息
             course: null,
             //课程评教信息
             content: null,
-            id: $state.params.id,
-            pitch: "",
+            params: {
+                teachingClassId: $stateParams.teachingClassId,
+                semesterName: $stateParams.semesterName,
+                averageScore: $stateParams.averageScore,
+                //teachingClassCode:$stateParams.teachingClassCode,
+                //courseName:$stateParams.courseName,
+                teacherName: $stateParams.teacherName,
+                scheduleId: null
+            },
+            
 
             //分页
             page: {
@@ -28,7 +36,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.teachingClassId=that.params.teachingClassId;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
                         that.course = data.data;
@@ -47,7 +55,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
+                params.teachingClassId=that.params.teachingClassId;
                 CourseService.getCsdInfo(params).$promise
                     .then(function(data) {
                         that.course = data.data;
@@ -60,7 +68,7 @@ angular.module('dleduWebApp')
             },
 
             //获取课程评教信息
-            getDetailInfo:function(){
+            getDetailInfo:function(scheduleId){
                 var that = this;
                 that.show = 2;
                 var params = {
@@ -68,8 +76,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
-                params.pitch = that.pitch;
+                params.scheduleId = scheduleId;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
                         that.content = data.data;
@@ -81,15 +88,14 @@ angular.module('dleduWebApp')
             },
 
             //按需求查询课程评教信息
-            findDetailByPage:function(){
+            findDetailByPage:function(scheduleId){
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.id=that.id;
-                params.pitch = that.pitch;
+                params.scheduleId=scheduleId;
                 CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
                         that.content = data.data;
