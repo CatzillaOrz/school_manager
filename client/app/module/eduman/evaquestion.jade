@@ -6,7 +6,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 查询结果
+            h2 问卷列表
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -50,14 +50,17 @@
                                     a.handle(ui-sref="distributelist({id:0,quesId:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ui-sref="evaquesedit({id:record.id})")
-                                        i.fa.fa-trash-o
+                                    a.handle(ng-show="record.teachingNum==0" ui-sref="evaquesedit({id:record.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle.disable-style(ng-show="record.teachingNum!=0")
+                                        i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ui-sref="evaquesshow({id:record.id})")
-                                        i.fa.fa-pencil-square-o
+                                        i.fa.fa-bars
                                         span 查看
                                     a.handle(ui-sref="distributelist({id:1,quesId:record.id})")
-                                        i.fa.fa-pencil-square-o
+                                        i.fa.fa-line-chart
                                         span 统计
 
                     .dt-toolbar-footer
