@@ -313,6 +313,15 @@ angular.module('dleduWebApp')
                 }
                 $state.go("attenddetail",{id:entity.classId,classes:classes})
             },
+            toTrend:function (entity) {
+                var data={
+                    courseName:entity.courseName,
+                    code:entity.code,
+                    teacherName:entity.teacherName
+                };
+                $state.go("teachClassTrend",{id:entity.classId})
+                tempStorageService.setter(data);
+            },
             //初始化
             init: function () {
                 var _this = this;

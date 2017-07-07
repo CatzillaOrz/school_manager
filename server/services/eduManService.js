@@ -376,7 +376,20 @@ var EduManService = {
                 callback(e);
             });
     },
-
+    teachClassTrend: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/AttendanceWeekTendency',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
     //获取电子围栏列表页面
     getElecFenceList: function (params, access_token, callback) {
         RestClient.get({
@@ -394,7 +407,20 @@ var EduManService = {
                 callback(e);
             });
     },
-
+    teachClassAttendExportTend: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/classes/exportAttendanceWeekTendency',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
     //获取电子围栏历史记录
     getElecFenceHistory: function (params, access_token, callback) {
         RestClient.get({

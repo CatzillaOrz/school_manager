@@ -169,6 +169,23 @@ angular.module('dleduWebApp')
 					label: '电子围栏'
 				}
 			})
+            .state('teachClassTrend', {
+                parent: 'attendlist',
+                url   : '/teachclasstrend/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TeachClassTrendCtr',
+                        templateUrl: 'app/module/eduman/teachClassTrend.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '考勤详情'
+                },
+                data:{
+                    teacherName:""
+                }
+            })
 			.state('elecfencehistory', {
 				parent: 'elecfence',
 				url   : '/elecfencehistory',

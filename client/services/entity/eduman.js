@@ -77,17 +77,13 @@ angular.module('dleduWebService')
                 return eduman.get(params);
             },
             getStudentAttendByTeachClassId: function (params) {
-                var eduman = $resource('api/eduman/getStudentAttendByTeachClassId',null,{
-                    query: {method: 'get', isArray: true, cancellable: true}
-                });
-                return eduman.query(params);
+                var eduman = $resource('api/eduman/getStudentAttendByTeachClassId');
+                return eduman.get(params);
             },
             //通过行政班级查询学生考勤
             getStudentAttendByClassId: function (params) {
-                var eduman = $resource('api/eduman/getStudentAttendByClassId',null,{
-                    query: {method: 'get', isArray: true, cancellable: true}
-                });
-                return eduman.query(params);
+                var eduman = $resource('api/eduman/getStudentAttendByClassId');
+                return eduman.get(params);
             },
             teachClassAttendExport:function (params) {
                 var eduman = $resource('api/eduman/teachClassAttendExport');
@@ -106,6 +102,17 @@ angular.module('dleduWebService')
             //行政班详情考勤记录导出
             classAttendInfoExport:function (params) {
                 var eduman = $resource('api/eduman/classAttendInfoExport');
+                return eduman.get(params);
+            },
+            //教学班考勤趋势
+            teachClassTrend:function (params) {
+                var eduman = $resource('api/eduman/teachClassTrend',null,{
+                    query: {method: 'get', isArray: true, cancellable: true}
+                });
+                return eduman.query(params);
+            },
+            teachClassAttendExportTend:function (params) {
+                var eduman = $resource('api/eduman/teachClassAttendExportTend');
                 return eduman.get(params);
             },
 

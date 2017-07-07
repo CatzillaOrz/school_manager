@@ -18,9 +18,9 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 课程名称：
+                            | 课程编号：
                         .col-sm-7
-                            input.form-control(type="text" placeholder="请填写课程编号" ng-model="handleFn.params.code" name="name" validator="required, maxlength=30")
+                            input.form-control(type="text" placeholder="请填写课程编号" ng-model="handleFn.params.code" name="name" validator="required,number, maxlength=30")
                     .form-group
                         label.col-sm-3.control-label
                             span

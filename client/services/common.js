@@ -116,10 +116,14 @@ angular.module('dleduWebService')
              */
             exceptionPrompt:function (error,defualt) {
                 var re = /[^\u4e00-\u9fa5]/;
-                if(re.test(error.data)){
+                var errorMessage=error.data.replace(/\d+/g,'');
+                errorMessage=errorMessage.replace(/[a-zA-Z]/g,'');
+                errorMessage=errorMessage.replace('[','');
+                errorMessage=errorMessage.replace(']','');
+                if(re.test(errorMessage)){
                    return defualt
                 }else {
-                    return error.data;
+                    return errorMessage;
 
                 }
             }

@@ -191,6 +191,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    teachClassTrend: function (req, res) {
+        EduManService.teachClassTrendSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
     getElecFenceList: function (req, res) {
         var data = {
@@ -237,6 +246,15 @@ module.exports = {
             .then(function (data) {
                 res.json(data);
             })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    teachClassAttendExportTend: function (req, res) {
+        EduManService.teachClassAttendExportTendSync(req.query, req.user.access_token)
+            .then(function (data) {
+            res.json(data);
+        })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
