@@ -36,6 +36,7 @@ angular.module('dleduWebApp')
                 studentsCount: 0,
                 teacherIds: [],
                 teacherNames: "",
+                code:"",
                 userId: AuthService.getUser().id,
                 id: 0,
                 name: ""
@@ -142,7 +143,7 @@ angular.module('dleduWebApp')
                     },
                     processResults: function (data, params) {
                         params.page = params.page || 1;
-                        that.courseDropList=data.data;
+                        //that.courseDropList=data.data;
                         return {
                             results: data.data,
                             pagination: {
@@ -156,7 +157,7 @@ angular.module('dleduWebApp')
                     if (data.id === '') { // adjust for custom placeholder values
                         return 'Custom styled placeholder text';
                     }
-
+                    that.courseDropList.push(data);
                     return data.name;
                 }}
             },
