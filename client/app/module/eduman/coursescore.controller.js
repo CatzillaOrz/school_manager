@@ -6,7 +6,7 @@ angular.module('dleduWebApp')
 		$scope.courseListFn={
             
             //课程评分列表
-            scoreList: [],
+            scoreList: null,
 
 			//查询参数
             params: {
@@ -97,27 +97,6 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         that.scoreList = data.data;
                         that.page=data.page;
-                    })
-                    .catch(function (error) {
-
-                    })
-            },
-            //按条件查询课程评分列表
-            findCourseByPage: function () {
-                var that = this;
-                var params ={
-                    orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
-                };
-                params.semsterId=that.params.semesterId;
-                params.courseName=that.params.courseName;
-                params.teacherName=that.params.teacherName;
-                CourseService.getCourseListIn(params).$promise
-                    .then(function (data) {
-                        that.scoreList = data.data;
-                        that.page.totalElements = data.page.totalElements;
-                        that.page.totalPages = data.page.totalPages;
                     })
                     .catch(function (error) {
 

@@ -57,7 +57,7 @@ angular.module('dleduWebApp')
 			})
             .state('coursescoredetail', {
                 parent: 'coursescore',
-                url   : '/coursescoredetail?teachingClassId&teacherName&averageScore&semesterName',
+                url   : '/coursescoredetail?teachingClassId&averageScore',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
