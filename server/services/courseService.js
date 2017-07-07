@@ -27,6 +27,63 @@ var CourseService = {
 				callback(e);
 			});
 	},
+
+	//查询课程评分
+	getCourseListIn: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryCourseAssess',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
+
+	//查询课程详情
+	getCsdInfo: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryCourseAssessDetails',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
+
+	//查询课程评教详情
+	getDetailInfo: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+			path: '/api/web/v1/courseAssess/queryOneCourseAssess',
+			access_token: access_token,
+			params: params,		
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
 	addCourse: function (params, access_token, callback) {
 		RestClient.post({
 			host: 'gateway-org',

@@ -3,18 +3,17 @@
  * 评教问卷新增，修改页面
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuesModCtrl', function ($scope, $state, AuthService, EduManService, messageService) {
+	.controller('EvaQuesModCtrl', function ($scope, $state, AuthService, EduManService, messageService, $filter) {
 		$scope.evaQuesModFn={
 			isEditOrAdd: false, //true是编辑 false是新增
 			//问卷信息
 			record: null,
 			id: $state.params.id,
-			checkDate: false,
 			params: {
 				name: '',
 				totalScore: '',
-				questions: [],
-				endTime: ''
+				endDate: '',
+				questions: []
 			},
 
 			quesLists: [],//临时保存题目
@@ -48,13 +47,6 @@ angular.module('dleduWebApp')
 				},
 			},
 
-			// checkDate: function(value){
-			// 	if(value == ''){
-			// 		this.checkDate = true;
-			// 	}else{
-			// 		this.checkDate = false;
-			// 	}
-			// },
 
 			// 获取评教问卷信息
 			getEvaQuesInfo: function () {
@@ -66,6 +58,7 @@ angular.module('dleduWebApp')
 				EduManService.getEvaQuesInfo(params).$promise
 					.then(function (data) {
 						that.params = data;
+						that.params.endDate = that.params.endDate.substring(0, 10);
 						that.quesLists = that.params.questions;
 					})
 					.catch(function (error) {
@@ -80,7 +73,7 @@ angular.module('dleduWebApp')
 
 			//点击删除
 			delQues: function($index){
-				this.quesLists.splice($index, 1)
+				this.quesLists.splice($index, 1);
 			},
 
 			/*//点击上移
@@ -102,23 +95,46 @@ angular.module('dleduWebApp')
 				var questions = this.quesLists;
 				this.params.questions = questions;
 				var params = this.params;
-				alert();
+				//this.params.endDate = $filter('date')(this.params.endDate, 'yyyy-MM-dd hh:mm:ss');
 				if(this.params.questions.length == 0){
 					messageService.openMsg("请添加题目!");
+					return;
 				}
-				return;
+				var allScore = 0;
+				for(var j = 0; j < questions.length; j++){
+					allScore += parseInt(questions[j].score);
+					questions[j].no = j+1;
+				}
+				if(allScore != this.params.totalScore){
+					messageService.openMsg("题目总分和问卷总分不相等!");
+					return;
+				}
 				if($state.params.id){
-					EduManService.updateEvaQues(params).$promise
+					var cloneParams = angular.copy(params);
+					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
+					EduManService.updateEvaQues(cloneParams).$promise
 						.then(function (data) {
-							messageService.openMsg("修改成功");
+							if(data.trueMSG){
+								messageService.openMsg("修改成功!");
+								$state.go("evaquestion");
+							}else{
+								messageService.openMsg(data.message);
+							}
 						})
 						.catch(function (error) {
 
 						})
 				}else{
-					EduManService.addEvaQues(params).$promise
+					var cloneParams = angular.copy(params);
+					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
+					EduManService.addEvaQues(cloneParams).$promise
 						.then(function (data) {
-							messageService.openMsg("新增成功");
+							if(data.trueMSG){
+								messageService.openMsg("新增成功!");
+								$state.go("evaquestion");
+							}else{
+								messageService.openMsg(data.message);
+							}
 						})
 						.catch(function (error) {
 

@@ -1,0 +1,9 @@
+//
+   Created by Administrator on 2017/6/21.
+.college-list-container
+    .row-fluid
+        #elecmap
+            .operationmap
+                button.btn.btn-default(style="width:100px",ng-click="startDraw()" ng-disabled="isDisabled") 绘制多边形
+                button.btn.btn-default(style="margin-left:20px;width:100px",ng-click="delDraw()" ng-disabled="!isDisabled") 删除多边形
+                button.btn.btn-default(style="margin-left:20px;width:100px",ng-click="saveDraw()") 保存设置

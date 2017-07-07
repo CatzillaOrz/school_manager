@@ -11,6 +11,20 @@ angular.module('dleduWebService')
 				var coursesList = $resource('api/course/getCourseList');
 				return coursesList.get(params);
 			},
+
+			getCourseListIn: function (params) {
+				var coursesList = $resource('api/course/getCourseListIn');
+				return coursesList.get(params);
+			},
+			getCsdInfo: function (params) {
+				var coursesList = $resource('api/course/getCsdInfo');
+				return coursesList.get(params);
+			},
+			getDetailInfo: function (params) {
+				var coursesList = $resource('api/course/getDetailInfo');
+				return coursesList.get(params);
+			},
+			
 			addCourse: function (params) {
 				var addCourse = $resource('api/course/addCourse');
 				return addCourse.save(params);

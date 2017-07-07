@@ -18,6 +18,8 @@ angular.module('dleduWebApp')
 			},
 
 			switchType: function(type){
+				this.page.pageNumber = 1;
+				this.records = [];
 				if(type == 'normal'){
 					this.getEvaQuesNormalStatic();
 				}else{
@@ -48,12 +50,13 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					questionnaireAssginId: that.id,
+					teachingClassId: that.staticInfo.teachingClassId
 				};
 				EduManService.getEvaQuesUnNormalStatic(params).$promise
 					.then(function (data) {
 						that.records = data.data;
-						that.page = data.page;
 					})
 					.catch(function (error) {
 
@@ -66,7 +69,8 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					id: that.id
 				};
 				EduManService.getEvaQuesNormalStatic(params).$promise
 					.then(function (data) {
@@ -80,9 +84,10 @@ angular.module('dleduWebApp')
 
 			//显示个人问卷详情
 			showQueInfo: function(index){
-				//var id = this.records.data[index].id;
+				var questionnaireAssginStudentId = this.records[index].id;
+				var questionnaireAssginId = this.id;
 				var that = this;
-				EduManService.getEvaQuesResult().$promise
+				EduManService.getEvaQuesResult({questionnaireAssginStudentId: questionnaireAssginStudentId, questionnaireAssginId: questionnaireAssginId}).$promise
 					.then(function(data){
 						that.quePersonInfo = data;
 					})

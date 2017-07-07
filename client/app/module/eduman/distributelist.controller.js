@@ -5,6 +5,8 @@
 angular.module('dleduWebApp')
 	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService, Select2LoadOptionsService, CollegeService) {
 		$scope.distributeListFn={
+			//问卷id
+			quesId: 0,
 			//学期列表
 			schoolYearDropList: [],
 			//问卷列表
@@ -15,6 +17,9 @@ angular.module('dleduWebApp')
 			collegeDropList:[],
 			//下拉列表的查询关键字
 			dropKeyWord:"",
+			//记录选择的分配课程id
+			selDistObj: [],
+
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -24,17 +29,13 @@ angular.module('dleduWebApp')
 
 			//查询条件
 			queryOption: {
-				collegeId: 0,
 				courseName: '',
 				teacherName: '',
-				semesterId: 0
 			},
 
 			switchType: function(type){
 				this.queryOption.teacherName = '';
 				this.queryOption.courseName = '';
-				this.queryOption.semesterId = 0;
-				this.queryOption.collegeId = 0;
 				this.page.pageNumber = 1;
 				if(type == 'uncomplete'){
 					this.getEvaQuesUnDist();
@@ -49,7 +50,8 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					id: this.quesId
 				};
 				EduManService.getEvaQuesDist(params).$promise
 					.then(function (data) {
@@ -68,12 +70,16 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					quId: that.quesId
 				};
 				EduManService.getEvaQuesUnDist(params).$promise
 					.then(function (data) {
 						that.records = data.data;
 						//增加check属性
+						for(var i = 0; i < data.data.length; i++){
+							data.data[i].check = false;
+						}
 						that.page = data.page;
 					})
 					.catch(function (error) {
@@ -85,13 +91,22 @@ angular.module('dleduWebApp')
 			//根据条件查询
 			findByOption: function (type) {
 				var that = this;
-				var queyOptions = that.queryOption;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					teacherName: that.queryOption.teacherName,
+					courseName: that.queryOption.courseName
 				};
+				if(that.queryOption.courseName == ''){
+					delete params.courseName;
+				}
+				if(that.queryOption.teacherName == ''){
+					delete params.teacherName;
+				}
+
 				if(type == 'uncomplete'){
+					params.quId = this.quesId;
 					EduManService.getEvaQuesUnDist(params).$promise
 						.then(function (data) {
 							that.records = data.data;
@@ -101,6 +116,7 @@ angular.module('dleduWebApp')
 
 						})
 				}else{
+					params.id = this.quesId;
 					EduManService.getEvaQuesDist(params).$promise
 						.then(function (data) {
 							that.records = data.data;
@@ -115,18 +131,18 @@ angular.module('dleduWebApp')
 
 			//撤销分配
 			cancleDist: function(index){
-				var that = this;
+				var that = $scope.distributeListFn;
 				var params = {
-					id: this.currentRecord.id,
+					id: that.currentRecord.id,
 					userId: AuthService.getUser().id,
 				}
 				EduManService.deleteEvaQues(params).$promise
 					.then(function (data) {
-						messageService.openMsg("删除成功！");
+						messageService.openMsg("撤销分配成功！");
 						that.getEvaQuesDist();
 					})
 					.catch(function (error) {
-						messageService.openMsg("删除失败！");
+						messageService.openMsg("撤销分配失败！");
 					})
 			},
 
@@ -242,8 +258,8 @@ angular.module('dleduWebApp')
 			//分配问卷
 			distQuestionaire: function(){
 				var that = this;
-				var ids = [];
-				EduManService.distQuestionaire(ids).$promise
+				var params = {questionnaireId: this.quesId, teachingClasses: this.selDistObj};
+				EduManService.distQuestionaire(params).$promise
 					.then(function (data) {
 						messageService.openMsg("分配成功！");
 						that.getEvaQuesUnDist();
@@ -253,8 +269,33 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//
+			selDist: function($index){
+				var selObj = this.records[$index];
+				if(selObj.check){
+					var flag = false, selId = selObj.teachingClassesId;
+					for(var j = 0; j < this.selDistObj.length; j++){
+						if(selId == this.selDistObj[j].teachingClassesId){
+							flag = true;
+						}
+					}
+					if(!flag){
+						this.selDistObj.push(selObj);
+					}
+				}else{
+					var selId = selObj.teachingClassesId;
+					for(var k = 0; k < this.selDistObj.length; k++){
+						if(selId == this.selDistObj[k].teachingClassesId){
+							this.selDistObj.splice(k, 1);
+							break;
+						}
+					}
+				}
+			},
+
 			init: function () {
 				var _this = this;
+				this.quesId = $state.params.quesId;
 				if($state.params.id == 1){
 					$("#myTab  a:last").tab("show");
 					this.getEvaQuesDist();

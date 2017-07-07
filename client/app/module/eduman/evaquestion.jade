@@ -40,14 +40,14 @@
                             tr.odd(role='row' ng-repeat="record in evaQuesListFn.records")
                                 td.sorting_1 {{$index+1 + ((evaQuesListFn.page.pageNumber==0?evaQuesListFn.page.pageNumber+1:evaQuesListFn.page.pageNumber)-1)*10}}
                                 td {{record.name}}
-                                td {{record.startTime}}
-                                td {{record.endTime}}
+                                td {{record.createDate}}
+                                td {{record.endDate}}
                                 td {{record.status}}
-                                td {{record.count}}
-                                td {{record.allScore}}
-                                td {{record.classNumber}}
+                                td {{record.totalQuestions}}
+                                td {{record.totalScore}}
+                                td {{record.teachingNum}}
                                 td
-                                    a.handle(ui-sref="distributelist({id:0})")
+                                    a.handle(ui-sref="distributelist({id:0,quesId:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
                                     a.handle(ui-sref="evaquesedit({id:record.id})")
@@ -56,7 +56,7 @@
                                     a.handle(ui-sref="evaquesshow({id:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 查看
-                                    a.handle(ui-sref="distributelist({id:1})")
+                                    a.handle(ui-sref="distributelist({id:1,quesId:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 统计
 
