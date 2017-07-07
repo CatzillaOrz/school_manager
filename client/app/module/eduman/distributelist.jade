@@ -82,7 +82,6 @@
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 全选
                                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
-                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 120px;') 开课学院
                                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 课程名称
                                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
                                         tbody
@@ -91,7 +90,6 @@
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
                                                 td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
-                                                td {{record.collegeName=='null'? '--':record.collegeName}}
                                                 td {{record.courseName=='null'? '--':record.courseName}}
                                                 td {{record.teacherName=='null'? '--':record.teacherName}}
 
@@ -107,7 +105,7 @@
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;")
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
 
@@ -206,5 +204,5 @@
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesDist()" boundary-link-numbers='true' rotate='false' items-per-page="distributeListFn.page.pageSize"  previous-text="<" next-text=">")
 

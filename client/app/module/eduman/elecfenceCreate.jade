@@ -21,6 +21,14 @@
                     .control-group
                         h5 监控时间设定：
                         .span12
+                            .row(style="margin-bottom:15px;")
+                                .col-sm-6
+                                    span 请选择学期：
+                                    select(style="width:70%" ng-model="ElecFenceCreateFn.elecSet.termSelectedId" ui-select2="ElecFenceCreateFn.select2SemesterOptions()" )
+                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in ElecFenceCreateFn.schoolYearDropList")
+                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+
+                        //.span12
                             span 请选择学期：
                             select.span3(ng-model="elecSet.termSelected" ng-options="obj.name for obj in elecSet.terms" ng-change='vertifyParams(elecSet.termSelected, "term")')
                             span.text-danger(ng-show="verifyObj.isSelTerm === false") 请选择学期
