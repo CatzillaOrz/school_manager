@@ -29,8 +29,8 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getStudentAttendByTeachClassId(params).$promise
                     .then(function (data) {
-                        _this.teachClassStudentList = data;
-                        //_this.page=data.page;
+                        _this.teachClassStudentList = data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -46,8 +46,8 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getStudentAttendByClassId(params).$promise
                     .then(function (data) {
-                        _this.classStudentList = data;
-                        //_this.page=data.page;
+                        _this.classStudentList = data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
