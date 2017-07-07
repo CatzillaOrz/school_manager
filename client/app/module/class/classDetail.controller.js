@@ -205,7 +205,7 @@ angular.module('dleduWebApp')
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.classStudentList=_this.dataHandler(data.data);
-
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("班级添加失败")
