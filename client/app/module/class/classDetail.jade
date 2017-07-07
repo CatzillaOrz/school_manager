@@ -77,7 +77,7 @@
                     thead
                         tr(role='row')
                             th.text-left
-                              input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll" style="width: 10% !important;")
+                              input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll" )
                               | 全选
                             th
                                 i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
@@ -108,6 +108,9 @@
                     .col-sm-6.col-xs-12.hidden-xs
                         .dataTables_info(role='status', aria-live='polite')
                             |共 {{classDetailFn.classStudentList.length}} 条数据
+                    .col-sm-6.col-xs-12
+                        #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                        ul.pagination-sm(uib-pagination, total-items='classDetailFn.page.totalElements', max-size='classDetailFn.page.pageSize' ng-model='classDetailFn.page.pageNumber',ng-change="classDetailFn.findClassStudent()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
     #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if="classDetailFn.isTransfer")
         header(role='heading')
