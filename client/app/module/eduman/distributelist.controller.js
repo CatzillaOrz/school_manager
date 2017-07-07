@@ -37,6 +37,7 @@ angular.module('dleduWebApp')
 				this.queryOption.teacherName = '';
 				this.queryOption.courseName = '';
 				this.page.pageNumber = 1;
+				this.records = [];
 				if(type == 'uncomplete'){
 					this.getEvaQuesUnDist();
 				}else{
@@ -81,6 +82,7 @@ angular.module('dleduWebApp')
 							data.data[i].check = false;
 						}
 						that.page = data.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
@@ -258,6 +260,10 @@ angular.module('dleduWebApp')
 			//分配问卷
 			distQuestionaire: function(){
 				var that = this;
+				if(this.selDistObj.length == 0){
+					messageService.openMsg("请选择课程！");
+					return;
+				}
 				var params = {questionnaireId: this.quesId, teachingClasses: this.selDistObj};
 				EduManService.distQuestionaire(params).$promise
 					.then(function (data) {

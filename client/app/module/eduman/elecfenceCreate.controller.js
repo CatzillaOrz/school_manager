@@ -6,10 +6,12 @@ angular.module('dleduWebApp')
 	.controller('ElecFenceCreateCtrl', function ($scope, AuthService, EduManService, amapService) {
 
 		$scope.ElecFenceCreateFn={
+			//学年下拉数据列表
+			schoolYearDropList: [],
 			fromType: null,
 			map: null,
 			elecSet: {
-				termSelected: null,
+				termSelectedId: null,
 				terms: [],
 				selectTime: [],
 				unSelectTime: [],
@@ -25,8 +27,66 @@ angular.module('dleduWebApp')
 
 			//获取当前日期
 			getNowDate: function(){
-				var date=new Date();
+				var date = new Date();
 				this.currentDate = date.getFullYear() + (date.getMonth() + 1 + "") + (date.getDate() + "");
+			},
+
+			select2SemesterOptions: function () {
+				var _this = this;
+				return {
+					placeholder: {
+						id: '-1', // the value of the option
+						text: '按学期筛选'
+					},
+					ajax: {
+						//url: "api/schoolyear/getSchoolYearDropList",
+						url: "/v1/semester/list",
+						//delay: 250,
+						data: function (query) {
+							var params = {
+								orgId: AuthService.getUser().orgId,
+								pageNumber: 1,
+								pageSize: 100,
+
+
+							}
+							params.name = query.term;
+							return params;
+						},
+						processResults: function (data, params) {
+							params.page = params.page || 1;
+							_this.schoolYearDropList = _this.select2GroupFormat(data.data)
+							return {
+								results: _this.schoolYearDropList,
+								pagination: {
+									more: (params.page * 30) < data.total_count
+								}
+							};
+						},
+						cache: false
+					},
+
+				}
+			},
+
+			//学期下拉列表分组数据格式化
+			select2GroupFormat: function (dataList) {
+				var result = []
+				angular.forEach(dataList, function (data) {
+					var obj = {
+						text: data.name,
+						children: []
+					};
+					angular.forEach(data.semesterIdNameList, function (sememster) {
+						var objChild = {
+							id: sememster.id,
+							text: sememster.name
+						};
+						obj.children.push(objChild);
+					})
+					result.push(obj);
+				})
+				return result;
 			},
 
 			/**
