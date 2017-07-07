@@ -178,8 +178,14 @@
                                 | 教学班级：
                             .col-sm-6
                                 input.form-control(ng-model="handleFn.params.name" type="text" name="name" validator="required, maxlength=30")
-                            .col-sm-3
-                                a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 教学班编号：
+                            .col-sm-6
+                                input.form-control(ng-model="handleFn.params.code" type="text" name="name" validator="required,number, maxlength=30")
+                        .col-sm-12.text-center
+                            a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
                     fieldset
                         legend 教学班信息预览
                     .row
