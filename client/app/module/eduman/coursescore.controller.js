@@ -90,7 +90,7 @@ angular.module('dleduWebApp')
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.semsterId=that.params.semesterId;
+                params.semesterId=that.params.semesterId;
                 params.courseName=that.params.courseName;
                 params.teacherName=that.params.teacherName;
                 CourseService.getCourseListIn(params).$promise
