@@ -108,6 +108,17 @@ angular.module('dleduWebService')
                 var eduman = $resource('api/eduman/classAttendInfoExport');
                 return eduman.get(params);
             },
+            //教学班考勤趋势
+            teachClassTrend:function (params) {
+                var eduman = $resource('api/eduman/teachClassTrend',null,{
+                    query: {method: 'get', isArray: true, cancellable: true}
+                });
+                return eduman.query(params);
+            },
+            teachClassAttendExportTend:function (params) {
+                var eduman = $resource('api/eduman/teachClassAttendExportTend');
+                return eduman.get(params);
+            },
 		}
 
 	});

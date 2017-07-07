@@ -1502,7 +1502,8 @@ a:focus {
             margin: 24px 24px 0 0px;
             background-color: #ffffff;
             display: inline-block;
-            border-radius: 4px !important; }
+            border-radius: 4px !important;
+            vertical-align: bottom; }
             .index-container .content-container .introduce-container .excellent-teacher .teacher-card-container .teacher-card .teacher-image {
               margin: 18px auto;
               text-align: center;

@@ -316,6 +316,7 @@
             background-color: $sub-navbar-bg;
             display: inline-block;
             border-radius: 4px !important;
+            vertical-align: bottom;
             // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
             .teacher-image {
               margin: 18px auto;

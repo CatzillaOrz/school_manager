@@ -20,16 +20,16 @@
     var firstPaint = {
         name: 'page.firstPaint',
         datapoints: [
-            { x: 2001, y: 22 },
-            { x: 2002, y: 13 },
-            { x: 2003, y: 35 },
-            { x: 2004, y: 52 },
-            { x: 2005, y: 32 },
-            { x: 2006, y: 40 },
-            { x: 2007, y: 63 },
-            { x: 2008, y: 80 },
-            { x: 2009, y: 20 },
-            { x: 2010, y: 25 }
+            { x: 2001, y: "70%"},
+            { x: 2002, y: "75.5%" },
+            { x: 2003, y: "80.5%" },
+            { x: 2004, y: "60.5%" },
+            { x: 2005, y: "90.5%" },
+            { x: 2006, y: "88.5%" },
+            { x: 2007, y: "92.5%" },
+            { x: 2008, y: "98.5%" },
+            { x: 2009, y: "88.5%" },
+            { x: 2010, y: "68.5%" }
         ]
     };
 
@@ -53,14 +53,14 @@
             showXAxis: true,
             showYAxis: true,
             showLegend: true,
-            stack: false
+            stack: true
         };
 
         $scope.data = [ pageload ];
         $scope.multiple = [pageload, firstPaint ];
 
         // CAUTION: 这行必须放在这里，不然 angular 感知不到数据变化
-        updateData($interval);
+        //updateData($interval);
     });
 
     app.controller('BarChartController', function ($scope) {
