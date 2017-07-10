@@ -26,7 +26,7 @@ angular.module('dleduWebApp')
 				totalElements: 0,
 				totalPages: 0,
 				pageNumber: 1,
-				pageSize: 3
+				pageSize: 10
 			},
 
 			//查询条件
