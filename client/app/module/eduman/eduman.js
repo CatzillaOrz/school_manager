@@ -69,6 +69,20 @@ angular.module('dleduWebApp')
                     label: '课程评分详情'
                 }
             })
+            .state('coursesingle', {
+                parent: 'coursescoredetail',
+                url   : '/coursesingle?scheduleId',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'CourseSingleDetailCtrl',
+                        templateUrl: 'app/module/eduman/courseSingle.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '单节课程评分详情'
+                }
+            })
 
 
 			.state('evaquestion', {

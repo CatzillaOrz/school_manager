@@ -1,17 +1,16 @@
 /**
- * Created by Administrator on 2017/6/21.
+ * Created by Administrator on 2017/7/7.
  */
 angular.module('dleduWebApp')
-    .controller('CourseScoreDetailCtrl', function ($scope, $stateParams, AuthService, CourseService) {
-        $scope.gradeListFn={
-
-            //课程信息
-            course: null,
+    .controller('CourseSingleDetailCtrl', function ($scope, $stateParams, AuthService, CourseService) {
+        $scope.singleListFn={
+         
+            //课程评教信息
+            content: null,
 
             //查询参数
             params: {
-                teachingClassId: $stateParams.teachingClassId,
-                averageScore: $stateParams.averageScore
+                scheduleId: $stateParams.scheduleId,
             },
             
             //分页
@@ -22,18 +21,18 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
 
-            //获取课程信息
-            getCsdInfo:function(){
+            //获取课程评教信息
+            getDetailInfo:function(){
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
-                params.teachingClassId=that.params.teachingClassId;
-                CourseService.getCsdInfo(params).$promise
+                params.scheduleId = that.params.scheduleId;
+                CourseService.getDetailInfo(params).$promise
                     .then(function(data) {
-                        that.course = data.data;
+                        that.content = data.data;
                         that.page = data.page;
                     })
                     .catch(function(error) {
@@ -43,8 +42,8 @@ angular.module('dleduWebApp')
 
             init:function () {
                 var that=this;
-                that.getCsdInfo();
+                that.getDetailInfo();
             },
         }
-        $scope.gradeListFn.init();
+        $scope.singleListFn.init();
     });
