@@ -305,11 +305,11 @@ angular.module('dleduWebApp')
                     tempStorageService.setter(data);
                 }else {
                     var data={
-                        courseName:entity.courseName,
+                        collegeName:entity.collegeName,
                         code:entity.code,
-                        teacherName:entity.teacherName
+                        className:entity.className
                     };
-                    tempStorageService.setter();
+                    tempStorageService.setter(data);
                 }
                 $state.go("attenddetail",{id:entity.classId,classes:classes})
             },
