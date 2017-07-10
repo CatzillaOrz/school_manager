@@ -19,9 +19,9 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                .form-group.col-sm-3
-                                    label 学期选择：
-                                    .form-control.no-border 2017年第一学期
+                                //.form-group.col-sm-3
+                                //    label 学期选择：
+                                //    .form-control.no-border 2017年第一学期
                                 .form-group.col-sm-3
                                     label 课程名称：
                                     .form-control.no-border {{attendDetailFn.selected.courseName}}
@@ -95,18 +95,18 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                .form-group.col-sm-3
-                                    label 学期选择：
-                                    .form-control.no-border 2017年第一学期
+                                //.form-group.col-sm-3
+                                //    label 学期选择：
+                                //    .form-control.no-border 2017年第一学期
                                 .form-group.col-sm-3
                                     label 开课学院：
-                                    .form-control.no-border 电信学院
+                                    .form-control.no-border {{attendDetailFn.selected.collegeName}}
                                 .form-group.col-sm-3
                                     label 专业：
                                     .form-control.no-border 信息管理
                                 .form-group.col-sm-3
                                     label 行政班级：
-                                    .form-control.no-border 计算机技术一班
+                                    .form-control.no-border {{attendDetailFn.selected.className}}
                         .col-sm-2.col-xs-6.hidden-xs
                             .ColVis
                                 button.btn.btn-primary(ng-click="attendDetailFn.classAttendInfoExport()")

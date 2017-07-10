@@ -1,0 +1,62 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 课程信息
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            .jarviswidget-editbox
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .col-xs-10
+                            form.form-inline
+                                .form-group.col-sm-3
+                                    label 学期选择：
+                                    select.form-control(ng-model="classTrendFn.params.semesterId" ui-select2="classTrendFn.select2SemesterOptions()" )
+                                        option 请选择学期
+                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in classTrendFn.schoolYearDropList")
+                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+
+                                .form-group.col-sm-3
+                                    label 开课学院：
+                                    select.form-control(ng-model="classTrendFn.params.collegeId" ui-select2="classTrendFn.selectCollege2Options()" )
+                                        option(ng-repeat="college in classTrendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                .form-group.col-sm-3
+                                    label 专业：
+                                    select.form-control(ng-model="classTrendFn.params.majorId" ui-select2="classTrendFn.select2MajorOptions(classTrendFn.collegeId)"  )
+                                        option(ng-repeat="major in classTrendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                .form-group.col-sm-3
+                                    label 行政班级：
+                                    select.form-control(ng-model="classTrendFn.params.classId" ui-select2="classTrendFn.select2ClassOptions(classTrendFn.majorId)")
+                                        option(ng-repeat="class in classTrendFn.classDropList" value="{{class.id}}") {{class.name}}
+
+                        .col-sm-2.col-xs-6.hidden-xs
+                            .ColVis
+                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                    span 查询
+                                button.btn.btn-primary(ng-click="classTrendFn.viewToggle()")
+                                    span(ng-if="classTrendFn.showLine") 列表
+                                    span(ng-if="!classTrendFn.showLine") 折线图
+                                button.btn.btn-primary(ng-click="classTrendFn.classAttendExportTrend()")
+                                    span 导出
+                    .container.margin-bottom-10.margin-bottom-10(ng-if="classTrendFn.showLine")
+                        div(style="height:500px")
+                            line-chart(config='config', data='classTrendFn.trendCharts' )
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-if="!classTrendFn.showLine" width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 教学周
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学生应出勤次数
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 实际出勤次数
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 综合出勤率
+                            tr.odd(role='row' ng-repeat="attend in classTrendFn.trendList")
+                                td.sorting_1 {{attend.week}}
+                                td.expand {{attend.participationCount}}
+                                td  {{attend.practical}}
+                                td  {{attend.proportion}}
+
