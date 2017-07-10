@@ -17,7 +17,7 @@
                         span {{evaQueStaticFn.staticInfo.courseName}}
                     .col-sm-3
                         span 选课编号：
-                        span {{evaQueStaticFn.staticInfo.teachingClassId}}
+                        span {{evaQueStaticFn.staticInfo.teachingClassCode=='null' ? '--': evaQueStaticFn.staticInfo.teachingClassCode}}
                     .col-sm-3
                         span 授课教师：
                         span {{evaQueStaticFn.staticInfo.teacherName}}
@@ -98,6 +98,8 @@
                                                     ul.pagination-sm(uib-pagination, total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.getEvaQuesNormalStatic()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
                         #hr2.tab-pane
+                            .row(role='row' ng-show="!evaQueStaticFn.records.data.length" style="text-align:center")  暂无学生答题
+
                             .row(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 .col-sm-12
                                     span {{'第'+ $index+1 +'题 '+record.questionName}}
