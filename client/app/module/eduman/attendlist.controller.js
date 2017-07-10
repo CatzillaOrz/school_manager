@@ -309,7 +309,7 @@ angular.module('dleduWebApp')
                         code:entity.code,
                         className:entity.className
                     };
-                    tempStorageService.setter();
+                    tempStorageService.setter(data);
                 }
                 $state.go("attenddetail",{id:entity.classId,classes:classes})
             },
