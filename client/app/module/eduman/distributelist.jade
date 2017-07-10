@@ -99,9 +99,9 @@
                                         .col-sm-6.col-xs-12.hidden-xs
                                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                                 | 显示第
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10+1}}
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
                                                 |  到
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10+distributeListFn.records.length}}
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
                                                 |  条 总共
                                                 span.text-primary {{distributeListFn.page.totalElements}}
                                                 |  条记录

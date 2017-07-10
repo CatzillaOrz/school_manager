@@ -102,7 +102,7 @@
 
                             .row(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 .col-sm-12
-                                    span {{'第'+ $index+1 +'题 '+record.questionName}}
+                                    span {{'第'+ ($index+1) +'题 '+record.questionName}}
                                 .col-sm-12
                                     table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
