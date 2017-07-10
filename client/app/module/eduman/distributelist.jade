@@ -79,19 +79,19 @@
                                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
                                             tr(role='row')
-                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 全选
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                    | 全选
                                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
-                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 120px;') 开课学院
                                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 课程名称
                                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
-                                                td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
+                                                td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
                                                 td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
-                                                td {{record.collegeName=='null'? '--':record.collegeName}}
                                                 td {{record.courseName=='null'? '--':record.courseName}}
                                                 td {{record.teacherName=='null'? '--':record.teacherName}}
 
@@ -107,7 +107,7 @@
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;")
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
 
@@ -175,8 +175,8 @@
                                                     th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 操作
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
-                                                td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10}}
-                                                td {{record.teachingClassCode}}
+                                                td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
+                                                td {{record.teachingClassCode=='null' ? '--':record.teachingClassCode}}
                                                 //td {{record.collegeName}}
                                                 td {{record.courseName}}
                                                 td {{record.teacherName}}
@@ -184,10 +184,10 @@
                                                 td {{record.assessCount+'/'+record.totalCount}}
                                                 td {{record.assginDate}}
                                                 td
-                                                    a.handle(ng-show="record.status=='20'" ng-click="distributeListFn.deletePrompt(record)")
+                                                    a.handle(ng-show="record.assAndCanStuatus=='10'" ng-click="distributeListFn.deletePrompt(record)")
                                                         i.fa.fa-pencil-square-o
                                                         span 撤销分配&nbsp;&nbsp;
-                                                    a.handle.disable-style(ng-show="record.status=='10'")
+                                                    a.handle.disable-style(ng-show="record.assAndCanStuatus=='20'")
                                                         i.fa.fa-pencil-square-o
                                                         span 已撤销&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")
@@ -198,13 +198,13 @@
                                         .col-sm-6.col-xs-12.hidden-xs
                                             #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
                                                 | 显示第
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10+1}}
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
                                                 |  到
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*10+distributeListFn.records.length}}
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
                                                 |  条 总共
                                                 span.text-primary {{distributeListFn.page.totalElements}}
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesDist()" boundary-link-numbers='true' rotate='false' items-per-page="distributeListFn.page.pageSize"  previous-text="<" next-text=">")
 

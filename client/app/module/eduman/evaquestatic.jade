@@ -17,7 +17,7 @@
                         span {{evaQueStaticFn.staticInfo.courseName}}
                     .col-sm-3
                         span 选课编号：
-                        span {{evaQueStaticFn.staticInfo.teachingClassId}}
+                        span {{evaQueStaticFn.staticInfo.teachingClassCode=='null' ? '--': evaQueStaticFn.staticInfo.teachingClassCode}}
                     .col-sm-3
                         span 授课教师：
                         span {{evaQueStaticFn.staticInfo.teacherName}}
@@ -68,8 +68,8 @@
                                                         th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                         th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 班级名称
                                                         th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 姓名
-                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 评分
-                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 提交日期
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 评分
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 提交日期
                                                         th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 35px;') 操作
                                             tbody
                                                 tr.odd(role='row' ng-repeat="record in evaQueStaticFn.records")
@@ -77,7 +77,7 @@
                                                     td {{record.classesName}}
                                                     td {{record.studentName}}
                                                     td {{record.score}}
-                                                    td {{record.commitDate}}
+                                                    td {{record.commitDate | date:'yyyy-MM-dd hh:mm:ss'}}
                                                     td
                                                         a.handle(ng-click="evaQueStaticFn.showQueInfo($index)")
                                                             i.fa.fa-pencil-square-o
@@ -95,9 +95,11 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.getEvaQuesNormalStatic()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
                         #hr2.tab-pane
+                            .row(role='row' ng-show="!evaQueStaticFn.records.data.length" style="text-align:center")  暂无学生答题
+
                             .row(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 .col-sm-12
                                     span {{'第'+ $index+1 +'题 '+record.questionName}}

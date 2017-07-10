@@ -6,7 +6,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 查询结果
+            h2 问卷列表
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -42,7 +42,7 @@
                                 td {{record.name}}
                                 td {{record.createDate}}
                                 td {{record.endDate}}
-                                td {{record.status}}
+                                td {{record.isEnd==''?'--':record.isEnd}}
                                 td {{record.totalQuestions}}
                                 td {{record.totalScore}}
                                 td {{record.teachingNum}}
@@ -50,14 +50,17 @@
                                     a.handle(ui-sref="distributelist({id:0,quesId:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ui-sref="evaquesedit({id:record.id})")
-                                        i.fa.fa-trash-o
+                                    a.handle(ng-show="record.teachingNum==0" ui-sref="evaquesedit({id:record.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle.disable-style(ng-show="record.teachingNum!=0")
+                                        i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ui-sref="evaquesshow({id:record.id})")
-                                        i.fa.fa-pencil-square-o
+                                        i.fa.fa-bars
                                         span 查看
                                     a.handle(ui-sref="distributelist({id:1,quesId:record.id})")
-                                        i.fa.fa-pencil-square-o
+                                        i.fa.fa-line-chart
                                         span 统计
 
                     .dt-toolbar-footer
@@ -72,4 +75,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='evaQuesListFn.page.totalElements', max-size='evaQuesListFn.page.pageSize' ng-model='evaQuesListFn.page.pageNumber',ng-change="evaQuesListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='evaQuesListFn.page.totalElements', max-size='evaQuesListFn.page.pageSize' ng-model='evaQuesListFn.page.pageNumber',ng-change="evaQuesListFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false'  previous-text="<" next-text=">")

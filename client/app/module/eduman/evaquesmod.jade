@@ -21,7 +21,7 @@
                             span.required *
                             | 问卷总分：
                         .col-sm-7
-                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  name="alltotal" validator="required, number")
+                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  name="alltotal" validator="required, integergt0")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
@@ -64,7 +64,7 @@
                                                 textarea.form-control(ng-model="record.name" name="{{'textarea'+$index}}" validator="required, maxlength=200")
                                         td
                                             .form-group
-                                                input.form-control(type="text" ng-model="record.score" name="{{'score'+$index}}" validator="required, number")
+                                                input.form-control(type="text" ng-model="record.score" name="{{'score'+$index}}" validator="required, integergt0")
                                         td
                                             a.handle(ng-click="evaQuesModFn.delQues($index)")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")

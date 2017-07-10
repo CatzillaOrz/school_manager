@@ -36,22 +36,7 @@ angular.module('dleduWebApp')
 
 			//根据名称查询
 			findClassByPage: function () {
-				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
-				};
-				//params.name = that.params.name;
-				EduManService.getEvaQuesList(params).$promise
-					.then(function (data) {
-						that.records = data.data;
-						that.page.totalElements = data.page.totalElements;
-						that.page.totalPages = data.page.totalPages;
-					})
-					.catch(function (error) {
-
-					})
+				this.getEvaQuesList();
 			},
 
 			init: function () {

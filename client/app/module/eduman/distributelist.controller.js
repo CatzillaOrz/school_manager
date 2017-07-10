@@ -19,12 +19,14 @@ angular.module('dleduWebApp')
 			dropKeyWord:"",
 			//记录选择的分配课程id
 			selDistObj: [],
+			//页面全选
+			checkAllRecord: false,
 
 			page: {
 				totalElements: 0,
 				totalPages: 0,
 				pageNumber: 1,
-				pageSize: 10
+				pageSize: 3
 			},
 
 			//查询条件
@@ -37,12 +39,17 @@ angular.module('dleduWebApp')
 				this.queryOption.teacherName = '';
 				this.queryOption.courseName = '';
 				this.page.pageNumber = 1;
+				this.records = [];
 				if(type == 'uncomplete'){
+					//切换后清空选择分配列表
+					this.selDistObj = [];
+					this.checkAllRecord = false;
 					this.getEvaQuesUnDist();
 				}else{
 					this.getEvaQuesDist();
 				}
 			},
+
 
 			// 获取评教问卷已分配列表
 			getEvaQuesDist: function () {
@@ -80,13 +87,34 @@ angular.module('dleduWebApp')
 						for(var i = 0; i < data.data.length; i++){
 							data.data[i].check = false;
 						}
+						that.checkAllRecord = false;
+						that.showSelDistList(data.data);
 						that.page = data.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
 					})
 			},
 
+			//还原之前选中的分配课程，在选择分配列表中的显示出来
+			showSelDistList: function(records){
+				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
+				for(var k = 0, lenRecord = records.length; k < lenRecord; k++){
+					var record = records[k], selId = record.teachingClassesId;
+					//判断元素在之前元素里面是否已经存在，如果存在不添加
+					for(var j = 0, selLen = this.selDistObj.length; j < selLen; j++){
+						if(selId == this.selDistObj[j].teachingClassesId){
+							record.check = true;
+							calcCount++;
+							break;
+						}
+					}
+				}
+				if(calcCount == lenRecord){
+					this.checkAllRecord = true;
+				}
+			},
 
 			//根据条件查询
 			findByOption: function (type) {
@@ -153,112 +181,16 @@ angular.module('dleduWebApp')
 				messageService.getMsg("您确定要撤销问卷吗？", that.cancleDist)
 			},
 
-			//获取学期列表
-			select2SemesterOptions: function () {
-				var _this = this;
-				return {
-					placeholder: {
-						id: '-1', // the value of the option
-						text: '按学期筛选'
-					},
-					ajax: {
-						url: "api/schoolyear/getSchoolYearDropList",
-						dataType: 'json',
-						//delay: 250,
-						data: function (query) {
-							var params = {
-								orgId: AuthService.getUser().orgId,
-								pageNumber: 1,
-								pageSize: 100,
-
-
-							}
-							params.name = query.term;
-							return params;
-						},
-						processResults: function (data, params) {
-							params.page = params.page || 1;
-							_this.schoolYearDropList = _this.select2GroupFormat(data.data)
-							return {
-								results: _this.schoolYearDropList,
-								pagination: {
-									more: (params.page * 30) < data.total_count
-								}
-							};
-						},
-						cache: false
-					},
-
-				}
-			},
-			//学期下拉列表分组数据格式化
-			select2GroupFormat: function (dataList) {
-				var result = []
-				angular.forEach(dataList, function (data) {
-					var obj = {
-						text: data.name,
-						children: []
-					};
-					angular.forEach(data.semesterIdNameList, function (sememster) {
-						var objChild = {
-							id: sememster.id,
-							text: sememster.name
-						};
-						obj.children.push(objChild);
-					})
-					result.push(obj);
-				})
-				return result;
-			},
-
-			//select2动态关键字查询列表配置
-			selectCollege2Options:function () {
-				var _this=this;
-				return{
-					placeholder: {
-						id: '-1', // the value of the option
-						text: '按班级筛选'
-					},
-					// allowClear: true,
-					ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
-						orgId: AuthService.getUser().orgId,
-						pageNumber: 1,
-						pageSize: 100
-					},"name"),
-
-					templateResult: function (data) {
-
-						if (data.id === '') { // adjust for custom placeholder values
-							_this.collegeDropList=[];
-							return '按班级筛选';
-						}
-						_this.collegeDropList.push(data);
-						return data.name;
-					}
-
-				}
-			},
-
-			getCollegeDropList:function () {
-				var that=this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
-					name:that.dropKeyWord,
-					pageSize: 100
-				}
-				CollegeService.getCollegeDropList(params).$promise
-					.then(function (data) {
-						that.collegeDropList=data.data;
-					})
-					.catch(function (error) {
-					})
-			},
 
 			//分配问卷
 			distQuestionaire: function(){
 				var that = this;
+				if(this.selDistObj.length == 0){
+					messageService.openMsg("请选择课程！");
+					return;
+				}
 				var params = {questionnaireId: this.quesId, teachingClasses: this.selDistObj};
+
 				EduManService.distQuestionaire(params).$promise
 					.then(function (data) {
 						messageService.openMsg("分配成功！");
@@ -269,7 +201,7 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//
+			//选择分配元素
 			selDist: function($index){
 				var selObj = this.records[$index];
 				if(selObj.check){
@@ -291,6 +223,43 @@ angular.module('dleduWebApp')
 						}
 					}
 				}
+				this.checkAllRecord = false;
+				this.showSelDistList(this.records);
+			},
+
+			//全选
+			checkAll: function(){
+				//选择当前页所有记录
+				if(this.checkAllRecord){
+					for(var k = 0, lenRecord = this.records.length; k < lenRecord; k++){
+						var record = this.records[k];
+						var flag = false, selId = record.teachingClassesId;
+						//判断元素在之前元素里面是否已经存在，如果存在不添加
+						for(var j = 0; j < this.selDistObj.length; j++){
+							if(selId == this.selDistObj[j].teachingClassesId){
+								flag = true;
+							}
+						}
+						if(!flag){
+							this.selDistObj.push(record);
+							record.check = true;
+						}
+					}
+
+				}else{//反选时当前页所有元素都被删除
+					for(var k = 0, lenRecord = this.records.length; k < lenRecord; k++){
+						var record = this.records[k];
+						var selId = record.teachingClassesId;
+						//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
+						for(var j = 0; j < this.selDistObj.length; j++){
+							if(selId == this.selDistObj[j].teachingClassesId){
+								this.selDistObj.splice(j, 1);
+								record.check = false;
+								break;
+							}
+						}
+					}
+				}
 			},
 
 			init: function () {
@@ -299,7 +268,6 @@ angular.module('dleduWebApp')
 				if($state.params.id == 1){
 					$("#myTab  a:last").tab("show");
 					this.getEvaQuesDist();
-					this.getCollegeDropList();
 				}else{
 					this.getEvaQuesUnDist();
 				}
