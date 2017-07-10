@@ -180,7 +180,7 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '考勤详情'
+                    label: '考勤趋势详情'
                 },
                 data:{
                     teacherName:""
@@ -242,4 +242,21 @@ angular.module('dleduWebApp')
 					label: '电子围栏设置'
 				}
 			})
+            .state('classTrend', {
+                parent: 'attendlist',
+                url   : '/classTrend',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'ClassTrendCtr',
+                        templateUrl: 'app/module/eduman/classTrend.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '考勤趋势详情'
+                },
+                data:{
+                    teacherName:""
+                }
+            })
 	});

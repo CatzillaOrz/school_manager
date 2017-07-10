@@ -130,6 +130,16 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/getElecFenceCurrent');
 				return eduman.get(params);
 			},
+            classTrend:function (params) {
+                var eduman = $resource('api/eduman/classTrend',null,{
+                    query: {method: 'get', isArray: true, cancellable: true}
+                });
+                return eduman.query(params);
+            },
+            classAttendExportTrend:function (params) {
+                var eduman = $resource('api/eduman/classAttendExportTrend');
+                return eduman.get(params);
+            },
 		}
 
 	});
