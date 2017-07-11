@@ -13,7 +13,8 @@ angular.module('dleduWebApp')
                 id: "",
                 semesterId:"",
                 name:"",
-                courseId:""
+                courseId:"",
+                code:""
 
             },
             //学期列表
@@ -123,6 +124,7 @@ angular.module('dleduWebApp')
                         _this.params.name = data.name;
                         _this.params.semesterId = data.semesterId;
                         _this.params.courseId = data.courseId;
+                        _this.params.code = data.code;
                        _this.getCourseById(_this.params.courseId);
                         _this.getSchoolYearDropList();
                        // _this.getSchoolYearById(_this.params.semesterId);
