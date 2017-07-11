@@ -111,15 +111,15 @@
 
                                                         .form-group.col-sm-3
                                                             label 开课学院：
-                                                            select.form-control(ng-model="attendFn.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                            select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                                                                 option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                                         .form-group.col-sm-3
                                                             label 专业：
-                                                            select.form-control(ng-model="attendFn.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                            select.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
                                                                 option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                         .form-group.col-sm-3
                                                             label 行政班级：
-                                                            select.form-control(ng-model="attendFn.classesId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
+                                                            select.form-control(ng-model="attendFn.params.classesId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
                                                                 option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
 
                                             .col-sm-2.col-xs-6.hidden-xs
