@@ -22,13 +22,13 @@
                                 //.form-group.col-sm-3
                                 //    label 学期选择：
                                 //    .form-control.no-border 2017年第一学期
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.courseName")
                                     label 课程名称：
                                     .form-control.no-border {{attendDetailFn.selected.courseName}}
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.code")
                                     label 课程编号：
                                     .form-control.no-border {{attendDetailFn.selected.code}}
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.teacherName")
                                     label 授课教师：
                                     .form-control.no-border {{attendDetailFn.selected.teacherName}}
 
@@ -51,7 +51,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat="stuAttend in attendDetailFn.teachClassStudentList")
                                 td.sorting_1 {{$index+1 + ((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10}}
-                                td.expand {{stuAttend.studentId}}
+                                td.expand {{stuAttend.jobNumber}}
                                 td  {{stuAttend.studentName}}
                                 td {{stuAttend.className}}
                                 td  {{stuAttend.arrvied}}
@@ -98,13 +98,13 @@
                                 //.form-group.col-sm-3
                                 //    label 学期选择：
                                 //    .form-control.no-border 2017年第一学期
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.collegeName")
                                     label 开课学院：
                                     .form-control.no-border {{attendDetailFn.selected.collegeName}}
                                 //.form-group.col-sm-3
                                 //    label 专业：
                                 //    .form-control.no-border 信息管理
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.className")
                                     label 行政班级：
                                     .form-control.no-border {{attendDetailFn.selected.className}}
                         .col-sm-2.col-xs-6.hidden-xs
@@ -125,7 +125,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat="stuAttend in attendDetailFn.classStudentList")
                                 td.sorting_1 {{$index+1 + ((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10}}
-                                td.expand {{stuAttend.studentId}}
+                                td.expand {{stuAttend.jobNumber}}
                                 td  {{stuAttend.studentName}}
                                 td  {{stuAttend.arrvied}}
                                 td {{stuAttend.beg}}

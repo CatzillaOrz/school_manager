@@ -19,16 +19,16 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                .form-group.col-sm-3
-                                    label 学期选择：
-                                    .form-control.no-border 2017年第一学期
-                                .form-group.col-sm-3
+                                //.form-group.col-sm-3
+                                //    label 学期选择：
+                                //    .form-control.no-border 2017年第一学期
+                                .form-group.col-sm-3(ng-if="teachClassTrendFn.selected.courseName")
                                     label 课程名称：
                                     .form-control.no-border {{teachClassTrendFn.selected.courseName}}
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="teachClassTrendFn.selected.code")
                                     label 课程编号：
                                     .form-control.no-border {{teachClassTrendFn.selected.code}}
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3(ng-if="teachClassTrendFn.selected.teacherName")
                                     label 授课教师：
                                     .form-control.no-border {{teachClassTrendFn.selected.teacherName}}
 
