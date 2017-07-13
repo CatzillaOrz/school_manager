@@ -44,7 +44,7 @@
                                     span(ng-if="!classTrendFn.showLine") 折线图
                                 button.btn.btn-primary(ng-click="classTrendFn.classAttendExportTrend()")
                                     span 导出
-                    .container.margin-bottom-10.margin-bottom-10(ng-if="classTrendFn.showLine")
+                    .container.margin-bottom-10.margin-top-30(ng-if="classTrendFn.showLine")
                         div(style="height:500px")
                             line-chart(config='config', data='classTrendFn.trendCharts' )
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-if="!classTrendFn.showLine" width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')

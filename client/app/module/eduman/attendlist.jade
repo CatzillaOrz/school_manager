@@ -77,9 +77,9 @@
                                                         a.handle(ng-click="attendFn.toDetail(attend,1)")
                                                             i.fa.fa-pencil-square-o
                                                             span 详情
-                                                        //a.handle(ng-click="attendFn.toTrend(attend)")
-                                                        //    i.fa.fa-trash-o
-                                                        //    span 趋势
+                                                        a.handle(ng-click="attendFn.toTrend(attend)")
+                                                            i.fa.fa-trash-o
+                                                            span 趋势
 
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
@@ -128,8 +128,8 @@
                                                         span 查询
                                                     button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
                                                         span 导出
-                                                    //button.btn.btn-primary(ui-sref="classTrend")
-                                                    //    span 学周趋势
+                                                    button.btn.btn-primary(ui-sref="classTrend")
+                                                        span 学周趋势
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
