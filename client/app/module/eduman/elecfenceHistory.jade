@@ -2,7 +2,6 @@
    Created by Administrator on 2017/6/21.
 .college-list-container
     #wid-id-2.jarviswidget.jarviswidget-color-blueDark
-    //.jarviswidget-sortable(ng-if="gradeListFn.show==2")
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
@@ -17,17 +16,17 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 学院
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 专业
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 班级
+                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 50px;') 序号
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 学院
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 专业
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 班级
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学号
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学生姓名
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 日期
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 当天被检测到次数
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 被检测期间是否曾离线
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 备注
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 操作
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 学生姓名
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 日期
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 当天被检测到次数
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 被检测期间是否曾离线
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 备注
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaFenceFn.records")
                                 td.sorting_1 {{$index+1}}
@@ -41,7 +40,7 @@
                                 td {{record.isLeave}}
                                 td {{record.comment}}
                                 td
-                                    a.handle(ui-sref="elecfencehistory({id:0})")
+                                    a.handle(ui-sref="elecfencecurrentinfo({id:0, date:'2017-05-20'})")
                                         span 当天轨迹
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
@@ -55,6 +54,6 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='evaFenceFn.page.totalElements', max-size='evaFenceFn.page.pageSize' ng-model='evaFenceFn.page.pageNumber',ng-change="evaFenceFn.getEvaQuesList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='evaFenceFn.page.totalElements', max-size='evaFenceFn.page.pageSize' ng-model='evaFenceFn.page.pageNumber',ng-change="evaFenceFn.getElecFenceHistory()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
 

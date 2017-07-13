@@ -259,7 +259,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-
+    //获取历史轨迹信息
     getElecFenceHistory: function (req, res) {
         var data = {
             "data": [
@@ -309,44 +309,38 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-
+    //获取当天轨迹信息
     getElecFenceCurrent: function (req, res) {
         var data = {
-            "id": 14,
-            "studentNo": "20170908114",
             "name": "张三",
-            "stuId": '21332121',
-            "college":"计算机",
             "major": '物理系',
+            "college":"计算机",
             "className": '101班',
+            "tel": 18729213355,
             "data": [
                 {
-                    "id": 14,
-                    "studentNo": "20170908114",
-                    "name": "abc",
-                    "stuId": '21332121',
-                    "college":"计算机",
-                    "major": '物理系',
-                    "className": '101班',
-                    "date": '2017-05-27',
-                    "checkedAcount": 6,
-                    "isLeave": "是",
+                    "date": '08:30',
                     "currentLocation": "离校",
-                    "isOnline": "离线",
-                    "comment": "未激活",
+                    "address": "北京市海淀区西三环北路",
+                    "center":"[1116.397428,39.90923]"
                 },
                 {
-                    "id": 14,
-                    "studentNo": "20170908114",
-                    "name": "abc",
-                    "stuId": '21332121',
-                    "college":"计算机",
-                    "major": '物理系',
-                    "className": '101班',
-                    "date": '2017-05-27',
-                    "checkedAcount": 6,
-                    "isLeave": "否",
-                    "comment": "当天未登录",
+                    "date": '09:30',
+                    "currentLocation": "离校",
+                    "address": "北京市海淀区西三环北路",
+                    "center":"[1116.397428,39.90923]"
+                },
+                {
+                    "date": '10:30',
+                    "currentLocation": "离校",
+                    "address": "北京市海淀区西三环北路",
+                    "center":"[1116.397428,39.90923]"
+                },
+                {
+                    "date": '16:30',
+                    "currentLocation": "离校",
+                    "address": "北京市海淀区西三环北路",
+                    "center":"[1116.397428,39.90923]"
                 },
             ],
         }

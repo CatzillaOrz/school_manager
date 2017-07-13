@@ -200,22 +200,36 @@ angular.module('dleduWebApp')
                     teacherName:""
                 }
             })
+            .state('elecfencecurrent', {
+				parent: 'elecfence',
+				url   : '/elecfencecurrent/:id/:date',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'ElecFenceCurrentCtrl',
+						templateUrl: 'app/module/eduman/elecfenceCurrent.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '当天轨迹'
+				}
+			})
 			.state('elecfencehistory', {
 				parent: 'elecfence',
-				url   : '/elecfencehistory',
+				url   : '/elecfencehistory/:id',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
 						controller : 'ElecFenceHistroyCtrl',
-						templateUrl: 'app/module/eduman/elecfencehistory.html'
+						templateUrl: 'app/module/eduman/elecfenceHistory.html'
 					}
 				},
 				ncyBreadcrumb: {
 					label: '学生历史记录'
 				}
 			})
-			.state('elecfencecurrent', {
-				parent: 'elecfence',
+			.state('elecfencecurrentinfo', {
+				parent: 'elecfencehistory',
 				url   : '/elecfencecurrent/:id/:date',
 				access: {requiredLogin: true},
 				views : {

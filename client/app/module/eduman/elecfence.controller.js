@@ -242,24 +242,6 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					id: that.id
-				};
-				EduManService.getElecFenceList(params).$promise
-					.then(function (data) {
-						that.records = data.data;
-						that.page = data.page;
-					})
-					.catch(function (error) {
-
-					})
-			},
-
-			//根据条件查询
-			findByOption: function (type) {
-				var that = this;
-				var queyOptions = that.queryOption;
-				var params = {
-					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
@@ -271,8 +253,8 @@ angular.module('dleduWebApp')
 					.catch(function (error) {
 
 					})
-
 			},
+
 
 			//设置围栏
 			setFence: function(){

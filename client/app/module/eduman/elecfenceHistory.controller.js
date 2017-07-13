@@ -2,11 +2,16 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceHistroyCtrl', function ($scope, AuthService, EduManService) {
+	.controller('ElecFenceHistroyCtrl', function ($scope, $stateParams, AuthService, EduManService) {
 		$scope.evaFenceFn={
-			//问卷信息
+			//当天轨迹信息
 			records: [],
 
+			//参数
+			params: {
+				id:$stateParams.id
+			},
+			//分页
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -20,8 +25,11 @@ angular.module('dleduWebApp')
 			getElecFenceHistory: function () {
 				var that = this;
 				var params = {
-					orgId: AuthService.getUser().orgId
+					orgId: AuthService.getUser().orgId,
+					pageNumber: that.page.pageNumber,
+					pageSize: that.page.pageSize
 				};
+				params.id = that.params.id;
 				EduManService.getElecFenceHistory(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -34,8 +42,10 @@ angular.module('dleduWebApp')
 
 
 			init: function () {
-				this.getElecFenceHistory();
+				var that = this;
+				that.getElecFenceHistory();
 			}
 		};
 		$scope.evaFenceFn.init();
 	});
+
