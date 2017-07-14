@@ -117,7 +117,7 @@ angular.module('dleduWebApp')
                 scope:$scope,
                 controller:function($scope){
                     $scope.show_data=function(){
-                       // $(".buld_head").remove();
+                        ngDialog.close("#ngdialog1");
                         ngDialog.open({
                             template: '<h1>ddddd</h1>',
                             plain: true,
