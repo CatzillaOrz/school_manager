@@ -52,3 +52,106 @@
 .width-percent-10{
   width: 10% !important;
 }
+.ColVis button{
+  margin-left:10px;
+}
+.ngdialog-close:before{
+  content:'';
+}
+.ngdialog.ngdialog-theme-default .ngdialog-close:before{
+  content:'';
+}
+.ngdialog-overlay{
+  background: rgba(0,0,0,.6);
+}
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+  background:#fff;
+  width:585px;
+  font-size:13px;
+  border-radius:0;
+  padding: 0;
+  .left{float:left;}
+  .right{float:right;}
+  .buld_head{
+    background-color:rgba(242, 242, 242, 1);
+    height:45px;
+    line-height:45px;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    .buld{
+      float:left;
+      margin-left:30px;
+    }
+    .close_btn{
+      float: right;
+      margin-right: 30px;
+      cursor:pointer;
+    }
+  }
+  .propt_content {
+    .load{
+      height:28px;
+      margin-left: 5px;
+      margin-top: 5px;
+      width:241px;
+    }
+    .load_inner{
+      cursor:pointer;
+      width:73px;
+      height:28px;
+      background-color:rgba(242, 242, 242, 1);
+      text-align:center;
+      line-height:28px;
+      border:1px solid #ccc;
+      margin-left:5px;
+      margin-top:5px;
+    }
+    .load_inner_w{
+      width:108px;
+      height:28px;
+      background-color:rgba(242, 242, 242, 1);
+      text-align:center;
+      line-height:28px;
+      border:1px solid #ccc;
+    }
+    .choseFile{
+      width:80px;
+      height:30px;
+      border:1px solid #ccc;
+      border-radius:5px;
+      line-height:30px;
+      text-align:center;
+      margin-top:4px;
+    }
+    table {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      tr {
+        line-height: 45px;
+        border-bottom: 1px solid #ccc;
+        border: none;
+        td {
+          border: 1px solid #ccc;
+          padding: 0 10px;
+          text-align: center;
+          ul {
+            padding-top: 19px;
+            padding-bottom: 19px;
+            text-align: left;
+            li {
+              list-style: none;
+              line-height: 24px;
+            }
+          }
+        }
+        td:first-child {
+          background-color: rgba(242, 242, 242, 1)
+        }
+      }
+      tr:last-child {
+        line-height: 24px;
+      }
+    }
+  }
+}
