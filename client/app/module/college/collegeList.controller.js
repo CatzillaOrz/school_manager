@@ -81,7 +81,7 @@ angular.module('dleduWebApp')
                 this.getCollegeList();
             }
         };
-
+        $scope.collegeListFn.init();
         $scope.buldLoad = function() {
             ngDialog.open({
                 template: '' +
