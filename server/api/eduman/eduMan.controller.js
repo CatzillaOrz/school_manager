@@ -322,26 +322,26 @@ module.exports = {
                     "date": '08:30',
                     "currentLocation": "离校",
                     "address": "北京市海淀区西三环北路",
-                    "center":"[1116.397428,39.90923]"
+                    "center":[116.35, 39.9]
                 },
                 {
                     "date": '09:30',
                     "currentLocation": "离校",
                     "address": "北京市海淀区西三环北路",
-                    "center":"[1116.397428,39.90923]"
+                    "center":[116.40, 39.9]
                 },
                 {
                     "date": '10:30',
                     "currentLocation": "离校",
                     "address": "北京市海淀区西三环北路",
-                    "center":"[1116.397428,39.90923]"
+                    "center":[116.40, 39.95]
                 },
                 {
                     "date": '16:30',
                     "currentLocation": "离校",
                     "address": "北京市海淀区西三环北路",
-                    "center":"[1116.397428,39.90923]"
-                },
+                    "center":[116.40, 40.00]
+                }
             ],
         }
         res.json(data);

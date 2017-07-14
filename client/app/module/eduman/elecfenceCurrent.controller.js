@@ -25,54 +25,72 @@ angular.module('dleduWebApp')
 				EduManService.getElecFenceCurrent(params).$promise
 					.then(function (data) {
 						that.locusList = data;
+						that.orbitList(data.data);
 					})
 					.catch(function (error) {
 
 					})
 			},
-
-			map: function(){
-				//var line = this.getElecFenceCurrent();
-				
-				//轨迹点经纬度
-				var lineArr = [[116.39, 39.9],[116.395, 39.95],[116.3905, 39.99]];
-				
-				//地图
-				var mapobj = new AMap.Map('elecmap', {
+			//地图
+			mapobj: function(){
+				this.mapobj = new AMap.Map('elecmap', {
 					resizeEnable: true,
 					zoom:13,
-					center: lineArr[0],
+					center: [116.39, 39.9]
 				});
+			},
 
-				//轨迹点marker
-				for(var i = 0; i<lineArr.length; i++){
+			//获取经纬度
+			orbitList: function(datas){
+				var that = this;
+				var coordinates = [];
+				for(var j in datas){
+					for(var z in datas[j]){
+						if( z =="center"){
+							coordinates.push(datas[j][z])
+						}
+					}
+				}
+				that.getOrbitMarker(coordinates);
+				that.drawOrbit(coordinates);
+			},
+
+			//轨迹点marker
+			getOrbitMarker: function(arr){
+				var that = this;
+				for(var i in arr){
 					var marker = new AMap.Marker({
-						position: lineArr[i],
-						map: mapobj
+						position: arr[i],
+						map: that.mapobj
 					})
-				};
+				}
+			},
 
-				//绘制轨迹
+			//绘制轨迹
+			drawOrbit: function(arr){
+				var that = this;
 				var polyline = new AMap.Polyline({
-			        path: lineArr,          //设置线覆盖物路径
+			        path: arr, //设置线覆盖物路径
 			        strokeColor: "#3366FF", //线颜色
 			        strokeOpacity: 1,       //线透明度
 			        strokeWeight: 5,        //线宽
 			        strokeStyle: "solid",   //线样式
 			        strokeDasharray: [10, 5] //补充线样式
 			    });
-				polyline.setMap(mapobj);
+				polyline.setMap(that.mapobj);
 			},
 
 			init: function () {
 				var that = this;
+				that.mapobj();
 				that.getElecFenceCurrent();
-				that.map();
 			},
 	
 		};
 		$scope.ElecFenceCurrentFn.init();
 	});
+
+
 
 			/*mapObjs: {
 				markersOribit: [],
