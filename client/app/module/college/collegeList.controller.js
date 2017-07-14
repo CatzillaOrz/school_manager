@@ -85,7 +85,7 @@ angular.module('dleduWebApp')
         $scope.buldLoad = function() {
             ngDialog.open({
                 template: '' +
-                '<div class="buld_head">' +
+                '<div class="buld_wrap"><div class="buld_head">' +
                 '   <div class="buld">批量导入</div>' +
                 '   <div class="close_btn ngdialog-close" type="button">关闭</div>' +
                 '   </div>' +
@@ -110,7 +110,7 @@ angular.module('dleduWebApp')
                 '       </ul>' +
             '       </td>' +
                 '   </tr>' +
-            '   </table>',
+            '   </table></div>',
                 plain: true,
                 showClose: false,
                 closeByDocument: false,
@@ -119,9 +119,27 @@ angular.module('dleduWebApp')
                     $scope.show_data=function(){
                         ngDialog.close("#ngdialog1");
                         ngDialog.open({
-                            template: '<h1>ddddd</h1>',
+                            template: '<div class="repeatLoad">' +
+                            '               <div class="repeat_header">' +
+                            '                   <div class="repeat_title left">重复导入提示</div>' +
+                            '                   <div class="close_btn ngdialog-close right" type="button">关闭</div>' +
+                            '               </div>' +
+                            '               <div class="repeat_content">' +
+                            '                   <table><tr><td>序号</td><td>院系名称</td><td>提示</td></tr></table>' +
+                            '               </div>' +
+                        '                   <div class="repeat_footer">' +
+                            '                   <div class="dataTables_paginate paging_simple_numbers" id="datatable_col_reorder_paginate">' +
+                            '                       <ul class="pagination-sm" total-items="collegeListFn.page.totalElements" max-size="collegeListFn.page.pageSize" ng-model="collegeListFn.page.pageNumber" ng-change="collegeListFn.findCollegeByPage()" boundary-link-numbers="true" rotate="false" previous-text="<" next-text=">">' +
+                            '                       </ul>' +
+                        '                       </div>' +
+                        '                       <div class="repeat_button">' +
+                            '                       <div class="repeat_btn left" type="button">重复更新</div>' +
+                            '                       <div class="repeat_btn right">不覆盖</div>' +
+                            '                   </div>' +
+                            '               </div>' +
+                            '           </div>',
                             plain: true,
-                            showClose:true,
+                            showClose:false,
                             closeByDocument: false
                         });
 
