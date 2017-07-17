@@ -62,7 +62,7 @@ angular.module('dleduWebApp')
 					var marker = new AMap.Marker({
 						position: arr[i],
 						map: that.mapobj
-					})
+					});
 				}
 			},
 
