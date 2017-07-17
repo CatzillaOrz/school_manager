@@ -365,6 +365,6 @@ angular.module('dleduWebApp')
                     $scope.handleFn.getClassDropList();
                 }
             });
-        })
+        });
 
     });

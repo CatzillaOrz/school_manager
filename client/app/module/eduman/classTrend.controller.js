@@ -26,6 +26,7 @@ angular.module('dleduWebApp')
             selected:{},
             trendList:[],
             trendCharts:[],
+            studentsCount:"",
             showLine:true,
             //学年下拉数据列表
             schoolYearDropList: [],
@@ -205,14 +206,16 @@ angular.module('dleduWebApp')
                 })
                 return result;
             },
-            //查询教学班趋势数据
+            //查询行政班趋势数据
             classTrend:function () {
                 var _this=this;
                 var params=_this.params;
                 EduManService.classTrend(params).$promise
                     .then(function (data) {
-                        _this.trendList = data;
-                        var line=_this.getChartData(data);
+                        _this.trendList = data.data;
+                        var line=_this.getChartData(_this.trendList);
+                        _this.trendCharts=[];
+                        _this.studentsCount=data.personNum;
                         _this.trendCharts.push(line);
                     })
                     .catch(function (error) {

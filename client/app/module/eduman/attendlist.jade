@@ -32,13 +32,13 @@
                                                     form.form-inline
                                                         .form-group.col-sm-3
                                                             label.control-label 学期选择：
-                                                            select.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            select.form-control.select2-selected( ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
-                                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
-                                                        .form-group.col-sm-3
-                                                            label.control-label  开课学院：
-                                                            select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
-                                                                option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" ) {{schoolYear.text+semester.text}}
+                                                        //.form-group.col-sm-3
+                                                        //    label.control-label  开课学院：
+                                                        //    select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                        //        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
 
                                                         .form-group.col-sm-3
                                                             label.control-label  课程名称：
@@ -104,10 +104,10 @@
                                                 form.form-inline
                                                         .form-group.col-sm-3
                                                             label 学期选择：
-                                                            select.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            select.form-control.select2-selected(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                 option 请选择学期
                                                                 optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
-                                                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+                                                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}
 
                                                         .form-group.col-sm-3
                                                             label 开课学院：
