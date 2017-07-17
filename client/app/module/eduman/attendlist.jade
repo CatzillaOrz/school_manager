@@ -32,9 +32,9 @@
                                                     form.form-inline
                                                         .form-group.col-sm-3
                                                             label.control-label 学期选择：
-                                                            select.form-control.select2-selected( ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            select#ddd.select2.form-control( ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
-                                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" ) {{schoolYear.text+semester.text}}
+                                                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{attendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                                                         //.form-group.col-sm-3
                                                         //    label.control-label  开课学院：
                                                         //    select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
@@ -104,22 +104,25 @@
                                                 form.form-inline
                                                         .form-group.col-sm-3
                                                             label 学期选择：
-                                                            select.form-control.select2-selected(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            select#dd.select2.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                 option 请选择学期
                                                                 optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
                                                                     option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}
 
                                                         .form-group.col-sm-3
                                                             label 开课学院：
-                                                            select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                            select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                                option 全部
                                                                 option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                                         .form-group.col-sm-3
                                                             label 专业：
-                                                            select.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                            select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                                option 全部
                                                                 option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                         .form-group.col-sm-3
                                                             label 行政班级：
-                                                            select.form-control(ng-model="attendFn.params.classesId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
+                                                            select.select2.form-control(ng-model="attendFn.params.classesId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
+                                                                option 全部
                                                                 option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
 
                                             .col-sm-2.col-xs-6.hidden-xs

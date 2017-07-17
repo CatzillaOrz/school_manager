@@ -215,9 +215,13 @@ angular.module('dleduWebApp')
                             ]
                         };
                         _this.getTeachClassAttendList();
-                        _this.schoolYearDropList.push(obj);
-                        _this.params.semesterId=data.id;
-                       // $(".select2-selected").val(_this.params.semesterId).trigger('change');
+                        _this.schoolYearDropList=[obj];
+                       _this.params.semesterId=data.id;
+                      $timeout(function () {
+                         // $("#ddd").select2("val", obj);
+                          // $("#ddd").select2().val(_this.params.semesterId).trigger("change")
+                          $(".select2").select2("val", obj);
+                      },100)
                     })
                     .catch(function (error) {
 
