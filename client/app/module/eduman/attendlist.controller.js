@@ -342,7 +342,7 @@ angular.module('dleduWebApp')
                     tempStorageService.setter(data);
                 } else {
                     var data = {
-                        semester: semesterName,
+                        semester: entity.semesterName,
                         collegeName: entity.collegeName,
                         code: entity.code,
                         className: entity.className
