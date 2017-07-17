@@ -26,6 +26,7 @@ angular.module('dleduWebApp')
             selected:{},
             trendList:[],
             trendCharts:[],
+            studentsCount:"",
             showLine:true,
             params: {
                 semesterId: null,
@@ -39,8 +40,10 @@ angular.module('dleduWebApp')
                 var params=_this.params;
                 EduManService.teachClassTrend(params).$promise
                     .then(function (data) {
-                        _this.trendList = data;
-                        var line=_this.getChartData(data);
+                        _this.trendList = data.data;
+                        var line=_this.getChartData(_this.trendList);
+                        _this.trendCharts=[];
+                        _this.studentsCount=data.personNum;
                         _this.trendCharts.push(line);
                     })
                     .catch(function (error) {

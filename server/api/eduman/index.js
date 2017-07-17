@@ -37,5 +37,6 @@ router.get('/getElecFenceHistory',auth.isSignedIn, controller.getElecFenceHistor
 router.get('/getElecFenceCurrent',auth.isSignedIn, controller.getElecFenceCurrent);
 router.get('/classTrend',auth.isSignedIn, controller.classTrend);
 router.get('/classAttendExportTrend',auth.isSignedIn, controller.classAttendExportTrend);
+router.get('/getCurrentSemester',auth.isSignedIn, controller.getCurrentSemester);
 
 module.exports = router;

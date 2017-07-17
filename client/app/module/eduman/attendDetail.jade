@@ -19,9 +19,9 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                //.form-group.col-sm-3
-                                //    label 学期选择：
-                                //    .form-control.no-border 2017年第一学期
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.semester")
+                                    label 学期选择：
+                                    .form-control.no-border {{attendDetailFn.selected.semester}}
                                 .form-group.col-sm-3(ng-if="attendDetailFn.selected.courseName")
                                     label 课程名称：
                                     .form-control.no-border {{attendDetailFn.selected.courseName}}
@@ -95,9 +95,9 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                //.form-group.col-sm-3
-                                //    label 学期选择：
-                                //    .form-control.no-border 2017年第一学期
+                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.semester")
+                                    label 学期选择：
+                                    .form-control.no-border {{attendDetailFn.selected.semester}}
                                 .form-group.col-sm-3(ng-if="attendDetailFn.selected.collegeName")
                                     label 开课学院：
                                     .form-control.no-border {{attendDetailFn.selected.collegeName}}

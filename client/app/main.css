@@ -980,6 +980,137 @@ a:focus {
 .width-percent-10 {
   width: 10% !important; }
 
+.ColVis button {
+  margin-left: 10px; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.repeatLoad {
+  background: #fff;
+  padding-bottom: 100px;
+  font-size: 14px; }
+  .repeatLoad .repeat_header {
+    height: 45px;
+    line-height: 45px;
+    background-color: #f2f2f2; }
+    .repeatLoad .repeat_header .repeat_title {
+      margin-left: 30px; }
+  .repeatLoad .repeat_content table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse; }
+    .repeatLoad .repeat_content table tr {
+      border-bottom: 1px solid #ccc;
+      height: 30px; }
+      .repeatLoad .repeat_content table tr td {
+        border: 1px solid #ccc;
+        text-align: center; }
+      .repeatLoad .repeat_content table tr td:first-child {
+        width: 20%; }
+      .repeatLoad .repeat_content table tr td:last-child {
+        width: 20%; }
+    .repeatLoad .repeat_content table tr:nth-child(odd) {
+      background-color: #f2f2f2; }
+  .repeatLoad .repeat_footer .repeat_button {
+    margin: 20px auto;
+    width: 200px;
+    line-height: 30px;
+    margin-top: 10px; }
+    .repeatLoad .repeat_footer .repeat_button .repeat_btn {
+      padding: 0 20px;
+      border: 1px solid #ccc;
+      background-color: #f2f2f2;
+      line-height: 30px;
+      text-align: center; }
+
+.ngdialog-close:before {
+  content: ''; }
+
+.ngdialog.ngdialog-theme-default .ngdialog-close:before {
+  content: ''; }
+
+.ngdialog-overlay {
+  background: rgba(0, 0, 0, 0.6); }
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  background: #fff;
+  width: 585px;
+  border-radius: 0;
+  padding: 0; }
+
+.close_btn {
+  margin-right: 30px;
+  cursor: pointer; }
+
+.buld_wrap {
+  font-size: 13px; }
+  .buld_wrap .buld_head {
+    background-color: #f2f2f2;
+    height: 45px;
+    line-height: 45px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc; }
+    .buld_wrap .buld_head .buld {
+      float: left;
+      margin-left: 30px; }
+  .buld_wrap .propt_content .load {
+    height: 28px;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 241px; }
+  .buld_wrap .propt_content .load_inner {
+    cursor: pointer;
+    width: 73px;
+    height: 28px;
+    background-color: #f2f2f2;
+    text-align: center;
+    line-height: 28px;
+    border: 1px solid #ccc;
+    margin-left: 5px;
+    margin-top: 5px; }
+  .buld_wrap .propt_content .load_inner_w {
+    width: 108px;
+    height: 28px;
+    background-color: #f2f2f2;
+    text-align: center;
+    line-height: 28px;
+    border: 1px solid #ccc; }
+  .buld_wrap .propt_content .choseFile {
+    width: 80px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 4px; }
+  .buld_wrap .propt_content table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse; }
+    .buld_wrap .propt_content table tr {
+      line-height: 45px;
+      border-bottom: 1px solid #ccc;
+      border: none; }
+      .buld_wrap .propt_content table tr td {
+        border: 1px solid #ccc;
+        padding: 0 10px;
+        text-align: center; }
+        .buld_wrap .propt_content table tr td ul {
+          padding-top: 19px;
+          padding-bottom: 19px;
+          text-align: left; }
+          .buld_wrap .propt_content table tr td ul li {
+            list-style: none;
+            line-height: 24px; }
+      .buld_wrap .propt_content table tr td:first-child {
+        background-color: #f2f2f2; }
+    .buld_wrap .propt_content table tr:last-child {
+      line-height: 24px; }
+
 .logo-container {
   font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
   .logo-container .logo-card-container .logo-image-view {
