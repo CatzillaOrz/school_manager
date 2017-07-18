@@ -101,6 +101,7 @@ angular.module('dleduWebApp')
             select2MajorOptions: function () {
                 var that = this;
                 return {
+                    placeholder: "全部",
                     allowClear: true,
                     ajax: {
                         url: "api/major/getMajorDropList",
@@ -374,6 +375,17 @@ angular.module('dleduWebApp')
             },
         }
         $scope.attendFn.init();
-
+        $timeout(function () {
+            $scope.$watch('attendFn.params.collegeId', function(newValue, oldValue) {
+                if (newValue!=oldValue){
+                    $scope.attendFn.majorDropList=[];
+                }
+            });
+            $scope.$watch('attendFn.params.majorId', function(newValue, oldValue) {
+                if (newValue!=oldValue){
+                    $scope.attendFn.classDropList=[];
+                }
+            });
+        });
 
     });
