@@ -130,7 +130,7 @@ angular.module('dleduWebApp')
                                 }
                             };
                         },
-                        cache: true
+                        cache: false
                     },
 
                     templateResult: function (data) {
@@ -175,7 +175,7 @@ angular.module('dleduWebApp')
                                 }
                             };
                         },
-                        cache: true
+                        cache: false
                     },
                     templateResult: function (data) {
                         if (data.id === '') { // adjust for custom placeholder values
@@ -261,11 +261,14 @@ angular.module('dleduWebApp')
                 var params = {
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
-                    professionId: _this.params.majorId,
+                    professionId: (_this.params.collegeId)?_this.params.majorId:null,
                     classAdministrativeId: _this.params.classesId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
+                if(!params.professionId){
+                    params.classAdministrativeId=null;
+                }
                 EduManService.getClassAttendList(params).$promise
                     .then(function (data) {
                         _this.classAttendList = data.data;
@@ -300,11 +303,14 @@ angular.module('dleduWebApp')
                 var params = {
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
-                    professionId: _this.params.majorId,
+                    professionId: (_this.params.collegeId)?_this.params.majorId:null,
                     classAdministrativeId: _this.params.classesId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
+                if(!params.professionId){
+                    params.classAdministrativeId=null;
+                }
                 EduManService.classAttendExport(params).$promise
                     .then(function (data) {
                         location.href = data.message;
@@ -384,11 +390,17 @@ angular.module('dleduWebApp')
         $scope.attendFn.init();
         $timeout(function () {
             $scope.$watch('attendFn.params.collegeId', function(newValue, oldValue) {
+                if(!newValue){
+                    $scope.attendFn.params.majorId=null;
+                }
                 if (newValue!=oldValue){
                     $scope.attendFn.majorDropList=[];
                 }
             });
             $scope.$watch('attendFn.params.majorId', function(newValue, oldValue) {
+                if(!newValue){
+                    $scope.attendFn.params.classesId=null;
+                }
                 if (newValue!=oldValue){
                     $scope.attendFn.classDropList=[];
                 }
