@@ -294,7 +294,7 @@ angular.module('dleduWebApp')
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
                     majorId: _this.params.majorId,
-                    classAdministrativeId: _this.params.classId,
+                    classAdministrativeId: _this.params.classesId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
