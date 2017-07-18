@@ -16,6 +16,7 @@ angular.module('dleduWebApp')
             teachClassAttendList: [],
             //行政班考勤列表
             classAttendList: [],
+            classAdministrativeId:"",
             params: {
                 majorId: null,
                 collegeId: null,
@@ -262,7 +263,7 @@ angular.module('dleduWebApp')
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
                     professionId: (_this.params.collegeId)?_this.params.majorId:null,
-                    classAdministrativeId: _this.params.classesId,
+                    classAdministrativeId: _this.classAdministrativeId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
@@ -304,7 +305,7 @@ angular.module('dleduWebApp')
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
                     professionId: (_this.params.collegeId)?_this.params.majorId:null,
-                    classAdministrativeId: _this.params.classesId,
+                    classAdministrativeId: _this.classAdministrativeId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
                 };
@@ -399,7 +400,7 @@ angular.module('dleduWebApp')
             });
             $scope.$watch('attendFn.params.majorId', function(newValue, oldValue) {
                 if(!newValue){
-                    $scope.attendFn.params.classesId=null;
+                    $scope.attendFn.classAdministrativeId=null;
                 }
                 if (newValue!=oldValue){
                     $scope.attendFn.classDropList=[];
