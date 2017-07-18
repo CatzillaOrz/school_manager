@@ -101,7 +101,10 @@ angular.module('dleduWebApp')
             select2MajorOptions: function () {
                 var that = this;
                 return {
-                    placeholder: "全部",
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
                     allowClear: true,
                     ajax: {
                         url: "api/major/getMajorDropList",
@@ -143,7 +146,10 @@ angular.module('dleduWebApp')
             select2ClassOptions: function () {
                 var that = this;
                 return {
-                    placeholder: "全部",
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
                     allowClear: true,
                     ajax: {
                         url: "api/class/geClassDropList",
@@ -248,13 +254,14 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //按行政班查询考勤列表
+            //按行政班查询考勤列表collegeId  professionId
+
             getClassAttendList: function () {
                 var _this = this;
                 var params = {
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
-                    majorId: _this.params.majorId,
+                    professionId: _this.params.majorId,
                     classAdministrativeId: _this.params.classesId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
@@ -293,7 +300,7 @@ angular.module('dleduWebApp')
                 var params = {
                     collegeId: _this.params.collegeId,
                     semesterId: _this.params.semesterId,
-                    majorId: _this.params.majorId,
+                    professionId: _this.params.majorId,
                     classAdministrativeId: _this.params.classesId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize
