@@ -118,12 +118,12 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/getElecFenceList');
 				return eduman.get(params);
 			},
-
+			//获取历史轨迹信息
 			getElecFenceHistory: function (params) {
 				var eduman = $resource('api/eduman/getElecFenceHistory');
 				return eduman.get(params);
 			},
-
+			//获取当天轨迹信息
 			getElecFenceCurrent: function (params) {
 				var eduman = $resource('api/eduman/getElecFenceCurrent');
 				return eduman.get(params);

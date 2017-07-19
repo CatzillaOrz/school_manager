@@ -10,7 +10,7 @@
                         .jarviswidget-ctrls(role='menu')
                         span.widget-icon
                             i.fa.fa-table
-                        h2 张三
+                        h2 {{ElecFenceCurrentFn.locusList.name}}
                         span.jarviswidget-loader
                             i.fa.fa-refresh.fa-spin
                     div(role='content')
@@ -18,17 +18,17 @@
                             .row(style="margin-bottom:15px;")
                                 .col-sm-6
                                     span 学院：
-                                    span {{'知新树'}}
+                                    span {{ElecFenceCurrentFn.locusList.major}}
                                 .col-sm-6
                                     span 专业：
-                                    span {{'北京分区'}}
+                                    span {{ElecFenceCurrentFn.locusList.college}}
                             .row(style="margin-bottom:15px;")
                                 .col-sm-6
                                     span 班级：
-                                    span {{'1011班'}}
+                                    span {{ElecFenceCurrentFn.locusList.className}}
                                 .col-sm-6
                                     span 联系方式：
-                                    span {{'1872921355'}}
+                                    span {{ElecFenceCurrentFn.locusList.tel}}
                     div(role='content')
                         .jarviswidget-editbox
                         .widget-body.no-padding
@@ -41,11 +41,11 @@
                                             th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 是否离校
                                             th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 地址
                                     tbody
-                                        tr.odd(role='row' ng-repeat="record in evaFenceFn.records")
+                                        tr.odd(role='row' ng-repeat="locus in ElecFenceCurrentFn.locusList.data")
                                             td.sorting_1 {{$index+1}}
-                                            td {{record.college}}
-                                            td {{record.major}}
-                                            td {{record.className}}
+                                            td {{locus.date}}
+                                            td {{locus.currentLocation}}
+                                            td {{locus.address}}
                                 //.dt-toolbar-footer
                                     .col-sm-6.col-xs-12.hidden-xs
                                         #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')

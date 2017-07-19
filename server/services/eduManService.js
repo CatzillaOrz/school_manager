@@ -439,7 +439,7 @@ var EduManService = {
             });
     },
 
-    //获取电子围栏历史记录
+    //获取电子围栏当天轨迹信息
     getElecFenceCurrent: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
