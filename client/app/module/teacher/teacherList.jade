@@ -60,7 +60,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber*10:(teacherListFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10+teacherListFn.teacherList.length}}
                                 |  条 总共

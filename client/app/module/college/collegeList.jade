@@ -54,7 +54,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber*10:(collegeListFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+collegeListFn.collegeList.length}}
                                 |  条 总共
