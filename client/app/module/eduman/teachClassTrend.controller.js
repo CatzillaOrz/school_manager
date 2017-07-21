@@ -44,7 +44,12 @@ angular.module('dleduWebApp')
                         var line=_this.getChartData(_this.trendList);
                         _this.trendCharts=[];
                         _this.studentsCount=data.personNum;
-                        _this.trendCharts.push(line);
+                        if(_this.trendList.length!=0){
+                            _this.trendCharts.push(line);
+                        }else {
+                            _this.trendCharts=[];
+                        }
+
                     })
                     .catch(function (error) {
 

@@ -41,7 +41,7 @@
                                     span 导出
                     .table.table-striped.table-bordered.table-hover.dataTable(ng-if="teachClassTrendFn.showLine")
                         .no-footer(style="height:500px")
-                            div 共{{teachClassTrendFn.studentsCount}}人
+                            .trend-total 共{{teachClassTrendFn.studentsCount}}人
                             line-chart(config='config', data='teachClassTrendFn.trendCharts' )
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-if="!teachClassTrendFn.showLine" width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead

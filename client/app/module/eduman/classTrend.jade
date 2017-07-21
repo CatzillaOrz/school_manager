@@ -17,22 +17,24 @@
                             form.form-inline
                                 .form-group.col-sm-3
                                     label 学期选择：
-                                    select.form-control(ng-model="classTrendFn.params.semesterId" ui-select2="classTrendFn.select2SemesterOptions()" )
-                                        option 请选择学期
+                                    select.select2.form-control(ng-model="classTrendFn.params.semesterId" ui-select2="classTrendFn.select2SemesterOptions()" )
                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in classTrendFn.schoolYearDropList")
-                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{classTrendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
 
                                 .form-group.col-sm-3
-                                    label 开课学院：
+                                    label 院系：
                                     select.form-control(ng-model="classTrendFn.params.collegeId" ui-select2="classTrendFn.selectCollege2Options()" )
+                                        option(value="") 全部
                                         option(ng-repeat="college in classTrendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                 .form-group.col-sm-3
                                     label 专业：
                                     select.form-control(ng-model="classTrendFn.params.majorId" ui-select2="classTrendFn.select2MajorOptions(classTrendFn.collegeId)"  )
+                                        option(value="") 全部
                                         option(ng-repeat="major in classTrendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                 .form-group.col-sm-3
                                     label 行政班级：
                                     select.form-control(ng-model="classTrendFn.params.classId" ui-select2="classTrendFn.select2ClassOptions(classTrendFn.majorId)")
+                                        option(value="") 全部
                                         option(ng-repeat="class in classTrendFn.classDropList" value="{{class.id}}") {{class.name}}
 
                         .col-sm-2.col-xs-6.hidden-xs
@@ -46,7 +48,7 @@
                                     span 导出
                     .table.table-striped.table-bordered.table-hover.dataTable.float-right(ng-if="classTrendFn.showLine")
                         .no-footer(style="height:500px")
-                            div {{classTrendFn.studentsCount}}人
+                            .trend-total 共{{classTrendFn.studentsCount}}人
                             line-chart(config='config', data='classTrendFn.trendCharts' )
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-if="!classTrendFn.showLine" width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead

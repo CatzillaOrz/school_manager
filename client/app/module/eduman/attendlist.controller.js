@@ -228,7 +228,7 @@ angular.module('dleduWebApp')
                       $timeout(function () {
                          // $("#ddd").select2("val", obj);
                           // $("#ddd").select2().val(_this.params.semesterId).trigger("change")
-                          $(".select2").select2("val", obj);
+                         // $(".select2").select2("val", obj);
                       },100)
                     })
                     .catch(function (error) {

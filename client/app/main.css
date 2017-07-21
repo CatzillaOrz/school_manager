@@ -966,6 +966,10 @@ a:focus {
     margin: 0px;
     width: 679px;
     height: 300px; }
+  .college-list-container .trend-total {
+    position: absolute;
+    left: 103px;
+    top: 50px; }
 
 .margin-left-10 {
   margin-left: 10px !important; }

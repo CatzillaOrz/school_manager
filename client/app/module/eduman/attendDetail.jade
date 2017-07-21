@@ -65,7 +65,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             .dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber*10:(attendDetailFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10+attendDetailFn.teachClassStudentList.length}}
                                 |  条 总共
@@ -99,7 +99,7 @@
                                     label 学期选择：
                                     .form-control.no-border {{attendDetailFn.selected.semester}}
                                 .form-group.col-sm-3(ng-if="attendDetailFn.selected.collegeName")
-                                    label 开课学院：
+                                    label 院系：
                                     .form-control.no-border {{attendDetailFn.selected.collegeName}}
                                 //.form-group.col-sm-3
                                 //    label 专业：
@@ -137,7 +137,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             .dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber*10:(attendDetailFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((attendDetailFn.page.pageNumber==0?attendDetailFn.page.pageNumber+1:attendDetailFn.page.pageNumber)-1)*10+attendDetailFn.classStudentList.length}}
                                 |  条 总共
