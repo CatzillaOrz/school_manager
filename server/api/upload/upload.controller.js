@@ -76,7 +76,7 @@ module.exports = {
         res.status(500).send(err);
         return;
       }
-      UploadService.impBatchSync(filePath, req.user.access_token, { orgId: req.body.orgId, userId: req.body.userId})
+      UploadService.impBatchSync(filePath, req.user.access_token, req.body)
           .then(function (json) {
             res.json(json);
           })

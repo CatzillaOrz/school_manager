@@ -27,6 +27,8 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="studentCreat")
                                     span 新建
+                                button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()")
+                                    span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -77,3 +79,47 @@
 
             // end widget content
         // end widget div
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='studentListFn.selected($newFiles, $invalidFiles)' ng-model="studentListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="studentListFn.myFile.name" )
+                            .left.load_inner(ng-click='studentListFn.importantBatch(studentListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="studentListFn.downLoad()") 账号导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载账号导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+            .repeat_content
+                table
+                    tr
+                        td 错误行号
+                        td 姓名
+                        td 学号
+                        td 班级名称
+                        td 错误信息
+                    tr(ng-repeat="info in studentListFn.errorInfos")
+                        td {{info.line}}
+                        td {{info.code}}
+                        td {{info.name}}
+                        td {{info.classesName}}
+                        td {{info.msg}}

@@ -104,6 +104,7 @@ angular.module('dleduWebApp')
                             file: file,
                             orgId: AuthService.getUser().orgId,
                             userId: AuthService.getUser().id,
+                            uploadType: 'college'
                         }
                     }).then(function(res){
                         if(res.status === 200){
