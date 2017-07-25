@@ -71,9 +71,11 @@ var UploadService = {
 	 * @param callback
 	 */
 	impBatch: function (filePath, access_token, params, callback) {
+		var paths = {'college' : '/v1/college/import', 'major' : '/v1/professionnal/import', 'classes':'/v1/classes/import',
+			'student': '/v1/students/import', 'teacher': '/v1/teacher/import'};
 		this.upload({
 			host: 'gateway-org',
-			path: '/v1/college/import?userId=' + params.userId + '&orgId=' + params.orgId,
+			path: paths[params.uploadType] + '?userId=' + params.userId + '&orgId=' + params.orgId,
 			access_token: access_token,
 			filePath: filePath,
 			fileKey: 'file'
