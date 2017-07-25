@@ -67,5 +67,35 @@ module.exports = {
         res.status(500).send(e.message);
       });
 
-  }
+  },
+
+  impBatch: function (req, res) {
+    var filePath = req.file.path + path.extname(req.file.originalname);
+    fs.rename(req.file.path, filePath, function (err) {
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      UploadService.impBatchSync(filePath, req.user.access_token, { orgId: req.body.orgId, userId: req.body.userId})
+          .then(function (json) {
+            res.json(json);
+          })
+          .catch(function (e) {
+            res.status(500).json(e);
+          })
+    });
+
+  },
+
+  downLoad: function(req,res){
+    UploadService.downLoadSync(req.query, req.user.access_token)
+          .then(function (data) {
+            //res.json(json);
+            res.send();
+          })
+          .catch(function (e) {
+            res.status(500).json(e);
+          })
+  },
+
 }

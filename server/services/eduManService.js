@@ -456,6 +456,43 @@ var EduManService = {
                 callback(e);
             });
     },
+
+    //获取设置信息
+    getElecSetInfo: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //获取设置信息
+    setElecFenceInfo: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '',
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
     classTrend: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',

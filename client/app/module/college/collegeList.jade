@@ -27,8 +27,8 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="college.creat")
                                     span 新建
-                                //button.btn.btn-primary(type='button' ng-click="buldLoad()")
-                                //    span 批量导入
+                                button.btn.btn-primary(type='button' ng-click="collegeListFn.openImpBatch()")
+                                    span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -54,7 +54,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber*10:(collegeListFn.page.pageNumber-1)*10+1}}
+                                span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((collegeListFn.page.pageNumber==0?collegeListFn.page.pageNumber+1:collegeListFn.page.pageNumber)-1)*10+collegeListFn.collegeList.length}}
                                 |  条 总共
@@ -63,5 +63,45 @@
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                 ul.pagination-sm(uib-pagination, total-items='collegeListFn.page.totalElements', max-size='collegeListFn.page.pageSize' ng-model='collegeListFn.page.pageNumber',ng-change="collegeListFn.findCollegeByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-            // end widget content
-        // end widget div
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='collegeListFn.selected($newFiles, $invalidFiles)' ng-model="collegeListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="collegeListFn.myFile.name" )
+                            .left.load_inner(ng-click='collegeListFn.importantBatch(collegeListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="collegeListFn.downLoad()") 账号导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载账号导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+            .repeat_content
+                table
+                    tr
+                        td 错误行号
+                        td 院系编码
+                        td 院系名称
+                        td 错误信息
+                    tr(ng-repeat="info in collegeListFn.errorInfos")
+                        td {{info.line}}
+                        td {{info.code}}
+                        td {{info.name}}
+                        td {{info.msg}}

@@ -67,14 +67,13 @@
 }
 .repeatLoad{
   background:#fff;
-  padding-bottom:100px;
   font-size:14px;
     .repeat_header{
       height:45px;
       line-height:45px;
-      background-color: rgba(242, 242, 242, 1);
-      .repeat_title{
-        margin-left:30px;
+      .buld{
+        margin-left: 3px;
+        font-weight: 800;
       }
     }
   .repeat_content{
@@ -118,3 +117,84 @@
 
     }
 }
+
+.buld_wrap {
+  font-size: 13px;
+  .buld_head {
+    height: 45px;
+    line-height: 45px;
+    border-bottom: none;
+    .buld {
+      margin-left: 3px;
+      font-weight: 800;
+    }
+
+  }
+  .propt_content {
+    .load {
+      height: 28px;
+      margin-left: 5px;
+      margin-top: 5px;
+      width: 241px;
+    }
+    .load_inner {
+      cursor: pointer;
+      width: 73px;
+      height: 28px;
+      background-color: rgba(242, 242, 242, 1);
+      text-align: center;
+      line-height: 28px;
+      border: 1px solid #ccc;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+    .load_inner_w {
+      width: 108px;
+      height: 28px;
+      background-color: rgba(242, 242, 242, 1);
+      text-align: center;
+      line-height: 28px;
+      border: 1px solid #ccc;
+    }
+    .choseFile {
+      width: 80px;
+      height: 30px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      line-height: 30px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    table {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      tr {
+        line-height: 45px;
+        border-bottom: 1px solid #ccc;
+        border: none;
+        td {
+          border: 1px solid #ccc;
+          padding: 0 10px;
+          text-align: center;
+          ul {
+            padding-top: 19px;
+            padding-bottom: 19px;
+            text-align: left;
+            li {
+              list-style: none;
+              line-height: 24px;
+            }
+          }
+        }
+        td:first-child {
+          background-color: rgba(242, 242, 242, 1)
+        }
+      }
+      tr:last-child {
+        line-height: 24px;
+      }
+    }
+  }
+}
+

@@ -354,6 +354,33 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    //获取多边形
+    getElecSetInfo: function (req, res) {
+        res.json(null);
+        return;
+        EduManService.getElecSetInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(null);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    //设置多边形信息
+    setElecFenceInfo: function (req, res) {
+        res.json("{'trueMSG':true}");
+        return;
+        EduManService.setElecFenceInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(null);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     classTrend: function (req, res) {
         EduManService.classTrendSync(req.query, req.user.access_token)
             .then(function (data) {

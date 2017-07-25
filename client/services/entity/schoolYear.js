@@ -60,6 +60,10 @@ angular.module('dleduWebService')
             getTeachWeekList: function (params) {
                 var schoolyear = $resource('api/schoolyear/getTeachWeekList');
                 return schoolyear.get(params);
+            },
+            getSemesterList: function (params) {
+                var semesterList = $resource('api/schoolyear/getSemesterList');
+                return semesterList.get(params);
             }
 
         }
