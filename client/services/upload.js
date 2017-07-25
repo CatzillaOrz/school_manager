@@ -110,7 +110,12 @@ angular.module('dleduWebService')
       getPolyvToken: function () {
         var qiniuToken = $resource('api/upload/getPolyvToken');
         return qiniuToken.get();
-      }
+      },
+
+      downLoad: function (params) {
+        var downLoad = $resource('api/upload/downLoad');
+          return downLoad.get(params);
+    }
     }
 
   });

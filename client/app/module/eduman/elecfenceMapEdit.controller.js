@@ -4,8 +4,8 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceMapEditCtrl', function ($scope, AuthService, EduManService, amapService, messageService) {
-		$scope.ElecFenceCreateFn={
-			isDisabled: false,//不存在多边形
+		$scope.ElecFenceCreateFn = {
+			isDisabled: false,//不存在多边形时
 			polyVer: [],
 			polyVers: [],  //多边形顶点数组
 			polygons: [], //保存多边形
@@ -13,6 +13,7 @@ angular.module('dleduWebApp')
 			polygonEditor: null,
 			polyObj: null,
 			targetObj: null,
+			mapObj: null,
 
 			/**
 			 * 加载设置
@@ -21,15 +22,15 @@ angular.module('dleduWebApp')
 				EduManService.getElecSetInfo().$promise
 					.then(function(data){
 						if(!data){//第一次进入设置
-							$scope.isDisabled = false;
+							$scope.ElecFenceCreateFn.isDisabled = false;
 						}else {//初始化选择的数据
-							$scope.record = data;
-							$scope.polyVer = data.lltudes;
+							$scope.ElecFenceCreateFn.record = data;
+							$scope.ElecFenceCreateFn.polyVer = data.lltudes;
 							//选择类型
-							if($scope.polyVer && $scope.polyVer.length > 0){
-								$scope.isDisabled = true;
+							if($scope.ElecFenceCreateFn.polyVer && $scope.ElecFenceCreateFn.polyVer.length > 0){
+								$scope.ElecFenceCreateFn.isDisabled = true;
 							}
-							$scope.startDraw();
+							$scope.ElecFenceCreateFn.startDraw();
 						}
 					})
 					.catch(function(e){
@@ -40,8 +41,8 @@ angular.module('dleduWebApp')
 			//加载地图插件
 			loadMouseTool: function(){
 				var that = this;
-				this.map.plugin(["AMap.MouseTool"], function () {//鼠标工具插件
-					that.mousetool = new AMap.MouseTool(this.map);
+				this.mapObj.plugin(["AMap.MouseTool"], function () {//鼠标工具插件
+					that.mousetool = new AMap.MouseTool(that.mapObj);
 					that.mousetool.polygon();
 					AMap.event.addListener(that.mousetool, 'draw', function (obj) {
 						that.polyObj = obj.obj;
@@ -55,11 +56,11 @@ angular.module('dleduWebApp')
 								verNew.push({longitude: temp.lng, latitude: temp.lat});
 							}
 						}
-						that.map.remove([that.polyObj]);
+						that.mapObj.remove([that.polyObj]);
 						that.polyVers.push(verNew);
 						that.polyVer = [verNew];
 						that.isDisabled = true;
-						that.$apply();
+						$scope.$apply();
 						that.startDraw();
 					});
 				});
@@ -72,8 +73,8 @@ angular.module('dleduWebApp')
 				var that = this;
 				if(this.isDisabled){
 					var polygons = this.polyVer, ver = [];
-					this.map.setCenter([parseFloat(this.polyVer[0][0].longitude), parseFloat(this.polyVer[0][1].latitude)]);
-					this.map.plugin(["AMap.PolyEditor"], function () {
+					this.mapObj.setCenter([parseFloat(this.polyVer[0][0].longitude), parseFloat(this.polyVer[0][1].latitude)]);
+					this.mapObj.plugin(["AMap.PolyEditor"], function () {
 						for(var i = 0; i < polygons.length; i++){
 							ver = [];
 							var polygonVer = polygons[i];
@@ -88,7 +89,7 @@ angular.module('dleduWebApp')
 								fillColor: "#1791fc",
 								fillOpacity: 0.35
 							});
-							polygonObj.setMap(this.map);
+							polygonObj.setMap(that.mapObj);
 
 
 							var contextMenu = new AMap.ContextMenu();  //创建右键菜单
@@ -97,19 +98,19 @@ angular.module('dleduWebApp')
 								if(this.polygonEditor){
 									that.polygonEditor.close();
 								}
-								that.map.remove(that.targetObj);
+								that.mapObj.remove(that.targetObj);
 							}, 0);
 							//添加菜单
 							contextMenu.addItem("编辑", function() {
 								if(this.polygonEditor){
 									that.polygonEditor.close();
 								}
-								that.polygonEditor = new AMap.PolyEditor(that.map, that.targetObj);
+								that.polygonEditor = new AMap.PolyEditor(that.mapObj, that.targetObj);
 								that.polygonEditor.open();
 							}, 1);
 							AMap.event.addListener(polygonObj,'rightclick',function(e){
 								that.targetObj = e.target;
-								contextMenu.open(that.map, e.lnglat);
+								contextMenu.open(that.mapObj, e.lnglat);
 							});
 						}
 					});
@@ -118,12 +119,13 @@ angular.module('dleduWebApp')
 				}
 			},
 
+			//删除多边形
 			delDraw: function(){
-				if(polygonEditor){
-					polygonEditor.close();
+				if(this.polygonEditor){
+					this.polygonEditor.close();
 				}
 				this.polyVer = [];
-				this.map.clearMap();
+				this.mapObj.clearMap();
 				this.isDisabled = false;
 			},
 
@@ -131,7 +133,7 @@ angular.module('dleduWebApp')
 			 * 保存设置
 			 */
 			saveDraw: function(){
-				var polygons = this.map.getAllOverlays('polygon');
+				var polygons = this.mapObj.getAllOverlays('polygon');
 				if(polygons.length == 0){
 					messageService.openMsg("请绘制多边形!");
 					return;
@@ -155,7 +157,7 @@ angular.module('dleduWebApp')
 					var params = {lltudes: itemVers, monitorDate: [], nomonitorDate: [], semesterId: 0};
 					this.record = params;
 				}else{
-					if($scope.polyVers.length > 0){
+					if(this.polyVers.length > 0){
 						this.record.lltudes = itemVers;
 					}else{
 						this.record.lltudes = itemVers;
@@ -183,16 +185,16 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				this.map = amapService.getMapObj("elecmap", {
+				this.mapObj = amapService.getMapObj("elecmap", {
 					resizeEnable: true,
 					zoom:13
 				});
-				amapService.getLocation(this.map);
+				/*amapService.getLocation(this.map);
 				var center = amapService.getCenter();
 				if(center.lon && center.lat){
 					this.map.setCenter([center.lon, center.lat]);
-				}
-
+				}*/
+				this.loadMouseTool();
 				this.loadSetInfo();
 			}
 		};
