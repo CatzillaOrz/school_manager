@@ -164,6 +164,7 @@
       line-height: 30px;
       text-align: center;
       margin-top: 4px;
+      cursor: pointer;
     }
     table {
       width: 100%;
@@ -188,7 +189,7 @@
           }
         }
         td:first-child {
-          background-color: rgba(242, 242, 242, 1)
+          background-color: rgba(242, 242, 242, 1);
         }
       }
       tr:last-child {
