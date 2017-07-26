@@ -58,5 +58,14 @@ module.exports = {
             .catch(function (e) {
                 res.status(403).json(e);
             });
-    }
+    },
+    resetPassword: function (req, res) {
+        AccountService.resetPasswordSync(req.query.id, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(500).json(e);
+            });
+    },
 };

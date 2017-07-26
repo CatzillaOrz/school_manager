@@ -15,7 +15,7 @@
                             | 选择学院：
                         .col-sm-7
                             select.form-control(ng-model="handleFn.collegeId" ui-select2="handleFn.selectCollege2Options()" )
-                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                                option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}" selected="{{handleFn.collegeId==college.id ? 'selected' : ''}}" ) {{college.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *

@@ -221,7 +221,7 @@ angular.module('dleduWebApp')
                     templateResult: function (data) {
                         if (data.id === '') { // adjust for custom placeholder values
                             return 'Custom styled placeholder text';
-                            hat.classDropList=[];
+                            that.classDropList=[];
                         }
                         that.classDropList.push(data);
                         return data.name;

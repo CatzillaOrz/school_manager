@@ -11,13 +11,22 @@ angular.module('dleduWebApp')
             showYAxis: true,
             showLegend: true,
             stack: false,
-
+            tooltip:{
+                formatter: '出勤率：{c} %'
+            },
             yAxis: {
                 type: 'value',
                 axisLabel: {
                     formatter: '{value} %'
                 },
-                axisLine: {show: true},
+                axisLine: {
+                    show: true
+                },
+                axisPointer:{
+                    label:{
+                        formatter:'{value} %'
+                    }
+                }
             },
 
         };
@@ -219,7 +228,7 @@ angular.module('dleduWebApp')
                 EduManService.classTrend(params).$promise
                     .then(function (data) {
                         _this.trendList = data.data;
-                        var line = _this.getChartData(_this.trendList);
+                        var line = _this.getChartData(_this.trendList,data.title);
                         _this.trendCharts = [];
                         _this.studentsCount = data.personNum;
                         if(_this.trendList.length!=0){
@@ -234,18 +243,19 @@ angular.module('dleduWebApp')
                     })
             },
             //趋势数据转换
-            getChartData: function (list) {
+            getChartData: function (list,title) {
                 var dataPoints = [];
                 angular.forEach(list, function (data) {
+                    var dataY=data.proportion.replace("%", '')==""?0:data.proportion.replace("%", '');
                     var temp = {
                         x: "第" + data.week + "周",
-                        y: data.proportion.replace("%", '')
+                        y: dataY
 
                     }
                     dataPoints.push(temp)
                 });
                 var line = {
-                    name: '教学周考勤趋势',
+                    name: title,
                     datapoints: dataPoints
                 }
 

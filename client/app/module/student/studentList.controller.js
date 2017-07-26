@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService) {
+    .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService,AccountService) {
         $scope.studentListFn={
             //学生列表
             studentList: [],
@@ -75,6 +75,22 @@ angular.module('dleduWebApp')
                 var that=this;
                 that.currentStudent = entity;
                 messageService.getMsg("您确定要删除此学生吗？", that.deleteStudent)
+            },
+            resetPassword: function () {
+                var _this = $scope.studentListFn;
+                AccountService.resetPassword( _this.currentStudent.id)
+                    .success(function (data) {
+                        messageService.openMsg("重置密码成功！");
+                        _this.getStudentList();
+                    })
+                    .error(function (error) {
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"重置密码失败！"));
+                    })
+            },
+            resetPasswordPrompt: function (entity) {
+                var that=this;
+                that.currentStudent = entity;
+                messageService.getMsg("您确定要重置"+that.currentStudent.name+"的密码吗？", that.resetPassword)
             },
             init: function () {
                 this.getStudentList();

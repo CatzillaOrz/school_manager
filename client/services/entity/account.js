@@ -42,6 +42,15 @@ angular.module('dleduWebService')
             code: code
           }
         });
-      }
+      },
+        resetPassword: function(userId){
+            return $http({
+                method: 'PUT',
+                url: 'api/account/resetPassword',
+                params: {
+                    id: userId
+                }
+            });
+        },
     }
   });

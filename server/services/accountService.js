@@ -218,7 +218,25 @@ var AccountService = {
       .catch(function (e) {
         callback(e);
       });
-  }
+  },
+    resetPassword: function(id,access_token,callback){
+        RestClient.put({
+            path: '/api/account/resetPassword/'+id,
+            access_token:access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                ErrorCode.getErrorSync(res.entity)
+                    .then(function(err){
+                        callback(err);
+                    });
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    }
 };
 
 Promise.promisifyAll(AccountService, {suffix: "Sync"});
