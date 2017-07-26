@@ -84,10 +84,16 @@ var UploadService = {
 				callback(err);
 				return;
 			}
-			if (res.statusCode === 200 || res.statusCode === 400) {
-				callback(null, res.body);
+			if (res.statusCode === 200 || res.statusCode === 426) {
+				console.log(JSON.parse(res.body));
+				callback(null, JSON.parse(res.body));
 			} else {
-				callback(ErrorCode.errorHandle(res));
+				callback(function(){
+					return {
+						code: JSON.parse(res.body).code,
+						message: JSON.parse(res.body).cause
+					};
+				});
 			}
 		})
 	},
