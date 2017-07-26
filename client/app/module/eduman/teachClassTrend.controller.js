@@ -11,7 +11,9 @@ angular.module('dleduWebApp')
             showYAxis: true,
             showLegend: true,
             stack: false,
-
+            tooltip:{
+                formatter: '出勤率：{c} %'
+            },
             yAxis: {
                 type: 'value',
                 axisLabel: {

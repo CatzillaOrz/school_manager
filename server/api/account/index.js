@@ -23,5 +23,6 @@ router.get('/signup_valid_phone_code', controller.validPhoneCode);
  * 邮箱验证
  */
 router.put('/validemail', controller.validEmail);
+router.put('/resetPassword', auth.isSignedIn,controller.resetPassword);
 
 module.exports = router;

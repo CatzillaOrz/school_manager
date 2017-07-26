@@ -27,8 +27,8 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="teacherCreat")
                                     span 新建
-                                button.btn.btn-primary(type='button' ng-click="teacherListFn.openImpBatch()")
-                                    span 批量导入
+                                //button.btn.btn-primary(type='button' ng-click="teacherListFn.openImpBatch()")
+                                //    span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -58,6 +58,9 @@
                                     a.handle(ng-click="teacherListFn.deletePrompt(teacher)")
                                         i.fa.fa-trash-o
                                         span 删除
+                                    a.handle(ng-click="teacherListFn.resetPasswordPrompt(teacher)")
+                                        i.fa.fa-repeat
+                                        span 重置密码
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
