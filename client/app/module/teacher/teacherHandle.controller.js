@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout,Select2LoadOptionsService) {
+    .controller('TeacherHandleCtrl', function ($scope, $state,TeacherService,AuthService,messageService,CollegeService,$timeout,Select2LoadOptionsService,CommonService) {
         /**
          * 此控制层是创建和编辑共用
          * @type {{title: string, prompt: string, handle: string, collegeDropList: Array, majorDropList: Array, collegeId: number, majorId: number, params: {id: number, orgId, name: string, userId, phone: string, email: string, jobNumber: string, sex: string}, page: {totalElements: number, totalPages: number, pageNumber: number, pageSize: number}, complete: boolean, select2Options: {ajax: (*), templateResult: templateResult}, addTeacher: addTeacher, getTeacherById: getTeacherById, updateTeacher: updateTeacher, submit: submit, getCollegeDropList: getCollegeDropList, getCollegeById: getCollegeById, init: init}}
@@ -67,13 +67,8 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg(error.data);
-                        }else {
 
-                            messageService.openMsg("添加失败");
-                        }
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"添加教师失败！"));
                     })
             },
             //根据id查询老师
