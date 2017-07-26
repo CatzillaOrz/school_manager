@@ -124,6 +124,10 @@ angular.module('dleduWebApp')
             select2MajorOptions: function () {
                 var that = this;
                 return {
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: '全部'
+                    },
                     allowClear: true,
                     ajax: {
                         url: "api/major/getMajorDropList",
@@ -165,6 +169,10 @@ angular.module('dleduWebApp')
             select2ClassOptions: function () {
                 var that = this;
                 return {
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: '全部'
+                    },
                     allowClear: true,
                     ajax: {
                         url: "api/class/geClassDropList",
@@ -306,7 +314,9 @@ angular.module('dleduWebApp')
             //初始化
             init: function () {
                 var _this = this;
-                _this.getCurrentSemester();
+                $timeout(function () {
+                    _this.getCurrentSemester();
+                },100)
                 _this.params.classId = $state.params.id;
                 _this.selected = tempStorageService.getter();
 

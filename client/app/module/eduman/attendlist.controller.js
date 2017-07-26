@@ -224,12 +224,8 @@ angular.module('dleduWebApp')
                         };
                         _this.getTeachClassAttendList();
                         _this.schoolYearDropList=[obj];
-                       _this.params.semesterId=data.id;
-                      $timeout(function () {
-                         // $("#ddd").select2("val", obj);
-                          // $("#ddd").select2().val(_this.params.semesterId).trigger("change")
-                         // $(".select2").select2("val", obj);
-                      },100)
+                        _this.params.semesterId=data.id;
+
                     })
                     .catch(function (error) {
 
@@ -380,7 +376,10 @@ angular.module('dleduWebApp')
             //初始化
             init: function () {
                 var _this = this;
-                _this.getCurrentSemester();
+
+                $timeout(function () {
+                    _this.getCurrentSemester();
+                },100)
                 if ($state.params.position == 2) {
                     $("#myTab  a:last").tab("show");
                 }
