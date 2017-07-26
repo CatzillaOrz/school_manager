@@ -128,6 +128,17 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/getElecFenceCurrent');
 				return eduman.get(params);
 			},
+			//获取电子围栏设置信息
+			getElecSetInfo: function(params){
+				var eduman = $resource('api/eduman/getElecSetInfo');
+				return eduman.get(params);
+			},
+			//保存设置的多边形信息
+			setElecFenceInfo: function(params){
+				var eduman = $resource('api/eduman/setElecFenceInfo');
+				return eduman.get(params);
+			},
+
             classTrend:function (params) {
                 var eduman = $resource('api/eduman/classTrend');
                 return eduman.get(params);

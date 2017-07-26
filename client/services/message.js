@@ -29,6 +29,33 @@ angular.module('dleduWebService')
                     //ngDialog.close({showClose: true});
                 }
             },
+
+            /*
+             * 是否根据id关闭对话框
+             * msg 消息内容
+             * */
+            openDialog: function(msg){
+                var result = ngDialog.open({
+                    template: '<span class="text-warning">' + msg + '</span>',
+                    plain: true
+                });
+                return result;
+            },
+
+            /*
+             * 是否根据id关闭对话框
+             * msg 消息内容
+             * timer 消息提示时间 默认2000
+             * */
+            closeDialog: function(id, timer){
+                if(timer =="" || timer ==undefined || timer == null){
+                    timer = 2000;
+                }
+                setTimeout(function () {
+                    ngDialog.close(id);
+                }, timer);
+            },
+
             /*
              * 如果调用回调函数
              *

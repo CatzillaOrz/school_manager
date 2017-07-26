@@ -6,8 +6,10 @@ angular.module('dleduWebApp')
 	.controller('ElecFenceCreateCtrl', function ($scope, AuthService, EduManService, amapService) {
 
 		$scope.ElecFenceCreateFn={
-			//学年下拉数据列表
-			schoolYearDropList: [],
+			//学期列表
+			semeterLists: [],
+			semeterListsCopy: [],
+			currentSemeter: null,
 			fromType: null,
 			map: null,
 			elecSet: {
@@ -28,7 +30,8 @@ angular.module('dleduWebApp')
 			//获取当前日期
 			getNowDate: function(){
 				var date = new Date();
-				this.currentDate = date.getFullYear() + (date.getMonth() + 1 + "") + (date.getDate() + "");
+				var month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
+				this.currentDate = date.getFullYear() + "-" + (month + "-") + (date.getDate());
 			},
 
 			select2SemesterOptions: function () {
@@ -40,24 +43,23 @@ angular.module('dleduWebApp')
 					},
 					ajax: {
 						//url: "api/schoolyear/getSchoolYearDropList",
-						url: "/v1/semester/list",
+						url: "api/schoolyear/getSemesterList",
 						//delay: 250,
 						data: function (query) {
 							var params = {
 								orgId: AuthService.getUser().orgId,
 								pageNumber: 1,
 								pageSize: 100,
-
-
 							}
 							params.name = query.term;
 							return params;
 						},
 						processResults: function (data, params) {
 							params.page = params.page || 1;
-							_this.schoolYearDropList = _this.select2GroupFormat(data.data)
+							_this.semeterListsCopy = angular.copy(data.data);
+							_this.semeterLists = _this.select2GroupFormat(data.data);
 							return {
-								results: _this.schoolYearDropList,
+								results: _this.semeterLists,
 								pagination: {
 									more: (params.page * 30) < data.total_count
 								}
@@ -75,15 +77,8 @@ angular.module('dleduWebApp')
 				angular.forEach(dataList, function (data) {
 					var obj = {
 						text: data.name,
-						children: []
+						id: data.id
 					};
-					angular.forEach(data.semesterIdNameList, function (sememster) {
-						var objChild = {
-							id: sememster.id,
-							text: sememster.name
-						};
-						obj.children.push(objChild);
-					})
 					result.push(obj);
 				})
 				return result;
@@ -117,7 +112,6 @@ angular.module('dleduWebApp')
 							that.polyVer = verNews;
 						}
 						that.drawPolygon(that.polyVer);
-						loadTerm(); //加载学期
 					})
 					.error(function(e){
 
@@ -152,11 +146,11 @@ angular.module('dleduWebApp')
 
 			//获取周末和周日时间
 			getWeekAndWeekend: function(termStart, termEnd, isExist){
-				var termStartLong = new Date(termStart);
+				var termStartLong = new Date(termStart + ' 00:00:00'), termEndLong = new Date(termEnd+ ' 00:00:00');
 				//获取日期内所有的周末和周内
 				var unSelectTime = [], selectTime = [];
 				if(isExist){
-					while(termStartLong.valueOf() <= termEnd) {
+					while(termStartLong.valueOf() <= termEndLong) {
 						if(termStartLong.getDay() == 0 || termStartLong.getDay() == 6){
 							unSelectTime.push(termStartLong.valueOf());
 						}else{
@@ -181,17 +175,61 @@ angular.module('dleduWebApp')
 				return {startTime: termStart, endTime: termEnd, unSelectTime: unSelectTime, selectTime: selectTime};
 			},
 
+			//根据学期id，获得学期对象
+			getSemeterById: function(id){
+				var that = this;
+				angular.forEach(this.semeterListsCopy, function(data){
+					if(data.id = id){
+						that.currentSemeter = data;
+					}
+				});
+				return that.currentSemeter;
+			},
+
 			//加载日期插件
-			loadDatepicker: function(){
+			loadDatepicker: function(options){
 				$('#starttime').data('datepicker', null);
 				var dateObj = $('#starttime').datepickermy(options);
 			},
+
+			//根据条件加载日历
+			loadDatePickerByOption: function(newVal){
+				if(!newVal){
+					return;
+				}
+				//localStorage.setItem('termObj', angular.toJson(newVal));
+				if(newVal && newVal.name == '--请选择--'){
+					return;
+				}
+				var options = {}, params = {};
+				//$scope.verifyObj.isSelTerm = true;
+				var semeter = this.getSemeterById(newVal);
+				if(this.record){
+					if(this.record.semesterId == newVal){
+						params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, false);
+					}else {
+						params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, true);
+					}
+				}else{
+					params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, true);
+				}
+				//去除修改日期后不在范围内的
+				options = {
+					weekStart: 1, top: 10, left: 84, zIndexOffset: 9999, startTime: new Date(params.startTime + ' 00:00:00'), endTime: new Date(params.endTime + ' 00:00:00'),
+					unSelectTime: params.unSelectTime, selectTime: params.selectTime, currentDate: (new Date(this.currentDate + ' 00:00:00').getTime() + 86400000)
+				};
+				this.loadDatepicker(options);
+			},
+
+
 
 			/**
 			 * 保存设置
 			 */
 			saveSet: function(){
+
 				var params = this.elecSet;
+				return;
 				if(this.elecSet.termSelected && this.elecSet.termSelected.name != '--请选择--'){
 					var data = $('#starttime').data('datepicker');
 					$scope.elecSet.selectTime = data.selectTime;
@@ -232,8 +270,13 @@ angular.module('dleduWebApp')
 				if(center.lon && center.lat){
 					this.map.setCenter([center.lon, center.lat]);
 				}
+
+				this.getNowDate();
 			}
 		};
 		$scope.ElecFenceCreateFn.init();
 
+		$scope.$watch("ElecFenceCreateFn.elecSet.termSelectedId", function(newVal){
+			$scope.ElecFenceCreateFn.loadDatePickerByOption(newVal);
+		});
 	});

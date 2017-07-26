@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('CollegeListCtrl', function ($scope, AuthService,ngDialog, CollegeService, messageService,CommonService) {
+    .controller('CollegeListCtrl', function ($scope, AuthService,ngDialog, CollegeService, messageService,CommonService, Upload, UploadService) {
         $scope.collegeListFn = {
             //学院列表
             collegeList: [],
@@ -14,6 +14,8 @@ angular.module('dleduWebApp')
                 pageNumber: 0,
                 pageSize: 10
             },
+            myFile: null, //选择的文件对象
+            errorInfos: [], //返回的错误信息
             //查询参数
             params: {
                 name:""
@@ -77,77 +79,93 @@ angular.module('dleduWebApp')
                 this.currentCollege = entity;
                 messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege);
             },
+
+            /**
+             * 弹出批量导入弹出框
+             */
+            openImpBatch: function(){
+                var result = ngDialog.open({
+                    template: 'importDialog',
+                    width: 600,
+                    scope: $scope,
+                });
+            },
+
+            /**
+             * 弹出批量导入弹出框
+             */
+            importantBatch: function(file){
+                var that = this;
+                if (file) {
+                    Upload.upload({
+                        url: '/api/upload/impBatch',
+                        method: 'POST',
+                        data: {
+                            file: file,
+                            orgId: AuthService.getUser().orgId,
+                            userId: AuthService.getUser().id,
+                            uploadType: 'college'
+                        }
+                    }).then(function(res){
+                        if(res.status === 200){
+                            that.errorInfos = JSON.parse(res.data);
+                            if(that.errorInfos[0].id){
+                                ngDialog.close();
+                                messageService.openMsg("导入成功！");
+                            }else{
+                                ngDialog.close();
+                                ngDialog.open({
+                                    template: 'importResultDialog',
+                                    width: 600,
+                                    scope: $scope
+                                });
+                            }
+                        }
+                    },function(res){
+                        messageService.openMsg("上传失败!");
+                    })
+                }else {
+                    messageService.openMsg("请选择excel文件！");
+                    return;
+                }
+            },
+
+            //选择文件事件
+            selected: function($newFiles, $invalidFiles){
+                if($newFiles) {
+                    var name = $newFiles[0].name;
+                    var suff = name.substring(name.lastIndexOf("."), name.length);
+                    if(suff != '.xls' && suff != '.xlsx'){
+                        var result = messageService.openDialog("请选择excel文件！");
+                        messageService.closeDialog(result.id);
+                        return;
+                    }
+                }
+            },
+
+			/**
+			 * 下载模板
+             */
+            downLoad: function(){
+                window.location.href = "http://gatewaydev.aizhixin.com:80/org-manager/v1/college/template";
+                /*UploadService.downLoad().$promise
+                    .then(function (data) {
+                        var blob = new Blob([data], {type: "application/vnd.ms-excel"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                        $("body").append(aForExcel);
+                        $(".forExcel").click();
+                        aForExcel.remove();
+                        //window.location.href = "http://7xpscc.com1.z0.glb.clouddn.com/904317d0-75df-4728-a832-0e2ce65c4cac.xlsx";
+                    })
+                    .catch(function (error) {
+                    })*/
+            },
+
             init: function () {
                 this.getCollegeList();
             }
         };
-        $scope.collegeListFn.init();
-        // $scope.buldLoad = function() {
-        //     ngDialog.open({
-        //         template: '' +
-        //         '<div class="buld_wrap"><div class="buld_head">' +
-        //         '   <div class="buld">批量导入</div>' +
-        //         '   <div class="close_btn ngdialog-close" type="button">关闭</div>' +
-        //         '   </div>' +
-        //         '<div class="propt_content">' +
-        //         '   <table>' +
-        //             '<tr>   ' +
-        //         '       <td class="first_td">上传文件</td>' +
-        //         '       <td><div class="choseFile left">选择文件</div>' +
-        //         '       <input type="text" readonly="readonly" class="left load"><div class="left load_inner" ng-click="show_data()" type="button">导入</div>' +
-        //         '       </td>' +
-        //     '       </tr>' +
-        //     '       <tr><td class="first_td">模板下载</td><td>' +
-        //         '       <div class="load_inner_w">账号导入模板</div>' +
-        //         '       </td>' +
-        //     '       </tr>' +
-        //         '   <tr>' +
-        //         '   <td class="first_td">导入功能说明</td><td>' +
-        //     '           <ul>' +
-        //         '           <li>1.请先下载账号导入模板</li>' +
-        //         '           <li>2.根据模板内容样式填写账号相关信息</li>' +
-        //         '           <li>3.选择要导入的账号文件，点击导入</li>' +
-        //         '       </ul>' +
-        //     '       </td>' +
-        //         '   </tr>' +
-        //     '   </table></div>',
-        //         plain: true,
-        //         showClose: false,
-        //         closeByDocument: false,
-        //         scope:$scope,
-        //         controller:function($scope){
-        //             $scope.show_data=function(){
-        //                 ngDialog.close("#ngdialog1");
-        //                 ngDialog.open({
-        //                     template: '<div class="repeatLoad">' +
-        //                     '               <div class="repeat_header">' +
-        //                     '                   <div class="repeat_title left">重复导入提示</div>' +
-        //                     '                   <div class="close_btn ngdialog-close right" type="button">关闭</div>' +
-        //                     '               </div>' +
-        //                     '               <div class="repeat_content">' +
-        //                     '                   <table><tr><td>序号</td><td>院系名称</td><td>提示</td></tr></table>' +
-        //                     '               </div>' +
-        //                 '                   <div class="repeat_footer">' +
-        //                     '                   <div class="dataTables_paginate paging_simple_numbers" id="datatable_col_reorder_paginate">' +
-        //                     '                       <ul class="pagination-sm" total-items="collegeListFn.page.totalElements" max-size="collegeListFn.page.pageSize" ng-model="collegeListFn.page.pageNumber" ng-change="collegeListFn.findCollegeByPage()" boundary-link-numbers="true" rotate="false" previous-text="<" next-text=">">' +
-        //                     '                       </ul>' +
-        //                 '                       </div>' +
-        //                 '                       <div class="repeat_button">' +
-        //                     '                       <div class="repeat_btn left" type="button">重复更新</div>' +
-        //                     '                       <div class="repeat_btn right">不覆盖</div>' +
-        //                     '                   </div>' +
-        //                     '               </div>' +
-        //                     '           </div>',
-        //                     plain: true,
-        //                     showClose:false,
-        //                     closeByDocument: false
-        //                 });
-        //
-        //             }
-        //         }
-        //     });
-        //
-        // }
 
             $scope.collegeListFn.init();
     });

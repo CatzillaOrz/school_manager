@@ -2,6 +2,7 @@ client/bower_components
 node_modules
 public
 dist
+uploads
 coverage
 npm-debug.log
 logs
