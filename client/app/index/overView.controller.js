@@ -4,7 +4,7 @@ angular.module('dleduWebApp')
     .controller('overViewCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$sce) {
         $scope.overViewFn={
             schoolInfo:{},
-            introduction:{},
+            introduction:null,
             params:{
                 orgId: ""
             },
