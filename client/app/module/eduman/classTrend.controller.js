@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('ClassTrendCtr', function ($scope,$timeout, $state, AuthService, Select2LoadOptionsService, EduManService, tempStorageService, $interval) {
+    .controller('ClassTrendCtr', function ($scope,$timeout, $state, AuthService, Select2LoadOptionsService, EduManService, tempStorageService, messageService) {
         $scope.config = {
             // title: 'Line Chart',
             // subtitle: 'Line Chart Subtitle',
@@ -278,10 +278,14 @@ angular.module('dleduWebApp')
                 };
                 EduManService.classAttendExportTrend(params).$promise
                     .then(function (data) {
-                        location.href = data.message;
+                        if(data.message){
+                            location.href = data.message;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //列表折线图切换
