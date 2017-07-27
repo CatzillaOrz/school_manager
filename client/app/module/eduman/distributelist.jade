@@ -5,13 +5,13 @@
         ul#myTab.nav.nav-tabs.pull-left.in
             li.active(ng-click="distributeListFn.switchType('uncomplete')")
                 a(data-toggle='tab', href='#hr1', aria-expanded='true')
-                    i.fa.fa-lg.fa-calendar
+                    i.fa.fa-list
                     span.hidden-mobile.hidden-tablet  选择分配
             li(ng-click="distributeListFn.switchType('complete')")
                 a(data-toggle='tab', href='#hr2', aria-expanded='false')
-                    i.fa.fa-lg.fa-clock-o
+                    i.fa.fa-list-alt
                     span.hidden-mobile.hidden-tablet
-                        | 已分配
+                        |  已分配
                         //span.label.bg-color-blue.txt-color-white
                             | label
                             i.fa.fa-exclamation
@@ -191,7 +191,7 @@
                                                         i.fa.fa-pencil-square-o
                                                         span 已撤销&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")
-                                                        i.fa.fa-trash-o
+                                                        i.fa.fa-line-chart
                                                         span 统计
 
                                     .dt-toolbar-footer
