@@ -56,7 +56,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            that.teacherDropList=data.data;
+                          //  that.teacherDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -355,4 +355,3 @@ angular.module('dleduWebApp')
 
 var imgSrc = "https://img.alicdn.com/bao/uploaded/TB1qimQIpXXXXXbXFXXSutbFXXX.jpg";
 //    var imgSrc = "img/1.jpg";
-
