@@ -39,7 +39,7 @@
                                     span(ng-if="!teachClassTrendFn.showLine") 折线图
                                 button.btn.btn-primary(ng-click="teachClassTrendFn.teachClassAttendExportTend()")
                                     span 导出
-                    .table.table-striped.table-bordered.table-hover.dataTable(ng-if="teachClassTrendFn.showLine")
+                    .table.table-striped.table-bordered.table-hover.dataTable.float-right(ng-if="teachClassTrendFn.showLine")
                         .no-footer(style="height:500px")
                             .trend-total 共{{teachClassTrendFn.studentsCount}}人
                             line-chart(config='config', data='teachClassTrendFn.trendCharts' )
