@@ -3,7 +3,7 @@
  * 当天轨迹
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceCreateCtrl', function ($scope, AuthService, EduManService, amapService) {
+	.controller('ElecFenceCreateCtrl', function ($scope, AuthService, EduManService, amapService, SchoolYearService) {
 
 		$scope.ElecFenceCreateFn={
 			//学期列表
@@ -35,7 +35,23 @@ angular.module('dleduWebApp')
 			},
 
 			select2SemesterOptions: function () {
-				var _this = this;
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 1,
+					pageSize: 10000,
+				}
+				SchoolYearService.getSemesterList(params).$promise
+					.then(function(dataList){
+						angular.forEach(dataList.data, function (data) {
+							data.text = data.name;
+						})
+						that.semeterLists = dataList.data;
+					})
+					.catch(function(e){
+
+					});
+				/*var _this = this;
 				return {
 					placeholder: {
 						id: '-1', // the value of the option
@@ -68,7 +84,7 @@ angular.module('dleduWebApp')
 						cache: false
 					},
 
-				}
+				}*/
 			},
 
 			//学期下拉列表分组数据格式化
@@ -178,7 +194,7 @@ angular.module('dleduWebApp')
 			//根据学期id，获得学期对象
 			getSemeterById: function(id){
 				var that = this;
-				angular.forEach(this.semeterListsCopy, function(data){
+				angular.forEach(this.semeterLists, function(data){
 					if(data.id = id){
 						that.currentSemeter = data;
 					}
@@ -215,7 +231,7 @@ angular.module('dleduWebApp')
 				}
 				//去除修改日期后不在范围内的
 				options = {
-					weekStart: 1, top: 10, left: 84, zIndexOffset: 9999, startTime: new Date(params.startTime + ' 00:00:00'), endTime: new Date(params.endTime + ' 00:00:00'),
+					weekStart: 1, top: -10, left: 84, zIndexOffset: 9999, startTime: new Date(params.startTime + ' 00:00:00'), endTime: new Date(params.endTime + ' 00:00:00'),
 					unSelectTime: params.unSelectTime, selectTime: params.selectTime, currentDate: (new Date(this.currentDate + ' 00:00:00').getTime() + 86400000)
 				};
 				this.loadDatepicker(options);
@@ -227,7 +243,6 @@ angular.module('dleduWebApp')
 			 * 保存设置
 			 */
 			saveSet: function(){
-
 				var params = this.elecSet;
 				return;
 				if(this.elecSet.termSelected && this.elecSet.termSelected.name != '--请选择--'){
