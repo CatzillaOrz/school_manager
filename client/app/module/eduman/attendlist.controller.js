@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService, ClassService, EduManService, tempStorageService, MajorService, $timeout) {
+    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService, ClassService, EduManService, tempStorageService, MajorService, $timeout,messageService) {
         $scope.attendFn = {
             //学年下拉数据列表
             schoolYearDropList: [],
@@ -288,10 +288,14 @@ angular.module('dleduWebApp')
                 };
                 EduManService.teachClassAttendExport(params).$promise
                     .then(function (data) {
-                        location.href = data.message;
+                        if(data.message){
+                            location.href = data.message;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //行政班考勤记录导出
@@ -310,10 +314,15 @@ angular.module('dleduWebApp')
                 }
                 EduManService.classAttendExport(params).$promise
                     .then(function (data) {
-                        location.href = data.message;
+                        if(data.message){
+                            location.href = data.message;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //查询参数重置

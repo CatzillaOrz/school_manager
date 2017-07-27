@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('TeachClassTrendCtr', function ($scope, $state, EduManService, tempStorageService,$interval) {
+    .controller('TeachClassTrendCtr', function ($scope, $state, EduManService, tempStorageService,messageService) {
         $scope.config = {
             // title: 'Line Chart',
             // subtitle: 'Line Chart Subtitle',
@@ -91,10 +91,14 @@ angular.module('dleduWebApp')
                 };
                 EduManService.teachClassAttendExportTend(params).$promise
                     .then(function (data) {
-                        location.href=data.message;
+                        if(data.message){
+                            location.href = data.message;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //初始化
