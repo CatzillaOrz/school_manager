@@ -64,7 +64,7 @@ angular.module('dleduWebApp')
                     },
                     processResults: function (data, params) {
                         params.page = params.page || 1;
-                        _this.collegeDropList=data.data;
+                       // _this.collegeDropList=data.data;
                         return {
                             results: data.data,
                             pagination: {
@@ -104,7 +104,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.majorDropList=data.data;
+                            //_this.majorDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
