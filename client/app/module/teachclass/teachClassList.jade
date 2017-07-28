@@ -30,6 +30,10 @@
                                 .speace-10
                                 button.btn.btn-primary(ui-sref="teachClassCreat")
                                     span 新建教学班
+                                button.btn.btn-primary(type='button' ng-click="teachClassListFn.openImpBatch('optional')")
+                                    span 按选修课批量导入
+                                button.btn.btn-primary(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')")
+                                    span 按必修课批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -76,5 +80,150 @@
                         .col-sm-6.col-xs-12
                                 #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                     ul.pagination-sm(uib-pagination, total-items='teachClassListFn.page.totalElements', max-size='teachClassListFn.page.pageSize' ng-model='teachClassListFn.page.pageNumber',ng-change="teachClassListFn.findTeachClassByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='teachClassListFn.selected($newFiles)' ng-model="teachClassListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="teachClassListFn.myFile.name" )
+                            .left.load_inner(ng-click='teachClassListFn.importantBatch(teachClassListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="teachClassListFn.downLoad()") 账号导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载账号导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+        ul#myTab.nav.nav-tabs
+            li.active
+                a(href='#teachingClass', data-toggle='tab')
+                    | 教学任务
+            li
+                a(href='#teacher', data-toggle='tab') 教师
+            li(ng-show='teachClassListFn.impType=="optional"')
+                a(href='#student', data-toggle='tab') 学生
+            li(ng-show='teachClassListFn.impType=="compulsory"')
+                a(href='#classes', data-toggle='tab') 班级
+            li
+                a(href='#course', data-toggle='tab') 课程表
+        #myTabContent.tab-content
+            #teachingClass.tab-pane.fade.in.active
+                p
+                    .repeatLoad
+                        .repeat_content
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班编号
+                                    td 教学班名称
+                                    td 课程编号
+                                    td 课程名称
+                                    td 学年
+                                    td 学期
+                                    td 错误信息
+                                tr(ng-repeat="info in teachClassListFn.errorInfos.teachingClassExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.courseCode}}
+                                    td {{info.courseName}}
+                                    td {{info.schoolYear}}
+                                    td {{info.semester}}
+                                    td {{info.msg}}
+            #teacher.tab-pane.fade
+                p
+                    .repeatLoad
+                        .repeat_content
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班编号
+                                    td 教学班名称
+                                    td 教师编号
+                                    td 教师姓名
+                                    td 错误信息
+                                tr(ng-repeat="info in teachClassListFn.errorInfos.teacherExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.teacherCode}}
+                                    td {{info.teacherName}}
+                                    td {{info.msg}}
+            #student.tab-pane.fade(ng-show='teachClassListFn.impType!="compulsory"')
+                p
+                    .repeatLoad
+                        .repeat_content
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班编号
+                                    td 教学班名称
+                                    td 学生编号
+                                    td 学生姓名
+                                    td 错误信息
+                                tr(ng-repeat="info in teachClassListFn.errorInfos.studentExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.studentCode}}
+                                    td {{info.studentName}}
+                                    td {{info.msg}}
+            #classes.tab-pane.fade(ng-show='teachClassListFn.impType=="compulsory"')
+                p
+                    .repeatLoad
+                        .repeat_content
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班编号
+                                    td 教学班名称
+                                    td 班级编号
+                                    td 班级名称
+                                    td 错误信息
+                                tr(ng-repeat="info in teachClassListFn.errorInfos.classesExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.classesCode}}
+                                    td {{info.classesName}}
+                                    td {{info.msg}}
+            #course.tab-pane.fade
+                p
+                    .repeatLoad
+                        .repeat_content
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班编号
+                                    td 教学班名称
+                                    td 起始周
+                                    td 结束周
+                                    td 单双周
+                                    td 错误信息
+                                tr(ng-repeat="info in teachClassListFn.errorInfos.courseScheduleExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.startWeek}}
+                                    td {{info.endWeek}}
+                                    td {{info.oneOrDouble}}
+                                    td {{info.msg}}
 
 

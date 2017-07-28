@@ -3,27 +3,33 @@
  * 当天轨迹
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceCreateCtrl', function ($scope, AuthService, EduManService, amapService, SchoolYearService) {
-
-		$scope.ElecFenceCreateFn={
+	.controller('ElecFenceCreateCtrl', function ($scope, $timeout, AuthService, EduManService, amapService, SchoolYearService,
+												 messageService) {
+		$timeout(function () {
+			$scope.$watch("elecFenceCreateFn.elecSet.termSelectedId", function(newValue, oldValue){
+				$scope.elecFenceCreateFn.loadDatePickerByOption(newValue);
+			});
+		});
+		$scope.elecFenceCreateFn={
 			//学期列表
 			semeterLists: [],
+			//学期列表clone
 			semeterListsCopy: [],
+			//保存当前学期信息
 			currentSemeter: null,
-			fromType: null,
+			fromType: null,//是否从创建多边形页面过来。1是，0否
+			//地图对象
 			map: null,
+			polyVer: [],//多边形顶点
+			//设置信息对象
 			elecSet: {
-				termSelectedId: null,
-				terms: [],
-				selectTime: [],
-				unSelectTime: [],
-				timeSections: [],
-				startTimeSection: {},//选择的开始时间段
-				endTimeSection: {}//选择的结束时间段
+				termSelectedId: 0,
+				selectTime: [],//监控日期
+				unSelectTime: [], //非监控日期
+				timeSections: []
 			},
-			currentDate: null,
+			currentDate: null,//当天时间
 			record: null,
-			polygonVertexs: null,
 			operation: '去修改',
 			location: null,
 
@@ -34,6 +40,7 @@ angular.module('dleduWebApp')
 				this.currentDate = date.getFullYear() + "-" + (month + "-") + (date.getDate());
 			},
 
+			//获取学期列表
 			select2SemesterOptions: function () {
 				var that = this;
 				var params = {
@@ -100,47 +107,14 @@ angular.module('dleduWebApp')
 				return result;
 			},
 
-			/**
-			 * 加载地图设置信息
-			 * @param options
-			 */
-			loadSetInfo: function(){
-				var that = this;
-				EduManService.getElecSetInfo()
-					.success(function(data){
-						if(!data){//第一次进入设置
-							that.operation = '去设置';
-						}else{//初始化选择的数据
-							that.record = data;
-							that.elecSet.timeSections = data.monitorTime;
-							that.verifyObj.isExistTimeSection = true;
-							var verNew = [], verNews = [];
-							that.map.setCenter([parseFloat(data.lltudes[0][0].longitude), parseFloat(data.lltudes[0][1].latitude)]);
-							for(var i = 0, length = data.lltudes.length; i < length; i++){
-								verNew = [];
-								var temp = data.lltudes[i];
-								for(var j = 0; j < temp.length; j++){
-									var lonlat = temp[j];
-									verNew.push({longitude: parseFloat(lonlat.longitude), latitude: parseFloat(lonlat.latitude)});
-								}
-								verNews.push(verNew);
-							}
-							that.polyVer = verNews;
-						}
-						that.drawPolygon(that.polyVer);
-					})
-					.error(function(e){
-
-					});
-			},
 
 			/**
 			 * 显示多变形
 			 * @type {Polygon|{type, shape, buildPath}|*}
 			 */
-			drawPolygon: function(){
+			drawPolygon: function(polyVers){
 				var ver = [];
-				var polygons = $scope.polyVer;
+				var polygons = polyVers;
 				for(var i = 0; i < polygons.length; i++){
 					ver = [];
 					var polygonVer = polygons[i];
@@ -156,7 +130,7 @@ angular.module('dleduWebApp')
 						fillColor: "#1791fc",
 						fillOpacity: 0.35
 					});
-					polygonObj.setMap($scope.elecSet.map);
+					polygonObj.setMap(this.map);
 				}
 			},
 
@@ -175,14 +149,14 @@ angular.module('dleduWebApp')
 						termStartLong.setDate(termStartLong.getDate() + 1);
 					}
 				}else{
-					for(var i = 0, nomonitorLen = $scope.record.nomonitorDate.length; i < nomonitorLen; i++ ){
-						var temp = $scope.record.nomonitorDate[i];
+					for(var i = 0, nomonitorLen = this.record.nomonitorDate.length; i < nomonitorLen; i++ ){
+						var temp = this.record.nomonitorDate[i];
 						if(temp >=termStart  && temp <= termEnd){
 							unSelectTime.push(temp);
 						}
 					}
-					for(var j = 0, monitorLen = $scope.record.monitorDate.length; j < monitorLen; j++ ){
-						var temp = $scope.record.monitorDate[j];
+					for(var j = 0, monitorLen = this.record.monitorDate.length; j < monitorLen; j++ ){
+						var temp = this.record.monitorDate[j];
 						if(temp >= termStart  && temp <= termEnd){
 							selectTime.push(temp);
 						}
@@ -208,17 +182,15 @@ angular.module('dleduWebApp')
 				var dateObj = $('#starttime').datepickermy(options);
 			},
 
-			//根据条件加载日历
+			//根据选择的学期加载日历
 			loadDatePickerByOption: function(newVal){
 				if(!newVal){
 					return;
 				}
-				//localStorage.setItem('termObj', angular.toJson(newVal));
 				if(newVal && newVal.name == '--请选择--'){
 					return;
 				}
 				var options = {}, params = {};
-				//$scope.verifyObj.isSelTerm = true;
 				var semeter = this.getSemeterById(newVal);
 				if(this.record){
 					if(this.record.semesterId == newVal){
@@ -243,23 +215,19 @@ angular.module('dleduWebApp')
 			 * 保存设置
 			 */
 			saveSet: function(){
-				var params = this.elecSet;
-				return;
-				if(this.elecSet.termSelected && this.elecSet.termSelected.name != '--请选择--'){
+				if(this.elecSet.termSelectedId){
 					var data = $('#starttime').data('datepicker');
-					$scope.elecSet.selectTime = data.selectTime;
-					$scope.elecSet.unSelectTime = data.unSelectTime;
+					this.elecSet.selectTime = data.selectTime;
+					this.elecSet.unSelectTime = data.unSelectTime;
 				}
 				//获取经纬度
-				var latLon = this.polyVer;
-				if(latLon.length > 0){
-					this.verifyObj.isExistPoly = true;
-				}else{
-					this.verifyObj.isExistPoly = false;
+				if(this.polyVer.length == 0){
+					messageService.openMsg("请先设置多边形!");
+					return;
 				}
 
-				var paramsObj = {lltudes: latLon, monitorDate: this.elecSet.selectTime, nomonitorDate: this.elecSet.unSelectTime,
-					monitorTime: this.elecSet.timeSections, semesterId: this.elecSet.termSelected.id};
+				var paramsObj = {lltudes: this.polyVer, monitorDate: this.elecSet.selectTime, nomonitorDate: this.elecSet.unSelectTime,
+					 semesterId: this.elecSet.termSelectedId, organId: AuthService.getUser().orgId};
 				EduManService.setElecFenceInfo(paramsObj).$promise
 					.then(function(data){
 						if(data.trueMSG){
@@ -273,6 +241,38 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			/**
+			 * 加载地图设置信息
+			 * @param options
+			 */
+			loadSetInfo: function(){
+				var that = this;
+				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
+					.then(function(data){
+						if(!data){//第一次进入设置
+							that.operation = '去设置';
+						}else{//初始化选择的数据
+							that.record = data;
+							that.elecSet.timeSections = data.monitorTime;
+							var verNew = [], verNews = [];
+							that.map.setCenter([parseFloat(data.lltudes[0][0].longitude), parseFloat(data.lltudes[0][1].latitude)]);
+							for(var i = 0, length = data.lltudes.length; i < length; i++){
+								verNew = [];
+								var temp = data.lltudes[i];
+								for(var j = 0; j < temp.length; j++){
+									var lonlat = temp[j];
+									verNew.push({longitude: parseFloat(lonlat.longitude), latitude: parseFloat(lonlat.latitude)});
+								}
+								verNews.push(verNew);
+							}
+							that.polyVer = verNews;
+						}
+						that.drawPolygon(that.polyVer);
+					})
+					.catch(function(e){
+
+					});
+			},
 
 			init: function () {
 				//初始化地图
@@ -280,18 +280,15 @@ angular.module('dleduWebApp')
 					resizeEnable: true,
 					zoom:13
 				});
-				amapService.getLocation(this.map);
+				/*amapService.getLocation(this.map);
 				var center = amapService.getCenter();
 				if(center.lon && center.lat){
 					this.map.setCenter([center.lon, center.lat]);
-				}
+				}*/
 
 				this.getNowDate();
+				this.loadSetInfo();
 			}
 		};
-		$scope.ElecFenceCreateFn.init();
-
-		$scope.$watch("ElecFenceCreateFn.elecSet.termSelectedId", function(newVal){
-			$scope.ElecFenceCreateFn.loadDatePickerByOption(newVal);
-		});
+		$scope.elecFenceCreateFn.init();
 	});
