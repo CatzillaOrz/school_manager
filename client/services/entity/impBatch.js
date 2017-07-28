@@ -39,7 +39,7 @@ angular.module('dleduWebService')
 							}
 						}
 					},function(res){
-						messageService.openMsg("上传失败!");
+						messageService.openMsg("导入失败!");
 					})
 				}else {
 					messageService.openMsg("请选择excel文件！");
@@ -51,7 +51,7 @@ angular.module('dleduWebService')
 			selected: function($newFiles){
 				if($newFiles && $newFiles[0]) {
 					var name = $newFiles[0].name;
-					var suff = name.substring(name.lastIndexOf("."), name.length);
+					var suff = name.substring(name.lastIndexOf("."), name.length).toLowerCase();
 					if(suff != '.xls' && suff != '.xlsx'){
 						var result = messageService.openDialog("请选择excel文件！");
 						messageService.closeDialog(result.id);
@@ -71,16 +71,22 @@ angular.module('dleduWebService')
 			downLoad: function(type){
 				var hostname = window.location.hostname;
 				var host = 'http://gatewaydev.aizhixin.com/org-manager';
-				if(hostname.indexOf('gatewaydev') != -1){
+				if(hostname.indexOf('schooldev.aizhixin.com') != -1){
 					host = 'http://gatewaydev.aizhixin.com/org-manager';
-				}else if(hostname.indexOf('gatewaytest') != -1){
+				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
+					host = 'http://gatewaytest.aizhixin.com/org-manager';
+				}else if(hostname.indexOf('school.dlztc.com') != -1){
+					host = 'http://gatewaytest.aizhixin.com/org-manager';
+				}else if(hostname.indexOf('school.aizhixin.com') != -1){
 					host = 'http://gatewaytest.aizhixin.com/org-manager';
 				}
 				var paths = {'college' : host + '/v1/college/template',
 					'major' : host + '/v1/professionnal/template',
 					'classes':host + '/v1/classes/template',
 					'student': host + '/v1/students/template',
-					'teacher': host + '/v1/teacher/template'};
+					'teacher': host + '/v1/teacher/template',
+					'compulsory': host + '/v1/teachingclass/template?templateType=must',
+					'optional': host + '/v1/teachingclass/template?templateType=option'};
 				window.location.href = paths[type];
 			},
 		}

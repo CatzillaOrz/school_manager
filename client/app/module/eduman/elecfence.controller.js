@@ -2,7 +2,11 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceCtrl', function ($scope, $state, AuthService, EduManService, Select2LoadOptionsService, MajorService, CollegeService, ClassService) {
+	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService, MajorService, CollegeService, ClassService) {
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isLeaveSchoolId', function(newValue, oldValue) {
+			});
+		});
 		$scope.evaFenceFn={
 			//问卷信息
 			records: [],
@@ -25,6 +29,38 @@ angular.module('dleduWebApp')
 				pageNumber: 1,
 				pageSize: 10
 			},
+
+			params:{
+				isLeaveSchoolId: -2,
+				isActiveId: -2,
+				isLoginId: -2,
+				locationId: -2,
+				isOnlineId: -2
+			},
+
+			isLeaveSchool: [],//是否曾离校
+			isActive: [],//是否激活
+			isLogin: [],//是否登录当天
+			location: [],//当前位置
+			isOnline: [],//是否在线
+
+			//获取结果筛选条件
+			getResultOption: function(type){
+				if(type=="isLeaveSchool"){
+					this.isLeaveSchool = [{id: -2, text: '是否曾离校'},{id: 1, text: '是'},{id: 0, text: '否'},{id: -1, text: '未知'}];
+				}else if(type=="isActive"){
+					this.isActive = [{id: -2, text: '是否未激活'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
+				}else if(type=="isLogin"){
+					this.isLogin = [{id: -2, text: '当天是否登录'}, {id: 1, text: '是'}, {id:0, text: '否'}];
+				}else if(type=="location"){
+					this.location = [{id: -2, text: '当前位置'}, {id: 1, text: '在校'},{id:0, text: '离校'}];
+				}else if(type=="isOnline"){
+					this.isOnline = [{id: -2, text: '在线状态'}, {id: 1, text: '在线'},{id:0, text: '离线'}];
+				}
+
+				//return {minimumResultsForSearch: -1};
+			},
+
 
 			//学院下拉列表配置
 			select2CollegeOptions:{

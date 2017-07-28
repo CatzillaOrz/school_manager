@@ -5,27 +5,19 @@
         .span12(style="margin-top: 10px;margin-left:20px;font-weight:bolder") 学校范围设定：
         #elecmap(style="height:300px")
             .mapedit
-                //a(ui-sref="elecfencemapset") {{operation}}
-                a(ui-sref="elecfencemapset") {{'去修改'}}
+                a(ui-sref="elecfencemapset") {{elecFenceCreateFn.operation}}
     .row-fluid
         .widget-body#mapset(style="padding:20px 0 20px 20px;")
             .widget-forms.clearfix
                 form.form-horizontal
-                    .span12(ng-show='verifyObj.isExistPoly === false')
-                        span.text-danger 请绘制多边形
-                    //.control-group
-                        h5 警报设定：
-                        .span12
-                            input(type='checkbox' name='time', ng-model="elecSet.selectTeacher")
-                            |  学生超出规定范围后，给班主任发送警报提醒
                     .control-group
                         h5 监控时间设定：
                         .span12
                             .row(style="margin-bottom:15px;")
                                 .col-sm-6
                                     span 请选择学期：
-                                    select(style="width:50%" ng-model="ElecFenceCreateFn.elecSet.termSelectedId" ui-select2="ElecFenceCreateFn.select2SemesterOptions()" )
-                                        option(value="{{semester.id}}" ng-repeat="semester in ElecFenceCreateFn.semeterLists") {{semester.text}}
+                                    select(style="width:50%" ng-model="elecFenceCreateFn.elecSet.termSelectedId" ui-select2="elecFenceCreateFn.select2SemesterOptions()" )
+                                        option(value="{{semester.id}}" ng-repeat="semester in elecFenceCreateFn.semeterLists") {{semester.text}}
                         .span12(style="margin-top:20px;")
                             .span6
                                 .span6 学期日历：
@@ -37,5 +29,5 @@
 
     .row-fluid(style="margin-top: 15px;")
         .span12
-            button.btn.btn-success#success(style="width:100px", ng-click="saveSet()") 保存
+            button.btn.btn-success#success(style="width:100px", ng-click="elecFenceCreateFn.saveSet()") 保存
 

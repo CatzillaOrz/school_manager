@@ -4,12 +4,16 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService) {
+	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
+												Upload, UploadService, ImpBatchService, ngDialog) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
 			//当前操作的教学班
 			currentTeachClass: {},
+			myFile: null, //选择的文件对象
+			errorInfos: [], //返回的错误信息
+			impType: '', //导入类型，按班级还是学生
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -118,6 +122,78 @@ angular.module('dleduWebApp')
 				that.currentTeachClass = entity;
 				messageService.getMsg("您确定要删除此教学班吗？", that.deleteTeachClass)
 			},
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			openImpBatch: function(type){
+				this.impType = type;
+				var params = {
+					template: 'importDialog',
+					width: 600,
+					scope: $scope,
+				};
+				ImpBatchService.openImpBatch(params);
+			},
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			importantBatch: function(file){
+				var that = this;
+				var type = this.impType == 'compulsory' ? 'compulsory' : 'optional';
+				var params = {
+					file: file,
+					orgId: AuthService.getUser().orgId,
+					userId: AuthService.getUser().id,
+					uploadType: type
+				};
+				var dialogParams = {
+					template: 'importResultDialog',
+					width: 600,
+					scope: $scope
+				};
+				if(!ImpBatchService.selected([params.file])){
+					return;
+				}
+				if (params.file) {
+					Upload.upload({
+						url: '/api/upload/impBatch',
+						method: 'POST',
+						data: params
+					}).then(function(res){
+						if(res.status === 200){
+							that.errorInfos = res.data;
+							if(!that.errorInfos.code ||  that.errorInfos.code== ''){
+								ngDialog.close();
+								messageService.openMsg("导入成功！");
+							}else{
+								ngDialog.close();
+								ngDialog.open(dialogParams);
+							}
+						}
+					},function(res){
+						messageService.openMsg("导入失败!");
+					})
+				}else {
+					messageService.openMsg("请选择excel文件！");
+					return;
+				}
+			},
+
+			//选择文件事件
+			selected: function($newFiles){
+				ImpBatchService.selected($newFiles);
+			},
+
+			/**
+			 * 下载模板
+			 */
+			downLoad: function(){
+				var type = this.impType == 'compulsory' ? 'compulsory' : 'optional';
+				ImpBatchService.downLoad(type);
+			},
+
 			init: function () {
 				this.getTeachClassList();
 			}

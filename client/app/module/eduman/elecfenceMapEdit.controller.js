@@ -3,7 +3,7 @@
  * 电子围栏地图编辑
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceMapEditCtrl', function ($scope, AuthService, EduManService, amapService, messageService) {
+	.controller('ElecFenceMapEditCtrl', function ($scope, $state, AuthService, EduManService, amapService, messageService) {
 		$scope.ElecFenceCreateFn = {
 			isDisabled: false,//不存在多边形时
 			polyVer: [],
@@ -170,16 +170,16 @@ angular.module('dleduWebApp')
 						this.record.nomonitorDate = [];
 					}
 				}
-				EduManService.setElecFenceInfo(this.record)
-					.success(function(data){
+				EduManService.setElecFenceInfo(this.record).$promise
+					.then(function(data){
 						if(data.trueMSG){
 							messageService.openMsg("保存成功!");
 						}else{
 							messageService.openMsg("保存失败!");
 						}
-						//$state.go('elecfence.set', {type: 1});
+						$state.go('elecfencecreate');
 					})
-					.error(function(e){
+					.catch(function(e){
 
 					})
 			},
