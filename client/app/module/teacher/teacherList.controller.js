@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('TeacherListCtrl', function ($scope, TeacherService,AuthService,messageService,CommonService,
-                                             ngDialog, Upload, ImpBatchService) {
+                                             ngDialog, Upload, ImpBatchService, AccountService) {
         $scope.teacherListFn={
             //老师列表
             teacherList: [],

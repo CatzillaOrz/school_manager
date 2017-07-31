@@ -107,39 +107,12 @@ angular.module('dleduWebApp')
 				return result;
 			},
 
-
-			/**
-			 * 显示多变形
-			 * @type {Polygon|{type, shape, buildPath}|*}
-			 */
-			drawPolygon: function(polyVers){
-				var ver = [];
-				var polygons = polyVers;
-				for(var i = 0; i < polygons.length; i++){
-					ver = [];
-					var polygonVer = polygons[i];
-					for(var j = 0; j < polygonVer.length; j++){
-						ver.push([parseFloat(polygonVer[j].longitude), parseFloat(polygonVer[j].latitude)]);
-					}
-
-					var polygonObj = new AMap.Polygon({
-						path: ver,    //设置多边形轮廓的节点数组
-						strokeColor:"#1791fc",
-						strokeOpacity:0.8,
-						strokeWeight:2,
-						fillColor: "#1791fc",
-						fillOpacity: 0.35
-					});
-					polygonObj.setMap(this.map);
-				}
-			},
-
 			//获取周末和周日时间
 			getWeekAndWeekend: function(termStart, termEnd, isExist){
-				var termStartLong = new Date(termStart + ' 00:00:00'), termEndLong = new Date(termEnd+ ' 00:00:00');
+				var termStartLong = termStart, termEndLong = termEnd;
 				//获取日期内所有的周末和周内
 				var unSelectTime = [], selectTime = [];
-				if(isExist){
+				if(isExist){//没有选择学期时
 					while(termStartLong.valueOf() <= termEndLong) {
 						if(termStartLong.getDay() == 0 || termStartLong.getDay() == 6){
 							unSelectTime.push(termStartLong.valueOf());
@@ -148,7 +121,7 @@ angular.module('dleduWebApp')
 						}
 						termStartLong.setDate(termStartLong.getDate() + 1);
 					}
-				}else{
+				}else{//选择学期时
 					for(var i = 0, nomonitorLen = this.record.nomonitorDate.length; i < nomonitorLen; i++ ){
 						var temp = this.record.nomonitorDate[i];
 						if(temp >=termStart  && temp <= termEnd){
@@ -173,6 +146,7 @@ angular.module('dleduWebApp')
 						that.currentSemeter = data;
 					}
 				});
+				that.elecSet.termSelectedId = id;
 				return that.currentSemeter;
 			},
 
@@ -194,16 +168,17 @@ angular.module('dleduWebApp')
 				var semeter = this.getSemeterById(newVal);
 				if(this.record){
 					if(this.record.semesterId == newVal){
-						params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, false);
+						params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), false);
 					}else {
-						params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, true);
+						params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), true);
 					}
 				}else{
-					params = this.getWeekAndWeekend(semeter.startDate, semeter.endDate, true);
+					params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), true);
 				}
 				//去除修改日期后不在范围内的
 				options = {
-					weekStart: 1, top: -10, left: 84, zIndexOffset: 9999, startTime: new Date(params.startTime + ' 00:00:00'), endTime: new Date(params.endTime + ' 00:00:00'),
+					weekStart: 1, top: -10, left: 84, zIndexOffset: 9999, startTime: params.startTime .getTime(),
+					endTime: params.endTime.getTime(),
 					unSelectTime: params.unSelectTime, selectTime: params.selectTime, currentDate: (new Date(this.currentDate + ' 00:00:00').getTime() + 86400000)
 				};
 				this.loadDatepicker(options);
@@ -242,6 +217,32 @@ angular.module('dleduWebApp')
 			},
 
 			/**
+			 * 显示多变形
+			 * @type {Polygon|{type, shape, buildPath}|*}
+			 */
+			drawPolygon: function(polyVers){
+				var ver = [];
+				var polygons = polyVers;
+				for(var i = 0; i < polygons.length; i++){
+					ver = [];
+					var polygonVer = polygons[i];
+					for(var j = 0; j < polygonVer.length; j++){
+						ver.push([parseFloat(polygonVer[j].longitude), parseFloat(polygonVer[j].latitude)]);
+					}
+
+					var polygonObj = new AMap.Polygon({
+						path: ver,    //设置多边形轮廓的节点数组
+						strokeColor:"#1791fc",
+						strokeOpacity:0.8,
+						strokeWeight:2,
+						fillColor: "#1791fc",
+						fillOpacity: 0.35
+					});
+					polygonObj.setMap(this.map);
+				}
+			},
+
+			/**
 			 * 加载地图设置信息
 			 * @param options
 			 */
@@ -267,7 +268,11 @@ angular.module('dleduWebApp')
 							}
 							that.polyVer = verNews;
 						}
+						//绘制多边形
 						that.drawPolygon(that.polyVer);
+						//选择学期
+						//that.getSemeterById(that.semesterId);
+						that.elecSet.termSelectedId = that.record.semesterId;
 					})
 					.catch(function(e){
 
