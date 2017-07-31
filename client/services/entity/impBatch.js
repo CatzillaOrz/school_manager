@@ -39,7 +39,11 @@ angular.module('dleduWebService')
 							}
 						}
 					},function(res){
-						messageService.openMsg("导入失败!");
+						if(res.data && res.data.message){
+							messageService.openMsg(res.data.message);
+						}else{
+							messageService.openMsg("导入失败!");
+						}
 					})
 				}else {
 					messageService.openMsg("请选择excel文件！");
