@@ -23,9 +23,7 @@ function request(options) {
     var _host = "";
     if (options.host && options.host == 'dd') {
         _host = Config.backend_api.api_gateway+"diandian_api";
-    } else if (options.host && options.host == 'dd_local') {
-        _host = 'http://172.16.40.107:8080';
-    }else if (options.host && options.host == 'em') {
+    } else if (options.host && options.host == 'em') {
         _host = Config.backend_api.em_host;
     } else  if (options.host && options.host == 'pt') {
         _host = Config.backend_api.pt_host;
