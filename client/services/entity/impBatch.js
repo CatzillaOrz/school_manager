@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService) {
+	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService) {
 		return {
 			/**
 			 * 弹出批量导入弹出框
@@ -21,12 +21,14 @@ angular.module('dleduWebService')
 				if(!this.selected([params.file])){
 					return;
 				}
+				CommonService.addLoading(true, 'all');
 				if (params.file) {
 					Upload.upload({
 						url: '/api/upload/impBatch',
 						method: 'POST',
 						data: params
 					}).then(function(res){
+						CommonService.addLoading(false, 'all');
 						if(res.status === 200){
 							scopeObj.errorInfos = res.data;
 							if(scopeObj.errorInfos[0].id){
@@ -39,6 +41,7 @@ angular.module('dleduWebService')
 							}
 						}
 					},function(res){
+						CommonService.addLoading(false, 'all');
 						if(res.data && res.data.message){
 							messageService.openMsg(res.data.message);
 						}else{
