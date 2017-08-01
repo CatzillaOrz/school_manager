@@ -37,6 +37,7 @@ router.get('/getElecFenceHistory',auth.isSignedIn, controller.getElecFenceHistor
 router.get('/getElecFenceCurrent',auth.isSignedIn, controller.getElecFenceCurrent);
 router.get('/getElecSetInfo',auth.isSignedIn, controller.getElecSetInfo);
 router.post('/setElecFenceInfo',auth.isSignedIn, controller.setElecFenceInfo);
+router.post('/notice',auth.isSignedIn, controller.notice);
 router.get('/classTrend',auth.isSignedIn, controller.classTrend);
 router.get('/classAttendExportTrend',auth.isSignedIn, controller.classAttendExportTrend);
 router.get('/getCurrentSemester',auth.isSignedIn, controller.getCurrentSemester);

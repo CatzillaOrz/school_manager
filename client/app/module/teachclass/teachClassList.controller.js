@@ -156,6 +156,7 @@ angular.module('dleduWebApp')
 				if(!ImpBatchService.selected([params.file])){
 					return;
 				}
+				CommonService.addLoading(true, 'all');
 				if (params.file) {
 					Upload.upload({
 						url: '/api/upload/impBatch',
@@ -163,8 +164,10 @@ angular.module('dleduWebApp')
 						data: params
 					}).then(function(res){
 						if(res.status === 200){
+							CommonService.addLoading(false, 'all');
 							that.errorInfos = res.data;
 							if(!that.errorInfos.code ||  that.errorInfos.code== ''){
+								that.getTeachClassList();
 								ngDialog.close();
 								messageService.openMsg("导入成功！");
 							}else{
@@ -173,6 +176,7 @@ angular.module('dleduWebApp')
 							}
 						}
 					},function(res){
+						CommonService.addLoading(false, 'all');
 						messageService.openMsg("导入失败!");
 					})
 				}else {

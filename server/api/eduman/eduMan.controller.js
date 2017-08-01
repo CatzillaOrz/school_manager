@@ -377,6 +377,16 @@ module.exports = {
             })
     },
 
+    notice: function (req, res) {
+        EduManService.noticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     classTrend: function (req, res) {
         EduManService.classTrendSync(req.query, req.user.access_token)
             .then(function (data) {

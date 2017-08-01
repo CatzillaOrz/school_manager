@@ -493,6 +493,24 @@ var EduManService = {
             });
     },
 
+    //通知班主任
+    notice: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd_local',
+            path: '/v1/electricFence/assignedsave',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
     classTrend: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',

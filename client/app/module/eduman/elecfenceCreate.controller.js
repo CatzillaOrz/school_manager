@@ -58,58 +58,12 @@ angular.module('dleduWebApp')
 					.catch(function(e){
 
 					});
-				/*var _this = this;
-				return {
-					placeholder: {
-						id: '-1', // the value of the option
-						text: '按学期筛选'
-					},
-					ajax: {
-						//url: "api/schoolyear/getSchoolYearDropList",
-						url: "api/schoolyear/getSemesterList",
-						//delay: 250,
-						data: function (query) {
-							var params = {
-								orgId: AuthService.getUser().orgId,
-								pageNumber: 1,
-								pageSize: 100,
-							}
-							params.name = query.term;
-							return params;
-						},
-						processResults: function (data, params) {
-							params.page = params.page || 1;
-							_this.semeterListsCopy = angular.copy(data.data);
-							_this.semeterLists = _this.select2GroupFormat(data.data);
-							return {
-								results: _this.semeterLists,
-								pagination: {
-									more: (params.page * 30) < data.total_count
-								}
-							};
-						},
-						cache: false
-					},
-
-				}*/
 			},
 
-			//学期下拉列表分组数据格式化
-			select2GroupFormat: function (dataList) {
-				var result = []
-				angular.forEach(dataList, function (data) {
-					var obj = {
-						text: data.name,
-						id: data.id
-					};
-					result.push(obj);
-				})
-				return result;
-			},
 
 			//获取周末和周日时间
 			getWeekAndWeekend: function(termStart, termEnd, isExist){
-				var termStartLong = termStart, termEndLong = termEnd;
+				var termStartLong = new Date(termStart), termEndLong = termEnd;
 				//获取日期内所有的周末和周内
 				var unSelectTime = [], selectTime = [];
 				if(isExist){//没有选择学期时
@@ -142,7 +96,7 @@ angular.module('dleduWebApp')
 			getSemeterById: function(id){
 				var that = this;
 				angular.forEach(this.semeterLists, function(data){
-					if(data.id = id){
+					if(data.id == id){
 						that.currentSemeter = data;
 					}
 				});
@@ -159,9 +113,6 @@ angular.module('dleduWebApp')
 			//根据选择的学期加载日历
 			loadDatePickerByOption: function(newVal){
 				if(!newVal){
-					return;
-				}
-				if(newVal && newVal.name == '--请选择--'){
 					return;
 				}
 				var options = {}, params = {};
@@ -285,12 +236,6 @@ angular.module('dleduWebApp')
 					resizeEnable: true,
 					zoom:13
 				});
-				/*amapService.getLocation(this.map);
-				var center = amapService.getCenter();
-				if(center.lon && center.lat){
-					this.map.setCenter([center.lon, center.lat]);
-				}*/
-
 				this.getNowDate();
 				this.loadSetInfo();
 			}

@@ -138,6 +138,11 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/setElecFenceInfo');
 				return eduman.save(params);
 			},
+			//通知班主任
+			notice: function(params){
+				var eduman = $resource('api/eduman/notice');
+				return eduman.save(params);
+			},
 
             classTrend:function (params) {
                 var eduman = $resource('api/eduman/classTrend');

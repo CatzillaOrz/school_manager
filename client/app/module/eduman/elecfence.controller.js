@@ -291,6 +291,38 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//通知班主任
+			notice: function(){
+				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
+					.then(function(data){
+						if(!data){//第一次进入设置
+							that.operation = '去设置';
+						}else{//初始化选择的数据
+							that.record = data;
+							that.elecSet.timeSections = data.monitorTime;
+							var verNew = [], verNews = [];
+							that.map.setCenter([parseFloat(data.lltudes[0][0].longitude), parseFloat(data.lltudes[0][1].latitude)]);
+							for(var i = 0, length = data.lltudes.length; i < length; i++){
+								verNew = [];
+								var temp = data.lltudes[i];
+								for(var j = 0; j < temp.length; j++){
+									var lonlat = temp[j];
+									verNew.push({longitude: parseFloat(lonlat.longitude), latitude: parseFloat(lonlat.latitude)});
+								}
+								verNews.push(verNew);
+							}
+							that.polyVer = verNews;
+						}
+						//绘制多边形
+						that.drawPolygon(that.polyVer);
+						//选择学期
+						//that.getSemeterById(that.semesterId);
+						that.elecSet.termSelectedId = that.record.semesterId;
+					})
+					.catch(function(e){
+
+					});
+			},
 
 			//设置围栏
 			setFence: function(){

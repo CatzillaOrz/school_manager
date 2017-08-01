@@ -170,6 +170,7 @@ angular.module('dleduWebApp')
 						this.record.nomonitorDate = [];
 					}
 				}
+				this.record.organId = AuthService.getUser().orgId;
 				EduManService.setElecFenceInfo(this.record).$promise
 					.then(function(data){
 						if(data.trueMSG){
