@@ -77,15 +77,15 @@ angular.module('dleduWebService')
 			 */
 			downLoad: function(type){
 				var hostname = window.location.hostname;
-				var host = 'http://gatewaydev.aizhixin.com/org-manager';
+				var host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
 				if(hostname.indexOf('schooldev.aizhixin.com') != -1){
-					host = 'http://gatewaydev.aizhixin.com/org-manager';
+					host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
 				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/org-manager';
+					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.dlztc.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/org-manager';
+					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.aizhixin.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/org-manager';
+					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
 				}
 				var paths = {'college' : host + '/v1/college/template',
 					'major' : host + '/v1/professionnal/template',
