@@ -83,9 +83,9 @@ angular.module('dleduWebService')
 				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
 					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.dlztc.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
+					host = 'http://gateway.dlztc.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.aizhixin.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
+					host = 'http://gateway.aizhixin.com/zuul/org-manager';
 				}
 				var paths = {'college' : host + '/v1/college/template',
 					'major' : host + '/v1/professionnal/template',
