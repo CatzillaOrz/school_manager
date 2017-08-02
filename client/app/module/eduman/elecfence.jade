@@ -19,7 +19,7 @@
                         form.form-inline
                             .form-group.col-md-2
                                 label.control-label 学院：
-                                select.form-control(ng-model="evaFenceFn.queryOption.collegeId" ui-select2="evaFenceFn.selectCollege2Options()" )
+                                select.form-control(ng-model="evaFenceFn.queryOption.collegeId" ui-select2="evaFenceFn.selectCollege2Options()")
                                     option(ng-repeat="college in evaFenceFn.collegeDropList" value="{{college.id}}" selected="{{evaFenceFn.collegeId==college.id?'selected':''}}") {{college.name}}
                             .form-group.col-md-2
                                 label.control-label 专业：
@@ -49,21 +49,42 @@
                 i.fa.fa-refresh.fa-spin
         div(role='content')
             .jarviswidget-editbox
+            .widget-body.no-padding(style="min-height:50px!important")
+                .col-md-12.padding-bottom-10.padding-top-10
+                    #datatable_col_reorder_filter2
+                        form.form-inline
+                            .form-group.col-md-1
+                                label.control-label 结果筛选：
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.isLeaveSchoolId" ui-select2="evaFenceFn.getResultOption('isLeaveSchool')" )
+                                    option(ng-repeat="record in evaFenceFn.isLeaveSchool" value="{{record.id}}" ) {{record.text}}
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.isActiveId" ui-select2="evaFenceFn.getResultOption('isActive')" )
+                                    option(ng-repeat="record in evaFenceFn.isActive" value="{{record.id}}" ) {{record.text}}
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.isLoginId" ui-select2="evaFenceFn.getResultOption('isLogin')" )
+                                    option(ng-repeat="record in evaFenceFn.isLogin" value="{{record.id}}" ) {{record.text}}
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.locationId" ui-select2="evaFenceFn.getResultOption('location')" )
+                                    option(ng-repeat="record in evaFenceFn.location" value="{{record.id}}" ) {{record.text}}
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.isOnlineId" ui-select2="evaFenceFn.getResultOption('isOnline')" )
+                                    option(ng-repeat="record in evaFenceFn.isOnline" value="{{record.id}}" ) {{record.text}}
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 50px;') 序号
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学院
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 专业
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 学院
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 专业
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 班级
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学号
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 学生姓名
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 200px;') 被检测到次数
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 曾离校
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 当前位置
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 在线状态
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学生姓名
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 60px;') 被检测到次数
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 曾离校
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 当前位置
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 在线状态
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 备注
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 操作
                         tbody

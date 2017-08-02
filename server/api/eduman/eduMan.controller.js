@@ -357,11 +357,9 @@ module.exports = {
 
     //获取多边形
     getElecSetInfo: function (req, res) {
-        res.json(null);
-        return;
         EduManService.getElecSetInfoSync(req.query, req.user.access_token)
             .then(function (data) {
-                res.json(null);
+                res.json(data);
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
@@ -370,11 +368,19 @@ module.exports = {
 
     //设置多边形信息
     setElecFenceInfo: function (req, res) {
-        res.json("{'trueMSG':true}");
-        return;
-        EduManService.setElecFenceInfoSync(req.query, req.user.access_token)
+        EduManService.setElecFenceInfoSync(req.body, req.user.access_token)
             .then(function (data) {
-                res.json(null);
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    notice: function (req, res) {
+        EduManService.noticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);

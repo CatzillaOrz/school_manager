@@ -136,7 +136,12 @@ angular.module('dleduWebService')
 			//保存设置的多边形信息
 			setElecFenceInfo: function(params){
 				var eduman = $resource('api/eduman/setElecFenceInfo');
-				return eduman.get(params);
+				return eduman.save(params);
+			},
+			//通知班主任
+			notice: function(params){
+				var eduman = $resource('api/eduman/notice');
+				return eduman.save(params);
 			},
 
             classTrend:function (params) {

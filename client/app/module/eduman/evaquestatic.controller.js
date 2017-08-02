@@ -101,6 +101,15 @@ angular.module('dleduWebApp')
 				})
 			},
 
+			//计算平均的得分和试题分数
+			showScoreAndAvg: function(record){
+				if(record.totalCount){
+					var avg = (record.totalScore/record.totalCount).toFixed(2);
+					return '(满分' + record.score + '; 平均得分'+ avg + ')';
+				}else{
+					return '(满分' + record.score + '; 平均得分0.00)';
+				}
+			},
 
 			init: function () {
 				this.id = $state.params.id;

@@ -128,6 +128,27 @@ angular.module('dleduWebService')
                     return errorMessage;
 
                 }
+            },
+
+			/**
+			 *
+             * @param status 是否隐藏
+             * @param type 添加类型 part局部添加 all整个添加
+             */
+            addLoading: function(status, type) {
+                var divParent = '.show-container', imgSub = 'show-loading-img';
+                if(type == 'part'){
+                    divParent = '.show-container-part';
+                    imgSub = 'show-loading-imgsub';
+                }
+                var html = '<div class="show-curtain"><img class="' + imgSub + '" src="assets/images/loading.gif"></div>';
+                if (status) {
+                    if ($(divParent + ' .show-curtain').length === 0) {
+                        $(divParent).append(html);
+                    }
+                } else {
+                    $(divParent + ' .show-curtain').remove();
+                }
             }
         }
     });

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('ClassListCtrl', function ($scope, ClassService,AuthService,messageService,CommonService, Upload, ngDialog) {
+    .controller('ClassListCtrl', function ($scope, $state, $window, ClassService,AuthService,messageService,CommonService,
+                                           Upload, ngDialog, ImpBatchService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -83,70 +84,42 @@ angular.module('dleduWebApp')
              * 弹出批量导入弹出框
              */
             openImpBatch: function(){
-                var result = ngDialog.open({
+                var params = {
                     template: 'importDialog',
                     width: 600,
                     scope: $scope,
-                });
+                };
+                ImpBatchService.openImpBatch(params);
             },
 
             /**
              * 弹出批量导入弹出框
              */
             importantBatch: function(file){
-                var that = this;
-                if (file) {
-                    Upload.upload({
-                        url: '/api/upload/impBatch',
-                        method: 'POST',
-                        data: {
-                            file: file,
-                            orgId: AuthService.getUser().orgId,
-                            userId: AuthService.getUser().id,
-                            uploadType: 'classes'
-                        }
-                    }).then(function(res){
-                        if(res.status === 200){
-                            that.errorInfos = JSON.parse(res.data);
-                            if(that.errorInfos[0].id){
-                                ngDialog.close();
-                                messageService.openMsg("导入成功！");
-                            }else{
-                                ngDialog.close();
-                                ngDialog.open({
-                                    template: 'importResultDialog',
-                                    width: 600,
-                                    scope: $scope
-                                });
-                            }
-                        }
-                    },function(res){
-                        messageService.openMsg("上传失败!");
-                    })
-                }else {
-                    messageService.openMsg("请选择excel文件！");
-                    return;
-                }
+                var params = {
+                    file: file,
+                    orgId: AuthService.getUser().orgId,
+                    userId: AuthService.getUser().id,
+                    uploadType: 'classes'
+                };
+                var dialogParams = {
+                    template: 'importResultDialog',
+                    width: 600,
+                    scope: $scope
+                };
+                ImpBatchService.importantBatch(params, this, dialogParams, this.getClassList);
             },
 
             //选择文件事件
-            selected: function($newFiles, $invalidFiles){
-                if($newFiles) {
-                    var name = $newFiles[0].name;
-                    var suff = name.substring(name.lastIndexOf("."), name.length);
-                    if(suff != '.xls' && suff != '.xlsx'){
-                        var result = messageService.openDialog("请选择excel文件！");
-                        messageService.closeDialog(result.id);
-                        return;
-                    }
-                }
+            selected: function($newFiles){
+                ImpBatchService.selected($newFiles);
             },
 
             /**
              * 下载模板
              */
             downLoad: function(){
-                window.location.href = "http://gatewaydev.aizhixin.com:80/org-manager/v1/classes/template";
+                ImpBatchService.downLoad('classes');
             },
 
             init: function () {

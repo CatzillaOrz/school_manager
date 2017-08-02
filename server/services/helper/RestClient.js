@@ -33,7 +33,9 @@ function request(options) {
         _host = Config.backend_api.io_host;
     } else  if (options.host && options.host == 'gateway-org'){
         _host = Config.backend_api.api_gateway+"org-manager";
-    } else  if (options.host && options.host == 'gateway-school'){
+    } else  if (options.host && options.host == 'gateway-org-io'){
+        _host = Config.backend_api.api_gateway+"zuul/org-manager";
+    }else  if (options.host && options.host == 'gateway-school'){
         _host = Config.backend_api.api_gateway+"school-manager";
     } else {
         _host = Config.backend_api.host

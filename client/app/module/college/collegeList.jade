@@ -27,8 +27,8 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="college.creat")
                                     span 新建
-                                //button.btn.btn-primary(type='button' ng-click="collegeListFn.openImpBatch()")
-                                //    span 批量导入
+                                button.btn.btn-primary(type='button' ng-click="collegeListFn.openImpBatch()")
+                                    span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -74,7 +74,7 @@
                     tr
                         td.first_td 上传文件
                         td
-                            .choseFile.left(ngf-select='collegeListFn.selected($newFiles, $invalidFiles)' ng-model="collegeListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            .choseFile.left(ngf-select='collegeListFn.selected($newFiles)' ng-model="collegeListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
                             input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="collegeListFn.myFile.name" )
                             .left.load_inner(ng-click='collegeListFn.importantBatch(collegeListFn.myFile)', type='button') 导入
                     tr

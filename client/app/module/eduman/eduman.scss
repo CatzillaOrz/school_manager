@@ -340,3 +340,37 @@ td.term-disable{
     float: right;
     margin-right: 20px;
 }
+
+.show-container{
+    position: relative;
+    .show-curtain {
+        position: absolute;
+        z-index: 1000000;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        .show-loading-img {
+            position: absolute;
+            left: 50%;
+            top: 30%;
+        }
+    }
+}
+.show-container-part{
+    position: relative;
+    .show-curtain {
+        position: absolute;
+        z-index: 1000000;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        .show-loading-imgsub {
+            position: absolute;
+            left: 50%;
+        }
+    }
+}
