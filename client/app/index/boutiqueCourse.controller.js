@@ -75,6 +75,8 @@ angular.module('dleduWebApp')
         $timeout(function () {
 
             $scope.boutiqueFn.init();
+            var height = document.body.clientHeight - 82 - 100;
+            $(".content-container").css("min-height", height + "px")
         })
 
     });

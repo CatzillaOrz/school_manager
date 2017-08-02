@@ -38,6 +38,8 @@ angular.module('dleduWebApp')
         $timeout(function () {
 
             $scope.noticeDetailFn.init();
+            var height = document.body.clientHeight - 82 - 100-40;
+            $(".content-container").css("min-height", height + "px")
         })
 
     });

@@ -24,7 +24,7 @@ angular.module('dleduWebApp')
             getBoutiqueCourseList:function () {
                 var _this=this;
                 var params = _this.params;
-                params.pageSize=8;
+                params.pageSize=10;
                 SchoolService.getBoutiqueCourseList(params).$promise
                     .then(function (data) {
                         _this.page=data.page;
@@ -78,7 +78,7 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var _this=this;
                 var params = _this.params;
-                params.pageSize=10;
+                params.pageSize=5;
                 SchoolService.getHotMajorList(params).$promise
                     .then(function (data) {
                         _this.page=data.page;
