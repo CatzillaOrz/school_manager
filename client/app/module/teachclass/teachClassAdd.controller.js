@@ -218,6 +218,10 @@ angular.module('dleduWebApp')
                         cache: true
                     },
                     allowClear: true,
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: '按班级筛选'
+                    },
                     templateResult: function (data) {
                         if (data.id === '') { // adjust for custom placeholder values
                             return 'Custom styled placeholder text';

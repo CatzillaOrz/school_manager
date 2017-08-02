@@ -47,42 +47,42 @@ angular.module('dleduWebApp')
             select2CollegeOptions:function(){
                 var _this=this;
                 return {
-                ajax:{
-                    url: "api/college/getCollegeDropList",
-                    dataType: 'json',
-                    //delay: 250,
-                    data: function (query) {
-                        var params={
-                            orgId: AuthService.getUser().orgId,
-                            pageNumber: 1,
-                            pageSize: 100,
-                            collegeId:_this.collegeId,
+                    ajax:{
+                        url: "api/college/getCollegeDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params={
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId:_this.collegeId,
 
-                        }
-                        params.name=query.term;
-                        return params;
-                    },
-                    processResults: function (data, params) {
-                        params.page = params.page || 1;
-                       // _this.collegeDropList=data.data;
-                        return {
-                            results: data.data,
-                            pagination: {
-                                more: (params.page * 30) < data.total_count
                             }
-                        };
+                            params.name=query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            // _this.collegeDropList=data.data;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: true
                     },
-                    cache: true
-                },
 
-                templateResult: function (data) {
-                    if (data.id === '') { // adjust for custom placeholder values
-                        return 'Custom styled placeholder text';
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            return 'Custom styled placeholder text';
+                        }
+
+                        return data.name;
                     }
-
-                    return data.name;
-                }
-            }},
+                }},
             //专业下拉列表配置
             select2MajorOptions:function(){
                 var _this=this;
@@ -156,11 +156,11 @@ angular.module('dleduWebApp')
                     })
             },
             setMajorToggle:function () {
-              var _this=this;
-              if(!_this.isSetMajor){
-                  _this.resetParams();
-              }
-              _this.isSetMajor=!_this.isSetMajor;
+                var _this=this;
+                if(!_this.isSetMajor){
+                    _this.resetParams();
+                }
+                _this.isSetMajor=!_this.isSetMajor;
             },
             uploadImage: function () {
                 //  $event.currentTarget.disabled=false;
@@ -278,24 +278,24 @@ angular.module('dleduWebApp')
                     })
             },
             submit:function () {
-              var _this=this;
-              var params=_this.params;
-              params.collegeId=_this.collegeId;
-              params.specialtyId=_this.majorId;
-              params.userId=AuthService.getUser().id;
-              if(!params.collegeId){
-                  messageService.openMsg("请选择学院！");
-                  return;
-              }
-            if(!params.specialtyId){
-                messageService.openMsg("请选择专业！");
-                return;
-            }
-              if(_this.params.id){
-                  _this.updateHotMajor(params);
-              }else {
-                  _this.addHotMajor(params);
-              }
+                var _this=this;
+                var params=_this.params;
+                params.collegeId=_this.collegeId;
+                params.specialtyId=_this.majorId;
+                params.userId=AuthService.getUser().id;
+                if(!params.collegeId){
+                    messageService.openMsg("请选择学院！");
+                    return;
+                }
+                if(!params.specialtyId){
+                    messageService.openMsg("请选择专业！");
+                    return;
+                }
+                if(_this.params.id){
+                    _this.updateHotMajor(params);
+                }else {
+                    _this.addHotMajor(params);
+                }
 
 
             },

@@ -11,7 +11,7 @@ angular.module("azx.swiper", [])
             '<div class="swiper-container">' +
             '   <div class="swiper-wrapper">' +
             '       <div class="swiper-slide" ng-repeat="slide in slides">' +
-            '           <div class="swiper-bg" style="background: url({{slide.background}}) center center no-repeat;height: 100%; width:100%; background-size: cover;"></div>' +
+            '           <div class="swiper-bg" style="background: url({{slide.background}}) center center no-repeat;height: 604px; width:100%; background-size: cover;"></div>' +
             '           <div class="slide-content">' +
             '               <div class="slide-box">' +
             '                   <a ng-href="{{slide.url}}" target="_blank"><img class="slide-img" ng-src="{{slide.image}}"></a>' +

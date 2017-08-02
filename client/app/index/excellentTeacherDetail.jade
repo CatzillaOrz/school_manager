@@ -1,8 +1,17 @@
-.sub-nav
-    span.cursor-pointer(ui-sref="index") 首页
-    span >>
-    span.cursor-pointer.active 优秀老师
-.content-container
-    .feature-block
-        .title 优秀老师
-    .school-introduce(ng-bind-html="excellentTeacherDetailFn.trustAsHtml(excellentTeacherDetailFn.excellentTeacher.introduction)")
+.content-container.gray-bg
+    .overview
+        .teacher-card-bg
+            //.shade(ng-show="a")
+            //.detail-button(ng-show="a")
+            //    a.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})")
+            //        | 教师详情>>
+            .teacher-image
+                img.img(ng-src="{{ excellentTeacherDetailFn.excellentTeacher.inUrl}}" ng-if="excellentTeacherDetailFn.excellentTeacher.inUrl")
+                img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" ng-if="!excellentTeacherDetailFn.excellentTeacher.inUrl&&excellentTeacherDetailFn.excellentTeacher.sex=='男'")
+                    img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!excellentTeacherDetailFn.excellentTeacher.inUrl&&excellentTeacherDetailFn.excellentTeacher.sex=='女'")
+            .teacher-name
+                span.name {{excellentTeacherDetailFn.excellentTeacher.teacherName}}
+                span.position {{teacher.position}}
+        .content
+            .title 老师介绍
+            .introduce(ng-bind-html="excellentTeacherDetailFn.trustAsHtml(excellentTeacherDetailFn.excellentTeacher.introduction)")

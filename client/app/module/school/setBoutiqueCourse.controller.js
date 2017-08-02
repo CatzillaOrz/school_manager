@@ -47,7 +47,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                           // that.courseDropList=data.data;
+                            // that.courseDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -237,10 +237,10 @@ angular.module('dleduWebApp')
                 var _this=this;
                 _this.isSetBoutique=true;
                 _this.params=entity;
-               $timeout(function () {
-                   var $ddd = $("#select2").select2();
-                   $ddd.val(_this.params.courseId).trigger("change");
-               })
+                $timeout(function () {
+                    var $ddd = $("#select2").select2();
+                    $ddd.val(_this.params.courseId).trigger("change");
+                })
 
             },
             //删除
@@ -265,13 +265,13 @@ angular.module('dleduWebApp')
                 messageService.getMsg("您确定要删除此精品课程吗？", this.deleteBoutiqueCourse)
             },
             selected:function (list) {
-               // var resultList=[];
+                // var resultList=[];
                 var _this=this;
-               angular.forEach(list,function (data) {
-                   if(data.id==_this.params.courseId){
-                       data.selected="selected";
-                   }
-               })
+                angular.forEach(list,function (data) {
+                    if(data.id==_this.params.courseId){
+                        data.selected="selected";
+                    }
+                })
             },
             init:function () {
                 var _this=this;

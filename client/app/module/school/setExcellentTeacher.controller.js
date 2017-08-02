@@ -56,7 +56,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                          //  that.teacherDropList=data.data;
+                            //  that.teacherDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -92,7 +92,7 @@ angular.module('dleduWebApp')
                 if (_this.imgFile) {
                     ImageService.convertFileToImage(_this.imgFile, function (image) {
                         var cutImage = null;
-                         cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
+                        cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
                                 //resp.data.url
@@ -122,7 +122,7 @@ angular.module('dleduWebApp')
             selectFile: function ($file) {
                 var _this = this;
                 _this.imgFile = $file;
-               // _this.uploadImage();
+                // _this.uploadImage();
             },
             setMajorToggle:function () {
                 var _this=this;

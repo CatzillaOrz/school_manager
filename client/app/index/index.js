@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
                 views : {
                     'content@indexnav': {
                         controller : 'IndexCtrl',
-                        templateUrl: 'app/index/index.html'
+                        templateUrl: 'app/index/indexnew.html'
                     }
                 },
 

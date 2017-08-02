@@ -37,11 +37,22 @@ angular.module('dleduWebApp')
 
                     })
             },
+            getHtmlFirstImg:function (html) {
+                var matches = /src="(.*?)"/gi;
+                var  results=null;
+                results=matches.exec(html);
+                if(results){
+                    if(results.length>0){
+                        return results[0].replace("src=","").replace(/\042/gi,"");
+                    };
+                }
+                return "";
 
+            },
             formatDate:function (date,format) {
                 var arr=date.split("-");
-                if(format=="yyyy/MM"){
-                    return arr[0]+"/"+ arr[1];
+                if(format=="yyyy-MM"){
+                    return arr[0]+"-"+ arr[1];
                 }else {
                     return arr[2];
                 }

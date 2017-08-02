@@ -1,31 +1,28 @@
 .index-container
-    .top-nav-container
-        .top-nav
-            .school-logo
+    .index-header
+        .nav-bar
+            .logo
                 img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png' }}")
-            //.login-button
-            //    button.btn-login(ng-click='indexFn.signIn()')
-            //        i.fa.fa-user.fa-fw
-            //        |  登录
-            //a.azx-logo
-            //    azx-logo
-
-
-    .nav-bar
-        .navigation
-            ul
-                li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
-                    | 首页
-                li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
-                    | 学校概况
-                li(ui-sref="hotmajorlist" ng-class="{'active':indexFn.currentActive=='hotmajorlist'}")
-                    | 热门专业
-                li(ui-sref="noticelist" ng-class="{'active':indexFn.currentActive=='noticelist'}")
-                    | 最新活动
-                li(ui-sref="excellentteacherlist" ng-class="{'active':indexFn.currentActive=='excellentteacherlist'}")
-                    | 优秀老师
-                li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
-                    | 精品课程
+            .navigation
+                ul
+                    li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
+                        | 首页
+                        .keyline(ng-if="indexFn.currentActive=='index'")
+                    li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
+                        | 学校概况
+                        .keyline(ng-if="indexFn.currentActive=='overview'" )
+                    li(ui-sref="hotmajorlist" )
+                        | 热门专业
+                        .keyline(ng-if="indexFn.currentActive=='hotmajorlist'")
+                    li(ui-sref="noticelist" ng-class="{'active':indexFn.currentActive=='noticelist'}")
+                        | 最新活动
+                        .keyline(ng-if="indexFn.currentActive=='noticelist'")
+                    li(ui-sref="excellentteacherlist" ng-class="{'active':indexFn.currentActive=='excellentteacherlist'}")
+                        | 优秀老师
+                        .keyline(ng-if="indexFn.currentActive=='excellentteacherlist'")
+                    li(ui-sref="boutique" ng-class="{'active':indexFn.currentActive=='boutique'}")
+                        | 精品课程
+                        .keyline(ng-if="indexFn.currentActive=='boutique'")
     div(ui-view="content")
     .footer
-        | Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · 京ICP备16006959号-1 · ver0.0.4.1
+        | Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · 京ICP备16006959号-1 · ver0.0.4.2

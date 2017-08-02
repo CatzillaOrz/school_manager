@@ -1,0 +1,79 @@
+.shuff-image(azx-swiper data-slides='indexFn.shuffImageList' data-full-screen='false' data-show-nav-buttons='indexFn.showSlidNav')
+.course-container
+    .course-block
+        .block-title
+            .line
+            .title 精品课程
+            .line
+        .swiper-course-container
+            .swiper-wrapper
+                .swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
+                    a.course-card(href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
+                        .course-image(style="background:url({{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1498583024217.jpg'}});background-size:cover;")
+                            .course-image-shade
+                            .teacher(ng-if="indexFn.activeCourseIndex==$index")
+                                .avater(ng-show="course.courseAuthors[0].photo")
+                                    img(ng-src="{{course.courseAuthors[0].photo}}" )
+                                .name(ng-show="course.courseAuthors[0].name") {{course.courseAuthors[0].position}} | {{course.courseAuthors[0].name}}
+
+                        .course-name
+                            | {{course.courseName}}
+                        .course-teacher
+            // Add Pagination
+            //.swiper-course-pagination
+            .swiper-course-button-prv
+                i.fa.fa-angle-left
+            .swiper-course-button-next
+                i.fa.fa-angle-right
+        .more
+            button.btn-more(ui-sref="boutique") 更多>
+.notice-major-container
+    .notice-major-block
+        .notice-block
+            .line
+            .title 最新活动
+            .line
+            ul.notice-content
+                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-class="{'current-new':$index==0}")
+                    .new-pic(ng-if="$index==0")
+                        img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default.png'}}")
+                    .current-context(ng-if="$index==0")
+                        .date
+                            span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
+                            span.year /{{ indexFn.formatDate(notice.publishDate,'yyyy-MM') }}
+                        .title {{notice.title}}
+                    .content(ng-if="$index!=0") {{notice.title}}
+                    .date(ng-if="$index!=0")
+                        i.fa.fa-calendar
+                        span {{notice.publishDate}}
+            .more
+                button.btn-more(ui-sref="noticelist") 更多>
+        .major-block
+            .line
+            .title 热门专业
+            .line
+            .major-content
+                .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" style="background:url({{major.inUrl}});background-size:cover;")
+                    | {{major.specialtyName}}
+            .more
+                button.btn-more(ui-sref="hotmajorlist") 更多>
+.teacher-container
+    .teacher-block
+        .block-title
+            .line
+            .title 优秀教师
+            .line
+            .teacher-content
+                .teacher-list(ng-repeat="teacher in indexFn.excellentTeacherList" class="{{'teacher'+$index}}" ui-sref="excellentteacherdetail({id:teacher.id})")
+                    .teacher-image
+                        img.img(ng-src="{{ teacher.inUrl}}" ng-if="teacher.inUrl")
+                        img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='男'")
+                        img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
+                    .content
+                        .name {{teacher.teacherName}}
+                        .detail
+                          | {{indexFn.cutHtml(teacher.introduction,34)}}
+                        button.btn.btn-detail 查看详情
+                        // http://oli56k5b0.bkt.clouddn.com/avatar-woman.png
+            .more
+                button.btn-more(ui-sref="excellentteacherlist") 更多>
