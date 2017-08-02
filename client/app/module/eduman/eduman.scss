@@ -342,32 +342,40 @@ td.term-disable{
 }
 
 .show-container{
-    position: relative;
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    z-index: 20000;
     .show-curtain {
         position: absolute;
-        z-index: 1000000;
+        z-index: 100000;
         left: 0px;
         top: 0px;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.5);
         .show-loading-img {
             position: absolute;
             left: 50%;
-            top: 30%;
+            top: 50%;
         }
     }
 }
 .show-container-part{
-    position: relative;
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    z-index: 20000;
     .show-curtain {
         position: absolute;
-        z-index: 1000000;
+        z-index: 100000;
         left: 0px;
         top: 0px;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0);
         .show-loading-imgsub {
             position: absolute;
             left: 50%;

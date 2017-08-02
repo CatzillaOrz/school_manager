@@ -142,12 +142,14 @@ angular.module('dleduWebService')
                     imgSub = 'show-loading-imgsub';
                 }
                 var html = '<div class="show-curtain"><img class="' + imgSub + '" src="assets/images/loading.gif"></div>';
+                $('body').append('<div class="show-container"></div>');
                 if (status) {
                     if ($(divParent + ' .show-curtain').length === 0) {
                         $(divParent).append(html);
                     }
                 } else {
                     $(divParent + ' .show-curtain').remove();
+                    $(".show-container").remove();
                 }
             }
         }
