@@ -60,7 +60,9 @@ angular.module('dleduWebApp')
                 }
 
             },
-
+            cutHtml:function (str,len) {
+                return CommonService.strCut(str,len)
+            },
 
             init:function () {
                 var _this=this;

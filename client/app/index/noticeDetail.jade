@@ -1,11 +1,5 @@
-.sub-nav
-    span.cursor-pointer(ui-sref="index") 首页
-    span >>
-    span.cursor-pointer.active 最新活动
-.content-container
-    .feature-block
-        .title 最新活动
-    .notice-title
+.content-container.gray-bg
+    .overview
         .title {{noticeDetailFn.notice.title}}
         .date 时间：{{noticeDetailFn.notice.lastModifiedDate}}
-    .school-introduce(ng-bind-html="noticeDetailFn.trustAsHtml(noticeDetailFn.notice.content)")
+        .school-introduce(ng-bind-html="noticeDetailFn.trustAsHtml(noticeDetailFn.notice.content)")

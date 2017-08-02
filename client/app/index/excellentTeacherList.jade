@@ -1,22 +1,19 @@
-.sub-nav
-    span.cursor-pointer(ui-sref="index") 首页
-    span >>
-    span.cursor-pointer.active 优秀老师
 .content-container
-    .feature-block
-        .title 优秀老师
     .teacher-card-container-bg
         .teacher-card-bg(ng-repeat="teacher in excellentTeacherListFn.excellentTeacherList" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
-            .shade(ng-show="a")
-            .detail-button(ng-show="a")
-                a.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})")
-                    | 教师详情>>
+            //.shade(ng-show="a")
+            //.detail-button(ng-show="a")
+            //    a.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})")
+            //        | 教师详情>>
             .teacher-image
                 img.img(ng-src="{{ teacher.inUrl || 'http://oli56k5b0.bkt.clouddn.com/avatar-200%E2%9C%96200.jpg'}}")
             .teacher-name
-                | {{teacher.teacherName}}
+                span.name {{teacher.teacherName}}
+                span.position {{teacher.position}}
             .teacher-detail
-                | {{excellentTeacherListFn.cutHtml(teacher.introduction)}}
+                | {{excellentTeacherListFn.cutHtml(teacher.introduction,50)}}
+            .detail
+                button.btn.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})") 查看详情
 
-    .page
+    .page(ng-if="excellentTeacherListFn.page.totalElements")
         ul.pagination-sm(uib-pagination, total-items='excellentTeacherListFn.page.totalElements',items-per-page="excellentTeacherListFn.page.pageSize" max-size='excellentTeacherListFn.page.pageSize' ng-model='excellentTeacherListFn.page.pageNumber',ng-change="excellentTeacherListFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")

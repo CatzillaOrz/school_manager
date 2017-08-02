@@ -56,7 +56,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            that.teacherDropList=data.data;
+                            //that.teacherDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {

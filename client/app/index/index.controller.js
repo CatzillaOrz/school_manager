@@ -16,9 +16,10 @@ angular.module('dleduWebApp')
             excellentTeacherList:[],
             hotMajorList:[],
             shuffImageList:[],
-            showSlidNav:false,
+            showSlidNav:true,
             noticeList:[],
             currentTab:"notice",
+            activeCourseIndex:4,
             //精品课程查询
             getBoutiqueCourseList:function () {
                 var _this=this;
@@ -28,6 +29,31 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.page=data.page;
                         _this.boutiqueCourseList=data.data;
+                        $timeout(function () {
+                            var swiper = new Swiper('.swiper-course-container', {
+                                pagination: '.swiper-course-pagination',
+                                nextButton: '.swiper-course-button-next',
+                                prevButton: '.swiper-course-button-prv',
+                                loop: true,
+                                // effect: 'fade',
+                                centeredSlides: true,
+                                // autoplay: 5000,
+                                spaceBetween: 20,
+                                slidesPerView: 5,
+                                paginationClickable: true,
+                                onSlideChangeEnd: function (swiper, current, total) {
+                                    $scope.$apply(function(){
+                                        _this.activeCourseIndex=swiper.realIndex;
+                                    })
+                                },
+                                onSlideChangeStart: function (swiper, current, total) {
+                                    $scope.$apply(function(){
+                                        _this.activeCourseIndex=-1;
+                                    })
+                                }
+                            },100);
+                        })
+
                     })
                     .catch(function (error) {
 
@@ -71,17 +97,30 @@ angular.module('dleduWebApp')
                         _this.shuffImageList=[];
                         angular.forEach(data.data,function (entity,index) {
                             var temp ={
-                                "background": "",
-                                    image: entity.imageUrl,
+                                    background: entity.imageUrl,
+                                    //image: entity.imageUrl,
                                     "url": entity.href,
-                                    "id": index
+                                    "id": index,
                             }
                             _this.shuffImageList.push(temp);
                         })
 
                     })
                     .catch(function (error) {
-
+                        var temp ={
+                            background: "http://lorempixel.com/600/600/nature/1/",
+                            //image: entity.imageUrl,
+                            "url": "",
+                            "id": "",
+                        };
+                        var temp1 ={
+                            background: "http://lorempixel.com/600/600/nature/2/",
+                            //image: entity.imageUrl,
+                            "url": "",
+                            "id": "",
+                        }
+                        _this.shuffImageList.push(temp);
+                        _this.shuffImageList.push(temp1);
                     })
             },
             getNoticeList:function () {
@@ -101,8 +140,8 @@ angular.module('dleduWebApp')
             },
             formatDate:function (date,format) {
                var arr=date.split("-");
-               if(format=="yyyy/MM"){
-                   return arr[0]+"/"+ arr[1];
+               if(format=="yyyy-MM"){
+                   return arr[0]+"-"+ arr[1];
                }else {
                    return arr[2];
                }
@@ -127,6 +166,18 @@ angular.module('dleduWebApp')
             },
             cutHtml:function (str,len) {
                 return CommonService.strCut(str,len)
+            },
+            getHtmlFirstImg:function (html) {
+                var matches = /src="(.*?)"/gi;
+                var  results=null;
+                results=matches.exec(html);
+                if(results){
+                    if(results.length>0){
+                        return results[0].replace("src=","").replace(/\042/gi,"");
+                    };
+                }
+                return "";
+
             },
             toEmHostInit:function () {
                 var _this=this;
@@ -163,6 +214,7 @@ angular.module('dleduWebApp')
             },
            init:function () {
                 var _this=this;
+
                _this.toEmHostInit();
                _this.schoolInfo=  CommonService.getSchool();
                _this.params.orgId=_this.schoolInfo.id;

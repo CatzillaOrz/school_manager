@@ -1,8 +1,3 @@
-.sub-nav
-    span.cursor-pointer(ui-sref="index") 首页
-    span >>
-    span.cursor-pointer.active 热门专业
-.content-container
-    .feature-block
-        .title 热门专业
-    .school-introduce(ng-bind-html="hotMajorFn.trustAsHtml(hotMajorFn.hotMajor.introduction)")
+.content-container.gray-bg
+    .overview
+        .school-introduce(ng-bind-html="hotMajorFn.trustAsHtml(hotMajorFn.hotMajor.introduction)")
