@@ -75,7 +75,7 @@ var UploadService = {
 			'student': '/v1/students/import', 'teacher': '/v1/teacher/import', 'compulsory': '/v1/teachingclass/importmust',
 			'optional': '/v1/teachingclass/importoption'};
 		this.upload({
-			host: 'gateway-org',
+			host: 'gateway-org-io',
 			path: paths[params.uploadType] + '?userId=' + params.userId + '&orgId=' + params.orgId,
 			access_token: access_token,
 			filePath: filePath,
