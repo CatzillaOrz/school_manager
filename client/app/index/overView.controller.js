@@ -34,6 +34,8 @@ angular.module('dleduWebApp')
         $timeout(function () {
 
             $scope.overViewFn.init();
+            var height = document.body.clientHeight - 82 - 100-40;
+            $(".content-container").css("min-height", height + "px")
         })
 
     });
