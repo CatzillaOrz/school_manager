@@ -269,7 +269,7 @@ angular.module('dleduWebApp')
                 params.name=_this.findParams.name;
                 SchoolService.getHotMajorList(params).$promise
                     .then(function (data) {
-                        _this.majorList = data.data;
+                        _this.hotMajorList = data.data;
                         _this.page.totalElements=data.page.totalElements;
                         _this.page.totalPages=data.page.totalPages;
                     })

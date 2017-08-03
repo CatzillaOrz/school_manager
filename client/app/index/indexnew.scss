@@ -334,6 +334,7 @@
         margin-right: 30px;
         width: 570px;
         height: 450px;
+        margin-top: 40px;
         .more{
           bottom: 0;
           //position: absolute;
@@ -442,6 +443,7 @@
         margin-left: 30px;
         width: 570px;
         height: 450px;
+        margin-top: 40px;
         .more{
           bottom: 0;
           //position: absolute;
@@ -490,28 +492,97 @@
             width: 314px;
             height: 145px;
             margin-right: 20px;
+            position: relative;
+            .shade{
+              background: #323232;
+              opacity: 0.4;
+              z-index: 888;
+              height: 145px;
+            }
+            .name{
+              z-index: 998;
+              position: absolute;
+              top: 0;
+              text-align: center;
+              width: 314px;
+            }
           }
           .major1{
             width: 236px;
             height: 145px;
+            position: relative;
+            .shade{
+              background: #323232;
+              opacity: 0.4;
+              z-index: 888;
+              height: 145px;
+            }
+            .name{
+              z-index: 998;
+              position: absolute;
+              top: 0;
+              text-align: center;
+              width: 236px;
+            }
           }
           .major2{
             width: 150px;
             height: 172px;
             margin-right: 20px;
             margin-top: 0;
+            position: relative;
+            .shade{
+              background: #323232;
+              opacity: 0.4;
+              z-index: 888;
+              height: 172px;
+            }
+            .name{
+              z-index: 998;
+              position: absolute;
+              top: 0;
+              text-align: center;
+              width: 150px;
+            }
           }
           .major3{
             width: 230px;
             height: 172px;
             margin-right: 20px;
             margin-top: 0;
+            position: relative;
+            .shade{
+              background: #323232;
+              opacity: 0.4;
+              z-index: 888;
+              height: 172px;
+            }
+            .name{
+              z-index: 998;
+              position: absolute;
+              top: 0;
+              text-align: center;
+              width: 230px;
+            }
           }
           .major4{
             width: 150px;
             height: 172px;
             margin-top: 0;
-
+            position: relative;
+            .shade{
+              background: #323232;
+              opacity: 0.4;
+              z-index: 888;
+              height: 172px;
+            }
+            .name{
+              z-index: 998;
+              position: absolute;
+              top: 0;
+              text-align: center;
+              width: 150px;
+            }
           }
         }
       }
@@ -638,7 +709,7 @@
     height: 100px;
     width: 100%;
     line-height: 100px;
-    background-color: #666666;
+    background-color: #2c3e50;
     text-align: center;
     font-size: 14px;
     color: #e6e5e5;
@@ -1249,4 +1320,18 @@
   bottom: 35px !important;
   left: 0;
   width: 100%;
+}
+.swiper-button-next{
+  background-image: url("http://oli56k5b0.bkt.clouddn.com/swiper-right.png");
+  height: 34px;
+  width: 34px;
+  background-size: cover;
+  right: 15%;
+}
+.swiper-button-prev{
+  background-image: url("http://oli56k5b0.bkt.clouddn.com/swiper-left.png");
+  height: 34px;
+  width: 34px;
+  background-size: cover;
+  left: 15%;
 }

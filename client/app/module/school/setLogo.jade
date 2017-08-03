@@ -7,14 +7,14 @@
                 .logo-block
                     img.logo(ng-src="{{logoFn.logoList[0].logoUrl}}")
                 .logo-block-introduce
-                   .logo-introduce 需要透明背景的200*200png图片，主要用于学校首页以及登录个性化的个性化展示。
+                   .logo-introduce 学校徽章logo，用于系统的学校个性化展示。
             .logo-image-view(ng-click='logoFn.setToggle(1)')
                 .title
                     | 第二张
                 .logo-long-block
                     img.logo(ng-src="{{logoFn.logoList[1].logoUrl}}")
                 .logo-long-block-introduce
-                    .logo-introduce 需要透明背景的60*420png图片，主要用于学校首页以及登录个性化的个性化展示。
+                    .logo-introduce 徽章文字logo，主要用于学校个性化展示。
 
         .container(ng-if="logoFn.isSetLogo")
             .logo-setting
