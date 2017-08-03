@@ -8,7 +8,7 @@
             .teacher-image
                 img.img(ng-src="{{ excellentTeacherDetailFn.excellentTeacher.inUrl}}" ng-if="excellentTeacherDetailFn.excellentTeacher.inUrl")
                 img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" ng-if="!excellentTeacherDetailFn.excellentTeacher.inUrl&&excellentTeacherDetailFn.excellentTeacher.sex=='男'")
-                    img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!excellentTeacherDetailFn.excellentTeacher.inUrl&&excellentTeacherDetailFn.excellentTeacher.sex=='女'")
+                img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!excellentTeacherDetailFn.excellentTeacher.inUrl&&excellentTeacherDetailFn.excellentTeacher.sex=='女'")
             .teacher-name
                 span.name {{excellentTeacherDetailFn.excellentTeacher.teacherName}}
                 span.position {{teacher.position}}

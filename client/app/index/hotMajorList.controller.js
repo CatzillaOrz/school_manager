@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 params.pageNumber = _this.page.pageNumber,
                     params.pageSize = _this.page.pageSize
-                params.pageSize = 12;
+                params.pageSize = 10;
                 SchoolService.getHotMajorList(params).$promise
                     .then(function (data) {
                         _this.page = data.page;

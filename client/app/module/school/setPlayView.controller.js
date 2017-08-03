@@ -37,7 +37,7 @@ angular.module('dleduWebApp')
                 _this.loadingFlag = true;
                 if (_this.imgFile) {
                     ImageService.convertFileToImage(_this.imgFile, function (image) {
-                        var cutImage=ImageService.getCutImage(image, actionParams, 1000, 400);
+                        var cutImage=ImageService.getCutImage(image, actionParams, 1930, 604);
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
                                 //resp.data.url
@@ -221,7 +221,7 @@ angular.module('dleduWebApp')
         ngJcropConfigProvider.setJcropConfig('longBlock', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 10/4
+            aspectRatio: 17/4
             // maxWidth: 250,
             // maxHeight: 250
         });
