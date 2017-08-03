@@ -6,7 +6,7 @@ angular.module('dleduWebService')
             product: {
                 name: '知新网综合平台',
 
-                version: '0.0.4.2'
+                version: '0.0.4.3'
 
             },
             isMSIE789: function () {
