@@ -1677,10 +1677,10 @@ a:focus {
             .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .date {
               display: inline-block;
               vertical-align: middle;
-              width: 100px;
+              width: 110px;
               color: #7ccbb2;
               font-size: 14px;
-              margin-left: 34px;
+              margin-left: 24px;
               line-height: 54px; }
               .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .date i {
                 padding-right: 8px; }
@@ -1765,11 +1765,17 @@ a:focus {
             height: 145px;
             margin-right: 20px;
             position: relative; }
+            .index-container .notice-major-container .notice-major-block .major-block .major-content .major0 img {
+              width: 314px;
+              height: 145px; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major0 .shade {
               background: #323232;
               opacity: 0.4;
               z-index: 888;
-              height: 145px; }
+              position: absolute;
+              height: 145px;
+              width: 314px;
+              top: 0; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major0 .name {
               z-index: 998;
               position: absolute;
@@ -1780,11 +1786,17 @@ a:focus {
             width: 236px;
             height: 145px;
             position: relative; }
+            .index-container .notice-major-container .notice-major-block .major-block .major-content .major1 img {
+              width: 236px;
+              height: 145px; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major1 .shade {
               background: #323232;
               opacity: 0.4;
               z-index: 888;
-              height: 145px; }
+              width: 236px;
+              height: 145px;
+              position: absolute;
+              top: 0; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major1 .name {
               z-index: 998;
               position: absolute;
@@ -1797,11 +1809,17 @@ a:focus {
             margin-right: 20px;
             margin-top: 0;
             position: relative; }
+            .index-container .notice-major-container .notice-major-block .major-block .major-content .major2 img {
+              width: 150px;
+              height: 172px; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major2 .shade {
               background: #323232;
               opacity: 0.4;
               z-index: 888;
-              height: 172px; }
+              width: 150px;
+              height: 172px;
+              position: absolute;
+              top: 0; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major2 .name {
               z-index: 998;
               position: absolute;
@@ -1814,11 +1832,18 @@ a:focus {
             margin-right: 20px;
             margin-top: 0;
             position: relative; }
+            .index-container .notice-major-container .notice-major-block .major-block .major-content .major3 img {
+              width: 230px;
+              height: 172px; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major3 .shade {
               background: #323232;
               opacity: 0.4;
               z-index: 888;
-              height: 172px; }
+              height: 172px;
+              width: 230px;
+              height: 172px;
+              position: absolute;
+              top: 0; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major3 .name {
               z-index: 998;
               position: absolute;
@@ -1830,11 +1855,17 @@ a:focus {
             height: 172px;
             margin-top: 0;
             position: relative; }
+            .index-container .notice-major-container .notice-major-block .major-block .major-content .major4 img {
+              width: 150px;
+              height: 172px; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major4 .shade {
               background: #323232;
               opacity: 0.4;
               z-index: 888;
-              height: 172px; }
+              width: 150px;
+              height: 172px;
+              position: absolute;
+              top: 0; }
             .index-container .notice-major-container .notice-major-block .major-block .major-content .major4 .name {
               z-index: 998;
               position: absolute;
