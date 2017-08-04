@@ -53,7 +53,8 @@
             .title 热门专业
             .line
             .major-content
-                .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" style="background:url({{major.inUrl}});background-size:cover;")
+                .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" )
+                    img(ng-src="{{major.inUrl}}")
                     .shade
                     .name {{major.specialtyName}}
             .more
@@ -78,3 +79,4 @@
                         // http://oli56k5b0.bkt.clouddn.com/avatar-woman.png
             .more
                 button.btn-more(ui-sref="excellentteacherlist") 更多>
+                //style="background:url({{major.inUrl}});background-size:cover;"
