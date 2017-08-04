@@ -6,10 +6,9 @@ angular.module('dleduWebApp')
 		$scope.evaFenceFn={
 			//当天轨迹信息
 			records: [],
-
 			//参数
 			params: {
-				id:$stateParams.id
+				id: $stateParams.id
 			},
 			//分页
 			page: {
@@ -20,16 +19,15 @@ angular.module('dleduWebApp')
 			},
 
 
-
 			// 获取电子围栏信息列表
 			getElecFenceHistory: function () {
 				var that = this;
 				var params = {
-					orgId: AuthService.getUser().orgId,
+					organId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
-				params.id = that.params.id;
+				params.userId = that.params.id;
 				EduManService.getElecFenceHistory(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -39,7 +37,6 @@ angular.module('dleduWebApp')
 
 					})
 			},
-
 
 			init: function () {
 				var that = this;

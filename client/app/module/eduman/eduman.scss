@@ -340,7 +340,24 @@ td.term-disable{
     float: right;
     margin-right: 20px;
 }
-
+.date-set{
+    float: right;
+    margin-right: 20px;
+    display:inline-block;
+    line-height: 32px;
+    height: 32px;
+    .input-date{
+        display:inline-block!important;
+        margin-left: 10px;
+        margin-bottom: 0!important;
+        .button-set{
+            vertical-align: initial!important;
+            i:before{
+                color: #000;
+            }
+        }
+    }
+}
 .show-container{
     position: absolute;
     width:100%;

@@ -390,23 +390,7 @@ var EduManService = {
             }
         })
     },
-    //获取电子围栏列表页面
-    getElecFenceList: function (params, access_token, callback) {
-        RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
-        }).then(function (res) {
-                if (res.status.code == 200) {
-                    callback(null, res.entity);
-                } else {
-                    callback(ErrorCode.errorHandle(res));
-                }
-            })
-            .catch(function (e) {
-                callback(e);
-            });
-    },
+
     teachClassAttendExportTend: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
@@ -421,12 +405,31 @@ var EduManService = {
             }
         })
     },
+    //获取电子围栏列表页面
+    getElecFenceList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd_local',
+            path: '/v1/electricFence/queryelectricfence',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
     //获取电子围栏历史记录
     getElecFenceHistory: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd_local',
+            path: '/v1/electricFence/queryHistory',
+            params: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
@@ -442,9 +445,10 @@ var EduManService = {
     //获取电子围栏当天轨迹信息
     getElecFenceCurrent: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
-            params: params
+            host: 'dd_local',
+            path: '/v1/electricFence/querlocus',
+            params: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
@@ -462,7 +466,8 @@ var EduManService = {
         RestClient.get({
             host: 'dd_local',
             path: '/v1/electricFence/queryInit',
-            params: params
+            params: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
@@ -480,7 +485,8 @@ var EduManService = {
         RestClient.post({
             host: 'dd_local',
             path: '/v1/electricFence/electricFenceCreate',
-            entity: params
+            entity: params,
+            access_token: access_token
         }).then(function (res) {
                 if (res.status.code == 200) {
                     callback(null, res.entity);
