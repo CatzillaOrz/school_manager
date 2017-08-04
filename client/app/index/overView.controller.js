@@ -31,7 +31,7 @@ angular.module('dleduWebApp')
                 _this.getSchoolInfo();
             }
         };
-        var height = document.body.clientHeight - 82 - 100-40;
+        var height = document.documentElement.clientHeight - 82 - 100;
         $(".content-container").css("min-height", height + "px")
         $timeout(function () {
 
