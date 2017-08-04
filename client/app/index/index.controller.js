@@ -39,7 +39,7 @@ angular.module('dleduWebApp')
                                 centeredSlides: true,
                                 // autoplay: 5000,
                                 spaceBetween: 20,
-                                slidesPerView: 5,
+                                slidesPerView: "auto",
                                 paginationClickable: true,
                                 onSlideChangeEnd: function (swiper, current, total) {
                                     $scope.$apply(function(){
