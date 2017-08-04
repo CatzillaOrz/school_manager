@@ -30,15 +30,15 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaFenceFn.records")
                                 td.sorting_1 {{$index+1}}
-                                td {{record.college}}
-                                td {{record.major}}
-                                td {{record.className}}
-                                td {{record.stuId}}
+                                td {{record.collegeName}}
+                                td {{record.professionalName}}
+                                td {{record.classesName}}
+                                td {{record.jobNumber}}
                                 td {{record.name}}
-                                td {{record.date}}
-                                td {{record.checkedAcount}}
-                                td {{record.isLeave}}
-                                td {{record.comment}}
+                                td {{record.checkdate}}
+                                td {{record.checkCount}}
+                                td {{record.leave}}
+                                td {{record.remark}}
                                 td
                                     a.handle(ui-sref="elecfencecurrentinfo({id:0, date:'2017-05-20'})")
                                         span 当天轨迹

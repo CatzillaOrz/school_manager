@@ -3,25 +3,49 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService, MajorService, CollegeService, ClassService) {
-		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isLeaveSchoolId', function(newValue, oldValue) {
+/*		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isLeaveSchool', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
 			});
 		});
-		$scope.evaFenceFn={
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isActivation', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
+			});
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isAtSchool', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
+			});
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isOnline', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
+			});
+
+		});*/
+		/*$timeout(function () {
+			$scope.$watch('evaFenceFn.params.time', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
+			});
+		});*/
+		$scope.evaFenceFn = {
 			//问卷信息
 			records: [],
 			//学院下拉列表
-			collegeDropList:[],
+			collegeDropList: [],
 			//专业下拉列表
-			majorDropList:[],
+			majorDropList: [],
 			//班级下拉列表
-			classDropList:[],
+			classDropList: [],
 			//学院id
-			collegeId:0,
+			collegeId: 0,
 			//专业id
-			majorId:0,
+			majorId: 0,
 			//班级id
-			classesId:0,
+			classesId: 0,
+
+			date: '',
 
 			page: {
 				totalElements: 0,
@@ -30,45 +54,73 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 
-			params:{
-				isLeaveSchoolId: -2,
-				isActiveId: -2,
-				isLoginId: -2,
-				locationId: -2,
-				isOnlineId: -2
+			params: {
+				isLeaveSchool: null,
+				isActivation: null,
+				isLoginId: null,
+				isAtSchool: null,
+				isOnline: null,
+				time: '',
+				name: null,
+				jobNumber: null,
+				organId: AuthService.getUser().organId,
+				collegeId: null,
+				professionalId: null,
+				classId: null
 			},
 
-			isLeaveSchool: [],//是否曾离校
-			isActive: [],//是否激活
-			isLogin: [],//是否登录当天
-			location: [],//当前位置
-			isOnline: [],//是否在线
+			isLeaveSchools: [],//是否曾离校
+			isActives: [],//是否激活
+			isLogins: [],//是否登录当天
+			locations: [],//当前位置
+			isOnlines: [],//是否在线
 
 			//获取结果筛选条件
-			getResultOption: function(type){
-				if(type=="isLeaveSchool"){
-					this.isLeaveSchool = [{id: -2, text: '是否曾离校'},{id: 1, text: '是'},{id: 0, text: '否'},{id: -1, text: '未知'}];
-				}else if(type=="isActive"){
-					this.isActive = [{id: -2, text: '是否未激活'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
-				}else if(type=="isLogin"){
-					this.isLogin = [{id: -2, text: '当天是否登录'}, {id: 1, text: '是'}, {id:0, text: '否'}];
-				}else if(type=="location"){
-					this.location = [{id: -2, text: '当前位置'}, {id: 1, text: '在校'},{id:0, text: '离校'}];
-				}else if(type=="isOnline"){
-					this.isOnline = [{id: -2, text: '在线状态'}, {id: 1, text: '在线'},{id:0, text: '离线'}];
+			getResultOption: function (type) {
+				if (type == "isLeaveSchool") {
+					this.isLeaveSchools = [{id: null, text: '是否曾离校'}, {id: 1, text: '是'}, {id: 0, text: '否'}, {
+						id: -1,
+						text: '未知'
+					}];
+				} else if (type == "isActive") {
+					this.isActives = [{id: null, text: '是否未激活'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
+				} else if (type == "isLogin") {
+					this.isLogins = [{id: null, text: '当天是否登录'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
+				} else if (type == "location") {
+					this.locations = [{id: null, text: '当前位置'}, {id: 1, text: '在校'}, {id: 0, text: '离校'}];
+				} else if (type == "isOnline") {
+					this.isOnlines = [{id: null, text: '在线状态'}, {id: 1, text: '在线'}, {id: 0, text: '离线'}];
 				}
 
 				//return {minimumResultsForSearch: -1};
 			},
 
+			getNowDate: function() {
+				var myDate,myDateStr;
+				myDate = new Date();
+				var yyyy = myDate.getFullYear();//取四位年份
+				var MM= myDate.getMonth()+1;//取月份
+				if(MM<10)
+				{
+					MM="0"+MM;
+				}
+				var dd= myDate.getDate();//取日
+				if(dd<10)
+				{
+					dd="0"+dd;
+				}
+				myDateStr=yyyy+"-"+MM+"-"+dd;
+				return myDateStr;
+			},
 
-			//学院下拉列表配置
-			select2CollegeOptions:{
-				ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
+
+/*			//学院下拉列表配置
+			select2CollegeOptions: {
+				ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: 1,
 					pageSize: 100
-				},"name"),
+				}, "name"),
 
 				templateResult: function (data) {
 					if (data.id === '') { // adjust for custom placeholder values
@@ -77,24 +129,23 @@ angular.module('dleduWebApp')
 
 					return data.name;
 				}
-			},
-			//专业下拉列表配置
-			select2MajorOptions:function(){
-				var that=this;
+			},*/
+/*			//专业下拉列表配置
+			select2MajorOptions: function () {
+				var that = this;
 				return {
 					ajax: {
 						url: "api/major/getMajorDropList",
 						dataType: 'json',
 						//delay: 250,
 						data: function (query) {
-							var params={
+							var params = {
 								orgId: AuthService.getUser().orgId,
 								pageNumber: 1,
 								pageSize: 100,
-								collegeId:that.collegeId,
-
+								collegeId: that.params.collegeId,
 							}
-							params.name=query.term;
+							params.name = query.term;
 							return params;
 						},
 						processResults: function (data, params) {
@@ -115,25 +166,25 @@ angular.module('dleduWebApp')
 						}
 
 						return data.name;
-					}}
+					}
+				}
 			},
 			//班级下拉列表配置
-			select2ClassOptions:function(){
-				var that=this;
+			select2ClassOptions: function () {
+				var that = this;
 				return {
 					ajax: {
 						url: "api/class/geClassDropList",
 						dataType: 'json',
-						//delay: 250,
 						data: function (query) {
-							var params={
+							var params = {
 								orgId: AuthService.getUser().orgId,
 								pageNumber: 1,
 								pageSize: 100,
-								professionalId:that.majorId,
+								majorId: that.params.majorId,
 
 							}
-							params.name=query.term;
+							params.name = query.term;
 							return params;
 						},
 						processResults: function (data, params) {
@@ -155,11 +206,11 @@ angular.module('dleduWebApp')
 						return data.name;
 					}
 				}
-			},
+			},*/
 
 			//学院下拉列表查询
-			getCollegeDropList:function () {
-				var that=this;
+			getCollegeDropList: function () {
+				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
@@ -167,25 +218,25 @@ angular.module('dleduWebApp')
 				}
 				CollegeService.getCollegeDropList(params).$promise
 					.then(function (data) {
-						that.collegeDropList=data.data;
+						that.collegeDropList = data.data;
 					})
 					.catch(function (error) {
 					})
 			},
 			//通过id查询学院
-			getCollegeById:function (collegeId) {
-				var that= this;
-				var params={
+			getCollegeById: function (collegeId) {
+				var that = this;
+				var params = {
 					id: collegeId
 				};
 				CollegeService.getCollegeById(params).$promise
 					.then(function (data) {
-						var temp={
-							id:data.id,
-							name:data.name
+						var temp = {
+							id: data.id,
+							name: data.name
 						}
 						that.collegeDropList.push(temp);
-						that.collegeId=data.id;
+						that.collegeId = data.id;
 
 					})
 					.catch(function (error) {
@@ -193,18 +244,18 @@ angular.module('dleduWebApp')
 					})
 			},
 			//专业下拉列表查询
-			getMajorDropList:function () {
-				var that=this;
+			getMajorDropList: function () {
+				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: 100
 				}
-				params.collegeId=that.collegeId;
+				params.collegeId = that.params.collegeId;
 				MajorService.getMajorDropList(params).$promise
 					.then(function (data) {
-						that.majorDropList=data.data;
-						if(!that.isInit&& $state.current.name=="studentEdit"){
+						that.majorDropList = data.data;
+						if (!that.isInit && $state.current.name == "studentEdit") {
 							that.getMajorById(that.majorId);
 						}
 
@@ -213,39 +264,39 @@ angular.module('dleduWebApp')
 					})
 			},
 			//通过id查询专业
-			getMajorById:function (majorId) {
-				var that= this;
-				var params={
+			getMajorById: function (majorId) {
+				var that = this;
+				var params = {
 					id: majorId
 				}
 				MajorService.getMajorById(params).$promise
 					.then(function (data) {
-						var temp={
-							id:data.id,
-							name:data.name
+						var temp = {
+							id: data.id,
+							name: data.name
 						}
 						that.majorDropList.push(temp);
-						that.majorId=data.id;
+						that.majorId = data.id;
 					})
 					.catch(function (error) {
 						//messageService.openMsg("专业添加失败")
 					})
 			},
 			//班级下拉类表查询
-			getClassDropList:function () {
-				var that=this;
+			getClassDropList: function () {
+				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: 100
 				}
-				params.professionalId=that.majorId;
+				params.professionalId = that.params.professionalId;
 				ClassService.getClassDropList(params).$promise
 					.then(function (data) {
-						that.classDropList=data.data;
-						if(!that.isInit&&$state.current.name=="studentEdit"){
+						that.classDropList = data.data;
+						if (!that.isInit && $state.current.name == "studentEdit") {
 							that.getClassById(that.classesId);
-							that.isInit=true;
+							that.isInit = true;
 						}
 
 					})
@@ -260,15 +311,14 @@ angular.module('dleduWebApp')
 				}
 				ClassService.getClassById(params).$promise
 					.then(function (data) {
-						var temp={
-							id:data.id,
-							name:data.name
+						var temp = {
+							id: data.id,
+							name: data.name
 						}
 						that.classDropList.push(temp);
-						that.classesId=data.id;
+						that.classesId = data.id;
 					})
 					.catch(function (error) {
-						//messageService.openMsg("班级添加失败")
 					})
 			},
 
@@ -276,11 +326,11 @@ angular.module('dleduWebApp')
 			// 获取电子围栏信息列表
 			getElecFenceList: function () {
 				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
-				};
+				this.params.pageNumber = 1;
+				this.params.pageSize = that.page.pageSize;
+				this.params.time = new Date(this.date).getTime();
+				this.params.organId = AuthService.getUser().orgId;
+				var params = this.params;
 				EduManService.getElecFenceList(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -292,47 +342,45 @@ angular.module('dleduWebApp')
 			},
 
 			//通知班主任
-			notice: function(){
-				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
-					.then(function(data){
-						if(!data){//第一次进入设置
-							that.operation = '去设置';
-						}else{//初始化选择的数据
-							that.record = data;
-							that.elecSet.timeSections = data.monitorTime;
-							var verNew = [], verNews = [];
-							that.map.setCenter([parseFloat(data.lltudes[0][0].longitude), parseFloat(data.lltudes[0][1].latitude)]);
-							for(var i = 0, length = data.lltudes.length; i < length; i++){
-								verNew = [];
-								var temp = data.lltudes[i];
-								for(var j = 0; j < temp.length; j++){
-									var lonlat = temp[j];
-									verNew.push({longitude: parseFloat(lonlat.longitude), latitude: parseFloat(lonlat.latitude)});
-								}
-								verNews.push(verNew);
-							}
-							that.polyVer = verNews;
+			notice: function (id) {
+				EduManService.setElecFenceInfo({organId: AuthService.getUser().orgId, userId: id}).$promise
+					.then(function (data) {
+						if (data.trueMSG) {
+							messageService.openMsg("通知成功!");
+						} else {
+							messageService.openMsg("通知失败!");
 						}
-						//绘制多边形
-						that.drawPolygon(that.polyVer);
-						//选择学期
-						//that.getSemeterById(that.semesterId);
-						that.elecSet.termSelectedId = that.record.semesterId;
 					})
-					.catch(function(e){
+					.catch(function (e) {
 
-					});
+					})
 			},
 
 			//设置围栏
-			setFence: function(){
+			setFence: function () {
 				$state.go('elecfencecreate');
 			},
 
 			init: function () {
 				this.getCollegeDropList();
+				this.date = this.getNowDate();
 				this.getElecFenceList();
 			}
 		};
 		$scope.evaFenceFn.init();
+
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.collegeId', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getMajorDropList();
+				}
+			});
+		})
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.professionalId', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getClassDropList();
+				}
+			});
+		})
 	});
