@@ -39,6 +39,6 @@ angular.module('dleduWebApp')
 
             $scope.excellentTeacherDetailFn.init();
         })
-        var height = document.body.clientHeight - 82 - 100;
+        var height = document.documentElement.clientHeight - 82 - 100;
         $(".content-container").css("min-height", height + "px");
     });
