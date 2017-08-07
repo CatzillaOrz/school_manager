@@ -111,6 +111,11 @@
             .repeat_header
                 i.fa.fa-exclamation-triangle
                 span.buld 导入错误提示
+                button.btn.btn-primary(style="margin-left:10px;" type='button' ng-click="teachClassListFn.openImpBatch(teachClassListFn.impType ,'reset')")
+                    span 重新导入
+        .repeat_header(style="padding:10px 0;")
+            i.fa.fa-exclamation-triangle(style="color:#ff0000")
+            span.buld {{"失败原因：" + teachClassListFn.errorInfos.message}}
         ul#myTab.nav.nav-tabs
             li.active
                 a(href='#teachingClass', data-toggle='tab')
@@ -127,7 +132,7 @@
             #teachingClass.tab-pane.fade.in.active
                 p
                     .repeatLoad
-                        .repeat_content
+                        .repeat_content.content-scorll
                             table
                                 tr
                                     td 错误行号
@@ -150,7 +155,7 @@
             #teacher.tab-pane.fade
                 p
                     .repeatLoad
-                        .repeat_content
+                        .repeat_content.content-scorll
                             table
                                 tr
                                     td 错误行号
@@ -169,7 +174,7 @@
             #student.tab-pane.fade(ng-show='teachClassListFn.impType!="compulsory"')
                 p
                     .repeatLoad
-                        .repeat_content
+                        .repeat_content.content-scorll
                             table
                                 tr
                                     td 错误行号
@@ -188,7 +193,7 @@
             #classes.tab-pane.fade(ng-show='teachClassListFn.impType=="compulsory"')
                 p
                     .repeatLoad
-                        .repeat_content
+                        .repeat_content.content-scorll
                             table
                                 tr
                                     td 错误行号
@@ -207,7 +212,7 @@
             #course.tab-pane.fade
                 p
                     .repeatLoad
-                        .repeat_content
+                        .repeat_content.content-scorll
                             table
                                 tr
                                     td 错误行号

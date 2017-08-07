@@ -76,6 +76,13 @@
         font-weight: 800;
       }
     }
+  .content-scorll{
+    margin-top:5px;
+    cursor:default;
+    min-height:74px;
+    max-height:300px;
+    overflow-y:scroll;
+  }
   .repeat_content{
       table{
         width:100%;

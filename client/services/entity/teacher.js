@@ -36,6 +36,10 @@ angular.module('dleduWebService')
                 var student = $resource('api/teacher/getSimpleTeachers');
                 return student.get(params);
             },
+            getImpResult: function (params) {
+                var teacheres = $resource('api/teacher/getImpResult');
+                return teacheres.get(params);
+            },
         }
 
     });

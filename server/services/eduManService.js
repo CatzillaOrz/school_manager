@@ -408,7 +408,7 @@ var EduManService = {
     //获取电子围栏列表页面
     getElecFenceList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'dd_local',
+            host: 'gateway-org',
             path: '/v1/electricFence/queryelectricfence',
             params: params,
             access_token: access_token
@@ -426,7 +426,7 @@ var EduManService = {
     //获取电子围栏历史记录
     getElecFenceHistory: function (params, access_token, callback) {
         RestClient.get({
-            host: 'dd_local',
+            host: 'gateway-org',
             path: '/v1/electricFence/queryHistory',
             params: params,
             access_token: access_token
@@ -445,7 +445,7 @@ var EduManService = {
     //获取电子围栏当天轨迹信息
     getElecFenceCurrent: function (params, access_token, callback) {
         RestClient.get({
-            host: 'dd_local',
+            host: 'gateway-org',
             path: '/v1/electricFence/querlocus',
             params: params,
             access_token: access_token
@@ -464,7 +464,7 @@ var EduManService = {
     //获取设置信息
     getElecSetInfo: function (params, access_token, callback) {
         RestClient.get({
-            host: 'dd_local',
+            host: 'gateway-org',
             path: '/v1/electricFence/queryInit',
             params: params,
             access_token: access_token
@@ -483,7 +483,7 @@ var EduManService = {
     //获取设置信息
     setElecFenceInfo: function (params, access_token, callback) {
         RestClient.post({
-            host: 'dd_local',
+            host: 'gateway-org',
             path: '/v1/electricFence/electricFenceCreate',
             entity: params,
             access_token: access_token
@@ -502,7 +502,7 @@ var EduManService = {
     //通知班主任
     notice: function (params, access_token, callback) {
         RestClient.post({
-            host: 'dd_local',
+            host: 'dd',
             path: '/v1/electricFence/assignedsave',
             access_token: access_token,
             entity: params

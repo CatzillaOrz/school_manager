@@ -86,7 +86,11 @@ var UploadService = {
 				return;
 			}
 			if (res.statusCode === 200 || res.statusCode === 426) {
-				callback(null, JSON.parse(res.body));
+				if(res.body == ''){
+					callback(null, JSON.parse('{"success":true}'));
+				}else{
+					callback(null, JSON.parse(res.body));
+				}
 			} else {
 				callback(function(){
 					return {

@@ -30,14 +30,18 @@ angular.module('dleduWebService')
 					}).then(function(res){
 						CommonService.addLoading(false, 'all');
 						if(res.status === 200){
-							scopeObj.errorInfos = res.data;
-							if(scopeObj.errorInfos[0].id){
-								ngDialog.close();
-								messageService.openMsg("导入成功！");
-								callback.call(scopeObj);
+							if(res.data && res.data.success){//学生教师、排课处理
+								messageService.openMsg("上传文件成功！请稍候查看处理结果");
 							}else{
-								ngDialog.close();
-								ngDialog.open(openParams);
+								scopeObj.errorInfos = res.data;
+								if(scopeObj.errorInfos[0].id){
+									ngDialog.close();
+									messageService.openMsg("导入成功！");
+									callback.call(scopeObj);
+								}else{
+									ngDialog.close();
+									ngDialog.open(openParams);
+								}
 							}
 						}
 					},function(res){

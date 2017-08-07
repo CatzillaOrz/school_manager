@@ -19,18 +19,19 @@ angular.module('dleduWebApp')
 			 * 加载设置
 			 */
 			loadSetInfo: function(){
-				EduManService.getElecSetInfo().$promise
+				var that = this;
+				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
 					.then(function(data){
 						if(!data){//第一次进入设置
-							$scope.ElecFenceCreateFn.isDisabled = false;
+							that.isDisabled = false;
 						}else {//初始化选择的数据
-							$scope.ElecFenceCreateFn.record = data;
-							$scope.ElecFenceCreateFn.polyVer = data.lltudes;
+							that.record = data;
+							that.polyVer = data.lltudes;
 							//选择类型
-							if($scope.ElecFenceCreateFn.polyVer && $scope.ElecFenceCreateFn.polyVer.length > 0){
-								$scope.ElecFenceCreateFn.isDisabled = true;
+							if(that.polyVer && that.polyVer.length > 0){
+								that.isDisabled = true;
 							}
-							$scope.ElecFenceCreateFn.startDraw();
+							that.startDraw();
 						}
 					})
 					.catch(function(e){

@@ -16,8 +16,8 @@
                             .row(style="margin-bottom:15px;")
                                 .col-sm-6
                                     span 请选择学期：
-                                    select(style="width:50%" ng-model="elecFenceCreateFn.elecSet.termSelectedId" ui-select2="elecFenceCreateFn.select2SemesterOptions()" )
-                                        option(value="{{semester.id}}" ng-repeat="semester in elecFenceCreateFn.semeterLists") {{semester.text}}
+                                    select(style="width:50%" ng-model="elecFenceCreateFn.elecSet.termSelectedId" ui-select2 = 'elecFenceCreateFn.select2SemesterOptions()')
+                                        option(value="{{semester.id}}" ng-repeat="semester in elecFenceCreateFn.semeterLists" selected="{{elecFenceCreateFn.record.semesterId==semester.id ? 'selected' : ''}}") {{semester.text}}
                         .span12(style="margin-top:20px;")
                             .span6
                                 .span6 学期日历：
@@ -27,7 +27,7 @@
                                         span.add-on
                                             i.icon-calendar
 
-    .row-fluid(style="margin-top: 15px;")
+    .row-fluid
         .span12
             button.btn.btn-success#success(style="width:100px", ng-click="elecFenceCreateFn.saveSet()") 保存
 
