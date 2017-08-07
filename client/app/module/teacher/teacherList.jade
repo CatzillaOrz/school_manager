@@ -108,7 +108,12 @@
             .repeat_header
                 i.fa.fa-exclamation-triangle
                 span.buld 导入错误提示
-            .repeat_content
+                button.btn.btn-primary(style="margin-left:10px;" type='button' ng-click="teacherListFn.openImpBatch('reset')")
+                    span 重新导入
+            .repeat_header
+                i.fa.fa-exclamation-triangle(style="color:#ff0000")
+                span.buld {{"失败原因：" + teacherListFn.errorInfos.message}}
+            .repeat_content.content-scorll
                 table
                     tr
                         td 错误行号
@@ -116,7 +121,7 @@
                         td 姓名
                         td 学院
                         td 错误信息
-                    tr(ng-repeat="info in teacherListFn.errorInfos")
+                    tr(ng-repeat="info in teacherListFn.errorInfos.teacherExcelDomainList")
                         td {{info.line}}
                         td {{info.code}}
                         td {{info.name}}

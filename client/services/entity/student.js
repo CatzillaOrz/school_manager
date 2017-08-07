@@ -37,5 +37,9 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return student.update(params);
             },
+            getImpResult: function (params) {
+                var student = $resource('api/student/getImpResult');
+                return student.get(params);
+            },
         }
     });

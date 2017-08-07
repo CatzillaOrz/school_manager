@@ -12,7 +12,7 @@ angular.module('dleduWebApp')
 			//当前操作的教学班
 			currentTeachClass: {},
 			myFile: null, //选择的文件对象
-			errorInfos: [], //返回的错误信息
+			errorInfos: null, //返回的错误信息
 			impType: '', //导入类型，按班级还是学生
 			page: {
 				totalElements: 0,
@@ -125,15 +125,77 @@ angular.module('dleduWebApp')
 
 			/**
 			 * 弹出批量导入弹出框
+			 * type 按必须导入还是选项导入
+			 * openType 是否重新打开页面
 			 */
-			openImpBatch: function(type){
+			openImpBatch: function(type, openType){
+				var that = this;
 				this.impType = type;
 				var params = {
 					template: 'importDialog',
 					width: 600,
 					scope: $scope,
 				};
-				ImpBatchService.openImpBatch(params);
+				if(openType == 'reset'){
+					ngDialog.close();
+					ImpBatchService.openImpBatch(params);
+					return;
+				}
+				CommonService.addLoading(true, 'all');
+				if(this.impType == 'optional'){
+					TeachClassService.getImpOptionResult({orgId: AuthService.getUser().orgId, userId: AuthService.getUser().id}).$promise
+						.then(function (data) {
+							CommonService.addLoading(false, 'all');
+							if(typeof data.state == 'undefined'){
+								ImpBatchService.openImpBatch(params);
+							}else{
+								if(data.state == 10){//数据正在处理请稍候查看
+									messageService.openMsg("数据正在处理，请稍候导入数据！");
+								}else if(data.state == 20){
+									ImpBatchService.openImpBatch(params);
+								}else if(data.state == 30){
+									that.errorInfos = data
+									ngDialog.close();
+									var dialogParams = {
+										template: 'importResultDialog',
+										width: 600,
+										scope: $scope
+									};
+									ngDialog.open(dialogParams);
+								}
+							}
+						})
+						.catch(function (error) {
+
+						})
+				}else{
+					TeachClassService.getImpMustResult({orgId: AuthService.getUser().orgId, userId: AuthService.getUser().id}).$promise
+						.then(function (data) {
+							CommonService.addLoading(false, 'all');
+							if(typeof data.state == 'undefined'){
+								ImpBatchService.openImpBatch(params);
+							}else{
+								if(data.state == 10){//数据正在处理请稍候查看
+									messageService.openMsg("数据正在处理，请稍候导入数据！");
+								}else if(data.state == 20){
+									ImpBatchService.openImpBatch(params);
+								}else if(data.state == 30){
+									that.errorInfos = data
+									ngDialog.close();
+									var dialogParams = {
+										template: 'importResultDialog',
+										width: 600,
+										scope: $scope
+									};
+									ngDialog.open(dialogParams);
+								}
+							}
+						})
+						.catch(function (error) {
+
+						})
+				}
+
 			},
 
 			/**
@@ -169,7 +231,7 @@ angular.module('dleduWebApp')
 							if(!that.errorInfos.code ||  that.errorInfos.code== ''){
 								that.getTeachClassList();
 								ngDialog.close();
-								messageService.openMsg("导入成功！");
+								messageService.openMsg("上传成功！");
 							}else{
 								ngDialog.close();
 								ngDialog.open(dialogParams);
@@ -177,7 +239,7 @@ angular.module('dleduWebApp')
 						}
 					},function(res){
 						CommonService.addLoading(false, 'all');
-						messageService.openMsg("导入失败!");
+						messageService.openMsg("上传失败!");
 					})
 				}else {
 					messageService.openMsg("请选择excel文件！");

@@ -17,5 +17,6 @@ router.put('/updateTeacher',auth.isSignedIn, controller.updateTeacher);
 router.get('/getTeacherById',auth.isSignedIn, controller.getTeacherById);
 router.get('/getTeacherDropListOrg',auth.isSignedIn, controller.getTeacherDropListOrg);
 router.get('/getSimpleTeachers',auth.isSignedIn, controller.getSimpleTeachers);
+router.get('/getImpResult',auth.isSignedIn, controller.getImpResult);
 
 module.exports = router;

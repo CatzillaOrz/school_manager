@@ -38,6 +38,10 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			getTimetamp: function(date){
+				return new Date(date).getTime();
+			},
+
 			init: function () {
 				var that = this;
 				that.getElecFenceHistory();

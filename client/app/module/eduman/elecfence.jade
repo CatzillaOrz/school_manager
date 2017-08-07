@@ -97,8 +97,8 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaFenceFn.records")
                                 td {{$index+1}}
-                                td {{record.collegeName}}
-                                td {{record.professionalName}}
+                                td {{record.collegeName?record.collegeName:''}}
+                                td {{record.professionalName ? record.professionalName:''}}
                                 td {{record.classesName ? record.classesName: ''}}
                                 td {{record.jobNumber}}
                                 td {{record.name}}

@@ -355,7 +355,39 @@ var TeachClassService = {
         }).catch(function (e) {
             callback(e);
         });
-    }
+    },
+	getImpMustResult: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/teachingclass/importmustmsg',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
+	getImpOptionResult: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/teachingclass/importoptionmsg',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	}
 };
 
 

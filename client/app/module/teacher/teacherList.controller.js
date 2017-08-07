@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
             //当前操作的teacher
             currentTeacher: {},
             myFile: null, //选择的文件对象
-            errorInfos: [], //返回的错误信息
+            errorInfos: null, //返回的错误信息
             page: {
                 totalElements: 0,
                 totalPages: 0,
@@ -99,13 +99,44 @@ angular.module('dleduWebApp')
             /**
              * 弹出批量导入弹出框
              */
-            openImpBatch: function(){
+            openImpBatch: function(type){
+                var that = this;
                 var params = {
                     template: 'importDialog',
                     width: 600,
                     scope: $scope,
                 };
-                ImpBatchService.openImpBatch(params);
+                if(type == 'reset'){
+                    ngDialog.close();
+                    ImpBatchService.openImpBatch(params);
+                    return;
+                }
+                CommonService.addLoading(true, 'all');
+                TeacherService.getImpResult({orgId: AuthService.getUser().orgId, userId: AuthService.getUser().id}).$promise
+                    .then(function (data) {
+                        CommonService.addLoading(false, 'all');
+                        if(typeof data.state == 'undefined'){
+                            ImpBatchService.openImpBatch(params);
+                        }else{
+                            if(data.state == 10){//数据正在处理请稍候查看
+                                messageService.openMsg("数据正在处理，请稍候导入数据！");
+                            }else if(data.state == 20){
+                                ImpBatchService.openImpBatch(params);
+                            }else if(data.state == 30){
+                                that.errorInfos = data
+                                ngDialog.close();
+                                var dialogParams = {
+                                    template: 'importResultDialog',
+                                    width: 600,
+                                    scope: $scope
+                                };
+                                ngDialog.open(dialogParams);
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+
+                    })
             },
 
             /**

@@ -32,5 +32,7 @@ router.post('/saveCourseSchedule', auth.isSignedIn, controller.saveCourseSchedul
 router.delete('/delCourseSchedule', auth.isSignedIn, controller.delCourseSchedule);
 router.put('/getCourseSchedules', auth.isSignedIn, controller.getCourseSchedules);
 router.post('/saveCourseSchedules', auth.isSignedIn, controller.saveCourseSchedules);
+router.get('/getImpMustResult', auth.isSignedIn, controller.getImpMustResult);
+router.get('/getImpOptionResult', auth.isSignedIn, controller.getImpOptionResult);
 //getTeachClassClassesList
 module.exports = router;

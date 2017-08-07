@@ -201,7 +201,25 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
-    }
+    },
+	getImpMustResult:function (req, res) {
+		TeachClassService.getImpMustResultSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+	getImpOptionResult:function (req, res) {
+		TeachClassService.getImpOptionResultSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
 };
 
 

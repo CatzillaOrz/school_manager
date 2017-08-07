@@ -3,32 +3,6 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService, MajorService, CollegeService, ClassService) {
-/*		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isLeaveSchool', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
-			});
-		});
-		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isActivation', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
-			});
-		});
-		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isAtSchool', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
-			});
-		});
-		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isOnline', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
-			});
-
-		});*/
-		/*$timeout(function () {
-			$scope.$watch('evaFenceFn.params.time', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
-			});
-		});*/
 		$scope.evaFenceFn = {
 			//问卷信息
 			records: [],
@@ -219,6 +193,7 @@ angular.module('dleduWebApp')
 				CollegeService.getCollegeDropList(params).$promise
 					.then(function (data) {
 						that.collegeDropList = data.data;
+						that.params.collegeId = null;
 					})
 					.catch(function (error) {
 					})
@@ -383,4 +358,38 @@ angular.module('dleduWebApp')
 				}
 			});
 		})
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isLeaveSchool', function (newValue, oldValue) {
+				$scope.evaFenceFn.getElecFenceList();
+			});
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isActivation', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getElecFenceList();
+				}
+			});
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isAtSchool', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getElecFenceList();
+				}
+			});
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.isOnline', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getElecFenceList();
+				}
+			});
+
+		});
+		$timeout(function () {
+			$scope.$watch('evaFenceFn.params.time', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getElecFenceList();
+				}
+			});
+		});
 	});

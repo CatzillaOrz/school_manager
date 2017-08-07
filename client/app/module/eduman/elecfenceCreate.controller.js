@@ -3,11 +3,13 @@
  * 当天轨迹
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceCreateCtrl', function ($scope, $timeout, AuthService, EduManService, amapService, SchoolYearService,
+	.controller('ElecFenceCreateCtrl', function ($scope, $timeout, $state, AuthService, EduManService, amapService, SchoolYearService,
 												 messageService) {
 		$timeout(function () {
 			$scope.$watch("elecFenceCreateFn.elecSet.termSelectedId", function(newValue, oldValue){
-				$scope.elecFenceCreateFn.loadDatePickerByOption(newValue);
+				if(newValue != oldValue){
+					$scope.elecFenceCreateFn.loadDatePickerByOption(newValue);
+				}
 			});
 		});
 		$scope.elecFenceCreateFn={
@@ -18,8 +20,7 @@ angular.module('dleduWebApp')
 			//保存当前学期信息
 			currentSemeter: null,
 			fromType: null,//是否从创建多边形页面过来。1是，0否
-			//地图对象
-			map: null,
+			map: null,//地图对象
 			polyVer: [],//多边形顶点
 			//设置信息对象
 			elecSet: {
@@ -52,6 +53,7 @@ angular.module('dleduWebApp')
 					.then(function(dataList){
 						angular.forEach(dataList.data, function (data) {
 							data.text = data.name;
+							//that.elecSet.termSelectedId = that.record.semesterId;
 						})
 						that.semeterLists = dataList.data;
 					})
@@ -100,7 +102,6 @@ angular.module('dleduWebApp')
 						that.currentSemeter = data;
 					}
 				});
-				that.elecSet.termSelectedId = id;
 				return that.currentSemeter;
 			},
 
@@ -158,6 +159,7 @@ angular.module('dleduWebApp')
 					.then(function(data){
 						if(data.trueMSG){
 							messageService.openMsg("设置成功!");
+							$state.go('elecfence');
 						}else{
 							messageService.openMsg("设置失败!");
 						}
@@ -201,7 +203,7 @@ angular.module('dleduWebApp')
 				var that = this;
 				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
 					.then(function(data){
-						if(!data){//第一次进入设置
+						if(typeof data.lltudes == 'undefined'){//第一次进入设置
 							that.operation = '去设置';
 						}else{//初始化选择的数据
 							that.record = data;
@@ -221,9 +223,7 @@ angular.module('dleduWebApp')
 						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);
-						//选择学期
-						//that.getSemeterById(that.semesterId);
-						that.elecSet.termSelectedId = that.record.semesterId;
+						//that.select2SemesterOptions();
 					})
 					.catch(function(e){
 
