@@ -244,8 +244,8 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: _this.page.pageNumber,
-                    pageSize: _this.page.pageSize
+                    pageNumber: 1,
+                    pageSize: 10
                 };
                 params.name=_this.findParams.name;
                 SchoolService.getHotMajorList(params).$promise
@@ -324,7 +324,7 @@ angular.module('dleduWebApp')
                 SchoolService.deleteHotMajor(params).$promise
                     .then(function (data) {
                         messageService.openMsg("专业删除成功！");
-                        _this.getHotMajorList();
+                        _this.findHotMajorByPage();
                     })
                     .catch(function (error) {
                         messageService.openMsg("专业删除失败！");

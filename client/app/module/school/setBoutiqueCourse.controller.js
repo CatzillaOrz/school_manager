@@ -184,8 +184,8 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: _this.page.pageNumber,
-                    pageSize: _this.page.pageSize
+                    pageNumber: 1,
+                    pageSize: 10
                 };
                 params.courseName=_this.findParams.name;
                 SchoolService.getBoutiqueCourseList(params).$promise
@@ -253,7 +253,7 @@ angular.module('dleduWebApp')
                 SchoolService.deleteBoutiqueCourse(params).$promise
                     .then(function (data) {
                         messageService.openMsg("精品课程删除成功！");
-                        _this.getBoutiqueCourseList();
+                        _this.findBoutiqueCourseByPage();
                     })
                     .catch(function (error) {
                         messageService.openMsg("精品课程删除失败！");

@@ -55,7 +55,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((boutiqueCourseFn.page.pageNumber==0?boutiqueCourseFn.page.pageNumber+1:boutiqueCourseFn.page.pageNumber)-1)*10+1}}
+                                span.txt-color-darken {{boutiqueCourseFn.page.pageNumber==0?boutiqueCourseFn.page.pageNumber*10:(boutiqueCourseFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((boutiqueCourseFn.page.pageNumber==0?boutiqueCourseFn.page.pageNumber+1:boutiqueCourseFn.page.pageNumber)-1)*10+boutiqueCourseFn.boutiqueCourseList.length}}
                                 |  条 总共
