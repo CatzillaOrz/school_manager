@@ -194,8 +194,8 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: _this.page.pageNumber,
-                    pageSize: _this.page.pageSize
+                    pageNumber: 1,
+                    pageSize: 10
                 };
                 params.teacherName=_this.findParams.name;
                 SchoolService.getExcellentTeacherList(params).$promise
@@ -279,7 +279,7 @@ angular.module('dleduWebApp')
                 SchoolService.deleteExcellentTeacher(params).$promise
                     .then(function (data) {
                         messageService.openMsg("优秀老师删除成功！");
-                        _this.getExcellentTeacherList();
+                        _this.findExcellentTeacherByPage();
                     })
                     .catch(function (error) {
                         messageService.openMsg("优秀老师删除失败！");

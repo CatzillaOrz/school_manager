@@ -54,7 +54,7 @@
             .line
             .major-content
                 .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" )
-                    img(ng-src="{{major.inUrl}}")
+                    img(ng-src="{{major.inUrl || 'http://oli56k5b0.bkt.clouddn.com/major-defulat.png'}}")
                     .shade
                     .name {{major.specialtyName}}
             .more

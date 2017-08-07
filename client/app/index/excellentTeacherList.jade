@@ -18,4 +18,4 @@
                 button.btn.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})") 查看详情
 
     .page(ng-if="excellentTeacherListFn.page.totalElements")
-        ul.pagination-sm(uib-pagination, total-items='excellentTeacherListFn.page.totalElements',items-per-page="excellentTeacherListFn.page.pageSize" max-size='excellentTeacherListFn.page.pageSize' ng-model='excellentTeacherListFn.page.pageNumber',ng-change="excellentTeacherListFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+        ul.pagination-sm(uib-pagination, total-items='excellentTeacherListFn.page.totalElements',items-per-page="excellentTeacherListFn.page.pageSize" max-size='excellentTeacherListFn.page.pageSize' ng-model='excellentTeacherListFn.page.pageNumber',ng-change="excellentTeacherListFn.getExcellentTeacherList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
