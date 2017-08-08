@@ -41,7 +41,7 @@
                         .date
                             span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
                             span.year /{{ indexFn.formatDate(notice.publishDate,'yyyy-MM') }}
-                        .title {{notice.title}}
+                        .title {{indexFn.cutHtml(notice.title,30)}}
                     .content(ng-if="$index!=0") {{notice.title}}
                     .date(ng-if="$index!=0")
                         i.fa.fa-calendar

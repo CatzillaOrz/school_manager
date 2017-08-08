@@ -9,7 +9,7 @@
                         span.day {{ noticeListFn.formatDate(notice.publishDate,'dd') }}
                         span.year /{{ noticeListFn.formatDate(notice.publishDate,'yyyy-MM') }}
                     .name
-                        | {{notice.title}}
+                        | {{noticeListFn.cutHtml(notice.title,36)}}
                     .introduce
                         | {{noticeListFn.cutHtml(notice.content,90)}}
     .page(ng-if='noticeListFn.page.totalElements')
