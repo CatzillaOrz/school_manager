@@ -55,75 +55,6 @@ angular.module('dleduWebApp')
 				return  lonlats;
 			},
 
-			/*//获取经纬度
-			orbitList: function(datas){
-				var that = this;
-				var coordinates = [];
-				for(var j in datas){
-					for(var z in datas[j]){
-						if( z =="center"){
-							coordinates.push(datas[j][z])
-						}
-					}
-				}
-				that.getOrbitMarker(coordinates);
-				that.drawOrbit(coordinates);
-			},
-
-			//轨迹点marker
-			getOrbitMarker: function(arr){
-				var that = this;
-				for(var i in arr){
-					var marker = new AMap.Marker({
-						position: arr[i],
-						map: that.mapobj
-					});
-				}
-			},
-*/
-			/**
-			 * 绘制轨迹
-			 * lonlats经纬度
-			 */
-			drawOrbit: function(lonlats){
-				var that = this;
-/*
-				var polyline = new AMap.Polyline({
-					path: arr, //设置线覆盖物路径
-					strokeColor: "#3366FF", //线颜色
-					strokeOpacity: 1,       //线透明度
-					strokeWeight: 5,        //线宽
-					strokeStyle: "solid",   //线样式
-					strokeDasharray: [10, 5] //补充线样式
-				});
-*/
-
-				// 绘制轨迹
-				var polyline = new AMap.Polyline({
-					map: that.mapObjs.map,
-					path: lineArr,
-					strokeColor: "#0000ff",  //线颜色
-					strokeOpacity: 0.5,     //线透明度
-					strokeWeight: 5,      //线宽
-					strokeStyle: "solid"  //线样式
-				});
-				that.mapObjs.lineArr.push(polyline);
-
-				passedPolyline = new AMap.Polyline({
-					map: this.mapObjs.map,
-					// path: lineArr,
-					strokeColor: "#F00",  //线颜色
-					// strokeOpacity: 1,     //线透明度
-					strokeWeight: 3,      //线宽
-					// strokeStyle: "solid"  //线样式
-				});
-
-				marker.on('moving',function(e){
-					passedPolyline.setPath(e.passedPath);
-				})
-				//marker.moveAlong(lineArr, 10000);
-				polyline.setMap(that.mapobj);
-			},
 
 			/**
 			 * 查询轨迹点信息
@@ -167,12 +98,12 @@ angular.module('dleduWebApp')
 					var lonlat = temp;
 					lineArr.push([lonlat[1], lonlat[0]]);
 					var imgSrc = "http://omh5h0gd2.bkt.clouddn.com/titles.jpg";
-					//var content = "<div class='elecmap-tip'><img src=" + imgSrc + " style='width:20px;height:20px;'></div> ";
+					var content = "<div class='elecmap-tip'><img src=" + imgSrc + " style='width:20px;height:20px;'></div> ";
 					var marker = new AMap.Marker({
 						map: this.mapObjs.map,
 						position: [lonlat[1], lonlat[0]],
 						extData: j,
-						//content: content,
+						content: content,
 						offset: new AMap.Pixel(-7, -10)
 					});
 					that.mapObjs.markersOribit.push(marker);
@@ -190,12 +121,15 @@ angular.module('dleduWebApp')
 				polyline = new AMap.Polyline({
 					map: that.mapObjs.map,
 					path: lineArr,
-					strokeColor: "#0000ff",  //线颜色
-					strokeOpacity: 0.5,     //线透明度
-					strokeWeight: 5,      //线宽
+					strokeColor: "#369AFF",  //线颜色
+					strokeOpacity: 0.9,     //线透明度
+					strokeWeight: 6,      //线宽
 					// strokeStyle: "solid"  //线样式
+					showDir: true
 				});
 				that.mapObjs.lineArr.push(polyline);
+
+
 
 				passedPolyline = new AMap.Polyline({
 					map: that.mapObjs.map,
