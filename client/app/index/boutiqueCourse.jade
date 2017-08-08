@@ -17,7 +17,7 @@
                        .name
                            | {{course.courseAuthors[0].name}} {{course.courseAuthors[0].position}}
                     .introduce
-                      | {{boutiqueFn.cutHtml(course.introduction,240)}}
+                      | {{boutiqueFn.cutHtml(course.introduction,150)}}
 
     .page(ng-if="boutiqueFn.page.totalElements")
         ul.pagination-sm(uib-pagination, total-items='boutiqueFn.page.totalElements',items-per-page="boutiqueFn.page.pageSize" max-size='boutiqueFn.page.pageSize' ng-model='boutiqueFn.page.pageNumber',ng-change="boutiqueFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")

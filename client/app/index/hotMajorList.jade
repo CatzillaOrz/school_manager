@@ -1,7 +1,7 @@
 .content-container
     .hot-major-container
         ul.major-content
-            li.major-list(ng-repeat="major in hotMajorListFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})")
+            li.major-list.pointer(ng-repeat="major in hotMajorListFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})")
                 .major-image
                     img(ng-src="{{major.inUrl || 'http://oli56k5b0.bkt.clouddn.com/major-defulat.png'}}")
                 .major-content
