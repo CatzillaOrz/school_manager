@@ -254,14 +254,18 @@ angular.module('dleduWebApp')
 		$timeout(function () {
 			$scope.$watch('evaFenceFn.params.collegeId', function (newValue, oldValue) {
 				if (newValue != oldValue) {
-					$scope.evaFenceFn.getMajorDropList();
+					if(newValue && newValue != ''){
+						$scope.evaFenceFn.getMajorDropList();
+					}
 				}
 			});
 		})
 		$timeout(function () {
 			$scope.$watch('evaFenceFn.params.professionalId', function (newValue, oldValue) {
 				if (newValue != oldValue) {
-					$scope.evaFenceFn.getClassDropList();
+					if(newValue && newValue != '') {
+						$scope.evaFenceFn.getClassDropList();
+					}
 				}
 			});
 		})
