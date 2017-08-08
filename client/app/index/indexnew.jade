@@ -34,16 +34,16 @@
             .title 最新活动
             .line
             ul.notice-content
-                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-class="{'current-new':$index==0}")
-                    .new-pic(ng-if="$index==0")
+                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
+                    .new-pic(ng-show="a")
                         img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default.png'}}")
-                    .current-context(ng-if="$index==0")
+                    .current-context(ng-show="a")
                         .date
                             span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
                             span.year /{{ indexFn.formatDate(notice.publishDate,'yyyy-MM') }}
                         .title {{indexFn.cutHtml(notice.title,30)}}
-                    .content(ng-if="$index!=0") {{notice.title}}
-                    .date(ng-if="$index!=0")
+                    .content(ng-show="!a") {{notice.title}}
+                    .date(ng-show="!a")
                         i.fa.fa-calendar
                         span {{notice.publishDate}}
             .more
