@@ -10,18 +10,24 @@ common scss
 body{
   font-family: $font-family-sans-serif;
 }
-.swiper-pagination-bullet-active {
-  opacity: 1 !important;
-  background: #ffffff !important;
+.swiper-pagination-bullet-active{
+  width: 35px !important;
+  height: 8px;
+  border-radius: 5px;
+  background: rgb(40, 183, 128);
+  margin: 8px 5px !important;
+
 }
 .swiper-pagination-bullet {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  margin: 8px 5px !important;
+  background: rgb(44, 186, 132) !important;
   opacity: 1;
-  background: none;
-  border: 1px solid #ffffff;
 }
 @import '../app/layout/layout.scss';
 @import "../app/layout/header.scss";

@@ -2,7 +2,9 @@
 
 angular.module('dleduWebApp')
     .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
+        $rootScope.user = AuthService.getUser();
         $scope.indexFn={
+            user: $rootScope.user,
             schoolInfo:{},
             schoolLogo:"",
             currentActive:"index",
@@ -20,6 +22,27 @@ angular.module('dleduWebApp')
             noticeList:[],
             currentTab:"notice",
             activeCourseIndex:4,
+            signIn: function () {
+                var _pathName = '';
+                if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
+                    _pathName = '/login?redirectUrl=' + $scope.redirectUrl;
+                } else if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") == -1) {
+                    _pathName = '/login?redirectUrl=' + $window.location.protocol + '//' + $window.location.host + $scope.redirectUrl;
+                } else {
+                    _pathName = '/login';
+                }
+                AuthService.navigation(0, _pathName);
+            },
+            signOut: function () {
+                AuthService.signOut();
+            },
+            navigate: function (host, path) {
+                AuthService.navigation(host, path);
+            },
+            authority: function (entity) {
+                var _this = this;
+                return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+            },
             //精品课程查询
             getBoutiqueCourseList:function () {
                 var _this=this;
@@ -38,7 +61,7 @@ angular.module('dleduWebApp')
                                 // effect: 'fade',
                                 centeredSlides: true,
                                 // autoplay: 5000,
-                                spaceBetween: 20,
+                                spaceBetween: 22,
                                 slidesPerView: "auto",
                                 paginationClickable: true,
                                 onSlideChangeEnd: function (swiper, current, total) {
