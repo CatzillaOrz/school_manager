@@ -503,7 +503,7 @@ var EduManService = {
     notice: function (params, access_token, callback) {
         RestClient.post({
             host: 'dd',
-            path: '/v1/electricFence/assignedsave',
+            path: '/api/web/v1/electricFence/assigned',
             access_token: access_token,
             entity: params
         }).then(function (res) {

@@ -2,7 +2,8 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService, MajorService, CollegeService, ClassService) {
+	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
+										   MajorService, CollegeService, ClassService, messageService) {
 		$scope.evaFenceFn = {
 			//问卷信息
 			records: [],
@@ -318,9 +319,9 @@ angular.module('dleduWebApp')
 
 			//通知班主任
 			notice: function (id) {
-				EduManService.setElecFenceInfo({organId: AuthService.getUser().orgId, userId: id}).$promise
+				EduManService.notice({organId: AuthService.getUser().orgId, userId: id}).$promise
 					.then(function (data) {
-						if (data.trueMSG) {
+						if (data.success) {
 							messageService.openMsg("通知成功!");
 						} else {
 							messageService.openMsg("通知失败!");
