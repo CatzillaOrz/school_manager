@@ -51,11 +51,8 @@ angular.module('dleduWebApp')
 				}
 				SchoolYearService.getSemesterList(params).$promise
 					.then(function(dataList){
-						angular.forEach(dataList.data, function (data) {
-							data.text = data.name;
-							//that.elecSet.termSelectedId = that.record.semesterId;
-						})
 						that.semeterLists = dataList.data;
+						that.loadSetInfo();
 					})
 					.catch(function(e){
 
@@ -220,10 +217,10 @@ angular.module('dleduWebApp')
 								verNews.push(verNew);
 							}
 							that.polyVer = verNews;
+							that.elecSet.termSelectedId = that.record.semesterId;
 						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);
-						//that.select2SemesterOptions();
 					})
 					.catch(function(e){
 
@@ -237,7 +234,7 @@ angular.module('dleduWebApp')
 					zoom:13
 				});
 				this.getNowDate();
-				this.loadSetInfo();
+				this.select2SemesterOptions();
 			}
 		};
 		$scope.elecFenceCreateFn.init();
