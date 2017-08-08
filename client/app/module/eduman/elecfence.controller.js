@@ -3,7 +3,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
-										   MajorService, CollegeService, ClassService, messageService) {
+										   MajorService, CollegeService, ClassService, messageService, CommonService) {
 		$scope.evaFenceFn = {
 			//问卷信息
 			records: [],
@@ -213,6 +213,7 @@ angular.module('dleduWebApp')
 				this.params.time = new Date(this.date).getTime();
 				this.params.organId = AuthService.getUser().orgId;
 				var params = this.params;
+				CommonService.delEmptyProperty(params);
 				EduManService.getElecFenceList(params).$promise
 					.then(function (data) {
 						that.records = data.data;
@@ -271,7 +272,9 @@ angular.module('dleduWebApp')
 		})
 		$timeout(function () {
 			$scope.$watch('evaFenceFn.params.isLeaveSchool', function (newValue, oldValue) {
-				$scope.evaFenceFn.getElecFenceList();
+				if (newValue != oldValue) {
+					$scope.evaFenceFn.getElecFenceList();
+				}
 			});
 		});
 		$timeout(function () {

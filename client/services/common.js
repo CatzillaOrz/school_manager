@@ -151,6 +151,18 @@ angular.module('dleduWebService')
                     $(divParent + ' .show-curtain').remove();
                     $(".show-container").remove();
                 }
+            },
+
+            /**
+             *
+             * @param obj 要处理的对象。全是属性
+             */
+            delEmptyProperty: function(obj) {
+                for (var property in obj) {
+                    if (!obj[property] || obj[property] == '') {
+                        delete obj[property];
+                    }
+                }
             }
         }
     });

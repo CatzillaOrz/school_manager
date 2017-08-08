@@ -76,20 +76,6 @@ angular.module('dleduWebApp')
 				this.quesLists.splice($index, 1);
 			},
 
-			/*//点击上移
-			upQues: function($index){
-				var temp = this.quesLists[$index];
-				this.quesLists[$index] = this.quesLists[$index - 1];
-				this.quesLists[$index - 1] = temp;
-			},
-
-			//点击下移
-			downQues: function($index){
-				var temp = this.quesLists[$index];
-				this.quesLists[$index] = this.quesLists[$index + 1];
-				this.quesLists[$index + 1] = temp;
-			},*/
-
 			//保存题目
 			saveQues: function(){
 				var questions = this.quesLists;
@@ -107,6 +93,12 @@ angular.module('dleduWebApp')
 				}
 				if(allScore != this.params.totalScore){
 					messageService.openMsg("题目总分和问卷总分不相等!");
+					return;
+				}
+				var dateTimeStamp = new Date(params.endDate).getTime();
+				var currentTime = $filter('date')(new Date().getTime(), 'yyyy-MM-dd')
+				if(dateTimeStamp < new Date(currentTime + ' 00:00:00').getTime()){
+					messageService.openMsg("截止日期不能小于今天!");
 					return;
 				}
 				if($state.params.id){
