@@ -217,7 +217,7 @@ angular.module('dleduWebApp')
 								verNews.push(verNew);
 							}
 							that.polyVer = verNews;
-							that.elecSet.termSelectedId = that.record.semesterId;
+							that.elecSet.termSelectedId = that.record.semesterId + '';
 						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);

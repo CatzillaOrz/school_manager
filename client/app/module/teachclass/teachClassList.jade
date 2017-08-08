@@ -17,15 +17,15 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.col-sm-6
+                        .col-xs-12.col-sm-4
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
                                     input.form-control(type='search', placeholder='按教学班名称查询', aria-controls='datatable_col_reorder' ng-model="teachClassListFn.params.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="teachClassListFn.getTeachClassList()")
                                         i.glyphicon.glyphicon-search
-                        .col-sm-6.col-xs-6.hidden-xs
+                        .col-sm-8.col-xs-6.hidden-xs
                             .ColVis
-                                button.btn.btn-default(ng-click='teachClassListFn.schedules()')
+                                button.btn.btn-primary(ng-click='teachClassListFn.schedules()')
                                     span 批量排课
                                 .speace-10
                                 button.btn.btn-primary(ui-sref="teachClassCreat")
