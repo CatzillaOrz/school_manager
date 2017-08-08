@@ -27,15 +27,15 @@
                             .form-group.col-md-2
                                 label.control-label 学院：
                                 select.form-control(ng-model="evaFenceFn.params.collegeId" ui-select2)
-                                    option(ng-repeat="college in evaFenceFn.collegeDropList" value="{{college.id}}" selected="{{evaFenceFn.collegeId==college.id?'selected':''}}") {{college.name}}
+                                    option(ng-repeat="college in evaFenceFn.collegeDropList" value="{{college.id}}" ng-selected="evaFenceFn.params.collegeId==college.id") {{college.name}}
                             .form-group.col-md-2
                                 label.control-label 专业：
-                                select.form-control(ng-model="evaFenceFn.params.professionalId" ui-select2)
-                                    option(ng-repeat="major in evaFenceFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                select.form-control(ng-model="evaFenceFn.params.professionalId" ui-select2  ng-disabled="!evaFenceFn.majorDropList")
+                                    option(ng-repeat="major in evaFenceFn.majorDropList" value="{{major.id}}"  ng-selected="evaFenceFn.params.professionalId==major.id") {{major.name}}
                             .form-group.col-md-2
                                 label.control-label 班级：
-                                select.form-control(ng-model="evaFenceFn.params.classId" ui-select2)
-                                    option(ng-repeat="class in evaFenceFn.classDropList" value="{{class.id}}" selected="{{evaFenceFn.params.classId==class.id?'selected':''}}") {{class.name}}
+                                select.form-control(ng-model="evaFenceFn.params.classId" ui-select2 ng-disabled="!evaFenceFn.classDropList")
+                                    option(ng-repeat="class in evaFenceFn.classDropList" value="{{class.id}}" ng-selected="evaFenceFn.params.classId==class.id") {{class.name}}
                             .form-group.col-md-2
                                 label.control-label 姓名：
                                 input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")

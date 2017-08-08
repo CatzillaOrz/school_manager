@@ -89,100 +89,6 @@ angular.module('dleduWebApp')
 			},
 
 
-/*			//学院下拉列表配置
-			select2CollegeOptions: {
-				ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: 1,
-					pageSize: 100
-				}, "name"),
-
-				templateResult: function (data) {
-					if (data.id === '') { // adjust for custom placeholder values
-						return 'Custom styled placeholder text';
-					}
-
-					return data.name;
-				}
-			},*/
-/*			//专业下拉列表配置
-			select2MajorOptions: function () {
-				var that = this;
-				return {
-					ajax: {
-						url: "api/major/getMajorDropList",
-						dataType: 'json',
-						//delay: 250,
-						data: function (query) {
-							var params = {
-								orgId: AuthService.getUser().orgId,
-								pageNumber: 1,
-								pageSize: 100,
-								collegeId: that.params.collegeId,
-							}
-							params.name = query.term;
-							return params;
-						},
-						processResults: function (data, params) {
-							params.page = params.page || 1;
-							return {
-								results: data.data,
-								pagination: {
-									more: (params.page * 30) < data.total_count
-								}
-							};
-						},
-						cache: true
-					},
-
-					templateResult: function (data) {
-						if (data.id === '') { // adjust for custom placeholder values
-							return 'Custom styled placeholder text';
-						}
-
-						return data.name;
-					}
-				}
-			},
-			//班级下拉列表配置
-			select2ClassOptions: function () {
-				var that = this;
-				return {
-					ajax: {
-						url: "api/class/geClassDropList",
-						dataType: 'json',
-						data: function (query) {
-							var params = {
-								orgId: AuthService.getUser().orgId,
-								pageNumber: 1,
-								pageSize: 100,
-								majorId: that.params.majorId,
-
-							}
-							params.name = query.term;
-							return params;
-						},
-						processResults: function (data, params) {
-							params.page = params.page || 1;
-							return {
-								results: data.data,
-								pagination: {
-									more: (params.page * 30) < data.total_count
-								}
-							};
-						},
-						cache: true
-					},
-					templateResult: function (data) {
-						if (data.id === '') { // adjust for custom placeholder values
-							return 'Custom styled placeholder text';
-						}
-
-						return data.name;
-					}
-				}
-			},*/
-
 			//学院下拉列表查询
 			getCollegeDropList: function () {
 				var that = this;
@@ -194,7 +100,7 @@ angular.module('dleduWebApp')
 				CollegeService.getCollegeDropList(params).$promise
 					.then(function (data) {
 						that.collegeDropList = data.data;
-						that.params.collegeId = null;
+						that.collegeDropList.splice(0, 0, {id: null, name : "--请选择--"});
 					})
 					.catch(function (error) {
 					})
@@ -216,7 +122,6 @@ angular.module('dleduWebApp')
 
 					})
 					.catch(function (error) {
-						//messageService.openMsg("学院添加失败")
 					})
 			},
 			//专业下拉列表查询
@@ -231,6 +136,7 @@ angular.module('dleduWebApp')
 				MajorService.getMajorDropList(params).$promise
 					.then(function (data) {
 						that.majorDropList = data.data;
+						that.majorDropList.splice(0, 0, {id: null, name : "--请选择--"});
 						if (!that.isInit && $state.current.name == "studentEdit") {
 							that.getMajorById(that.majorId);
 						}
@@ -255,7 +161,6 @@ angular.module('dleduWebApp')
 						that.majorId = data.id;
 					})
 					.catch(function (error) {
-						//messageService.openMsg("专业添加失败")
 					})
 			},
 			//班级下拉类表查询
@@ -270,6 +175,7 @@ angular.module('dleduWebApp')
 				ClassService.getClassDropList(params).$promise
 					.then(function (data) {
 						that.classDropList = data.data;
+						that.classDropList.splice(0, 0, {id: null, name : "--请选择--"});
 						if (!that.isInit && $state.current.name == "studentEdit") {
 							that.getClassById(that.classesId);
 							that.isInit = true;
