@@ -60,7 +60,7 @@ angular.module('dleduWebService')
                     return school;
                 } else {
                     var url = $location.host().split('.')[0];
-                    //url = "sjlb";
+                    url = "sjlb";
                     var params = {
                         domainname: url
                     };
