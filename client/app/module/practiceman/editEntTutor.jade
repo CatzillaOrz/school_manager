@@ -1,0 +1,56 @@
+//
+   Created by Administrator on 2017/6/21.
+
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            form.form-horizontal(name="entTutorForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 姓名：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            |企业名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字企业名称" ng-model="handleFn.params.enterpriseName" name="enterpriseName" validator="required, maxlength=30" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 部门：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字部门名称" ng-model="handleFn.params.department" name="department" validator="required, maxlength=30" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 职务：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过20个字职务名称" ng-model="handleFn.params.position" name="post" validator="required, maxlength=20" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 邮箱：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写邮箱" name="email" ng-model="handleFn.params.mailbox" validator="required")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 手机号码：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写手机号码" name="phone" ng-model="handleFn.params.phone" validator="required")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="entTutorForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="enttutorman") 取消
