@@ -1335,6 +1335,9 @@
             .content {
               width: 200px;
               margin-top: 20px;
+              height: 133px;
+              /* border: 1px solid; */
+              position: relative;
               .name {
                 font-size: 18px;
                 color: #323232;
@@ -1342,7 +1345,7 @@
                 text-align: center;
               }
               .detail {
-                margin-top: 10px;
+                padding: 10px;
                 font-size: 14px;
                 color: #646464;
                 text-align: center;
@@ -1351,9 +1354,9 @@
                 color: #333;
                 /* display: inline-block; */
                 border: 1px solid #e0e0e0;
-                /* position: absolute; */
+                position: absolute;
                 right: 0;
-                /* top: -10px; */
+                /* top: 16px; */
                 width: 80px;
                 height: 30px;
                 text-align: center;
@@ -1362,9 +1365,11 @@
                 border-radius: 4px;
                 background: #fff;
                 cursor: pointer;
-                margin-top: 10px;
+                margin-bottom: 15px;
                 transition-property: all;
                 transition-duration: .3s;
+                bottom: 0px;
+                right: 55px;
                 &:hover {
                   background-color: $brand-hover;
                   color: #fff;
