@@ -22,6 +22,7 @@ angular.module('dleduWebApp')
             noticeList:[],
             currentTab:"notice",
             activeCourseIndex:4,
+            activeFirstNotice:0,
             signIn: function () {
                 var _pathName = '';
                 if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
@@ -61,7 +62,7 @@ angular.module('dleduWebApp')
                                 // effect: 'fade',
                                 centeredSlides: true,
                                 // autoplay: 5000,
-                                spaceBetween: 22,
+                                spaceBetween: 20,
                                 slidesPerView: "auto",
                                 paginationClickable: true,
                                 onSlideChangeEnd: function (swiper, current, total) {
@@ -86,7 +87,7 @@ angular.module('dleduWebApp')
             getExcellentTeacherList:function () {
                 var _this=this;
                 var params = _this.params;
-                params.pageSize=6;
+                params.pageSize=5;
                 SchoolService.getExcellentTeacherList(params).$promise
                     .then(function (data) {
                         _this.page=data.page;

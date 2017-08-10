@@ -14,7 +14,7 @@ body{
   width: 35px !important;
   height: 8px;
   border-radius: 5px;
-  background: rgb(40, 183, 128);
+  background: #fff !important;
   margin: 8px 5px !important;
 
 }
@@ -26,7 +26,7 @@ body{
   border-color: initial;
   border-image: initial;
   margin: 8px 5px !important;
-  background: rgb(44, 186, 132) !important;
+  background: #fff ;
   opacity: 1;
 }
 @import '../app/layout/layout.scss';
