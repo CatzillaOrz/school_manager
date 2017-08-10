@@ -1,5 +1,5 @@
 .shuff-image(azx-swiper data-slides='indexFn.shuffImageList' data-full-screen='false' data-show-nav-buttons='indexFn.showSlidNav')
-.course-container
+.course-container(ng-if="indexFn.boutiqueCourseList.length>0")
     .course-block
         .block-title
             .line
@@ -10,15 +10,13 @@
                 .swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
                     a.course-card(href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
                         .course-image(style="background:url({{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1498583024217.jpg'}});background-size:cover;")
-                            .course-image-shade
-                            .teacher(ng-if="indexFn.activeCourseIndex==$index")
-                                .avater(ng-show="course.courseAuthors[0].photo")
-                                    img(ng-src="{{course.courseAuthors[0].photo}}" )
+                        .course-detail
+                            .name {{course.courseName}}
+                            .teacher
+                                .avater
+                                    img(ng-src="{{course.courseAuthors[0].photo || 'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" )
                                 .name(ng-show="course.courseAuthors[0].name") {{course.courseAuthors[0].position}} | {{course.courseAuthors[0].name}}
 
-                        .course-name
-                            | {{course.courseName}}
-                        .course-teacher
             // Add Pagination
             //.swiper-course-pagination
             .swiper-course-button-prv
@@ -34,16 +32,16 @@
             .title 最新活动
             .line
             ul.notice-content
-                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
-                    .new-pic(ng-show="a")
+                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="a=false" ng-mouseenter="a=true;indexFn.activeFirstNotice=$index" ng-mouseleave="a=false",ng-class="{'active':$index==indexFn.activeFirstNotice}")
+                    .new-pic(ng-if="a||(indexFn.activeFirstNotice==$index)")
                         img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default.png'}}")
-                    .current-context(ng-show="a")
+                    .current-context(ng-if="a||(indexFn.activeFirstNotice==$index)")
                         .date
                             span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
                             span.year /{{ indexFn.formatDate(notice.publishDate,'yyyy-MM') }}
                         .title {{indexFn.cutHtml(notice.title,30)}}
-                    .content(ng-show="!a") {{notice.title}}
-                    .date(ng-show="!a")
+                    .content(ng-if="!(a||(indexFn.activeFirstNotice==$index))") {{notice.title}}
+                    .date(ng-if="!(a||(indexFn.activeFirstNotice==$index))")
                         i.fa.fa-calendar
                         span {{notice.publishDate}}
             .more
@@ -59,7 +57,7 @@
                     .name {{major.specialtyName}}
             .more
                 button.btn-more(ui-sref="hotmajorlist") 更多>
-.teacher-container
+.teacher-container(ng-if="indexFn.excellentTeacherList.length>0")
     .teacher-block
         .block-title
             .line
@@ -75,7 +73,7 @@
                         .name {{teacher.teacherName}}
                         .detail
                           | {{indexFn.cutHtml(teacher.introduction,34)}}
-                        button.btn.btn-detail 查看详情
+                        button.btn-detail 了解详情
                         // http://oli56k5b0.bkt.clouddn.com/avatar-woman.png
             .more
                 button.btn-more(ui-sref="excellentteacherlist") 更多>
