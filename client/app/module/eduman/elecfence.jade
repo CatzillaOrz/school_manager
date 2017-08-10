@@ -68,8 +68,8 @@
                             .form-group.col-md-2
                                 select.form-control(ng-model="evaFenceFn.params.isActivation" ui-select2="evaFenceFn.getResultOption('isActive')" )
                                     option(ng-repeat="record in evaFenceFn.isActives" value="{{record.id}}" ) {{record.text}}
-                            //.form-group.col-md-2
-                                select.form-control(ng-model="evaFenceFn.params.isLoginId" ui-select2="evaFenceFn.getResultOption('isLogin')" )
+                            .form-group.col-md-2
+                                select.form-control(ng-model="evaFenceFn.params.isLogin" ui-select2="evaFenceFn.getResultOption('isLogin')" )
                                     option(ng-repeat="record in evaFenceFn.isLogins" value="{{record.id}}" ) {{record.text}}
                             .form-group.col-md-2
                                 select.form-control(ng-model="evaFenceFn.params.isAtSchool" ui-select2="evaFenceFn.getResultOption('location')" )

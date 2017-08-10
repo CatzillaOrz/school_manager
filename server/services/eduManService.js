@@ -407,6 +407,7 @@ var EduManService = {
     },
     //获取电子围栏列表页面
     getElecFenceList: function (params, access_token, callback) {
+        params.accessToken = "Bearer " + access_token;
         RestClient.get({
             host: 'gateway-org',
             path: '/v1/electricFence/queryelectricfence',
