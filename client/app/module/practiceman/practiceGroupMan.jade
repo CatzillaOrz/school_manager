@@ -25,29 +25,35 @@
                                     input.form-control(type='search', placeholder='按小组名称查询', aria-controls='datatable_col_reorder' ng-model="practiceGroupMan.params.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="practiceGroupMan.getEntTutorList()")
                                         i.glyphicon.glyphicon-search
-                        .col-sm-6.col-xs-6.hidden-xs
+                        //.col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.btn.btn-primary(ui-sref="college.creat")
+                                button.btn.btn-primary(ui-sref="createpracticegroup")
                                     span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组名称
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 导师
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 导师姓名
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 本校教师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组人数
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 开始日期
+                                    th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 结束日期
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in practiceGroupMan.records")
                                 td.sorting_1 {{$index+1 + ((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*10}}
-                                td {{record.name}}
+                                td {{record.groupName}}
+                                td {{record.corporateMentorsName}}
                                 td {{record.teacherName}}
-                                td {{record.count}}
+                                td {{record.studentCount}}
+                                td {{record.startDate}}
+                                td {{record.endDate}}
                                 td
-                                    a.handle(ui-sref="college.edit({id:record.id})")
+                                    a.handle(ui-sref="createpracticegroup({id: record.corporateMentorsId})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
+                                    //a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
 

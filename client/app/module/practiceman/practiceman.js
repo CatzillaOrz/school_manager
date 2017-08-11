@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
 			})
 			.state('createpracticegroup', {
 				parent: 'base',
-				url   : '/createPracticeGroup',
+				url   : '/createPracticeGroup/:id/:tutorId',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

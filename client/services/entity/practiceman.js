@@ -32,6 +32,23 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getPracticeGroupList');
                 return practiceman.get(params);
             },
+            getPracticeGroupInfo: function (params) {
+                var practiceman = $resource('api/practiceman/getPracticeGroupInfo');
+                return practiceman.get(params);
+            },
+            addPracticeGroup: function (params) {
+                var practiceman = $resource('api/practiceman/addPracticeGroup');
+                return practiceman.save(params);
+            },
+            updatePracticeGroup: function (params) {
+                var practiceman = $resource('api/practiceman/updatePracticeGroup','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            delPracticeGroup:function (params) {
+                var practiceman = $resource('api/practiceman/delPracticeGroup');
+                return practiceman.remove(params);
+            },
         }
 
     });

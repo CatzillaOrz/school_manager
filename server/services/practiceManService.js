@@ -33,7 +33,7 @@ var PracticeManService = {
     getEntTutorInfo: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
-            path: '/v1/mentorstraining/queryinfo/'+params.id,
+            path: '/v1/mentorstraining/query/'+params.id,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -102,8 +102,79 @@ var PracticeManService = {
     getPracticeGroupList: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
-            path: '',
+            path: '/v1/trainingmanage/querygrouplist',
             params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, {data: res.entity});
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //创建实践小组
+    addPracticeGroup: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/trainingmanage/creatgroup',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //编辑实践小组
+    updatePracticeGroup: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/trainingmanage/updategroup',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+
+    //查询实训小组信息
+    getPracticeGroupInfo: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/mentorstraining/queryinfo/'+ params.id,
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //删除实践小组
+    delPracticeGroup: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/mentorstraining/delete/'+params.id,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
