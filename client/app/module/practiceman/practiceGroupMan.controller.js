@@ -35,7 +35,8 @@ angular.module('dleduWebApp')
 				PracticeManService.getPracticeGroupList(params).$promise
 					.then(function (data) {
 						that.records = data.data;
-						that.page = data.page;
+						//that.page = data.page;
+						//that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
@@ -43,18 +44,16 @@ angular.module('dleduWebApp')
 			},
 
 			//删除企业导师
-			delEntTutor: function () {
-				var that = this;
+			delPracticeGroup: function () {
+				var that = $scope.practiceGroupMan;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize,
 					id: that.currentRecord.id
 				};
-				PracticeManService.delEntTutor(params).$promise
+				PracticeManService.delPracticeGroup(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
-						that.getEntTutorList();
+						that.getPracticeGroupList();
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));

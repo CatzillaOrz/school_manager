@@ -27,28 +27,28 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="editenttutor")
                                     span 新建
-                                button.btn.btn-primary(type='button' )
+                                //button.btn.btn-primary(type='button' )
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 工号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 姓名
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 账号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 100px;') 姓名
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 企业名称
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 部门
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 职务
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 邮箱
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 手机号码
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 100px;') 手机号码
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in entTutorMan.records")
                                 td.sorting_1 {{$index+1 + ((entTutorMan.page.pageNumber==0?entTutorMan.page.pageNumber+1:entTutorMan.page.pageNumber)-1)*entTutorMan.page.pageSize}}
-                                td {{record.accountId}}
+                                td {{record.loginName}}
                                 td {{record.name}}
                                 td {{record.enterpriseName}}
                                 td {{record.department}}
-                                td {{record.post}}
+                                td {{record.position}}
                                 td {{record.mailbox}}
                                 td {{record.phone}}
                                 td
@@ -58,7 +58,7 @@
                                     a.handle(ng-click="entTutorMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
-                                    a.handle(ui-sref="createpracticegroup({id: record.id})")
+                                    a.handle(ui-sref="createpracticegroup({id: record.id, tutorId: record.accountId})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
 
@@ -74,4 +74,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='entTutorMan.page.totalElements', max-size='entTutorMan.page.pageSize' ng-model='entTutorMan.page.pageNumber',ng-change="entTutorMan.getEntTutorList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='entTutorMan.page.totalElements', max-size='entTutorMan.page.pageSize' ng-model='entTutorMan.page.pageNumber',ng-change="entTutorMan.getEntTutorList()" boundary-link-numbers='true' items-per-page="entTutorMan.page.pageSize" rotate='false' previous-text="<" next-text=">")

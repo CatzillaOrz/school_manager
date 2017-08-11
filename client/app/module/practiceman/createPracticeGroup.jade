@@ -10,33 +10,34 @@
                 .col-sm-5
                     fieldset
                         legend
-                            span 选择导师
+                            span 选择本校教师
                     .row
-                        //.col-lg-6
+                        .col-lg-6
                             select.form-control(ng-model="handleFn.searchParams.collegeId" ui-select2="handleFn.selectCollege2Options()")
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                         .col-lg-6
                             .input-group
-                                input.form-control(type='text', placeholder='姓名搜索' ng-model="handleFn.searchParams.name")
+                                input.form-control(type='text', placeholder='按学号或姓名搜索' ng-model="handleFn.searchParams.name")
                                 span.input-group-btn
                                     button.btn.btn-default(type='button' ng-click="handleFn.getSimpleTeachers()")
                                         i.fa.fa-search
-                    table.table.table-striped.table-bordered.table-hover.dataTable
-                        thead
-                            tr(role='row')
-                                th.sorting_asc 账号
-                                th.expand.sorting 姓名
-                                th.sorting 企业名称
-                                th.sorting 操作
-                        tbody
-                            tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.teacherList" )
-                                td {{teacher.loginName}}
-                                td {{teacher.name}}
-                                td {{teacher.enterpriseName}}
-                                td
-                                    a.handle(ng-click="handleFn.selectTeacher(teacher)")
-                                        i.fa.fa-arrow-circle-right
-                                        span 选中
+                    .row(style="cursor:default;min-height:74px;max-height:450px;overflow-y:scroll;")
+                        table.table.table-striped.table-bordered.table-hover.dataTable
+                            thead
+                                tr(role='row')
+                                    th.sorting_asc 工号
+                                    th.expand.sorting 姓名
+                                    th.sorting 学院
+                                    th.sorting 操作
+                            tbody
+                                tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.teacherList" )
+                                    td {{teacher.jobNumber}}
+                                    td {{teacher.name}}
+                                    td {{teacher.collegeName}}
+                                    td
+                                        a.handle(ng-click="handleFn.selectTeacher(teacher)")
+                                            i.fa.fa-arrow-circle-right
+                                            span 选中
                 .col-sm-1
                 .col-sm-5
                     fieldset
@@ -46,15 +47,15 @@
                     table.table.table-striped.table-bordered.table-hover.dataTable
                         thead
                             tr(role='row')
-                                th.sorting_asc 账号
+                                th.sorting_asc 工号
                                 th.expand.sorting 姓名
-                                th.sorting 企业名称
+                                th.sorting 学院
                                 th.sorting 操作
                         tbody
                             tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
-                                td {{teacher.loginName}}
+                                td {{teacher.jobNumber}}
                                 td {{teacher.name}}
-                                td {{teacher.enterpriseName}}
+                                td {{teacher.collegeName}}
                                 td
                                     a.handle(ng-click="handleFn.removeSelectedTeacher(teacher)")
                                         i.fa.fa-times
@@ -76,23 +77,23 @@
                                         button.btn.btn-default(type='button' ng-click="handleFn.getSimpleStudents()")
                                             i.fa.fa-search
 
-
-                        table.table.table-striped.table-bordered.table-hover.dataTable
-                            thead
-                                tr(role='row')
-                                    th.sorting_asc 学号
-                                    th.expand.sorting 姓名
-                                    th.sorting 院系
-                                    th.sorting 操作
-                            tbody
-                                tr.cursor-pointer(role='row' ng-repeat="student in handleFn.studentList")
-                                    td {{student.jobNumber}}
-                                    td {{student.name}}
-                                    td {{student.collegeName}}
-                                    td
-                                        a.handle(ng-click="handleFn.selectStudent(student)")
-                                            i.fa.fa-arrow-circle-right
-                                            span 选中
+                        .row(style="cursor:default;min-height:74px;max-height:450px;overflow-y:scroll;")
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 学号
+                                        th.expand.sorting 姓名
+                                        th.sorting 班级
+                                        th.sorting 操作
+                                tbody
+                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.studentList")
+                                        td {{student.jobNumber}}
+                                        td {{student.name}}
+                                        td {{student.classesName}}
+                                        td
+                                            a.handle(ng-click="handleFn.selectStudent(student)")
+                                                i.fa.fa-arrow-circle-right
+                                                span 选中
                     .col-sm-1
                     .col-sm-5
                         fieldset
@@ -104,13 +105,13 @@
                                 tr(role='row')
                                     th.sorting_asc 学号
                                     th.expand.sorting 姓名
-                                    th.sorting 院系
+                                    th.sorting 班级
                                     th.sorting 操作
                             tbody
                                 tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
                                     td {{student.jobNumber}}
                                     td {{student.name}}
-                                    td {{student.collegeName}}
+                                    td {{student.classesName}}
                                     td
                                         a.handle(ng-click="handleFn.removeSelectedStudent(student)")
                                             i.fa.fa-times
@@ -124,14 +125,26 @@
                             label.col-sm-3.control-label
                                 span.required *
                                 | 实践小组名称：
-                            .col-sm-6
-                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" validator="required, maxlength=30")
-                        //.form-group
+                            .col-sm-7
+                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" placeholder='请输入实践小组名称' validator="required, maxlength=30")
+                        .form-group
                             label.col-sm-3.control-label
                                 span.required *
-                                | 教学班编号：
-                            .col-sm-6
-                                input.form-control(ng-model="handleFn.params.code" type="text" name="name" validator="required,number, maxlength=30")
+                                | 开始日期：
+                            .col-sm-7
+                                .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="handleFn.params.startDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 结束日期：
+                            .col-sm-7
+                                .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="handleFn.params.endDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
                         .col-sm-12.text-center
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
                     fieldset
@@ -158,12 +171,12 @@
                                     tr(role='row')
                                         th.sorting_asc 学号
                                         th.expand.sorting 姓名
-                                        th.sorting 院系
+                                        th.sorting 班级
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
                                         td {{student.jobNumber}}
                                         td {{student.name}}
-                                        td {{student.collegeName}}
+                                        td {{student.classesName}}
 
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
                         a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建

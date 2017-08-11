@@ -123,6 +123,26 @@
                     "icon": "barcode"
                 }
             ]
+        },
+        {
+            "title": "实践信息管理",
+            "sref": "practiceman",
+            "icon": "navicon",
+            "active": "practiceInfo",
+            "items":[
+                {
+                    "title": "企业导师管理",
+                    "sref": "enttutorman",
+                    "active": "enterpriseTutor",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践小组管理",
+                    "sref": "practicegroupman",
+                    "active": "practiceGroup",
+                    "icon": "pencil-square-o"
+                }
+            ]
         }
     ]
 }

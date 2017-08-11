@@ -43,15 +43,6 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    updateEvaQues: function (req, res) {
-        PracticeManService.updateEvaQuesSync(req.body, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
     updateEntTutor:function (req,res) {
         PracticeManService.updateEntTutorSync(req.body, req.user.access_token)
             .then(function (data) {
@@ -61,31 +52,49 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    addPracticeGroup: function (req, res) {
+        PracticeManService.addPracticeGroupSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    updatePracticeGroup:function (req,res) {
+        PracticeManService.updatePracticeGroupSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getPracticeGroupInfo: function (req, res) {
+        PracticeManService.getPracticeGroupInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     getPracticeGroupList: function (req, res) {
-        var data = {
-            "data": [
-                {
-                    "id": 110,
-                    "name": "实践小组1",
-                    "count": 10,
-                    "teacherName": '张三',
-                },
-                {
-                    "id": 110,
-                    "name": "实践小组2",
-                    "count": 5,
-                    "teacherName": '张三、李四',
-                }
-            ],
-            "page": {
-                "totalElements": 23,
-                "totalPages": 3,
-                "pageNumber": 0,
-                "pageSize": 10
-            }
-        };
-        return res.json(data);
         PracticeManService.getPracticeGroupListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    delPracticeGroup: function (req, res) {
+        PracticeManService.delPracticeGroupSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
