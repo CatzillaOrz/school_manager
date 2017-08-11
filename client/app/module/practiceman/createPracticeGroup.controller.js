@@ -313,10 +313,11 @@ angular.module('dleduWebApp')
 					return;
 				}
 				if(this.isEidt){
+					entity.id = this.practiceGroupInfo.trainingGroupId;
 					PracticeManService.updatePracticeGroup(entity).$promise
 						.then(function (data) {
 							messageService.openMsg("编辑实践小组成功！");
-							$state.go("enttutorman");
+							$state.go("practicegroupman");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
@@ -332,7 +333,7 @@ angular.module('dleduWebApp')
 					PracticeManService.addPracticeGroup(entity).$promise
 						.then(function (data) {
 							messageService.openMsg("创建实践小组成功！");
-							$state.go("enttutorman");
+							$state.go("practicegroupman");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
