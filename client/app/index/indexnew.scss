@@ -76,7 +76,7 @@
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        padding: 5px 0;
+        height: 50px;
       }
       .account {
         height: $nav-container-height;
@@ -298,7 +298,7 @@
         .line {
           height: 1px;
           width: 520px;
-          background: #E0E0E0;
+          background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -463,6 +463,13 @@
             color: #666666;
             font-size: 16px;
           }
+          &:hover{
+            background: #29c192;
+            opacity: 1;
+            i{
+              color: #ffffff;
+            }
+          }
         }
         .swiper-course-button-next {
           position: relative;
@@ -485,6 +492,13 @@
           i {
             color: #666666;
             font-size: 16px;
+          }
+          &:hover{
+            background: #29c192;
+            opacity: 1;
+            i{
+              color: #ffffff;
+            }
           }
         }
       }
@@ -539,7 +553,7 @@
         .line {
           height: 1px;
           width: 206px;
-          background: #E0E0E0;
+          background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -558,7 +572,7 @@
           .notice-list {
             cursor: pointer;
             height: 52px;
-            border-bottom: 1px solid #E0E0E0;
+            border-bottom: 1px solid $line-color;
             .content {
               display: inline-block;
               vertical-align: middle;
@@ -703,7 +717,7 @@
         .line {
           height: 1px;
           width: 206px;
-          background: #E0E0E0;
+          background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -1255,7 +1269,7 @@
     margin: 0 auto;
     width: 100%;
     background: #ffffff;
-    height: 600px;
+    height: 508px;
     .teacher-block {
       margin: 0 auto;
       width: 1200px;
@@ -1294,7 +1308,7 @@
         .line {
           height: 1px;
           width: 520px;
-          background: #E0E0E0;
+          background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -1353,7 +1367,7 @@
               .btn-detail {
                 color: #333;
                 /* display: inline-block; */
-                border: 1px solid #e0e0e0;
+                border: 1px solid $line-color;
                 position: absolute;
                 right: 0;
                 /* top: 16px; */
@@ -1402,16 +1416,35 @@
     font-size: 11px;
     overflow: hidden;
     padding: 5px 10px;
+    padding-top: 0;
     text-align: center;
-    -ms-box-shadow: inset 0 1px #fff;
-    box-shadow: inset 0 1px #fff;
-    margin-bottom: 150px;
+    .pagination > li > a{
+       box-shadow: none;
+    }
+   // margin-bottom: 150px;
     a {
+      width: 40px;
+      height: 40px;
+      line-height: 26px;
+      border-radius: 6px !important;
+      font-size: 14px;
       margin: 0 5px
+    }
+    .pagination-sm > li:last-child > a {
+      background: #ffffff;
+      &:hover{
+        background: #f8f8f8;
+      }
+    }
+    .pagination-sm > li:first-child > a{
+      background: #ffffff;
+      &:hover{
+        background: #f8f8f8;
+      }
     }
   }
   .gray-bg {
-    background: #f8f8f8 !important;
+    background: #f7f7f7 !important;
   }
   .content-container {
     min-height: 635px;
@@ -1420,7 +1453,17 @@
     .overview {
       margin: 0px auto;
       width: 1200px;
-      margin-top: 40px;
+      //margin-top: 40px;
+      //padding-top: 30px;
+      .position{
+        padding: 20px 0;
+        span{
+          cursor: pointer;
+        }
+        .active{
+          color: #00b47a;
+        }
+      }
       .title {
         font-size: 24px;
         color: #333333;
@@ -1434,81 +1477,81 @@
         text-align: center;
       }
       .teacher-card-bg {
-        height: 410px;
-        width: 330px;
-        margin-right: 34px;
+        height: 250px;
+        width: 250px;
+        margin-right: 15px;
+        background-color: #ffffff;
+        display: inline-block;
+        border-radius: 6px !important;
+        // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
+        .teacher-image {
+          margin: 20px auto;
+          margin-top: 30px;
+          text-align: center;
+          border-radius: 50%;
+          overflow: hidden;
+          height: 100px;
+          width: 100px;
+          border: 1px solid #dddddd;
+          img {
+            height: 100px;
+            width: 100px;
+          }
+        }
+        .teacher-name {
+          text-align: center;
+          .name {
+            font-size: 18px;
+            color: #343434;
+          }
+          .position {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999999;
+          }
+        }
+      }
+      .school-card-bg {
+        height: 227px;
+        width: 250px;
+        margin-right: 15px;
         background-color: #ffffff;
         display: inline-block;
         border-radius: 4px !important;
         // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
-        .teacher-image {
-          margin: 26px auto;
-          margin-top: 50px;
-          margin-bottom: 40px;
+        .school-image {
+          margin: 20px auto;
+          margin-top: 30px;
           text-align: center;
           border-radius: 50%;
           overflow: hidden;
-          height: 156px;
-          width: 156px;
+          height: 100px;
+          width: 100px;
           border: 1px solid #dddddd;
           img {
-            height: 156px;
-            width: 156px;
+            height: 100px;
+            width: 100px;
           }
         }
-        .teacher-name {
-          margin-top: 30px;
+        .school-name {
           text-align: center;
           .name {
             font-size: 18px;
-            color: #323232;
+            color: #343434;
           }
-          .position {
-            font-size: 16px;
-            color: #646464;
-          }
-        }
-        .teacher-detail {
-          margin-top: 20px;
-          padding-left: 14px;
-          color: #646464;
-          font-size: 14px;
-          //white-space: nowrap;
-          //overflow: hidden;
-          //text-overflow: ellipsis;
-          height: 68px;
-
-        }
-        .detail {
-          text-align: center;
-          .btn-detail {
-            border: 1px solid #29c192;
-            color: #29c192;
-            font-size: 14px;
-            border-radius: 14px;
-            height: 28px;
-            background: #ffffff;
-            line-height: 15px;
-            width: 92px;
-          }
-        }
-
-        .detail-button {
-          position: absolute;
-          margin: 120px auto auto auto;
-          margin-left: 60px;
 
         }
       }
       .content {
+        border-radius: 6px;
         .title {
-          height: 76px;
+          height: 58px;
           color: #323232;
           font-size: 24px;
           border-bottom: 1px solid #eeeeee;
           text-align: left;
           padding: 30px;
-          line-height: 27px;
+          line-height: 0px;
         }
         display: inline-block;
         vertical-align: top;
@@ -1517,28 +1560,32 @@
         .introduce {
           padding: 30px;
           padding-bottom: 40px;
+          padding-top: 16px;
         }
       }
     }
     .hot-major-container {
       margin: 0px auto;
       width: 1200px;
-      padding-top: 40px;
+      padding-top: 30px;
       .major-content {
         padding-left: 0;
         list-style: none;
+        overflow: hidden;
+        border-radius: 6px;
         .major-list {
           width: 1200px;
-          // cursor: pointer;
-          height: 210px;
-          margin-bottom: 40px;
+          background: #fff;
+          height: 200px;
+          border-bottom: 1px solid $line-color;
+          padding: 20px;
           .major-image {
             display: inline-block;
             vertical-align: top;
             position: relative;
             img {
-              width: 338px;
-              height: 210px;
+              width: 256px;
+              height: 160px;
             }
             .shade {
               background: #000000;
@@ -1546,8 +1593,8 @@
               filter: alpha(opacity=40);
               -moz-opacity: 0.4;
               -khtml-opacity: 0.4;
-              height: 210px;
-              width: 338px;
+              width: 256px;
+              height: 160px;
               position: absolute;
               top: 0;
               .tipes {
@@ -1577,15 +1624,14 @@
             }
           }
           .major-content {
-            background: #f1f1f1;
-            padding: 30px;
+            margin-left: 20px;
             display: inline-block;
             vertical-align: top;
-            height: 210px;
-            width: 862px;
+            height: 160px;
+            width:884px;
             .name {
-              font-size: 20px;
-              color: #646464;
+              font-size: 18px;
+              color: #343434;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -1607,17 +1653,19 @@
                 display: inline-block;
                 vertical-align: middle;
                 font-size: 14px;
-                color: #646464;
+                color: #999999;
 
               }
             }
             .introduce {
-              margin-top: 24px;
-              color: #858585;
+              margin-top: 18px;
+              color: #666666;
               font-size: 14px;
             }
           }
-
+          &:hover{
+            background: #f9f9f9;
+          }
         }
 
       }
@@ -1625,31 +1673,33 @@
     .new-notice-container {
       margin: 0px auto;
       width: 1200px;
-      padding-top: 40px;
+      padding-top: 30px;
       .new-notice-content {
         padding-left: 0;
         list-style: none;
+        overflow: hidden;
+        border-radius: 6px;
         .new-notice-list {
           width: 1200px;
           cursor: pointer;
-          height: 156px;
-          margin-bottom: 30px;
+          height: 158px;
+          padding: 20px;
+          background: #fff;
+          border-bottom: 1px solid #f9f9f9;
           .new-notice-image {
             display: inline-block;
             vertical-align: top;
             img {
-              width: 420px;
-              height: 156px;
+              width: 220px;
+              height: 118px;
             }
           }
           .new-notice-content {
-            background: #e0f0eb;
-            padding: 30px;
+            padding-left: 20px;
             display: inline-block;
             vertical-align: top;
-            height: 156px;
-            width: 780px;
-            padding-top: 20px;
+            height: 158px;
+            width: 940px;
             .date {
               margin: 0;
               height: 40px;
@@ -1666,86 +1716,103 @@
             .name {
               margin-top: 5px;
               font-size: 18px;
-              color: #29c192;
+              color: #343434;
             }
             .introduce {
               margin-top: 7px;
-              color: #646464;
+              color: #999999;
               font-size: 14px;
             }
           }
-
+          &:hover{
+            background: #f9f9f9;
+            .new-notice-content{
+              .name{
+                color: #00b47a;
+              }
+            }
+          }
         }
 
       }
     }
     .teacher-card-container-bg {
-      width: 1200px;
+      width: 1220px;
       margin: 0 auto;
       .teacher-card-bg {
-        height: 340px;
-        width: 276px;
-        margin: 27px 24px 0 0px;
-        background-color: #f5f5f5;
+        height: 290px;
+        width: 224px;
+        margin: 27px 20px 0 0px;
+        background-color: #fff;
         display: inline-block;
-        border-radius: 4px !important;
-        // @include box-shadow2(0px,0px,4px,rgba(0,0,0,0.4));
+        vertical-align: middle;
+        border-radius: 6px !important;
+        transition-property: all;
+        transition-duration: .3s;
         .teacher-image {
           margin: 26px auto;
           text-align: center;
           border-radius: 50%;
           overflow: hidden;
-          height: 110px;
-          width: 110px;
+          height: 100px;
+          width: 100px;
           border: 1px solid #dddddd;
           img {
-            height: 110px;
-            width: 110px;
+            height: 100px;
+            width: 100px;
           }
         }
         .teacher-name {
-          margin-top: 30px;
+         // margin-top: 30px;
           text-align: center;
           .name {
             font-size: 18px;
-            color: #323232;
+            color: #343434;
           }
           .position {
-            font-size: 16px;
-            color: #646464;
+            font-size: 18px;
+            color: #343434;
           }
         }
         .teacher-detail {
-          margin-top: 20px;
-          padding-left: 14px;
-          color: #646464;
+          margin-top: 17px;
+          padding-left: 15px;
+          padding-right: 15px;
+          text-align: center;
+          color: #999999;
           font-size: 14px;
           //white-space: nowrap;
           //overflow: hidden;
           //text-overflow: ellipsis;
-          height: 68px;
+          height: 48px;
 
         }
         .detail {
           text-align: center;
           .btn-detail {
-            border: 1px solid #29c192;
-            color: #29c192;
+            border: 1px solid #999999;
+            color: #999999;
             font-size: 14px;
-            border-radius: 14px;
-            height: 28px;
+            border-radius:6px;
+            height: 30px;
             background: #ffffff;
-            line-height: 15px;
-            width: 92px;
+            line-height: 12px;
+            width: 80px;
+            transition-property: all;
+            transition-duration: .3s;
+            &:hover {
+              background-color: $brand-hover;
+              color: #fff;
+              border: 1px solid $brand-hover;
+            }
           }
+
         }
-        //&:hover{
-        //  background: #000000;
-        //  opacity: 0.4;
-        //  filter:alpha(opacity=40); /* IE */
-        //  -moz-opacity:0.4; /* 老版Mozilla */
-        //  -khtml-opacity:0.4; /* 老版Safari */
-        //}
+        &:hover{
+          margin-top: 22px;
+          @include box-shadow2(0px,4px,20px,rgba(0,0,0,0.1));
+          border-radius: 6px;
+        }
         .shade {
           background: #000000;
           opacity: 0.4;

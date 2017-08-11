@@ -1,4 +1,4 @@
-.content-container
+.content-container.gray-bg
     .new-notice-container
         ul.new-notice-content
             li.new-notice-list(ng-repeat="notice in noticeListFn.noticeList" ui-sref="noticedetail({id:notice.id})")
@@ -11,7 +11,7 @@
                     .name
                         | {{noticeListFn.cutHtml(notice.title,36)}}
                     .introduce
-                        | {{noticeListFn.cutHtml(notice.content,90)}}
-    .page(ng-if='noticeListFn.page.totalElements')
-        ul.pagination-sm(uib-pagination, total-items='noticeListFn.page.totalElements',items-per-page="noticeListFn.page.pageSize" max-size='noticeListFn.page.pageSize' ng-model='noticeListFn.page.pageNumber',ng-change="noticeListFn.getNoticeList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+                        | {{noticeListFn.cutHtml(notice.content,100)}}
+    .page.gray-bg(ng-if='noticeListFn.page.totalElements')
+        ul.pagination-sm(uib-pagination, total-items='noticeListFn.page.totalElements',items-per-page="noticeListFn.page.pageSize" max-size='noticeListFn.page.pageSize' ng-model='noticeListFn.page.pageNumber',ng-change="noticeListFn.getNoticeList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 

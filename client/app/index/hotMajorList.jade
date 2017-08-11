@@ -1,4 +1,4 @@
-.content-container
+.content-container.gray-bg
     .hot-major-container
         ul.major-content
             li.major-list.pointer(ng-repeat="major in hotMajorListFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})")
@@ -11,5 +11,5 @@
                         | {{hotMajorListFn.cutHtml(major.introduction,300)}}
 
 
-    .page(ng-if='hotMajorListFn.page.totalElements')
-        ul.pagination-sm(uib-pagination, total-items='hotMajorListFn.page.totalElements',items-per-page="hotMajorListFn.page.pageSize" max-size='hotMajorListFn.page.pageSize' ng-model='hotMajorListFn.page.pageNumber',ng-change="hotMajorListFn.getHotMajorList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+    .page.gray-bg(ng-if='hotMajorListFn.page.totalElements')
+        ul.pagination-sm(uib-pagination, total-items='hotMajorListFn.page.totalElements',items-per-page="hotMajorListFn.page.pageSize" max-size='hotMajorListFn.page.pageSize' ng-model='hotMajorListFn.page.pageNumber',ng-change="hotMajorListFn.getHotMajorList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

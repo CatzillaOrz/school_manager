@@ -1,5 +1,10 @@
-.content-container.gray-bg
+.content-container
     .overview
+        .position
+            span 当前位置：  >
+            span(ui-sref="index")  首页  >
+            span(ui-sref="noticelist")  最新活动  >
+            span.active 活动详情
         .title {{noticeDetailFn.notice.title}}
         .date 时间：{{noticeDetailFn.notice.lastModifiedDate}}
         .school-introduce(ng-bind-html="noticeDetailFn.trustAsHtml(noticeDetailFn.notice.content)")

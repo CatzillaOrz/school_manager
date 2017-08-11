@@ -1433,7 +1433,7 @@ a:focus {
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        padding: 5px 0; }
+        height: 50px; }
       .index-container .index-header .nav-bar .account {
         height: 48px;
         float: right;
@@ -1619,7 +1619,7 @@ a:focus {
         .index-container .course-container .course-block .block-title .line {
           height: 1px;
           width: 520px;
-          background: #E0E0E0;
+          background: #f0f0f0;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -1715,6 +1715,11 @@ a:focus {
           .index-container .course-container .course-block .swiper-course-container .swiper-course-button-prv i {
             color: #666666;
             font-size: 16px; }
+          .index-container .course-container .course-block .swiper-course-container .swiper-course-button-prv:hover {
+            background: #29c192;
+            opacity: 1; }
+            .index-container .course-container .course-block .swiper-course-container .swiper-course-button-prv:hover i {
+              color: #ffffff; }
         .index-container .course-container .course-block .swiper-course-container .swiper-course-button-next {
           position: relative;
           top: 50%;
@@ -1736,6 +1741,11 @@ a:focus {
           .index-container .course-container .course-block .swiper-course-container .swiper-course-button-next i {
             color: #666666;
             font-size: 16px; }
+          .index-container .course-container .course-block .swiper-course-container .swiper-course-button-next:hover {
+            background: #29c192;
+            opacity: 1; }
+            .index-container .course-container .course-block .swiper-course-container .swiper-course-button-next:hover i {
+              color: #ffffff; }
   .index-container .notice-major-container {
     margin: 0 auto;
     width: 100%;
@@ -1780,7 +1790,7 @@ a:focus {
         .index-container .notice-major-container .notice-major-block .notice-block .line {
           height: 1px;
           width: 206px;
-          background: #E0E0E0;
+          background: #f0f0f0;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -1797,7 +1807,7 @@ a:focus {
           .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list {
             cursor: pointer;
             height: 52px;
-            border-bottom: 1px solid #E0E0E0; }
+            border-bottom: 1px solid #f0f0f0; }
             .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .content {
               display: inline-block;
               vertical-align: middle;
@@ -1916,7 +1926,7 @@ a:focus {
         .index-container .notice-major-container .notice-major-block .major-block .line {
           height: 1px;
           width: 206px;
-          background: #E0E0E0;
+          background: #f0f0f0;
           bottom: 15px;
           position: relative;
           display: inline-block;
@@ -2418,7 +2428,7 @@ a:focus {
     margin: 0 auto;
     width: 100%;
     background: #ffffff;
-    height: 600px; }
+    height: 508px; }
     .index-container .teacher-container .teacher-block {
       margin: 0 auto;
       width: 1200px; }
@@ -2451,7 +2461,7 @@ a:focus {
       .index-container .teacher-container .teacher-block .block-title .line {
         height: 1px;
         width: 520px;
-        background: #E0E0E0;
+        background: #f0f0f0;
         bottom: 15px;
         position: relative;
         display: inline-block;
@@ -2504,7 +2514,7 @@ a:focus {
             .index-container .teacher-container .teacher-block .block-title .teacher-content .teacher-list .content .btn-detail {
               color: #333;
               /* display: inline-block; */
-              border: 1px solid #e0e0e0;
+              border: 1px solid #f0f0f0;
               position: absolute;
               right: 0;
               /* top: 16px; */
@@ -2546,21 +2556,39 @@ a:focus {
     font-size: 11px;
     overflow: hidden;
     padding: 5px 10px;
-    text-align: center;
-    -ms-box-shadow: inset 0 1px #fff;
-    box-shadow: inset 0 1px #fff;
-    margin-bottom: 150px; }
+    padding-top: 0;
+    text-align: center; }
+    .index-container .page .pagination > li > a {
+      box-shadow: none; }
     .index-container .page a {
+      width: 40px;
+      height: 40px;
+      line-height: 26px;
+      border-radius: 6px !important;
+      font-size: 14px;
       margin: 0 5px; }
+    .index-container .page .pagination-sm > li:last-child > a {
+      background: #ffffff; }
+      .index-container .page .pagination-sm > li:last-child > a:hover {
+        background: #f8f8f8; }
+    .index-container .page .pagination-sm > li:first-child > a {
+      background: #ffffff; }
+      .index-container .page .pagination-sm > li:first-child > a:hover {
+        background: #f8f8f8; }
   .index-container .gray-bg {
-    background: #f8f8f8 !important; }
+    background: #f7f7f7 !important; }
   .index-container .content-container {
     min-height: 635px;
     background: #ffffff; }
     .index-container .content-container .overview {
       margin: 0px auto;
-      width: 1200px;
-      margin-top: 40px; }
+      width: 1200px; }
+      .index-container .content-container .overview .position {
+        padding: 20px 0; }
+        .index-container .content-container .overview .position span {
+          cursor: pointer; }
+        .index-container .content-container .overview .position .active {
+          color: #00b47a; }
       .index-container .content-container .overview .title {
         font-size: 24px;
         color: #333333;
@@ -2572,97 +2600,105 @@ a:focus {
         color: #999999;
         text-align: center; }
       .index-container .content-container .overview .teacher-card-bg {
-        height: 410px;
-        width: 330px;
-        margin-right: 34px;
+        height: 250px;
+        width: 250px;
+        margin-right: 15px;
         background-color: #ffffff;
         display: inline-block;
-        border-radius: 4px !important; }
+        border-radius: 6px !important; }
         .index-container .content-container .overview .teacher-card-bg .teacher-image {
-          margin: 26px auto;
-          margin-top: 50px;
-          margin-bottom: 40px;
+          margin: 20px auto;
+          margin-top: 30px;
           text-align: center;
           border-radius: 50%;
           overflow: hidden;
-          height: 156px;
-          width: 156px;
+          height: 100px;
+          width: 100px;
           border: 1px solid #dddddd; }
           .index-container .content-container .overview .teacher-card-bg .teacher-image img {
-            height: 156px;
-            width: 156px; }
+            height: 100px;
+            width: 100px; }
         .index-container .content-container .overview .teacher-card-bg .teacher-name {
-          margin-top: 30px;
           text-align: center; }
           .index-container .content-container .overview .teacher-card-bg .teacher-name .name {
             font-size: 18px;
-            color: #323232; }
+            color: #343434; }
           .index-container .content-container .overview .teacher-card-bg .teacher-name .position {
-            font-size: 16px;
-            color: #646464; }
-        .index-container .content-container .overview .teacher-card-bg .teacher-detail {
-          margin-top: 20px;
-          padding-left: 14px;
-          color: #646464;
-          font-size: 14px;
-          height: 68px; }
-        .index-container .content-container .overview .teacher-card-bg .detail {
-          text-align: center; }
-          .index-container .content-container .overview .teacher-card-bg .detail .btn-detail {
-            border: 1px solid #29c192;
-            color: #29c192;
+            margin-top: 20px;
             font-size: 14px;
-            border-radius: 14px;
-            height: 28px;
-            background: #ffffff;
-            line-height: 15px;
-            width: 92px; }
-        .index-container .content-container .overview .teacher-card-bg .detail-button {
-          position: absolute;
-          margin: 120px auto auto auto;
-          margin-left: 60px; }
+            color: #999999; }
+      .index-container .content-container .overview .school-card-bg {
+        height: 227px;
+        width: 250px;
+        margin-right: 15px;
+        background-color: #ffffff;
+        display: inline-block;
+        border-radius: 4px !important; }
+        .index-container .content-container .overview .school-card-bg .school-image {
+          margin: 20px auto;
+          margin-top: 30px;
+          text-align: center;
+          border-radius: 50%;
+          overflow: hidden;
+          height: 100px;
+          width: 100px;
+          border: 1px solid #dddddd; }
+          .index-container .content-container .overview .school-card-bg .school-image img {
+            height: 100px;
+            width: 100px; }
+        .index-container .content-container .overview .school-card-bg .school-name {
+          text-align: center; }
+          .index-container .content-container .overview .school-card-bg .school-name .name {
+            font-size: 18px;
+            color: #343434; }
       .index-container .content-container .overview .content {
+        border-radius: 6px;
         display: inline-block;
         vertical-align: top;
         width: 836px;
         background: #ffffff; }
         .index-container .content-container .overview .content .title {
-          height: 76px;
+          height: 58px;
           color: #323232;
           font-size: 24px;
           border-bottom: 1px solid #eeeeee;
           text-align: left;
           padding: 30px;
-          line-height: 27px; }
+          line-height: 0px; }
         .index-container .content-container .overview .content .introduce {
           padding: 30px;
-          padding-bottom: 40px; }
+          padding-bottom: 40px;
+          padding-top: 16px; }
     .index-container .content-container .hot-major-container {
       margin: 0px auto;
       width: 1200px;
-      padding-top: 40px; }
+      padding-top: 30px; }
       .index-container .content-container .hot-major-container .major-content {
         padding-left: 0;
-        list-style: none; }
+        list-style: none;
+        overflow: hidden;
+        border-radius: 6px; }
         .index-container .content-container .hot-major-container .major-content .major-list {
           width: 1200px;
-          height: 210px;
-          margin-bottom: 40px; }
+          background: #fff;
+          height: 200px;
+          border-bottom: 1px solid #f0f0f0;
+          padding: 20px; }
           .index-container .content-container .hot-major-container .major-content .major-list .major-image {
             display: inline-block;
             vertical-align: top;
             position: relative; }
             .index-container .content-container .hot-major-container .major-content .major-list .major-image img {
-              width: 338px;
-              height: 210px; }
+              width: 256px;
+              height: 160px; }
             .index-container .content-container .hot-major-container .major-content .major-list .major-image .shade {
               background: #000000;
               opacity: 0.4;
               filter: alpha(opacity=40);
               -moz-opacity: 0.4;
               -khtml-opacity: 0.4;
-              height: 210px;
-              width: 338px;
+              width: 256px;
+              height: 160px;
               position: absolute;
               top: 0; }
               .index-container .content-container .hot-major-container .major-content .major-list .major-image .shade .tipes {
@@ -2686,15 +2722,14 @@ a:focus {
               margin: 94px auto auto auto;
               margin-left: 32px; }
           .index-container .content-container .hot-major-container .major-content .major-list .major-content {
-            background: #f1f1f1;
-            padding: 30px;
+            margin-left: 20px;
             display: inline-block;
             vertical-align: top;
-            height: 210px;
-            width: 862px; }
+            height: 160px;
+            width: 884px; }
             .index-container .content-container .hot-major-container .major-content .major-list .major-content .name {
-              font-size: 20px;
-              color: #646464;
+              font-size: 18px;
+              color: #343434;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis; }
@@ -2712,37 +2747,41 @@ a:focus {
                 display: inline-block;
                 vertical-align: middle;
                 font-size: 14px;
-                color: #646464; }
+                color: #999999; }
             .index-container .content-container .hot-major-container .major-content .major-list .major-content .introduce {
-              margin-top: 24px;
-              color: #858585;
+              margin-top: 18px;
+              color: #666666;
               font-size: 14px; }
+          .index-container .content-container .hot-major-container .major-content .major-list:hover {
+            background: #f9f9f9; }
     .index-container .content-container .new-notice-container {
       margin: 0px auto;
       width: 1200px;
-      padding-top: 40px; }
+      padding-top: 30px; }
       .index-container .content-container .new-notice-container .new-notice-content {
         padding-left: 0;
-        list-style: none; }
+        list-style: none;
+        overflow: hidden;
+        border-radius: 6px; }
         .index-container .content-container .new-notice-container .new-notice-content .new-notice-list {
           width: 1200px;
           cursor: pointer;
-          height: 156px;
-          margin-bottom: 30px; }
+          height: 158px;
+          padding: 20px;
+          background: #fff;
+          border-bottom: 1px solid #f9f9f9; }
           .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-image {
             display: inline-block;
             vertical-align: top; }
             .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-image img {
-              width: 420px;
-              height: 156px; }
+              width: 220px;
+              height: 118px; }
           .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-content {
-            background: #e0f0eb;
-            padding: 30px;
+            padding-left: 20px;
             display: inline-block;
             vertical-align: top;
-            height: 156px;
-            width: 780px;
-            padding-top: 20px; }
+            height: 158px;
+            width: 940px; }
             .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-content .date {
               margin: 0;
               height: 40px;
@@ -2756,58 +2795,81 @@ a:focus {
             .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-content .name {
               margin-top: 5px;
               font-size: 18px;
-              color: #29c192; }
+              color: #343434; }
             .index-container .content-container .new-notice-container .new-notice-content .new-notice-list .new-notice-content .introduce {
               margin-top: 7px;
-              color: #646464;
+              color: #999999;
               font-size: 14px; }
+          .index-container .content-container .new-notice-container .new-notice-content .new-notice-list:hover {
+            background: #f9f9f9; }
+            .index-container .content-container .new-notice-container .new-notice-content .new-notice-list:hover .new-notice-content .name {
+              color: #00b47a; }
     .index-container .content-container .teacher-card-container-bg {
-      width: 1200px;
+      width: 1220px;
       margin: 0 auto; }
       .index-container .content-container .teacher-card-container-bg .teacher-card-bg {
-        height: 340px;
-        width: 276px;
-        margin: 27px 24px 0 0px;
-        background-color: #f5f5f5;
+        height: 290px;
+        width: 224px;
+        margin: 27px 20px 0 0px;
+        background-color: #fff;
         display: inline-block;
-        border-radius: 4px !important; }
+        vertical-align: middle;
+        border-radius: 6px !important;
+        transition-property: all;
+        transition-duration: .3s; }
         .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-image {
           margin: 26px auto;
           text-align: center;
           border-radius: 50%;
           overflow: hidden;
-          height: 110px;
-          width: 110px;
+          height: 100px;
+          width: 100px;
           border: 1px solid #dddddd; }
           .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-image img {
-            height: 110px;
-            width: 110px; }
+            height: 100px;
+            width: 100px; }
         .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-name {
-          margin-top: 30px;
           text-align: center; }
           .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-name .name {
             font-size: 18px;
-            color: #323232; }
+            color: #343434; }
           .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-name .position {
-            font-size: 16px;
-            color: #646464; }
+            font-size: 18px;
+            color: #343434; }
         .index-container .content-container .teacher-card-container-bg .teacher-card-bg .teacher-detail {
-          margin-top: 20px;
-          padding-left: 14px;
-          color: #646464;
+          margin-top: 17px;
+          padding-left: 15px;
+          padding-right: 15px;
+          text-align: center;
+          color: #999999;
           font-size: 14px;
-          height: 68px; }
+          height: 48px; }
         .index-container .content-container .teacher-card-container-bg .teacher-card-bg .detail {
           text-align: center; }
           .index-container .content-container .teacher-card-container-bg .teacher-card-bg .detail .btn-detail {
-            border: 1px solid #29c192;
-            color: #29c192;
+            border: 1px solid #999999;
+            color: #999999;
             font-size: 14px;
-            border-radius: 14px;
-            height: 28px;
+            border-radius: 6px;
+            height: 30px;
             background: #ffffff;
-            line-height: 15px;
-            width: 92px; }
+            line-height: 12px;
+            width: 80px;
+            transition-property: all;
+            transition-duration: .3s; }
+            .index-container .content-container .teacher-card-container-bg .teacher-card-bg .detail .btn-detail:hover {
+              background-color: #28b780;
+              color: #fff;
+              border: 1px solid #28b780; }
+        .index-container .content-container .teacher-card-container-bg .teacher-card-bg:hover {
+          margin-top: 22px;
+          -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          -khtml-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          -moz-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          -ms-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          -o-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+          border-radius: 6px; }
         .index-container .content-container .teacher-card-container-bg .teacher-card-bg .shade {
           background: #000000;
           opacity: 0.4;

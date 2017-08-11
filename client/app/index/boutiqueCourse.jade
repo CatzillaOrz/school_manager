@@ -1,4 +1,4 @@
-.content-container
+.content-container.gray-bg
     .hot-major-container
         ul.major-content
             li.major-list(ng-repeat="course in boutiqueFn.boutiqueCourseList" )
@@ -13,11 +13,11 @@
                         | {{course.courseName}}
                     .teacher(ng-if="course.courseAuthors[0]")
                        .avater
-                           img(ng-src="{{course.courseAuthors[0].photo}}")
+                           img(ng-src="{{course.courseAuthors[0].photo ||'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}")
                        .name
-                           | {{course.courseAuthors[0].name}} {{course.courseAuthors[0].position}}
+                           | {{course.courseAuthors[0].name}} | {{course.courseAuthors[0].position}}
                     .introduce
                       | {{boutiqueFn.cutHtml(course.introduction,150)}}
 
-    .page(ng-if="boutiqueFn.page.totalElements")
-        ul.pagination-sm(uib-pagination, total-items='boutiqueFn.page.totalElements',items-per-page="boutiqueFn.page.pageSize" max-size='boutiqueFn.page.pageSize' ng-model='boutiqueFn.page.pageNumber',ng-change="boutiqueFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+    .page.gray-bg(ng-if="boutiqueFn.page.totalElements")
+        ul.pagination-sm(uib-pagination, total-items='boutiqueFn.page.totalElements',items-per-page="boutiqueFn.page.pageSize" max-size='boutiqueFn.page.pageSize' ng-model='boutiqueFn.page.pageNumber',ng-change="boutiqueFn.getBoutiqueCourseList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
