@@ -1,5 +1,10 @@
 .content-container.gray-bg
     .overview
+        .position
+            span 当前位置：  >
+            span(ui-sref="index")  首页  >
+            span(ui-sref="excellentteacherlist")  优秀教师  >
+            span.active {{excellentTeacherDetailFn.excellentTeacher.teacherName}}
         .teacher-card-bg
             //.shade(ng-show="a")
             //.detail-button(ng-show="a")

@@ -1,4 +1,4 @@
-.content-container
+.content-container.gray-bg
     .teacher-card-container-bg
         .teacher-card-bg(ng-repeat="teacher in excellentTeacherListFn.excellentTeacherList" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
             //.shade(ng-show="a")
@@ -11,11 +11,11 @@
                 img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
             .teacher-name
                 span.name {{teacher.teacherName}}
-                span.position {{teacher.position}}
+                span.position(ng-if="teacher.position")    | {{teacher.position}}
             .teacher-detail
-                | {{excellentTeacherListFn.cutHtml(teacher.introduction,50)}}
+                | {{excellentTeacherListFn.cutHtml(teacher.introduction,25)}}
             .detail
-                button.btn.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})") 查看详情
+                button.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})") 查看详情
 
-    .page(ng-if="excellentTeacherListFn.page.totalElements")
-        ul.pagination-sm(uib-pagination, total-items='excellentTeacherListFn.page.totalElements',items-per-page="excellentTeacherListFn.page.pageSize" max-size='excellentTeacherListFn.page.pageSize' ng-model='excellentTeacherListFn.page.pageNumber',ng-change="excellentTeacherListFn.getExcellentTeacherList()" boundary-link-numbers='true' rotate='false' previous-text="上一页" next-text="下一页")
+    .page.gray-bg(ng-if="excellentTeacherListFn.page.totalElements")
+        ul.pagination-sm(uib-pagination, total-items='excellentTeacherListFn.page.totalElements',items-per-page="excellentTeacherListFn.page.pageSize" max-size='excellentTeacherListFn.page.pageSize' ng-model='excellentTeacherListFn.page.pageNumber',ng-change="excellentTeacherListFn.getExcellentTeacherList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

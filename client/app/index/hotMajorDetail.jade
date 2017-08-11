@@ -1,3 +1,8 @@
 .content-container.gray-bg
     .overview
+        .position
+            span 当前位置：  >
+            span(ui-sref="index")  首页  >
+            span(ui-sref="hotmajorlist")  热门专业  >
+            span.active {{hotMajorFn.hotMajor.teacherName}}
         .school-introduce(ng-bind-html="hotMajorFn.trustAsHtml(hotMajorFn.hotMajor.introduction)")

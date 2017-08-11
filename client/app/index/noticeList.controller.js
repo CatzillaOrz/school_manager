@@ -72,7 +72,7 @@ angular.module('dleduWebApp')
 
             $scope.noticeListFn.init();
         })
-        var height = document.documentElement.clientHeight - 82 - 100;
+        var height = document.documentElement.clientHeight - 50 - 100;
         $(".content-container").css("min-height", height + "px")
         //$(".login-container").css("height", height + "px")
     });

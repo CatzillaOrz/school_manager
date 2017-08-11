@@ -5,6 +5,7 @@ angular.module('dleduWebApp')
         $scope.overViewFn={
             schoolInfo:{},
             introduction:null,
+            schoolLogo:'',
             params:{
                 orgId: ""
             },
@@ -21,17 +22,36 @@ angular.module('dleduWebApp')
                     })
             },
 
+//logo
+            getLogoList:function () {
+                var _this=this;
+                var params={
+                    orgId:_this.params.orgId
+                };
+                SchoolService.getLogoList(params).$promise
+                    .then(function (data) {
+                        angular.forEach(data.data,function (temp) {
+                            if(temp.logoSort==1){
+                                _this.schoolLogo=temp;
+                            }
+                        })
+                    })
+                    .catch(function (error) {
 
+                    })
+            },
 
 
             init:function () {
                 var _this=this;
                 _this.schoolInfo=  CommonService.getSchool();
+                console.log(_this.schoolInfo);
                 _this.params.orgId=_this.schoolInfo.id;
                 _this.getSchoolInfo();
+                _this.getLogoList();
             }
         };
-        var height = document.documentElement.clientHeight - 82 - 100;
+        var height = document.documentElement.clientHeight - 50 - 100;
         $(".content-container").css("min-height", height + "px")
         $timeout(function () {
 

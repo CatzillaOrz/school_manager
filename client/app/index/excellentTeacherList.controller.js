@@ -50,6 +50,6 @@ angular.module('dleduWebApp')
         $timeout(function () {
             $scope.excellentTeacherListFn.init();
         })
-        var height = document.documentElement.clientHeight - 82 - 100;
+        var height = document.documentElement.clientHeight - 50 - 100;
         $(".content-container").css("min-height", height + "px")
     });
