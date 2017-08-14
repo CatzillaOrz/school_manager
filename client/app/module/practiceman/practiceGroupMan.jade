@@ -61,7 +61,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize+1}}
+                                span.txt-color-darken {{practiceGroupMan.page.totalElements==0?0:(((practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize+1)}}
                                 |  到
                                 span.txt-color-darken {{((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize+practiceGroupMan.records.length}}
                                 |  条 总共

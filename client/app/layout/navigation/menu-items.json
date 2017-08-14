@@ -127,20 +127,20 @@
         },
         {
             "title": "实践信息管理",
-            "sref": "practiceman",
+            "sref": "enttutorman",
             "icon": "navicon",
-            "active": "practiceInfo",
+            "active": "practiceman",
             "items":[
                 {
                     "title": "企业导师管理",
                     "sref": "enttutorman",
-                    "active": "enterpriseTutor",
+                    "active": "enttutorman",
                     "icon": "pencil-square-o"
                 },
                 {
                     "title": "实践小组管理",
                     "sref": "practicegroupman",
-                    "active": "practiceGroup",
+                    "active": "practicegroupman",
                     "icon": "pencil-square-o"
                 }
             ]
