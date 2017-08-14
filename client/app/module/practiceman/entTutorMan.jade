@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按导师姓名查询', aria-controls='datatable_col_reorder' ng-model="entTutorMan.queryOption.name")
+                                    input.form-control(type='search', placeholder='按企业导师姓名查询', aria-controls='datatable_col_reorder' ng-model="entTutorMan.queryOption.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="entTutorMan.getEntTutorList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
@@ -66,7 +66,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{((entTutorMan.page.pageNumber==0?entTutorMan.page.pageNumber+1:entTutorMan.page.pageNumber)-1)*entTutorMan.page.pageSize+1}}
+                                span.txt-color-darken {{entTutorMan.page.totalElements==0?0:(((entTutorMan.page.pageNumber)-1)*entTutorMan.page.pageSize+1)}}
                                 |  到
                                 span.txt-color-darken {{((entTutorMan.page.pageNumber==0?entTutorMan.page.pageNumber+1:entTutorMan.page.pageNumber)-1)*entTutorMan.page.pageSize+entTutorMan.records.length}}
                                 |  条 总共
