@@ -32,16 +32,16 @@
             .title 最新活动
             .line
             ul.notice-content
-                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="a=false" ng-mouseenter="a=true;indexFn.activeFirstNotice=$index" ng-mouseleave="a=false",ng-class="{'active':$index==indexFn.activeFirstNotice}")
-                    .new-pic(ng-if="a||(indexFn.activeFirstNotice==$index)")
+                li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="indexFn.activeFirstNotice=0" ng-mouseenter="indexFn.activeFirstNotice=$index" ng-class="{'active':$index==indexFn.activeFirstNotice}")
+                    .new-pic
                         img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default.png'}}")
-                    .current-context(ng-if="a||(indexFn.activeFirstNotice==$index)")
+                    .current-context
                         .date
                             span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
                             span.year /{{ indexFn.formatDate(notice.publishDate,'yyyy-MM') }}
                         .title {{indexFn.cutHtml(notice.title,30)}}
-                    .content(ng-if="!(a||(indexFn.activeFirstNotice==$index))") {{notice.title}}
-                    .date(ng-if="!(a||(indexFn.activeFirstNotice==$index))")
+                    .content {{notice.title}}
+                    .date
                         i.fa.fa-calendar
                         span {{notice.publishDate}}
             .more

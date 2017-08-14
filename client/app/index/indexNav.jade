@@ -1,53 +1,52 @@
+azx-school-header
 .index-container
-    .index-header
-        .nav-bar
-            .logo
-                img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png' }}")
-            ul.account(ng-if='indexFn.user')
-                li.user-menu(uib-dropdown='uib-dropdown', uib-dropdown-toggle='uib-dropdown-toggle')
-                    span.user-avatar
-                        img.avatar-30.img-circle(ng-src='{{indexFn.user.avatar}}')
-                    span#user-name.dropdown-toggle
-                        span {{indexFn.user.name || indexFn.user.login | cutStr:8}}
-                        i.caret
-                    ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu', aria-labelledby='user-name')
-                        li
-                            a(ng-click='indexFn.navigate(0,"userCenter")')
-                                i.fa.fa-sun-o
-                                span 个人中心
-                        li
-                            a(ng-click='indexFn.navigate(0,"account")')
-                                i.fa.fa-vcard-o
-                                span 账号设置
-                        li(ng-if="indexFn.authority()")
-                            a(ui-sref="home")
-                                i.fa.fa-id-card
-                                span 管理中心
-                        li.split
-                        li
-                            a(ng-click='indexFn.signOut()')
-                                i.fa.fa-sign-out
-                                span 退出
-            button.btn-login(ng-if="!indexFn.user" ng-click="indexFn.signIn()") 登录
-            .navigation
-                ul
-                    li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
-                        | 首页
-                        .keyline(ng-if="indexFn.currentActive=='index'")
-                    li(ng-click='indexFn.navigate(1,"/")')
-                        | 课程中心
-                        //.keyline(ng-if="indexFn.currentActive=='hotmajorlist'")
-                    li(ng-click='indexFn.navigate(2,"/")')
-                        | 实训中心
-                        //.keyline(ng-if="indexFn.currentActive=='noticelist'")
-                    li(ng-click='indexFn.navigate(4,"/")')
-                        | 掌上校园
-                        //.keyline(ng-if="indexFn.currentActive=='excellentteacherlist'")
-                    li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
-                        | 学校概况
-                        .keyline(ng-if="indexFn.currentActive=='overview'" )
-
-
     div(ui-view="content")
     .footer
         | Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · 京ICP备16006959号-1 · ver0.0.4.5
+//    .index-header
+//        .nav-bar
+//            .logo
+//                img.logo(ng-src="{{indexFn.schoolLogo.logoUrl || 'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png' }}")
+//            ul.account(ng-if='indexFn.user')
+//                li.user-menu(uib-dropdown='uib-dropdown', uib-dropdown-toggle='uib-dropdown-toggle')
+//                    span.user-avatar
+//                        img.avatar-30.img-circle(ng-src='{{indexFn.user.avatar}}')
+//                    span#user-name.dropdown-toggle
+//                        span {{indexFn.user.name || indexFn.user.login | cutStr:8}}
+//                        i.caret
+//                    ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu', aria-labelledby='user-name')
+//                        li
+//                            a(ng-click='indexFn.navigate(0,"userCenter")')
+//                                i.fa.fa-sun-o
+//                                span 个人中心
+//                        li
+//                            a(ng-click='indexFn.navigate(0,"account")')
+//                                i.fa.fa-vcard-o
+//                                span 账号设置
+//                        li(ng-if="indexFn.authority()")
+//                            a(ui-sref="home")
+//                                i.fa.fa-id-card
+//                                span 管理中心
+//                        li.split
+//                        li
+//                            a(ng-click='indexFn.signOut()')
+//                                i.fa.fa-sign-out
+//                                span 退出
+//            button.btn-login(ng-if="!indexFn.user" ng-click="indexFn.signIn()") 登录
+//            .navigation
+//                ul
+//                    li(ui-sref="index" ng-class="{'active':indexFn.currentActive=='index'}")
+//                        | 首页
+//                        .keyline(ng-if="indexFn.currentActive=='index'")
+//                    li(ui-sref="overview" ng-class="{'active':indexFn.currentActive=='overview'}")
+//                        | 学校概况
+//                        .keyline(ng-if="indexFn.currentActive=='overview'" )
+//                    li(ng-click='indexFn.navigate(1,"/")')
+//                        | 课程中心
+//                        //.keyline(ng-if="indexFn.currentActive=='hotmajorlist'")
+//                    li(ng-click='indexFn.navigate(2,"/")')
+//                        | 实训中心
+//                        //.keyline(ng-if="indexFn.currentActive=='noticelist'")
+//                    li(ng-click='indexFn.navigate(4,"/")')
+//                        | 掌上校园
+//                        //.keyline(ng-if="indexFn.currentActive=='excellentteacherlist'")
