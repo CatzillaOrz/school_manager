@@ -11,8 +11,14 @@ angular.module('dleduWebApp')
 					$scope.elecFenceCreateFn.loadDatePickerByOption(newValue);
 				}
 			});
+			$scope.$watch("elecFenceCreateFn.isOpenElec", function(newValue, oldValue){
+				if(newValue != oldValue){
+					$scope.elecFenceCreateFn.switchElec();
+				}
+			});
 		});
 		$scope.elecFenceCreateFn={
+			isOpenElec: '1',//是否打开电子围栏。默认不打开
 			//学期列表
 			semeterLists: [],
 			//学期列表clone
@@ -225,6 +231,22 @@ angular.module('dleduWebApp')
 					.catch(function(e){
 
 					});
+			},
+
+			//开启或者关闭围栏
+			switchElec: function(){
+				var isOpen = parseInt(this.isOpenElec);
+				EduManService.switchElec({organId: AuthService.getUser().orgId, flag: isOpen}).$promise
+					.then(function(data){
+						if(data.success){
+							messageService.openMsg(data.message);
+						}else{
+							messageService.openMsg(data.message);
+						}
+					})
+					.catch(function(e){
+
+					})
 			},
 
 			init: function () {

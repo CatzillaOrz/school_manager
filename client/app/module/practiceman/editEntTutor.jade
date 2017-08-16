@@ -39,6 +39,12 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
+                            | 公司地址：
+                        .col-sm-7
+                            input.form-control(placeholder="请填公司地址" name="phone" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
                             | 邮箱：
                         .col-sm-7
                             input.form-control(placeholder="请填写邮箱" name="email" ng-model="handleFn.params.mailbox" validator="required,email,maxlength=60")
