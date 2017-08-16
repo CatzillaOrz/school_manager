@@ -1,0 +1,36 @@
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{newsHandle.title}}
+        .widget-body
+            form.form-horizontal(name="studentForm")
+                fieldset
+                    legend {{newsHandle.prompt}}
+
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 标题：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过50个字标题" ng-model="newsHandle.params.title" name="name" validator="required, maxlength=50")
+                    .form-group
+                        label.col-sm-3.control-label 类别：
+                        .col-sm-7
+                            label.radio-inline
+                                input(type='radio', name='inlineRadioOptions',ng-model="newsHandle.params.type" value='10')
+                                |  顶岗实习公告
+                            label.radio-inline
+                                input(type='radio', name='inlineRadioOptions',ng-model="newsHandle.params.sex" value='20')
+                                |  学校最新活动
+                    .form-group
+                        label.col-sm-3.control-label 内容：
+                        .col-sm-7
+                            div(ueditor id='newsHandle.editorid' uec='newsHandle.params.content' editor='newsHandle.editor' config='newsHandle.editorConf')
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="newsHandle.submit()" validation-submit="studentForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="newslist") 取消

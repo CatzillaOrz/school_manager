@@ -115,9 +115,41 @@
                     "sref": "evaquestion",
                     "active": "evaquestion",
                     "icon": "question-circle"
+                },
+                {
+                    "title": "电子围栏",
+                    "sref": "elecfence",
+                    "active": "elecfence",
+                    "icon": "barcode"
                 }
 
             ]
+        },
+        {
+            "title": "实践信息管理",
+            "sref": "enttutorman",
+            "icon": "navicon",
+            "active": "practiceman",
+            "items":[
+                {
+                    "title": "企业导师管理",
+                    "sref": "enttutorman",
+                    "active": "enttutorman",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践小组管理",
+                    "sref": "practicegroupman",
+                    "active": "practicegroupman",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
+            "title": "通知管理",
+            "sref": "newslist",
+            "active": "news",
+            "icon": "commenting"
         }
     ]
 }

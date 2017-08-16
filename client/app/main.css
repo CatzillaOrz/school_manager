@@ -280,6 +280,14 @@ a:focus {
     color: #e7505a;
     margin-right: 5px; }
 
+.lg-form {
+  min-height: 200px;
+  width: 1200px;
+  margin: 0 auto; }
+  .lg-form .required {
+    color: #e7505a;
+    margin-right: 5px; }
+
 .md-form {
   min-height: 200px;
   width: 600px;
@@ -1692,24 +1700,24 @@ a:focus {
               .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .new-pic img {
                 height: 100px;
                 width: 180px; }
-            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .current-context {
+            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context {
               padding: 15px 16px;
               background: #f7f7f7;
               display: none;
               vertical-align: top;
               height: 101px;
               width: 390px; }
-              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .current-context .date {
+              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date {
                 margin: 0;
                 height: 40px;
                 line-height: 40px; }
-                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .current-context .date .day {
+                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date .day {
                   font-size: 28px;
                   color: #323232; }
-                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .current-context .date .year {
+                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date .year {
                   font-size: 14px;
                   color: #646464; }
-              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .current-context .title {
+              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .title {
                 margin: 0;
                 font-size: 14px;
                 color: #29c192;

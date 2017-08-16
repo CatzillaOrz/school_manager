@@ -146,7 +146,11 @@ angular.module("azx.common", ['ui.bootstrap'])
                     if (link == 5) {
                         $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + _urlarr[link] + _pathname;
                     } else {
-                        $window.location.href = 'http://' + _urlarr[link] + _pathname;
+                        if(_tempArr.length == 4){
+                            $window.location.href = 'http://'+_tempArr[0] +'.'+ _urlarr[link] + _pathname;
+                        }else {
+                            $window.location.href = 'http://' + _urlarr[link] + _pathname;
+                        }
                     }
                 } else {
                     (!!_pathname ? $window.location.href = 'http://' + _host + _pathname : console.warn('没有发现跳转路径'));
@@ -570,10 +574,11 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window, $http, CommonService) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location,SchoolService, $http, CommonService) {
                 $rootScope.user = AuthService.getUser();
                 $scope.indexFn = {
                     user: $rootScope.user,
+                    schoolLogo:"",
                     subnavArrow: '',
                     signIn: function () {
                         var _pathName = '';
@@ -595,6 +600,41 @@ angular.module("azx.common", ['ui.bootstrap'])
                     authority: function (entity) {
                         var _this = this;
                         return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                    },
+                    getSchool: function () {
+                        var _this = this;
+                            var url = $location.host().split('.')[0];
+                            url = "sjdr";
+                            var params = {
+                                domainname: url
+                            };
+                            SchoolService.getSchoolByDomain(params).$promise
+                                .then(function (data) {
+                                    document.title = data.name;
+                                    _this.getLogoList(data.id);
+
+                                })
+                                .catch(function (error) {
+
+                                })
+                    },
+                    //logo
+                    getLogoList:function (orgid) {
+                        var _this=this;
+                        var params={
+                            orgId:_this.params.orgId
+                        };
+                        SchoolService.getLogoList(params).$promise
+                            .then(function (data) {
+                                angular.forEach(data.data,function (temp) {
+                                    if(temp.logoSort==2){
+                                        _this.schoolLogo=temp;
+                                    }
+                                })
+                            })
+                            .catch(function (error) {
+
+                            })
                     },
                 };
 
