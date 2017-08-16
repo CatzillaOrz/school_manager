@@ -219,6 +219,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
@@ -309,7 +310,7 @@ angular.module('dleduWebApp')
 
 		});
 		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.time', function (newValue, oldValue) {
+			$scope.$watch('evaFenceFn.date', function (newValue, oldValue) {
 				if (newValue != oldValue) {
 					$scope.evaFenceFn.getElecFenceList();
 				}
