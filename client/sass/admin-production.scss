@@ -11437,7 +11437,7 @@ nav > ul > li:last-child.open {
 
 nav ul li a {
   line-height: normal;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px 10px 10px 11px;
   margin: 10px 10px;
   color: #c0bbb7;
@@ -11445,6 +11445,10 @@ nav ul li a {
   font-weight: 400;
   text-decoration: none !important;
   position: relative
+
+}
+nav ul li a i{
+  font-size:22px;
 }
 
 nav > ul > li > ul > li > a, nav > ul > li > ul > li > ul > li > a {
