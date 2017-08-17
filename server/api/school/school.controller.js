@@ -231,9 +231,10 @@ module.exports = {
                 };
                 return SchoolService.getLogoListSync(params)
             }).then(function (entity) {
-            res.json(entity);
+            var result="var GLOB_SCHOOL="+JSON.stringify(entity);
+            res.send(result);
         }).catch(function (e) {
-            res.status(e.code).send(e.message);
+           // res.status(e.code).send(e.message);
             });
     }
 };

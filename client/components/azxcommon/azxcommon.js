@@ -617,7 +617,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location, $http) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location) {
                 $rootScope.user = AuthService.getUser();
                 $scope.indexFn = {
                     user: $rootScope.user,
@@ -656,19 +656,30 @@ angular.module("azx.common", ['ui.bootstrap'])
                         }
                         var _host = $window.location.host;
                         var _urlarr = AuthService.contrastDomain(_hostname);
-                            url=_urlarr[5];
                         var code = $location.host().split('.')[0];
-                        //code = "sjdr";
-                        $http({
-                            method: 'GET',
-                            url: url+'/api/school/getSchoolOra?domainname='+code
-                        }).success(function (data) {
-                            angular.forEach(data.data,function (temp) {
+                           //code="kjkf";
+                            url='http://'+code+'.'+_urlarr[5]+'/api/school/getSchoolOra?domainname='+code;
+                       // url='http://localhost:9000'+'/api/school/getSchoolOra?domainname='+code;
+                        var script = $('<script src='+url+'></script>');   //创建script标签
+                        $('body').append(script);   //将标签插入body尾部
+                        $timeout(function () {
+                            angular.forEach(GLOB_SCHOOL.data,function (temp) {
                                 if(temp.logoSort==2){
                                     _this.schoolLogo=temp;
                                 }
                             })
-                        });
+                        })
+                        //code = "sjdr";
+                        // $http({
+                        //     method: 'GET',
+                        //     url: url
+                        // }).success(function (data) {
+                        //     angular.forEach(data.data,function (temp) {
+                        //         if(temp.logoSort==2){
+                        //             _this.schoolLogo=temp;
+                        //         }
+                        //     })
+                        // });
                     },
                     // //logo
                     // getLogoList:function (orgid) {
@@ -699,6 +710,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                         var _this=this;
                         _this. currentActiveTabInit();
                         _this.getSchool();
+                        
                     }
                 };
                 $scope.indexFn.init();
