@@ -636,8 +636,12 @@ angular.module("azx.common", ['ui.bootstrap'])
 
                             })
                     },
+                    init:function () {
+                        var _this=this;
+                        _this.getSchool();
+                    }
                 };
-
+                $scope.indexFn.init();
 
                 $rootScope.$watch('user', function () {
                     // console.log($rootScope.user);

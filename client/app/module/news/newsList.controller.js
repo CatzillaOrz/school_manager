@@ -26,8 +26,8 @@ angular.module('dleduWebApp')
                 NewsService.getNewsList(params).$promise
                     .then(function (data) {
                         _this.newsList=data.data;
-                        // _this.page.totalElements=data.page.totalElements;
-                        // _this.page.totalPages=data.page.totalPages;
+                        _this.page.totalElements=data.page.totalElements;
+                        _this.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
                     })

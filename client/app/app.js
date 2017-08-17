@@ -23,6 +23,7 @@ angular.module('dleduWebApp', [
     'ngJcrop',
     'ngUeditor',
     'angular-echarts',
+    'angular-datepicker',
     'frapontillo.bootstrap-switch'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
