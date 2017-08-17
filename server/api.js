@@ -17,4 +17,5 @@ module.exports = function(app){
   app.use('/api/notice', require('./api/notice'));
   app.use('/api/eduman', require('./api/eduman')); //教务管理
   app.use('/api/practiceman', require('./api/practiceman')); //实践管理
+    app.use('/api/news', require('./api/news'));
 };

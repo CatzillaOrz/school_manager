@@ -280,6 +280,14 @@ a:focus {
     color: #e7505a;
     margin-right: 5px; }
 
+.lg-form {
+  min-height: 200px;
+  width: 1200px;
+  margin: 0 auto; }
+  .lg-form .required {
+    color: #e7505a;
+    margin-right: 5px; }
+
 .md-form {
   min-height: 200px;
   width: 600px;
@@ -1368,7 +1376,6 @@ a:focus {
 .index-container {
   min-width: 1000px;
   width: 100%;
-  min-height: 810px;
   background-color: #f8f8f8;
   font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
   .index-container .pointer {
@@ -1421,157 +1428,6 @@ a:focus {
           transition-property: all;
           transition-duration: .3s;
           border-radius: 5px; }
-  .index-container .index-header {
-    background: #ffffff;
-    height: 50px;
-    width: 100%;
-    border-bottom: 1px solid #eeeeee; }
-    .index-container .index-header .nav-bar {
-      width: 1200px;
-      margin: 0px auto; }
-      .index-container .index-header .nav-bar .logo {
-        display: inline-block;
-        vertical-align: middle;
-        width: 206px;
-        height: 50px; }
-      .index-container .index-header .nav-bar .account {
-        height: 48px;
-        float: right;
-        margin: 0 0 0 8px;
-        display: table; }
-        .index-container .index-header .nav-bar .account li:hover {
-          color: #58b5a2;
-          cursor: pointer; }
-        .index-container .index-header .nav-bar .account .user-menu {
-          width: 130px;
-          padding: 0;
-          height: 48px;
-          display: table-cell;
-          vertical-align: middle; }
-          .index-container .index-header .nav-bar .account .user-menu .user-avatar {
-            margin: 4px 10px 4px 0; }
-          .index-container .index-header .nav-bar .account .user-menu #user-name {
-            display: inline;
-            font-size: 14px; }
-            .index-container .index-header .nav-bar .account .user-menu #user-name .caret {
-              margin-left: 5px; }
-          .index-container .index-header .nav-bar .account .user-menu .dropdown-menu {
-            width: 130px;
-            min-width: 130px !important;
-            left: auto;
-            right: 0;
-            border-radius: 0;
-            margin: 0;
-            text-align: center;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #f0f0f0;
-            background: #ffffff;
-            font-size: 12px;
-            -webkit-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-            -khtml-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-            -moz-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-            -ms-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-            -o-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05); }
-            .index-container .index-header .nav-bar .account .user-menu .dropdown-menu li a {
-              padding: 6px 20px; }
-              .index-container .index-header .nav-bar .account .user-menu .dropdown-menu li a:hover {
-                color: #666;
-                background: #f5f5f5; }
-              .index-container .index-header .nav-bar .account .user-menu .dropdown-menu li a i.fa {
-                float: left;
-                margin: 2px 10px 2px 0;
-                color: #999999; }
-            .index-container .index-header .nav-bar .account .user-menu .dropdown-menu .split {
-              height: 1px;
-              background: #f0f0f0;
-              margin: 5px 0; }
-        .index-container .index-header .nav-bar .account .tool-bar {
-          height: 48px;
-          padding: 0 20px;
-          display: table-cell;
-          vertical-align: middle; }
-          .index-container .index-header .nav-bar .account .tool-bar .user-inbox {
-            display: inline;
-            position: relative; }
-            .index-container .index-header .nav-bar .account .tool-bar .user-inbox .badge {
-              position: absolute;
-              left: 12px;
-              top: -12px;
-              min-width: 16px;
-              font-size: 11px;
-              padding: 2px;
-              background: #f95a5a;
-              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-              font-weight: 400;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-              text-align: center;
-              letter-spacing: 1px; }
-      .index-container .index-header .nav-bar .btn-login {
-        height: 29px;
-        margin-top: 8px;
-        margin-left: 20px;
-        padding: 4px 10px;
-        min-width: 41px;
-        float: right;
-        color: #666;
-        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-        background-color: #fff;
-        font-size: 12px;
-        line-height: 1em;
-        text-decoration: none;
-        text-align: center;
-        display: inline-block;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        cursor: pointer;
-        border: 1px solid #8b8b8b;
-        box-sizing: border-box;
-        transition-property: all;
-        transition-duration: .3s;
-        border-radius: 4px; }
-      .index-container .index-header .nav-bar .btn-login:hover {
-        background-color: #28b780;
-        color: #fff;
-        border: 1px solid #28b780; }
-      .index-container .index-header .nav-bar .navigation {
-        height: 50px;
-        float: right;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 41px; }
-        .index-container .index-header .nav-bar .navigation ul {
-          padding: 0; }
-          .index-container .index-header .nav-bar .navigation ul li {
-            text-align: center;
-            vertical-align: middle;
-            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-            float: left;
-            padding: 0px 20px;
-            font-size: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0);
-            color: #616161; }
-            .index-container .index-header .nav-bar .navigation ul li:hover {
-              color: #29c192;
-              cursor: pointer; }
-            .index-container .index-header .nav-bar .navigation ul li .keyline {
-              height: 2px;
-              /* position: absolute; */
-              width: 22px;
-              background: #28b780;
-              /* left: 40%; */
-              bottom: 5px;
-              position: relative;
-              /* text-align: center; */
-              margin: 0 auto; }
-          .index-container .index-header .nav-bar .navigation ul .active {
-            cursor: pointer;
-            color: #29c192; }
   .index-container .sub-nav {
     margin: 30px auto 0 auto;
     width: 1000px;
@@ -1803,11 +1659,14 @@ a:focus {
         .index-container .notice-major-container .notice-major-block .notice-block .notice-content {
           padding-left: 0;
           list-style: none;
-          margin-top: 40px; }
+          margin-top: 40px;
+          height: 308px;
+          overflow: hidden; }
           .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list {
             cursor: pointer;
             height: 52px;
-            border-bottom: 1px solid #f0f0f0; }
+            border-bottom: 1px solid #f0f0f0;
+            overflow: hidden; }
             .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list .content {
               display: inline-block;
               vertical-align: middle;
@@ -1830,38 +1689,46 @@ a:focus {
                 padding-right: 8px; }
             .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover {
               height: 100px;
-              border: none; }
-              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .new-pic {
-                display: inline-block;
-                vertical-align: middle; }
-                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .new-pic img {
-                  height: 100px;
-                  width: 180px; }
-              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .current-context {
-                padding: 15px 16px;
-                background: #f7f7f7;
-                display: inline-block;
-                vertical-align: top;
-                height: 101px;
-                width: 390px; }
-                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .current-context .date {
-                  margin: 0;
-                  height: 40px;
-                  line-height: 40px; }
-                  .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .current-context .date .day {
-                    font-size: 28px;
-                    color: #323232; }
-                  .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .current-context .date .year {
-                    font-size: 14px;
-                    color: #646464; }
-                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list:hover .current-context .title {
-                  margin: 0;
+              border: none;
+              overflow: hidden; }
+            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .new-pic {
+              display: none;
+              vertical-align: middle;
+              height: 100px;
+              width: 180px;
+              overflow: hidden; }
+              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .new-pic img {
+                height: 100px;
+                width: 180px; }
+            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context {
+              padding: 15px 16px;
+              background: #f7f7f7;
+              display: none;
+              vertical-align: top;
+              height: 101px;
+              width: 390px; }
+              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date {
+                margin: 0;
+                height: 40px;
+                line-height: 40px; }
+                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date .day {
+                  font-size: 28px;
+                  color: #323232; }
+                .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .date .year {
                   font-size: 14px;
-                  color: #29c192;
-                  width: 366px; }
+                  color: #646464; }
+              .index-container .notice-major-container .notice-major-block .notice-block .notice-content .notice-list > .current-context .title {
+                margin: 0;
+                font-size: 14px;
+                color: #29c192;
+                width: 366px; }
           .index-container .notice-major-container .notice-major-block .notice-block .notice-content .active {
             height: 100px;
             border: none; }
+            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .active > .content {
+              display: none; }
+            .index-container .notice-major-container .notice-major-block .notice-block .notice-content .active > .date {
+              display: none; }
             .index-container .notice-major-container .notice-major-block .notice-block .notice-content .active .new-pic {
               display: inline-block;
               vertical-align: middle; }
@@ -2668,7 +2535,8 @@ a:focus {
         .index-container .content-container .overview .content .introduce {
           padding: 30px;
           padding-bottom: 40px;
-          padding-top: 16px; }
+          padding-top: 16px;
+          overflow: hidden; }
     .index-container .content-container .hot-major-container {
       margin: 0px auto;
       width: 1200px;

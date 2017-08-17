@@ -144,6 +144,12 @@
                     "icon": "pencil-square-o"
                 }
             ]
+        },
+        {
+            "title": "通知管理",
+            "sref": "newslist",
+            "active": "news",
+            "icon": "commenting"
         }
     ]
 }
