@@ -22,7 +22,8 @@ angular.module('dleduWebApp', [
     "ngTable",
     'ngJcrop',
     'ngUeditor',
-    'angular-echarts'
+    'angular-echarts',
+    'angular-datepicker'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');

@@ -28,14 +28,14 @@
                             .col-sm-offset-3
                                 .col-sm-5
                                     p.input-group
-                                        input.form-control(type='text', uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]'  ng-model='semester.startDate', is-open='opened[$index][0]', datepicker-options='periodHandlerFn.datePick.dateOptions'  close-text='Close')
+                                        input.form-control(type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"  ng-model='semester.startDate' placeholder="请选择开始时间")
                                         span.input-group-btn
                                             button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
                                                 i.glyphicon.glyphicon-calendar
                                 .col-sm-1 至
                                 .col-sm-5
                                     p.input-group
-                                        input.form-control(type='text', uib-datepicker-popup='',ng-init="opened[$index][1]=false" ng-click='opened[$index][1]=!opened[$index][1]' ng-model='semester.endDate', is-open='opened[$index][1]', datepicker-options='periodHandlerFn.datePick.dateOptions', close-text='Close')
+                                        input.form-control(type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"   ng-model='semester.endDate' placeholder="请选择结束时间")
                                         span.input-group-btn
                                             button.btn.btn-default(type='button', ng-click='opened[$index][1]=!opened[$index][1]')
                                                 i.glyphicon.glyphicon-calendar
