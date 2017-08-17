@@ -19,6 +19,7 @@ router.delete('/deleteCourse', auth.isSignedIn, controller.deleteCourse);
 router.put('/updateCourse', auth.isSignedIn, controller.updateCourse);
 router.get('/getCourseById', auth.isSignedIn, controller.getCourseById);
 router.get('/getCourseDropListOrg', auth.isSignedIn, controller.getCourseDropListOrg);
+router.get('/getImpResult', auth.isSignedIn, controller.getImpResult);
 
 
 module.exports = router;

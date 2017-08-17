@@ -19,6 +19,7 @@ angular.module('dleduWebApp')
 				department: '', //部门
 				mailbox: '', //邮箱
 				phone: '', //邮箱
+				companyAddress: '', //地址公司
 			},
 
 			// 查询导师信息

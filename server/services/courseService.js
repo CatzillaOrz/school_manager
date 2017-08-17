@@ -159,7 +159,24 @@ var CourseService = {
 		}).catch(function (e) {
 			callback(e);
 		});
-	}
+	},
+
+	getImpResult: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/course/importmsg',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
 
 };
 

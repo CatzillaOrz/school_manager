@@ -22,7 +22,8 @@ angular.module('dleduWebApp', [
     "ngTable",
     'ngJcrop',
     'ngUeditor',
-    'angular-echarts'
+    'angular-echarts',
+    'frapontillo.bootstrap-switch'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');

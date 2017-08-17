@@ -143,6 +143,11 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/notice');
 				return eduman.save(params);
 			},
+			//开启围栏
+			switchElec: function(params){
+				var eduman = $resource('api/eduman/switchElec');
+				return eduman.save(params);
+			},
 
             classTrend:function (params) {
                 var eduman = $resource('api/eduman/classTrend');

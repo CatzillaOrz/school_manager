@@ -101,7 +101,7 @@
         border: 1px solid #CCCCCC;
         position: absolute;
         top: 70px;
-        right: 20px;
+        right: 0;
         line-height: 36px;
         width: 470px;
         background: #ffffff;
@@ -340,6 +340,12 @@ td.term-disable{
     float: right;
     margin-right: 20px;
 }
+.open-elec{
+    height: 40px;
+    line-height: 40px;
+    float: right;
+    margin-right: 30px;
+}
 .date-set{
     float: right;
     margin-right: 20px;
@@ -398,4 +404,24 @@ td.term-disable{
             left: 50%;
         }
     }
+}
+#datatable_col_reorder_wrapperelec::-webkit-scrollbar
+{
+    width: 16px;
+    height: 6px;
+    background-color: #c0c0c0;
+}
+
+#datatable_col_reorder_wrapperelec::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#datatable_col_reorder_wrapperelec::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
 }

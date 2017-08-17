@@ -2,7 +2,11 @@
    Created by Administrator on 2017/6/21.
 .college-list-container
     .row-fluid(style="background:#fff")
-        .span12(style="margin-top: 10px;margin-left:20px;font-weight:bolder") 学校范围设定：
+        .span12(style="line-height:40px;margin-left:20px;") 学校范围设定：
+            .open-elec
+                span 开启围栏：
+                input(type="checkbox" ng-click="elecFenceCreateFn.switchElec()" bs-switch ng-model="elecFenceCreateFn.isOpenElec" switch-on-text="开启" switch-off-text="关闭" switch-on-color="success" switch-off-color="danger" ng-true-value="'1'"
+                ng-false-value="'0'")
         #elecmap(style="height:300px")
             .mapedit
                 a(ui-sref="elecfencemapset") {{elecFenceCreateFn.operation}}

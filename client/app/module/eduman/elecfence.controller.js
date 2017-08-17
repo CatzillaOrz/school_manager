@@ -5,6 +5,10 @@ angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
 										   MajorService, CollegeService, ClassService, messageService, CommonService) {
 		$scope.evaFenceFn = {
+			//结果中离线的人数，
+			allLeave: 0,
+			//结果中当前离线的人数，
+			currentLeave: 0,
 			//问卷信息
 			records: [],
 			//学院下拉列表
@@ -217,8 +221,11 @@ angular.module('dleduWebApp')
 				CommonService.delEmptyProperty(params);
 				EduManService.getElecFenceList(params).$promise
 					.then(function (data) {
-						that.records = data.data;
-						that.page = data.page;
+						that.allLeave = data.onceLeave;
+						that.currentLeave = data.nowLeave;
+						that.records = data.pagedata.data;
+						that.page = data.pagedata.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
@@ -309,7 +316,7 @@ angular.module('dleduWebApp')
 
 		});
 		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.time', function (newValue, oldValue) {
+			$scope.$watch('evaFenceFn.date', function (newValue, oldValue) {
 				if (newValue != oldValue) {
 					$scope.evaFenceFn.getElecFenceList();
 				}
