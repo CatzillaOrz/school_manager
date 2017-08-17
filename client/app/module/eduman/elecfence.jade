@@ -24,34 +24,37 @@
                 .col-md-12.padding-bottom-10.padding-top-10
                     #datatable_col_reorder_filter1
                         form.form-inline
-                            .form-group.col-md-2
+                            .form-group.col-md-4
                                 label.control-label 学院：
                                 select.form-control(ng-model="evaFenceFn.params.collegeId" ui-select2)
                                     option(ng-repeat="college in evaFenceFn.collegeDropList" value="{{college.id}}" ng-selected="evaFenceFn.params.collegeId==college.id") {{college.name}}
-                            .form-group.col-md-2
+                            .form-group.col-md-4
                                 label.control-label 专业：
                                 select.form-control(ng-model="evaFenceFn.params.professionalId"  ui-select2  )
                                     option(ng-repeat="major in evaFenceFn.majorDropList" value="{{major.id}}"  ng-selected="evaFenceFn.params.professionalId==major.id") {{major.name}}
-                            .form-group.col-md-2
+                            .form-group.col-md-4
                                 label.control-label 班级：
                                 select.form-control(ng-model="evaFenceFn.params.classId" ui-select2 )
                                     option(ng-repeat="class in evaFenceFn.classDropList" value="{{class.id}}" ng-selected="evaFenceFn.params.classId==class.id") {{class.name}}
-                            .form-group.col-md-2
-                                label.control-label 姓名：
-                                input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
-                            .form-group.col-md-2
-                                label.control-label 学号：
-                                input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
-                            .form-group.col-md-2
-                                .ColVis
-                                    button.btn.btn-primary(ng-click="evaFenceFn.getElecFenceList()")
-                                        span 查询
+
+                .col-md-12.padding-bottom-10.padding-top-10
+                    form.form-inline
+                        .form-group.col-md-4
+                            label.control-label 姓名：
+                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
+                        .form-group.col-md-4
+                            label.control-label 学号：
+                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
+                        .form-group.col-md-4
+                            .ColVis
+                                button.btn.btn-primary(ng-click="evaFenceFn.getElecFenceList()")
+                                    span 查询
     #wid-id-2.jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 查询结果 {{'(结果中'+ evaFenceFn.allLeave + '人被检测曾到离校，当前'+ evaFenceFn.currentLeave +'人离校)'}}
+            h2 查询结果 {{'(结果中'+ evaFenceFn.allLeave + '人被检测曾经离校，当前'+ evaFenceFn.currentLeave +'人离校)'}}
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         div(role='content')
@@ -60,21 +63,26 @@
                 .col-md-12.padding-bottom-10.padding-top-10
                     #datatable_col_reorder_filter2
                         form.form-inline
-                            .form-group.col-md-1(style="width:auto!important;padding:5px;")
+                            .form-group.col-md-2(style="width:100px;padding:5px;")
                                 label.control-label 结果筛选：
-                            .form-group.col-md-2
+                            .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isLeaveSchool" ui-select2="evaFenceFn.getResultOption('isLeaveSchool')" )
                                     option(ng-repeat="record in evaFenceFn.isLeaveSchools" value="{{record.id}}" ) {{record.text}}
-                            .form-group.col-md-2
+                            .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isActivation" ui-select2="evaFenceFn.getResultOption('isActive')" )
                                     option(ng-repeat="record in evaFenceFn.isActives" value="{{record.id}}" ) {{record.text}}
-                            .form-group.col-md-2
+                            .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isLogin" ui-select2="evaFenceFn.getResultOption('isLogin')" )
                                     option(ng-repeat="record in evaFenceFn.isLogins" value="{{record.id}}" ) {{record.text}}
-                            .form-group.col-md-2
+
+                .col-md-12.padding-bottom-10.padding-top-10
+                    #datatable_col_reorder_filter3
+                        form.form-inline
+                            .form-group.col-md-2(style="width:100px;padding:5px;")
+                            .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isAtSchool" ui-select2="evaFenceFn.getResultOption('location')" )
                                     option(ng-repeat="record in evaFenceFn.locations" value="{{record.id}}" ) {{record.text}}
-                            .form-group.col-md-2
+                            .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isOline" ui-select2="evaFenceFn.getResultOption('isOnline')" )
                                     option(ng-repeat="record in evaFenceFn.isOnlines" value="{{record.id}}" ) {{record.text}}
             .widget-body.no-padding
