@@ -223,6 +223,19 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getSchoolOra: function (req, res) {
+        SchoolService.getSchoolByDomainSync(req.query)
+            .then(function (data) {
+                var params={
+                    orgId:data.id
+                };
+                return SchoolService.getLogoListSync(params)
+            }).then(function (entity) {
+            res.json(entity);
+        }).catch(function (e) {
+            res.status(e.code).send(e.message);
+            });
+    }
 };
 
 

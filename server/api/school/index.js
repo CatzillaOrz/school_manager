@@ -42,5 +42,5 @@ router.get('/getExcellentTeacherById', controller.getExcellentTeacherById);
 //从开卷课程中获取
 router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);
 
-
+router.get('/getSchoolOra', controller.getSchoolOra);
 module.exports = router;
