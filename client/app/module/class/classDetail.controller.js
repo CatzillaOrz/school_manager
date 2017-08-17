@@ -199,13 +199,14 @@ angular.module('dleduWebApp')
                     orgId:_this.params.orgId,
                     classesId:_this.params.id,
                     pageNumber:_this.page.pageNumber,
-                    pageSize:_this.pageSize
+                    pageSize:_this.page.pageSize
                 };
                 params.name=_this.keyWord;
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.classStudentList=_this.dataHandler(data.data);
                         _this.page=data.page;
+                        _this.page.pageNumber++;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("班级添加失败")
