@@ -4,12 +4,14 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('CourseListCtrl', function ($scope, CourseService, AuthService, messageService,CommonService) {
+	.controller('CourseListCtrl', function ($scope, CourseService, AuthService, messageService,CommonService, ImpBatchService, ngDialog) {
 		$scope.courseListFn = {
 			//课程列表
 			courseList: [],
 			//当前操作的course
 			currentCourse: {},
+			myFile: null, //选择的文件对象
+			errorInfos: null, //返回的错误信息
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -65,6 +67,80 @@ angular.module('dleduWebApp')
 				that.currentCourse = entity;
 				messageService.getMsg("您确定要删除此课程吗？", that.deleteCourse)
 			},
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			openImpBatch: function(type){
+				var that = this;
+				var params = {
+					template: 'importDialog',
+					width: 600,
+					scope: $scope,
+				};
+				if(type == 'reset'){
+					ngDialog.close();
+					ImpBatchService.openImpBatch(params);
+					return;
+				}
+				CommonService.addLoading(true, 'all');
+				CourseService.getImpResult({orgId: AuthService.getUser().orgId, userId: AuthService.getUser().id}).$promise
+					.then(function (data) {
+						CommonService.addLoading(false, 'all');
+						if(typeof data.state == 'undefined'){
+							ImpBatchService.openImpBatch(params);
+						}else{
+							if(data.state == 10){//数据正在处理请稍候查看
+								messageService.openMsg("数据正在处理，请稍候导入数据！");
+							}else if(data.state == 20){
+								ImpBatchService.openImpBatch(params);
+							}else if(data.state == 30){
+								that.errorInfos = data
+								ngDialog.close();
+								var dialogParams = {
+									template: 'importResultDialog',
+									width: 600,
+									scope: $scope
+								};
+								ngDialog.open(dialogParams);
+							}
+						}
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			importantBatch: function(file){
+				var params = {
+					file: file,
+					orgId: AuthService.getUser().orgId,
+					userId: AuthService.getUser().id,
+					uploadType: 'course'
+				};
+				var dialogParams = {
+					template: 'importResultDialog',
+					width: 600,
+					scope: $scope
+				};
+				ImpBatchService.importantBatch(params, this, dialogParams);
+			},
+
+			//选择文件事件
+			selected: function($newFiles){
+				ImpBatchService.selected($newFiles);
+			},
+
+			/**
+			 * 下载模板
+			 */
+			downLoad: function(){
+				ImpBatchService.downLoad('course');
+			},
+
 			init: function () {
 				this.getCourseList();
 			}

@@ -46,7 +46,11 @@ angular.module('dleduWebService')
 			getCourseDropListOrg: function (params) {
 				var getCourseDropListOrg = $resource('api/course/getCourseDropListOrg');
 				return getCourseDropListOrg.get(params);
-			}
+			},
+			getImpResult: function (params) {
+				var course = $resource('api/course/getImpResult');
+				return course.get(params);
+			},
 		}
 
 	});
