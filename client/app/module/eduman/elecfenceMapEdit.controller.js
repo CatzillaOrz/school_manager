@@ -100,6 +100,12 @@ angular.module('dleduWebApp')
 									that.polygonEditor.close();
 								}
 								that.mapObj.remove(that.targetObj);
+								var polygons = that.mapObj.getAllOverlays('polygon');
+								if(polygons.length == 0){
+									$scope.$apply(function () {
+										that.isDisabled = false;
+									});
+								}
 							}, 0);
 							//添加菜单
 							contextMenu.addItem("编辑", function() {
