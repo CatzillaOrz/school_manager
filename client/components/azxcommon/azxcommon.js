@@ -93,7 +93,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             qrcodeSignIn: function (token) {
                 var deferred = $q.defer();
                 $http.post("api/qrcodeSignIn", {
-                    token:token
+                    token: token
                 })
                     .success(function (user) {
                         console.log(user);
@@ -169,12 +169,12 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var _urlarr = this.contrastDomain(_hostname);
                 var _pathname = pathname || '';
                 if (_hostname != 'localhost' && _urlarr.length > 0) {
-                    if (link == 5&&AuthService.getUser()) {
+                    if (link == 5 && AuthService.getUser()) {
                         $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + _urlarr[link] + _pathname;
                     } else {
-                        if(_tempArr.length == 4){
-                            $window.location.href = 'http://'+_tempArr[0] +'.'+ _urlarr[link] + _pathname;
-                        }else {
+                        if (_tempArr.length == 4) {
+                            $window.location.href = 'http://' + _tempArr[0] + '.' + _urlarr[link] + _pathname;
+                        } else {
                             $window.location.href = 'http://' + _urlarr[link] + _pathname;
                         }
 
@@ -617,14 +617,14 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location,$interval) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window, localStorageService, $location,$http, $interval,$templateCache) {
                 $rootScope.user = AuthService.getUser();
                 $scope.indexFn = {
                     user: $rootScope.user,
-                    schoolLogo:"",
+                    schoolLogo: "",
                     subnavArrow: '',
-                    currentTab:5,
-                    currentRouter:"index",
+                    currentTab: 5,
+                    currentRouter: "index",
                     signIn: function () {
                         var _pathName = '';
                         if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
@@ -657,22 +657,52 @@ angular.module("azx.common", ['ui.bootstrap'])
                         var _host = $window.location.host;
                         var _urlarr = AuthService.contrastDomain(_hostname);
                         var code = $location.host().split('.')[0];
-                           //code="kjkf";
-                            url='http://'+code+'.'+_urlarr[5]+'/api/school/getSchoolOra?domainname='+code;
-                       // url='http://localhost:9000'+'/api/school/getSchoolOra?domainname='+code;
-                        var script = $('<script src='+url+'></script>');   //创建script标签
-                        $('body').append(script);   //将标签插入body尾部
-                        var load=$interval(function() {
-                            if(GLOB_SCHOOL){
-                                $interval.cancel(load);
-                                angular.forEach(GLOB_SCHOOL.data,function (temp) {
-                                    if(temp.logoSort==2){
-                                        _this.schoolLogo=temp;
+                        code = "kjkf";
+                       // url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code;
+                       url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                        // var script = document.createElement("script");  //创建script标签
+                        // script.type = "text\/javascript";
+                        // script.onload = script.onreadystatechange = function () {
+                        //     if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                        //         angular.forEach(GLOB_SCHOOL.data, function (temp) {
+                        //             if (temp.logoSort == 2) {
+                        //                 _this.schoolLogo = temp;
+                        //             }
+                        //         })
+                        //     }
+                        //
+                        // };
+                        // script.src = url;
+                        // $('body').append(script);   //将标签插入body尾部
+                        // $http.jsonp(url, {jsonpCallbackParam: 'callback'}).then(function (data) {
+                        //     console.log(data);
+                        // }, function (error) {
+                        //     console.log(error);
+                        // });
+                        $http({method: "JSONP", url: url,cache: $templateCache}).
+                            success(function (data) {
+                                angular.forEach(data.data, function (temp) {
+                                    if (temp.logoSort == 2) {
+                                        _this.schoolLogo = temp;
                                     }
                                 })
-                            }
-
-                        }, 100);
+                        })
+                        // then(function(response) {
+                        //     console.log(response);
+                        // }, function(response) {
+                        //     console.log(response);
+                        // });
+                        // var load=$interval(function() {
+                        //     if(GLOB_SCHOOL){
+                        //         $interval.cancel(load);
+                        //         angular.forEach(GLOB_SCHOOL.data,function (temp) {
+                        //             if(temp.logoSort==2){
+                        //                 _this.schoolLogo=temp;
+                        //             }
+                        //         })
+                        //     }
+                        //
+                        // }, 100);
                         //code = "sjdr";
                         // $http({
                         //     method: 'GET',
@@ -708,13 +738,13 @@ angular.module("azx.common", ['ui.bootstrap'])
                         _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length)
                         var _urlarr = AuthService.contrastDomain(_hostname);
                         this.currentTab = _urlarr.indexOf(_hostname);
-                        this.currentRouter=window.location.pathname;
+                        this.currentRouter = window.location.pathname;
                     },
-                    init:function () {
-                        var _this=this;
-                        _this. currentActiveTabInit();
+                    init: function () {
+                        var _this = this;
+                        _this.currentActiveTabInit();
                         _this.getSchool();
-                        
+
                     }
                 };
                 $scope.indexFn.init();
