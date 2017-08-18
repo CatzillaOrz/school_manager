@@ -230,6 +230,14 @@ angular.module('dleduWebApp')
 							that.polyVer = verNews;
 							that.elecSet.termSelectedId = that.record.semesterId + '';
 						}
+						//判断是否存在开启围栏的属性
+						if(that.record.setupOrClose){
+							if(that.record.setupOrClose == 10){//开启
+								that.isOpenElec = '1';
+							}else if(that.record.setupOrClose == 20){
+								that.isOpenElec = '0';
+							}
+						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);
 					})
