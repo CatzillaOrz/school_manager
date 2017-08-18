@@ -217,7 +217,7 @@ angular.module('dleduWebApp')
 				this.params.pageSize = that.page.pageSize;
 				this.params.time = new Date(this.date).getTime();
 				this.params.organId = AuthService.getUser().orgId;
-				var params = this.params;
+				var params = angular.copy(this.params);
 				CommonService.delEmptyProperty(params);
 				EduManService.getElecFenceList(params).$promise
 					.then(function (data) {
