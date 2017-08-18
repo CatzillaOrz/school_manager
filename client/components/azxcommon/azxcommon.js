@@ -617,7 +617,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location,$interval) {
                 $rootScope.user = AuthService.getUser();
                 $scope.indexFn = {
                     user: $rootScope.user,
@@ -662,13 +662,17 @@ angular.module("azx.common", ['ui.bootstrap'])
                        // url='http://localhost:9000'+'/api/school/getSchoolOra?domainname='+code;
                         var script = $('<script src='+url+'></script>');   //创建script标签
                         $('body').append(script);   //将标签插入body尾部
-                        $timeout(function () {
-                            angular.forEach(GLOB_SCHOOL.data,function (temp) {
-                                if(temp.logoSort==2){
-                                    _this.schoolLogo=temp;
-                                }
-                            })
-                        })
+                        var load=$interval(function() {
+                            if(GLOB_SCHOOL){
+                                $interval.cancel(load);
+                                angular.forEach(GLOB_SCHOOL.data,function (temp) {
+                                    if(temp.logoSort==2){
+                                        _this.schoolLogo=temp;
+                                    }
+                                })
+                            }
+
+                        }, 100);
                         //code = "sjdr";
                         // $http({
                         //     method: 'GET',
