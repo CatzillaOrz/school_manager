@@ -314,157 +314,166 @@ h6 {
   text-align: center;
   background: #fff; }
 
-.azx-school-header .index-header {
-  background: #ffffff;
-  height: 50px;
-  width: 100%;
-  border-bottom: 1px solid #eeeeee; }
-  .azx-school-header .index-header .nav-bar {
-    width: 1200px;
-    margin: 0px auto; }
-    .azx-school-header .index-header .nav-bar .logo {
-      display: inline-block;
-      vertical-align: middle;
-      width: 206px;
-      height: 50px; }
-    .azx-school-header .index-header .nav-bar .account {
-      height: 48px;
-      float: right;
-      margin: 0 0 0 8px;
-      display: table; }
-      .azx-school-header .index-header .nav-bar .account li:hover {
-        color: #58b5a2;
-        cursor: pointer; }
-      .azx-school-header .index-header .nav-bar .account .user-menu {
-        width: 130px;
-        padding: 0;
+.azx-school-header {
+  background-color: #f8f8f8;
+  font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
+  .azx-school-header .school-header {
+    background: #ffffff;
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid #eeeeee; }
+    .azx-school-header .school-header .border-top {
+      width: 100%;
+      height: 2px;
+      background: #58b5a2 url("//oli56k5b0.bkt.clouddn.com/nav_top_border.gif") repeat-y;
+      -webkit-background-size: cover;
+      background-size: cover; }
+    .azx-school-header .school-header .school-nav-bar {
+      width: 1200px;
+      margin: 0px auto; }
+      .azx-school-header .school-header .school-nav-bar .logo {
+        display: inline-block;
+        vertical-align: middle;
+        width: 206px;
+        height: 45px; }
+      .azx-school-header .school-header .school-nav-bar .account {
         height: 48px;
-        display: table-cell;
-        vertical-align: middle; }
-        .azx-school-header .index-header .nav-bar .account .user-menu .user-avatar {
-          margin: 4px 10px 4px 0; }
-        .azx-school-header .index-header .nav-bar .account .user-menu #user-name {
-          display: inline;
-          font-size: 14px; }
-          .azx-school-header .index-header .nav-bar .account .user-menu #user-name .caret {
-            margin-left: 5px; }
-        .azx-school-header .index-header .nav-bar .account .user-menu .dropdown-menu {
+        float: right;
+        margin: 0 0 0 8px;
+        display: table; }
+        .azx-school-header .school-header .school-nav-bar .account li:hover {
+          color: #58b5a2;
+          cursor: pointer; }
+        .azx-school-header .school-header .school-nav-bar .account .user-menu {
           width: 130px;
-          min-width: 130px !important;
-          left: auto;
-          right: 0;
-          border-radius: 0;
-          margin: 0;
-          text-align: center;
-          border-width: 1px;
-          border-style: solid;
-          border-color: #f0f0f0;
-          background: #ffffff;
-          font-size: 12px;
-          -webkit-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-          -khtml-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-          -moz-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-          -ms-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-          -o-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05); }
-          .azx-school-header .index-header .nav-bar .account .user-menu .dropdown-menu li a {
-            padding: 6px 20px; }
-            .azx-school-header .index-header .nav-bar .account .user-menu .dropdown-menu li a:hover {
-              color: #666;
-              background: #f5f5f5; }
-            .azx-school-header .index-header .nav-bar .account .user-menu .dropdown-menu li a i.fa {
-              float: left;
-              margin: 2px 10px 2px 0;
-              color: #999999; }
-          .azx-school-header .index-header .nav-bar .account .user-menu .dropdown-menu .split {
-            height: 1px;
-            background: #f0f0f0;
-            margin: 5px 0; }
-      .azx-school-header .index-header .nav-bar .account .tool-bar {
-        height: 48px;
-        padding: 0 20px;
-        display: table-cell;
-        vertical-align: middle; }
-        .azx-school-header .index-header .nav-bar .account .tool-bar .user-inbox {
-          display: inline;
-          position: relative; }
-          .azx-school-header .index-header .nav-bar .account .tool-bar .user-inbox .badge {
-            position: absolute;
-            left: 12px;
-            top: -12px;
-            min-width: 16px;
-            font-size: 11px;
-            padding: 2px;
-            background: #f95a5a;
-            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-            font-weight: 400;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+          padding: 0;
+          height: 48px;
+          display: table-cell;
+          vertical-align: middle; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu .user-avatar {
+            margin: 4px 10px 4px 0; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu #user-name {
+            display: inline;
+            font-size: 14px; }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu #user-name .caret {
+              margin-left: 5px; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu {
+            width: 130px;
+            min-width: 130px !important;
+            left: auto;
+            right: 0;
+            border-radius: 0;
+            margin: 0;
             text-align: center;
-            letter-spacing: 1px; }
-    .azx-school-header .index-header .nav-bar .btn-login {
-      height: 29px;
-      margin-top: 8px;
-      margin-left: 20px;
-      padding: 4px 10px;
-      min-width: 41px;
-      float: right;
-      color: #666;
-      font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-      background-color: #fff;
-      font-size: 12px;
-      line-height: 1em;
-      text-decoration: none;
-      text-align: center;
-      display: inline-block;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      cursor: pointer;
-      border: 1px solid #8b8b8b;
-      box-sizing: border-box;
-      transition-property: all;
-      transition-duration: .3s;
-      border-radius: 4px; }
-    .azx-school-header .index-header .nav-bar .btn-login:hover {
-      background-color: #28b780;
-      color: #fff;
-      border: 1px solid #28b780; }
-    .azx-school-header .index-header .nav-bar .navigation {
-      height: 50px;
-      float: right;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 41px; }
-      .azx-school-header .index-header .nav-bar .navigation ul {
-        padding: 0; }
-        .azx-school-header .index-header .nav-bar .navigation ul li {
-          text-align: center;
-          vertical-align: middle;
-          font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-          float: left;
-          padding: 0px 20px;
-          font-size: 14px;
-          overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0);
-          color: #616161; }
-          .azx-school-header .index-header .nav-bar .navigation ul li:hover {
-            color: #29c192;
-            cursor: pointer; }
-          .azx-school-header .index-header .nav-bar .navigation ul li .keyline {
-            height: 2px;
-            /* position: absolute; */
-            width: 22px;
-            background: #28b780;
-            /* left: 40%; */
-            bottom: 5px;
-            position: relative;
-            /* text-align: center; */
-            margin: 0 auto; }
-        .azx-school-header .index-header .nav-bar .navigation ul .active {
-          cursor: pointer;
-          color: #29c192; }
+            border-width: 1px;
+            border-style: solid;
+            border-color: #f0f0f0;
+            background: #ffffff;
+            font-size: 12px;
+            -webkit-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -khtml-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -ms-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -o-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05); }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a {
+              padding: 6px 20px; }
+              .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a:hover {
+                color: #666;
+                background: #f5f5f5; }
+              .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a i.fa {
+                float: left;
+                margin: 2px 10px 2px 0;
+                color: #999999; }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu .split {
+              height: 1px;
+              background: #f0f0f0;
+              margin: 5px 0; }
+        .azx-school-header .school-header .school-nav-bar .account .tool-bar {
+          height: 48px;
+          padding: 0 20px;
+          display: table-cell;
+          vertical-align: middle; }
+          .azx-school-header .school-header .school-nav-bar .account .tool-bar .user-inbox {
+            display: inline;
+            position: relative; }
+            .azx-school-header .school-header .school-nav-bar .account .tool-bar .user-inbox .badge {
+              position: absolute;
+              left: 12px;
+              top: -12px;
+              min-width: 16px;
+              font-size: 11px;
+              padding: 2px;
+              background: #f95a5a;
+              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+              font-weight: 400;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              text-align: center;
+              letter-spacing: 1px; }
+      .azx-school-header .school-header .school-nav-bar .btn-login {
+        height: 29px;
+        margin-top: 8px;
+        margin-left: 20px;
+        padding: 4px 10px;
+        min-width: 41px;
+        float: right;
+        color: #666;
+        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        background-color: #fff;
+        font-size: 12px;
+        line-height: 1em;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        border: 1px solid #8b8b8b;
+        box-sizing: border-box;
+        transition-property: all;
+        transition-duration: .3s;
+        border-radius: 4px; }
+      .azx-school-header .school-header .school-nav-bar .btn-login:hover {
+        background-color: #28b780;
+        color: #fff;
+        border: 1px solid #28b780; }
+      .azx-school-header .school-header .school-nav-bar .navigation {
+        height: 48px;
+        float: right;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 41px; }
+        .azx-school-header .school-header .school-nav-bar .navigation ul {
+          padding: 0; }
+          .azx-school-header .school-header .school-nav-bar .navigation ul li {
+            text-align: center;
+            vertical-align: middle;
+            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+            float: left;
+            padding: 0px 20px;
+            font-size: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0);
+            color: #616161; }
+            .azx-school-header .school-header .school-nav-bar .navigation ul li:hover {
+              color: #29c192;
+              cursor: pointer; }
+            .azx-school-header .school-header .school-nav-bar .navigation ul li .keyline {
+              height: 2px;
+              /* position: absolute; */
+              width: 22px;
+              background: #28b780;
+              /* left: 40%; */
+              bottom: 5px;
+              position: relative;
+              /* text-align: center; */
+              margin: 0 auto; }
+          .azx-school-header .school-header .school-nav-bar .navigation ul .active {
+            cursor: pointer;
+            color: #29c192; }
 
 .azx-header {
   width: 100%;

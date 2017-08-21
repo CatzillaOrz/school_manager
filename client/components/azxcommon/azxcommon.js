@@ -575,15 +575,16 @@ angular.module("azx.common", ['ui.bootstrap'])
             restrict: 'EA',
             template: '' +
             '<div class="azx-school-header">' +
-            '<div class="index-header">' +
-            ' <div class="nav-bar">' +
+            '<div class="school-header">' +
+            '<div class="border-top"></div>' +
+            ' <div class="school-nav-bar">' +
             '<div class="logo"><img ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png\' }}" class="logo"/></div>' +
             '<ul ng-if="indexFn.user" class="account">' +
             '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
-            '<li><a ng-click="indexFn.navigate(0,&quot;userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
-            '<li><a ng-click="indexFn.navigate(0,&quot;account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
-            '<li ng-if="indexFn.authority()"><a ng-click="indexFn.navigate(0,&quot;home&quot;)"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
+            '<li ng-if="indexFn.authority()"><a ng-click="indexFn.navigate(5,&quot;/home&quot;)"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
             '<li class="split"></li>' +
             '<li><a ng-click="indexFn.signOut()"><i class="fa fa-sign-out"></i><span>退出</span></a></li>' +
             '</ul>' +
@@ -657,7 +658,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                         var _urlarr = AuthService.contrastDomain(_hostname);
                         var code = $location.host().split('.')[0];
                        // code = "kjkf";
-                       var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code;
+                       var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
                        //url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
                         // var script = document.createElement("script");  //创建script标签
                         // script.type = "text\/javascript";
