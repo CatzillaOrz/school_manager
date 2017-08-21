@@ -583,7 +583,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
             '<li><a ng-click="indexFn.navigate(0,&quot;userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
             '<li><a ng-click="indexFn.navigate(0,&quot;account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
-            '<li ng-if="indexFn.authority()"><a ui-sref="home"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
+            '<li ng-if="indexFn.authority()"><a ng-click="indexFn.navigate(0,&quot;home&quot;)"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
             '<li class="split"></li>' +
             '<li><a ng-click="indexFn.signOut()"><i class="fa fa-sign-out"></i><span>退出</span></a></li>' +
             '</ul>' +
@@ -648,7 +648,6 @@ angular.module("azx.common", ['ui.bootstrap'])
                     },
                     getSchool: function () {
                         var _this = this;
-                        var url = window.location.origin;
                         var _tempArr = $window.location.hostname.split(".");
                         var _hostname = $window.location.hostname;
                         if (_tempArr.length == 4) {
@@ -657,9 +656,9 @@ angular.module("azx.common", ['ui.bootstrap'])
                         var _host = $window.location.host;
                         var _urlarr = AuthService.contrastDomain(_hostname);
                         var code = $location.host().split('.')[0];
-                        code = "kjkf";
-                       // url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code;
-                       url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                       // code = "kjkf";
+                       var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code;
+                       //url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
                         // var script = document.createElement("script");  //创建script标签
                         // script.type = "text\/javascript";
                         // script.onload = script.onreadystatechange = function () {
