@@ -3,7 +3,8 @@
  * 企业导师管理
  */
 angular.module('dleduWebApp')
-	.controller('EntTutorManCtrl', function ($scope, $state, AuthService, messageService, PracticeManService, CommonService) {
+	.controller('EntTutorManCtrl', function ($scope, $state, AuthService, messageService, PracticeManService, CommonService,
+											 AccountService) {
 		$scope.entTutorMan = {
 			//问卷列表
 			records: [],
@@ -64,6 +65,24 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.currentRecord = entity;
 				messageService.getMsg("您确定要删除此条记录吗？", that.delEntTutor)
+			},
+
+			//重置密码
+			resetPassword: function () {
+				var _this = $scope.entTutorMan;
+				AccountService.resetPassword( _this.currentRecord.accountId)
+					.success(function (data) {
+						messageService.openMsg("重置密码成功！");
+						_this.getEntTutorList();
+					})
+					.error(function (error) {
+						messageService.openMsg(CommonService.exceptionPrompt(error,"重置密码失败！"));
+					})
+			},
+			resetPasswordPrompt: function (entity) {
+				var that = this;
+				that.currentRecord = entity;
+				messageService.getMsg("您确定要重置"+that.currentRecord.name+"的密码吗？", that.resetPassword)
 			},
 
 			init: function () {
