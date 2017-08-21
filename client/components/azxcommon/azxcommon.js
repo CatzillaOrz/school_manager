@@ -146,8 +146,8 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var _headerLink = {
                     DEV: ['dledudev.aizhixin.com', 'emdev.aizhixin.com', 'ptdev.aizhixin.com', 'hydev.aizhixin.com', 'dddev.aizhixin.com', 'schooldev.aizhixin.com'],
                     TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com', 'schooltest.aizhixin.com'],
-                    PDE: ['www.dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'schooluat.dlztc.com'],
-                    SDE: ['www.aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com']
+                    PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'schooluat.dlztc.com'],
+                    SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com']
                 };
                 var _urlarr = [];
                 for (var _k in _headerLink) {
