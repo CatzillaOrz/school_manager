@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,SchoolYearService) {
+    .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,SchoolYearService,$q) {
         /**
          * 教学班基本信息更新
          * @type {{params: {userId, id: string, semesterId: string, name: string, courseId: string}, schoolYearDropList: Array, courseDropList: Array, select2CourseOptions: select2CourseOptions, select2SemesterOptions: select2SemesterOptions, select2GroupFormat: select2GroupFormat, getTeachClassById: getTeachClassById, getCourseDropListOrg: getCourseDropListOrg, getSchoolYearDropList: getSchoolYearDropList, updateTeachClass: updateTeachClass, init: init}}
@@ -41,7 +41,7 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.courseDropList=data.data;
+                           // _this.courseDropList=data.data;
                             return {
                                 results: data.data,
                                 pagination: {
@@ -49,7 +49,6 @@ angular.module('dleduWebApp')
                                 }
                             };
                         },
-                        cache: true
                     },
                     templateResult: function (data) {
                         if (data.id === '') { // adjust for custom placeholder values
@@ -63,10 +62,10 @@ angular.module('dleduWebApp')
             select2SemesterOptions: function () {
                 var _this = this;
                 return {
-                    placeholder: {
-                        id: '-1', // the value of the option
-                        text: '按学期筛选'
-                    },
+                    // placeholder: {
+                    //     id: -1, // the value of the option
+                    //     text: '按学期筛选'
+                    // },
                     ajax: {
                         url: "api/schoolyear/getSchoolYearDropList",
                         dataType: 'json',
@@ -84,7 +83,8 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.schoolYearDropList=_this.select2GroupFormat(data.data)
+                            _this.schoolYearDropList = _this.select2GroupFormat(data.data);
+                            console.log(_this.schoolYearDropList);
                             return {
                                 results: _this.schoolYearDropList,
                                 pagination: {
@@ -122,17 +122,40 @@ angular.module('dleduWebApp')
                 TeachClassService.getTeachClassById(_this.params).$promise
                     .then(function (data) {
                         _this.params.name = data.name;
+
                         _this.params.semesterId = data.semesterId;
                         _this.params.courseId = data.courseId;
                         _this.params.code = data.code;
                        _this.getCourseById(_this.params.courseId);
-                        _this.getSchoolYearDropList();
+                       // _this.getSchoolYearDropList();
                        // _this.getSchoolYearById(_this.params.semesterId);
+                        _this.params.courseId = data.courseId;
+                        var currentSemester=_this.getSelected(_this.params.semesterId,_this.schoolYearDropList);
+                      //  _this.schoolYearDropList=[];
+                        _this.schoolYearDropList.push(currentSemester);
+
+
+                        // $('#select').val(_this.params.semesterId);
+                        // $('#select').trigger('change');
                     })
                     .catch(function (error) {
 
                     })
             },
+             getSelected:function (id,list) {
+                var obj={};
+                 angular.forEach(list,function (data) {
+                     angular.forEach(data.children,function (entity) {
+                         if(id==entity.id){
+                             obj=data;
+                             obj.children=[];
+                             obj.children.push(entity);
+                             return obj;
+                         }
+                     })
+                 });
+                 return obj;
+             },
             getCourseById:function (id) {
                 var _this= this;
                 var params={
@@ -155,6 +178,7 @@ angular.module('dleduWebApp')
 
             //获取课程下拉列表数据
             getCourseDropListOrg:function () {
+                var deferred = $q.defer();
                 var _this=this;
                 var params={
                     orgId: AuthService.getUser().orgId,
@@ -166,14 +190,16 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.courseDropList = data.data;
                        // console.log(_this.courseDropList)
-
+                        deferred.resolve(data);
                     })
                     .catch(function (error) {
-
+                        deferred.reject(error);
                     })
+                return deferred.promise;
             },
             //学期下拉列表获取
             getSchoolYearDropList:function () {
+                var deferred = $q.defer();
                 var _this=this;
                 var params={
                     orgId: AuthService.getUser().orgId,
@@ -184,12 +210,12 @@ angular.module('dleduWebApp')
                 SchoolYearService.getSchoolYearDropList(params).$promise
                     .then(function (data) {
                         _this.schoolYearDropList = _this.select2GroupFormat(data.data);
-                       console.log(_this.schoolYearDropList);
-
+                        deferred.resolve(data);
                     })
                     .catch(function (error) {
-
+                        deferred.reject(error);
                     })
+                return deferred.promise;
             },
             //更新教学班
             updateTeachClass:function () {
@@ -212,8 +238,11 @@ angular.module('dleduWebApp')
             init: function () {
                 var _this = this;
                 _this.params.id = $state.params.id;
-                _this.getTeachClassById();
-                _this.getCourseDropListOrg();
+               _this.getSchoolYearDropList().then(function () {
+                    _this.getCourseDropListOrg().then(function () {
+                        _this.getTeachClassById();
+                    })
+              })
 
 
             }

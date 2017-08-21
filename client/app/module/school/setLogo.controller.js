@@ -48,7 +48,7 @@ angular.module('dleduWebApp')
                         if(_this.currentObjIndex==0|| _this.currentObjIndex==0){
                             cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
                         }else {
-                            cutImage = ImageService.getCutImage(image, actionParams, 420, 60);
+                            cutImage = ImageService.getCutImage(image, actionParams, 206, 50);
                         }
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {

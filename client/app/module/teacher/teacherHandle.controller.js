@@ -121,7 +121,7 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: 100
+                    pageSize: 1000
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {

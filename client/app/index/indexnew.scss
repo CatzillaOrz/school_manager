@@ -1282,16 +1282,18 @@
     background: #f7f7f7 !important;
   }
   .content-container {
-    padding-top: 30px;
+
     min-height: 635px;
     background: #ffffff;
 
     .overview {
+      padding-top: 30px;
       margin: 0px auto;
       width: 1200px;
       //margin-top: 40px;
       //padding-top: 30px;
       .position{
+        margin-top: -30px;
         padding: 20px 0;
         span{
           cursor: pointer;
