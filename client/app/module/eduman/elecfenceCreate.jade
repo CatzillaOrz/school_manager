@@ -4,6 +4,9 @@
     .row-fluid(style="background:#fff")
         .span12(style="line-height:40px;margin-left:20px;") 学校范围设定：
             .open-elec
+                span {{'(状态:'}}
+                span(style="color:red;") {{(elecFenceCreateFn.isOpenElec=='1'?'开启':'关闭')}}
+                span {{')'}}
                 span 开启围栏：
                 input(type="checkbox" ng-click="elecFenceCreateFn.switchElec()" bs-switch ng-model="elecFenceCreateFn.isOpenElec" switch-on-text="开启" switch-off-text="关闭" switch-on-color="success" switch-off-color="danger" ng-true-value="'1'"
                 ng-false-value="'0'")
@@ -25,7 +28,7 @@
                         .span12(style="margin-top:20px;")
                             .span6
                                 .span6 学期日历：
-                                div#mydate(style="height:450px;min-height: 30px;position: relative;")
+                                div#mydate(style="height:410px;min-height: 30px;position: relative;")
                                     .input-append.date.datepicker.datepicker-basic#starttime(ng-show="false" data-date='', data-date-format='yyyy-mm-dd' )
                                         input(size='16',  type='text' )
                                         span.add-on

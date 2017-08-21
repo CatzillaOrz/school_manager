@@ -160,7 +160,7 @@ angular.module('dleduWebApp')
 				TeacherService.getSimpleTeachers(params).$promise
 					.then(function (data) {
 						_this.teacherList = data.data;
-						if(_this.practiceGroupInfo){
+						if(_this.practiceGroupInfo && _this.practiceGroupInfo.teacherId){
 							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.teacherId, name:
 							_this.practiceGroupInfo.teacherName, jobNumber: _this.practiceGroupInfo.teacherJobNumer,
 								collegeName: _this.practiceGroupInfo.collegeName});

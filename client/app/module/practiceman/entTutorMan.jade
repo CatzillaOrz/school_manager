@@ -61,6 +61,9 @@
                                     a.handle(ui-sref="createpracticegroup({id: record.id, tutorId: record.accountId})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
+                                    a.handle(ng-click="entTutorMan.resetPasswordPrompt(record)")
+                                        i.fa.fa-repeat
+                                        span 重置密码
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs

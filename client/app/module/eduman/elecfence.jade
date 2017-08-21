@@ -85,7 +85,7 @@
                             .form-group.col-md-3
                                 select.form-control(ng-model="evaFenceFn.params.isOline" ui-select2="evaFenceFn.getResultOption('isOnline')" )
                                     option(ng-repeat="record in evaFenceFn.isOnlines" value="{{record.id}}" ) {{record.text}}
-            .widget-body.no-padding
+            .widget-body.no-padding(style="position: initial!important")
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
