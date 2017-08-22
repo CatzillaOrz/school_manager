@@ -42,8 +42,12 @@ angular.module('dleduWebApp')
              */
             publishNews:function (entity) {
                 var _this=this;
+                if(entity.publishStatus==1){
+                    CommonService.msgDialog("该公告已经发布，不能重复发布",2);
+                    return ;
+                }
                 var params={
-                    id:entity
+                    id:entity.id
                 };
                 NewsService.publishNews(params).$promise
                     .then(function (data) {
