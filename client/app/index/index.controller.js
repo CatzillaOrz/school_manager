@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
+    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location,$window) {
         $rootScope.user = AuthService.getUser();
         $scope.indexFn={
             user: $rootScope.user,
@@ -205,26 +205,30 @@ angular.module('dleduWebApp')
             },
             toEmHostInit:function () {
                 var _this=this;
-                var urlArr=$location.host().split('.');
-                var  urlOne ="";
-                var  urlTwo ="";
-                if(urlArr.length==4){
-                    urlOne =urlArr[1];
-                    urlTwo =urlArr[2];
-                    if(urlOne=="schooltest"){
-                        _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
-                    }else if(urlOne=="school" || urlOne=="schooluat"){
-                        if(urlTwo =="dlztc"){
-                            _this.emHost="http://em.dlztc.com/classicalCourse/";
-                        }else {
-                            _this.emHost="http://em.aizhixin.com/classicalCourse/";
-                        }
-                    }else {
-                        _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
-                    }
-                }else {
-                    _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
-                }
+                var _this=this;
+                var _hostname=$window.location.hostname;
+                var _host=_hostname.substring(_hostname.indexOf('.') + 1, _hostname.length);
+                _this.emHost="http://"+_hostname.split(".")[0]+AuthService.contrastDomain(_host)[1]+"/classicalCourse/";
+                // var urlArr=$location.host().split('.');
+                // var  urlOne ="";
+                // var  urlTwo ="";
+                // if(urlArr.length==4){
+                //     urlOne =urlArr[1];
+                //     urlTwo =urlArr[2];
+                //     if(urlOne=="schooltest"){
+                //         _this.emHost="http://emtest.aizhixin.com/classicalCourse/";
+                //     }else if(urlOne=="school" || urlOne=="schooluat"){
+                //         if(urlTwo =="dlztc"){
+                //             _this.emHost="http://em.dlztc.com/classicalCourse/";
+                //         }else {
+                //             _this.emHost="http://em.aizhixin.com/classicalCourse/";
+                //         }
+                //     }else {
+                //         _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                //     }
+                // }else {
+                //     _this.emHost="http://emdev.aizhixin.com/classicalCourse/";
+                // }
             },
             tabToggle:function(entity){
                 this.currentTab=entity;
