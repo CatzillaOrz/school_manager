@@ -41,7 +41,7 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var _hostname=$window.location.hostname;
                 var _host=_hostname.substring(_hostname.indexOf('.') + 1, _hostname.length);
-                _this.emHost="http://"+_hostname.split(".")[0]+AuthService.contrastDomain(_host)[1]+"/classicalCourse/";
+                _this.emHost="http://"+_hostname.split(".")[0]+'.'+AuthService.contrastDomain(_host)[1]+"/classicalCourse/";
                 // var urlArr=$location.host().split('.');
                 // var  urlOne ="";
                 // var  urlTwo ="";
