@@ -59,15 +59,15 @@ angular.module('dleduWebApp')
 			getResultOption: function (type) {
 				if (type == "isLeaveSchool") {
 					this.isLeaveSchools = [{id: null, text: '是否曾离校'}, {id: 1, text: '是'}, {id: 0, text: '否'}, {
-						id: -1,
+						id: 2,
 						text: '未知'
 					}];
 				} else if (type == "isActive") {
-					this.isActives = [{id: null, text: '是否未激活'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
+					this.isActives = [{id: null, text: '是否未激活'}, {id: 0, text: '是'}, {id: 1, text: '否'}];
 				} else if (type == "isLogin") {
 					this.isLogins = [{id: null, text: '当天是否登录'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
 				} else if (type == "location") {
-					this.locations = [{id: null, text: '当前位置'}, {id: 1, text: '在校'}, {id: 0, text: '离校'}];
+					this.locations = [{id: null, text: '当前位置'}, {id: 1, text: '在校'}, {id: 0, text: '离校'}, {id: 2, text: '未知'}];
 				} else if (type == "isOnline") {
 					this.isOnlines = [{id: null, text: '在线状态'}, {id: 1, text: '在线'}, {id: 0, text: '离线'}];
 				}
