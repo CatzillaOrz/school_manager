@@ -159,6 +159,11 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }
                 return _urlarr;
             },//orgCode
+            /**
+             *
+             * @param link 需要跳转到的项目主机域名 0：知新网 1：开卷 2：校场 3：慧眼 4：点点 5：学校管理
+             * @param pathname 需要跳转到的具体功能模块
+             */
             navigation: function (link, pathname) {
                 var _tempArr = $window.location.hostname.split(".");
                 var _hostname = $window.location.hostname;
@@ -599,7 +604,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<li ng-click="indexFn.navigate(5,&quot;/overview&quot;)">学校概况' +
             '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/overview\'" class="keyline"></div>' +
             '</li>' +
-            '<li ng-click="indexFn.navigate(1,&quot;/&quot;)">课程中心' +
+            '<li ng-click="indexFn.navigate(1,&quot;/schindex&quot;)">课程中心' +
             '<div ng-if="indexFn.currentTab==1" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(2,&quot;/&quot;)">实训中心' +

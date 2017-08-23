@@ -6,5 +6,5 @@
             span(ui-sref="noticelist")  最新活动  >
             span.active 活动详情
         .title {{noticeDetailFn.notice.title}}
-        .date 时间：{{noticeDetailFn.notice.lastModifiedDate}}
+        .date 时间：{{noticeDetailFn.notice.createdDate}}
         .school-introduce(ng-bind-html="noticeDetailFn.trustAsHtml(noticeDetailFn.notice.content)")
