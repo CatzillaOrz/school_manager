@@ -213,7 +213,7 @@ angular.module('dleduWebApp')
 			// 获取电子围栏信息列表
 			getElecFenceList: function () {
 				var that = this;
-				this.params.pageNumber = 1;
+				this.params.pageNumber = that.page.pageNumber;
 				this.params.pageSize = that.page.pageSize;
 				this.params.time = new Date(this.date).getTime();
 				this.params.organId = AuthService.getUser().orgId;

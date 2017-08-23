@@ -116,11 +116,17 @@
                                 td {{record.onlinStatus}}
                                 td {{record.remark}}
                                 td
-                                    a.handle(ui-sref="elecfencecurrent({id: record.id, date: evaFenceFn.params.time})")
+                                    a.handle(ng-show="record.remark!='未激活'" ui-sref="elecfencecurrent({id: record.id, date: evaFenceFn.params.time})")
                                         span 当天轨迹
-                                    a.handle(ui-sref="elecfencehistory({id: record.id})")
+                                    a.handle(ng-show="record.remark!='未激活'" ui-sref="elecfencehistory({id: record.id})")
                                         span 历史记录
-                                    a.handle(ng-click="evaFenceFn.notice(record.id)")
+                                    a.handle(ng-show="record.remark!='未激活'" ng-click="evaFenceFn.notice(record.id)")
+                                        span 通知班主任
+                                    a.handle.disable-style(ng-show="record.remark=='未激活'" )
+                                        span 当天轨迹
+                                    a.handle.disable-style(ng-show="record.remark=='未激活'" )
+                                        span 历史记录
+                                    a.handle.disable-style(ng-show="record.remark=='未激活'" )
                                         span 通知班主任
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
