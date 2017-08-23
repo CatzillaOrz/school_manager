@@ -26,8 +26,8 @@ angular.module('dleduWebApp')
                 NewsService.getNewsList(params).$promise
                     .then(function (data) {
                         _this.newsList=data.data;
-                        // _this.page.totalElements=data.page.totalElements;
-                        // _this.page.totalPages=data.page.totalPages;
+                        _this.page.totalElements=data.page.totalElements;
+                        _this.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
                     })
@@ -42,8 +42,12 @@ angular.module('dleduWebApp')
              */
             publishNews:function (entity) {
                 var _this=this;
+                if(entity.publishStatus==1){
+                    CommonService.msgDialog("该公告已经发布，不能重复发布",2);
+                    return ;
+                }
                 var params={
-                    id:entity
+                    id:entity.id
                 };
                 NewsService.publishNews(params).$promise
                     .then(function (data) {

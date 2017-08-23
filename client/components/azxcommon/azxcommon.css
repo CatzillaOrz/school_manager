@@ -1,74 +1,3 @@
-@charset "UTF-8";
-/**
-common scss
- */
-/* -------------------------------------------------------------
-  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
-  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
-
-  List of CSS3 Sass Mixins File to be @imported and @included as you need
-
-  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
-  ENDING css files
-
-  note: All CSS3 Properties are being supported by Safari 5
-  more info: http://www.findmebyip.com/litmus/#css3-properties
-
-------------------------------------------------------------- */
-/**
- * Created by Secmax on 16/5/20.
- */
-@import url(../components/ng-jcrop/css/jquery.Jcrop.css);
-@import url(../components/bootstrapDatePicker/bootstrap-datepicker.min.css);
-@import url(../components/bootstrapDatePicker/bootstrap-datepicker-elec.css);
-h1 {
-  font-size: 28px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-h2 {
-  font-size: 26px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-h3 {
-  font-size: 22px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-h4 {
-  font-size: 18px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-h5 {
-  font-size: 16px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-h6 {
-  font-size: 14px;
-  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  line-height: 1.1;
-  color: inherit; }
-
-/* left side */
-/* right side */
-/* the color that flashes when you click on the first nav element */
-/**
-所有components的scss都放在这里
- */
 /* -------------------------------------------------------------
   Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
   By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
@@ -324,12 +253,6 @@ h6 {
     height: 50px;
     width: 100%;
     border-bottom: 1px solid #eeeeee; }
-    .azx-school-header .school-header .border-top {
-      width: 100%;
-      height: 2px;
-      background: #58b5a2 url("//oli56k5b0.bkt.clouddn.com/nav_top_border.gif") repeat-y;
-      -webkit-background-size: cover;
-      background-size: cover; }
     .azx-school-header .school-header .school-nav-bar {
       width: 1200px;
       margin: 0px auto; }
@@ -337,7 +260,7 @@ h6 {
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        height: 45px; }
+        height: 50px; }
       .azx-school-header .school-header .school-nav-bar .account {
         height: 48px;
         float: right;
@@ -443,7 +366,7 @@ h6 {
         color: #fff;
         border: 1px solid #28b780; }
       .azx-school-header .school-header .school-nav-bar .navigation {
-        height: 48px;
+        height: 50px;
         float: right;
         display: inline-block;
         vertical-align: middle;
@@ -1142,157 +1065,4 @@ h6 {
   width: 0;
   clear: both; }
 
-.siginmodel-container {
-  width: 490px;
-  height: 598px; }
-
-.siginmodel-modal-header {
-  padding: 15px;
-  min-height: 16.42857px; }
-
-.siginmodel-modal-title {
-  margin: 0;
-  text-align: center;
-  font-size: 24px !important;
-  font-weight: normal;
-  color: #fe742b;
-  padding: 40px 0 67px 0; }
-
-.siginmodel-modal_name_input {
-  height: 47px;
-  width: 356px;
-  padding-left: 50px;
-  line-height: 47px;
-  font-size: 18px;
-  border-radius: 0;
-  margin-left: 20px; }
-
-.siginmodel-modal_name_input:focus {
-  box-shadow: 0 0 4px #fe9d6a;
-  border: 2px solid #fe9d6a; }
-
-.siginmodel-modal_user_icon {
-  position: absolute;
-  margin: 10px 0 0 25px !important;
-  width: 25px;
-  height: 28px;
-  display: inline-block;
-  z-index: 100; }
-
-.siginmodel-modal_password_input {
-  height: 47px;
-  width: 356px;
-  padding-left: 50px;
-  line-height: 47px;
-  font-size: 18px;
-  border-radius: 0;
-  margin-left: 20px; }
-
-.siginmodel-modal_password_input:focus {
-  box-shadow: 0 0 4px #fe9d6a;
-  border: 2px solid #fe9d6a; }
-
-.siginmodel-modal_user_name {
-  position: relative;
-  margin-bottom: 40px;
-  width: 100%; }
-  .siginmodel-modal_user_name .text-danger {
-    display: block;
-    margin-top: 4px;
-    font-size: 14px;
-    color: #fe742b;
-    margin-left: 20px; }
-
-.siginmodel-signin_user_password {
-  position: relative;
-  margin-bottom: 10px;
-  width: 100%; }
-  .siginmodel-signin_user_password .text-danger {
-    display: block;
-    margin-top: 4px;
-    font-size: 14px;
-    color: #fe742b;
-    margin-left: 20px; }
-
-.siginmodel-modal_upassword_icon {
-  position: absolute;
-  margin: 10px 0 0 25px !important;
-  width: 25px;
-  height: 28px;
-  display: inline-block;
-  z-index: 100; }
-
-.siginmodel-forget_auto {
-  margin-bottom: 30px;
-  padding-top: 10px;
-  width: 430px; }
-
-.signin_auto {
-  float: left;
-  margin-left: 20px;
-  color: #aaa9a9;
-  margin: 0;
-  padding-left: 20px; }
-  .signin_auto > label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: normal; }
-
-.signin_forget {
-  float: right;
-  font-size: 14px;
-  font-weight: normal;
-  color: #fe742b;
-  text-decoration: underline; }
-
-.signin_btn {
-  margin-bottom: 10px;
-  width: 410px;
-  margin-left: 20px; }
-  .signin_btn > button {
-    display: block;
-    height: 47px;
-    width: 100%;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: #fe742b;
-    font-size: 20px;
-    opacity: 1;
-    color: #FFFFFF; }
-    .signin_btn > button:hover {
-      color: #FFFFFF; }
-
-.signin_signup {
-  margin-bottom: 30px;
-  text-align: right;
-  margin-right: 30px; }
-  .signin_signup > a {
-    text-decoration: underline;
-    font-size: 14px;
-    color: #03c180;
-    cursor: pointer; }
-  .signin_signup a:hover, .signin_signup a:focus {
-    text-decoration: none; }
-
-.third {
-  width: 410px;
-  margin: 0 auto; }
-
-.third_platform {
-  margin: 18px 0 40px 0;
-  padding: 0 90px 0 90px; }
-  .third_platform .third_icon {
-    display: inline-block;
-    height: 34px; }
-  .third_platform .third_wechat {
-    padding: 0 53px 0 53px; }
-
-.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-  opacity: 1;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); }
-
-/*# sourceMappingURL=components.css.map */
+/*# sourceMappingURL=azxcommon.css.map */

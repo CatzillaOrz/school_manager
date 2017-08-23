@@ -122,7 +122,7 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.params.name=data.name;
                         _this.semesterList=data.semesterList
-                        _this.stringToDate(_this.semesterList);
+                       // _this.stringToDate(_this.semesterList);
                     })
                     .catch(function (error) {
 

@@ -90,6 +90,32 @@ angular.module("azx.common", ['ui.bootstrap'])
                     });
                 return deferred.promise;
             },
+            qrcodeSignIn: function (token) {
+                var deferred = $q.defer();
+                $http.post("api/qrcodeSignIn", {
+                    token: token
+                })
+                    .success(function (user) {
+                        console.log(user);
+                        if (!!user) {
+                            AuthService.setUser(user);
+                            var domain = $window.document.domain.split('.').reverse()[1];
+                            if (domain == 'dlztc') {
+                                Cookies.set('authorize', true, {domain: '.dlztc.com'});
+                            } else if (domain == 'aizhixin') {
+                                Cookies.set('authorize', true, {domain: '.aizhixin.com'});
+                            } else {
+                                Cookies.set('authorize', true);
+                            }
+                            deferred.resolve(user);
+                            return user;
+                        }
+                    })
+                    .error(function (err) {
+                        deferred.reject(err);
+                    });
+                return deferred.promise;
+            },
             logIn: function (username, password) {
                 return $http.post("api/signin", {
                     username: username,
@@ -120,8 +146,8 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var _headerLink = {
                     DEV: ['dledudev.aizhixin.com', 'emdev.aizhixin.com', 'ptdev.aizhixin.com', 'hydev.aizhixin.com', 'dddev.aizhixin.com', 'schooldev.aizhixin.com'],
                     TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com', 'schooltest.aizhixin.com'],
-                    PDE: ['www.dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'schooluat.dlztc.com'],
-                    SDE: ['www.aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com']
+                    PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'schooluat.dlztc.com'],
+                    SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com']
                 };
                 var _urlarr = [];
                 for (var _k in _headerLink) {
@@ -143,14 +169,15 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var _urlarr = this.contrastDomain(_hostname);
                 var _pathname = pathname || '';
                 if (_hostname != 'localhost' && _urlarr.length > 0) {
-                    if (link == 5) {
+                    if (link == 5 && AuthService.getUser()) {
                         $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + _urlarr[link] + _pathname;
                     } else {
-                        if(_tempArr.length == 4){
-                            $window.location.href = 'http://'+_tempArr[0] +'.'+ _urlarr[link] + _pathname;
-                        }else {
+                        if (_tempArr.length == 4) {
+                            $window.location.href = 'http://' + _tempArr[0] + '.' + _urlarr[link] + _pathname;
+                        } else {
                             $window.location.href = 'http://' + _urlarr[link] + _pathname;
                         }
+
                     }
                 } else {
                     (!!_pathname ? $window.location.href = 'http://' + _host + _pathname : console.warn('没有发现跳转路径'));
@@ -159,10 +186,6 @@ angular.module("azx.common", ['ui.bootstrap'])
             browser: {
                 versions: function () {
                     var u = navigator.userAgent, app = navigator.appVersion;
-                    var browser = navigator.appName
-                    var b_version = navigator.appVersion
-                    var version = b_version.split(";");
-                    var trim_Version = version[1].replace(/[ ]/g, "");
                     console.log(u);
                     return {//移动终端浏览器版本信息
                         trident: u.indexOf('Trident') > -1, //IE内核
@@ -178,7 +201,6 @@ angular.module("azx.common", ['ui.bootstrap'])
                         webApp: u.indexOf('Safari') == -1,//是否web应该程序，没有头部与底部
                         google: u.indexOf('Chrome') > -1,
                         weixin: u.match(/MicroMessenger/i) == "MicroMessenger",
-                        ie9: browser == "Microsoft Internet Explorer" && trim_Version == "MSIE9.0"
                     };
                 }(),
                 language: (navigator.browserLanguage || navigator.language).toLowerCase()
@@ -206,7 +228,6 @@ angular.module("azx.common", ['ui.bootstrap'])
                 reader.onload = function () {
                     // 通过 reader.result 来访问生成的 DataURL
                     var url = reader.result;
-                    // console.log(url)
                     image = new Image();
                     image.src = url;
                     callback(image);
@@ -229,13 +250,12 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var data = canvas.toDataURL();
                 data = data.split(',')[1];
                 data = window.atob(data);
-                var mime = canvas.toDataURL().split(',')[0].match(/:(.*?);/)[1];
                 var ia = new Uint8Array(data.length);
                 for (var i = 0; i < data.length; i++) {
                     ia[i] = data.charCodeAt(i);
                 }
                 ;
-                var blob = new Blob([ia], {type: mime});
+                var blob = new Blob([ia], {type: "image/png"});
                 return blob;
             },
         };
@@ -319,7 +339,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '                       <img ng-src="{{headerFn.user.avatar}}" class="avatar-30 img-circle"/>' +
             '                   </span>' +
             '                   <span id="user-name" class="dropdown-toggle">' +
-            '                       <span>{{headerFn.user.name | cutStr:8}}</span>' +
+            '                       <span>{{headerFn.user.name || headerFn.user.login | cutStr:8}}</span>' +
             '                       <i class="caret"></i>' +
             '                   </span>' +
             '               <ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
@@ -332,14 +352,15 @@ angular.module("azx.common", ['ui.bootstrap'])
             '               </li>' +
             // '               <li class="tool-bar"><span class="user-inbox"><i class="fa fa-inbox fa-2x"></i><span ng-if="true" class="badge">1</spanng-if></span></li>' +
             '           </ul>' +
-            '           <button ng-if="!headerFn.user" class="btn-login" ng-click="headerFn.signIn()"><i class="fa fa-user fa-fw"></i> 登录</button>' +
+            '           <button ng-if="!headerFn.user" class="btn-login" ng-click="headerFn.signIn()"> 登录</button>' +
             '           <div class="nav-split"></div>' +
             '           <ul id="navigation" class="navigation">' +
             // '               <li ng-click="headerFn.navigate(0)">首页' +
             // '                   <svg ng-if="headerFn.user && subnav.index == 0" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
             // '               </li>' +
-            '               <li ng-repeat="mnav in navigation.mainNav" ng-click="headerFn.mainNavigate(mnav)">{{mnav.name}}' +
-            '                   <svg ng-if="headerFn.user && subnav.index == $index+1" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
+            '               <li ng-repeat="mnav in navigation.mainNav" ng-class="{active:mnav.host==headerFn.currentTab}" ng-click="headerFn.mainNavigate(mnav)">{{mnav.name}}' +
+            // '                   <svg ng-if="headerFn.user && subnav.index == $index+1" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
+            '                   <div class="keyline"></div>' +
             '               </li>' +
             // '               <li ng-click="headerFn.navigate(1)">课程中心' +
             // '                   <svg ng-if="headerFn.user && subnav.index == 1" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
@@ -366,11 +387,12 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window, $http, CommonService) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window, $http) {
                 $rootScope.user = AuthService.getUser();
                 $scope.headerFn = {
                     user: $rootScope.user,
                     subnavArrow: '',
+                    currentTab: 0,
                     signOut: function () {
                         AuthService.signOut();
                     },
@@ -388,8 +410,8 @@ angular.module("azx.common", ['ui.bootstrap'])
                     authority: function (entity) {
                         var _this = this;
                         if (entity.role && entity.role == "admin") {
-                            return "ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1
-                        } else {
+                            return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                        } else {//
                             return true;
                         }
                     },
@@ -405,6 +427,11 @@ angular.module("azx.common", ['ui.bootstrap'])
                         } else {
                             AuthService.navigation(nav.host);
                         }
+                    },
+                    currentActiveTabInit: function () {
+                        var _hostname = $window.location.hostname;
+                        var _urlarr = AuthService.contrastDomain(_hostname);
+                        this.currentTab = _urlarr.indexOf(_hostname);
                     },
                     subNavigate: function (path) {
                         $window.location.href = $window.location.protocol + '//' + $window.location.host + path;
@@ -427,27 +454,35 @@ angular.module("azx.common", ['ui.bootstrap'])
                         }
                     }
                 };
+                $scope.headerFn.currentActiveTabInit();
                 if (AuthService.browser.versions.trident) {
                     $scope.navigation = {
                         "mainNav": [
                             {
+                                "name": "首页",
+                                "host": 0,
+                                "spath": "/",
+                                "tpath": "/"
+                            },
+                            {
                                 "name": "课程中心",
                                 "host": 1,
-                                "spath": "/index",
-                                "tpath": "/index",
-                                "subnav": []
+                                "spath": "/",
+                                "tpath": "/"
                             },
                             {
                                 "name": "实训中心",
                                 "host": 2,
-                                "spath": "/dashboard",
-                                "tpath": "/dashboard"
+                                "spath": "/",
+                                "tpath": "/"
                             },
+
+
                             {
-                                "name": "管理中心",
+                                "name": "掌上校园",
                                 "host": 4,
-                                "spath": "/content",
-                                "tpath": "/content"
+                                "spath": "/",
+                                "tpath": "/"
                             }
                         ],
                         "accountNav": [
@@ -464,20 +499,22 @@ angular.module("azx.common", ['ui.bootstrap'])
                                 "path": "/account"
                             },
                             {
-                                "name": "split"
+                                "name": "管理中心",
+                                "host": 5,
+                                "icon": "fa-id-card",
+                                "path": "/home",
+                                "role": "admin"
                             },
                             {
-                                "name": "账号设置",
-                                "host": 0,
-                                "icon": "fa-vcard-o",
-                                "path": "/account"
+                                "name": "split"
                             }
+
                         ]
-                    };
+                    }
                 } else {
                     $http({
                         method: 'GET',
-                        url: 'http://oli56k5b0.bkt.clouddn.com/api/navigation0.4.5.08.json'
+                        url: 'http://oli56k5b0.bkt.clouddn.com/api/navigation.json'
                     }).success(function (res) {
                         $scope.navigation = res;
                     });
@@ -509,7 +546,8 @@ angular.module("azx.common", ['ui.bootstrap'])
             link: function (scope, element, attr) {
                 attr.fluid ? element.addClass('fluid') : element.removeClass('fluid');
                 attr.inverse ? element.addClass('inverse-nav') : element.removeClass('inverse-nav');
-                attr.alphaLight ? element.addClass('alpha-light-nav') : element.removeClass('alpha-light-nav');
+                // attr.alphaLight ? element.addClass('alpha-light-nav') : element.removeClass('alpha-light-nav');
+                attr.alphaDark ? element.addClass('alpha-dark-nav') : element.removeClass('alpha-dark-nav');
                 attr.alphaDark ? element.addClass('alpha-dark-nav') : element.removeClass('alpha-dark-nav');
 
                 function onScroll(e) {
@@ -529,20 +567,24 @@ angular.module("azx.common", ['ui.bootstrap'])
             }
         }
     }])
+    /**
+     * 学校定制化header
+     */
     .directive('azxSchoolHeader', ['$window', function ($window) {
         return {
             restrict: 'EA',
             template: '' +
             '<div class="azx-school-header">' +
-            '<div class="index-header">' +
-            ' <div class="nav-bar">' +
+            '<div class="school-header">' +
+            '<div class="border-top"></div>' +
+            ' <div class="school-nav-bar">' +
             '<div class="logo"><img ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png\' }}" class="logo"/></div>' +
             '<ul ng-if="indexFn.user" class="account">' +
             '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
-            '<li><a ng-click="indexFn.navigate(0,&quot;userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
-            '<li><a ng-click="indexFn.navigate(0,&quot;account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
-            '<li ng-if="indexFn.authority()"><a ui-sref="home"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
+            '<li ng-if="indexFn.authority()"><a ng-click="indexFn.navigate(5,&quot;/home&quot;)"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
             '<li class="split"></li>' +
             '<li><a ng-click="indexFn.signOut()"><i class="fa fa-sign-out"></i><span>退出</span></a></li>' +
             '</ul>' +
@@ -551,19 +593,21 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<button ng-if="!indexFn.user" ng-click="indexFn.signIn()" class="btn-login">登录</button>' +
             '<div class="navigation">' +
             '<ul>' +
-            '<li ui-sref="index" ng-class="{\'active\':indexFn.currentActive==\'index\'}">首页' +
-            '<div ng-if="indexFn.currentActive==\'index\'" class="keyline"></div>' +
+            '<li ng-click="indexFn.navigate(5,&quot;/&quot;)" >首页' +
+            '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/index\'" class="keyline"></div>' +
             '</li>' +
-            '<li ui-sref="overview" ng-class="{\'active\':indexFn.currentActive==\'overview\'}">学校概况' +
-            '<div ng-if="indexFn.currentActive==\'overview\'" class="keyline"></div>' +
+            '<li ng-click="indexFn.navigate(5,&quot;/overview&quot;)">学校概况' +
+            '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/overview\'" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(1,&quot;/&quot;)">课程中心' +
-            <!--.keyline(ng-if="indexFn.currentActive=='hotmajorlist'")-->
+            '<div ng-if="indexFn.currentTab==1" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(2,&quot;/&quot;)">实训中心' +
-            <!--.keyline(ng-if="indexFn.currentActive=='noticelist'")-->
+            '<div ng-if="indexFn.currentTab==2" class="keyline"></div>' +
             '</li>' +
-            '<li ng-click="indexFn.navigate(4,&quot;/&quot;)">掌上校园</li>' +
+            '<li ng-click="indexFn.navigate(4,&quot;/&quot;)">掌上校园' +
+            '<div ng-if="indexFn.currentTab==4" class="keyline"></div>' +
+            '</li>' +
             '</ul>' +
             '</div>' +
             '</div>' +
@@ -574,12 +618,14 @@ angular.module("azx.common", ['ui.bootstrap'])
                 subnav: '='
             },
             transclude: true,
-            controller: function ($scope, $rootScope, $timeout, AuthService, $window,localStorageService,$location,SchoolService, $http, CommonService) {
+            controller: function ($scope, $rootScope, $timeout, AuthService, $window, localStorageService, $location,$http, $interval,$templateCache) {
                 $rootScope.user = AuthService.getUser();
                 $scope.indexFn = {
                     user: $rootScope.user,
-                    schoolLogo:"",
+                    schoolLogo: "",
                     subnavArrow: '',
+                    currentTab: 5,
+                    currentRouter: "index",
                     signIn: function () {
                         var _pathName = '';
                         if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
@@ -603,41 +649,105 @@ angular.module("azx.common", ['ui.bootstrap'])
                     },
                     getSchool: function () {
                         var _this = this;
-                            var url = $location.host().split('.')[0];
-                            url = "sjdr";
-                            var params = {
-                                domainname: url
-                            };
-                            SchoolService.getSchoolByDomain(params).$promise
-                                .then(function (data) {
-                                    document.title = data.name;
-                                    _this.getLogoList(data.id);
-
-                                })
-                                .catch(function (error) {
-
-                                })
-                    },
-                    //logo
-                    getLogoList:function (orgid) {
-                        var _this=this;
-                        var params={
-                            orgId:_this.params.orgId
-                        };
-                        SchoolService.getLogoList(params).$promise
-                            .then(function (data) {
-                                angular.forEach(data.data,function (temp) {
-                                    if(temp.logoSort==2){
-                                        _this.schoolLogo=temp;
+                        var _tempArr = $window.location.hostname.split(".");
+                        var _hostname = $window.location.hostname;
+                        if (_tempArr.length == 4) {
+                            _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length)
+                        }
+                        var _host = $window.location.host;
+                        var _urlarr = AuthService.contrastDomain(_hostname);
+                        var code = $location.host().split('.')[0];
+                       // code = "kjkf";
+                       var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                       //url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                        // var script = document.createElement("script");  //创建script标签
+                        // script.type = "text\/javascript";
+                        // script.onload = script.onreadystatechange = function () {
+                        //     if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                        //         angular.forEach(GLOB_SCHOOL.data, function (temp) {
+                        //             if (temp.logoSort == 2) {
+                        //                 _this.schoolLogo = temp;
+                        //             }
+                        //         })
+                        //     }
+                        //
+                        // };
+                        // script.src = url;
+                        // $('body').append(script);   //将标签插入body尾部
+                        // $http.jsonp(url, {jsonpCallbackParam: 'callback'}).then(function (data) {
+                        //     console.log(data);
+                        // }, function (error) {
+                        //     console.log(error);
+                        // });
+                        $http({method: "JSONP", url: url,cache: $templateCache}).
+                            success(function (data) {
+                                angular.forEach(data.data, function (temp) {
+                                    if (temp.logoSort == 2) {
+                                        _this.schoolLogo = temp;
                                     }
                                 })
-                            })
-                            .catch(function (error) {
-
-                            })
+                        })
+                        // then(function(response) {
+                        //     console.log(response);
+                        // }, function(response) {
+                        //     console.log(response);
+                        // });
+                        // var load=$interval(function() {
+                        //     if(GLOB_SCHOOL){
+                        //         $interval.cancel(load);
+                        //         angular.forEach(GLOB_SCHOOL.data,function (temp) {
+                        //             if(temp.logoSort==2){
+                        //                 _this.schoolLogo=temp;
+                        //             }
+                        //         })
+                        //     }
+                        //
+                        // }, 100);
+                        //code = "sjdr";
+                        // $http({
+                        //     method: 'GET',
+                        //     url: url
+                        // }).success(function (data) {
+                        //     angular.forEach(data.data,function (temp) {
+                        //         if(temp.logoSort==2){
+                        //             _this.schoolLogo=temp;
+                        //         }
+                        //     })
+                        // });
                     },
-                };
+                    // //logo
+                    // getLogoList:function (orgid) {
+                    //     var _this=this;
+                    //     var params={
+                    //         orgId:orgid
+                    //     };
+                    //     SchoolService.getLogoList(params).$promise
+                    //         .then(function (data) {
+                    //             angular.forEach(data.data,function (temp) {
+                    //                 if(temp.logoSort==2){
+                    //                     _this.schoolLogo=temp;
+                    //                 }
+                    //             })
+                    //         })
+                    //         .catch(function (error) {
+                    //
+                    //         })
+                    // },
+                    currentActiveTabInit: function () {
+                        var _hostname = $window.location.hostname;
+                        _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length)
+                        var _urlarr = AuthService.contrastDomain(_hostname);
+                        this.currentTab = _urlarr.indexOf(_hostname);
+                        this.currentRouter = window.location.pathname;
+                    },
+                    init: function () {
+                        var _this = this;
+                        _this.currentActiveTabInit();
+                        _this.getSchool();
 
+                    }
+                };
+                $scope.indexFn.init();
 
                 $rootScope.$watch('user', function () {
                     // console.log($rootScope.user);
@@ -682,7 +792,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             template: '' +
             '<div class="azx-footer"> ' +
             '    <div class="footer-content">' +
-            '            <div azx-logo class="azx-logo-gray"></div>' +
+            '            <div azx-logo class="azx-logo-white"></div>' +
             '            <div class="footer-right">' +
             '               <div class="version">{{footerFn.connector}}{{product}} · ver.{{version}}</div>' +
             '               <div class="Copyright">Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · <span>京ICP备16006959号-1</span></div>' +
@@ -775,6 +885,8 @@ angular.module("azx.common", ['ui.bootstrap'])
             }
         }
     }])
+
+
     /**
      * 知新树logo
      */
@@ -1812,6 +1924,14 @@ angular.module('validation.directive', ['validation.provider']);
                     var numberreg = /^\d+$/;
                     return !value || numberreg.test(value);
                 },
+                integergt0: function (value) {
+                    var numberreg = /^\+?[1-9][0-9]*$/;
+                    return !value || numberreg.test(value);
+                },
+                workscore: function (value) {
+                    var numberreg = /^(\d{1,2}?(\.\d{1,2})?|100)$/;
+                    return !value || numberreg.test(value);
+                },
                 ip: function (value) {
                     var ipreg = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
                     return !value || ipreg.test(value);
@@ -1855,6 +1975,14 @@ angular.module('validation.directive', ['validation.provider']);
                 },
                 number: {
                     error: '只能填写数字',
+                    success: ''
+                },
+                integergt0: {
+                    error: '只能填写大于0的整数',
+                    success: ''
+                },
+                workscore: {
+                    error: '请输入小数不超过2位的0-100的分数',
                     success: ''
                 },
                 repassword: {

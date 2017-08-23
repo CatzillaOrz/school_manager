@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
                  id: 0,
                  organId: AuthService.getUser().orgId,
                  title: "",
-                 type: ""
+                 type: 10
              },
              /**
               * 添加
@@ -54,6 +54,14 @@ angular.module('dleduWebApp')
              },
              submit:function () {
                  var _this=this;
+                 var content=CommonService.strCut(_this.params.content);
+                 if(!content){
+                     CommonService.msgDialog("内容不能为空！",2);
+                     return;
+                 }else if(content.length>1000){
+                     CommonService.msgDialog("内容不能超过最大长度！",2);
+                     return;
+                 }
                  if (_this.handle == "newsedit") {
                      _this.updateNews();
                  }else {

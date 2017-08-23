@@ -32,6 +32,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 

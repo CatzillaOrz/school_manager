@@ -15,9 +15,10 @@
                             span.required *
                             | 选择学期：
                         .col-sm-7
-                            select.form-control(ng-model="teachClassUpdateFn.params.semesterId" ui-select2="teachClassUpdateFn.select2SemesterOptions()")
+                            select#select.form-control(ng-model="teachClassUpdateFn.params.semesterId" ui-select2="teachClassUpdateFn.select2SemesterOptions()")
                                 optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassUpdateFn.schoolYearDropList")
                                     option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassUpdateFn.params.semesterId==semester.id?'selected':''}}") {{semester.text}}
+                                    //selected="{{teachClassUpdateFn.params.semesterId==semester.id?'selected':''}}"
                     .form-group
                         label.col-sm-4.control-label
                             span.required *
@@ -25,6 +26,7 @@
                         .col-sm-7
                             select.form-control(ng-model="teachClassUpdateFn.params.courseId" ui-select2="teachClassUpdateFn.select2CourseOptions()" )
                                 option(ng-repeat="course in teachClassUpdateFn.courseDropList" value="{{course.id}}" selected="{{teachClassUpdateFn.params.courseId==course.id?'selected':''}}") {{course.name}}
+                                //
                     .form-group
                         label.col-sm-4.control-label
                             span.required *
