@@ -17,6 +17,10 @@ angular.module('dleduWebApp')
 					return;
 				}
 				if(newValue != oldValue){
+					if($scope.elecFenceCreateFn.isGetInitValue){
+						$scope.elecFenceCreateFn.isGetInitValue = false;
+						return;
+					}
 					$scope.elecFenceCreateFn.switchElec(oldValue);
 				}
 			});
@@ -44,6 +48,7 @@ angular.module('dleduWebApp')
 			record: null,
 			operation: '去修改',
 			location: null,
+			isGetInitValue: false, //是否是从接口获取的初始化围栏开启值
 
 			//获取当前日期
 			getNowDate: function(){
@@ -237,6 +242,7 @@ angular.module('dleduWebApp')
 							}else if(that.record.setupOrClose == 20){
 								that.isOpenElec = '0';
 							}
+							that.isGetInitValue = true;
 						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);
