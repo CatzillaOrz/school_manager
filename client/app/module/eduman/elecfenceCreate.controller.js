@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 			});
 		});
 		$scope.elecFenceCreateFn={
-			isOpenElec: '1',//是否打开电子围栏。默认不打开
+			isOpenElec: '0',//是否打开电子围栏。默认不打开
 			isEnd: false,
 			//学期列表
 			semeterLists: [],
@@ -231,7 +231,7 @@ angular.module('dleduWebApp')
 							that.elecSet.termSelectedId = that.record.semesterId + '';
 						}
 						//判断是否存在开启围栏的属性
-						if(that.record.setupOrClose){
+						if(that.record && that.record.setupOrClose){
 							if(that.record.setupOrClose == 10){//开启
 								that.isOpenElec = '1';
 							}else if(that.record.setupOrClose == 20){
@@ -250,6 +250,12 @@ angular.module('dleduWebApp')
 			switchElec: function(oldValue){
 				var isOpen = parseInt(this.isOpenElec);
 				var that = this;
+				if(!that.record){
+					messageService.openMsg('请先设置围栏!');
+					that.isOpenElec = oldValue;
+					that.isEnd = true;
+					return;
+				}
 				EduManService.switchElec({organId: AuthService.getUser().orgId, flag: isOpen}).$promise
 					.then(function(data){
 						if(data.success){
