@@ -41,10 +41,10 @@
                     form.form-inline
                         .form-group.col-md-4
                             label.control-label 姓名：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
+                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.name")
                         .form-group.col-md-4
                             label.control-label 学号：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.queryOption.courseName")
+                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.jobNumber")
                         .form-group.col-md-4
                             .ColVis
                                 button.btn.btn-primary(ng-click="evaFenceFn.getElecFenceList()")
@@ -120,13 +120,13 @@
                                         span 当天轨迹
                                     a.handle(ng-show="record.remark!='未激活'" ui-sref="elecfencehistory({id: record.id})")
                                         span 历史记录
-                                    a.handle(ng-show="record.remark!='未激活'" ng-click="evaFenceFn.notice(record.id)")
+                                    a.handle(ng-click="evaFenceFn.notice(record.id)")
                                         span 通知班主任
                                     a.handle.disable-style(ng-show="record.remark=='未激活'" )
                                         span 当天轨迹
                                     a.handle.disable-style(ng-show="record.remark=='未激活'" )
                                         span 历史记录
-                                    a.handle.disable-style(ng-show="record.remark=='未激活'" )
+                                    //a.handle.disable-style(ng-show="record.remark=='未激活'" )
                                         span 通知班主任
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
