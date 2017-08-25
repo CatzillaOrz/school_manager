@@ -506,7 +506,7 @@ var EduManService = {
             host: 'dd',
             path: '/api/web/v1/electricFence/assigned',
             access_token: access_token,
-            entity: params
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
