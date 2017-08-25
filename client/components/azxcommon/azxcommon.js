@@ -583,7 +583,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<div class="school-header">' +
             '<div class="border-top"></div>' +
             ' <div class="school-nav-bar">' +
-            '<div class="logo"><img ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/schoolmanager_defaultLogo.png\' }}" class="logo"/></div>' +
+            '<div class="logo"><img ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/logo.jpg\' }}" class="logo"/></div>' +
             '<ul ng-if="indexFn.user" class="account">' +
             '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
@@ -598,7 +598,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<button ng-if="!indexFn.user" ng-click="indexFn.signIn()" class="btn-login">登录</button>' +
             '<div class="navigation">' +
             '<ul>' +
-            '<li ng-click="indexFn.navigate(5,&quot;/&quot;)" >首页' +
+            '<li ng-click="indexFn.navigate(5,&quot;/&quot;)" >学校首页' +
             '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/index\'" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(5,&quot;/overview&quot;)">学校概况' +
