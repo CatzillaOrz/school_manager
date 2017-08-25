@@ -377,8 +377,10 @@ td.term-disable{
         top: 0px;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.3);
         .show-loading-img {
+            width:50px;
+            height: 50px;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -398,7 +400,7 @@ td.term-disable{
         top: 0px;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0);
+        background: rgba(0, 0, 0, 0.3);
         .show-loading-imgsub {
             position: absolute;
             left: 50%;

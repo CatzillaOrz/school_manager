@@ -39,7 +39,7 @@ angular.module('dleduWebApp', [
                 divParent = '.show-container-part';
                 imgSub = 'show-loading-imgsub';
             }
-            var html = '<div class="show-curtain"><img class="' + imgSub + '" src="assets/images/loading.gif"></div>';
+            var html = '<div class="show-curtain"><img class="' + imgSub + '" src="http://oli56k5b0.bkt.clouddn.com/loading.gif"></div>';
             $('body').append('<div class="show-container"></div>');
             if (status) {
                 if ($(divParent + ' .show-curtain').length === 0) {
@@ -53,6 +53,7 @@ angular.module('dleduWebApp', [
         //配置httpInterceptor
         return {
             'responseError': function (response) {
+                loading(false,'all')
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
                     AuthService.clearUser();
@@ -73,6 +74,7 @@ angular.module('dleduWebApp', [
                 return config;
             },
             'requestError': function (config) {
+                loading(false,'all')
                 return $q.reject(config);
             }
         };
