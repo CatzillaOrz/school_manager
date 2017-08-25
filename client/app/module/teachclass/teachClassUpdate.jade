@@ -12,13 +12,12 @@
                 .short-form
                     .form-group
                         label.col-sm-4.control-label
-                            span.required *
+                            span.required *.
                             | 选择学期：
                         .col-sm-7
-                            select#select.form-control(ng-model="teachClassUpdateFn.params.semesterId" ui-select2="teachClassUpdateFn.select2SemesterOptions()")
+                            select#select.form-control
                                 optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassUpdateFn.schoolYearDropList")
-                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassUpdateFn.params.semesterId==semester.id?'selected':''}}") {{semester.text}}
-                                    //selected="{{teachClassUpdateFn.params.semesterId==semester.id?'selected':''}}"
+                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                     .form-group
                         label.col-sm-4.control-label
                             span.required *

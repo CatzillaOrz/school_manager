@@ -15,7 +15,7 @@ var CollegeService = {
         RestClient.get({
             host: 'gateway-org',
             path: '/v1/college/list',
-            params,
+            params:params,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -91,7 +91,7 @@ var CollegeService = {
         RestClient.get({
             host: 'gateway-org',
             path: '/v1/college/droplist',
-            params,
+            params:params,
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {

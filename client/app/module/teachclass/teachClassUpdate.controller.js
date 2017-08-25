@@ -122,20 +122,34 @@ angular.module('dleduWebApp')
                 TeachClassService.getTeachClassById(_this.params).$promise
                     .then(function (data) {
                         _this.params.name = data.name;
-
-                        _this.params.semesterId = data.semesterId;
-                        _this.params.courseId = data.courseId;
                         _this.params.code = data.code;
                        _this.getCourseById(_this.params.courseId);
                        // _this.getSchoolYearDropList();
                        // _this.getSchoolYearById(_this.params.semesterId);
                         _this.params.courseId = data.courseId;
-                        var currentSemester=_this.getSelected(_this.params.semesterId,_this.schoolYearDropList);
+                       // var currentSemester=_this.getSelected(data.semesterId,_this.schoolYearDropList);
                       //  _this.schoolYearDropList=[];
-                        _this.schoolYearDropList.push(currentSemester);
+                        //_this.schoolYearDropList.push(currentSemester);
+                        _this.params.semesterId = data.semesterId;
+                        function formatState(state) {
+                            _this.params.semesterId = state.id;
+                            var $state = $(
+                                '<span> ' + state.text + '</span>'
+                            );
+                            return $state;
+                        };
+                        function formatState2(state) {
+                            var $state = $(
+                                '<span> ' + state.text + '</span>'
+                            );
+                            return $state;
+                        };
 
-
-                        // $('#select').val(_this.params.semesterId);
+                        var oMenuIcon = $("#select").select2({
+                            templateResult: formatState2,
+                            templateSelection: formatState
+                        });
+                        oMenuIcon.val(data.semesterId).trigger("change");
                         // $('#select').trigger('change');
                     })
                     .catch(function (error) {
