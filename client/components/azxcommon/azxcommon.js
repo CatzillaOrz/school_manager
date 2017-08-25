@@ -604,7 +604,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<li ng-click="indexFn.navigate(5,&quot;/overview&quot;)">学校概况' +
             '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/overview\'" class="keyline"></div>' +
             '</li>' +
-            '<li ng-click="indexFn.navigate(1,&quot;/schindex&quot;)">课程中心' +
+            '<li ng-click="indexFn.navigate(1,&quot;/schindex&quot;)" ng-if="!indexFn.authority()">课程中心' +
             '<div ng-if="indexFn.currentTab==1" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(2,&quot;/&quot;)">实训中心' +
