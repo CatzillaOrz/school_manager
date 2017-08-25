@@ -28,6 +28,28 @@ angular.module('dleduWebApp', [
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');
+        /**
+         *
+         * @param status 是否隐藏
+         * @param type 添加类型 part局部添加 all整个添加
+         */
+        function loading(status, type) {
+            var divParent = '.show-container', imgSub = 'show-loading-img';
+            if(type == 'part'){
+                divParent = '.show-container-part';
+                imgSub = 'show-loading-imgsub';
+            }
+            var html = '<div class="show-curtain"><img class="' + imgSub + '" src="assets/images/loading.gif"></div>';
+            $('body').append('<div class="show-container"></div>');
+            if (status) {
+                if ($(divParent + ' .show-curtain').length === 0) {
+                    $(divParent).append(html);
+                }
+            } else {
+                $(divParent + ' .show-curtain').remove();
+                $(".show-container").remove();
+            }
+        };
         //配置httpInterceptor
         return {
             'responseError': function (response) {
@@ -43,9 +65,11 @@ angular.module('dleduWebApp', [
                 return $q.reject(response);
             },
             'response': function (response) {
+                loading(false,'all')
                 return response;
             },
             'request': function (config) {
+                loading(true,'all')
                 return config;
             },
             'requestError': function (config) {
