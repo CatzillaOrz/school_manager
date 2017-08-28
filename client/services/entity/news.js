@@ -32,7 +32,11 @@ angular.module('dleduWebService')
                 var newses = $resource('api/news/publishNews','',{
                     update: {method:'PUT'}});
                 return newses.update(params);
-            }
+            },
+            getNewsListByOrg: function (params) {
+                var newsesList = $resource('api/news/getNewsListByOrg');
+                return newsesList.get(params);
+            },
         }
 
     });

@@ -105,6 +105,7 @@ angular.module('dleduWebApp')
             init: function () {
                 var _this = this;
                 _this.params.classId = $state.params.id;
+                _this.params.semesterId=$state.params.semesterId;
                 _this.selected = tempStorageService.getter();
                 _this.teachClassTrend();
 

@@ -12,23 +12,23 @@ var Promise = require('bluebird'),
 
 var NewsService = {
 
-    getNewsList : function (params, access_token, callback) {
-    RestClient.get({
-      host: 'hy',
-      path: '/api/web/v1/announcementList/list',
-      access_token:access_token,
-        params
-    }).then(function (res) {
-      if (res.status.code == 200) {
-        callback(null, res.entity);
-      } else {
-       callback(ErrorCode.errorHandle(res));
-      }
-    })
-      .catch(function (e) {
-        callback(e);
-      });
-  },
+    getNewsList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'hy',
+            path: '/api/web/v1/announcementList/list',
+            access_token: access_token,
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
     addNews: function (params, access_token, callback) {
         RestClient.post({
             host: 'hy',
@@ -77,11 +77,11 @@ var NewsService = {
             callback(e);
         });
     },
-    getNewsById: function (params, access_token, callback) {
+    getNewsById: function (params,  callback) {
         RestClient.get({
             host: 'hy',
-            path: '/api/web/v1/announcementList/get/'+params.id,
-            access_token: access_token
+            path: '/api/web/v1/announcementList/get/'+params.id
+
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -107,7 +107,22 @@ var NewsService = {
             callback(e);
         });
     },
-
+    getNewsListByOrg : function (params,callback) {
+        RestClient.get({
+            host: 'hy',
+            path: '/api/web/v1/announcementList/listByOrganIdAndPublishStatus',
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
 
 };
 

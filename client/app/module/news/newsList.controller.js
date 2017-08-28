@@ -67,11 +67,11 @@ angular.module('dleduWebApp')
                 }
                 NewsService.deleteNews(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("学生删除成功！");
+                        messageService.openMsg("通知删除成功！");
                         _this.getNewsList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error,"学生删除失败！"));
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"通知删除失败！"));
                     })
             },
             //删除提示

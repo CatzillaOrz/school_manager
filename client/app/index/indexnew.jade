@@ -43,7 +43,7 @@
                     .content {{notice.title}}
                     .date
                         i.fa.fa-calendar
-                        span {{notice.publishDate}}
+                        span {{notice.publishDate | limitTo:10}}
             .more
                 button.btn-more(ui-sref="noticelist") 更多>
         .major-block

@@ -185,7 +185,7 @@ angular.module('dleduWebApp')
 			})
             .state('teachClassTrend', {
                 parent: 'attendlist',
-                url   : '/teachclasstrend/:id',
+                url   : '/teachclasstrend/:id/:semesterId',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

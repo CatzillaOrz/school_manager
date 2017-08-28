@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location,$window) {
+    .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location,$window,NewsService) {
         $rootScope.user = AuthService.getUser();
         $scope.indexFn={
             user: $rootScope.user,
@@ -147,14 +147,15 @@ angular.module('dleduWebApp')
                         _this.shuffImageList.push(temp1);
                     })
             },
-            getNoticeList:function () {
+            getNewsListByOrg:function () {
                 var _this=this;
                 var params = _this.params;
                 params.pageNumber= 1,
                 params.pageSize= 5,
                 params.published=1,
                 params.organId=_this.params.orgId;
-                NoticeService.getNoticeList(params).$promise
+                params.type=20,
+                NewsService.getNewsListByOrg(params).$promise
                     .then(function (data) {
                         _this.noticeList=data.data;
                     })
@@ -163,7 +164,8 @@ angular.module('dleduWebApp')
                     })
             },
             formatDate:function (date,format) {
-               var arr=date.split("-");
+               var data=date.split(" ")[0];
+               var arr=data.split("-");
                if(format=="yyyy-MM"){
                    return arr[0]+"-"+ arr[1];
                }else {
@@ -252,7 +254,7 @@ angular.module('dleduWebApp')
                _this.getExcellentTeacherList();
                _this.getBoutiqueCourseList();
                _this.getLogoList();
-               _this.getNoticeList();
+               _this.getNewsListByOrg();
            }
         };
         $timeout(function () {

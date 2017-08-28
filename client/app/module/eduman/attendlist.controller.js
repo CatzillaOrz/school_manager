@@ -222,9 +222,10 @@ angular.module('dleduWebApp')
                                 }
                             ]
                         };
+                        _this.params.semesterId=data.id;
                         _this.getTeachClassAttendList();
                         _this.schoolYearDropList=[obj];
-                        _this.params.semesterId=data.id;
+
 
                     })
                     .catch(function (error) {
@@ -378,7 +379,7 @@ angular.module('dleduWebApp')
                     code: entity.code,
                     teacherName: entity.teacherName
                 };
-                $state.go("teachClassTrend", {id: entity.classId})
+                $state.go("teachClassTrend", {id: entity.classId,semesterId:entity.semesterId})
                 tempStorageService.setter(data);
             },
 
