@@ -14,6 +14,8 @@ router.get('/getNewsList',auth.isSignedIn, controller.getNewsList);
 router.post('/addNews',auth.isSignedIn, controller.addNews);
 router.delete('/deleteNews',auth.isSignedIn, controller.deleteNews);
 router.put('/updateNews',auth.isSignedIn, controller.updateNews);
-router.get('/getNewsById',auth.isSignedIn, controller.getNewsById);
+router.get('/getNewsById',controller.getNewsById);
 router.put('/publishNews',auth.isSignedIn, controller.publishNews);
+router.get('/getNewsListByOrg',controller.getNewsListByOrg);
+
 module.exports = router;

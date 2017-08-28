@@ -5,19 +5,18 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('noticeDetailCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,$sce,NoticeService) {
+    .controller('noticeDetailCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,$sce,NewsService) {
         $scope.noticeDetailFn={
             notice:{},
             params:{
-                articleId:""
+                id:""
             },
-            //精品课程查询
-            getNoticeById:function () {
+            getNewsById:function () {
                 var _this=this;
                 var params = _this.params;
-                NoticeService.getNoticeById(params).$promise
+                NewsService.getNewsById(params).$promise
                     .then(function (data) {
-                        _this.notice=data.news;
+                        _this.notice=data;
                     })
                     .catch(function (error) {
 
@@ -31,8 +30,8 @@ angular.module('dleduWebApp')
 
             init:function () {
                 var _this=this;
-                _this.params.articleId=$state.params.id;
-                _this.getNoticeById();
+                _this.params.id=$state.params.id;
+                _this.getNewsById();
             }
         };
         $timeout(function () {

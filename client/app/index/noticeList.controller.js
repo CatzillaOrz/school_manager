@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('noticeListCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,NoticeService) {
+    .controller('noticeListCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,NewsService) {
         $scope.noticeListFn={
             schoolInfo:{},
             params:{
@@ -18,14 +18,13 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
-            //精品课程查询
-            getNoticeList:function () {
+            getNewsListByOrg:function () {
                 var _this=this;
                 var params = _this.params;
                 params.pageNumber= _this.page.pageNumber,
                 params.pageSize= _this.page.pageSize
-
-                NoticeService.getNoticeList(params).$promise
+                params.type=20,
+                NewsService.getNewsListByOrg(params).$promise
                     .then(function (data) {
                         _this.page.totalElements=data.totalCount;
                         _this.page.totalPages=data.pageCount;
@@ -50,7 +49,8 @@ angular.module('dleduWebApp')
 
             },
             formatDate:function (date,format) {
-                var arr=date.split("-");
+                var data=date.split(" ")[0];
+                var arr=data.split("-");
                 if(format=="yyyy-MM"){
                     return arr[0]+"-"+ arr[1];
                 }else {
@@ -65,7 +65,7 @@ angular.module('dleduWebApp')
                 var _this=this;
                 _this.schoolInfo=  CommonService.getSchool();
                 _this.params.organId=_this.schoolInfo.id;
-                _this.getNoticeList();
+                _this.getNewsListByOrg();
             }
         };
         $timeout(function () {

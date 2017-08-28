@@ -42,7 +42,7 @@ module.exports = {
             })
     },
     getNewsById: function (req, res) {
-       NewsService.getNewsByIdSync(req.query, req.user.access_token)
+       NewsService.getNewsByIdSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
@@ -52,6 +52,15 @@ module.exports = {
     },
     publishNews:function (req,res) {
         NewsService.publishNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getNewsListByOrg : function (req, res) {
+        NewsService.getNewsListByOrgSync(req.query)
             .then(function (data) {
                 res.json(data);
             })
