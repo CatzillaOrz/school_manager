@@ -25080,6 +25080,7 @@ nav ul li.open > a, nav ul li.open > a b {
   color: #fff !important; }
 
 nav > ul > li > a b {
+  font-size: 16px;
   position: absolute !important;
   right: 10px;
   top: 10px; }
