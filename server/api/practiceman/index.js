@@ -20,5 +20,6 @@ router.get('/getPracticeGroupList',auth.isSignedIn, controller.getPracticeGroupL
 router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupInfo);
 router.put('/updatePracticeGroup',auth.isSignedIn, controller.updatePracticeGroup);
 router.delete('/delPracticeGroup',auth.isSignedIn, controller.delPracticeGroup);
+router.get('/isExistInGroup',auth.isSignedIn, controller.isExistInGroup);
 
 module.exports = router;

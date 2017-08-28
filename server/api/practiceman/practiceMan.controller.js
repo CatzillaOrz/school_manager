@@ -83,6 +83,16 @@ module.exports = {
             })
     },
 
+    isExistInGroup: function (req, res) {
+        PracticeManService.isExistInGroupSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     getPracticeGroupList: function (req, res) {
         PracticeManService.getPracticeGroupListSync(req.query, req.user.access_token)
             .then(function (data) {
