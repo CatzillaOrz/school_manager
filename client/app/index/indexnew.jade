@@ -6,8 +6,8 @@
             .title 精品课程
             .line
         .swiper-course-container
-            .swiper-wrapper
-                .swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
+            ul.swiper-wrapper
+                li.swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
                     a.course-card(href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
                         .course-image(style="background:url({{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1498583024217.jpg'}});background-size:cover;")
                         .course-detail

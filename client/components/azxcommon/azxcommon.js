@@ -648,9 +648,14 @@ angular.module("azx.common", ['ui.bootstrap'])
                     navigate: function (host, path) {
                         AuthService.navigation(host, path);
                     },
-                    authority: function (entity) {
+                    authority: function () {
                         var _this = this;
-                        return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                        if(_this.user){
+                            return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                        }else {
+                            return false;
+                        }
+
                     },
                     getSchool: function () {
                         var _this = this;

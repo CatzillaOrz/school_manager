@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('BoutiqueCourseCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$location) {
+    .controller('BoutiqueCourseCtrl', function ($scope, $rootScope,AuthService, CollegeService, $state, messageService, $timeout,SchoolService,CommonService,$location,$window) {
         $scope.boutiqueFn={
             schoolInfo:{},
             emHost:"http://emdev.aizhixin.com",

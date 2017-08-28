@@ -139,6 +139,13 @@
         overflow: hidden;
         padding-top: 40px;
         padding-bottom: 20px;
+        ul{
+          list-style: none;
+          padding: 0;
+          //li:nth-child(5n) {
+          //  margin-right: 0 !important;
+          //}
+        }
         .swiper-slide {
           width: 224px !important;
           transition-property: all;
