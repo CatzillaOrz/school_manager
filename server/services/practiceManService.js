@@ -170,6 +170,24 @@ var PracticeManService = {
         });
     },
 
+    //根据学生或教师id判断是否已经加入其他小组
+    isExistInGroup: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/trainingmanage/checkuser',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
     //删除实践小组
     delPracticeGroup: function (params, access_token, callback) {
         RestClient.delete({

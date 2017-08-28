@@ -49,6 +49,10 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/delPracticeGroup');
                 return practiceman.remove(params);
             },
+            isExistInGroup:function (params) {
+                var practiceman = $resource('api/practiceman/isExistInGroup');
+                return practiceman.get(params);
+            },
         }
 
     });

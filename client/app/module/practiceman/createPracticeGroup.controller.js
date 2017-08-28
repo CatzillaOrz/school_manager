@@ -220,19 +220,31 @@ angular.module('dleduWebApp')
 			},
 			//选择的老师
 			selectTeacher: function (entity) {
+				var that = this;
 				if(this.selectTeacherList.length >= 1){
 					messageService.openMsg("只能选择一个本校教师！");
 					return;
 				}
-				var _this = this;
-				var temp = _.filter(_this.selectTeacherList, function (value) {
-					if (entity.id == value.id) {
-						return value;
-					}
-				});
-				if (temp.length == 0) {
-					_this.selectTeacherList.splice(0, 0, entity);
-				}
+				PracticeManService.isExistInGroup({userId: entity.id}).$promise
+					.then(function (data) {
+						if(data.success){
+							var _this = that;
+							var temp = _.filter(_this.selectTeacherList, function (value) {
+								if (entity.id == value.id) {
+									return value;
+								}
+							});
+							if (temp.length == 0) {
+								_this.selectTeacherList.splice(0, 0, entity);
+							}
+						}else{
+							messageService.openMsg("该教师已经在其他小组，不能选择！");
+						}
+
+					})
+					.catch(function (error) {
+
+					})
 			},
 			//移除老师
 			removeSelectedTeacher: function (entity) {
@@ -245,15 +257,27 @@ angular.module('dleduWebApp')
 			},
 			//选择学生
 			selectStudent: function (entity) {
-				var _this = this;
-				var temp = _.filter(_this.selectStudentList, function (value) {
-					if (entity.id == value.id) {
-						return value;
-					}
-				});
-				if (temp.length == 0) {
-					_this.selectStudentList.splice(0, 0, entity);
-				}
+				var that = this;
+				PracticeManService.isExistInGroup({userId: entity.id}).$promise
+					.then(function (data) {
+						if(data.success){
+							var _this = that;
+							var temp = _.filter(_this.selectStudentList, function (value) {
+								if (entity.id == value.id) {
+									return value;
+								}
+							});
+							if (temp.length == 0) {
+								_this.selectStudentList.splice(0, 0, entity);
+							}
+						}else{
+							messageService.openMsg("该学生已经在其他小组，不能选择！");
+						}
+
+					})
+					.catch(function (error) {
+
+					})
 			},
 			//移除学生
 			removeSelectedStudent: function (entity) {
