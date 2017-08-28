@@ -25,12 +25,12 @@
                 // for minified menu collapse only second level
                 if ($body.hasClass('minified')) {
                     if ($this.closest('nav ul ul').length) {
-                        $this.find('>a .collapse-sign .fa').toggleClass('fa-minus-square-o fa-plus-square-o');
+                        $this.find('>a .collapse-sign .fa').toggleClass('fa-plus-square-o fa-minus-square-o');
                         $this.find('ul:first').slideToggle(appConfig.menu_speed || 200);
                     }
                 } else {
                     // toggle expand item
-                    $this.find('>a .collapse-sign .fa').toggleClass('fa-minus-square-o fa-plus-square-o');
+                    $this.find('>a .collapse-sign .fa').toggleClass('fa-plus-square-o fa-minus-square-o');
                     $this.find('ul:first').slideToggle(appConfig.menu_speed || 200);
                 }
             }
@@ -66,7 +66,7 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
 
                             e.preventDefault();
                         })
-                        .find('>a').append('<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>');
+                        .find('>a').append('<b class="collapse-sign"><em class="fa fa-minus-square-o"></em></b>');
 
                     // initialization toggle
                     if ($li.find('li.active').length) {
