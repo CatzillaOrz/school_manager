@@ -981,8 +981,8 @@ a:focus {
     width: 679px;
     height: 300px; }
   .college-list-container .trend-total {
-    position: absolute;
-    left: 103px;
+    position: relative;
+    left: 76px;
     top: 50px; }
 
 .margin-left-10 {
