@@ -413,7 +413,10 @@ angular.module('dleduWebApp')
 				PracticeManService.getPracticeGroupInfo({orgId: AuthService.getUser().orgId, id: id}).$promise
 					.then(function (data) {
 						that.practiceGroupInfo = data;
-						that.isEidt = true;
+						if(that.practiceGroupInfo && that.practiceGroupInfo.teacherId){
+							that.isEidt = true;
+						}
+
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;
 						that.params.endDate = that.practiceGroupInfo.endDate;
