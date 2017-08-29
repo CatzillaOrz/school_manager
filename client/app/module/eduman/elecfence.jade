@@ -83,7 +83,7 @@
                                 select.form-control(ng-model="evaFenceFn.params.isAtSchool" ui-select2="evaFenceFn.getResultOption('location')" )
                                     option(ng-repeat="record in evaFenceFn.locations" value="{{record.id}}" ) {{record.text}}
                             .form-group.col-md-3
-                                select.form-control(ng-model="evaFenceFn.params.isOnline" ui-select2="evaFenceFn.getResultOption('isOnline')" )
+                                select.form-control(ng-model="evaFenceFn.params.isOline" ui-select2="evaFenceFn.getResultOption('isOnline')" )
                                     option(ng-repeat="record in evaFenceFn.isOnlines" value="{{record.id}}" ) {{record.text}}
             .widget-body.no-padding(style="position: initial!important")
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer

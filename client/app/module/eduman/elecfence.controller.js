@@ -38,7 +38,7 @@ angular.module('dleduWebApp')
 				isActivation: null,
 				isLoginId: null,
 				isAtSchool: null,
-				isOnline: null,
+				isOline: null,
 				isLogin: null,
 				time: '',
 				name: null,
@@ -300,7 +300,7 @@ angular.module('dleduWebApp')
 			});
 		});
 		$timeout(function () {
-			$scope.$watch('evaFenceFn.params.isOnline', function (newValue, oldValue) {
+			$scope.$watch('evaFenceFn.params.isOline', function (newValue, oldValue) {
 				if (newValue != oldValue) {
 					$scope.evaFenceFn.getElecFenceList();
 				}
