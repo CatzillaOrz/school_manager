@@ -115,14 +115,7 @@
                     "sref": "evaquestion",
                     "active": "evaquestion",
                     "icon": "question-circle"
-                },
-                {
-                    "title": "电子围栏",
-                    "sref": "elecfence",
-                    "active": "elecfence",
-                    "icon": "barcode"
                 }
-
             ]
         },
         {
