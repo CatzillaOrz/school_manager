@@ -14,10 +14,10 @@
                         h4 知新平台 · 智慧校园
                     label.signin_user
                         span.i.fa.fa-user
-                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='账号 / 手机号 / 邮箱 ', type='text' name='username', ng-trim='true', ng-keypress='signinFn.keyPressHandle($event)', required='required', ng-model='signinFn.form.username')
+                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='账号 / 手机号 / 邮箱 ', type='text' name='username', ng-trim='true',ng-focus='signinFn.inputOnFocus()', ng-keypress='signinFn.keyPressHandle($event)', required='required', ng-model='signinFn.form.username')
                     label.signin_user
                         span.i.fa.fa-lock
-                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='请输入您的密码', type='password', name='password', required='required', ng-keypress='signinFn.keyPressHandle($event)', ng-model='signinFn.form.password', autocomplete='off')
+                        input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(placeholder='请输入您的密码', type='password', name='password', required='required',ng-focus='signinFn.inputOnFocus()', ng-keypress='signinFn.keyPressHandle($event)', ng-model='signinFn.form.password', autocomplete='off')
                     .signin_warning
                         .signin_warning_inner.ng-binding.ng-hide(ng-show='signInError')
                     .signin_submit

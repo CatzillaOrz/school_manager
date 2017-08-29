@@ -18,9 +18,20 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            inputOnFocus:function(){
+                $('input[name = username]').removeClass('empty-input');
+                $('input[name = password]').removeClass('empty-input');
+            },
             signIn: function () {
                 var that = this;
                 that.signInError = '';
+                if(that.form.username == ''){
+                    $('input[name = username]').addClass('empty-input');
+                    return;
+                }else if(that.form.password == ''){
+                    $('input[name = password]').addClass('empty-input');
+                    return;
+                }
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                          //$state.go('index');
