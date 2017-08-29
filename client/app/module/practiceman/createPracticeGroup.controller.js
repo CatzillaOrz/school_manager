@@ -225,7 +225,7 @@ angular.module('dleduWebApp')
 					messageService.openMsg("只能选择一个本校教师！");
 					return;
 				}
-				PracticeManService.isExistInGroup({userId: entity.id}).$promise
+				PracticeManService.isExistInGroup({orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
 					.then(function (data) {
 						if(data.success){
 							var _this = that;
@@ -258,7 +258,7 @@ angular.module('dleduWebApp')
 			//选择学生
 			selectStudent: function (entity) {
 				var that = this;
-				PracticeManService.isExistInGroup({userId: entity.id}).$promise
+				PracticeManService.isExistInGroup({orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
 					.then(function (data) {
 						if(data.success){
 							var _this = that;
@@ -332,6 +332,7 @@ angular.module('dleduWebApp')
 				entity.studentIds = params.studentIds;
 				entity.startDate = params.startDate;
 				entity.endDate = params.endDate;
+				entity.orgId = AuthService.getUser().orgId;
 				if(this.validateDate(entity.startDate, entity.endDate)){
 					messageService.openMsg("开始日期不能大于等于结束日期！");
 					return;
@@ -409,7 +410,7 @@ angular.module('dleduWebApp')
 			 */
 			getPracticeGroupInfo: function(id){
 				var that = this;
-				PracticeManService.getPracticeGroupInfo({id: id}).$promise
+				PracticeManService.getPracticeGroupInfo({orgId: AuthService.getUser().orgId, id: id}).$promise
 					.then(function (data) {
 						that.practiceGroupInfo = data;
 						that.isEidt = true;
