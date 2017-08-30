@@ -247,6 +247,27 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//计算禁用按钮
+			disableButton: function(index, type){
+				var record = this.records[index];
+				if(type == 'current'){
+					if(record.remark=='未登录' && record.onlinStatus=='离线'){
+						return false;
+					}else if(record.remark=='未激活' && record.onlinStatus=='离线'){
+						return false;
+					}else{
+						return true;
+					}
+				}
+				if(type == 'history'){
+					if(record.remark=='未激活' && record.onlinStatus=='离线'){
+						return false;
+					}else{
+						return true;
+					}
+				}
+			},
+
 			//设置围栏
 			setFence: function () {
 				$state.go('elecfencecreate');
