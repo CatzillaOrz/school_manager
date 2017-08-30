@@ -20,6 +20,10 @@ angular.module('dleduWebApp')
 			prompt: "填写以下信息以建立实践小组",
 			//操作标识
 			handle: "create",
+			//是否添加了已经分配的学生
+			isAddStu: false,
+			//是否添加了分配的教师
+			isAddTea: false,
 			//添加步骤
 			steps: [
 				{title: '选择教师'},
@@ -160,10 +164,11 @@ angular.module('dleduWebApp')
 				TeacherService.getSimpleTeachers(params).$promise
 					.then(function (data) {
 						_this.teacherList = data.data;
-						if(_this.practiceGroupInfo && _this.practiceGroupInfo.teacherId){
+						if(_this.practiceGroupInfo && _this.practiceGroupInfo.teacherId && !_this.isAddTea){
 							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.teacherId, name:
 							_this.practiceGroupInfo.teacherName, jobNumber: _this.practiceGroupInfo.teacherJobNumer,
 								collegeName: _this.practiceGroupInfo.collegeName});
+							_this.isAddTea = true;
 						}
 					})
 					.catch(function (error) {
@@ -194,9 +199,10 @@ angular.module('dleduWebApp')
 				StudentService.getSimpleStudents(params).$promise
 					.then(function (data) {
 						_this.studentList = data.data;
-						if(_this.practiceGroupInfo){
+						if(_this.practiceGroupInfo && !_this.isAddStu){
 							angular.forEach(_this.practiceGroupInfo.studentDTOList, function(item){
 								_this.selectStudentList.splice(0, 0, item);
+								_this.isAddStu = true;
 							});
 						}
 					})
