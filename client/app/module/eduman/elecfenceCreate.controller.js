@@ -7,6 +7,10 @@ angular.module('dleduWebApp')
 												 messageService) {
 		$timeout(function () {
 			$scope.$watch("elecFenceCreateFn.elecSet.termSelectedId", function(newValue, oldValue){
+				if(!newValue){
+					$scope.elecFenceCreateFn.elecSet.termSelectedId = oldValue;
+					return;
+				}
 				if(newValue != oldValue){
 					$scope.elecFenceCreateFn.loadDatePickerByOption(newValue);
 				}
@@ -39,7 +43,7 @@ angular.module('dleduWebApp')
 			polyVer: [],//多边形顶点
 			//设置信息对象
 			elecSet: {
-				termSelectedId: 0,
+				termSelectedId: '0',
 				selectTime: [],//监控日期
 				unSelectTime: [], //非监控日期
 				timeSections: []
@@ -68,7 +72,9 @@ angular.module('dleduWebApp')
 				SchoolYearService.getSemesterList(params).$promise
 					.then(function(dataList){
 						that.semeterLists = dataList.data;
-						that.loadSetInfo();
+						dataList.data.splice(0, 0, {name: "--请选择--", id: '0'});
+						that.elecSet.termSelectedId = that.record.semesterId + '';
+						//that.loadSetInfo();
 					})
 					.catch(function(e){
 
@@ -91,7 +97,7 @@ angular.module('dleduWebApp')
 						termStartLong.setDate(termStartLong.getDate() + 1);
 					}
 				}else{//选择学期时
-					for(var i = 0, nomonitorLen = this.record.nomonitorDate.length; i < nomonitorLen; i++ ){
+					/*for(var i = 0, nomonitorLen = this.record.nomonitorDate.length; i < nomonitorLen; i++ ){
 						var temp = this.record.nomonitorDate[i];
 						if(temp >=termStart  && temp <= termEnd){
 							unSelectTime.push(temp);
@@ -102,7 +108,9 @@ angular.module('dleduWebApp')
 						if(temp >= termStart  && temp <= termEnd){
 							selectTime.push(temp);
 						}
-					}
+					}*/
+					selectTime = this.record.monitorDate;
+					unSelectTime = this.record.nomonitorDate
 				}
 				return {startTime: termStart, endTime: termEnd, unSelectTime: unSelectTime, selectTime: selectTime};
 			},
@@ -233,8 +241,8 @@ angular.module('dleduWebApp')
 								verNews.push(verNew);
 							}
 							that.polyVer = verNews;
-							that.elecSet.termSelectedId = that.record.semesterId + '';
 						}
+						that.select2SemesterOptions();
 						//判断是否存在开启围栏的属性
 						if(that.record && that.record.setupOrClose){
 							if(that.record.setupOrClose == 10){//开启
@@ -283,7 +291,8 @@ angular.module('dleduWebApp')
 					zoom:13
 				});
 				this.getNowDate();
-				this.select2SemesterOptions();
+				this.loadSetInfo();
+
 			}
 		};
 		$scope.elecFenceCreateFn.init();
