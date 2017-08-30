@@ -40,7 +40,9 @@
                                 td {{record.leave}}
                                 td {{record.remark}}
                                 td
-                                    a.handle(ui-sref="elecfencecurrentinfo({id: record.id, date: evaFenceFn.getTimetamp(record.checkdate)})")
+                                    a.handle(ng-show='record.checkCount!=0' ui-sref="elecfencecurrentinfo({id: record.id, date: evaFenceFn.getTimetamp(record.checkdate)})")
+                                        span 当天轨迹
+                                    a.handle.disable-style(ng-show='record.checkCount==0')
                                         span 当天轨迹
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
