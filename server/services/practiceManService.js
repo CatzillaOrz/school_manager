@@ -65,10 +65,11 @@ var PracticeManService = {
 
     //删除企业导师
     delEntTutor: function (params, access_token, callback) {
+        params.accessToken = access_token;
         RestClient.delete({
             host: 'gateway-org',
-            path: '/v1/mentorstraining/delete/'+params.id,
-            access_token: access_token
+            path: '/v1/mentorstraining/delete',
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
@@ -190,10 +191,11 @@ var PracticeManService = {
 
     //删除实践小组
     delPracticeGroup: function (params, access_token, callback) {
+        params.accessToken = access_token;
         RestClient.delete({
             host: 'gateway-org',
-            path: '/v1/mentorstraining/delete/'+params.id,
-            access_token: access_token
+            path: '/v1/mentorstraining/delete',
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
