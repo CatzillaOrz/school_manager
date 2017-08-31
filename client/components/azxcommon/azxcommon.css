@@ -253,6 +253,12 @@ h6 {
     height: 50px;
     width: 100%;
     border-bottom: 1px solid #eeeeee; }
+    .azx-school-header .school-header .border-top {
+      width: 100%;
+      height: 2px;
+      background: #58b5a2 url("//oli56k5b0.bkt.clouddn.com/nav_top_border.gif") repeat-y;
+      -webkit-background-size: cover;
+      background-size: cover; }
     .azx-school-header .school-header .school-nav-bar {
       width: 1200px;
       margin: 0px auto; }
@@ -260,7 +266,7 @@ h6 {
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        height: 50px; }
+        height: 45px; }
       .azx-school-header .school-header .school-nav-bar .account {
         height: 48px;
         float: right;
@@ -366,7 +372,7 @@ h6 {
         color: #fff;
         border: 1px solid #28b780; }
       .azx-school-header .school-header .school-nav-bar .navigation {
-        height: 50px;
+        height: 48px;
         float: right;
         display: inline-block;
         vertical-align: middle;
