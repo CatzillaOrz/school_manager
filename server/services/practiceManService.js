@@ -173,9 +173,11 @@ var PracticeManService = {
 
     //根据学生或教师id判断是否已经加入其他小组
     isExistInGroup: function (params, access_token, callback) {
+        var type = params.type;
+        var path = type == 'student' ? '/v1/trainingmanage/checkStudent' : '/v1/trainingmanage/checkteacher';
         RestClient.get({
             host: 'gateway-org',
-            path: '/v1/trainingmanage/checkuser',
+            path: path,
             access_token: access_token,
             params: params
         }).then(function (res) {
