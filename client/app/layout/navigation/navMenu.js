@@ -22,6 +22,7 @@
                 // toggle open
                 $this.toggleClass('open');
 
+
                 // for minified menu collapse only second level
                 if ($body.hasClass('minified')) {
                     if ($this.closest('nav ul ul').length) {
@@ -46,10 +47,9 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
 
             var $collapsible = element.find('li[data-menu-collapse]');
             var bindEvents = function(){
+                var collapLen = $collapsible.length;
                 $collapsible.each(function (idx, li) {
                     var $li = $(li);
-                    $li.siblings('.open').smartCollapseToggle();
-                    $li.smartCollapseToggle();
                     $li
                         .on('click', '>a', function (e) {
 
@@ -66,8 +66,14 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
 
                             e.preventDefault();
                         })
-                        .find('>a').append('<b class="collapse-sign"><em class="fa fa-minus-square-o"></em></b>');
-
+                        .find('>a').append('<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>');
+                        $li.siblings('.open').smartCollapseToggle();
+                        if(collapLen != idx + 1){
+                            $li.smartCollapseToggle();
+                        }else{
+                            $li.smartCollapseToggle();
+                            $li.smartCollapseToggle();
+                        }
                     // initialization toggle
                     if ($li.find('li.active').length) {
                         $li.smartCollapseToggle();
