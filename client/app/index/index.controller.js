@@ -58,23 +58,23 @@ angular.module('dleduWebApp')
                                 pagination: '.swiper-course-pagination',
                                 nextButton: '.swiper-course-button-next',
                                 prevButton: '.swiper-course-button-prv',
-                                loop: true,
+                                //loop: true,
                                 // effect: 'fade',
-                                centeredSlides: true,
+                                //centeredSlides: true,
                                 // autoplay: 5000,
                                 spaceBetween: 20,
-                                slidesPerView: "auto",
+                                slidesPerView: 5,
                                 paginationClickable: true,
-                                onSlideChangeEnd: function (swiper, current, total) {
-                                    $scope.$apply(function(){
-                                        _this.activeCourseIndex=swiper.realIndex;
-                                    })
-                                },
-                                onSlideChangeStart: function (swiper, current, total) {
-                                    $scope.$apply(function(){
-                                        _this.activeCourseIndex=-1;
-                                    })
-                                }
+                                // onSlideChangeEnd: function (swiper, current, total) {
+                                //     $scope.$apply(function(){
+                                //         _this.activeCourseIndex=swiper.realIndex;
+                                //     })
+                                // },
+                                // onSlideChangeStart: function (swiper, current, total) {
+                                //     $scope.$apply(function(){
+                                //         _this.activeCourseIndex=-1;
+                                //     })
+                                // }
                             },100);
                         })
 

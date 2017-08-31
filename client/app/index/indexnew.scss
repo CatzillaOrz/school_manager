@@ -139,6 +139,9 @@
         overflow: hidden;
         padding-top: 40px;
         padding-bottom: 20px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
         ul{
           list-style: none;
           padding: 0;
@@ -150,6 +153,18 @@
           width: 224px !important;
           transition-property: all;
           transition-duration: .3s;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
           .course-card {
             height: 220px;
             border-radius: 6px;
@@ -171,6 +186,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                width: 140px;
               }
               .teacher {
                 margin: 0 auto;

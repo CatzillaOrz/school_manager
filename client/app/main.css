@@ -567,6 +567,9 @@ a:focus {
     background: #ffffff;
     border: none; }
 
+.empty-input {
+  border-color: red !important; }
+
 .forget_view * {
   box-sizing: content-box; }
 .forget_view .forget_password {
@@ -1490,14 +1493,29 @@ a:focus {
         margin: 0 auto;
         overflow: hidden;
         padding-top: 40px;
-        padding-bottom: 20px; }
+        padding-bottom: 20px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto; }
         .index-container .course-container .course-block .swiper-course-container ul {
           list-style: none;
           padding: 0; }
         .index-container .course-container .course-block .swiper-course-container .swiper-slide {
           width: 224px !important;
           transition-property: all;
-          transition-duration: .3s; }
+          transition-duration: .3s;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center; }
           .index-container .course-container .course-block .swiper-course-container .swiper-slide .course-card {
             height: 220px;
             border-radius: 6px; }
@@ -1517,7 +1535,8 @@ a:focus {
                 color: #343434;
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis; }
+                text-overflow: ellipsis;
+                width: 140px; }
               .index-container .course-container .course-block .swiper-course-container .swiper-slide .course-card .course-detail .teacher {
                 margin: 0 auto; }
                 .index-container .course-container .course-block .swiper-course-container .swiper-slide .course-card .course-detail .teacher .avater {
