@@ -72,7 +72,7 @@ angular.module('dleduWebApp')
 				SchoolYearService.getSemesterList(params).$promise
 					.then(function(dataList){
 						that.semeterLists = dataList.data;
-						dataList.data.splice(0, 0, {name: "--请选择--", id: '0'});
+						//dataList.data.splice(0, 0, {name: "--请选择--", id: '0'});
 						that.elecSet.termSelectedId = that.record.semesterId + '';
 						//that.loadSetInfo();
 					})
