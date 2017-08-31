@@ -24,7 +24,7 @@
                                 .col-sm-6
                                     span 请选择学期：
                                     select(style="width:50%" ng-model="elecFenceCreateFn.elecSet.termSelectedId" ui-select2)
-                                        option(value="{{semester.id}}" ng-repeat="semester in elecFenceCreateFn.semeterLists" ng-selected="elecFenceCreateFn.elecSet.termSelectedId==semester.id") {{semester.name}}
+                                        option(value="{{semester.id}}" ng-repeat="semester in elecFenceCreateFn.semeterLists" ng-selected="elecFenceCreateFn.elecSet.termSelectedId==semester.id+''") {{semester.name}}
                         .span12(style="margin-top:20px;")
                             .span6
                                 .span6 学期日历：
