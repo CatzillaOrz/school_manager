@@ -330,7 +330,11 @@ a:focus {
     color: #ffffff;
     line-height: 50px;
     margin-left: 10px;
-    font-size: 20px; }
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px; }
 #header .account {
   height: 48px;
   float: right;
