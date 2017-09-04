@@ -1,7 +1,7 @@
 header#header
     #logo-group.cursor-pointer(ng-click="layoutFn.toIndex()")
         span#logo
-            img(ng-src='{{layoutFn.user.orgLogo}}', alt='{{layoutFn.user.orgName}}')
+            img(ng-src='{{layoutFn.user.orgLogo || "http://oli56k5b0.bkt.clouddn.com/defaultimg/logo.png"}}', alt='{{layoutFn.user.orgName}}')
         span#orgName {{layoutFn.user.orgName}}
     //#logout.btn-header.transparent.pull-right
         span
