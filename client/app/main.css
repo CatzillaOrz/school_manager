@@ -1447,7 +1447,7 @@ a:focus {
     margin: 0 auto;
     width: 100%;
     background: #f7f7f7;
-    height: 417px; }
+    height: 335px; }
     .index-container .course-container .course-block {
       margin: 0 auto;
       width: 1200px; }
@@ -1479,9 +1479,17 @@ a:focus {
             border: 1px solid #28b780; }
       .index-container .course-container .course-block .block-title {
         margin-top: 40px; }
-        .index-container .course-container .course-block .block-title .line {
+        .index-container .course-container .course-block .block-title .left-line {
           height: 1px;
           width: 520px;
+          background: #f0f0f0;
+          bottom: 15px;
+          position: relative;
+          display: inline-block;
+          vertical-align: bottom; }
+        .index-container .course-container .course-block .block-title .right-line {
+          height: 1px;
+          width: 485px;
           background: #f0f0f0;
           bottom: 15px;
           position: relative;
@@ -1492,6 +1500,14 @@ a:focus {
           font-size: 24px;
           display: inline-block;
           color: #323232; }
+        .index-container .course-container .course-block .block-title .more {
+          display: inline-block;
+          font-size: 14px;
+          color: #666666;
+          padding-left: 10px;
+          cursor: pointer; }
+          .index-container .course-container .course-block .block-title .more:hover {
+            color: #29c192; }
       .index-container .course-container .course-block .swiper-course-container {
         width: 1200px;
         margin: 0 auto;
@@ -1632,7 +1648,7 @@ a:focus {
     margin: 0 auto;
     width: 100%;
     background: #ffffff;
-    height: 536px; }
+    height: 460px; }
     .index-container .notice-major-container .notice-major-block {
       margin: 0 auto;
       width: 1200px; }
@@ -1669,19 +1685,33 @@ a:focus {
               background-color: #28b780;
               color: #fff;
               border: 1px solid #28b780; }
-        .index-container .notice-major-container .notice-major-block .notice-block .line {
+        .index-container .notice-major-container .notice-major-block .notice-block .left-line {
           height: 1px;
           width: 206px;
           background: #f0f0f0;
           bottom: 15px;
           position: relative;
-          display: inline-block;
-          vertical-align: bottom; }
+          display: inline-block; }
+        .index-container .notice-major-container .notice-major-block .notice-block .right-line {
+          height: 1px;
+          width: 170px;
+          background: #f0f0f0;
+          bottom: 15px;
+          position: relative;
+          display: inline-block; }
         .index-container .notice-major-container .notice-major-block .notice-block .title {
           margin: 0 30px;
           font-size: 24px;
           display: inline-block;
           color: #323232; }
+        .index-container .notice-major-container .notice-major-block .notice-block .more {
+          display: inline-block;
+          font-size: 14px;
+          color: #666666;
+          padding-left: 10px;
+          cursor: pointer; }
+          .index-container .notice-major-container .notice-major-block .notice-block .more:hover {
+            color: #29c192; }
         .index-container .notice-major-container .notice-major-block .notice-block .notice-content {
           padding-left: 0;
           list-style: none;
@@ -1816,19 +1846,33 @@ a:focus {
               background-color: #28b780;
               color: #fff;
               border: 1px solid #28b780; }
-        .index-container .notice-major-container .notice-major-block .major-block .line {
+        .index-container .notice-major-container .notice-major-block .major-block .left-line {
           height: 1px;
           width: 206px;
           background: #f0f0f0;
           bottom: 15px;
           position: relative;
-          display: inline-block;
-          vertical-align: bottom; }
+          display: inline-block; }
+        .index-container .notice-major-container .notice-major-block .major-block .right-line {
+          height: 1px;
+          width: 170px;
+          background: #f0f0f0;
+          bottom: 15px;
+          position: relative;
+          display: inline-block; }
         .index-container .notice-major-container .notice-major-block .major-block .title {
           margin: 0 30px;
           font-size: 24px;
           display: inline-block;
           color: #323232; }
+        .index-container .notice-major-container .notice-major-block .major-block .more {
+          display: inline-block;
+          font-size: 14px;
+          color: #666666;
+          padding-left: 10px;
+          cursor: pointer; }
+          .index-container .notice-major-container .notice-major-block .major-block .more:hover {
+            color: #29c192; }
         .index-container .notice-major-container .notice-major-block .major-block .major-content {
           margin-top: 20px; }
           .index-container .notice-major-container .notice-major-block .major-block .major-content .major-list {
@@ -2351,9 +2395,17 @@ a:focus {
             background-color: #28b780;
             color: #fff;
             border: 1px solid #28b780; }
-      .index-container .teacher-container .teacher-block .block-title .line {
+      .index-container .teacher-container .teacher-block .block-title .left-line {
         height: 1px;
         width: 520px;
+        background: #f0f0f0;
+        bottom: 15px;
+        position: relative;
+        display: inline-block;
+        vertical-align: bottom; }
+      .index-container .teacher-container .teacher-block .block-title .right-line {
+        height: 1px;
+        width: 485px;
         background: #f0f0f0;
         bottom: 15px;
         position: relative;
@@ -2364,6 +2416,14 @@ a:focus {
         font-size: 24px;
         display: inline-block;
         color: #323232; }
+      .index-container .teacher-container .teacher-block .block-title .more {
+        display: inline-block;
+        font-size: 14px;
+        color: #666666;
+        padding-left: 10px;
+        cursor: pointer; }
+        .index-container .teacher-container .teacher-block .block-title .more:hover {
+          color: #29c192; }
       .index-container .teacher-container .teacher-block .block-title .teacher-content {
         padding-left: 0;
         list-style: none;

@@ -81,7 +81,7 @@
     margin: 0 auto;
     width: 100%;
     background: #f7f7f7;
-    height: 417px;
+    height: 335px;
     .course-block {
       margin: 0 auto;
       width: 1200px;
@@ -117,9 +117,18 @@
       }
       .block-title {
         margin-top: 40px;
-        .line {
+        .left-line {
           height: 1px;
           width: 520px;
+          background: $line-color;
+          bottom: 15px;
+          position: relative;
+          display: inline-block;
+          vertical-align: bottom;
+        }
+        .right-line {
+          height: 1px;
+          width: 485px;
           background: $line-color;
           bottom: 15px;
           position: relative;
@@ -131,6 +140,16 @@
           font-size: 24px;
           display: inline-block;
           color: #323232;
+        }
+        .more{
+          display: inline-block;
+          font-size: 14px;
+          color:#666666;
+          padding-left: 10px;
+          cursor: pointer;
+          &:hover{
+            color: #29c192;
+          }
         }
       }
       .swiper-course-container {
@@ -228,62 +247,7 @@
 
           }
         }
-        //.swiper-slide-active{
-        //  width: 250px !important;
-        //  margin-top: -15px;
-        //  .course-card{
-        //    height: 238px;
-        //    .course-image{
-        //      width: 250px;
-        //      height: 158px;
-        //      .course-image-shade{
-        //        background: #323232;
-        //        opacity: 0.66;
-        //        width: 250px;
-        //        height: 158px;
-        //        position: absolute;
-        //        top: 0;
-        //      }
-        //      .teacher{
-        //        margin: 0 auto;
-        //        padding-top: 38px;
-        //        position: relative;
-        //        .avater{
-        //          width: 45px;
-        //          height: 45px;
-        //          margin: 0 auto;
-        //          img{
-        //            width: 45px;
-        //            height: 45px;
-        //            border-radius: 45%;
-        //          }
-        //        }
-        //        .name{
-        //          margin-top: 18px;
-        //          text-align: center;
-        //          font-size: 15px;
-        //          color: #ffffff;
-        //          line-height: 54px;
-        //          white-space: nowrap;
-        //          overflow: hidden;
-        //          text-overflow: ellipsis;
-        //        }
-        //      }
-        //    }
-        //
-        //    .course-name{
-        //      height: 80px;
-        //      text-align: center;
-        //      line-height: 80px;
-        //      font-size: 17px;
-        //      color: #ffffff;
-        //      background: #29c192;
-        //      white-space: nowrap;
-        //      overflow: hidden;
-        //      text-overflow: ellipsis;
-        //    }
-        //  }
-        //}
+
         .swiper-course-pagination {
           text-align: center;
 
@@ -353,7 +317,7 @@
     margin: 0 auto;
     width: 100%;
     background: #ffffff;
-    height: 536px;
+    height: 460px;
     .notice-major-block {
       margin: 0 auto;
       width: 1200px;
@@ -395,20 +359,39 @@
             }
           }
         }
-        .line {
+        .left-line {
           height: 1px;
           width: 206px;
           background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
-          vertical-align: bottom;
+          //vertical-align: bottom;
+        }
+        .right-line {
+          height: 1px;
+          width: 170px;
+          background: $line-color;
+          bottom: 15px;
+          position: relative;
+          display: inline-block;
+          //vertical-align: bottom;
         }
         .title {
           margin: 0 30px;
           font-size: 24px;
           display: inline-block;
           color: #323232;
+        }
+        .more{
+          display: inline-block;
+          font-size: 14px;
+          color:#666666;
+          padding-left: 10px;
+          cursor: pointer;
+          &:hover{
+            color: #29c192;
+          }
         }
         .notice-content {
           padding-left: 0;
@@ -572,20 +555,39 @@
             }
           }
         }
-        .line {
+        .left-line {
           height: 1px;
           width: 206px;
           background: $line-color;
           bottom: 15px;
           position: relative;
           display: inline-block;
-          vertical-align: bottom;
+         // vertical-align: bottom;
+        }
+        .right-line {
+          height: 1px;
+          width: 170px;
+          background: $line-color;
+          bottom: 15px;
+          position: relative;
+          display: inline-block;
+          //vertical-align: bottom;
         }
         .title {
           margin: 0 30px;
           font-size: 24px;
           display: inline-block;
           color: #323232;
+        }
+        .more{
+          display: inline-block;
+          font-size: 14px;
+          color:#666666;
+          padding-left: 10px;
+          cursor: pointer;
+          &:hover{
+            color: #29c192;
+          }
         }
         .major-content {
           margin-top: 20px;
@@ -1163,9 +1165,18 @@
       }
       .block-title {
         // margin-top: 60px;
-        .line {
+        .left-line {
           height: 1px;
           width: 520px;
+          background: $line-color;
+          bottom: 15px;
+          position: relative;
+          display: inline-block;
+          vertical-align: bottom;
+        }
+        .right-line {
+          height: 1px;
+          width: 485px;
           background: $line-color;
           bottom: 15px;
           position: relative;
@@ -1177,6 +1188,16 @@
           font-size: 24px;
           display: inline-block;
           color: #323232;
+        }
+        .more{
+          display: inline-block;
+          font-size: 14px;
+          color:#666666;
+          padding-left: 10px;
+          cursor: pointer;
+          &:hover{
+            color: #29c192;
+          }
         }
         .teacher-content {
           padding-left: 0;

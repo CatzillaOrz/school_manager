@@ -2,9 +2,10 @@
 .course-container(ng-if="indexFn.boutiqueCourseList.length>0")
     .course-block
         .block-title
-            .line
+            .left-line
             .title 精品课程
-            .line
+            .right-line
+            .more(ui-sref="boutique") 更多
         .swiper-course-container
             ul.swiper-wrapper
                 li.swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
@@ -23,14 +24,13 @@
                 i.fa.fa-angle-left
             .swiper-course-button-next
                 i.fa.fa-angle-right
-        .more
-            button.btn-more(ui-sref="boutique") 更多>
 .notice-major-container
     .notice-major-block
         .notice-block
-            .line
+            .left-line
             .title 最新活动
-            .line
+            .right-line
+            .more(ui-sref="noticelist") 更多
             ul.notice-content
                 li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="indexFn.activeFirstNotice=0" ng-mouseenter="indexFn.activeFirstNotice=$index" ng-class="{'active':$index==indexFn.activeFirstNotice}")
                     .new-pic
@@ -44,25 +44,23 @@
                     .date
                         i.fa.fa-calendar
                         span {{notice.publishDate | limitTo:10}}
-            .more
-                button.btn-more(ui-sref="noticelist") 更多>
         .major-block
-            .line
+            .left-line
             .title 热门专业
-            .line
+            .right-line
+            .more(ui-sref="hotmajorlist") 更多
             .major-content
                 .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" )
                     img(ng-src="{{major.inUrl || 'http://oli56k5b0.bkt.clouddn.com/major-defulat.png'}}")
                     .shade
                     .name {{major.specialtyName}}
-            .more
-                button.btn-more(ui-sref="hotmajorlist") 更多>
 .teacher-container(ng-if="indexFn.excellentTeacherList.length>0")
     .teacher-block
         .block-title
-            .line
+            .left-line
             .title 优秀教师
-            .line
+            .right-line
+            .more(ui-sref="excellentteacherlist") 更多
             .teacher-content
                 .teacher-list(ng-repeat="teacher in indexFn.excellentTeacherList" class="{{'teacher'+$index}}" ui-sref="excellentteacherdetail({id:teacher.id})")
                     .teacher-image
@@ -75,6 +73,3 @@
                           | {{indexFn.cutHtml(teacher.introduction,20)}}
                         button.btn-detail 了解详情
                         // http://oli56k5b0.bkt.clouddn.com/avatar-woman.png
-            .more
-                button.btn-more(ui-sref="excellentteacherlist") 更多>
-                //style="background:url({{major.inUrl}});background-size:cover;"
