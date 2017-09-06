@@ -1503,7 +1503,7 @@ a:focus {
         .index-container .course-container .course-block .block-title .more {
           display: inline-block;
           font-size: 14px;
-          color: #666666;
+          color: #999;
           padding-left: 10px;
           cursor: pointer; }
           .index-container .course-container .course-block .block-title .more:hover {
@@ -1707,7 +1707,7 @@ a:focus {
         .index-container .notice-major-container .notice-major-block .notice-block .more {
           display: inline-block;
           font-size: 14px;
-          color: #666666;
+          color: #999;
           padding-left: 10px;
           cursor: pointer; }
           .index-container .notice-major-container .notice-major-block .notice-block .more:hover {
@@ -1868,7 +1868,7 @@ a:focus {
         .index-container .notice-major-container .notice-major-block .major-block .more {
           display: inline-block;
           font-size: 14px;
-          color: #666666;
+          color: #999;
           padding-left: 10px;
           cursor: pointer; }
           .index-container .notice-major-container .notice-major-block .major-block .more:hover {
@@ -2419,7 +2419,7 @@ a:focus {
       .index-container .teacher-container .teacher-block .block-title .more {
         display: inline-block;
         font-size: 14px;
-        color: #666666;
+        color: #999;
         padding-left: 10px;
         cursor: pointer; }
         .index-container .teacher-container .teacher-block .block-title .more:hover {
