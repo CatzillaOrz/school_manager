@@ -73,7 +73,7 @@ var UploadService = {
 	impBatch: function (filePath, access_token, params, callback) {
 		var paths = {'college' : '/v1/college/import', 'major' : '/v1/professionnal/import', 'classes':'/v1/classes/import',
 			'student': '/v1/students/import', 'teacher': '/v1/teacher/import', 'compulsory': '/v1/teachingclass/importmust',
-			'optional': '/v1/teachingclass/importoption', 'course': '/v1/course/import'};
+			'optional': '/v1/teachingclass/importoption', 'course': '/v1/course/import', 'entTutor': '/v1/mentorstraining/import'};
 		this.upload({
 			host: 'gateway-org-io',
 			path: paths[params.uploadType] + '?userId=' + params.userId + '&orgId=' + params.orgId,

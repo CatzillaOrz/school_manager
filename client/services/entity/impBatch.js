@@ -98,7 +98,8 @@ angular.module('dleduWebService')
 					'teacher': host + '/v1/teacher/template',
 					'compulsory': host + '/v1/teachingclass/template?templateType=must',
 					'optional': host + '/v1/teachingclass/template?templateType=option',
-					'course': host + '/v1/course/template'};
+					'course': host + '/v1/course/template',
+					'entTutor': host + '/v1/mentorstraining/template'};
 				window.location.href = paths[type];
 			},
 		}

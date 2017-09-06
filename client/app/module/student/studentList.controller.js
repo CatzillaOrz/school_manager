@@ -169,6 +169,13 @@ angular.module('dleduWebApp')
                 ImpBatchService.downLoad('student');
             },
 
+			/**
+			 * 导出学生
+             */
+            exportData: function(){
+
+            },
+
             init: function () {
                 this.getStudentList();
             }
