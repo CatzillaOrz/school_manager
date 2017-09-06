@@ -5,7 +5,6 @@ angular.module('dleduWebApp')
         $scope.preiodFn={
             //查询参数
             params:{
-
                 id:"",
                 orgId: AuthService.getUser().orgId,
             },
@@ -18,6 +17,8 @@ angular.module('dleduWebApp')
             },
             //当前操作的学年对象
             currentSchoolYear:{},
+            //学期id
+            currentTermId: 0,
             //课节列表
             periodList:[],
             //学年列表
@@ -231,6 +232,35 @@ angular.module('dleduWebApp')
                         }
 
                     })
+            },
+            //删除学期
+            deleteTerm: function () {
+                var _this = $scope.preiodFn;
+                var params = {
+                    id: _this.currentTermId,
+                    userId: AuthService.getUser().id,
+                }
+                SchoolYearService.deleteTerm(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("课节删除成功！");
+                        _this.getSchoolYearList();
+                    })
+                    .catch(function (error) {
+                        var re = /[^\u4e00-\u9fa5]/;
+                        if(re.test(error.data)){
+                            messageService.openMsg("课节删除失败！");
+
+                        }else {
+                            messageService.openMsg(error.data);
+
+                        }
+
+                    })
+            },
+            //学期删除提示
+            deleteTermPrompt: function (id) {
+                this.currentTermId = id;
+                messageService.getMsg("您确定要删除此学期吗？", this.deleteTerm)
             },
             //学年删除提示
             deleteSchoolYearPrompt: function (entity) {

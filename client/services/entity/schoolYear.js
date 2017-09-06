@@ -40,6 +40,10 @@ angular.module('dleduWebService')
                 var schoolyear=$resource('api/schoolyear/deletePeriod');
                 return schoolyear.remove(params);
             },
+            deleteTerm:function (params) {
+                var schoolyear=$resource('api/schoolyear/deleteTerm');
+                return schoolyear.remove(params);
+            },
             updateSchoolYear: function (params) {
                 var schoolyear = $resource('api/schoolyear/updateSchoolYear','',{
                     update: {method:'PUT'}});
