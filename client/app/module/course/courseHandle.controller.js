@@ -20,7 +20,8 @@ angular.module('dleduWebApp')
 				name: "",
 				userId: AuthService.getUser().id,
 				courseDesc: "",
-				courseProp: "",
+                courseProp: "",
+                credit: "",
                 code:""
 			},
 			//操作完成标识
