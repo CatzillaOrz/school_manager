@@ -183,7 +183,7 @@
                                 span.required *
                                 | 教学班编号：
                             .col-sm-6
-                                input.form-control(ng-model="handleFn.params.code" type="text" name="name" validator="required,number, maxlength=30")
+                                input.form-control(ng-model="handleFn.params.code" type="text" name="name" validator="required, maxlength=50")
                         .col-sm-12.text-center
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
                     fieldset

@@ -35,6 +35,8 @@
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 课程名称
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 课程编号
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 课程性质
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 学分
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 350px;') 课程描述
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 100px;') 操作
                         tbody
@@ -42,6 +44,8 @@
                                 td.sorting_1 {{$index+1 + ((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10}}
                                 td {{course.name}}
                                 td {{course.code}}
+                                td {{course.courseProp}}
+                                td {{course.credit}}
                                 td {{course.courseDesc}}
                                 td
                                     a.handle(ui-sref="courseEdit({id:course.id})")

@@ -46,7 +46,7 @@
                             table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
 
                                 tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
-                                    td(colspan='4')
+                                    td(colspan='5')
                                         a(href='', )
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
@@ -55,6 +55,8 @@
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
                                     td(sortable="'name'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
+                                    td(sortable="'code'", data-title="'学期编号'", groupable="'code'")
+                                        | {{schoolTerm.code}}
                                     td(sortable="'startDate'", data-title="'开始日期'", groupable="'name'")
                                         | {{schoolTerm.startDate}}
                                     td(sortable="'endDate'", data-title="'结束日期'", groupable="'age'")
