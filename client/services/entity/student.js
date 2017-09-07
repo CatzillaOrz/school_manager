@@ -41,5 +41,9 @@ angular.module('dleduWebService')
                 var student = $resource('api/student/getImpResult');
                 return student.get(params);
             },
+            exportData: function () {
+                var student = $resource('api/student/exportData');
+                return student.get({orgId: 214, userId: 0});
+            },
         }
     });

@@ -27,7 +27,7 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="editenttutor")
                                     span 新建
-                                //button.btn.btn-primary(type='button' ng-click="entTutorMan.openImpBatch()")
+                                button.btn.btn-primary(type='button' ng-click="entTutorMan.openImpBatch()")
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -113,11 +113,9 @@
                 table
                     tr
                         td 错误行号
-                        td 姓名
-                        td 公司
-                        td 错误信息
+                        td(style="width:20%;") 错误字段
+                        td(style="width:auto") 错误信息
                     tr(ng-repeat="info in entTutorMan.errorInfos")
                         td {{info.line}}
-                        td {{info.code}}
-                        td {{info.name}}
-                        td {{info.msg}}
+                        td(style="width:20%;") {{info.name}}
+                        td(style="width:auto") {{info.msg}}

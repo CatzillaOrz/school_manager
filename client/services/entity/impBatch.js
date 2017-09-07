@@ -33,7 +33,11 @@ angular.module('dleduWebService')
 							if(res.data && res.data.success){//学生教师、排课处理
 								messageService.openMsg("上传文件成功！请稍候查看处理结果");
 							}else{
-								scopeObj.errorInfos = res.data;
+								if(res.data && res.data.errorInfo){//处理企业管理不一致的导入接口
+									scopeObj.errorInfos = res.data.errorInfo;
+								}else{
+									scopeObj.errorInfos = res.data;
+								}
 								if(scopeObj.errorInfos[0].id){
 									ngDialog.close();
 									messageService.openMsg("导入成功！");
@@ -80,17 +84,7 @@ angular.module('dleduWebService')
 			 * 下载模板
 			 */
 			downLoad: function(type){
-				var hostname = window.location.hostname;
-				var host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
-				if(hostname.indexOf('schooldev.aizhixin.com') != -1){
-					host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
-				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
-				}else if(hostname.indexOf('school.dlztc.com') != -1){
-					host = 'http://gateway.dlztc.com/zuul/org-manager';
-				}else if(hostname.indexOf('school.aizhixin.com') != -1){
-					host = 'http://gateway.aizhixin.com/zuul/org-manager';
-				}
+				var host = this.getEnvHost();
 				var paths = {'college' : host + '/v1/college/template',
 					'major' : host + '/v1/professionnal/template',
 					'classes':host + '/v1/classes/template',
@@ -102,6 +96,22 @@ angular.module('dleduWebService')
 					'entTutor': host + '/v1/mentorstraining/template'};
 				window.location.href = paths[type];
 			},
+
+			//获取环境
+			getEnvHost: function(){
+				var hostname = window.location.hostname;
+				var host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
+				if(hostname.indexOf('schooldev.aizhixin.com') != -1){
+					host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
+				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
+					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
+				}else if(hostname.indexOf('school.dlztc.com') != -1){
+					host = 'http://gateway.dlztc.com/zuul/org-manager';
+				}else if(hostname.indexOf('school.aizhixin.com') != -1){
+					host = 'http://gateway.aizhixin.com/zuul/org-manager';
+				}
+				return host;
+			}
 		}
 
 	});

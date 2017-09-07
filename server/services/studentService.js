@@ -140,9 +140,9 @@ var StudentService = {
     exportData: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
-            path: '/v1/students/importmsg',
+            path: '/v1/students/exportstudents',
             access_token: access_token,
-            params: params
+            params: {orgId: 214, userId: 0}
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);

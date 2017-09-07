@@ -18,6 +18,7 @@ router.get('/getStudentById',auth.isSignedIn, controller.getStudentById);
 router.get('/getSimpleStudents',auth.isSignedIn, controller.getSimpleStudents);
 router.put('/updateStudentToClasses',auth.isSignedIn, controller.updateStudentToClasses);
 router.get('/getImpResult',auth.isSignedIn, controller.getImpResult);
+router.get('/exportData',auth.isSignedIn, controller.exportData);
 
 
 module.exports = router;
