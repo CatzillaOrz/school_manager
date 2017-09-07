@@ -140,7 +140,7 @@ var StudentService = {
     exportData: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
-            path: '/v1/students/importmsg',
+            path: '/v1/students/exportstudents',
             access_token: access_token,
             params: params
         }).then(function (res) {

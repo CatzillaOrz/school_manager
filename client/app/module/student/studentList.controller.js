@@ -173,7 +173,14 @@ angular.module('dleduWebApp')
 			 * 导出学生
              */
             exportData: function(){
+                var orgId = AuthService.getUser().orgId;
+                StudentService.exportData({orgId: orgId, userId: AuthService.getUser().id}).$promise
+                    .then(function (data) {
+                        window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId;
+                    })
+                    .catch(function (error) {
 
+                    })
             },
 
             init: function () {
