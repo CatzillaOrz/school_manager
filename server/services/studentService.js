@@ -142,7 +142,7 @@ var StudentService = {
             host: 'gateway-org',
             path: '/v1/students/exportstudents',
             access_token: access_token,
-            params: {orgId: 214, userId: 0}
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
