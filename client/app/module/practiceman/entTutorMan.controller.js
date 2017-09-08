@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			// 获取评教问卷已分配列表
+			// 获取企业导师列表
 			getEntTutorList: function () {
 				var that = this;
 				var params = {
@@ -113,7 +113,7 @@ angular.module('dleduWebApp')
 					width: 600,
 					scope: $scope
 				};
-				ImpBatchService.importantBatch(params, this, dialogParams, this.getCollegeList);
+				ImpBatchService.importantBatch(params, this, dialogParams, this.getEntTutorList);
 			},
 
 			//选择文件事件
