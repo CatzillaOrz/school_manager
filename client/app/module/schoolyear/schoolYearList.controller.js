@@ -242,19 +242,11 @@ angular.module('dleduWebApp')
                 }
                 SchoolYearService.deleteTerm(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("课节删除成功！");
+                        messageService.openMsg("学期删除成功！");
                         _this.getSchoolYearList();
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg("课节删除失败！");
-
-                        }else {
-                            messageService.openMsg(error.data);
-
-                        }
-
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"学期删除失败！"));
                     })
             },
             //学期删除提示
