@@ -120,7 +120,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentTeachClass = entity;
-				messageService.getMsg("您确定要删除此教学班吗？", that.deleteTeachClass)
+				messageService.getMsg("课表、考勤等点点相关的业务数据，以及开卷相关业务数据将被清除,您确定仍要删除此教学班吗？", that.deleteTeachClass)
 			},
 
 			/**

@@ -4,7 +4,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('EntTutorManCtrl', function ($scope, $state, AuthService, messageService, PracticeManService, CommonService,
-											 AccountService) {
+											 AccountService, ImpBatchService) {
 		$scope.entTutorMan = {
 			//问卷列表
 			records: [],
@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			// 获取评教问卷已分配列表
+			// 获取企业导师列表
 			getEntTutorList: function () {
 				var that = this;
 				var params = {
@@ -84,6 +84,50 @@ angular.module('dleduWebApp')
 				that.currentRecord = entity;
 				messageService.getMsg("您确定要重置"+that.currentRecord.name+"的密码吗？", that.resetPassword)
 			},
+
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			openImpBatch: function(){
+				var params = {
+					template: 'importDialog',
+					width: 600,
+					scope: $scope,
+				};
+				ImpBatchService.openImpBatch(params);
+			},
+
+			/**
+			 * 弹出批量导入弹出框
+			 */
+			importantBatch: function(file){
+				var params = {
+					file: file,
+					orgId: AuthService.getUser().orgId,
+					userId: AuthService.getUser().id,
+					uploadType: 'entTutor'
+				};
+				var dialogParams = {
+					template: 'importResultDialog',
+					width: 600,
+					scope: $scope
+				};
+				ImpBatchService.importantBatch(params, this, dialogParams, this.getEntTutorList);
+			},
+
+			//选择文件事件
+			selected: function($newFiles){
+				ImpBatchService.selected($newFiles);
+			},
+
+			/**
+			 * 下载模板
+			 */
+			downLoad: function(){
+				ImpBatchService.downLoad('entTutor');
+			},
+
 
 			init: function () {
 				this.getEntTutorList();

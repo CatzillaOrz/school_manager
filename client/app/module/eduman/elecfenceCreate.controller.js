@@ -21,10 +21,6 @@ angular.module('dleduWebApp')
 					return;
 				}
 				if(newValue != oldValue){
-					if($scope.elecFenceCreateFn.isGetInitValue){
-						$scope.elecFenceCreateFn.isGetInitValue = false;
-						return;
-					}
 					$scope.elecFenceCreateFn.switchElec(oldValue);
 				}
 			});
@@ -73,7 +69,9 @@ angular.module('dleduWebApp')
 					.then(function(dataList){
 						that.semeterLists = dataList.data;
 						//dataList.data.splice(0, 0, {name: "--请选择--", id: '0'});
-						that.elecSet.termSelectedId = that.record.semesterId + '';
+						if(that.record && that.record.semesterId){
+							that.elecSet.termSelectedId = that.record.semesterId + '';
+						}
 						//that.loadSetInfo();
 					})
 					.catch(function(e){
@@ -247,10 +245,12 @@ angular.module('dleduWebApp')
 						if(that.record && that.record.setupOrClose){
 							if(that.record.setupOrClose == 10){//开启
 								that.isOpenElec = '1';
+								that.isGetInitValue = true;
 							}else if(that.record.setupOrClose == 20){
 								that.isOpenElec = '0';
+								that.isGetInitValue = false;
 							}
-							that.isGetInitValue = true;
+
 						}
 						//绘制多边形
 						that.drawPolygon(that.polyVer);
@@ -264,6 +264,10 @@ angular.module('dleduWebApp')
 			switchElec: function(oldValue){
 				var isOpen = parseInt(this.isOpenElec);
 				var that = this;
+				if(that.isGetInitValue){
+					that.isGetInitValue = false;
+					return;
+				}
 				if(!that.record){
 					messageService.openMsg('请先设置围栏!');
 					that.isOpenElec = oldValue;

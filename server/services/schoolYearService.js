@@ -163,6 +163,21 @@ var SchoolYearService = {
             callback(e);
         });
     },
+    deleteTerm: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/semester/delete/' + params.id,
+            params:{userId:params.userId}
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     getPeriodById: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',

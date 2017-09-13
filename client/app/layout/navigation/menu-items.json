@@ -75,13 +75,13 @@
             "icon": "graduation-cap"
         },
         {
-            "title": "学时管理",
+            "title": "学期管理",
             "sref": "periodlist",
             "active": "period",
             "icon": "calendar"
         },
         {
-            "title": "课程管理",
+            "title": "课程基本管理",
             "sref": "courselist",
             "active": "course",
             "icon": "book"

@@ -231,7 +231,7 @@ angular.module('dleduWebApp')
 					messageService.openMsg("只能选择一个本校教师！");
 					return;
 				}
-				PracticeManService.isExistInGroup({orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
+				PracticeManService.isExistInGroup({type: 'teacher', orgId: AuthService.getUser().orgId, teacherId: entity.id}).$promise
 					.then(function (data) {
 						if(data.success){
 							var _this = that;
@@ -264,7 +264,7 @@ angular.module('dleduWebApp')
 			//选择学生
 			selectStudent: function (entity) {
 				var that = this;
-				PracticeManService.isExistInGroup({orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
+				PracticeManService.isExistInGroup({type: 'student', orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
 					.then(function (data) {
 						if(data.success){
 							var _this = that;
@@ -340,7 +340,6 @@ angular.module('dleduWebApp')
 				entity.endDate = params.endDate;
 				entity.orgId = AuthService.getUser().orgId;
 				if(this.validateDate(entity.startDate, entity.endDate)){
-					messageService.openMsg("开始日期不能大于等于结束日期！");
 					return;
 				}
 				if(this.isEidt){
@@ -382,8 +381,14 @@ angular.module('dleduWebApp')
 			//校验日期
 			validateDate: function(startDate, endDate){
 				var resultFlag = false;
-				if(new Date(startDate + ' 00:00:00').getTime() >= new Date(endDate + ' 00:00:00').getTime()){
+				var start = new Date(startDate + ' 00:00:00').getTime(), end = new Date(endDate + ' 00:00:00').getTime();
+				var timeStampCurrent = new Date(new Date().setHours(0, 0, 0, 0));
+				if(start >= end){
 					resultFlag = true;
+					messageService.openMsg("开始日期不能大于等于结束日期！");
+				}else if(start < timeStampCurrent){
+					resultFlag = true;
+					messageService.openMsg("日期不能小于当前日期！");
 				}
 				return resultFlag;
 			},

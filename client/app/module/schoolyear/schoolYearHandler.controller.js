@@ -21,7 +21,8 @@ angular.module('dleduWebApp')
             semester:{
                 name:"",
                 startDate:"",
-                endDate:""
+                endDate:"",
+                code:""
             },
             //学期列表
             semesterList:[],
@@ -69,12 +70,20 @@ angular.module('dleduWebApp')
             addSchoolYear:function(){
                 var that = this;
                 var params = that.params;
-
+                var isFlag=false;
                 params.semesterList=_.filter(that.semesterList, function(entity) {
                     if(entity.name&&entity.startDate&&entity.endDate){
+                        if(!entity.code){
+                            isFlag=true;
+                        }
                        return entity
                     }
+
                 });
+                if(isFlag){
+                    messageService.openMsg("学期编码不能为空！");
+                    return;
+                }
                 SchoolYearService.addSchoolYear(params).$promise
                     .then(function (data) {
                         that.complete = true;

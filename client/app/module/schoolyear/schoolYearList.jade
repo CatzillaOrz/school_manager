@@ -50,7 +50,7 @@
                                         a(href='', )
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
-                                            // span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
+                                            span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
                                             span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
                                     td(sortable="'name'", data-title="'学期'", groupable="'country'")
@@ -64,6 +64,9 @@
                                     td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
                                         span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
                                         span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
+                                    td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
+                                        a(href='', )
+                                            span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)") 删除
                             .dt-toolbar-footer
                                 .col-sm-6.col-xs-12.hidden-xs
                                     #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
