@@ -58,6 +58,11 @@
                                     a.handle(ng-click="handleFn.selectTeacher(teacher)")
                                         i.fa.fa-arrow-circle-right
                                         span 选中
+                    .dt-toolbar-footer
+                        .col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='handleFn.page.totalElements', max-size='handleFn.page.pageSize' ng-model='handleFn.page.pageNumber',ng-change="handleFn.getSimpleTeachers()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
                 .col-sm-1
                 .col-sm-5
                     fieldset
@@ -145,6 +150,11 @@
                                         a.handle(ng-click="handleFn.selectStudent(student)")
                                             i.fa.fa-arrow-circle-right
                                             span 选中
+                        dt-toolbar-footer
+                            .col-xs-12
+                                .dataTables_paginate.paging_simple_numbers
+                                    ul.pagination-sm(uib-pagination, total-items='handleFn.page.totalElements', max-size='handleFn.page.pageSize' ng-model='handleFn.page.pageNumber',ng-change="handleFn.getSimpleStudents()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
                     .col-sm-1
                     .col-sm-5
                         fieldset
