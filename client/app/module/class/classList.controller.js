@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('ClassListCtrl', function ($scope, $state, $window, ClassService,AuthService,messageService,CommonService,
-                                           Upload, ngDialog, ImpBatchService) {
+                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -10,6 +10,8 @@ angular.module('dleduWebApp')
             currentClass: {},
             myFile: null, //选择的文件对象
             errorInfos: [], //返回的错误信息
+            collegeDropList:[],
+            majorDropList:[],
             page: {
                 totalElements: 0,
                 totalPages: 0,
@@ -18,8 +20,84 @@ angular.module('dleduWebApp')
             },
             params: {
                 name:"",
-            },
+                collegeId:"",
+                professionalId:"",
+                masterName:"",
+                teachingYear:""
 
+            },
+            //select2动态关键字查询列表配置
+            selectCollege2Options: function () {
+                var _this = this;
+                return {
+
+                    ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
+                        orgId: AuthService.getUser().orgId,
+                        pageNumber: 1,
+                        pageSize: 100
+                    }, "name"),
+
+                    templateResult: function (data) {
+
+                        if (data.id === '') { // adjust for custom placeholder values
+                            _this.collegeDropList = [];
+                            return '按班级筛选';
+                        }
+                        _this.collegeDropList.push(data);
+                        return data.name;
+                    },
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true
+                }
+            },
+            //专业下拉列表配置
+            select2MajorOptions: function () {
+                var that = this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/major/getMajorDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId: that.params.collegeId,
+
+                            };
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.majorDropList = [];
+                        }
+                        that.majorDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
             // 获取班级列表
             getClassList: function () {
                 var that = this;
@@ -29,6 +107,10 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+                params.professionalId=that.params.professionalId;
+                params.masterName=that.params.masterName;
+                params.teachingYear=that.params.teachingYear;
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;
@@ -127,4 +209,14 @@ angular.module('dleduWebApp')
             }
         };
         $scope.classListFn.init();
+        $timeout(function () {
+            $scope.$watch('classListFn.params.collegeId', function(newValue, oldValue) {
+                if(!newValue){
+                    $scope.classListFn.params.professionalId=null;
+                }
+                if (newValue!=oldValue){
+                    $scope.classListFn.majorDropList=[];
+                }
+            });
+        });
     });

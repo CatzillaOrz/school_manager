@@ -5,7 +5,7 @@ angular.module('dleduWebService')
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.0.5.3'
+                version: '0.0.5.4'
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
@@ -58,7 +58,7 @@ angular.module('dleduWebService')
                     return school;
                 } else {
                     var url = $location.host().split('.')[0];
-                     //url = "sjdr";
+                    // url = "sjlb";
                     var params = {
                         domainname: url
                     };

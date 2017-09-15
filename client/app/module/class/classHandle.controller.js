@@ -16,7 +16,12 @@ angular.module('dleduWebApp')
                 orgId: AuthService.getUser().orgId,
                 name: "",
                 userId: AuthService.getUser().id,
-                collegeId:""
+                collegeId:"",
+                schoolStatus:10,
+                teachingYear:"",
+                inSchoolDate:"",
+                outSchoolDate:""
+
             },
             page: {
                 totalElements: 0,

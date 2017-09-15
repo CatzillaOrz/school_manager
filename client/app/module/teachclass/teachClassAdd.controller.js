@@ -257,9 +257,12 @@ angular.module('dleduWebApp')
             getSimpleTeachers:function () {
                 var _this=this;
                 var params=_this.searchParams;
+                params.pageSize=_this.page.pageSize;
+                params.pageNumber=_this.page.pageNumber;
                 TeacherService.getSimpleTeachers(params).$promise
                     .then(function (data) {
                         _this.teacherList = data.data;
+                        _this.page=data.page;
 
                     })
                     .catch(function (error) {
@@ -270,10 +273,12 @@ angular.module('dleduWebApp')
             getSimpleStudents:function () {
                 var _this=this;
                 var params=_this.searchStudentParams;
+                params.pageSize=_this.page.pageSize;
+                params.pageNumber=_this.page.pageNumber;
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList = data.data;
-
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -292,6 +297,16 @@ angular.module('dleduWebApp')
                     return;
                 }
                 this.step = this.step - 1;
+            },
+            //查询参数重置
+            resetParams: function () {
+                var _this = this;
+                _this.page = {
+                    totalElements: 0,
+                    totalPages: 0,
+                    pageNumber: 1,
+                    pageSize: 10
+                };
             },
            //选择的老师
             selectTeacher:function (entity) {

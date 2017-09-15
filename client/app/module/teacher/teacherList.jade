@@ -17,14 +17,20 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.col-sm-6
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="teacherListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="teacherListFn.getTeacherList()")
-                                        i.glyphicon.glyphicon-search
-                        .col-sm-6.col-xs-6.hidden-xs
+                        .col-xs-10
+                            form.form-inline
+                                .form-group.col-sm-3.margin-top-5
+                                    label 院系：
+                                    select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()" )
+                                        option(value="") 全部
+                                        option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                .form-group.col-sm-3.margin-top-5
+                                    label 教师：
+                                    input.form-control(type='search', placeholder='按教师名称查询',  ng-model="teacherListFn.params.name")
+                        .col-sm-2.hidden-xs
                             .ColVis
+                                button.btn.btn-primary(ng-click="teacherListFn.getTeacherList()")
+                                    span 查询
                                 button.btn.btn-primary(ui-sref="teacherCreat")
                                     span 新建
                                 button.btn.btn-primary(type='button' ng-click="teacherListFn.openImpBatch()")
