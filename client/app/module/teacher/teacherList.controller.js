@@ -53,7 +53,7 @@ angular.module('dleduWebApp')
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
+                    pageNumber: 1,
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
@@ -77,6 +77,7 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
                 TeacherService.getTeacherList(params).$promise
                     .then(function (data) {
                         that.teacherList = data.data;

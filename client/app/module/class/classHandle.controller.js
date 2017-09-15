@@ -116,6 +116,10 @@ angular.module('dleduWebApp')
                         that.params.name = data.name;
                         that.collegeId=data.collegeId;
                         that.majorId=data.professionalId;
+                        that.params.schoolStatus=data.schoolStatus;
+                        that.params.teachingYear=data.teachingYear;
+                        that.params.inSchoolDate=data.inSchoolDate;
+                        that.params.outSchoolDate=data.outSchoolDate;
                         that.getCollegeById(that.collegeId);
 
                     })

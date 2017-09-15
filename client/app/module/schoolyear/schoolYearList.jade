@@ -64,7 +64,7 @@
                                     td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
                                         span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
                                         span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
-                                    td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
+                                    td.cursor-pointer(sortable="'numWeek'", data-title="'操作'")
                                         a(href='', )
                                             span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)") 删除
                             .dt-toolbar-footer
