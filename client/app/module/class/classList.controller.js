@@ -103,7 +103,7 @@ angular.module('dleduWebApp')
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: that.page.pageNumber,
+                    pageNumber:1,
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
@@ -129,6 +129,10 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+                params.professionalId=that.params.professionalId;
+                params.masterName=that.params.masterName;
+                params.teachingYear=that.params.teachingYear;
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;

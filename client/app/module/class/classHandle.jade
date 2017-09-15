@@ -28,9 +28,9 @@
                             span.required *
                             | 在校状态：
                         .col-sm-7
-                            select.form-control(ng-model="handleFn.params.schoolStatus ")
-                                option(value="10") 在校
-                                option(value="20") 毕业
+                            select.form-control(ng-model="handleFn.params.schoolStatus")
+                                option(value="10" ng-selected="handleFn.params.schoolStatus==10") 在校
+                                option(value="20" ng-selected="handleFn.params.schoolStatus==20") 毕业
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
