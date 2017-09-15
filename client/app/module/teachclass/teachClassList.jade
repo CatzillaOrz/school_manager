@@ -17,22 +17,40 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.col-sm-4
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按教学班名称查询', aria-controls='datatable_col_reorder' ng-model="teachClassListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="teachClassListFn.getTeachClassList()")
-                                        i.glyphicon.glyphicon-search
-                        .col-sm-8.col-xs-6.hidden-xs
+                        .col-xs-9
+                            form.form-inline
+                                .form-group.col-sm-3.margin-top-5
+                                    label 学期：
+                                    select.select2.form-control(ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()" )
+                                        option(value="") 全部
+                                        option(ng-repeat="college in teachClassListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                .form-group.col-sm-3.margin-top-5
+                                    label 选课类型：
+                                    select.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
+                                        option(value="") 全部
+                                        option(value="10" ) 必修
+                                        option(value="20" ) 选修
+                                .form-group.col-sm-3.margin-top-5
+                                    label 课程名称：
+                                    input.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
+                                .form-group.col-sm-3.margin-top-5
+                                    label 教学班：
+                                    input.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
+                                .form-group.col-sm-3.margin-top-5
+                                    label 教师：
+                                    input.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
+                        .col-sm-3.hidden-xs
                             .ColVis
-                                button.btn.btn-primary(ng-click='teachClassListFn.schedules()')
+                                button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
+                                    span 查询
+                                button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()')
                                     span 批量排课
                                 .speace-10
-                                button.btn.btn-primary(ui-sref="teachClassCreat")
+                                button.btn.btn-primary.margin-top-5(ui-sref="teachClassCreat")
                                     span 新建教学班
-                                button.btn.btn-primary(type='button' ng-click="teachClassListFn.openImpBatch('optional')")
+                                button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('optional')")
                                     span 按选修课批量导入
-                                button.btn.btn-primary(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')")
+                                button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')")
                                     span 按必修课批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -41,10 +59,11 @@
 
                                         input(type='checkbox'  ng-model="teachClassListFn.allChedked" ng-click='teachClassListFn.allCheck(teachClassListFn.allChedked)' )
                                         span 全选
-                                th 班级名称
+                                th 教学班名称
                                 th 学期
                                 th 课程
-                                th 教学班编号
+                                th 课程类型
+                                th 教师名称
                                 th 学生数量
                                 th 操作
                         tbody
@@ -55,7 +74,10 @@
                                     a.handle(ui-sref="teachClassDetail({id:teachClass.id})") {{teachClass.name}}
                                 td {{teachClass.semesterName}}
                                 td {{teachClass.courseName}}
-                                td {{teachClass.code}}
+                                td
+                                    span(ng-if="teachClass.classOrStudents==10") 必修
+                                    span(ng-if="teachClass.classOrStudents==20") 选修
+                                td {{teachClass.teacherNames}}
                                 td {{teachClass.studentsCount}}
                                 td
                                     a.handle(ui-sref="agendaWeek({id:teachClass.id,name:teachClass.name,semesterId:teachClass.semesterId})")
