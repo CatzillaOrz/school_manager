@@ -62,7 +62,7 @@ angular.module('dleduWebApp')
                                 }
                             };
                         },
-                        cache: false
+                        cache: true
                     },
 
                 }

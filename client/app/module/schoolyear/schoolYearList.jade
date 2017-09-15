@@ -46,7 +46,7 @@
                             table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
 
                                 tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
-                                    td(colspan='5')
+                                    td(colspan='6')
                                         a(href='', )
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
