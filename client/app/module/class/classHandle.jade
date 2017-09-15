@@ -26,9 +26,35 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
+                            | 在校状态：
+                        .col-sm-7
+                            select.form-control(ng-model="handleFn.params.schoolStatus ")
+                                option(value="10") 在校
+                                option(value="20") 毕业
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 年级：
+                        .col-sm-7
+                            input.form-control(ng-model="handleFn.params.teachingYear " name="teachingYear" placeholder="请填输入年份！" validator="required")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 入学时间：
+                        .col-sm-7
+                            input.form-control(type="text" name="inSchool"  pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.inSchoolDate' placeholder="请选择入学时间" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 毕业时间：
+                        .col-sm-7
+                            input.form-control(type="text" name="outSchool" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.outSchoolDate' placeholder="请选择毕业时间" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
                             | 班级名称：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过50个字班级名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=50")
+                            input.form-control(type="text" name="name"  ng-model='handleFn.params.name' placeholder="请选输入班级名称" validator="required, maxlength=50")
                 .form-actions
                     .row
                         .col-md-12

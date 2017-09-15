@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('TeacherListCtrl', function ($scope, TeacherService,AuthService,messageService,CommonService,
-                                             ngDialog, Upload, ImpBatchService, AccountService) {
+                                             ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService) {
         $scope.teacherListFn={
             //老师列表
             teacherList: [],
@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
             currentTeacher: {},
             myFile: null, //选择的文件对象
             errorInfos: null, //返回的错误信息
+            collegeDropList:[],
             page: {
                 totalElements: 0,
                 totalPages: 0,
@@ -18,8 +19,35 @@ angular.module('dleduWebApp')
             },
             params: {
                 name:"",
+                collegeId:"",
             },
+//select2动态关键字查询列表配置
+            selectCollege2Options: function () {
+                var _this = this;
+                return {
 
+                    ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
+                        orgId: AuthService.getUser().orgId,
+                        pageNumber: 1,
+                        pageSize: 100
+                    }, "name"),
+
+                    templateResult: function (data) {
+
+                        if (data.id === '') { // adjust for custom placeholder values
+                            _this.collegeDropList = [];
+                            return '按班级筛选';
+                        }
+                        _this.collegeDropList.push(data);
+                        return data.name;
+                    },
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true
+                }
+            },
             // 获取老师列表
             getTeacherList: function () {
                 var that = this;
@@ -29,6 +57,8 @@ angular.module('dleduWebApp')
                     pageSize: that.page.pageSize
                 };
                 params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+
                 TeacherService.getTeacherList(params).$promise
                     .then(function (data) {
                         that.teacherList = data.data;
