@@ -302,7 +302,7 @@ angular.module('dleduWebApp')
                     }
                 });
                 if(temp.length==0){
-                    _this.selectTeacherList.splice(0,0,entity);
+                    _this.selectTeacherList.push(entity);
                 }
             },
             //移除老师
