@@ -106,7 +106,7 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				this.getTeacherList();
+				//this.getTeacherList();
 			}
 		};
 		$scope.roleDist.init();
