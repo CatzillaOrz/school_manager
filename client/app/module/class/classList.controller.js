@@ -109,7 +109,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber:1,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
                 params.collegeId=that.params.collegeId;
@@ -131,7 +132,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
                 params.collegeId=that.params.collegeId;
