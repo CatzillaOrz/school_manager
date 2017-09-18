@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('SchoolYearListCtrl', function ($scope, $state,AuthService,StudentService,messageService,CommonService,NgTableParams,SchoolYearService) {
+    .controller('SchoolYearListCtrl', function ($scope, $state,AuthService,StudentService,messageService,CommonService,
+                                                NgTableParams,SchoolYearService, RoleAuthService) {
         $scope.preiodFn={
             //查询参数
             params:{
@@ -108,6 +109,12 @@ angular.module('dleduWebApp')
                     text:"第二十节"
                 },
             ],
+
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
+
             //学年查询
             getSchoolYearList: function () {
                 var that = this;

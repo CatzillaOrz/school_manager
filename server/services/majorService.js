@@ -14,9 +14,9 @@ var MajorService = {
 
     getMajorList : function (params, access_token, callback) {
     RestClient.get({
-      host: 'gateway-org',
-      path: '/v1/professionnal/list',
-        params
+      host: 'gateway-org-auth',
+      path: '/v1/shool/professionnallist',
+      params
     }).then(function (res) {
       if (res.status.code == 200) {
         callback(null, res.entity);

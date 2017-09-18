@@ -5,7 +5,7 @@
 
 angular.module('dleduWebApp')
 	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
-												Upload, UploadService, ImpBatchService, ngDialog) {
+												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -29,6 +29,12 @@ angular.module('dleduWebApp')
 				courseName:"",
                 teacherName:""
 			},
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
+			},
+
             select2SemesterOptions: function () {
                 var _this = this;
                 return {

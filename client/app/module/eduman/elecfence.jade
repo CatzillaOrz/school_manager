@@ -8,7 +8,7 @@
                 i.fa.fa-table
             h2 查询条件
 
-            button.btn.btn-primary.set-elecfence(ng-click="evaFenceFn.setFence()")
+            button.btn.btn-primary.set-elecfence(ng-click="evaFenceFn.setFence()" ng-if="evaFenceFn.isUseAuth('add')")
                 span.widget-icon
                     i.fa.fa-table
                 span 设置围栏

@@ -25,9 +25,9 @@
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.btn.btn-primary(ui-sref="courseCreat")
+                                button.btn.btn-primary(ui-sref="courseCreat" ng-if="courseListFn.isUseAuth('add')")
                                     span 新建
-                                button.btn.btn-primary(type='button' ng-click="courseListFn.openImpBatch()")
+                                button.btn.btn-primary(type='button' ng-click="courseListFn.openImpBatch()" ng-if="courseListFn.isUseAuth('imp')")
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
@@ -48,10 +48,10 @@
                                 td {{course.credit}}
                                 td {{course.courseDesc}}
                                 td
-                                    a.handle(ui-sref="courseEdit({id:course.id})")
+                                    a.handle(ui-sref="courseEdit({id:course.id})" ng-if="courseListFn.isUseAuth('update')")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="courseListFn.deletePrompt(course)")
+                                    a.handle(ng-click="courseListFn.deletePrompt(course)" ng-if="courseListFn.isUseAuth('del')")
                                         i.fa.fa-trash-o
                                         span 删除
                     .dt-toolbar-footer

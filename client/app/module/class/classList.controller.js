@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('ClassListCtrl', function ($scope, $state, $window, ClassService,AuthService,messageService,CommonService,
-                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout) {
+                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout, RoleAuthService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -26,6 +26,10 @@ angular.module('dleduWebApp')
                 teachingYear:""
 
             },
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
             //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
@@ -34,7 +38,8 @@ angular.module('dleduWebApp')
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
-                        pageSize: 100
+                        pageSize: 100,
+                        managerId: AuthService.getUser().id
                     }, "name"),
 
                     templateResult: function (data) {

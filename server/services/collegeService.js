@@ -89,8 +89,8 @@ var CollegeService = {
     },
     getCollegeDropList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/college/droplist',
+            host: 'gateway-org-auth',
+            path: '/v1/shool/collegedroplist',
             params:params,
             access_token: access_token
         }).then(function (res) {
