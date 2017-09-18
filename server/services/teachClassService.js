@@ -14,7 +14,7 @@ var TeachClassService = {
 	getTeachClassList: function (params, access_token, callback) {
 		RestClient.get({
 			host: 'gateway-org',
-			path: '/v1/teachingclass/list',
+			path: '/v1/shool/organ/teachingClassesList',
 			params: params
 		}).then(function (res) {
 				if (res.status.code == 200) {

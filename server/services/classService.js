@@ -13,8 +13,8 @@ var ClassService = {
 
     getClassList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/classes/list',
+            host: 'gateway-org-auth',
+            path: '/v1/shool/classeslist',
             params
         }).then(function (res) {
             if (res.status.code == 200) {

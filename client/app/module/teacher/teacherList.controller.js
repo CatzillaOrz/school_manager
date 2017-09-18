@@ -2,7 +2,8 @@
 
 angular.module('dleduWebApp')
     .controller('TeacherListCtrl', function ($scope, TeacherService,AuthService,messageService,CommonService,
-                                             ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService) {
+                                             ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService,
+                                             RoleAuthService) {
         $scope.teacherListFn={
             //老师列表
             teacherList: [],
@@ -21,6 +22,12 @@ angular.module('dleduWebApp')
                 name:"",
                 collegeId:"",
             },
+
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
+
 //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;

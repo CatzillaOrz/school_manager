@@ -14,8 +14,8 @@ var TeacherService = {
 
     getTeacherList : function (params, access_token, callback) {
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/teacher/list',
+            host: 'gateway-org-auth',
+            path: '/v1/shool/simpleteachers',
             params
         }).then(function (res) {
             if (res.status.code == 200) {
