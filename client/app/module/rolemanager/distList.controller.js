@@ -65,7 +65,13 @@ angular.module('dleduWebApp')
 				}
 				RoleManagerService.distRole(params).$promise
 					.then(function (data) {
-						messageService.openMsg("分配权限成功！");
+						if(data.success){
+							messageService.openMsg("分配权限成功！");
+						}else{
+							messageService.openMsg(data.message);
+						}
+
+
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error, "分配权限失败！"));
@@ -100,7 +106,7 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				this.getTeacherList();
+				//this.getTeacherList();
 			}
 		};
 		$scope.roleDist.init();
