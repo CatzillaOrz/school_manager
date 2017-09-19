@@ -15,7 +15,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="roleDist.params.name")
+                                    input.form-control(type='search', placeholder='按教师名称或者工号查询', aria-controls='datatable_col_reorder' ng-model="roleDist.params.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="roleDist.getTeacherList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
@@ -50,7 +50,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat="teacher in roleDist.records")
                                 td
-                                    input(type="radio" name="sel" ng-click="roleDist.selDist(teacher)" )
+                                    input(type="radio" name="sel" ng-disabled="roleDist.currentId == teacher.id" ng-click="roleDist.selDist(teacher)" )
                                 td {{teacher.jobNumber}}
                                 td {{teacher.name}}
                                 td {{teacher.collegeName}}

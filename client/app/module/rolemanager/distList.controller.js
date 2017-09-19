@@ -12,6 +12,8 @@ angular.module('dleduWebApp')
 			currentRecord: null,
 			//distType 分配类型
 			distType: 'school',
+			//当前登录用户id
+			currentId: AuthService.getUser().id,
 			page: {
 				totalElements: 0,
 				totalPages: 0,
