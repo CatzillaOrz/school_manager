@@ -26,7 +26,7 @@
                                         option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                 .form-group.col-sm-3.margin-top-5
                                     label 教师：
-                                    input.form-control(type='search', placeholder='按教师名称查询',  ng-model="teacherListFn.params.name")
+                                    input.form-control(type='search', placeholder='按教师名称或者工号查询',  ng-model="teacherListFn.params.name")
                         .col-sm-2.hidden-xs
                             .ColVis
                                 button.btn.btn-primary(ng-click="teacherListFn.getTeacherList()")
@@ -61,7 +61,7 @@
                                     a.handle(ui-sref="teacherEdit({id:teacher.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="teacherListFn.deletePrompt(teacher)")
+                                    a.handle(ng-click="teacherListFn.deletePrompt(teacher)" ng-if='teacherListFn.currentId != teacher.id')
                                         i.fa.fa-trash-o
                                         span 删除
                                     a.handle(ng-click="teacherListFn.resetPasswordPrompt(teacher)")

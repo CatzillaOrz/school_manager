@@ -12,6 +12,8 @@ angular.module('dleduWebApp')
             myFile: null, //选择的文件对象
             errorInfos: null, //返回的错误信息
             collegeDropList:[],
+            //当前登录用户id
+            currentId: AuthService.getUser().id,
             page: {
                 totalElements: 0,
                 totalPages: 0,
