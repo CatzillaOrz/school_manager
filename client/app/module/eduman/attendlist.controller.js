@@ -16,6 +16,9 @@ angular.module('dleduWebApp')
             teachClassAttendList: [],
             //行政班考勤列表
             classAttendList: [],
+            //维度标识
+            tab:"course",
+
             classAdministrativeId:"",
             params: {
                 majorId: null,
@@ -31,6 +34,9 @@ angular.module('dleduWebApp')
                 totalPages: 0,
                 pageNumber: 0,
                 pageSize: 10
+            },
+            switchTab:function (entity) {
+                this.tab=entity;
             },
             select2SemesterOptions: function () {
                 var _this = this;
@@ -398,7 +404,47 @@ angular.module('dleduWebApp')
 
 
             },
-        }
+        };
+        //教学班按教师维度查询
+        $scope.attendTeacherFn={
+            params: {
+                collegeId: null,
+                startDate: null,
+                endDate: null,
+                teacherName: null
+            },
+            //分页参数
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
+        };
+       //教学班按时间维度查询
+
+        $scope.attendTimeFn={
+            params: {
+                courseName: null,
+                startDate: null,
+                endDate: null,
+                teacherName: null
+            },
+            //分页参数
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
+        };
+        $scope.attendSettingFn={
+            params: {
+
+            },
+            //分页参数
+
+        };
         $scope.attendFn.init();
         $timeout(function () {
             $scope.$watch('attendFn.params.collegeId', function(newValue, oldValue) {
