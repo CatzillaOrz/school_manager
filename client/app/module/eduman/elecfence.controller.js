@@ -223,7 +223,7 @@ angular.module('dleduWebApp')
 				this.params.pageNumber = that.page.pageNumber;
 				this.params.pageSize = that.page.pageSize;
 				this.params.time = new Date(this.date).getTime();
-				this.params.organId = AuthService.getUser().orgId;
+				this.params.orgId = AuthService.getUser().orgId;
 				var params = angular.copy(this.params);
 				params.managerId = AuthService.getUser().id;
 				CommonService.delEmptyProperty(params);
