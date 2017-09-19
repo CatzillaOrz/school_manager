@@ -212,6 +212,7 @@ a:focus {outline: none;}
 .height-auto{
   height: auto;
   min-height: 50px;
+
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content{
@@ -228,4 +229,7 @@ a:focus {outline: none;}
     width: 20px !important;
 
   }
+}
+.inline-block{
+  display: inline-block;
 }
