@@ -86,7 +86,7 @@
                         .tab-content.padding-10
                             .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
                                 .ColVis
-                                    button.btn.btn-primary(ui-sref="semesterCreate")
+                                    button.btn.btn-primary(ui-sref="semesterCreate" ng-if="preiodFn.isUseAuth('addtime')")
                                         span 添加新的时段
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
                                 tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
