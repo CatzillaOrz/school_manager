@@ -1,0 +1,347 @@
+.student-geo{
+  width: 1920px;
+  height:1080px;
+  font-family: 微软雅黑;
+  background-color: #23243a;
+  .student-geo-header{
+    width: 100%;
+    height:40px;
+    background: url("http://7xpscc.com1.z0.glb.clouddn.com/8d22b74a-54c3-480e-9e88-eb87d36e6216.png") no-repeat center center;
+    background-size:100% 100%;
+    position: relative;
+  }
+  .student-geo-content{
+    display: flex;
+    justify-content: center;
+    .content-left{
+      width:560px;
+      height:750px;
+      margin: 10px;
+      .left-style, .left-style1{
+        width:560px;
+        height:240px;
+
+        position: relative;
+        .chart-title{
+          width: 5px;
+          height: 15px;
+          background-color: #26a9ff;
+          position: absolute;
+          top: 13px;
+          left: 20px;
+        }
+        .chart-span{
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          color: #3fcdff;
+        }
+        .chart-data{
+          position: absolute;
+          top: 88px;
+          right: 45px;
+          color: #ccc;
+        }
+        .chart-data1{
+          position: absolute;
+          top: 130px;
+          right: 45px;
+          color: #ccc;
+        }
+        #educational_statistics{
+          position: absolute;
+          left: 0px;
+          bottom:0px;
+        }
+      }
+      .left-style{
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/7fe28bcf-11d6-4f62-a870-aff307668361.png") no-repeat center center;
+        background-size:100% 100%;
+        .chart-title{
+          width: 5px;
+          height: 15px;
+          background-color: #26a9ff;
+          position: absolute;
+          top: 13px;
+          left: 20px;
+
+        }
+        .chart-span{
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          color: #3fcdff;
+        }
+      }
+      .left-style1{
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/bc17b26c-59f3-40a1-9f51-1844b15d907c.png") no-repeat center center;
+        background-size:100% 100%;
+        #educational_statistics1{
+          position: absolute;
+          left: 0px;
+          bottom:0px;
+        }
+        .chart-discribe{
+          position: absolute;
+          top: 33px;
+          left: 315px;
+          line-height: 35px;
+          font-size: 12px;
+          color: #ccc;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .left-style2{
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/c143aaf9-0dd7-4961-ac3e-9b6bc4c84925.png") no-repeat center center;
+        background-size:100% 100%;
+        width:560px;
+        height:240px;
+        position: relative;
+        .chart-title{
+          width: 5px;
+          height: 15px;
+          background-color: #26a9ff;
+          position: absolute;
+          top: 13px;
+          left: 20px;
+        }
+        .chart-span{
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          color: #3fcdff;
+        }
+      }
+    }
+    .content-middle{
+      width:700px;
+      height:750px;
+      margin: 10px;
+      position: relative;
+      .hot-ticker{
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/c143aaf9-0dd7-4961-ac3e-9b6bc4c84925.png") no-repeat center center;
+        background-size:100% 100%;
+        height: 180px;
+        margin-top: 10px;
+        color: #ccc;
+        .ticker-title{
+          height:30px;
+          position: relative;
+          .chart-title{
+            width: 5px;
+            height: 15px;
+            background-color: #26a9ff;
+            position: absolute;
+            top: 13px;
+            left: 20px;
+          }
+          .chart-span{
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            color: #3fcdff;
+          }
+        }
+        .ticker-content{
+          height: 150px;
+          ul{
+            list-style:none;
+            li{
+              height: 50px;
+              width:660px;
+              margin:0 20px !important;
+            }
+          }
+        }
+      }
+    }
+    .content-right{
+      width:610px;
+      height:760px;
+      margin: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      .right-style{
+        margin:5px;
+        width:295px;
+        height:180px;
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/0d257471-29e3-4b82-b628-2a867f08c64d.png") no-repeat center center;
+        background-size:100% 100%;
+        position: relative;
+        .chart-title{
+          position: absolute;
+          top: 12px;
+          left: 25px;
+          color: #3fcdff;
+        }
+        .chart-discribe{
+          position: absolute;
+          top: 52px;
+          left: 180px;
+          line-height: 24px;
+          font-size: 12px;
+          color: #ccc;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .chart-margin{
+
+      }
+    }
+  }
+  .bottom-line{
+    width: 100%;
+    height:40px;
+    margin:5px 0px 10px 0px;
+    background: url("http://7xpscc.com1.z0.glb.clouddn.com/604432cd-4e54-4d04-9efb-568b61345c3a.png") no-repeat center center;
+    background-size:100% 100%;
+    position: relative;
+    span{
+      color: #FFFFFF;
+      position: absolute;
+      top: 10px;
+    }
+    .teacher-name{
+      left: 125px;
+    }
+    .class-name{
+      left: 360px;
+    }
+    #scrollBox{
+      position: absolute;
+      left: 755px;
+      overflow: hidden;
+      height: 20px;
+      top: 10px;
+      color: #FFFFFF;
+    }
+  }
+  .student-geo-bottom{
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin:10px 0px 10px 0px;
+    .geo-bottom-chart{
+      width:450px;
+      height:180px;
+      background: url("http://7xpscc.com1.z0.glb.clouddn.com/31fae3dd-25c7-40e2-8fdd-3f75ee5e76d0.gif") no-repeat center center;
+      background-size:100% 100%;
+      margin: 10px;
+      position: relative;
+      .chart-title{
+        width: 5px;
+        height: 15px;
+        background-color: #26a9ff;
+        position: absolute;
+        top: 13px;
+        left: 20px;
+      }
+      .chart-span{
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        color: #3fcdff;
+      }
+      span{
+        display: block;
+        position: absolute;
+        color:#ccc;
+      }
+      .center-content{
+        top: 80px;
+        left: 205px;
+      }
+      .left-top{
+        top: 55px;
+        left: 50px;
+      }
+      .left-bottom{
+        top: 105px;
+        left: 50px;
+      }
+      .right-top{
+        top: 55px;
+        right: 50px;
+      }
+      .right-bottom{
+        top: 105px;
+        right: 50px;
+      }
+    }
+    .geo-bottom-chart1{
+      width:450px;
+      height:180px;
+      background: url("http://7xpscc.com1.z0.glb.clouddn.com/dc50c7a7-4257-4528-8973-ee9fa582002a.png") no-repeat center center;
+      background-size:100% 100%;
+      margin:10px;
+      position: relative;
+      .chart-title{
+        width: 5px;
+        height: 15px;
+        background-color: #26a9ff;
+        position: absolute;
+        top: 13px;
+        left: 20px;
+      }
+      .chart-span{
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        color: #3fcdff;
+      }
+    }
+    .geo-bottom-chart2{
+      width:450px;
+      height:180px;
+      background: url("http://7xpscc.com1.z0.glb.clouddn.com/4d4a56e8-bb28-4101-910b-d75a0443895b.gif") no-repeat center center;
+      background-size:100% 100%;
+      margin:10px;
+      position: relative;
+      .chart-title{
+        width: 5px;
+        height: 15px;
+        background-color: #26a9ff;
+        position: absolute;
+        top: 13px;
+        left: 20px;
+      }
+      .chart-span{
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        color: #3fcdff;
+      }
+      span{
+        display: block;
+        position: absolute;
+        color:#ccc;
+        font-size: 12px;
+      }
+      .center-content{
+        top: 80px;
+        left: 205px;
+      }
+      .left-top{
+        top: 60px;
+        left: 33px;
+      }
+      .left-bottom{
+        top: 104px;
+        left: 33px;
+      }
+      .right-top{
+        top: 60px;
+        right: 33px;
+      }
+      .right-bottom{
+        top: 104px;
+        right: 33px;
+      }
+    }
+  }
+}
+.anchorBL{
+  display:none !important;
+}
