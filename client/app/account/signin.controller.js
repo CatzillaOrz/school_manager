@@ -35,10 +35,15 @@ angular.module('dleduWebApp')
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                          //$state.go('index');
-                        if("ROLE_ADMIN".indexOf(user.roleNames.toString())>-1||"ROLE_ORG_ADMIN".indexOf(user.roleNames.toString())>-1){//
-                            that.toRedirectUrl();
-                        }else {
-                            messageService.openMsg("您没有管理员权限！")
+                        if(user.roleNames){
+                            if(user.roleNames.toString().indexOf("ROLE_ORG_ADMIN") != -1 || user.roleNames.toString().indexOf("ROLE_COLLEGE_ADMIN") != -1
+                                || user.roleNames.toString().indexOf("ROLE_ORG_MANAGER") != -1){//
+                                that.toRedirectUrl();
+                            }else {
+                                messageService.openMsg("您没有管理员权限！")
+                            }
+                        }else{
+                            messageService.openMsg("没有找到roleNames属性！")
                         }
 
                     })

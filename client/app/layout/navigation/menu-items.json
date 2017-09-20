@@ -4,13 +4,15 @@
             "title": "首页",
             "sref": "home",
             "active": "home",
-            "icon": "home"
+            "icon": "home",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "学校信息管理",
             "sref": "setlogo",
             "icon": "university",
             "active": "school",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
                 {
                     "title": "设置学校LOGO",
@@ -48,55 +50,64 @@
             "title": "院系管理",
             "sref": "college.list",
             "active": "college",
-            "icon": "building-o"
+            "icon": "building-o",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         },
         {
             "title": "专业管理",
             "sref": "majorlist",
             "active": "major",
-            "icon": "bookmark-o"
+            "icon": "bookmark-o",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "班级管理",
             "sref": "classlist",
             "active": "class",
-            "icon": "users"
+            "icon": "users",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "教师管理",
             "sref": "teacherlist",
             "active": "teacher",
-            "icon": "id-card-o"
+            "icon": "id-card-o",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "学生管理",
             "sref": "studentlist",
             "active": "student",
-            "icon": "graduation-cap"
+            "icon": "graduation-cap",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "学期管理",
             "sref": "periodlist",
             "active": "period",
-            "icon": "calendar"
+            "icon": "calendar",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
-            "title": "课程基本管理",
+            "title": "课程基本信息",
             "sref": "courselist",
             "active": "course",
-            "icon": "book"
+            "icon": "book",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
-            "title": "教学班管理",
+            "title": "课程安排",
             "sref": "teachclasslist",
             "active": "teachclass",
-            "icon": "th"
+            "icon": "th",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "教务管理",
             "sref": "attendlist",
             "icon": "navicon",
             "active": "eduman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
             "items":[
                 {
                     "title": "考勤记录",
@@ -129,6 +140,7 @@
             "sref": "enttutorman",
             "icon": "navicon",
             "active": "practiceman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
                 {
                     "title": "企业导师管理",
@@ -145,10 +157,33 @@
             ]
         },
         {
+            "title": "权限管理",
+            "sref": "distlist",
+            "icon": "navicon",
+            "active": "rolemanager",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "角色分配",
+                    "sref": "distlist",
+                    "active": "distlist",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "已分配列表",
+                    "sref": "distedlist",
+                    "active": "distedlist",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
             "title": "通知管理",
             "sref": "newslist",
             "active": "news",
-            "icon": "commenting"
+            "icon": "commenting",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         }
+
     ]
 }

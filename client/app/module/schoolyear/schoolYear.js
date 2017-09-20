@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '学时管理'
+                    label: '学期管理'
                 }
             })
 

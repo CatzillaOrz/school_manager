@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 
-    angular.module('dleduWebApp').directive('smartMenuItems', function ($http, $rootScope, $compile) {
+    angular.module('dleduWebApp').directive('smartMenuItems', function ($http, $rootScope, $compile, AuthService) {
     return {
         restrict: 'A',
         compile: function (element, attrs) {
@@ -49,7 +49,9 @@
                     'smart-menu': ''
                 });
                 _.forEach(res.data.items, function(item) {
-                    createItem(item, ul, 1);
+                    if(isUseAuthority(item)){
+                        createItem(item, ul, 1);
+                    }
                 });
 
                 var $scope = $rootScope.$new();
@@ -60,6 +62,23 @@
 
                 element.replaceWith(_element);
             })
+
+            //判断角色是否应当授予权限
+            function isUseAuthority(auth){
+                if(typeof auth.role == 'undefined'){
+                    console.log(auth.title + "没有设置权限");
+                    return true;
+                }
+                var user = AuthService.getUser();
+                var roleNames = user.roleNames;
+                for(var i = 0, length = roleNames.length; i < length; i++){
+                    if(auth.role.indexOf(roleNames[i]) != -1){
+                        return true;
+                        break;
+                    }
+                }
+                return false;
+            }
         }
     }
 });

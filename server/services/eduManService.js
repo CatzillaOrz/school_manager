@@ -106,9 +106,10 @@ var EduManService = {
 
     //查询已经分配的列表
     getEvaQuesDist: function (params, access_token, callback) {
+        params.accessToken = "Bearer " + access_token;
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/assignQuesniare/query',
+            path: '/api/web/v1/questionnaire/assignQuesniareList/query',
             access_token: access_token,
             params: params
         }).then(function (res) {
@@ -125,9 +126,10 @@ var EduManService = {
 
     //查询未分配的列表
     getEvaQuesUnDist: function (params, access_token, callback) {
+        params.accessToken = "Bearer " + access_token;
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/organ/listTeachingClasses',
+            path: '/api/web/v1/questionnaire/organ/teachingClassesList',
             access_token: access_token,
             params: params
         }).then(function (res) {
@@ -258,7 +260,7 @@ var EduManService = {
     getClassAttendList: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/classes/ClassAdministrative',
+            path: '/api/web/v1/classes/attendancebyclass',
             params: params,
             access_token:access_token
         }).then(function (res) {
@@ -409,8 +411,8 @@ var EduManService = {
     getElecFenceList: function (params, access_token, callback) {
         params.accessToken = "Bearer " + access_token;
         RestClient.get({
-            host: 'gateway-org',
-            path: '/v1/electricFence/queryelectricfence',
+            host: 'gateway-org-auth',
+            path: '/v1/shool/queryelectricfence',
             params: params,
             access_token: access_token
         }).then(function (res) {

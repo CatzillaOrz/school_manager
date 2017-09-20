@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('MajorListCtrl', function ($scope, MajorService,AuthService,messageService,CommonService, ngDialog,
-                                           Upload, ImpBatchService) {
+                                           Upload, ImpBatchService, RoleAuthService) {
         $scope.majorListFn={
             //专业列表
             majorList: [],
@@ -22,11 +22,17 @@ angular.module('dleduWebApp')
                 name:"",
             },
 
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
+
             // 获取专业列表
             getMajorList: function () {
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
+                    managerId: AuthService.getUser().id,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
@@ -46,7 +52,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
                 MajorService.getMajorList(params).$promise

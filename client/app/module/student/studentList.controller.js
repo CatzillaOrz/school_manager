@@ -2,7 +2,8 @@
 
 angular.module('dleduWebApp')
     .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService,
-                                             ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService,$timeout) {
+                                             ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService,
+                                             $timeout, RoleAuthService) {
         $scope.studentListFn={
             //学生列表
             studentList: [],
@@ -28,6 +29,12 @@ angular.module('dleduWebApp')
                 professionalId:"",
                 classesId:""
             },
+
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
+
             //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
@@ -36,7 +43,8 @@ angular.module('dleduWebApp')
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
-                        pageSize: 100
+                        pageSize: 100,
+                        managerId: AuthService.getUser().id
                     }, "name"),
 
                     templateResult: function (data) {
@@ -150,7 +158,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: 1,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 params.collegeId=that.params.collegeId;
                 params.professionalId=that.params.professionalId;
@@ -171,7 +180,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
                 params.collegeId=that.params.collegeId;

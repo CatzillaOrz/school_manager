@@ -58,7 +58,8 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					id: this.quesId
+					id: this.quesId,
+					managerId: AuthService.getUser().id
 				};
 				EduManService.getEvaQuesDist(params).$promise
 					.then(function (data) {
@@ -78,7 +79,8 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					quId: that.quesId
+					quId: that.quesId,
+					managerId: AuthService.getUser().id
 				};
 				EduManService.getEvaQuesUnDist(params).$promise
 					.then(function (data) {

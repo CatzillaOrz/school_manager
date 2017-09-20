@@ -50,7 +50,8 @@ angular.module('dleduWebApp')
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
-                        pageSize: 100
+                        pageSize: 100,
+                        managerId: AuthService.getUser().id
                     },"name"),
 
                     templateResult: function (data) {
@@ -137,7 +138,8 @@ angular.module('dleduWebApp')
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     name: that.dropKeyWord,
-                    pageSize: 100
+                    pageSize: 100,
+                    managerId: AuthService.getUser().id
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {

@@ -41,7 +41,7 @@
                                                 i.glyphicon.glyphicon-search
                             .col-sm-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
                                 .ColVis
-                                    button.btn.btn-primary(ui-sref="periodCreate")
+                                    button.btn.btn-primary(ui-sref="periodCreate" ng-if="preiodFn.isUseAuth('add')")
                                         span 新建
                             table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
 
@@ -50,8 +50,8 @@
                                         a(href='', )
                                             span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
                                             strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
-                                            span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})") 编辑
-                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)") 删除
+                                            span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})" ng-if="preiodFn.isUseAuth('update')") 编辑
+                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)" ng-if="preiodFn.isUseAuth('del')") 删除
                                 tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
                                     td(sortable="'name'", data-title="'学期'", groupable="'country'")
                                         | {{schoolTerm.name}}
@@ -66,7 +66,7 @@
                                         span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
                                     td.cursor-pointer(sortable="'numWeek'", data-title="'操作'")
                                         a(href='', )
-                                            span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)") 删除
+                                            span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)" ng-if="preiodFn.isUseAuth('del')") 删除
                             .dt-toolbar-footer
                                 .col-sm-6.col-xs-12.hidden-xs
                                     #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
@@ -86,7 +86,7 @@
                         .tab-content.padding-10
                             .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
                                 .ColVis
-                                    button.btn.btn-primary(ui-sref="semesterCreate")
+                                    button.btn.btn-primary(ui-sref="semesterCreate" ng-if="preiodFn.isUseAuth('addtime')")
                                         span 添加新的时段
                             table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
                                 tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
@@ -97,10 +97,10 @@
                                     td(sortable="'age'", data-title="'下课时间'", groupable="'age'")
                                         | {{schoolTerm.endTime}}
                                     td(sortable="'money'", data-title="'操作'")
-                                        a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})")
+                                        a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})" ng-if="preiodFn.isUseAuth('update')")
                                             i.fa.fa-pencil-square-o
                                             span 编辑
-                                        a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)")
+                                        a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)" ng-if="preiodFn.isUseAuth('del')")
                                             i.fa.fa-trash-o
                                             span 删除
     // end widget div
