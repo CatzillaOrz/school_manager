@@ -335,6 +335,12 @@ angular.module('dleduWebApp')
             //查询参数重置
             resetParams: function (index) {
                 var _this = this;
+                if(index==1){
+                    _this.switchTab("course");
+                }else {
+                    _this.switchTab("college");
+                }
+
                 // _this.params = {
                 //     majorId: null,
                 //     collegeId: null,

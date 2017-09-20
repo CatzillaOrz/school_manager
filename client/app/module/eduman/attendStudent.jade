@@ -1,0 +1,158 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 个人考勤详情
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .col-xs-9
+                            form.form-inline
+                                .form-group.col-sm-3
+                                    label 课程：
+                                    select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
+                                        option(value="") 全部
+                                        option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                .form-group.col-sm-3
+                                    label 状态：
+                                    select.select2.form-control(ng-model="studentListFn.params.professionalId" ui-select2="studentListFn.select2MajorOptions()"  )
+                                        option(value="") 全部
+                                        option(ng-repeat="major in studentListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                .form-group.col-sm-6.margin-top-10
+                                    label.control-label 时间段：
+                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                        span.add-on
+                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                    .inline-block -
+                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                        span.add-on
+                                            i.icon-calendar.glyphicon.glyphicon-calendar
+                        .col-sm-3.hidden-xs
+                            .ColVis
+                                button.btn.btn-primary(ng-click="studentListFn.getStudentList()")
+                                    span 查询
+                                button.btn.btn-primary(ui-sref="studentCreat")
+                                    span 新建
+                                button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()")
+                                    span 批量导入
+                                button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()")
+                                    span 导出学生
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th 序号
+                                th 课程
+                                th 任课老师
+                                th 课程时间
+                                th 教室
+                                th 考勤状态
+                                th 签到时间
+                                th 签到方式
+                                th 签到地点
+                                th 备注
+                                th 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="student in studentListFn.studentList")
+                                td.sorting_1 {{$index+1 + ((studentListFn.page.pageNumber==0?studentListFn.page.pageNumber+1:studentListFn.page.pageNumber)-1)*10}}
+                                td.expand
+                                    span.responsiveExpander
+                                    | {{student.jobNumber}}
+                                td {{student.name}}
+                                td {{student.sex}}
+                                td {{student.collegeName}}
+                                td {{student.professionalName}}
+                                td {{student.classesName}}
+                                td {{student.email}}
+                                td {{student.phone}}
+                                td
+                                    a.handle(ui-sref="studentEdit({id:student.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle(ng-click="studentListFn.deletePrompt(student)")
+                                        i.fa.fa-trash-o
+                                        span 删除
+                                    a.handle(ng-click="studentListFn.resetPasswordPrompt(student)")
+                                        i.fa.fa-repeat
+                                        span 重置密码
+
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{studentListFn.page.pageNumber==0?studentListFn.page.pageNumber*10:(studentListFn.page.pageNumber-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((studentListFn.page.pageNumber==0?studentListFn.page.pageNumber+1:studentListFn.page.pageNumber)-1)*10+studentListFn.studentList.length}}
+                                |  条 总共
+                                span.text-primary {{studentListFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='studentListFn.page.totalElements', items-per-page="studentListFn.page.pageSize" max-size='studentListFn.page.pageSize' ng-model='studentListFn.page.pageNumber',ng-change="studentListFn.findStudentByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+            // end widget content
+        // end widget div
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='studentListFn.selected($newFiles, $invalidFiles)' ng-model="studentListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="studentListFn.myFile.name" )
+                            .left.load_inner(ng-click='studentListFn.importantBatch(studentListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="studentListFn.downLoad()") 账号导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载账号导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+                button.btn.btn-primary(style="margin-left:10px;" type='button' ng-click="studentListFn.openImpBatch('reset')")
+                    span 重新导入
+            .repeat_header
+                i.fa.fa-exclamation-triangle(style="color:#ff0000")
+                span.buld {{"失败原因：" + studentListFn.errorInfos.message}}
+            .repeat_content.content-scorll
+                table
+                    tr
+                        td 错误行号
+                        td 姓名
+                        td 学号
+                        td 班级名称
+                        td 错误信息
+                    tr(ng-repeat="info in studentListFn.errorInfos.studentExcelDomainList")
+                        td {{info.line}}
+                        td {{info.name}}
+                        td {{info.code}}
+                        td {{info.classesName}}
+                        td {{info.msg}}
+
+

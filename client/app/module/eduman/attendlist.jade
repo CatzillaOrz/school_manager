@@ -12,11 +12,11 @@
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 行政班考勤
-                //li
-                //    a(data-toggle='tab', href='#hr3', aria-expanded='false')
-                //        i.fa.fa-lg.fa-pencil
-                //        span.hidden-mobile.hidden-tablet
-                //            | 到课率设置
+                li
+                    a(data-toggle='tab', href='#hr3', aria-expanded='false')
+                        i.fa.fa-lg.fa-pencil
+                        span.hidden-mobile.hidden-tablet
+                            | 到课率设置
         // widget div
         div(role='content')
             // widget edit box
@@ -27,14 +27,14 @@
             .widget-body.no-padding
                 .tab-content
                     #hr1.tab-pane.active
-                        //.col-xs-12.margin-top-10
-                        //    .col-xs-6.no-padding
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('course')" ng-class="{'btn-primary':attendFn.tab=='course'}")
-                        //            span 按课程
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('teacher')" ng-class="{'btn-primary':attendFn.tab=='teacher'}")
-                        //            span 按教师
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('time')" ng-class="{'btn-primary':attendFn.tab=='time'}")
-                        //            span 按上课时间
+                        .col-xs-12.margin-top-10
+                            .col-xs-6.no-padding
+                                button.btn.btn-default(ng-click="attendFn.switchTab('course')" ng-class="{'btn-primary':attendFn.tab=='course'}")
+                                    span 按课程
+                                button.btn.btn-default(ng-click="attendFn.switchTab('teacher')" ng-class="{'btn-primary':attendFn.tab=='teacher'}")
+                                    span 按教师
+                                button.btn.btn-default(ng-click="attendFn.switchTab('time')" ng-class="{'btn-primary':attendFn.tab=='time'}")
+                                    span 按上课时间
                         .tabbable.tabs-below(ng-if="attendFn.tab=='course'")
                             .tab-content
                                 .no-padding
@@ -267,51 +267,52 @@
                                                 .dataTables_paginate.paging_simple_numbers
                                                     ul.pagination-sm(uib-pagination, total-items='attendTimeFn.page.totalElements', max-size='attendTimeFn.page.pageSize' ng-model='attendTimeFn.page.pageNumber',ng-change="attendTimeFn.getTeachClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     #hr2.tab-pane
-                        //.col-xs-12.margin-top-10
-                        //    .col-xs-6.no-padding
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('course')" ng-class="{'btn-primary':attendFn.tab=='course'}")
-                        //            span 按课程
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('teacher')" ng-class="{'btn-primary':attendFn.tab=='teacher'}")
-                        //            span 按教师
-                        //        button.btn.btn-default(ng-click="attendFn.switchTab('time')" ng-class="{'btn-primary':attendFn.tab=='time'}")
-                        //            span 按上课时间
-                        .tabbable.tabs-below
+                        .col-xs-12.margin-top-10
+                            .col-xs-6.no-padding
+                                button.btn.btn-default(ng-click="attendFn.switchTab('college')" ng-class="{'btn-primary':attendFn.tab=='college'}")
+                                    span 按学院
+                                button.btn.btn-default(ng-click="attendFn.switchTab('major')" ng-class="{'btn-primary':attendFn.tab=='major'}")
+                                    span 按专业
+                                button.btn.btn-default(ng-click="attendFn.switchTab('class')" ng-class="{'btn-primary':attendFn.tab=='class'}")
+                                    span 按班级
+                                button.btn.btn-default(ng-click="attendFn.switchTab('student')" ng-class="{'btn-primary':attendFn.tab=='student'}")
+                                    span 按学生
+                        .tabbable.tabs-below(ng-if="attendFn.tab=='college'")
                             .tab-content
-                                .widget-body.no-padding
+                                .no-padding
                                     .dataTables_wrapper.form-inline.no-footer
-                                        .dt-toolbar.padding-bottom-10
-                                            .col-xs-10
-                                                form.form-inline
-                                                        .form-group.col-sm-3
-                                                            label 学期选择：
-                                                            select#dd.select2.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
-                                                                optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
-                                                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{attendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                        .col-xs-9.margin-top-10
+                                            form.form-inline
+                                                .form-group.col-sm-3
+                                                    label 院系：
+                                                        select.select2.form-control(ng-model="attendTeacherFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                            option(value="") 全部
+                                                            option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
 
-                                                        .form-group.col-sm-3
-                                                            label 院系：
-                                                            select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
-                                                                option(value="") 全部
-                                                                option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                                        .form-group.col-sm-3
-                                                            label 专业：
-                                                            select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
-                                                                option(value="") 全部
-                                                                option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                                        .form-group.col-sm-3
-                                                            label 行政班级：
-                                                            select.select2.form-control(ng-model="attendFn.classAdministrativeId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
-                                                                option(value="") 全部
-                                                                option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
+                                                .form-group.col-sm-3
+                                                    label.control-label  年级：
+                                                    input.form-control(type="text" ng-model="attendTeacherFn.params.courseName" placeholder="请输入教师名称" )
+                                                .form-group.col-sm-6
+                                                    label.control-label 时间段：
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
 
-                                            .col-sm-2.col-xs-6.hidden-xs
-                                                .ColVis
-                                                    button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
-                                                        span 查询
-                                                    button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
-                                                        span 导出
-                                                    button.btn.btn-primary(ui-sref="classTrend")
-                                                        span 学周趋势
+                                                    .inline-block -
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                        .col-sm-3.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
+                                                    span 导出
+                                                button.btn.btn-primary(ui-sref="classTrend")
+                                                    span 学周趋势
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
@@ -349,5 +350,287 @@
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
                                                     ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                        .tabbable.tabs-below(ng-if="attendFn.tab=='major'")
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-9.margin-top-10
+                                            form.form-inline
+                                                .form-group.col-sm-3
+                                                    label 院系：
+                                                    select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                .form-group.col-sm-3
+                                                    label 专业：
+                                                    select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                .form-group.col-sm-3
+                                                    label.control-label  年级：
+                                                    input.form-control(type="text" ng-model="attendTeacherFn.params.courseName" placeholder="请输入年级名称" )
+                                                .form-group.col-sm-6.margin-top-10
+                                                    label.control-label 时间段：
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                                    .inline-block -
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                        .col-sm-3.col-xs-6.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
+                                                    span 导出
+                                                button.btn.btn-primary(ui-sref="classTrend")
+                                                    span 学周趋势
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 学院
+                                                    th 专业
+                                                    th 应到
+                                                    th 实到
+                                                    th 迟到
+                                                    th 请假
+                                                    th 旷课
+                                                    th 早退
+                                                    th 到课率
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="attend in attendFn.classAttendList")
+                                                    td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
+                                                    td.expand {{attend.collegeName}}
+                                                    td  {{attend.className}}
+                                                    td  {{attend.participationCount}}
+                                                    td  {{attend.practical}}
+                                                    td  {{attend.proportion}}
+                                                    td
+                                                        a.handle(ng-click="attendFn.toDetail(attend,2)")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 查看详情
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{attendFn.page.pageNumber==0?attendFn.page.pageNumber*10:(attendFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{attendFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                        .tabbable.tabs-below(ng-if="attendFn.tab=='class'")
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-9.margin-top-10
+                                            form.form-inline
+                                                .form-group.col-sm-3
+                                                    label 院系：
+                                                    select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                .form-group.col-sm-3
+                                                    label 专业：
+                                                    select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                .form-group.col-sm-3
+                                                    label 行政班级：
+                                                    select.select2.form-control(ng-model="attendFn.params.classesId" ui-select2="attendFn.select2ClassOptions()")
+                                                        option(value="") 全部
+                                                        option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
+
+                                                .form-group.col-sm-3
+                                                    label.control-label  年级：
+                                                    input.form-control(type="text" ng-model="attendTeacherFn.params.courseName" placeholder="请输入年级名称" )
+                                                .form-group.col-sm-6.margin-top-10
+                                                    label.control-label 时间段：
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                                    .inline-block -
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+
+                                        .col-sm-3.col-xs-6.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
+                                                    span 导出
+                                                button.btn.btn-primary(ui-sref="classTrend")
+                                                    span 学周趋势
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 学院
+                                                    th 专业
+                                                    th 班级
+                                                    th 年级
+                                                    th 班级名称
+                                                    th 辅导员
+                                                    th 辅导员工号
+                                                    th 应到
+                                                    th 实到
+                                                    th 迟到
+                                                    th 请假
+                                                    th 旷课
+                                                    th 早退
+                                                    th 到课率
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="attend in attendFn.classAttendList")
+                                                    td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
+                                                    td.expand {{attend.collegeName}}
+                                                    td  {{attend.className}}
+                                                    td  {{attend.participationCount}}
+                                                    td  {{attend.practical}}
+                                                    td  {{attend.proportion}}
+                                                    td
+                                                        a.handle(ng-click="attendFn.toDetail(attend,2)")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 查看详情
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{attendFn.page.pageNumber==0?attendFn.page.pageNumber*10:(attendFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{attendFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                        .tabbable.tabs-below(ng-if="attendFn.tab=='student'")
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-9.margin-top-10
+                                            form.form-inline
+                                                .form-group.col-sm-3
+                                                    label 院系：
+                                                    select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                .form-group.col-sm-3
+                                                    label 专业：
+                                                    select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                .form-group.col-sm-3
+                                                    label 班级：
+                                                    select.select2.form-control(ng-model="attendFn.params.classesId" ui-select2="attendFn.select2ClassOptions()")
+                                                        option(value="") 全部
+                                                        option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
+
+                                                .form-group.col-sm-3
+                                                    label.control-label  年级：
+                                                    input.form-control(type="text" ng-model="attendTeacherFn.params.courseName" placeholder="请输入年级名称" )
+                                                .form-group.col-sm-3.margin-top-10
+                                                    label.control-label  学生：
+                                                    input.form-control(type="text" ng-model="attendTeacherFn.params.courseName" placeholder="请输入学生名称" )
+                                                .form-group.col-sm-6.margin-top-10
+                                                    label.control-label 时间段：
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                                    .inline-block -
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendTeacherFn.params.startDate" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                        .col-sm-3.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
+                                                    span 导出
+                                                button.btn.btn-primary(ui-sref="classTrend")
+                                                    span 学周趋势
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 学号
+                                                    th 姓名
+                                                    th 班级
+                                                    th 年级
+                                                    th 专业
+                                                    th 学院
+                                                    th 应到
+                                                    th 实到
+                                                    th 迟到
+                                                    th 请假
+                                                    th 旷课
+                                                    th 早退
+                                                    th 到课率
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="attend in attendFn.classAttendList")
+                                                    td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
+                                                    td.expand {{attend.collegeName}}
+                                                    td  {{attend.className}}
+                                                    td  {{attend.participationCount}}
+                                                    td  {{attend.practical}}
+                                                    td  {{attend.proportion}}
+                                                    td
+                                                        a.handle(ng-click="attendFn.toDetail(attend,2)")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 查看详情
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{attendFn.page.pageNumber==0?attendFn.page.pageNumber*10:(attendFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{attendFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     #hr3.tab-pane
-                        span 考勤设置
+                        .college-handle-container
+                            .jarviswidget-color-blueDark
+                                .widget-body
+                                    form.form-horizontal(name="studentForm")
+                                        fieldset
+                                            legend 到课率设置
+                                        .short-form
+                                            .form-group
+                                                .radio
+                                                    input(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='男')
+                                                    |  男
+                                                .radio
+                                                    input(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='女')
+                                                    |  女
+                                        .form-actions
+                                            .row
+                                                .col-md-12
+                                                    a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="studentForm") 应用设置
