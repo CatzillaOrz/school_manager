@@ -70,8 +70,9 @@
                             tr.odd(role='row' ng-repeat="teachClass in teachClassListFn.teachClassList")
                                 td
                                     input(type='checkbox' ng-model='teachClass.checked' ng-checked="teachClassListFn.allChedked")
-                                td
-                                    a.handle(ui-sref="teachClassDetail({id:teachClass.id})") {{teachClass.name}}
+                                td(ng-if="teachClassListFn.isUseAuth('href')")
+                                    a.handle(ui-sref="teachClassDetail({id:teachClass.id})" ) {{teachClass.name}}
+                                td(ng-if="!teachClassListFn.isUseAuth('href')") {{teachClass.name}}
                                 td {{teachClass.semesterName}}
                                 td {{teachClass.courseName}}
                                 td

@@ -270,7 +270,8 @@ angular.module('dleduWebApp')
                     classAdministrativeId: _this.classAdministrativeId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize,
-                    managerId: AuthService.getUser().id
+                    managerId: AuthService.getUser().id,
+                    orgId: AuthService.getUser().orgId
                 };
                 if(!params.professionId){
                     params.classAdministrativeId=null;
