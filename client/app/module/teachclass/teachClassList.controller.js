@@ -15,6 +15,8 @@ angular.module('dleduWebApp')
 			errorInfos: null, //返回的错误信息
 			impType: '', //导入类型，按班级还是学生
             schoolYearDropList:[],
+			//当前登录用户id
+			currentId: AuthService.getUser().id,
 			page: {
 				totalElements: 0,
 				totalPages: 0,
