@@ -581,6 +581,160 @@ var EduManService = {
             }
         })
     },
+    getAttendacneSettingList: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/organ/getAttendacneList',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getTeachingclassAttendByTeacher: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/teachingclassByTeacher',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getAttendanceByPeriod: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/attendanceByPeriod',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getClassAttendanceGroupByPro: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/classAttendanceGroupByPro',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getClassAttendanceGroupByclass: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/classAttendanceGroupByclass',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getClassAttendanceGroupByCollege: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/classAttendanceGroupByCollege',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    exportTeachingclassByTeacher: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/exportTeachingclassByTeacher',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    exportClassAttendanceByPeriod: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/exportClassAttendanceByPeriod',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    exportClassAttendanceGroupByCollege: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/exportClassAttendanceGroupByCollege',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    exportClassAttendanceGroupByPro: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/exportClassAttendanceGroupByPro',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    exportClassAttendanceGroupByclass: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendance/exportClassAttendanceGroupByclass',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
 };
 
 

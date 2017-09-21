@@ -161,6 +161,52 @@ angular.module('dleduWebService')
                 var eduman = $resource('api/eduman/getCurrentSemester');
                 return eduman.get(params);
             },
+            getAttendacneSettingList:function () {
+                var eduman =  $resource('api/eduman/getAttendacneSettingList', '', {
+                    query: {method: 'get', isArray: true}
+                });
+                return eduman.query();
+            },
+            getTeachingclassAttendByTeacher:function (params) {
+                var eduman = $resource('api/eduman/getTeachingclassAttendByTeacher');
+                return eduman.get(params);
+            },
+            getAttendanceByPeriod:function (params) {
+                var eduman = $resource('api/eduman/getAttendanceByPeriod');
+                return eduman.get(params);
+            },
+            getClassAttendanceGroupByPro:function (params) {
+                var eduman = $resource('api/eduman/getClassAttendanceGroupByPro');
+                return eduman.get(params);
+            },
+            getClassAttendanceGroupByclass:function (params) {
+                var eduman = $resource('api/eduman/getClassAttendanceGroupByclass');
+                return eduman.get(params);
+            },
+            getClassAttendanceGroupByCollege:function (params) {
+                var eduman = $resource('api/eduman/getClassAttendanceGroupByCollege');
+                return eduman.get(params);
+            },
+            exportTeachingclassByTeacher:function (params) {
+                var eduman = $resource('api/eduman/exportTeachingclassByTeacher');
+                return eduman.get(params);
+            },
+            exportClassAttendanceByPeriod:function (params) {
+                var eduman = $resource('api/eduman/exportClassAttendanceByPeriod');
+                return eduman.get(params);
+            },
+            exportClassAttendanceGroupByCollege:function (params) {
+                var eduman = $resource('api/eduman/exportClassAttendanceGroupByCollege');
+                return eduman.get(params);
+            },
+            exportClassAttendanceGroupByPro:function (params) {
+                var eduman = $resource('api/eduman/exportClassAttendanceGroupByPro');
+                return eduman.get(params);
+            },
+            exportClassAttendanceGroupByclass:function (params) {
+                var eduman = $resource('api/eduman/exportClassAttendanceGroupByclass');
+                return eduman.get(params);
+            },
 		}
 
 	});
