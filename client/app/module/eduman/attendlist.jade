@@ -277,77 +277,74 @@
                         //            span 按上课时间
                         .tabbable.tabs-below
                             .tab-content
-                                .widget-body.no-padding
-                                    .dataTables_wrapper.form-inline.no-footer
-                                        .dt-toolbar.padding-bottom-10
-                                            .col-xs-10
-                                                form.form-inline
-                                                        .form-group.col-sm-3
-                                                            label 学期选择：
-                                                            select#dd.select2.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
-                                                                optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
-                                                                    option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{attendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                .dataTables_wrapper.form-inline.no-footer
+                                    .dt-toolbar.padding-bottom-10
+                                        .col-xs-10
+                                            form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label 学期选择：
+                                                        select#dd.select2.form-control(ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
+                                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
+                                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{attendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
 
-                                                        .form-group.col-sm-3
-                                                            label 院系：
-                                                            select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
-                                                                option(value="") 全部
-                                                                option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                                        .form-group.col-sm-3
-                                                            label 专业：
-                                                            select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
-                                                                option(value="") 全部
-                                                                option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                                        .form-group.col-sm-3
-                                                            label 行政班级：
-                                                            select.select2.form-control(ng-model="attendFn.classAdministrativeId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
-                                                                option(value="") 全部
-                                                                option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
+                                                    .form-group.col-sm-3
+                                                        label 院系：
+                                                        select.select2.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
+                                                            option(value="") 全部
+                                                            option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                    .form-group.col-sm-3
+                                                        label 专业：
+                                                        select.select2.form-control(ng-model="attendFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                            option(value="") 全部
+                                                            option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                    .form-group.col-sm-3
+                                                        label 行政班级：
+                                                        select.select2.form-control(ng-model="attendFn.classAdministrativeId" ui-select2="attendFn.select2ClassOptions(attendFn.majorId)")
+                                                            option(value="") 全部
+                                                            option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
 
-                                            .col-sm-2.col-xs-6.hidden-xs
-                                                .ColVis
-                                                    button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
-                                                        span 查询
-                                                    button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
-                                                        span 导出
-                                                    button.btn.btn-primary(ui-sref="classTrend")
-                                                        span 学周趋势
-                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
-                                            thead
-                                                tr(role='row')
-                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学院
-                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 行政班级
-                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生应出勤次数
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 学生实际出勤次数
-                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学期综合出勤率
-                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
-                                            tbody
-                                                tr.odd(role='row' ng-repeat="attend in attendFn.classAttendList")
-                                                    td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
-                                                    td.expand {{attend.collegeName}}
-                                                    td  {{attend.className}}
-                                                    td  {{attend.participationCount}}
-                                                    td  {{attend.practical}}
-                                                    td  {{attend.proportion}}
-                                                    td
-                                                        a.handle(ng-click="attendFn.toDetail(attend,2)")
-                                                            i.fa.fa-pencil-square-o
-                                                            span 查看详情
+                                        .col-sm-2.col-xs-6.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendFn.getClassAttendList()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="attendFn.classAttendExport()")
+                                                    span 导出
+                                                button.btn.btn-primary(ui-sref="classTrend")
+                                                    span 学周趋势
+                                    table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学院
+                                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 行政班级
+                                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生应出勤次数
+                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 学生实际出勤次数
+                                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学期综合出勤率
+                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="attend in attendFn.classAttendList")
+                                                td.sorting_1 {{$index+1 + ((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10}}
+                                                td.expand {{attend.collegeName}}
+                                                td  {{attend.className}}
+                                                td  {{attend.participationCount}}
+                                                td  {{attend.practical}}
+                                                td  {{attend.proportion}}
+                                                td
+                                                    a.handle(ng-click="attendFn.toDetail(attend,2)")
+                                                        i.fa.fa-pencil-square-o
+                                                        span 查看详情
 
 
-                                        .dt-toolbar-footer
-                                            .col-sm-6.col-xs-12.hidden-xs
-                                                .dataTables_info(role='status', aria-live='polite')
-                                                    | 显示第
-                                                    span.txt-color-darken {{attendFn.page.pageNumber==0?attendFn.page.pageNumber*10:(attendFn.page.pageNumber-1)*10+1}}
-                                                    |  到
-                                                    span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
-                                                    |  条 总共
-                                                    span.text-primary {{attendFn.page.totalElements}}
-                                                    |  条记录
-                                            .col-sm-6.col-xs-12
-                                                .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-                    #hr3.tab-pane
-                        span 考勤设置
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            .dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{attendFn.page.pageNumber==0?attendFn.page.pageNumber*10:(attendFn.page.pageNumber-1)*10+1}}
+                                                |  到
+                                                span.txt-color-darken {{((attendFn.page.pageNumber==0?attendFn.page.pageNumber+1:attendFn.page.pageNumber)-1)*10+attendFn.classAttendList.length}}
+                                                |  条 总共
+                                                span.text-primary {{attendFn.page.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            .dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
