@@ -343,7 +343,7 @@ angular.module('dleduWebApp')
              var that = this;
              that.params.id = $state.params.id;
              that.handle = $state.current.ncyBreadcrumbLabel;
-             that.getCollegeDropList();
+            // that.getCollegeDropList();
              if (that.handle == "编辑学生信息") {
                     that.params.id = $state.params.id;
                  that.getStudentById();
