@@ -40,7 +40,7 @@ angular.module('dleduWebApp')
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
                                 pageSize: 100,
-
+                                managerId: AuthService.getUser().id
                             }
                             params.name=query.term;
                             return params;
