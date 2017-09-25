@@ -384,7 +384,7 @@ angular.module('courseSchedule', [])
                             var isLabeled;
                             var axisHtml;
                             // 计算每个时隙的时间
-                            while (slotTime < this.maxTime) {
+                            while (slotTime <= this.maxTime) {
                                 slotDate = this.start.clone().time(slotTime);
                                 var label = parseInt(slotDate.format(this.labelFormat).split(':')[0]) + 1;
                                 // console.log(label);
