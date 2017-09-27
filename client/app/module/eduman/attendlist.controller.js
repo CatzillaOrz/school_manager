@@ -300,6 +300,30 @@ angular.module('dleduWebApp')
             //
             //         })
             // },
+            getClassAttendList: function () {
+                var _this = this;
+                var params = {
+                    collegeId: _this.params.collegeId,
+                    semesterId: _this.params.semesterId,
+                    professionId: (_this.params.collegeId)?_this.params.majorId:null,
+                    classAdministrativeId: _this.classAdministrativeId,
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize,
+                    managerId: AuthService.getUser().id,
+                    orgId: AuthService.getUser().orgId
+                };
+                if(!params.professionId){
+                    params.classAdministrativeId=null;
+                }
+                EduManService.getClassAttendList(params).$promise
+                    .then(function (data) {
+                        _this.classAttendList = data.data;
+                        _this.page = data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
             //教学班考勤记录导出
             teachClassAttendExport: function () {
                 var _this = this;
