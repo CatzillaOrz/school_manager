@@ -735,6 +735,20 @@ var EduManService = {
             }
         })
     },
+    updateAttendacne: function (params, access_token, callback) {
+        RestClient.put({
+            host:  'dd',
+            path: '/api/web/v1/organ/attentionUpdate',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
 };
 
 

@@ -162,10 +162,8 @@ angular.module('dleduWebService')
                 return eduman.get(params);
             },
             getAttendacneSettingList:function () {
-                var eduman =  $resource('api/eduman/getAttendacneSettingList', '', {
-                    query: {method: 'get', isArray: true}
-                });
-                return eduman.query();
+                var eduman =  $resource('api/eduman/getAttendacneSettingList');
+                return eduman.get();
             },
             getTeachingclassAttendByTeacher:function (params) {
                 var eduman = $resource('api/eduman/getTeachingclassAttendByTeacher');
@@ -206,6 +204,11 @@ angular.module('dleduWebService')
             exportClassAttendanceGroupByclass:function (params) {
                 var eduman = $resource('api/eduman/exportClassAttendanceGroupByclass');
                 return eduman.get(params);
+            },
+            updateAttendacne:function (params) {
+                var eduman = $resource('api/eduman/updateAttendacne','',{
+                    update: {method:'PUT'}});
+                return eduman.update(params);
             },
 		}
 

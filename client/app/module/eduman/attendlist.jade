@@ -618,10 +618,10 @@
                                         .short-form
                                             .form-group
                                                 .radio(ng-repeat="obj in attendSettingFn.settingList")
-                                                    input(type='radio', name='inlineRadioOptions',ng-model="handleFn.params.sex" value='{{obj.key}}')
+                                                    input(type='radio', name='inlineRadioOptions',ng-model="attendSettingFn.params.arithmetic" value='{{obj.key}}')
                                                     |  {{obj.value}}
 
                                         .form-actions
                                             .row
                                                 .col-md-12
-                                                    a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="studentForm") 应用设置
+                                                    a.btn.btn-primary(ng-click="attendSettingFn.updateAttendacne()" validation-submit="studentForm") 应用设置

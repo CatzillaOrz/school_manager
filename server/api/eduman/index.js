@@ -53,5 +53,5 @@ router.get('/exportClassAttendanceByPeriod',auth.isSignedIn, controller.exportCl
 router.get('/exportClassAttendanceGroupByCollege',auth.isSignedIn, controller.exportClassAttendanceGroupByCollege);
 router.get('/exportClassAttendanceGroupByPro',auth.isSignedIn, controller.exportClassAttendanceGroupByPro);
 router.get('/exportClassAttendanceGroupByclass',auth.isSignedIn, controller.exportClassAttendanceGroupByclass);
-//
+router.put('/updateAttendacne',auth.isSignedIn, controller.updateAttendacne);
 module.exports = router;
