@@ -425,6 +425,7 @@ angular.module('dleduWebApp')
                 EduManService.getAttendanceByPeriod(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -473,6 +474,7 @@ angular.module('dleduWebApp')
                 EduManService.getClassAttendanceGroupByCollege(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -564,6 +566,7 @@ angular.module('dleduWebApp')
                 EduManService.getClassAttendanceGroupByPro(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -701,6 +704,7 @@ angular.module('dleduWebApp')
                 EduManService.getClassAttendanceGroupByclass(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
