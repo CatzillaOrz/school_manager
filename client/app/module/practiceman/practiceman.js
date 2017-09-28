@@ -70,4 +70,32 @@ angular.module('dleduWebApp')
 					label: '创建实践小组'
 				}
 			})
+			.state('practicemanstats', {
+				parent: 'base',
+				url   : '/practiceManStats',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'PracticeManStatsCtrl',
+						templateUrl: 'app/module/practiceman/practiceManStats.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '实践统计'
+				}
+			})
+			.state('practicepeople', {
+				parent: 'practicemanstats',
+				url   : '/practicePeople/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'PracticePeopleCtrl',
+						templateUrl: 'app/module/practiceman/practicePeople.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '班级实践详情'
+				}
+			})
 	});

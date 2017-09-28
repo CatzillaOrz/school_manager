@@ -53,6 +53,39 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/isExistInGroup');
                 return practiceman.get(params);
             },
+            getPeopleStats: function (params) {
+                var practiceman = $resource('api/practiceman/getPeopleStats');
+                return practiceman.save(params);
+            },
+            getTaskStats: function (params) {
+                var practiceman = $resource('api/practiceman/getTaskStats');
+                return practiceman.save(params);
+            },
+            getPeopleDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getPeopleDetail');
+                return practiceman.save(params);
+            },
+            exportPeople: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/practiceman/exportPeople",
+                    params: params
+                });
+            },
+            exportPeopleStats: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/practiceman/exportPeopleStats",
+                    params: params
+                });
+            },
+            exportTaskStats: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/practiceman/exportTaskStats",
+                    params: params
+                });
+            },
         }
 
     });

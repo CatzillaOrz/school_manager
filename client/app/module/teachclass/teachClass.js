@@ -8,7 +8,7 @@ angular.module('dleduWebApp')
 				parent: 'base'
 			})
 			.state('teachclasslist', {
-				parent: 'teachclass',
+				parent: 'base',
 				url: '/teachclass/list',
 				access: {requiredLogin: true},
 				views: {
@@ -129,6 +129,34 @@ angular.module('dleduWebApp')
                     label: '教学班详情'
                 }
             })
+			.state('holidayman', {
+				parent: 'base',
+				url: '/holidayman',
+				access: {requiredLogin: true},
+				views: {
+					'content@base': {
+						controller: 'HolidayManCtrl',
+						templateUrl: 'app/module/teachclass/holidayMan.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '节假日管理'
+				}
+			})
+			.state('changecourse', {
+				parent: 'base',
+				url: '/changecourse',
+				access: {requiredLogin: true},
+				views: {
+					'content@base': {
+						controller: 'ChangeCourseCtrl',
+						templateUrl: 'app/module/teachclass/changeCourse.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '调课'
+				}
+			})
 			/*.state('courseEdit', {
 				parent: 'course',
 				url: '/courseedit/:id',

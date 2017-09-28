@@ -96,11 +96,31 @@
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
-            "title": "课程安排",
+            "title": "课程安排管理",
             "sref": "teachclasslist",
             "active": "teachclass",
             "icon": "th",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
+            "items":[
+                {
+                    "title": "课程安排",
+                    "sref": "teachclasslist",
+                    "active": "teachclasslist",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "节假日管理",
+                    "sref": "holidayman",
+                    "active": "holidayman",
+                    "icon": "signal"
+                },
+                {
+                    "title": "调课",
+                    "sref": "changecourse",
+                    "active": "changecourse",
+                    "icon": "signal"
+                }
+            ]
         },
         {
             "title": "教务管理",
@@ -152,6 +172,12 @@
                     "title": "实践小组管理",
                     "sref": "practicegroupman",
                     "active": "practicegroupman",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践统计",
+                    "sref": "practicemanstats",
+                    "active": "practicemanstats",
                     "icon": "pencil-square-o"
                 }
             ]
