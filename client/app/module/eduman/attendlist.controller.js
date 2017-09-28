@@ -121,95 +121,6 @@ angular.module('dleduWebApp')
                     allowClear: true
                 }
             },
-            //专业下拉列表配置
-            select2MajorOptions: function () {
-                var that = this;
-                return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true,
-                    ajax: {
-                        url: "api/major/getMajorDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params = {
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                collegeId: that.params.collegeId,
-
-                            };
-                            params.name = query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: false
-                    },
-
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            that.majorDropList = [];
-                        }
-                        that.majorDropList.push(data);
-                        return data.name;
-                    }
-                }
-            },
-            //班级下拉列表配置
-            select2ClassOptions: function () {
-                var that = this;
-                return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true,
-                    ajax: {
-                        url: "api/class/geClassDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params = {
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                professionalId: that.params.majorId,
-
-                            }
-                            params.name = query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: false
-                    },
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            that.classDropList = [];
-                        }
-                        that.classDropList.push(data);
-                        return data.name;
-                    }
-                }
-            },
             //学期下拉列表分组数据格式化
             select2GroupFormat: function (dataList) {
                 var result = []
@@ -600,8 +511,53 @@ angular.module('dleduWebApp')
                 endDate: today,
                 teacherName: null
             },
+            majorDropList:[],
             attendList:[],
-            ////api/web/v1/attendance/classAttendanceGroupByPro
+            //专业下拉列表配置
+            select2MajorOptions: function () {
+                var that=this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/major/getMajorDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId: that.params.collegeId,
+
+                            };
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.majorDropList = [];
+                        }
+                        that.majorDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
             getClassAttendanceGroupByPro:function () {
                 var _this=this;
                 var params=_this.params;
@@ -648,6 +604,97 @@ angular.module('dleduWebApp')
                 teacherName: null
             },
             attendList:[],
+            majorDropList:[],
+            classDropList:[],
+            //专业下拉列表配置
+            select2MajorOptions: function () {
+                var that=this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/major/getMajorDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId: that.params.collegeId,
+
+                            };
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.majorDropList = [];
+                        }
+                        that.majorDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
+            //班级下拉列表配置
+            select2ClassOptions: function () {
+                var that = this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/class/geClassDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                professionalId: that.params.proId,
+
+                            }
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.classDropList = [];
+                        }
+                        that.classDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
             getClassAttendanceGroupByclass:function () {
                 var _this=this;
                 var params=_this.params;

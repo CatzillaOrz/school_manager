@@ -175,7 +175,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{attendTeacherFn.page.pageNumber==0?attendTeacherFn.page.pageNumber*10:(attendTeacherFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendTeacherFn.page.pageNumber==0?attendTeacherFn.page.pageNumber+1:attendTeacherFn.page.pageNumber)-1)*10+attendTeacherFn.teachClassAttendList.lengtd}}
+                                                    span.txt-color-darken {{((attendTeacherFn.page.pageNumber==0?attendTeacherFn.page.pageNumber+1:attendTeacherFn.page.pageNumber)-1)*10+attendTeacherFn.attendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendTeacherFn.page.totalElements}}
                                                     |  条记录
@@ -255,7 +255,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{attendTimeFn.page.pageNumber==0?attendTimeFn.page.pageNumber*10:(attendTimeFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendTimeFn.page.pageNumber==0?attendTimeFn.page.pageNumber+1:attendTimeFn.page.pageNumber)-1)*10+attendTimeFn.teachClassAttendList.length}}
+                                                    span.txt-color-darken {{((attendTimeFn.page.pageNumber==0?attendTimeFn.page.pageNumber+1:attendTimeFn.page.pageNumber)-1)*10+attendTimeFn.attendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendTimeFn.page.totalElements}}
                                                     |  条记录
@@ -287,7 +287,7 @@
 
                                                 .form-group.col-sm-3
                                                     label.control-label  年级：
-                                                    input.form-control(type="text" ng-model="attendCollegeFn.params.courseName" placeholder="请输入教师名称" )
+                                                    input.form-control(type="text" ng-model="attendCollegeFn.params.courseName" placeholder="请输入年级" )
                                                 .form-group.col-sm-6
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -338,7 +338,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{attendCollegeFn.page.pageNumber==0?attendCollegeFn.page.pageNumber*10:(attendCollegeFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendCollegeFn.page.pageNumber==0?attendCollegeFn.page.pageNumber+1:attendCollegeFn.page.pageNumber)-1)*10+attendCollegeFn.classAttendList.length}}
+                                                    span.txt-color-darken {{((attendCollegeFn.page.pageNumber==0?attendCollegeFn.page.pageNumber+1:attendCollegeFn.page.pageNumber)-1)*10+attendCollegeFn.attendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendCollegeFn.page.totalElements}}
                                                     |  条记录
@@ -358,9 +358,9 @@
                                                         option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                                 .form-group.col-sm-3
                                                     label 专业：
-                                                    select.select2.form-control(ng-model="attendMajorFn.params.majorId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                    select.select2.form-control(ng-model="attendMajorFn.params.majorId" ui-select2="attendMajorFn.select2MajorOptions()"  )
                                                         option(value="") 全部
-                                                        option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                        option(ng-repeat="major in attendMajorFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                 .form-group.col-sm-3
                                                     label.control-label  年级：
                                                     input.form-control(type="text" ng-model="attendMajorFn.params.grade" placeholder="请输入年级名称" )
@@ -416,7 +416,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{attendMajorFn.page.pageNumber==0?attendMajorFn.page.pageNumber*10:(attendMajorFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendMajorFn.page.pageNumber==0?attendMajorFn.page.pageNumber+1:attendMajorFn.page.pageNumber)-1)*10+attendMajorFn.classAttendList.length}}
+                                                    span.txt-color-darken {{((attendMajorFn.page.pageNumber==0?attendMajorFn.page.pageNumber+1:attendMajorFn.page.pageNumber)-1)*10+attendMajorFn.attendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendMajorFn.page.totalElements}}
                                                     |  条记录
@@ -436,14 +436,14 @@
                                                         option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                                                 .form-group.col-sm-3
                                                     label 专业：
-                                                    select.select2.form-control(ng-model="attendClassFn.params.proId" ui-select2="attendFn.select2MajorOptions(attendFn.collegeId)"  )
+                                                    select.select2.form-control(ng-model="attendClassFn.params.proId" ui-select2="attendClassFn.select2MajorOptions()"  )
                                                         option(value="") 全部
-                                                        option(ng-repeat="major in attendFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                        option(ng-repeat="major in attendClassFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                 .form-group.col-sm-3
                                                     label 行政班级：
-                                                    select.select2.form-control(ng-model="attendClassFn.params.classId" ui-select2="attendFn.select2ClassOptions()")
+                                                    select.select2.form-control(ng-model="attendClassFn.params.classId" ui-select2="attendClassFn.select2ClassOptions()")
                                                         option(value="") 全部
-                                                        option(ng-repeat="class in attendFn.classDropList" value="{{class.id}}") {{class.name}}
+                                                        option(ng-repeat="class in attendClassFn.classDropList" value="{{class.id}}") {{class.name}}
 
                                                 .form-group.col-sm-3
                                                     label.control-label  年级：
@@ -508,7 +508,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{attendClassFn.page.pageNumber==0?attendClassFn.page.pageNumber*10:(attendClassFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((attendClassFn.page.pageNumber==0?attendClassFn.page.pageNumber+1:attendClassFn.page.pageNumber)-1)*10+attendClassFn.classAttendList.length}}
+                                                    span.txt-color-darken {{((attendClassFn.page.pageNumber==0?attendClassFn.page.pageNumber+1:attendClassFn.page.pageNumber)-1)*10+attendClassFn.attendList.length}}
                                                     |  条 总共
                                                     span.text-primary {{attendClassFn.page.totalElements}}
                                                     |  条记录
