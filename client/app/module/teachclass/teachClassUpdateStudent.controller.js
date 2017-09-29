@@ -20,6 +20,12 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 100
             },
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 100
+            },
             //关键字
             keyWord:"",
             //班级下拉列表
@@ -73,8 +79,8 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var params={
                     orgId:_this.params.orgId,
-                    pageNumber: _this.params.pageNumber,
-                    pageSize: _this.params.pageSize
+                    pageNumber: _this.page.pageNumber,
+                    pageSize: _this.page.pageSize
                 };
                 params.name=_this.keyWord;
                 if(_this.selectClassesId){
@@ -83,7 +89,7 @@ angular.module('dleduWebApp')
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList=data.data;
-
+                        _this.page = data.page;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("班级添加失败")
@@ -150,8 +156,27 @@ angular.module('dleduWebApp')
             //添加所有
             addAll:function () {
                 var _this=this;
-                _this.selectedStudents=_.union(_this.selectedStudents,this.studentList)
+                //_this.selectedStudents=_.union(_this.selectedStudents,this.studentList);
+                this.addStuByPage(_this.selectedStudents,this.studentList);
             },
+
+            //添加数据
+            addStuByPage: function(selectedStudents, selectStudents){
+                for(var i = 0, selectLen = selectStudents.length; i < selectLen; i++){
+                    var selectStu = selectStudents[i], isAddFlag = false;
+                    for(var j = 0, selectedLen = selectedStudents.length; j < selectedLen; j++){
+                        var selectedStu = selectedStudents[j];
+                        if(selectedStu.id == selectStu.id){
+                            isAddFlag = true;
+                            continue;
+                        }
+                    }
+                    if(!isAddFlag){
+                        selectedStudents.splice(0,0,selectStu);
+                    }
+                }
+            },
+
             //移除所有
             removeAll:function () {
                 var _this=this;
