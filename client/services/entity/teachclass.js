@@ -121,7 +121,7 @@ angular.module('dleduWebService')
 				return courseSchedule.save(params);
 			},
 			updateHoliday: function (params) {
-				var practiceman = $resource('api/practiceman/updateHoliday','',{
+				var practiceman = $resource('api/teachclass/updateHoliday','',{
 					update: {method:'PUT'}});
 				return practiceman.update(params);
 			},
@@ -143,7 +143,7 @@ angular.module('dleduWebService')
 				return courseSchedule.save(params);
 			},
 			updateChangeCourse: function (params) {
-				var practiceman = $resource('api/practiceman/updateChangeCourse','',{
+				var practiceman = $resource('api/teachclass/updateChangeCourse','',{
 					update: {method:'PUT'}});
 				return practiceman.update(params);
 			},

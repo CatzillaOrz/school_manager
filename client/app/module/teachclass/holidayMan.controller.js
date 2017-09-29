@@ -7,7 +7,7 @@ angular.module('dleduWebApp')
     .controller('HolidayManCtrl', function ($scope, $timeout, AuthService, messageService, CommonService, ngDialog,
                                             TeachClassService, EduManService) {
         $scope.Holiday = {
-            //老师列表
+            //列表
             records: [],
             //当前操作的teacher
             currentRecord: null,
@@ -114,37 +114,14 @@ angular.module('dleduWebApp')
                     })
             },
 
-            // 获取老师列表
-            getHolidayList: function () {
-                var that = this;
-                var params = {
-                    managerId: AuthService.getUser().id,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
-                };
-                TeachClassService.getHolidayList(params).$promise
-                    .then(function (data) {
-                        that.records = data.data;
-                        that.page = data.page;
-                        that.page.pageNumber++;
-                    })
-                    .catch(function (error) {
-
-                    })
-            },
-
             //增加节假日
             addHoliday: function(){
                 var that = this;
                 var params = this.entity;
                 TeachClassService.addHoliday(params).$promise
                     .then(function (data) {
-                        if(data.success){
-                            messageService.openMsg("新增节假日成功!");
-                            that.getHolidayList();
-                        }else{
-                            messageService.openMsg(data.message);
-                        }
+                        messageService.openMsg("新增节假日成功!");
+                        that.getHolidayList();
                     })
                     .catch(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error,"新增节假日失败！"));
@@ -156,19 +133,39 @@ angular.module('dleduWebApp')
                 this.addHoliday();
             },
 
+            // 获取老师列表
+            getHolidayList: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                TeachClassService.getHolidayList(params).$promise
+                    .then(function (data) {
+                        that.records = data.data;
+                        that.page = data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+
             //删除
             delRecord: function () {
                 var _this = $scope.Holiday;
                 var params = {
-                    id: _this.currentRecord.id
+                    id: _this.currentRecord.id,
+                    userId: AuthService.getUser().id
                 }
                 TeachClassService.delHoliday(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("取消权限成功！");
+                        messageService.openMsg("删除成功！");
                         _this.getHolidayList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error, "取消权限失败！"));
+                        messageService.openMsg(CommonService.exceptionPrompt(error, "删除失败！"));
                     })
             },
 

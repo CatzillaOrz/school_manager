@@ -391,10 +391,10 @@ var TeachClassService = {
 
 	//获取节假日列表
 	getHolidayList: function (params, access_token, callback) {
-		RestClient.put({
+		RestClient.get({
 			host: 'gateway-org',
 			path: '/v1/schoolholiday/list',
-			entity: params.teachingClassIds
+			params: params
 		}).then(function (res) {
 			if (res.status.code == 200) {
 				callback(null, res.entity);
@@ -408,10 +408,9 @@ var TeachClassService = {
 
 	//获取节假日通过id
 	getHolidayById: function (params, access_token, callback) {
-		RestClient.put({
+		RestClient.get({
 			host: 'gateway-org',
 			path: '/v1/schoolholiday/get/'+params.id,
-			entity: params.teachingClassIds
 		}).then(function (res) {
 			if (res.status.code == 200) {
 				callback(null, res.entity);
@@ -442,7 +441,7 @@ var TeachClassService = {
 
 	//编辑
 	updateHoliday: function (params, access_token, callback) {
-		RestClient.post({
+		RestClient.put({
 			host: 'gateway-org',
 			path: '/v1/schoolholiday/update',
 			access_token: access_token,
@@ -477,10 +476,10 @@ var TeachClassService = {
 
 	//获取列表
 	getChangeCourseList: function (params, access_token, callback) {
-		RestClient.put({
+		RestClient.get({
 			host: 'gateway-org',
-			path: '/v1/schoolholiday/list',
-			entity: params.teachingClassIds
+			path: '/v1/schooladjust/list',
+			params: params
 		}).then(function (res) {
 			if (res.status.code == 200) {
 				callback(null, res.entity);
@@ -494,10 +493,10 @@ var TeachClassService = {
 
 	//获取通过id
 	getChangeCourseById: function (params, access_token, callback) {
-		RestClient.put({
+		RestClient.get({
 			host: 'gateway-org',
-			path: '/v1/schoolholiday/get/'+params.id,
-			entity: params.teachingClassIds
+			path: '/v1/schooladjust/get/'+params.id,
+			params: params
 		}).then(function (res) {
 			if (res.status.code == 200) {
 				callback(null, res.entity);
@@ -512,7 +511,7 @@ var TeachClassService = {
 	addChangeCourse: function (params, access_token, callback) {
 		RestClient.post({
 			host: 'gateway-org',
-			path: '/v1/schoolholiday/add',
+			path: '/v1/schooladjust/add',
 			entity: params
 		}).then(function (res) {
 			if (res.status.code == 200) {
@@ -529,7 +528,7 @@ var TeachClassService = {
 	updateChangeCourse: function (params, access_token, callback) {
 		RestClient.post({
 			host: 'gateway-org',
-			path: '/v1/schoolholiday/update',
+			path: '/v1/schooladjust/update',
 			access_token: access_token,
 			entity: params
 		}).then(function (res) {
@@ -546,7 +545,7 @@ var TeachClassService = {
 	delChangeCourse: function (params, access_token, callback) {
 		RestClient.delete({
 			host: 'gateway-org',
-			path: '/v1/schoolholiday/delete/' + params.id,
+			path: '/v1/schooladjust/delete/' + params.id,
 			params: params
 		}).then(function (res) {
 			if (res.status.code == 200) {

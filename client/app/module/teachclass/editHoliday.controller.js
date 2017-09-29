@@ -99,8 +99,6 @@ angular.module('dleduWebApp')
                         };
                         _this.entity.semesterId = data.id;
                         _this.schoolYearDropList=[obj];
-
-
                     })
                     .catch(function (error) {
 
@@ -127,7 +125,8 @@ angular.module('dleduWebApp')
             addHoliday: function(){
                 var that = this;
                 var params = this.entity;
-                TeachClassService.addHoliday(params).$promise
+                params.userId = AuthService.getUser().id;
+                TeachClassService.updateHoliday(params).$promise
                     .then(function (data) {
                         if(data.success){
                             messageService.openMsg("编辑节假日成功!");
@@ -145,30 +144,6 @@ angular.module('dleduWebApp')
             submit: function(){
                 this.addHoliday();
             },
-
-            //删除
-            delRecord: function () {
-                var _this = $scope.Holiday;
-                var params = {
-                    userId: _this.currentRecord.id
-                }
-                TeachClassService.delHoliday(params).$promise
-                    .then(function (data) {
-                        messageService.openMsg("取消权限成功！");
-                        _this.getHolidayList();
-                    })
-                    .catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error, "取消权限失败！"));
-                    })
-            },
-
-            //删除
-            delTip: function (record) {
-                var that = this;
-                that.currentRecord = record;
-                messageService.getMsg("是否确定删除该条记录？", that.delRecord)
-            },
-
 
             init: function () {
                 var that = this;
