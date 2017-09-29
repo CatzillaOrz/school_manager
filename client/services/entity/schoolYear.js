@@ -68,6 +68,10 @@ angular.module('dleduWebService')
             getSemesterList: function (params) {
                 var semesterList = $resource('api/schoolyear/getSemesterList');
                 return semesterList.get(params);
+            },
+            getSemesterById: function (params) {
+                var semesterList = $resource('api/schoolyear/getSemesterById');
+                return semesterList.get(params);
             }
 
         }

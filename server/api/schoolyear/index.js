@@ -25,7 +25,7 @@ router.delete('/deleteTerm',auth.isSignedIn, controller.deleteTerm);
 router.get('/getPeriodById',auth.isSignedIn, controller.getPeriodById);
 router.get('/getTeachWeekList',auth.isSignedIn, controller.getTeachWeekList);
 router.get('/getSemesterList',auth.isSignedIn, controller.getSemesterList);
-
+router.get('/getSemesterById',auth.isSignedIn, controller.getSemesterById);
 
 
 module.exports = router;

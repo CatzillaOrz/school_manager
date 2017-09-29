@@ -5,7 +5,7 @@
  */
 angular.module('dleduWebApp')
     .controller('EditHolidayCtrl', function ($scope, $timeout, $state, AuthService, messageService, CommonService, ngDialog,
-                                            TeachClassService, EduManService) {
+                                            TeachClassService, SchoolYearService) {
         $scope.editHoliday = {
             id: 0,
             //当前操作的teacher
@@ -81,12 +81,13 @@ angular.module('dleduWebApp')
                 return result;
             },
 
-            getCurrentSemester: function () {
+            getCurrentSemester: function (id) {
                 var _this = this;
                 var params = {
-                    orgId: AuthService.getUser().orgId
+                    orgId: AuthService.getUser().orgId,
+                    id: id
                 };
-                EduManService.getCurrentSemester(params).$promise
+                SchoolYearService.getSemesterById(params).$promise
                     .then(function (data) {
                         var obj = {
                             text: data.yearName,
@@ -115,6 +116,9 @@ angular.module('dleduWebApp')
                 TeachClassService.getHolidayById(params).$promise
                     .then(function (data) {
                         that.entity = data;
+                        $timeout(function () {
+                            that.getCurrentSemester(that.entity.semesterId);
+                        },100)
                     })
                     .catch(function (error) {
 
@@ -126,14 +130,11 @@ angular.module('dleduWebApp')
                 var that = this;
                 var params = this.entity;
                 params.userId = AuthService.getUser().id;
+                params.orgId = AuthService.getUser().orgId
                 TeachClassService.updateHoliday(params).$promise
                     .then(function (data) {
-                        if(data.success){
-                            messageService.openMsg("编辑节假日成功!");
-                            that.getHolidayById();
-                        }else{
-                            messageService.openMsg(data.message);
-                        }
+                        messageService.openMsg("编辑节假日成功!");
+                        $state.go("holidayman");
                     })
                     .catch(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error,"编辑节假日失败！"));
@@ -148,9 +149,6 @@ angular.module('dleduWebApp')
             init: function () {
                 var that = this;
                 that.id = $state.params.id;
-                $timeout(function () {
-                    that.getCurrentSemester();
-                },100)
                 this.getHolidayById();
             }
         };
