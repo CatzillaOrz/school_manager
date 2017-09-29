@@ -4,20 +4,13 @@
  * 添加节假日
  */
 angular.module('dleduWebApp')
-    .controller('HolidayManCtrl', function ($scope, $timeout, AuthService, messageService, CommonService, ngDialog,
+    .controller('EditHolidayCtrl', function ($scope, $timeout, $state, AuthService, messageService, CommonService, ngDialog,
                                             TeachClassService, EduManService) {
-        $scope.Holiday = {
-            //老师列表
-            records: [],
+        $scope.editHoliday = {
+            id: 0,
             //当前操作的teacher
             currentRecord: null,
             schoolYearDropList: [],
-            page: {
-                totalElements: 0,
-                totalPages: 0,
-                pageNumber: 1,
-                pageSize: 10
-            },
 
             entity: {
                 endDate: "",
@@ -115,18 +108,15 @@ angular.module('dleduWebApp')
             },
 
             // 获取老师列表
-            getHolidayList: function () {
+            getHolidayById: function () {
                 var that = this;
                 var params = {
-                    managerId: AuthService.getUser().id,
-                    pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    userId: AuthService.getUser().id,
+                    id: that.id
                 };
-                TeachClassService.getHolidayList(params).$promise
+                TeachClassService.getHolidayById(params).$promise
                     .then(function (data) {
-                        that.records = data.data;
-                        that.page = data.page;
-                        that.page.pageNumber++;
+                        that.entity = data;
                     })
                     .catch(function (error) {
 
@@ -140,14 +130,14 @@ angular.module('dleduWebApp')
                 TeachClassService.addHoliday(params).$promise
                     .then(function (data) {
                         if(data.success){
-                            messageService.openMsg("新增节假日成功!");
-                            that.getHolidayList();
+                            messageService.openMsg("编辑节假日成功!");
+                            that.getHolidayById();
                         }else{
                             messageService.openMsg(data.message);
                         }
                     })
                     .catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error,"新增节假日失败！"));
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"编辑节假日失败！"));
                     })
             },
 
@@ -160,7 +150,7 @@ angular.module('dleduWebApp')
             delRecord: function () {
                 var _this = $scope.Holiday;
                 var params = {
-                    id: _this.currentRecord.id
+                    userId: _this.currentRecord.id
                 }
                 TeachClassService.delHoliday(params).$promise
                     .then(function (data) {
@@ -182,12 +172,13 @@ angular.module('dleduWebApp')
 
             init: function () {
                 var that = this;
+                that.id = $state.params.id;
                 $timeout(function () {
                     that.getCurrentSemester();
                 },100)
-                this.getHolidayList();
+                this.getHolidayById();
             }
         };
-        $scope.Holiday.init();
+        $scope.editHoliday.init();
     });
 

@@ -21,14 +21,14 @@
                                         span.required *
                                         | 节日名称：
                                     .col-sm-7
-                                        input.form-control(placeholder="请填写不超过30个字专业名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                                        input.form-control(placeholder="请填写不超过50个字节日名称" ng-model="Holiday.entity.name" name="name" validator="required, maxlength=50")
                                 .form-group
                                     label.col-sm-3.control-label
                                         span.required *
                                         | 开始日期：
                                     .col-sm-7
                                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="handleFn.params.startDate" validator="required")
+                                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="Holiday.entity.startDate" validator="required")
                                             span.add-on
                                                 i.icon-calendar.glyphicon.glyphicon-calendar
                                 .form-group
@@ -37,14 +37,21 @@
                                         | 结束日期：
                                     .col-sm-7
                                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="handleFn.params.endDate" validator="required")
+                                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="Holiday.entity.endDate" validator="required")
                                             span.add-on
                                                 i.icon-calendar.glyphicon.glyphicon-calendar
-
+                                .form-group
+                                    label.col-sm-3.control-label
+                                        span.required *
+                                        | 学期：
+                                    .col-sm-7
+                                        select#ddd.select2.form-control( ng-model="Holiday.entity.semesterId" ui-select2="Holiday.select2SemesterOptions()" )
+                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in Holiday.schoolYearDropList")
+                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{Holiday.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                             .form-actions
                                 .row
                                     .col-md-12
-                                        a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="majorForm") 保存
+                                        a.btn.btn-primary(ng-click="Holiday.submit()" validation-submit="majorForm") 保存
                                         .speace-10
                                         a.btn.btn-default(ui-sref="majorlist") 取消
     #wid-id-1.jarviswidget.jarviswidget-color-blueDark
@@ -65,20 +72,19 @@
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 节日名称
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 开始日期
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 结束日期
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学期
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat="major in majorListFn.majorList")
-                                td.sorting_1 {{$index+1 + ((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10}}
-                                td.expand
-                                    span.responsiveExpander
-                                    | {{major.name}}
-                                td  {{major.collegeName}}
-                                td  {{major.createdDate}}
+                            tr.odd(role='row' ng-repeat="record in Holiday.records")
+                                td.sorting_1 {{$index+1 + ((Holiday.page.pageNumber==0?Holiday.page.pageNumber+1:Holiday.page.pageNumber)-1)*10}}
+                                td {{record.name}}
+                                td  {{record.startDate}}
+                                td  {{record.endDate}}
                                 td
-                                    a.handle(ui-sref="majorEdit({id:major.id})")
+                                    a.handle(ui-sref="editholiday({id: record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="majorListFn.deletePrompt(major)")
+                                    a.handle(ng-click="Holiday.delTip(record)")
                                         i.fa.fa-trash-o
                                         span 删除
 
@@ -86,12 +92,13 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{majorListFn.page.pageNumber==0?majorListFn.page.pageNumber*10:(majorListFn.page.pageNumber-1)*10+1}}
+                                span.txt-color-darken {{Holiday.page.totalElements==0?0:(((Holiday.page.pageNumber)-1)*Holiday.page.pageSize+1)}}
                                 |  到
-                                span.txt-color-darken {{((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10+majorListFn.majorList.length}}
+                                span.txt-color-darken {{((Holiday.page.pageNumber==0?Holiday.page.pageNumber+1:Holiday.page.pageNumber)-1)*Holiday.page.pageSize+Holiday.records.length}}
                                 |  条 总共
-                                span.text-primary {{majorListFn.page.totalElements}}
+                                span.text-primary {{Holiday.page.totalElements}}
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='majorListFn.page.totalElements', max-size='majorListFn.page.pageSize' ng-model='majorListFn.page.pageNumber',ng-change="majorListFn.findMajorByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='Holiday.page.totalElements', max-size='Holiday.page.pageSize' ng-model='Holiday.page.pageNumber',ng-change="Holiday.getHolidayList()" boundary-link-numbers='true' items-per-page="Holiday.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                    
