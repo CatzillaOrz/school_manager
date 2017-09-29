@@ -32,7 +32,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             .ColVis
                                 a.btn.btn-default(ng-click="studentUpdateFn.addAll()") 添加全部
-                    .dt-toolbar-footer(ng-show="studentUpdateFn.studentList.length>0")
+                    .dt-toolbar-footer(ng-show="studentUpdateFn.page.totalElements>studentUpdateFn.page.pageSize")
                         .col-sm-12.col-xs-12.hidden-xs
                             #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
@@ -52,7 +52,7 @@
                                 td {{student.name}}
                                 td {{student.jobNumber}}
                                 td {{student.sex}}
-                    .dt-toolbar-footer(ng-show="studentUpdateFn.studentList.length>0")
+                    .dt-toolbar-footer(ng-show="studentUpdateFn.page.totalElements>studentUpdateFn.page.pageSize")
                         .col-sm-12.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
