@@ -65,6 +65,17 @@
         div(role='content')
             .widget-body.no-padding(style="position: initial!important")
                 #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        //.col-xs-12.col-sm-6
+                            #datatable_col_reorder_filter.dataTables_filter
+                                label
+                                    input.form-control(type='search', placeholder='按学院名称查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="collegeListFn.getCollegeList()")
+                                        i.glyphicon.glyphicon-search
+                        //.col-sm-6.col-xs-6.hidden-xs
+                            .ColVis
+                                button.btn.btn-primary(ui-sref="editholiday")
+                                    span 新建
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -72,7 +83,6 @@
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 节日名称
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 开始日期
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 结束日期
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学期
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in Holiday.records")

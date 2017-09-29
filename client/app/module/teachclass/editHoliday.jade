@@ -21,14 +21,14 @@
                                         span.required *
                                         | 节日名称：
                                     .col-sm-7
-                                        input.form-control(placeholder="请填写不超过50个字节日名称" ng-model="Holiday.entity.name" name="name" validator="required, maxlength=50")
+                                        input.form-control(placeholder="请填写不超过50个字节日名称" ng-model="editHoliday.entity.name" name="name" validator="required, maxlength=50")
                                 .form-group
                                     label.col-sm-3.control-label
                                         span.required *
                                         | 开始日期：
                                     .col-sm-7
                                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="Holiday.entity.startDate" validator="required")
+                                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="editHoliday.entity.startDate" validator="required")
                                             span.add-on
                                                 i.icon-calendar.glyphicon.glyphicon-calendar
                                 .form-group
@@ -37,7 +37,7 @@
                                         | 结束日期：
                                     .col-sm-7
                                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="Holiday.entity.endDate" validator="required")
+                                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="editHoliday.entity.endDate" validator="required")
                                             span.add-on
                                                 i.icon-calendar.glyphicon.glyphicon-calendar
                                 .form-group
@@ -45,12 +45,12 @@
                                         span.required *
                                         | 学期：
                                     .col-sm-7
-                                        select#ddd.select2.form-control( ng-model="Holiday.entity.semesterId" ui-select2="Holiday.select2SemesterOptions()" )
-                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in Holiday.schoolYearDropList")
-                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{Holiday.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                        select#ddd.select2.form-control( ng-model="editHoliday.entity.semesterId" ui-select2="editHoliday.select2SemesterOptions()" )
+                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in editHoliday.schoolYearDropList")
+                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{editHoliday.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                             .form-actions
                                 .row
                                     .col-md-12
-                                        a.btn.btn-primary(ng-click="Holiday.submit()" validation-submit="majorForm") 保存
+                                        a.btn.btn-primary(ng-click="editHoliday.submit()" validation-submit="majorForm") 保存
                                         .speace-10
-                                        a.btn.btn-default(ui-sref="majorlist") 取消
+                                        a.btn.btn-default(ui-sref="holidayman") 取消
