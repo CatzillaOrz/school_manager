@@ -100,7 +100,7 @@
             "sref": "teachclasslist",
             "active": "teachclass",
             "icon": "th",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
                 {
                     "title": "课程安排",

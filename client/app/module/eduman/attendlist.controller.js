@@ -563,6 +563,8 @@ angular.module('dleduWebApp')
             getClassAttendanceGroupByPro:function () {
                 var _this=this;
                 var params=_this.params;
+                params.pageSize = this.page.pageSize;
+                params.pageNumber = this.page.pageNumber;
                 EduManService.getClassAttendanceGroupByPro(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
@@ -701,6 +703,8 @@ angular.module('dleduWebApp')
             getClassAttendanceGroupByclass:function () {
                 var _this=this;
                 var params=_this.params;
+                params.pageSize = this.page.pageSize;
+                params.pageNumber = this.page.pageNumber;
                 EduManService.getClassAttendanceGroupByclass(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
