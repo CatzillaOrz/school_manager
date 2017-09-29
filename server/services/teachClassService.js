@@ -387,7 +387,177 @@ var TeachClassService = {
 		}) .catch(function (e) {
 			callback(e);
 		});
-	}
+	},
+
+	//获取节假日列表
+	getHolidayList: function (params, access_token, callback) {
+		RestClient.put({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/list',
+			entity: params.teachingClassIds
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//获取节假日通过id
+	getHolidayById: function (params, access_token, callback) {
+		RestClient.put({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/get/'+params.id,
+			entity: params.teachingClassIds
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//添加节假日
+	addHoliday: function (params, access_token, callback) {
+		RestClient.post({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/add',
+			entity: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//编辑
+	updateHoliday: function (params, access_token, callback) {
+		RestClient.post({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/update',
+			access_token: access_token,
+			entity: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//删除节假日
+	delHoliday: function (params, access_token, callback) {
+		RestClient.delete({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/delete/' + params.id,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//获取列表
+	getChangeCourseList: function (params, access_token, callback) {
+		RestClient.put({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/list',
+			entity: params.teachingClassIds
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//获取通过id
+	getChangeCourseById: function (params, access_token, callback) {
+		RestClient.put({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/get/'+params.id,
+			entity: params.teachingClassIds
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	addChangeCourse: function (params, access_token, callback) {
+		RestClient.post({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/add',
+			entity: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
+
+	//编辑
+	updateChangeCourse: function (params, access_token, callback) {
+		RestClient.post({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/update',
+			access_token: access_token,
+			entity: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
+
+	delChangeCourse: function (params, access_token, callback) {
+		RestClient.delete({
+			host: 'gateway-org',
+			path: '/v1/schoolholiday/delete/' + params.id,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, res.entity);
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}).catch(function (e) {
+			callback(e);
+		});
+	},
 };
 
 

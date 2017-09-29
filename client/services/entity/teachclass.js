@@ -107,6 +107,50 @@ angular.module('dleduWebService')
 				var courseSchedule = $resource('api/teachclass/getImpOptionResult');
 				return courseSchedule.get(params);
 			},
+
+			getHolidayList: function (params) {
+				var courseSchedule = $resource('api/teachclass/getHolidayList');
+				return courseSchedule.get(params);
+			},
+			getHolidayById: function (params) {
+				var courseSchedule = $resource('api/teachclass/getHolidayById');
+				return courseSchedule.get(params);
+			},
+			addHoliday: function (params) {
+				var courseSchedule = $resource('api/teachclass/addHoliday');
+				return courseSchedule.save(params);
+			},
+			updateHoliday: function (params) {
+				var practiceman = $resource('api/practiceman/updateHoliday','',{
+					update: {method:'PUT'}});
+				return practiceman.update(params);
+			},
+			delHoliday: function (params) {
+				var courseSchedule = $resource('api/teachclass/delHoliday');
+				return courseSchedule.remove(params);
+			},
+
+			getChangeCourseList: function (params) {
+				var courseSchedule = $resource('api/teachclass/getChangeCourseList');
+				return courseSchedule.get(params);
+			},
+			getChangeCourseById: function (params) {
+				var courseSchedule = $resource('api/teachclass/getChangeCourseById');
+				return courseSchedule.get(params);
+			},
+			addChangeCourse: function (params) {
+				var courseSchedule = $resource('api/teachclass/addChangeCourse');
+				return courseSchedule.save(params);
+			},
+			updateChangeCourse: function (params) {
+				var practiceman = $resource('api/practiceman/updateChangeCourse','',{
+					update: {method:'PUT'}});
+				return practiceman.update(params);
+			},
+			delChangeCourse: function (params) {
+				var courseSchedule = $resource('api/teachclass/delChangeCourse');
+				return courseSchedule.remove(params);
+			},
 		}
 
 	});

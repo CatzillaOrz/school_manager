@@ -92,7 +92,7 @@
                                                 form.form-inline
                                                     .form-group.col-sm-3
                                                         label 学生姓名：
-                                                        input.form-control(type='search', placeholder='按学生姓名或者学号查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
+                                                        input.form-control(type='search', placeholder='按学生姓名查询', aria-controls='datatable_col_reorder' ng-model="practiceStats.taskOption.name")
 
                                                     .form-group.col-sm-3
                                                         label 实践公司：
@@ -122,7 +122,7 @@
                                                         th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 被打回
                                                         th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 待审核
                                                         th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 未提交
-                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                                        //th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                                             tbody
                                                 tr.odd(role='row' ng-repeat="record in practiceStats.records")
                                                     td.sorting_1 {{$index+1 + ((practiceStats.page.pageNumber==0?practiceStats.page.pageNumber+1:practiceStats.page.pageNumber)-1)*10}}
@@ -136,7 +136,7 @@
                                                     td {{record.backToNum}}
                                                     td {{record.checkPendingNum}}
                                                     td {{record.uncommitNum}}
-                                                    td
+                                                    //td
                                                         a.handle(ng-click="")
                                                             i.fa.fa-pencil-square-o
                                                             span 统计图

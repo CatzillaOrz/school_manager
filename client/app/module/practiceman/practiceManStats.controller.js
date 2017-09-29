@@ -180,7 +180,7 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					name: that.taskOption.name,
+					stuName: that.taskOption.name,
 				};
 				params.enterpriseName = this.getCompanyName(that.taskOption.enterpriseName);
 				//CommonService.delEmptyProperty(params);

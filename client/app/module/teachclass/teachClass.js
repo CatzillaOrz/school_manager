@@ -143,6 +143,20 @@ angular.module('dleduWebApp')
 					label: '节假日管理'
 				}
 			})
+			.state('editholiday', {
+				parent: 'holidayman',
+				url: '/editholiday/:id',
+				access: {requiredLogin: true},
+				views: {
+					'content@base': {
+						controller: 'EditHolidayCtrl',
+						templateUrl: 'app/module/teachclass/editHoliday.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '节假日编辑'
+				}
+			})
 			.state('changecourse', {
 				parent: 'base',
 				url: '/changecourse',
