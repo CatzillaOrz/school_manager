@@ -100,25 +100,28 @@
             "sref": "teachclasslist",
             "active": "teachclass",
             "icon": "th",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
             "items":[
                 {
                     "title": "课程安排",
                     "sref": "teachclasslist",
                     "active": "teachclasslist",
-                    "icon": "pencil-square-o"
+                    "icon": "pencil-square-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
                     "title": "节假日管理",
                     "sref": "holidayman",
                     "active": "holidayman",
-                    "icon": "signal"
+                    "icon": "signal",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
                 },
                 {
                     "title": "调课",
                     "sref": "changecourse",
                     "active": "changecourse",
-                    "icon": "signal"
+                    "icon": "signal",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
                 }
             ]
         },
