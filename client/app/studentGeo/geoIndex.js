@@ -5,7 +5,7 @@ angular.module('dleduWebApp')
         $stateProvider
         .state('geo', {
             url   : '/geo',
-            access: {requiredLogin: true},
+            access: {requiredLogin: false},
             views : {
                 'root': {
                     controller : 'studentGeoCtl',

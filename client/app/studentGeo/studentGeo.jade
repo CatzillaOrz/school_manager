@@ -14,7 +14,7 @@
                 #educational_statistics(style="width:400px;height:200px")
             .left-style1(style="margin-bottom:15px;")
                 .chart-title
-                .chart-span 实时代课老师签到率top5
+                .chart-span 实时课程签到率top5
                 #educational_statistics1(style="width:250px;height:250px")
                 .chart-discribe
                     span 所授课程：机械原理
@@ -34,85 +34,28 @@
                     .chart-span 实时热门评论
                 .ticker-content
                     ul
-                        li 王老师讲的课很有意思啊，虽然之前没有做任何预习，居然听懂了，是我太聪明还是老师太任性？
-                        li 老师上课点名，居然没办法正常签到，肯定不是app的问题，想了想，嗯！这个手机都用了两年了，iphone X也上市了，是时候入手一台新手机了。
-                        li 睡着了，听见大家大笑才醒来，以为发生了什么有趣的事情，睁眼一看，大家都看着我，老师就站我旁边！大写的尴尬，还不怪我们宿舍的，大晚上的非要我带他们飞！
+                        li(ng-repeat="views in viewsList")
+                            span(style="color:'#3fcdff'") {{views.strudentName}}在{{views.teacherName}}老师所带课程{{courseName}}发表评论：
+                            span {{views.content}}
         .content-right
-            .right-style
-                .chart-title 16软件技术3班
-                #chart(style="width:160px;height:160px;")
+            .right-style(ng-repeat='class in classList')
+                .chart-title {{class.className}}
+                .chart(style="width:160px;height:160px;" id='{{class.classId}}')
                 .chart-discribe
-                    span 到课率：96%
-                    span 已到人数：77
-                    span 请假人数：4
-                    span 老师：刘小英
-            .right-style
-                .chart-title 16建设工程管理1班
-                #chart1(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：87%
-                    span 已到人数：41
-                    span 请假人数：0
-                    span 老师：杨慧慧
-            .right-style
-                .chart-title 16汽车检测与维修4班
-                #chart2(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：65%
-                    span 已到人数：87
-                    span 请假人数：2
-                    span 老师：陈雪倩
-            .right-style
-                .chart-title 16酒店管理2班
-                #chart3(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：60%
-                    span 已到人数：39
-                    span 请假人数：0
-                    span 老师：张蓉
-            .right-style
-                .chart-title 16广告设计与制作1班
-                #chart4(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：57%
-                    span 已到人数：42
-                    span 请假人数：7
-                    span 老师：张航瑜
-            .right-style
-                .chart-title 16人力资源管理2班
-                #chart5(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：50%
-                    span 已到人数：58
-                    span 请假人数：1
-                    span 老师：兰芳亭
-            .right-style
-                .chart-title 16环境艺术设计1班
-                #chart6(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：45%
-                    span 已到人数：27
-                    span 请假人数：5
-                    span 老师：欧万玲
-            .right-style
-                .chart-title 16健身指导与管理1班
-                #chart7(style="width:160px;height:160px;")
-                .chart-discribe
-                    span 到课率：41%
-                    span 已到人数：67
-                    span 请假人数：3
-                    span 老师：杨素文
+                    span 到课率：{{class.classRate}}
+                    span 已到人数：{{class.normal}}
+                    span 请假人数：{{class.askForLeave}}
+                    span 老师：{{class.teacherName}}
     .student-geo-bottom
         .geo-bottom-chart
             .chart-title
             .chart-span 本学期到课率汇总
             .chart-back
                 #bottom-chart(style="width:450px;height:180px")
-            span.center-content 85.3%
-            span.left-top 正常：4562
-            span.left-bottom 迟到：235
-            span.right-top 请假：350
-            span.right-bottom 旷课：107
+            span.left-top 正常：{{termtoClass.normal}}
+            span.left-bottom 迟到：{{termtoClass.late}}
+            span.right-top 请假：{{termtoClass.leave}}
+            span.right-bottom 旷课：{{termtoClass.absenteeism}}
         .geo-bottom-chart1
             .chart-title
             .chart-span 本学期教师综合排名TOP10
@@ -128,5 +71,4 @@
             .chart-span 本学期综合好评率
             .chart-back
                 #bottom-chart3(style="width:450px;height:180px")
-            span.center-content 85.3%
     .bottom-line

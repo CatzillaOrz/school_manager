@@ -183,6 +183,13 @@
             "active": "news",
             "icon": "commenting",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+        },
+        {
+            "title": "实时监控分析",
+            "sref": "geo",
+            "active": "news",
+            "icon": "commenting",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         }
 
     ]

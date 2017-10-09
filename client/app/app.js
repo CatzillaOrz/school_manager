@@ -70,7 +70,9 @@ angular.module('dleduWebApp', [
                 return response;
             },
             'request': function (config) {
-                loading(true,'all')
+                if(config.url.split('/').indexOf('geo') == -1){
+                    loading(true,'all')
+                }
                 return config;
             },
             'requestError': function (config) {
