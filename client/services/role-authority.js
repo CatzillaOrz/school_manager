@@ -17,8 +17,8 @@ angular.module('dleduWebService')
                     "url": "classlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,get,imp",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,imp",
+                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,href",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,href",
                         "ROLE_COLLEGE_ADMIN": "add,update,get,del"
                     }
                 },
@@ -62,8 +62,8 @@ angular.module('dleduWebService')
                     "url": "teachclasslist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "batchadd,add,update,del,get,imp,exp,assign,info",
-                        "ROLE_ORG_MANAGER": "batchadd,add,update,del,get,imp,exp,assign,info",
+                        "ROLE_ORG_ADMIN": "batchadd,add,update,del,get,imp,exp,assign,info,href",
+                        "ROLE_ORG_MANAGER": "batchadd,add,update,del,get,imp,exp,assign,info,href",
                         "ROLE_COLLEGE_ADMIN": "get"
                     }
                 },

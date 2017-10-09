@@ -34,5 +34,17 @@ router.put('/getCourseSchedules', auth.isSignedIn, controller.getCourseSchedules
 router.post('/saveCourseSchedules', auth.isSignedIn, controller.saveCourseSchedules);
 router.get('/getImpMustResult', auth.isSignedIn, controller.getImpMustResult);
 router.get('/getImpOptionResult', auth.isSignedIn, controller.getImpOptionResult);
+
+router.get('/getHolidayList', auth.isSignedIn, controller.getHolidayList);
+router.get('/getHolidayById', auth.isSignedIn, controller.getHolidayById);
+router.post('/addHoliday', auth.isSignedIn, controller.addHoliday);
+router.put('/updateHoliday', auth.isSignedIn, controller.updateHoliday);
+router.delete('/delHoliday', auth.isSignedIn, controller.delHoliday);
+
+router.get('/getChangeCourseList', auth.isSignedIn, controller.getChangeCourseList);
+router.get('/getChangeCourseById', auth.isSignedIn, controller.getChangeCourseById);
+router.post('/addChangeCourse', auth.isSignedIn, controller.addChangeCourse);
+router.put('/updateChangeCourse', auth.isSignedIn, controller.updateChangeCourse);
+router.delete('/delChangeCourse', auth.isSignedIn, controller.delChangeCourse);
 //getTeachClassClassesList
 module.exports = router;

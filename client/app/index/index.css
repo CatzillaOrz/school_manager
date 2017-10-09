@@ -1,3 +1,69 @@
+/*
+Error: Undefined variable: "$navbar-default-bg".
+        on line 5 of index.scss
 
+1: .index-container {
+2:   min-width: 1000px;
+3:   width: 100%;
+4:   min-height: 810px;
+5:   background-color: $navbar-default-bg;
+6:   font-family: $font-family-sans-serif;
+7:   .top-nav-container {
+8:     height: 68px;
+9:     .top-nav {
+10:       min-width: 1000px;
 
-/*# sourceMappingURL=index.css.map */
+Backtrace:
+index.scss:5
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/script/tree/variable.rb:49:in `_perform'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/script/tree/node.rb:50:in `perform'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:79:in `block in with_base'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:115:in `with_frame'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:79:in `with_base'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `map'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:79:in `block in with_base'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:115:in `with_frame'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/stack.rb:79:in `with_base'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:158:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:157:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:8:in `visit'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/engine.rb:295:in `render_with_sourcemap'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:209:in `each'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/plugin.rb:82:in `update_stylesheets'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/exec/sass_scss.rb:361:in `watch_or_update'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/exec/sass_scss.rb:51:in `process_result'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/exec/base.rb:52:in `parse'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/exec/base.rb:19:in `parse!'
+D:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.20/bin/scss:13:in `<top (required)>'
+D:/Ruby22-x64/bin/scss:23:in `load'
+D:/Ruby22-x64/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$navbar-default-bg\".\A         on line 5 of index.scss\A \A 1: .index-container {\A 2:   min-width: 1000px;\A 3:   width: 100%;\A 4:   min-height: 810px;\A 5:   background-color: $navbar-default-bg;\A 6:   font-family: $font-family-sans-serif;\A 7:   .top-nav-container {\A 8:     height: 68px;\A 9:     .top-nav {\A 10:       min-width: 1000px;"; }

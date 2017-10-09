@@ -21,5 +21,12 @@ router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupI
 router.put('/updatePracticeGroup',auth.isSignedIn, controller.updatePracticeGroup);
 router.delete('/delPracticeGroup',auth.isSignedIn, controller.delPracticeGroup);
 router.get('/isExistInGroup',auth.isSignedIn, controller.isExistInGroup);
+router.post('/getPeopleStats',auth.isSignedIn, controller.getPeopleStats);
+router.post('/getTaskStats',auth.isSignedIn, controller.getTaskStats);
+router.get('/getCompanyName',auth.isSignedIn, controller.getCompanyName);
+router.post('/getPeopleDetail',auth.isSignedIn, controller.getPeopleDetail);
+router.get('/exportPeople',auth.isSignedIn, controller.exportPeople);
+router.get('/exportPeopleStats',auth.isSignedIn, controller.exportPeopleStats);
+router.get('/exportTaskStats',auth.isSignedIn, controller.exportTaskStats);
 
 module.exports = router;

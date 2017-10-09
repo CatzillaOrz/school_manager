@@ -42,5 +42,16 @@ router.post('/switchElec',auth.isSignedIn, controller.switchElec);
 router.get('/classTrend',auth.isSignedIn, controller.classTrend);
 router.get('/classAttendExportTrend',auth.isSignedIn, controller.classAttendExportTrend);
 router.get('/getCurrentSemester',auth.isSignedIn, controller.getCurrentSemester);
-
+router.get('/getAttendacneSettingList',auth.isSignedIn, controller.getAttendacneSettingList);
+router.get('/getTeachingclassAttendByTeacher',auth.isSignedIn, controller.getTeachingclassAttendByTeacher);
+router.get('/getAttendanceByPeriod',auth.isSignedIn, controller.getAttendanceByPeriod);
+router.get('/getClassAttendanceGroupByPro',auth.isSignedIn, controller.getClassAttendanceGroupByPro);
+router.get('/getClassAttendanceGroupByclass',auth.isSignedIn, controller.getClassAttendanceGroupByclass);
+router.get('/getClassAttendanceGroupByCollege',auth.isSignedIn, controller.getClassAttendanceGroupByCollege);
+router.get('/exportTeachingclassByTeacher',auth.isSignedIn, controller.exportTeachingclassByTeacher);
+router.get('/exportClassAttendanceByPeriod',auth.isSignedIn, controller.exportClassAttendanceByPeriod);
+router.get('/exportClassAttendanceGroupByCollege',auth.isSignedIn, controller.exportClassAttendanceGroupByCollege);
+router.get('/exportClassAttendanceGroupByPro',auth.isSignedIn, controller.exportClassAttendanceGroupByPro);
+router.get('/exportClassAttendanceGroupByclass',auth.isSignedIn, controller.exportClassAttendanceGroupByclass);
+router.put('/updateAttendacne',auth.isSignedIn, controller.updateAttendacne);
 module.exports = router;

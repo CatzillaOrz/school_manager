@@ -3,6 +3,8 @@
  */
 angular.module('dleduWebApp')
     .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService, ClassService, EduManService, tempStorageService, MajorService, $timeout,messageService) {
+       //当天时间
+        var today=new Date().Format("yyyy-MM-dd");
         $scope.attendFn = {
             //学年下拉数据列表
             schoolYearDropList: [],
@@ -36,6 +38,20 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
             switchTab:function (entity) {
+
+                if(entity=="teacher"){
+                    $scope.attendTeacherFn.getTeachingclassAttendByTeacher();
+                }else if(entity=="time"){
+                    $scope.attendTimeFn.getAttendanceByPeriod();
+                }else if(entity=="college"){
+                    $scope.attendCollegeFn.getClassAttendanceGroupByCollege();
+                }else if(entity=="major"){
+                    $scope.attendMajorFn.getClassAttendanceGroupByPro();
+                }else if(entity=="class"){
+                    $scope.attendClassFn.getClassAttendanceGroupByclass();
+                }else if(entity=="student"){
+
+                }
                 this.tab=entity;
             },
             select2SemesterOptions: function () {
@@ -105,95 +121,6 @@ angular.module('dleduWebApp')
                     allowClear: true
                 }
             },
-            //专业下拉列表配置
-            select2MajorOptions: function () {
-                var that = this;
-                return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true,
-                    ajax: {
-                        url: "api/major/getMajorDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params = {
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                collegeId: that.params.collegeId,
-
-                            };
-                            params.name = query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: false
-                    },
-
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            that.majorDropList = [];
-                        }
-                        that.majorDropList.push(data);
-                        return data.name;
-                    }
-                }
-            },
-            //班级下拉列表配置
-            select2ClassOptions: function () {
-                var that = this;
-                return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true,
-                    ajax: {
-                        url: "api/class/geClassDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params = {
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-                                professionalId: that.params.majorId,
-
-                            }
-                            params.name = query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            return {
-                                results: data.data,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: false
-                    },
-                    templateResult: function (data) {
-                        if (data.id === '') { // adjust for custom placeholder values
-                            that.classDropList = [];
-                        }
-                        that.classDropList.push(data);
-                        return data.name;
-                    }
-                }
-            },
             //学期下拉列表分组数据格式化
             select2GroupFormat: function (dataList) {
                 var result = []
@@ -261,6 +188,29 @@ angular.module('dleduWebApp')
             },
             //按行政班查询考勤列表collegeId  professionId
 
+            // getClassAttendList: function () {
+            //     var _this = this;
+            //     var params = {
+            //         collegeId: _this.params.collegeId,
+            //         semesterId: _this.params.semesterId,
+            //         professionId: (_this.params.collegeId)?_this.params.majorId:null,
+            //         classAdministrativeId: _this.classAdministrativeId,
+            //         pageNumber: _this.page.pageNumber,
+            //         pageSize: _this.page.pageSize,
+            //         managerId: AuthService.getUser().id
+            //     };
+            //     if(!params.professionId){
+            //         params.classAdministrativeId=null;
+            //     }
+            //     EduManService.getClassAttendList(params).$promise
+            //         .then(function (data) {
+            //             _this.classAttendList = data.data;
+            //             _this.page = data.page;
+            //         })
+            //         .catch(function (error) {
+            //
+            //         })
+            // },
             getClassAttendList: function () {
                 var _this = this;
                 var params = {
@@ -270,7 +220,8 @@ angular.module('dleduWebApp')
                     classAdministrativeId: _this.classAdministrativeId,
                     pageNumber: _this.page.pageNumber,
                     pageSize: _this.page.pageSize,
-                    managerId: AuthService.getUser().id
+                    managerId: AuthService.getUser().id,
+                    orgId: AuthService.getUser().orgId
                 };
                 if(!params.professionId){
                     params.classAdministrativeId=null;
@@ -337,6 +288,12 @@ angular.module('dleduWebApp')
             //查询参数重置
             resetParams: function (index) {
                 var _this = this;
+                if(index==1){
+                    _this.switchTab("course");
+                }else {
+                    _this.switchTab("college");
+                }
+
                 // _this.params = {
                 //     majorId: null,
                 //     collegeId: null,
@@ -356,7 +313,7 @@ angular.module('dleduWebApp')
                 if (index == 1) {
                     _this.getTeachClassAttendList();
                 } else {
-                    _this.getClassAttendList();
+                   // _this.getClassAttendList();
                 }
             },
             toDetail: function (entity, classes) {
@@ -409,9 +366,37 @@ angular.module('dleduWebApp')
         $scope.attendTeacherFn={
             params: {
                 collegeId: null,
-                startDate: null,
-                endDate: null,
+                beginDate: today,
+                endDate: today,
                 teacherName: null
+            },
+            attendList:[],
+            getTeachingclassAttendByTeacher:function () {
+                var _this=this;
+                var params=_this.params;
+                params.pageNumber=_this.page.pageNumber;
+                params.pageSize=_this.page.pageSize;
+                EduManService.getTeachingclassAttendByTeacher(params).$promise
+                    .then(function (data) {
+                        _this.attendList=data.data;
+                        _this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //导出
+            exportTeachingclassByTeacher:function () {
+                var _this=this;
+                var params=_this.params;
+                EduManService.exportTeachingclassByTeacher(params).$promise
+                    .then(function (data) {
+                        location.href = data.message+'?attname='+ data.fileName ;
+
+                    })
+                    .catch(function (error) {
+
+                    })
             },
             //分页参数
             page: {
@@ -426,9 +411,38 @@ angular.module('dleduWebApp')
         $scope.attendTimeFn={
             params: {
                 courseName: null,
-                startDate: null,
-                endDate: null,
+                beginDate: today,
+                endDate: today,
                 teacherName: null
+            },
+            attendList:[],
+            ///api/web/v1/attendance/attendanceByPeriod
+            getAttendanceByPeriod:function () {
+                var _this=this;
+                var params=_this.params;
+                params.pageNumber=_this.page.pageNumber;
+                params.pageSize=_this.page.pageSize;
+                EduManService.getAttendanceByPeriod(params).$promise
+                    .then(function (data) {
+                        _this.attendList=data.data;
+                        _this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //导出
+            exportClassAttendanceByPeriod:function () {
+                var _this=this;
+                var params=_this.params;
+                EduManService.exportClassAttendanceByPeriod(params).$promise
+                    .then(function (data) {
+                        location.href = data.message+'?attname='+ data.fileName ;
+
+                    })
+                    .catch(function (error) {
+
+                    })
             },
             //分页参数
             page: {
@@ -438,13 +452,337 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
         };
-        $scope.attendSettingFn={
-            params: {
+        ///api/web/v1/attendance/classAttendanceGroupByCollege
+        //行政班按学院维度查询
 
+        $scope.attendCollegeFn={
+            params: {
+                collegeId: null,
+                proId:null,
+                grade:null,
+                courseName: null,
+                beginDate: today,
+                endDate: today,
+                teacherName: null
+            },
+            attendList:[],
+            getClassAttendanceGroupByCollege:function () {
+                var _this=this;
+                var params=_this.params;
+                params.pageNumber=_this.page.pageNumber;
+                params.pageSize=_this.page.pageSize;
+                EduManService.getClassAttendanceGroupByCollege(params).$promise
+                    .then(function (data) {
+                        _this.attendList=data.data;
+                        _this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //导出
+            exportClassAttendanceGroupByCollege:function () {
+                var _this=this;
+                var params=_this.params;
+                EduManService.exportClassAttendanceGroupByCollege(params).$promise
+                    .then(function (data) {
+                        location.href = data.message+'?attname='+ data.fileName ;
+
+                    })
+                    .catch(function (error) {
+
+                    })
             },
             //分页参数
-
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
         };
+        //行政班按专业维度查询
+
+        $scope.attendMajorFn={
+            params: {
+                collegeId: null,
+                proId:null,
+                grade:null,
+                courseName: null,
+                beginDate: today,
+                endDate: today,
+                teacherName: null
+            },
+            majorDropList:[],
+            attendList:[],
+            //专业下拉列表配置
+            select2MajorOptions: function () {
+                var that=this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/major/getMajorDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId: that.params.collegeId,
+
+                            };
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.majorDropList = [];
+                        }
+                        that.majorDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
+            getClassAttendanceGroupByPro:function () {
+                var _this=this;
+                var params=_this.params;
+                params.pageSize = this.page.pageSize;
+                params.pageNumber = this.page.pageNumber;
+                EduManService.getClassAttendanceGroupByPro(params).$promise
+                    .then(function (data) {
+                        _this.attendList=data.data;
+                        _this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //导出
+            exportClassAttendanceGroupByPro:function () {
+                var _this=this;
+                var params=_this.params;
+                EduManService.exportClassAttendanceGroupByPro(params).$promise
+                    .then(function (data) {
+                        location.href = data.message+'?attname='+ data.fileName ;
+
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //分页参数
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
+        };
+        //行政班按班级维度查询
+
+        $scope.attendClassFn={
+            params: {
+                collegeId: null,
+                proId:null,
+                classId:null,
+                grade:null,
+                courseName: null,
+                beginDate: today,
+                endDate: today,
+                teacherName: null
+            },
+            attendList:[],
+            majorDropList:[],
+            classDropList:[],
+            //专业下拉列表配置
+            select2MajorOptions: function () {
+                var that=this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/major/getMajorDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                collegeId: that.params.collegeId,
+
+                            };
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.majorDropList = [];
+                        }
+                        that.majorDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
+            //班级下拉列表配置
+            select2ClassOptions: function () {
+                var that = this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/class/geClassDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+                                professionalId: that.params.proId,
+
+                            }
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.data,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: false
+                    },
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            that.classDropList = [];
+                        }
+                        that.classDropList.push(data);
+                        return data.name;
+                    }
+                }
+            },
+            getClassAttendanceGroupByclass:function () {
+                var _this=this;
+                var params=_this.params;
+                params.pageSize = this.page.pageSize;
+                params.pageNumber = this.page.pageNumber;
+                EduManService.getClassAttendanceGroupByclass(params).$promise
+                    .then(function (data) {
+                        _this.attendList=data.data;
+                        _this.page=data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //导出
+            exportClassAttendanceGroupByclass:function () {
+                var _this=this;
+                var params=_this.params;
+                EduManService.exportClassAttendanceGroupByclass(params).$promise
+                    .then(function (data) {
+                        location.href = data.message+'?attname='+ data.fileName ;
+
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            //分页参数
+            page: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
+        };
+        //设置到课率
+        $scope.attendSettingFn={
+            settingList:[],
+            params: {
+                arithmetic:""
+            },
+            getAttendacneSettingList:function () {
+                var _this=this;
+                EduManService.getAttendacneSettingList().$promise
+                    .then(function (data) {
+                        _this.settingList=_this.dataFormat(data.data);
+                        _this.params.arithmetic=data.key;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            ///api/web/v1/organ/attentionUpdate
+            updateAttendacne:function () {
+                var _this=this;
+                EduManService.updateAttendacne(_this.params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("到课率设置成功！");
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("到课率设置失败！");
+                    })
+            },
+            dataFormat:function (list) {
+                var result=[];
+                list=eval(list);
+                angular.forEach(list,function (entity) {
+                    _.mapKeys(entity, function(value, key) {
+                        var obj={
+                            key:key,
+                            value:value
+                        }
+                        result.push(obj);
+                    });
+                });
+                return result;
+            },
+            //分页参数
+            init:function () {
+                this.getAttendacneSettingList();
+            }
+        };
+        $scope.attendSettingFn.init();
         $scope.attendFn.init();
         $timeout(function () {
             $scope.$watch('attendFn.params.collegeId', function(newValue, oldValue) {

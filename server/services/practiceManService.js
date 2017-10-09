@@ -208,6 +208,78 @@ var PracticeManService = {
             callback(e);
         });
     },
+
+    //获取实践人数统计
+    getPeopleStats: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/peoplecountlist',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取实践任务统计
+    getTaskStats: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/stutasklist',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取实践任务统计
+    getCompanyName: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/enterprisenamelist',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取实践人员详情
+    getPeopleDetail: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/peopledetaillist',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 
