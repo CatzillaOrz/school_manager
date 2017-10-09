@@ -181,7 +181,7 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='attendTeacherFn.page.totalElements', max-size='attendTeacherFn.page.pageSize' ng-model='attendTeacherFn.page.pageNumber',ng-change="attendTeacherFn.getTeachClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='attendTeacherFn.page.totalElements', max-size='attendTeacherFn.page.pageSize' ng-model='attendTeacherFn.page.pageNumber',ng-change="attendTeacherFn.getTeachingclassAttendByTeacher()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                         .tabbable.tabs-below(ng-if="attendFn.tab=='time'")
                             .tab-content
                                 .no-padding
@@ -312,6 +312,7 @@
                                                 tr(role='row')
                                                     th 序号
                                                     th 学院
+                                                    th 年级
                                                     th 应到
                                                     th 实到
                                                     th 迟到
@@ -323,6 +324,7 @@
                                                 tr.odd(role='row' ng-repeat="attend in attendCollegeFn.attendList")
                                                     td.sorting_1 {{$index+1 + ((attendCollegeFn.page.pageNumber==0?attendCollegeFn.page.pageNumber+1:attendCollegeFn.page.pageNumber)-1)*10}}
                                                     td {{attend.collegeName}}
+                                                    td {{attend.grade}}
                                                     td {{attend.total}}
                                                     td {{attend.normal}}
                                                     td {{attend.later}}
@@ -389,6 +391,7 @@
                                                     th 序号
                                                     th 学院
                                                     th 专业
+                                                    th 年级
                                                     th 应到
                                                     th 实到
                                                     th 迟到
@@ -401,6 +404,7 @@
                                                     td.sorting_1 {{$index+1 + ((attendMajorFn.page.pageNumber==0?attendMajorFn.page.pageNumber+1:attendMajorFn.page.pageNumber)-1)*10}}
                                                     td {{attend.collegeName}}
                                                     td {{attend.proName}}
+                                                    td {{attend.grade}}
                                                     td {{attend.total}}
                                                     td {{attend.normal}}
                                                     td {{attend.later}}
