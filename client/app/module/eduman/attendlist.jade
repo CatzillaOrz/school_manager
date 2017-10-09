@@ -181,7 +181,7 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='attendTeacherFn.page.totalElements', max-size='attendTeacherFn.page.pageSize' ng-model='attendTeacherFn.page.pageNumber',ng-change="attendTeacherFn.getTeachClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='attendTeacherFn.page.totalElements', max-size='attendTeacherFn.page.pageSize' ng-model='attendTeacherFn.page.pageNumber',ng-change="attendTeacherFn.getTeachingclassAttendByTeacher()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                         .tabbable.tabs-below(ng-if="attendFn.tab=='time'")
                             .tab-content
                                 .no-padding
