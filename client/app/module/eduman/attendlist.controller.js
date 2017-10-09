@@ -565,6 +565,7 @@ angular.module('dleduWebApp')
                 var params=_this.params;
                 params.pageNumber=_this.page.pageNumber;
                 params.pageSize=_this.page.pageSize;
+
                 EduManService.getClassAttendanceGroupByPro(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;
@@ -705,6 +706,7 @@ angular.module('dleduWebApp')
                 var params=_this.params;
                 params.pageNumber=_this.page.pageNumber;
                 params.pageSize=_this.page.pageSize;
+
                 EduManService.getClassAttendanceGroupByclass(params).$promise
                     .then(function (data) {
                         _this.attendList=data.data;

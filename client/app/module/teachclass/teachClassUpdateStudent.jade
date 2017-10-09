@@ -28,21 +28,50 @@
                     .dt-toolbar-footer.student-list-class-detail
                         .col-sm-6.col-xs-12.hidden-xs
                             .dataTables_info(role='status', aria-live='polite')
-                                | 共 {{studentUpdateFn.studentList.length}} 条数据
+                                | 当前页 {{studentUpdateFn.studentList.length}} 条数据
                         .col-sm-6.col-xs-12.hidden-xs
                             .ColVis
                                 a.btn.btn-default(ng-click="studentUpdateFn.addAll()") 添加全部
+                    .dt-toolbar-footer(ng-show="studentUpdateFn.page.totalElements>studentUpdateFn.page.pageSize")
+                        .col-sm-12.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{studentUpdateFn.page.totalElements==0?0:(((studentUpdateFn.page.pageNumber)-1)*studentUpdateFn.page.pageSize+1)}}
+                                |  到
+                                span.txt-color-darken {{((studentUpdateFn.page.pageNumber==0?studentUpdateFn.page.pageNumber+1:studentUpdateFn.page.pageNumber)-1)*studentUpdateFn.page.pageSize+studentUpdateFn.studentList.length}}
+                                |  条 总共
+                                span.text-primary {{studentUpdateFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-12.col-xs-12
+                            #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='studentUpdateFn.page.totalElements', max-size='studentUpdateFn.page.pageSize' ng-model='studentUpdateFn.page.pageNumber',ng-change="studentUpdateFn.findStudentByKey()" boundary-link-numbers='true' items-per-page="studentUpdateFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+
                     table.table.table-striped.table-bordered.table-hover.dataTable
                         tbody
                             tr.cursor-pointer(role='row' ng-repeat="student in studentUpdateFn.studentList" ng-click="studentUpdateFn.selectStudent(student)")
                                 td {{student.name}}
                                 td {{student.jobNumber}}
                                 td {{student.sex}}
+                    .dt-toolbar-footer(ng-show="studentUpdateFn.page.totalElements>studentUpdateFn.page.pageSize")
+                        .col-sm-12.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{studentUpdateFn.page.totalElements==0?0:(((studentUpdateFn.page.pageNumber)-1)*studentUpdateFn.page.pageSize+1)}}
+                                |  到
+                                span.txt-color-darken {{((studentUpdateFn.page.pageNumber==0?studentUpdateFn.page.pageNumber+1:studentUpdateFn.page.pageNumber)-1)*studentUpdateFn.page.pageSize+studentUpdateFn.studentList.length}}
+                                |  条 总共
+                                span.text-primary {{studentUpdateFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-12.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='studentUpdateFn.page.totalElements', max-size='studentUpdateFn.page.pageSize' ng-model='studentUpdateFn.page.pageNumber',ng-change="studentUpdateFn.findStudentByKey()" boundary-link-numbers='true' items-per-page="studentUpdateFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+
                 .col-sm-1
                 .col-sm-4
                     fieldset
                         legend
                             span 已选择的学生
+
                     .dt-toolbar-footer.student-list-class-detail
                         .col-sm-6.col-xs-12.hidden-xs
                             a.btn.btn-default(ng-click="studentUpdateFn.removeAll()") 取消全部
@@ -58,6 +87,7 @@
                                 td {{student.sex}}
                                 td.cursor-pointer(ng-click="studentUpdateFn.removeSelectedStudent(student)")
                                     i.fa.fa-trash-o
+
             form.form-horizontal()
                 .form-actions
                     .row

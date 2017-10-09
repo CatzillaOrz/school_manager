@@ -39,6 +39,8 @@ function request(options) {
         _host = Config.backend_api.api_gateway+"zuul/org-manager";
     }else  if (options.host && options.host == 'gateway-school'){
         _host = Config.backend_api.api_gateway+"school-manager";
+    }else  if (options.host && options.host == 'stu-practice'){
+        _host = Config.backend_api.api_gateway+"student-practice";
     } else {
         _host = Config.backend_api.host
     }

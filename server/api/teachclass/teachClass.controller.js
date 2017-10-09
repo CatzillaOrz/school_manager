@@ -220,6 +220,106 @@ module.exports = {
 				res.status(e.code).send(e.message);
 			})
 	},
+
+	getHolidayList:function (req, res) {
+		TeachClassService.getHolidayListSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	getHolidayById:function (req, res) {
+		TeachClassService.getHolidayByIdSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	addHoliday: function (req, res) {
+		TeachClassService.addHolidaySync(req.body, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	updateHoliday: function (req, res) {
+		TeachClassService.updateHolidaySync(req.body, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	delHoliday: function (req, res) {
+		TeachClassService.delHolidaySync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	getChangeCourseList:function (req, res) {
+		TeachClassService.getChangeCourseListSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	getChangeCourseById:function (req, res) {
+		TeachClassService.getChangeCourseByIdSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	addChangeCourse: function (req, res) {
+		TeachClassService.addChangeCourseSync(req.body, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	updateChangeCourse: function (req, res) {
+		TeachClassService.updateChangeCourseSync(req.body, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	delChangeCourse: function (req, res) {
+		TeachClassService.delChangeCourseSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
 };
 
 

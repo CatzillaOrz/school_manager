@@ -36,7 +36,9 @@
                     li.append(ul);
                     li.attr('data-menu-collapse', '');
                     _.forEach(item.items, function(child) {
-                        createItem(child, ul, level+1);
+                        if(isUseAuthority(child)){
+                            createItem(child, ul, level+1);
+                        }
                     })
                 }
 
