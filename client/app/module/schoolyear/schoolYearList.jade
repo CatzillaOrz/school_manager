@@ -1,17 +1,17 @@
-#wid-id-7.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
+#wid-id-7.tabBlock.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
     header(role='heading')
         .jarviswidget-ctrls(role='menu')
             a.button-icon.jarviswidget-toggle-btn(href='javascript:void(0);', rel='tooltip', title='', data-placement='bottom', data-original-title='Collapse')
                 i.fa.fa-minus
             a.button-icon.jarviswidget-delete-btn(href='javascript:void(0);', rel='tooltip', title='', data-placement='bottom', data-original-title='Delete')
                 i.fa.fa-times
-        ul#myTab.nav.nav-tabs.pull-left.in
-            li.active
-                a(data-toggle='tab', href='#hr1', aria-expanded='true')
+        ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+            li.tabBlock-tab.cursor-pointer.active
+                a(data-toggle='tab', aria-expanded='true')
                     i.fa.fa-lg.fa-calendar
                     span.hidden-mobile.hidden-tablet  学期信息
-            li
-                a(data-toggle='tab', href='#hr2', aria-expanded='false')
+            li.tabBlock-tab.cursor-pointer
+                a(data-toggle='tab', aria-expanded='false')
                     i.fa.fa-lg.fa-clock-o
                     span.hidden-mobile.hidden-tablet
                         | 课节信息
