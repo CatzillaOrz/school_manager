@@ -1,5 +1,5 @@
 .college-list-container
-    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
 
@@ -43,7 +43,7 @@
                                         .dt-toolbar.padding-bottom-10
                                             .col-xs-10
                                                 form.form-inline
-                                                    .form-group.col-sm-3
+                                                    .form-group.col-sm-4
                                                         label.control-label 学期选择：
                                                         select#ddd.select2.form-control( ng-model="attendFn.params.semesterId" ui-select2="attendFn.select2SemesterOptions()" )
                                                                     optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
@@ -53,10 +53,10 @@
                                                     //    select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                                                     //        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
 
-                                                    .form-group.col-sm-3
+                                                    .form-group.col-sm-4
                                                         label.control-label  课程名称：
                                                         input.form-control(type="text" ng-model="attendFn.params.courseName" placeholder="请输入课程名称" )
-                                                    .form-group.col-sm-3
+                                                    .form-group.col-sm-4
                                                         label.control-label 授课教师：
                                                         input.form-control(type="text" ng-model="attendFn.params.teacherName" placeholder="请输入授课教师" )
 
@@ -354,17 +354,17 @@
                                     .dataTables_wrapper.form-inline.no-footer
                                         .col-xs-9.margin-top-10
                                             form.form-inline
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label 院系：
                                                     select.select2.form-control(ng-model="attendMajorFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                                                         option(value="") 全部
                                                         option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label 专业：
                                                     select.select2.form-control(ng-model="attendMajorFn.params.majorId" ui-select2="attendMajorFn.select2MajorOptions()"  )
                                                         option(value="") 全部
                                                         option(ng-repeat="major in attendMajorFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label.control-label  年级：
                                                     input.form-control(type="text" ng-model="attendMajorFn.params.grade" placeholder="请输入年级名称" )
                                                 .form-group.col-sm-6.margin-top-10
@@ -434,23 +434,23 @@
                                     .dataTables_wrapper.form-inline.no-footer
                                         .col-xs-9.margin-top-10
                                             form.form-inline
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label 院系：
                                                     select.select2.form-control(ng-model="attendClassFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                                                         option(value="") 全部
                                                         option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label 专业：
                                                     select.select2.form-control(ng-model="attendClassFn.params.proId" ui-select2="attendClassFn.select2MajorOptions()"  )
                                                         option(value="") 全部
                                                         option(ng-repeat="major in attendClassFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label 行政班级：
                                                     select.select2.form-control(ng-model="attendClassFn.params.classId" ui-select2="attendClassFn.select2ClassOptions()")
                                                         option(value="") 全部
                                                         option(ng-repeat="class in attendClassFn.classDropList" value="{{class.id}}") {{class.name}}
 
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4.margin-top-10
                                                     label.control-label  年级：
                                                     input.form-control(type="text" ng-model="attendClassFn.params.grade" placeholder="请输入年级名称" )
                                                 .form-group.col-sm-6.margin-top-10
