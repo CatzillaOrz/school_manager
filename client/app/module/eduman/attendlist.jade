@@ -1,19 +1,20 @@
 .college-list-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
-            ul#myTab.nav.nav-tabs.pull-left.in
-                li.active(ng-click="attendFn.resetParams(1)")
-                    a(data-toggle='tab', href='#hr1', aria-expanded='true')
+
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.active.cursor-pointer(ng-click="attendFn.resetParams(1)" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='true')
                         i.fa.fa-lg.fa-calendar
                         span.hidden-mobile.hidden-tablet  教学班考勤
-                li(ng-click="attendFn.resetParams(2)")
-                    a(data-toggle='tab', href='#hr2', aria-expanded='false')
+                li.tabBlock-tab.cursor-pointer(ng-click="attendFn.resetParams(2)" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='false')
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 行政班考勤
-                li
-                    a(data-toggle='tab', href='#hr3', aria-expanded='false')
+                li.tabBlock-tab.cursor-pointer(role="navigation")
+                    a(data-toggle='tab', aria-expanded='false')
                         i.fa.fa-lg.fa-pencil
                         span.hidden-mobile.hidden-tablet
                             | 到课率设置
