@@ -15,6 +15,9 @@
                 li.append(a);
                 if(item.sref)
                     a.attr('ui-sref', item.sref);
+                if(item.target){
+                    a.attr('target', item.target);
+                }
                 if(item.href)
                     a.attr('href', item.href);
                 if(item.icon){

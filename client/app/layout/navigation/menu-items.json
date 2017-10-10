@@ -216,6 +216,7 @@
         {
             "title": "实时监控分析",
             "sref": "geo",
+            "target":"_blank",
             "active": "news",
             "icon": "commenting",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"

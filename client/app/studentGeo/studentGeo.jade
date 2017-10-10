@@ -9,19 +9,19 @@
             .left-style(style="margin-bottom:15px")
                 .chart-title
                 .chart-span 实时签到旷课统计
-                .chart-data 签到总次数：500
-                .chart-data1 旷课总次数：45
+                .chart-data 签到总次数：{{attendancestatistics.count}}
+                .chart-data1 旷课总次数：{{attendancestatistics.absenteeismCount}}
                 #educational_statistics(style="width:400px;height:200px")
             .left-style1(style="margin-bottom:15px;")
                 .chart-title
                 .chart-span 实时课程签到率top5
                 #educational_statistics1(style="width:250px;height:250px")
                 .chart-discribe
-                    span 所授课程：机械原理
-                    span 所授课程：电工电焊
-                    span 所授课程：汽车设计及制造原理
-                    span 所授课程：三维游戏场景设计与制作
-                    span 所授课程：三国蜀汉文化与当代管理
+                    span 所授课程：{{courseNameList[0]}}
+                    span 所授课程：{{courseNameList[1]}}
+                    span 所授课程：{{courseNameList[2]}}
+                    span 所授课程：{{courseNameList[3]}}
+                    span 所授课程：{{courseNameList[4]}}
             .left-style2
                 .chart-title
                 .chart-span 院系考勤历史数据汇总

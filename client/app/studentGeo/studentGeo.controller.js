@@ -74,7 +74,7 @@ angular.module('dleduWebApp')
             geoChart:function(data){
                 var option = {
                     bmap: {
-                        center: [113.559615,22.390077],
+                        center: data.center,
                         zoom: 19,
                         roam: true,
                         enableMapClick: false,
@@ -252,7 +252,7 @@ angular.module('dleduWebApp')
                                 color: '#3ec5f4'
                             }
                         },
-                        data: [21, 45, 75, 100, 200, 400, 500]
+                        data: [data.time8.count8, data.time10.count10, data.time12.count12, data.time14.count14, data.time16.count16, data.time18.count18, data.time20.count20]
                     }, {
                         name: 'bar2',
                         type: 'bar',
@@ -262,12 +262,12 @@ angular.module('dleduWebApp')
                                 color: '#ff8340'
                             }
                         },
-                        data: [2, 5, 5, 10, 42, 70, 100]
+                        data: [data.time8.absenteeismCount8, data.time10.absenteeismCount10, data.time12.absenteeismCount12, data.time14.absenteeismCount14, data.time16.absenteeismCount16, data.time18.absenteeismCount18, data.time20.absenteeismCount20]
                     }]
                 };
                 return  option;
             },
-            chart1:function(){
+            chart1:function(data){
                 var option = {
                     grid: {
                         left: '3%',
@@ -304,7 +304,9 @@ angular.module('dleduWebApp')
                         axisLabel: {
                             interval: null
                         },
-                        data: ['徐兰', '廖桂苓', '杨素文', '潘红君', '申帅'],
+                        data: _.map(data,function(item){
+                            return item.teacherName
+                        }),
                         splitLine: {
                             show: false
                         }
@@ -331,7 +333,9 @@ angular.module('dleduWebApp')
                                 }], false)
                             }
                         },
-                        data: [95, 86, 77, 68, 49]
+                        data: _.map(data,function(item){
+                            return item.attendanceRate
+                        }),
                     }]
                 };
                 return option;
@@ -877,44 +881,63 @@ angular.module('dleduWebApp')
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
+            var params = {orgId:215};
             setTimeout(function(){
-                //地理化信息数据
-                GeoService.getOrgan({orgId:214}).success(function(res){
+               //地理化信息数据
+                GeoService.getOrgan(params).success(function(res){
                     myChart2.setOption(eduChartConfig.geoChart(res.data));
                 });
-
                 //实时签到旷课统计
-                GeoService.getAttendancestatistics({orgId:214}).success(function(res){
+                GeoService.getAttendancestatistics(params).success(function(res){
                     myChart3.setOption(eduChartConfig.chart(res.data));
+                    $scope.attendancestatistics = {
+                        "count": res.data.count,
+                        "absenteeismCount": res.data.absenteeismCount
+                    }
                 })
 
                 //实时课程签到率Top5
-                GeoService.attendancerate({orgId:214}).success(function(res){
+                GeoService.attendancerate(params).success(function(res){
                     myChart4.setOption(eduChartConfig.chart1(res.data));
+                    $scope.courseNameList = _.map(data,function(item){
+                        return item.courseName
+                    })
                 })
-
                 //院系考勤历史数据汇总
-                GeoService.departmentsummary({orgId:214}).success(function(res){
+                GeoService.departmentsummary(params).success(function(res){
                     myChart5.setOption(eduChartConfig.chart2(res.data));
                 })
 
                 //实时教学班考勤展示
-                GeoService.realtimestatistics({orgId:214}).success(function(res){
-                    var page = Math.ceil(res.data.length/8);
-                    for(var i=0;i<page;i++){
-                        var resList = res.data.slice(8*i,8*(i+1));
-                        _.each(resList,function(item,index){
-                            $scope.classList[index] = _.extend($scope.classList[index],item);
-                        });
-                        _.each($scope.classList,function(item,index){
-                            var chart = echarts.init(document.getElementById('chart_'+(index+1)));
-                            chart.setOption(eduChartConfig.chart3(item.classRate));
-                        });
-                    }
-                });
-
+                setInterval(function(){
+                    GeoService.realtimestatistics(params).success(function(res){
+                        var page = Math.ceil(res.data.length/8);
+                        var id=0;
+                        var getGeoFun=function(id){
+                            for(var i=0;i<page;i++){
+                                if(id == i){
+                                    var resList = res.data.slice(8*i,8*(i+1));
+                                    _.each(resList,function(item,index){
+                                        $scope.classList[index] = _.extend($scope.classList[index],item);
+                                    });
+                                    _.each($scope.classList,function(item,index){
+                                        var chart = echarts.init(document.getElementById('chart_'+(index+1)));
+                                        chart.setOption(eduChartConfig.chart3(item.classRate));
+                                    });
+                                }
+                            }
+                        }
+                        setInterval(function(){
+                            getGeoFun(id);
+                            id++;
+                            if((id+1) == page){
+                                id = 0;
+                            }
+                        },5000);
+                    });
+                },30000);
                 //本学期到课率汇总
-                GeoService.termtoclassrate({orgId:214}).success(function(res){
+                GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
                         "normal": res.data.normal,
                         "absenteeism": res.data.absenteeism,
@@ -925,22 +948,22 @@ angular.module('dleduWebApp')
                 })
 
                 //本学期教师综合排名top10
-                GeoService.teacherranking({orgId:214}).success(function(res){
+                GeoService.teacherranking(params).success(function(res){
                     myChart13.setOption(eduChartConfig.chart5(res.data));
                 })
 
                 //本学期行政班排名top5
-                GeoService.classranking({orgId:214}).success(function(res){
+                GeoService.classranking(params).success(function(res){
                     myChart14.setOption(eduChartConfig.chart6(res.data));
                 })
 
                 //本学期综合好评率
-                GeoService.comprehensivepraise({orgId:214}).success(function(res){
+                GeoService.comprehensivepraise(params).success(function(res){
                     myChart15.setOption(eduChartConfig.chart7(res.praise));
                 })
 
                 //实时热门评论20
-                GeoService.comprehensivepraise({orgId:214}).success(function(res){
+                GeoService.comprehensivepraise(params).success(function(res){
                     $scope.viewsList = res.data;
                     $('.ticker-content').vTicker();
                 })
