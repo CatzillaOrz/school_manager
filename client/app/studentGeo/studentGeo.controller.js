@@ -884,37 +884,35 @@ angular.module('dleduWebApp')
             var params = {orgId:215};
             setTimeout(function(){
                //地理化信息数据
-                setInterval(function() {
+                function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
                         myChart2.setOption(eduChartConfig.geoChart(res.data));
                     });
-                },300000)
+                }
+
                 //实时签到旷课统计
-                setInterval(function() {
-                GeoService.getAttendancestatistics(params).success(function(res){
-                    myChart3.setOption(eduChartConfig.chart(res.data));
-                    $scope.attendancestatistics = {
-                        "count": res.data.count,
-                        "absenteeismCount": res.data.absenteeismCount
-                    }
-                })
-                },1800000);
-                //实时课程签到率Top5
-                setInterval(function() {
-                GeoService.attendancerate(params).success(function(res){
-                    myChart4.setOption(eduChartConfig.chart1(res.data));
-                    $scope.courseNameList = _.map(data,function(item){
-                        return item.courseName
+                function getAttendancestatistics(){
+                    GeoService.getAttendancestatistics(params).success(function(res){
+                        myChart3.setOption(eduChartConfig.chart(res.data));
+                        $scope.attendancestatistics = {
+                            "count": res.data.count,
+                            "absenteeismCount": res.data.absenteeismCount
+                        }
                     })
-                })
-                },300000)
-                //院系考勤历史数据汇总
-                GeoService.departmentsummary(params).success(function(res){
-                    myChart5.setOption(eduChartConfig.chart2(res.data));
-                })
+                }
+
+                //实时课程签到率Top5
+                function attendancerate(){
+                    GeoService.attendancerate(params).success(function(res){
+                        myChart4.setOption(eduChartConfig.chart1(res.data));
+                        $scope.courseNameList = _.map(data,function(item){
+                            return item.courseName
+                        })
+                    })
+                }
 
                 //实时教学班考勤展示
-                setInterval(function(){
+                function realtimestatistics(){
                     GeoService.realtimestatistics(params).success(function(res){
                         var page = Math.ceil(res.data.length/8);
                         var id=0;
@@ -940,7 +938,33 @@ angular.module('dleduWebApp')
                             }
                         },5000);
                     });
+                }
+
+                //实时热门评论20
+                function comprehensivepraise(){
+                    GeoService.comprehensivepraise(params).success(function(res){
+                        $scope.viewsList = res.data;
+                        $('.ticker-content').vTicker();
+                    })
+                }
+                getOrgan();
+                getAttendancestatistics();
+                attendancerate();
+                realtimestatistics();
+                comprehensivepraise();
+                setInterval(function() {
+                    getAttendancestatistics();
+                },1800000);
+                setInterval(function(){
+                    getOrgan();
+                    attendancerate();
+                    realtimestatistics();
+                    comprehensivepraise();
                 },30000);
+                //院系考勤历史数据汇总
+                GeoService.departmentsummary(params).success(function(res){
+                    myChart5.setOption(eduChartConfig.chart2(res.data));
+                })
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
@@ -951,29 +975,18 @@ angular.module('dleduWebApp')
                     }
                     myChart12.setOption(eduChartConfig.chart4(res.data.rate));
                 })
-
                 //本学期教师综合排名top10
                 GeoService.teacherranking(params).success(function(res){
                     myChart13.setOption(eduChartConfig.chart5(res.data));
                 })
-
                 //本学期行政班排名top5
                 GeoService.classranking(params).success(function(res){
                     myChart14.setOption(eduChartConfig.chart6(res.data));
                 })
-
                 //本学期综合好评率
                 GeoService.comprehensivepraise(params).success(function(res){
                     myChart15.setOption(eduChartConfig.chart7(res.praise));
                 })
-
-                //实时热门评论20
-                setInterval(function(){
-                GeoService.comprehensivepraise(params).success(function(res){
-                    $scope.viewsList = res.data;
-                    $('.ticker-content').vTicker();
-                })
-                },30000);
             },200)
         }
         $scope.getEcharts();
