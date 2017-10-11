@@ -960,7 +960,7 @@ angular.module('dleduWebApp')
                     attendancerate();
                     realtimestatistics();
                     comprehensivepraise();
-                },30000);
+                },300000);
                 //院系考勤历史数据汇总
                 GeoService.departmentsummary(params).success(function(res){
                     myChart5.setOption(eduChartConfig.chart2(res.data));

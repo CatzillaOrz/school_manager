@@ -217,7 +217,7 @@
             "title": "实时监控分析",
             "sref": "geo",
             "target":"_blank",
-            "active": "news",
+            "active": "geo",
             "icon": "bar-chart-o",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         }
