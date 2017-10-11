@@ -41,7 +41,7 @@
                             tr.odd(role='row' ng-repeat="news in newsFn.newsList")
                                 td {{$index+1 + ((newsFn.page.pageNumber==0?newsFn.page.pageNumber+1:newsFn.page.pageNumber)-1)*10}}
                                 td {{news.title}}
-                                td {{news.createDate || '-'}}
+                                td {{news.createdDate || '-'}}
                                 td {{news.publishDate || '-'}}
                                 td
                                     span(ng-if="news.type==10") 顶岗实习公告
