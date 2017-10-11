@@ -6,7 +6,7 @@ angular.module('dleduWebApp')
             {
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -15,7 +15,7 @@ angular.module('dleduWebApp')
             {
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -31,7 +31,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -39,7 +39,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -47,7 +47,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -55,7 +55,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -63,7 +63,7 @@ angular.module('dleduWebApp')
             },{
                 "className": "--",
                 "teacherName": "--",
-                "normal": '',
+                "normal": '--',
                 "leave": '--',
                 "askForLeave": '--',
                 "classRate": "--",
@@ -884,10 +884,13 @@ angular.module('dleduWebApp')
             var params = {orgId:215};
             setTimeout(function(){
                //地理化信息数据
-                GeoService.getOrgan(params).success(function(res){
-                    myChart2.setOption(eduChartConfig.geoChart(res.data));
-                });
+                setInterval(function() {
+                    GeoService.getOrgan(params).success(function (res) {
+                        myChart2.setOption(eduChartConfig.geoChart(res.data));
+                    });
+                },300000)
                 //实时签到旷课统计
+                setInterval(function() {
                 GeoService.getAttendancestatistics(params).success(function(res){
                     myChart3.setOption(eduChartConfig.chart(res.data));
                     $scope.attendancestatistics = {
@@ -895,14 +898,16 @@ angular.module('dleduWebApp')
                         "absenteeismCount": res.data.absenteeismCount
                     }
                 })
-
+                },1800000);
                 //实时课程签到率Top5
+                setInterval(function() {
                 GeoService.attendancerate(params).success(function(res){
                     myChart4.setOption(eduChartConfig.chart1(res.data));
                     $scope.courseNameList = _.map(data,function(item){
                         return item.courseName
                     })
                 })
+                },300000)
                 //院系考勤历史数据汇总
                 GeoService.departmentsummary(params).success(function(res){
                     myChart5.setOption(eduChartConfig.chart2(res.data));
@@ -963,10 +968,12 @@ angular.module('dleduWebApp')
                 })
 
                 //实时热门评论20
+                setInterval(function(){
                 GeoService.comprehensivepraise(params).success(function(res){
                     $scope.viewsList = res.data;
                     $('.ticker-content').vTicker();
                 })
+                },30000);
             },200)
         }
         $scope.getEcharts();

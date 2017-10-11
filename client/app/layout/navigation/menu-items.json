@@ -218,7 +218,7 @@
             "sref": "geo",
             "target":"_blank",
             "active": "news",
-            "icon": "commenting",
+            "icon": "bar-chart-o",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         }
 
