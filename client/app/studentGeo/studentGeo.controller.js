@@ -252,7 +252,7 @@ angular.module('dleduWebApp')
                                 color: '#3ec5f4'
                             }
                         },
-                        data: [data.time8.count8, data.time10.count10, data.time12.count12, data.time14.count14, data.time16.count16, data.time18.count18, data.time20.count20]
+                        data: [ data.time10.count10, data.time12.count12, data.time16.count16, data.time18.count18, data.time22.count22]
                     }, {
                         name: 'bar2',
                         type: 'bar',
@@ -262,7 +262,7 @@ angular.module('dleduWebApp')
                                 color: '#ff8340'
                             }
                         },
-                        data: [data.time8.absenteeismCount8, data.time10.absenteeismCount10, data.time12.absenteeismCount12, data.time14.absenteeismCount14, data.time16.absenteeismCount16, data.time18.absenteeismCount18, data.time20.absenteeismCount20]
+                        data: [data.time10.absenteeismCount10, data.time12.absenteeismCount12,data.time16.absenteeismCount16, data.time18.absenteeismCount18, data.time22.absenteeismCount22]
                     }]
                 };
                 return  option;
