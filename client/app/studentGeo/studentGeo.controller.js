@@ -995,9 +995,9 @@ angular.module('dleduWebApp')
                     hotreviews();
                 },300000);
                 //院系考勤历史数据汇总
-                GeoService.departmentsummary(params).success(function(res){
-                    myChart5.setOption(eduChartConfig.chart2(res.data));
-                })
+                //GeoService.departmentsummary(params).success(function(res){
+                //    myChart5.setOption(eduChartConfig.chart2(res.data));
+                //})
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
