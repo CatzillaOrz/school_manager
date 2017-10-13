@@ -75,7 +75,18 @@ angular.module('dleduWebApp')
         $scope.allData = {
             classList:getClassList()
         }
+        var imageList = [
+            'image://../../assets/images/01.png',
+            'image://../../assets/images/02.png',
+            'image://../../assets/images/03.png',
+            'image://../../assets/images/04.png',
+            'image://../../assets/images/05.png',
+            'image://../../assets/images/06.png',
+            'image://../../assets/images/07.png',
+            'image://../../assets/images/08.png'
+        ]
         var eduChartConfig = {
+
             geoChart:function(data){
                 var option = {
                     bmap: {
@@ -207,22 +218,24 @@ angular.module('dleduWebApp')
                             ]
                         }
                     },
-                    series:[{
-                        type: 'scatter',
-                        coordinateSystem: 'bmap',
-                        data: data.lltudes,
-                        symbol: 'pin',
-                        symbolSize: 30,
-                        showEffectOn: 'render',
-                        rippleEffect: {
-                            brushType: 'stroke'
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#7666ef'
+                    series: _.map(data.lltudes,function(item){
+                        return {
+                            type: 'scatter',
+                            coordinateSystem: 'bmap',
+                            data: [item],
+                            symbol:imageList[parseInt(8*Math.random())],
+                            symbolSize: 40,
+                            showEffectOn: 'render',
+                            rippleEffect: {
+                                brushType: 'stroke'
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#7666ef'
+                                }
                             }
                         }
-                    }]
+                    })
                 }
                 return option;
             },
