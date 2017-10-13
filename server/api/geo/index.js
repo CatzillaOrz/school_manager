@@ -14,4 +14,5 @@ router.get('/termtoclassrate', auth.isSignedIn,controller.termtoclassrate);
 router.get('/classranking', auth.isSignedIn,controller.classranking);
 router.get('/teacherranking', auth.isSignedIn,controller.teacherranking);
 router.get('/comprehensivepraise', auth.isSignedIn,controller.comprehensivepraise);
+router.get('/hotreviews', auth.isSignedIn,controller.hotreviews);
 module.exports = router;

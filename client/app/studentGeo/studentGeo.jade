@@ -17,11 +17,11 @@
                 .chart-span 实时课程签到率top5
                 #educational_statistics1(style="width:250px;height:250px")
                 .chart-discribe
-                    span 所授课程：{{courseNameList[0]||'--'}}
-                    span 所授课程：{{courseNameList[1]||'--'}}
-                    span 所授课程：{{courseNameList[2]||'--'}}
-                    span 所授课程：{{courseNameList[3]||'--'}}
                     span 所授课程：{{courseNameList[4]||'--'}}
+                    span 所授课程：{{courseNameList[3]||'--'}}
+                    span 所授课程：{{courseNameList[2]||'--'}}
+                    span 所授课程：{{courseNameList[1]||'--'}}
+                    span 所授课程：{{courseNameList[0]||'--'}}
             .left-style2
                 .chart-title
                 .chart-span 院系考勤历史数据汇总
@@ -38,7 +38,7 @@
                             span(style="color:'#3fcdff'") {{views.strudentName}}在{{views.teacherName}}老师所带课程{{courseName}}发表评论：
                             span {{views.content}}
         .content-right
-            .right-style(ng-repeat='class in classList')
+            .right-style(ng-repeat='class in allData.classList')
                 .chart-title {{class.className}}
                 .chart(style="width:160px;height:160px;" id='{{class.classId}}')
                 .chart-discribe

@@ -2,79 +2,84 @@
 angular.module('dleduWebApp')
     .controller('studentGeoCtl', function ($scope, $http,GeoService) {
         $scope.showLoading = false;
-        $scope.classList=[
-            {
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_1'
-            },
-            {
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_2'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_3'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_4'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_5'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_6'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_7'
-            },{
-                "className": "--",
-                "teacherName": "--",
-                "normal": '--',
-                "leave": '--',
-                "askForLeave": '--',
-                "classRate": "--",
-                classId:'chart_8'
-            }
-        ];
+        function getClassList(){
+            return [
+                {
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_1'
+                },
+                {
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_2'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_3'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_4'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_5'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_6'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_7'
+                },{
+                    "className": "--",
+                    "teacherName": "--",
+                    "normal": '--',
+                    "leave": '--',
+                    "askForLeave": '--',
+                    "classRate": "--",
+                    classId:'chart_8'
+                }
+            ];
+        };
+        $scope.allData = {
+            classList:getClassList()
+        }
         var eduChartConfig = {
             geoChart:function(data){
                 var option = {
                     bmap: {
-                        center: data.center,
+                        center: [data.lltudes[0][0], data.lltudes[0][1]],
                         zoom: 19,
                         roam: true,
                         enableMapClick: false,
@@ -233,6 +238,13 @@ angular.module('dleduWebApp')
                             lineStyle: {
                                 color: '#ccc'
                             }
+                        },
+                        axisLabel:{
+                            interval:0,
+                            rotate:30
+                        },
+                        axisTick:{
+                            interval:0
                         }
                     },
                     yAxis: {
@@ -905,7 +917,7 @@ angular.module('dleduWebApp')
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
                         myChart4.setOption(eduChartConfig.chart1(res.data));
-                        $scope.courseNameList = _.map(data,function(item){
+                        $scope.courseNameList = _.map(res.data,function(item){
                             return item.courseName
                         })
                     })
@@ -917,13 +929,15 @@ angular.module('dleduWebApp')
                         var page = Math.ceil(res.data.length/8);
                         var id=0;
                         var getGeoFun=function(id){
+                            $scope.allData.classList = getClassList();
                             for(var i=0;i<page;i++){
                                 if(id == i){
                                     var resList = res.data.slice(8*i,8*(i+1));
                                     _.each(resList,function(item,index){
-                                        $scope.classList[index] = _.extend($scope.classList[index],item);
+                                        $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
+                                        $scope.$apply();
                                     });
-                                    _.each($scope.classList,function(item,index){
+                                    _.each($scope.allData.classList,function(item,index){
                                         var chart = echarts.init(document.getElementById('chart_'+(index+1)));
                                         chart.setOption(eduChartConfig.chart3(item.classRate));
                                     });
@@ -932,26 +946,29 @@ angular.module('dleduWebApp')
                         }
                         setInterval(function(){
                             getGeoFun(id);
+
                             id++;
-                            if((id+1) == page){
+                            if(id == page){
                                 id = 0;
                             }
-                        },5000);
+                        },10000);
                     });
                 }
 
                 //实时热门评论20
-                function comprehensivepraise(){
-                    GeoService.comprehensivepraise(params).success(function(res){
+                function hotreviews(){
+                    GeoService.hotreviews(params).success(function(res){
                         $scope.viewsList = res.data;
-                        $('.ticker-content').vTicker();
+                        setTimeout(function() {
+                            $('.ticker-content').vTicker();
+                        },100)
                     })
                 }
                 getOrgan();
                 getAttendancestatistics();
                 attendancerate();
                 realtimestatistics();
-                comprehensivepraise();
+                hotreviews();
                 setInterval(function() {
                     getAttendancestatistics();
                 },1800000);
@@ -959,7 +976,7 @@ angular.module('dleduWebApp')
                     getOrgan();
                     attendancerate();
                     realtimestatistics();
-                    comprehensivepraise();
+                    hotreviews();
                 },300000);
                 //院系考勤历史数据汇总
                 GeoService.departmentsummary(params).success(function(res){

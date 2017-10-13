@@ -64,5 +64,12 @@ angular.module('dleduWebService')
                     params:params
                 });
             },
+            hotreviews:function(params){
+                return $http({
+                    method: "GET",
+                    url: "api/geo/hotreviews",
+                    params:params
+                });
+            },
         }
     });

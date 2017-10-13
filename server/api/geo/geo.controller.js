@@ -86,6 +86,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    hotreviews: function (req, res) {
+        geoService.hotreviewsSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 
