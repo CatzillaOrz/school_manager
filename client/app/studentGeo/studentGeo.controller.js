@@ -1,6 +1,6 @@
 'use strict';
 angular.module('dleduWebApp')
-    .controller('studentGeoCtl', function ($scope, $http,GeoService) {
+    .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
         $scope.showLoading = false;
         function getClassList(){
             return [
