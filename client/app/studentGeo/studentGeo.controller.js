@@ -908,7 +908,8 @@ angular.module('dleduWebApp')
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
-            var params = {orgId:215};
+            var orgId = AuthService.getUser().orgId;
+            var params = {orgId:orgId};
             setTimeout(function(){
                //地理化信息数据
                 function getOrgan(){
