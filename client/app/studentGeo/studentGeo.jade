@@ -39,7 +39,7 @@
                             span {{views.content}}
         .content-right
             .right-style(ng-repeat='class in allData.classList')
-                .chart-title {{class.className}}
+                .chart-title {{class.className}}({{class.startTime}}--{{class.endTime}})
                 .chart(style="width:160px;height:160px;" id='{{class.classId}}')
                 .chart-discribe
                     span 到课率：{{class.classRate}}

@@ -208,9 +208,11 @@ angular.module('dleduWebApp')
                         }
                     },
                     series:[{
-                        type: 'effectScatter',
+                        type: 'scatter',
                         coordinateSystem: 'bmap',
                         data: data.lltudes,
+                        symbol: 'pin',
+                        symbolSize: 30,
                         showEffectOn: 'render',
                         rippleEffect: {
                             brushType: 'stroke'
