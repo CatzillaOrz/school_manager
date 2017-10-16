@@ -1,7 +1,7 @@
 'use strict';
 angular.module('dleduWebApp')
     .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
-        $scope.showLoading = false;
+        $scope.showLoading = true;
         function getClassList(){
             return [
                 {
@@ -825,6 +825,7 @@ angular.module('dleduWebApp')
                 function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
                         myChart2.setOption(eduChartConfig.geoChart(res.data));
+                        $scope.showLoading =false;
                     });
                 }
                 //实时签到旷课统计
@@ -857,8 +858,8 @@ angular.module('dleduWebApp')
                                     var resList = res.data.slice(8*i,8*(i+1));
                                     _.each(resList,function(item,index){
                                         $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
-                                        $scope.$apply();
                                     });
+                                    $scope.$apply();
                                     _.each($scope.allData.classList,function(item,index){
                                         var chart = echarts.init(document.getElementById('chart_'+(index+1)));
                                         chart.setOption(eduChartConfig.chart3(item.classRate));
@@ -873,7 +874,7 @@ angular.module('dleduWebApp')
                             if(id == page){
                                 id = 0;
                             }
-                        },10000);
+                        },30000);
                     });
                 }
 
