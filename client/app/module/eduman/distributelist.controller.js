@@ -191,7 +191,7 @@ angular.module('dleduWebApp')
 					messageService.openMsg("请选择课程！");
 					return;
 				}
-				if(this.selDistObj.length >= 30){
+				if(this.selDistObj.length > 30){
 					messageService.openMsg("选择的课程数量一次不能超过30个！");
 					return;
 				}
