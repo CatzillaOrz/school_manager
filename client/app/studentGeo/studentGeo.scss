@@ -9,6 +9,14 @@
     background: url("http://7xpscc.com1.z0.glb.clouddn.com/8d22b74a-54c3-480e-9e88-eb87d36e6216.png") no-repeat center center;
     background-size:100% 100%;
     position: relative;
+    .page-tilte{
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+    }
   }
   .student-geo-content{
     display: flex;
@@ -79,6 +87,21 @@
         width:560px;
         height:495px;
         position: relative;
+        .chart-title{
+          width: 5px;
+          height: 15px;
+          background-color: #26a9ff;
+          position: absolute;
+          top: 13px;
+          left: 20px;
+
+        }
+        .chart-span{
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          color: #3fcdff;
+        }
         #educational_statistics1{
           position: absolute;
           left: 0px;

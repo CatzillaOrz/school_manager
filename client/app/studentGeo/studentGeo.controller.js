@@ -1,6 +1,6 @@
 'use strict';
 angular.module('dleduWebApp')
-    .controller('studentGeoCtl', function ($scope, $http,GeoService) {
+    .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
         $scope.showLoading = false;
         function getClassList(){
             return [
@@ -298,7 +298,7 @@ angular.module('dleduWebApp')
                 var option = {
                     grid: {
                         left: '10%',
-                        right: '35%',
+                        right: '10%',
                         top: '12%',
                         height: 430, //设置grid高度
                         containLabel: true
@@ -331,38 +331,36 @@ angular.module('dleduWebApp')
                         axisLabel: {
                             interval: null
                         },
-                        data: [1,2,1,4,5,6,7,8,9,0],
-                            /*_.map(data,function(item){
-                            return item.teacherName
-                        }),*/
+                        data: _.map(data,function(item){
+                            return item.teacherName+'(所授课程：'+item .courseName+')'
+                        }),
                         splitLine: {
                             show: false
                         }
                     }],
                     series: [{
-                        name: '流量',
-                        type: 'bar',
-                        barWidth: 15,
-                        itemStyle:{
-                            normal:{
-                                "color": new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                                    "offset": 0,
-                                    "color": "#02c1d4" // 0% 处的颜色
-                                }, {
-                                    "offset": 1,
-                                    "color": "#1590e5" // 100% 处的颜色
-                                }], false),
-                                label:{
-                                    show: true,
-                                    position: 'right',
-                                    formatter: '{c}('+data[3].courseName+')'
+                            name: '流量',
+                            type: 'bar',
+                            barWidth: 15,
+                            itemStyle:{
+                                normal:{
+                                    "color": new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                        "offset": 0,
+                                        "color": "#02c1d4" // 0% 处的颜色
+                                    }, {
+                                        "offset": 1,
+                                        "color": "#1590e5" // 100% 处的颜色
+                                    }], false),
+                                    label:{
+                                        show: true,
+                                        position: 'right',
+                                        formatter: '{c}'
+                                    }
                                 }
-                            }
-                        },
-                        data: [10,20,30,40,50,60,70,80,90,55],
-                            /*_.map(data,function(item){
-                            return item.attendanceRate
-                        }),*/
+                            },
+                            data: _.map(data,function(item){
+                                return item.attendanceRate
+                            })
                     }]
                 };
                 return option;
@@ -819,7 +817,9 @@ angular.module('dleduWebApp')
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
-            var params = {orgId:95};
+            var orgId = AuthService.getUser().orgId;
+            $scope.collegeName = AuthService.getUser().orgName;
+            var params = {orgId:orgId};
             setTimeout(function(){
                //地理化信息数据
                 function getOrgan(){
@@ -827,7 +827,6 @@ angular.module('dleduWebApp')
                         myChart2.setOption(eduChartConfig.geoChart(res.data));
                     });
                 }
-
                 //实时签到旷课统计
                 function getAttendancestatistics(){
                     GeoService.getAttendancestatistics(params).success(function(res){
@@ -839,7 +838,7 @@ angular.module('dleduWebApp')
                     })
                 }
 
-                //实时课程签到率Top5
+                //本学期课程签到率Top10
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
                         myChart4.setOption(eduChartConfig.chart1(res.data));
@@ -893,14 +892,12 @@ angular.module('dleduWebApp')
                 realtimestatistics();
                 hotreviews();
                 setInterval(function() {
-                    getAttendancestatistics();
-                },1800000);
-                setInterval(function(){
                     getOrgan();
                     attendancerate();
                     realtimestatistics();
                     hotreviews();
-                },300000);
+                    getAttendancestatistics();
+                },1800000);
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
