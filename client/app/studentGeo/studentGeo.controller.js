@@ -91,7 +91,7 @@ angular.module('dleduWebApp')
                 var option = {
                     bmap: {
                         center: [data.lltudes[0][0], data.lltudes[0][1]],
-                        zoom: 19,
+                        zoom: 17,
                         roam: true,
                         enableMapClick: false,
                         mapStyle: {
@@ -297,10 +297,10 @@ angular.module('dleduWebApp')
             chart1:function(data){
                 var option = {
                     grid: {
-                        left: '3%',
-                        right: '10%',
-                        top: '17%',
-                        height: 200, //设置grid高度
+                        left: '10%',
+                        right: '35%',
+                        top: '12%',
+                        height: 430, //设置grid高度
                         containLabel: true
                     },
                     xAxis: [{
@@ -331,9 +331,10 @@ angular.module('dleduWebApp')
                         axisLabel: {
                             interval: null
                         },
-                        data: _.map(data,function(item){
+                        data: [1,2,1,4,5,6,7,8,9,0],
+                            /*_.map(data,function(item){
                             return item.teacherName
-                        }),
+                        }),*/
                         splitLine: {
                             show: false
                         }
@@ -342,13 +343,6 @@ angular.module('dleduWebApp')
                         name: '流量',
                         type: 'bar',
                         barWidth: 15,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'right'
-                            }
-
-                        },
                         itemStyle:{
                             normal:{
                                 "color": new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
@@ -357,101 +351,19 @@ angular.module('dleduWebApp')
                                 }, {
                                     "offset": 1,
                                     "color": "#1590e5" // 100% 处的颜色
-                                }], false)
+                                }], false),
+                                label:{
+                                    show: true,
+                                    position: 'right',
+                                    formatter: '{c}('+data[3].courseName+')'
+                                }
                             }
                         },
-                        data: _.map(data,function(item){
+                        data: [10,20,30,40,50,60,70,80,90,55],
+                            /*_.map(data,function(item){
                             return item.attendanceRate
-                        }),
+                        }),*/
                     }]
-                };
-                return option;
-            },
-            chart2:function(data) {
-                var schema = [
-                    {name: 'date', index: 0, text: '总数'},
-                    {name: 'AQIindex', index: 1, text: '正常'},
-                    {name: 'PM25', index: 2, text: '迟到'},
-                    {name: 'PM10', index: 3, text: '请假'},
-                    {name: 'CO', index: 4, text: '旷课'},
-                    {name: 'NO2', index: 5, text: '到课率(%)'},
-                ];
-                var lineStyle = {
-                    normal: {
-                        width: 2,
-                        opacity: 1
-                    }
-                };
-                var colors = ['#3366cc','#dc3912', '#ff9900', '#109618',
-                    '#990099','#0099c6','#dd4477','#66aa00','#b82e2e',
-                    '#994499','#22aa99','#aaaa11','#6633cc','#329262'
-                    ,'#a9c413','#8b0707','#668d1c','#bea413','#0d4012'];
-
-                var option = {
-                    color: colors,
-                    legend: {
-                        bottom: 3,
-                        data: _.map(data,function(item){
-                            return item.collegeName
-                        }),
-                        itemGap: 10,
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 10
-                        }
-                    },
-                    parallelAxis: [
-                        {dim: 0, name: schema[0].text},
-                        {dim: 1, name: schema[1].text},
-                        {dim: 2, name: schema[2].text},
-                        {dim: 3, name: schema[3].text},
-                        {dim: 4, name: schema[4].text},
-                        {dim: 5, name: schema[5].text}
-                    ],
-                    parallel: {
-                        left: '5%',
-                        right: '10%',
-                        bottom: 70,
-                        top:70,
-                        parallelAxisDefault: {
-                            type: 'value',
-                            name: 'AQI指数',
-                            nameLocation: 'end',
-                            nameGap: 15,
-                            nameTextStyle: {
-                                color: '#fff',
-                                fontSize: 8
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#aaa'
-                                }
-                            },
-                            axisTick: {
-                                lineStyle: {
-                                    color: '#777'
-                                }
-                            },
-                            splitLine: {
-                                show: false
-                            },
-                            axisLabel: {
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    series: _.map(data,function(item){
-                        return {
-                            name: item.collegeName,
-                            type: 'parallel',
-                            lineStyle: lineStyle,
-                            data: [
-                                [item.total,item.normal,item.late,item.askForLeave,item.absenteeism,item.classRate]
-                            ]
-                        }
-                    })
                 };
                 return option;
             },
@@ -902,13 +814,12 @@ angular.module('dleduWebApp')
         var myChart2 = echarts.init(document.getElementById('student-geo2'));
         var myChart3 = echarts.init(document.getElementById('educational_statistics'));
         var myChart4 = echarts.init(document.getElementById('educational_statistics1'));
-        var myChart5 = echarts.init(document.getElementById('educational_statistics2'));
         var myChart12 = echarts.init(document.getElementById('bottom-chart'));
         var myChart13 = echarts.init(document.getElementById('bottom-chart1'));
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
-            var params = {orgId:215};
+            var params = {orgId:95};
             setTimeout(function(){
                //地理化信息数据
                 function getOrgan(){
@@ -932,9 +843,6 @@ angular.module('dleduWebApp')
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
                         myChart4.setOption(eduChartConfig.chart1(res.data));
-                        $scope.courseNameList = _.map(res.data,function(item){
-                            return item.courseName
-                        })
                     })
                 }
 
@@ -993,10 +901,6 @@ angular.module('dleduWebApp')
                     realtimestatistics();
                     hotreviews();
                 },300000);
-                //院系考勤历史数据汇总
-                GeoService.departmentsummary(params).success(function(res){
-                    myChart5.setOption(eduChartConfig.chart2(res.data));
-                })
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
