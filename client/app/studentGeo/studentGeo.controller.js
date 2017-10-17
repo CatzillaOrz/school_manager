@@ -824,17 +824,21 @@ angular.module('dleduWebApp')
                //地理化信息数据
                 function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
-                        myChart2.setOption(eduChartConfig.geoChart(res.data));
-                        $scope.showLoading =false;
+                        if(res.data.lltudes.length!=0){
+                            myChart2.setOption(eduChartConfig.geoChart(res.data));
+                            $scope.showLoading =false;
+                        }
                     });
                 }
                 //实时签到旷课统计
                 function getAttendancestatistics(){
                     GeoService.getAttendancestatistics(params).success(function(res){
-                        myChart3.setOption(eduChartConfig.chart(res.data));
-                        $scope.attendancestatistics = {
-                            "count": res.data.count,
-                            "absenteeismCount": res.data.absenteeismCount
+                        if(!_.isEmpty(res.data)){
+                            myChart3.setOption(eduChartConfig.chart(res.data));
+                            $scope.attendancestatistics = {
+                                "count": res.data.count,
+                                "absenteeismCount": res.data.absenteeismCount
+                            }
                         }
                     })
                 }
@@ -842,49 +846,55 @@ angular.module('dleduWebApp')
                 //本学期课程签到率Top10
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
-                        myChart4.setOption(eduChartConfig.chart1(res.data));
+                        if(res.data.length!=0){
+                            myChart4.setOption(eduChartConfig.chart1(res.data));
+                        }
                     })
                 }
 
                 //实时教学班考勤展示
                 function realtimestatistics(){
                     GeoService.realtimestatistics(params).success(function(res){
-                        var page = Math.ceil(res.data.length/8);
-                        var id=0;
-                        var getGeoFun=function(id){
-                            $scope.allData.classList = getClassList();
-                            for(var i=0;i<page;i++){
-                                if(id == i){
-                                    var resList = res.data.slice(8*i,8*(i+1));
-                                    _.each(resList,function(item,index){
-                                        $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
-                                    });
-                                    $scope.$apply();
-                                    _.each($scope.allData.classList,function(item,index){
-                                        var chart = echarts.init(document.getElementById('chart_'+(index+1)));
-                                        chart.setOption(eduChartConfig.chart3(item.classRate));
-                                    });
+                        if(res.data.length!=0){
+                            var page = Math.ceil(res.data.length/8);
+                            var id=0;
+                            var getGeoFun=function(id){
+                                $scope.allData.classList = getClassList();
+                                for(var i=0;i<page;i++){
+                                    if(id == i){
+                                        var resList = res.data.slice(8*i,8*(i+1));
+                                        _.each(resList,function(item,index){
+                                            $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
+                                        });
+                                        $scope.$apply();
+                                        _.each($scope.allData.classList,function(item,index){
+                                            var chart = echarts.init(document.getElementById('chart_'+(index+1)));
+                                            chart.setOption(eduChartConfig.chart3(item.classRate));
+                                        });
+                                    }
                                 }
                             }
-                        }
-                        setInterval(function(){
-                            getGeoFun(id);
+                            setInterval(function(){
+                                getGeoFun(id);
 
-                            id++;
-                            if(id == page){
-                                id = 0;
-                            }
-                        },30000);
+                                id++;
+                                if(id == page){
+                                    id = 0;
+                                }
+                            },30000);
+                        }
                     });
                 }
 
                 //实时热门评论20
                 function hotreviews(){
                     GeoService.hotreviews(params).success(function(res){
-                        $scope.viewsList = res.data;
-                        setTimeout(function() {
-                            $('.ticker-content').vTicker();
-                        },100)
+                        if(res.data.length!=0){
+                            $scope.viewsList = res.data;
+                            setTimeout(function() {
+                                $('.ticker-content').vTicker();
+                            },100)
+                        }
                     })
                 }
                 getOrgan();
@@ -915,7 +925,9 @@ angular.module('dleduWebApp')
                 })
                 //本学期行政班排名top5
                 GeoService.classranking(params).success(function(res){
-                    myChart14.setOption(eduChartConfig.chart6(res.data));
+                    if(res.data.length!=0){
+                        myChart14.setOption(eduChartConfig.chart6(res.data));
+                    }
                 })
                 //本学期综合好评率
                 GeoService.comprehensivepraise(params).success(function(res){
