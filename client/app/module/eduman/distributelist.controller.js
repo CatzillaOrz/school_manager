@@ -126,7 +126,8 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
 					teacherName: that.queryOption.teacherName,
-					courseName: that.queryOption.courseName
+					courseName: that.queryOption.courseName,
+					managerId: AuthService.getUser().id
 				};
 				if(that.queryOption.courseName == ''){
 					delete params.courseName;
