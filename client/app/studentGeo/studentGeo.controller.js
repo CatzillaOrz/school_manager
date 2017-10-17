@@ -819,7 +819,7 @@ angular.module('dleduWebApp')
         $scope.getEcharts = function(){
             var orgId = AuthService.getUser().orgId;
             $scope.collegeName = AuthService.getUser().orgName;
-            var params = {orgId:95};
+            var params = {orgId:orgId};
             setTimeout(function(){
                //地理化信息数据
                 function getOrgan(){
