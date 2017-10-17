@@ -1,7 +1,7 @@
 'use strict';
 angular.module('dleduWebApp')
     .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
-        $scope.showLoading = true;
+        $scope.showLoading = false;
         function getClassList(){
             return [
                 {
@@ -826,7 +826,6 @@ angular.module('dleduWebApp')
                     GeoService.getOrgan(params).success(function (res) {
                         if(res.data.lltudes.length!=0){
                             myChart2.setOption(eduChartConfig.geoChart(res.data));
-                            $scope.showLoading =false;
                         }
                     });
                 }
@@ -874,9 +873,13 @@ angular.module('dleduWebApp')
                                     }
                                 }
                             }
+                            getGeoFun(id);
+                            id++;
+                            if(id == page){
+                                id = 0;
+                            }
                             setInterval(function(){
                                 getGeoFun(id);
-
                                 id++;
                                 if(id == page){
                                     id = 0;
