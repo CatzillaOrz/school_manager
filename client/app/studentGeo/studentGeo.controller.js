@@ -819,7 +819,7 @@ angular.module('dleduWebApp')
         $scope.getEcharts = function(){
             var orgId = AuthService.getUser().orgId;
             $scope.collegeName = AuthService.getUser().orgName;
-            var params = {orgId:orgId};
+            var params = {orgId:95};
             setTimeout(function(){
                //地理化信息数据
                 function getOrgan(){
@@ -873,6 +873,13 @@ angular.module('dleduWebApp')
                                     }
                                 }
                             }
+                            setTimeout(function(){
+                                getGeoFun(id);
+                                id++;
+                                if(id == page){
+                                    id = 0;
+                                }
+                            },100);
                             setInterval(function(){
                                 getGeoFun(id);
                                 id++;
