@@ -86,6 +86,31 @@ angular.module('dleduWebService')
                     params: params
                 });
             },
+            getWeekTaskList: function (params) {
+                var practiceman = $resource('api/practiceman/getWeekTaskList');
+                return practiceman.get(params);
+            },
+            putWeekTask: function (params) {
+                var practiceman = $resource('api/practiceman/putWeekTask','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            getWeekTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getWeekTaskDetail');
+                return practiceman.get(params);
+            },
+            deleteWeekTask: function (params) {
+                var practiceman = $resource('api/practiceman/deleteWeekTask');
+                return practiceman.remove(params);
+            },
+            addWeekTask: function (params) {
+                var practiceman = $resource('api/practiceman/addWeekTask');
+                return practiceman.save(params);
+            },
+            getGrouplistByOrgId: function (params) {
+                var practiceman = $resource('api/practiceman/getGrouplistByOrgId');
+                return practiceman.query(params);
+            }
         }
 
     });
