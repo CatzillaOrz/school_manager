@@ -1,6 +1,6 @@
 'use strict';
 angular.module('dleduWebApp')
-    .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
+    .controller('studentGeoCtl', function ($scope, $http,$timeout,$interval ,GeoService, AuthService) {
         $scope.showLoading = false;
         function getClassList(){
             return [
@@ -820,7 +820,7 @@ angular.module('dleduWebApp')
             var orgId = AuthService.getUser().orgId;
             $scope.collegeName = AuthService.getUser().orgName;
             var params = {orgId:orgId};
-            setTimeout(function(){
+            $timeout(function(){
                //地理化信息数据
                 function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
@@ -873,7 +873,7 @@ angular.module('dleduWebApp')
                                     }
                                 }
                             }
-                            setTimeout(function(){
+                            $timeout(function(){
                                 getGeoFun(id);
                                 id++;
                                 if(id == page){
@@ -896,7 +896,7 @@ angular.module('dleduWebApp')
                     GeoService.hotreviews(params).success(function(res){
                         if(res.data.length!=0){
                             $scope.viewsList = res.data;
-                            setTimeout(function() {
+                            $timeout(function() {
                                 $('.ticker-content').vTicker();
                             },100)
                         }
@@ -907,7 +907,7 @@ angular.module('dleduWebApp')
                 attendancerate();
                 realtimestatistics();
                 hotreviews();
-                setInterval(function() {
+                $interval(function() {
                     getOrgan();
                     attendancerate();
                     realtimestatistics();
