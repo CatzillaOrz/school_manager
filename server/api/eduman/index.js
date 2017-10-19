@@ -54,4 +54,9 @@ router.get('/exportClassAttendanceGroupByCollege',auth.isSignedIn, controller.ex
 router.get('/exportClassAttendanceGroupByPro',auth.isSignedIn, controller.exportClassAttendanceGroupByPro);
 router.get('/exportClassAttendanceGroupByclass',auth.isSignedIn, controller.exportClassAttendanceGroupByclass);
 router.put('/updateAttendacne',auth.isSignedIn, controller.updateAttendacne);
+router.get('/getAttendListByCondition',auth.isSignedIn, controller.getAttendListByCondition);
+router.get('/getAttendChangeLog',auth.isSignedIn, controller.getAttendChangeLog);
+router.put('/updateAttend',auth.isSignedIn, controller.updateAttend);
+router.get('/getAttendStopLogs',auth.isSignedIn, controller.getAttendStopLogs);
+
 module.exports = router;

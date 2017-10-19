@@ -557,6 +557,21 @@ var TeachClassService = {
 			callback(e);
 		});
 	},
+    getTeacherChangeCourseList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/ddschooltimetable/listtempadjustcourse',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 

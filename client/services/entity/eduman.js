@@ -210,6 +210,23 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return eduman.update(params);
             },
+            getAttendListByCondition:function (params) {
+                var eduman = $resource('api/eduman/getAttendListByCondition');
+                return eduman.get(params);
+            },
+            getAttendChangeLog:function (params) {
+                var eduman = $resource('api/eduman/getAttendChangeLog');
+                return eduman.get(params);
+            },
+            updateAttend: function (params) {
+                var eduman = $resource('api/eduman/updateAttend','',{
+                    update: {method:'PUT'}});
+                return eduman.update(params);
+            },
+            getAttendStopLogs:function (params) {
+                var eduman = $resource('api/eduman/getAttendStopLogs');
+                return eduman.get(params);
+            },
 		}
 
 	});
