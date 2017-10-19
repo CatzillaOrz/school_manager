@@ -708,7 +708,7 @@
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
-                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
+                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==1?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
                                                     |  到
                                                     span.txt-color-darken {{((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10+attendPauseFn.attendList.length}}
                                                     |  条 总共
@@ -781,7 +781,7 @@
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
-                                                    span.txt-color-darken {{attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber*10:(attendFixFn.page.pageNumber-1)*10+1}}
+                                                    span.txt-color-darken {{attendFixFn.page.pageNumber==1?attendFixFn.page.pageNumber*10:(attendFixFn.page.pageNumber-1)*10+1}}
                                                     |  到
                                                     span.txt-color-darken {{((attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber+1:attendFixFn.page.pageNumber)-1)*10+attendFixFn.attendList.length}}
                                                     |  条 总共

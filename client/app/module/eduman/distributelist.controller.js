@@ -126,7 +126,8 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
 					teacherName: that.queryOption.teacherName,
-					courseName: that.queryOption.courseName
+					courseName: that.queryOption.courseName,
+					managerId: AuthService.getUser().id
 				};
 				if(that.queryOption.courseName == ''){
 					delete params.courseName;
@@ -189,6 +190,10 @@ angular.module('dleduWebApp')
 				var that = this;
 				if(this.selDistObj.length == 0){
 					messageService.openMsg("请选择课程！");
+					return;
+				}
+				if(this.selDistObj.length > 30){
+					messageService.openMsg("选择的课程数量一次不能超过30个！");
 					return;
 				}
 				var params = {questionnaireId: this.quesId, teachingClasses: this.selDistObj};

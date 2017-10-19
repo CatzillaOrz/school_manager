@@ -319,6 +319,30 @@ a:focus {
 .inline-block {
   display: inline-block; }
 
+.select-box {
+  border: 1px solid #ccc;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100px;
+  overflow-y: auto; }
+  .select-box .select-item {
+    list-style: none;
+    margin: 0;
+    padding: 0 10px; }
+    .select-box .select-item input[type=checkbox] {
+      float: left;
+      left: 0;
+      margin-right: 10px; }
+    .select-box .select-item .item-label {
+      position: relative;
+      display: inline-block;
+      padding-left: 0;
+      margin-bottom: 0;
+      vertical-align: middle;
+      font-weight: normal;
+      cursor: pointer; }
+
 #header #logo-group {
   padding: 22px 10px 22px 20px;
   height: 100px; }
@@ -3427,6 +3451,19 @@ a:focus {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555; }
 
+.loading-img {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10000;
+  background-color: #262731;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .loading-img img {
+    width: 300px;
+    height: 300px; }
+
 .student-geo {
   width: 1920px;
   height: 1080px;
@@ -3438,6 +3475,13 @@ a:focus {
     background: url("http://7xpscc.com1.z0.glb.clouddn.com/8d22b74a-54c3-480e-9e88-eb87d36e6216.png") no-repeat center center;
     background-size: 100% 100%;
     position: relative; }
+    .student-geo .student-geo-header .page-tilte {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px; }
   .student-geo .student-geo-content {
     display: flex;
     justify-content: center; }
@@ -3445,33 +3489,33 @@ a:focus {
       width: 560px;
       height: 750px;
       margin: 10px; }
-      .student-geo .student-geo-content .content-left .left-style, .student-geo .student-geo-content .content-left .left-style1 {
+      .student-geo .student-geo-content .content-left .left-style {
         width: 560px;
         height: 240px;
         position: relative; }
-        .student-geo .student-geo-content .content-left .left-style .chart-title, .student-geo .student-geo-content .content-left .left-style1 .chart-title {
+        .student-geo .student-geo-content .content-left .left-style .chart-title {
           width: 5px;
           height: 15px;
           background-color: #26a9ff;
           position: absolute;
           top: 13px;
           left: 20px; }
-        .student-geo .student-geo-content .content-left .left-style .chart-span, .student-geo .student-geo-content .content-left .left-style1 .chart-span {
+        .student-geo .student-geo-content .content-left .left-style .chart-span {
           position: absolute;
           top: 10px;
           left: 30px;
           color: #3fcdff; }
-        .student-geo .student-geo-content .content-left .left-style .chart-data, .student-geo .student-geo-content .content-left .left-style1 .chart-data {
+        .student-geo .student-geo-content .content-left .left-style .chart-data {
           position: absolute;
           top: 88px;
           right: 45px;
           color: #ccc; }
-        .student-geo .student-geo-content .content-left .left-style .chart-data1, .student-geo .student-geo-content .content-left .left-style1 .chart-data1 {
+        .student-geo .student-geo-content .content-left .left-style .chart-data1 {
           position: absolute;
           top: 130px;
           right: 45px;
           color: #ccc; }
-        .student-geo .student-geo-content .content-left .left-style #educational_statistics, .student-geo .student-geo-content .content-left .left-style1 #educational_statistics {
+        .student-geo .student-geo-content .content-left .left-style #educational_statistics {
           position: absolute;
           left: 0px;
           bottom: 0px; }
@@ -3490,22 +3534,39 @@ a:focus {
           top: 10px;
           left: 30px;
           color: #3fcdff; }
-      .student-geo .student-geo-content .content-left .left-style1 {
-        background: url("http://7xpscc.com1.z0.glb.clouddn.com/bc17b26c-59f3-40a1-9f51-1844b15d907c.png") no-repeat center center;
-        background-size: 100% 100%; }
-        .student-geo .student-geo-content .content-left .left-style1 #educational_statistics1 {
+      .student-geo .student-geo-content .content-left .left-style-two {
+        background: url("http://7xpscc.com1.z0.glb.clouddn.com/c143aaf9-0dd7-4961-ac3e-9b6bc4c84925.png") no-repeat center center;
+        background-size: 100% 100%;
+        width: 560px;
+        height: 495px;
+        position: relative; }
+        .student-geo .student-geo-content .content-left .left-style-two .chart-title {
+          width: 5px;
+          height: 15px;
+          background-color: #26a9ff;
+          position: absolute;
+          top: 13px;
+          left: 20px; }
+        .student-geo .student-geo-content .content-left .left-style-two .chart-span {
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          color: #3fcdff; }
+        .student-geo .student-geo-content .content-left .left-style-two #educational_statistics1 {
           position: absolute;
           left: 0px;
           bottom: 0px; }
-        .student-geo .student-geo-content .content-left .left-style1 .chart-discribe {
+        .student-geo .student-geo-content .content-left .left-style-two .chart-discribe {
           position: absolute;
-          top: 33px;
+          top: 70px;
           left: 315px;
-          line-height: 35px;
           font-size: 12px;
           color: #ccc;
           display: flex;
           flex-direction: column; }
+          .student-geo .student-geo-content .content-left .left-style-two .chart-discribe span {
+            display: block;
+            height: 35px; }
       .student-geo .student-geo-content .content-left .left-style2 {
         background: url("http://7xpscc.com1.z0.glb.clouddn.com/c143aaf9-0dd7-4961-ac3e-9b6bc4c84925.png") no-repeat center center;
         background-size: 100% 100%;

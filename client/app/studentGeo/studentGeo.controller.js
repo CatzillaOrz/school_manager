@@ -1,6 +1,6 @@
 'use strict';
 angular.module('dleduWebApp')
-    .controller('studentGeoCtl', function ($scope, $http,GeoService, AuthService) {
+    .controller('studentGeoCtl', function ($scope, $http,$timeout,$interval ,GeoService, AuthService) {
         $scope.showLoading = false;
         function getClassList(){
             return [
@@ -91,7 +91,7 @@ angular.module('dleduWebApp')
                 var option = {
                     bmap: {
                         center: [data.lltudes[0][0], data.lltudes[0][1]],
-                        zoom: 19,
+                        zoom: 17,
                         roam: true,
                         enableMapClick: false,
                         mapStyle: {
@@ -297,10 +297,10 @@ angular.module('dleduWebApp')
             chart1:function(data){
                 var option = {
                     grid: {
-                        left: '3%',
+                        left: '10%',
                         right: '10%',
-                        top: '17%',
-                        height: 200, //设置grid高度
+                        top: '12%',
+                        height: 430, //设置grid高度
                         containLabel: true
                     },
                     xAxis: [{
@@ -332,126 +332,36 @@ angular.module('dleduWebApp')
                             interval: null
                         },
                         data: _.map(data,function(item){
-                            return item.teacherName
+                            return item.teacherName+'(所授课程：'+item .courseName+')'
                         }),
                         splitLine: {
                             show: false
                         }
                     }],
                     series: [{
-                        name: '流量',
-                        type: 'bar',
-                        barWidth: 15,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'right'
-                            }
-
-                        },
-                        itemStyle:{
-                            normal:{
-                                "color": new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                                    "offset": 0,
-                                    "color": "#02c1d4" // 0% 处的颜色
-                                }, {
-                                    "offset": 1,
-                                    "color": "#1590e5" // 100% 处的颜色
-                                }], false)
-                            }
-                        },
-                        data: _.map(data,function(item){
-                            return item.attendanceRate
-                        }),
+                            name: '流量',
+                            type: 'bar',
+                            barWidth: 15,
+                            itemStyle:{
+                                normal:{
+                                    "color": new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                        "offset": 0,
+                                        "color": "#02c1d4" // 0% 处的颜色
+                                    }, {
+                                        "offset": 1,
+                                        "color": "#1590e5" // 100% 处的颜色
+                                    }], false),
+                                    label:{
+                                        show: true,
+                                        position: 'right',
+                                        formatter: '{c}'
+                                    }
+                                }
+                            },
+                            data: _.map(data,function(item){
+                                return item.attendanceRate
+                            })
                     }]
-                };
-                return option;
-            },
-            chart2:function(data) {
-                var schema = [
-                    {name: 'date', index: 0, text: '总数'},
-                    {name: 'AQIindex', index: 1, text: '正常'},
-                    {name: 'PM25', index: 2, text: '迟到'},
-                    {name: 'PM10', index: 3, text: '请假'},
-                    {name: 'CO', index: 4, text: '旷课'},
-                    {name: 'NO2', index: 5, text: '到课率(%)'},
-                ];
-                var lineStyle = {
-                    normal: {
-                        width: 2,
-                        opacity: 1
-                    }
-                };
-                var colors = ['#3366cc','#dc3912', '#ff9900', '#109618',
-                    '#990099','#0099c6','#dd4477','#66aa00','#b82e2e',
-                    '#994499','#22aa99','#aaaa11','#6633cc','#329262'
-                    ,'#a9c413','#8b0707','#668d1c','#bea413','#0d4012'];
-
-                var option = {
-                    color: colors,
-                    legend: {
-                        bottom: 3,
-                        data: _.map(data,function(item){
-                            return item.collegeName
-                        }),
-                        itemGap: 10,
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 10
-                        }
-                    },
-                    parallelAxis: [
-                        {dim: 0, name: schema[0].text},
-                        {dim: 1, name: schema[1].text},
-                        {dim: 2, name: schema[2].text},
-                        {dim: 3, name: schema[3].text},
-                        {dim: 4, name: schema[4].text},
-                        {dim: 5, name: schema[5].text}
-                    ],
-                    parallel: {
-                        left: '5%',
-                        right: '10%',
-                        bottom: 70,
-                        top:70,
-                        parallelAxisDefault: {
-                            type: 'value',
-                            name: 'AQI指数',
-                            nameLocation: 'end',
-                            nameGap: 15,
-                            nameTextStyle: {
-                                color: '#fff',
-                                fontSize: 8
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#aaa'
-                                }
-                            },
-                            axisTick: {
-                                lineStyle: {
-                                    color: '#777'
-                                }
-                            },
-                            splitLine: {
-                                show: false
-                            },
-                            axisLabel: {
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    series: _.map(data,function(item){
-                        return {
-                            name: item.collegeName,
-                            type: 'parallel',
-                            lineStyle: lineStyle,
-                            data: [
-                                [item.total,item.normal,item.late,item.askForLeave,item.absenteeism,item.classRate]
-                            ]
-                        }
-                    })
                 };
                 return option;
             },
@@ -902,82 +812,94 @@ angular.module('dleduWebApp')
         var myChart2 = echarts.init(document.getElementById('student-geo2'));
         var myChart3 = echarts.init(document.getElementById('educational_statistics'));
         var myChart4 = echarts.init(document.getElementById('educational_statistics1'));
-        var myChart5 = echarts.init(document.getElementById('educational_statistics2'));
         var myChart12 = echarts.init(document.getElementById('bottom-chart'));
         var myChart13 = echarts.init(document.getElementById('bottom-chart1'));
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
             var orgId = AuthService.getUser().orgId;
+            $scope.collegeName = AuthService.getUser().orgName;
             var params = {orgId:orgId};
-            setTimeout(function(){
+            $timeout(function(){
                //地理化信息数据
                 function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
-                        myChart2.setOption(eduChartConfig.geoChart(res.data));
+                        if(res.data.lltudes.length!=0){
+                            myChart2.setOption(eduChartConfig.geoChart(res.data));
+                        }
                     });
                 }
-
                 //实时签到旷课统计
                 function getAttendancestatistics(){
                     GeoService.getAttendancestatistics(params).success(function(res){
-                        myChart3.setOption(eduChartConfig.chart(res.data));
-                        $scope.attendancestatistics = {
-                            "count": res.data.count,
-                            "absenteeismCount": res.data.absenteeismCount
+                        if(!_.isEmpty(res.data)){
+                            myChart3.setOption(eduChartConfig.chart(res.data));
+                            $scope.attendancestatistics = {
+                                "count": res.data.count,
+                                "absenteeismCount": res.data.absenteeismCount
+                            }
                         }
                     })
                 }
 
-                //实时课程签到率Top5
+                //本学期课程签到率Top10
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
-                        myChart4.setOption(eduChartConfig.chart1(res.data));
-                        $scope.courseNameList = _.map(res.data,function(item){
-                            return item.courseName
-                        })
+                        if(res.data.length!=0){
+                            myChart4.setOption(eduChartConfig.chart1(res.data));
+                        }
                     })
                 }
 
                 //实时教学班考勤展示
                 function realtimestatistics(){
                     GeoService.realtimestatistics(params).success(function(res){
-                        var page = Math.ceil(res.data.length/8);
-                        var id=0;
-                        var getGeoFun=function(id){
-                            $scope.allData.classList = getClassList();
-                            for(var i=0;i<page;i++){
-                                if(id == i){
-                                    var resList = res.data.slice(8*i,8*(i+1));
-                                    _.each(resList,function(item,index){
-                                        $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
+                        if(res.data.length!=0){
+                            var page = Math.ceil(res.data.length/8);
+                            var id=0;
+                            var getGeoFun=function(id){
+                                $scope.allData.classList = getClassList();
+                                for(var i=0;i<page;i++){
+                                    if(id == i){
+                                        var resList = res.data.slice(8*i,8*(i+1));
+                                        _.each(resList,function(item,index){
+                                            $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
+                                        });
                                         $scope.$apply();
-                                    });
-                                    _.each($scope.allData.classList,function(item,index){
-                                        var chart = echarts.init(document.getElementById('chart_'+(index+1)));
-                                        chart.setOption(eduChartConfig.chart3(item.classRate));
-                                    });
+                                        _.each($scope.allData.classList,function(item,index){
+                                            var chart = echarts.init(document.getElementById('chart_'+(index+1)));
+                                            chart.setOption(eduChartConfig.chart3(item.classRate));
+                                        });
+                                    }
                                 }
                             }
+                            $timeout(function(){
+                                getGeoFun(id);
+                                id++;
+                                if(id == page){
+                                    id = 0;
+                                }
+                            },100);
+                            setInterval(function(){
+                                getGeoFun(id);
+                                id++;
+                                if(id == page){
+                                    id = 0;
+                                }
+                            },30000);
                         }
-                        setInterval(function(){
-                            getGeoFun(id);
-
-                            id++;
-                            if(id == page){
-                                id = 0;
-                            }
-                        },10000);
                     });
                 }
 
                 //实时热门评论20
                 function hotreviews(){
                     GeoService.hotreviews(params).success(function(res){
-                        $scope.viewsList = res.data;
-                        setTimeout(function() {
-                            $('.ticker-content').vTicker();
-                        },100)
+                        if(res.data.length!=0){
+                            $scope.viewsList = res.data;
+                            $timeout(function() {
+                                $('.ticker-content').vTicker();
+                            },100)
+                        }
                     })
                 }
                 getOrgan();
@@ -985,19 +907,13 @@ angular.module('dleduWebApp')
                 attendancerate();
                 realtimestatistics();
                 hotreviews();
-                setInterval(function() {
-                    getAttendancestatistics();
-                },1800000);
-                setInterval(function(){
+                $interval(function() {
                     getOrgan();
                     attendancerate();
                     realtimestatistics();
                     hotreviews();
-                },300000);
-                //院系考勤历史数据汇总
-                //GeoService.departmentsummary(params).success(function(res){
-                //    myChart5.setOption(eduChartConfig.chart2(res.data));
-                //})
+                    getAttendancestatistics();
+                },1800000);
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
@@ -1014,7 +930,9 @@ angular.module('dleduWebApp')
                 })
                 //本学期行政班排名top5
                 GeoService.classranking(params).success(function(res){
-                    myChart14.setOption(eduChartConfig.chart6(res.data));
+                    if(res.data.length!=0){
+                        myChart14.setOption(eduChartConfig.chart6(res.data));
+                    }
                 })
                 //本学期综合好评率
                 GeoService.comprehensivepraise(params).success(function(res){

@@ -47,7 +47,10 @@
                                 td {{record.totalScore}}
                                 td {{record.teachingNum}}
                                 td
-                                    a.handle(ui-sref="distributelist({id:0,quesId:record.id})")
+                                    a.handle.disable-style(ng-if="record.isEnd=='已截至'")
+                                        i.fa.fa-pencil-square-o
+                                        span 分配
+                                    a.handle(ng-if="record.isEnd!='已截至'" ui-sref="distributelist({id:0,quesId:record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
                                     a.handle(ng-show="record.teachingNum==0" ui-sref="evaquesedit({id:record.id})")

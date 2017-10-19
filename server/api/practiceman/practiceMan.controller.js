@@ -44,7 +44,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    updateEntTutor:function (req,res) {
+    updateEntTutor: function (req, res) {
         PracticeManService.updateEntTutorSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -64,7 +64,7 @@ module.exports = {
             })
     },
 
-    updatePracticeGroup:function (req,res) {
+    updatePracticeGroup: function (req, res) {
         PracticeManService.updatePracticeGroupSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -134,7 +134,7 @@ module.exports = {
     getCompanyName: function (req, res) {
         PracticeManService.getCompanyNameSync(req.query, req.user.access_token)
             .then(function (data) {
-                for(var i = 0, len = data.data.length; i < len; i++){
+                for (var i = 0, len = data.data.length; i < len; i++) {
                     var temp = data.data[i];
                     temp.id = i + 1;
                 }
@@ -168,7 +168,7 @@ module.exports = {
                 var ws = XLSX.utils.aoa_to_sheet(datas);
                 var wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "实践学生信息");
-                res.status(200).send(XLSX.write(wb, { type: 'binary', bookType: 'xlsx' }));
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
@@ -189,7 +189,7 @@ module.exports = {
                 var ws = XLSX.utils.aoa_to_sheet(datas);
                 var wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "实践人数统计");
-                res.status(200).send(XLSX.write(wb, { type: 'binary', bookType: 'xlsx' }));
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
@@ -210,12 +210,66 @@ module.exports = {
                 var ws = XLSX.utils.aoa_to_sheet(datas);
                 var wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "实践任务统计");
-                res.status(200).send(XLSX.write(wb, { type: 'binary', bookType: 'xlsx' }));
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
     },
+    getWeekTaskList: function (req, res) {
+        PracticeManService.getWeekTaskListSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    putWeekTask: function (req, res) {
+        PracticeManService.putWeekTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getWeekTaskDetail: function (req, res) {
+        PracticeManService.getWeekTaskDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteWeekTask: function (req, res) {
+        PracticeManService.deleteWeekTaskSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addWeekTask: function (req, res) {
+        PracticeManService.addWeekTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getGrouplistByOrgId: function (req, res) {
+        PracticeManService.getGrouplistByOrgIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    }
 };
 
 

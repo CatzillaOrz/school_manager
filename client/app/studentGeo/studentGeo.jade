@@ -3,7 +3,7 @@
 .student-geo
     .student-geo-header
         .logo
-        .page-tilte
+        .page-tilte {{collegeName}}
     .student-geo-content
         .content-left
             .left-style(style="margin-bottom:15px")
@@ -12,21 +12,10 @@
                 .chart-data 签到总次数：{{attendancestatistics.count}}
                 .chart-data1 异常总次数：{{attendancestatistics.absenteeismCount}}
                 #educational_statistics(style="width:400px;height:200px")
-            .left-style1(style="margin-bottom:15px;")
+            .left-style-two(style="margin-bottom:15px;")
                 .chart-title
-                .chart-span 实时课程签到率top5
-                #educational_statistics1(style="width:250px;height:250px")
-                .chart-discribe
-                    span 所授课程：{{courseNameList[4]||'--'}}
-                    span 所授课程：{{courseNameList[3]||'--'}}
-                    span 所授课程：{{courseNameList[2]||'--'}}
-                    span 所授课程：{{courseNameList[1]||'--'}}
-                    span 所授课程：{{courseNameList[0]||'--'}}
-            .left-style2
-                .chart-title
-                .chart-span
-                //.chart-span 院系考勤历史数据汇总
-                #educational_statistics2(style="width:560;height:240px")
+                .chart-span 本学期课程签到率top10
+                #educational_statistics1(style="width:550px;height:500px")
         .content-middle
             #student-geo2(style="width:700px;height:560px")
             .hot-ticker
@@ -45,7 +34,7 @@
                 .chart-discribe
                     span 到课率：{{class.classRate}}
                     span 已到人数：{{class.normal}}
-                    span 请假人数：{{class.askForLeave}}
+                    span 请假人数：{{class.leave}}
                     span 老师：{{class.teacherName}}
     .student-geo-bottom
         .geo-bottom-chart

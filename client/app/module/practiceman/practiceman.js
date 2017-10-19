@@ -98,4 +98,36 @@ angular.module('dleduWebApp')
 					label: '班级实践详情'
 				}
 			})
+            .state('practicetasklist', {
+                parent: 'base',
+                url   : '/practiceTasklist',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'PracticeTasklistCtrl',
+                        templateUrl: 'app/module/practiceman/practiceTasklist.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践任务'
+                }
+            })
+            .state('createpracticetask', {
+                parent: 'base',
+                url   : '/createPracticeTask/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'CreatePracticeTaskCtrl',
+                        templateUrl: 'app/module/practiceman/createPracticeTask.html'
+                    }
+                },
+                data:{
+                    prompt:'填写以下信息以修改院系',
+                    completeMSG:'恭喜你，编辑院系成功！'
+                },
+                ncyBreadcrumb: {
+                    label: '创建实践小组'
+                }
+            })
 	});
