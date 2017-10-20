@@ -185,6 +185,7 @@
                     "icon": "pencil-square-o"
                 },
                 {
+
                     "title": "实践任务",
                     "sref": "practicetasklist",
                     "active": "practicetasklist",
