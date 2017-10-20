@@ -178,6 +178,13 @@
                     "icon": "pencil-square-o"
                 },
                 {
+
+                    "title": "实践任务",
+                    "sref": "practicetasklist",
+                    "active": "practicetasklist",
+                    "icon": "pencil-square-o"
+                },
+                {
                     "title": "实践统计",
                     "sref": "practicemanstats",
                     "active": "practicemanstats",
