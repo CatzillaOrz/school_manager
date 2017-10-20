@@ -176,6 +176,7 @@ angular.module('dleduWebApp')
 				EduManService.deleteEvaQues(params).$promise
 					.then(function (data) {
 						messageService.openMsg("撤销分配成功！");
+						that.page.pageNumber = 1;
 						that.getEvaQuesDist();
 					})
 					.catch(function (error) {
@@ -207,6 +208,8 @@ angular.module('dleduWebApp')
 				EduManService.distQuestionaire(params).$promise
 					.then(function (data) {
 						messageService.openMsg("分配成功！");
+						that.selDistObj = [];
+						that.page.pageNumber = 1;
 						that.getEvaQuesUnDist();
 					})
 					.catch(function (error) {
