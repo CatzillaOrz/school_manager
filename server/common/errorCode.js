@@ -33,7 +33,7 @@ var ErrorCode = {
     errorHandle:function(res){
         const statusCode = res.status.code;
         return {
-            code: statusCode,
+            code: statusCode || 500,
             message: res.entity.cause
         };
     }

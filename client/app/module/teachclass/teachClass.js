@@ -189,5 +189,18 @@ angular.module('dleduWebApp')
 					label: '编辑课程信息'
 				}
 			})*/
-
+            .state('changecourselist', {
+                parent: 'base',
+                url: '/changecourselist',
+                access: {requiredLogin: true},
+                views: {
+                    'content@base': {
+                        controller: 'ChangeCourseListctrl',
+                        templateUrl: 'app/module/teachclass/changeCourseList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '教师调停课记录'
+                }
+            })
 	});

@@ -46,5 +46,6 @@ router.get('/getChangeCourseById', auth.isSignedIn, controller.getChangeCourseBy
 router.post('/addChangeCourse', auth.isSignedIn, controller.addChangeCourse);
 router.put('/updateChangeCourse', auth.isSignedIn, controller.updateChangeCourse);
 router.delete('/delChangeCourse', auth.isSignedIn, controller.delChangeCourse);
-//getTeachClassClassesList
+router.get('/getTeacherChangeCourseList', auth.isSignedIn, controller.getTeacherChangeCourseList);
+//
 module.exports = router;

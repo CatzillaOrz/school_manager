@@ -749,6 +749,64 @@ var EduManService = {
             }
         })
     },
+    getAttendListByCondition: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendancerecor/searchbywhere',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getAttendChangeLog: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/attendancerecor/viewlog',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    updateAttend: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/attendancerecor/modifyattendance',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    getAttendStopLogs: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'gateway-org',
+            path: '/v1/pauselog/getbywhere',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    }
 };
 
 

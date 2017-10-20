@@ -151,6 +151,10 @@ angular.module('dleduWebService')
 				var courseSchedule = $resource('api/teachclass/delChangeCourse');
 				return courseSchedule.remove(params);
 			},
+            getTeacherChangeCourseList: function (params) {
+                var courseSchedule = $resource('api/teachclass/getTeacherChangeCourseList');
+                return courseSchedule.get(params);
+            },
 		}
 
 	});

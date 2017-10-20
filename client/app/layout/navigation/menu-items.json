@@ -122,6 +122,13 @@
                     "active": "changecourse",
                     "icon": "signal",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "教师调停课记录",
+                    "sref": "changecourselist",
+                    "active": "changecourselist",
+                    "icon": "signal",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
                 }
             ]
         },
