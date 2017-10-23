@@ -667,7 +667,7 @@
 
                                                     .inline-block -
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendPauseFn.params.endDate" validator="required")
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendPauseFn.params.endTime" validator="required")
                                                         span.add-on
                                                             i.icon-calendar.glyphicon.glyphicon-calendar
 
@@ -692,23 +692,22 @@
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendPauseFn.attendList")
                                                     td.sorting_1 {{$index+1 + ((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10}}
-                                                    td {{attend.collegeName}}
-                                                    td {{attend.grade}}
-                                                    td {{attend.total}}
-                                                    td {{attend.normal}}
-                                                    td {{attend.later}}
-                                                    td {{attend.askForLeave}}
-                                                    td {{attend.truancy}}
-                                                    td {{attend.leave}}
-                                                    td {{attend.attendance}}
-                                                    td {{attend.attendance}}
-
+                                                    td {{attend.operationTime}}
+                                                    td {{attend.operator}}
+                                                    td {{attend.optContent}}
+                                                    td {{attend.msg}}
+                                                    td {{attend.stuJobNumber}}
+                                                    td {{attend.stuName }}
+                                                    td {{attend.stuClassesName}}
+                                                    td {{attend.stuClassesYear }}
+                                                    td {{attend.stuProfessionalName }}
+                                                    td {{attend.stuCollegeName }}
 
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
-                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==1?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
+                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
                                                     |  到
                                                     span.txt-color-darken {{((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10+attendPauseFn.attendList.length}}
                                                     |  条 总共
@@ -781,7 +780,7 @@
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
-                                                    span.txt-color-darken {{attendFixFn.page.pageNumber==1?attendFixFn.page.pageNumber*10:(attendFixFn.page.pageNumber-1)*10+1}}
+                                                    span.txt-color-darken {{attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber*10:(attendFixFn.page.pageNumber-1)*10+1}}
                                                     |  到
                                                     span.txt-color-darken {{((attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber+1:attendFixFn.page.pageNumber)-1)*10+attendFixFn.attendList.length}}
                                                     |  条 总共

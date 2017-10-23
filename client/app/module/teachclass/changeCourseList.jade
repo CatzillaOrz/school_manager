@@ -28,9 +28,8 @@
                                         option(value="") 全部
                                         option(value="10") 增课
                                         option(value="20") 停课
-                                        option(value="30") 调课
 
-                                .form-group.col-sm-6.margin-top-10
+                                .form-group.col-sm-6
                                     label.control-label 时间段：
                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
                                         input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="changeCourseListFn.params.startDate" validator="required")
@@ -57,8 +56,8 @@
                                 th 操作内容
                                 th 选课编号
                                 th 教学班名称
-                                th 原上课信息
-                                th 新上课信息
+                                th 上课信息
+
                         tbody
                             tr.odd(role='row' ng-repeat="entity in changeCourseListFn.changeCourseList")
                                 td.sorting_1 {{$index+1 + ((changeCourseListFn.page.pageNumber==0?changeCourseListFn.page.pageNumber+1:changeCourseListFn.page.pageNumber)-1)*10}}
@@ -66,13 +65,12 @@
                                 td {{entity.teacherName}}
                                 td {{entity.teacherJobNumber}}
                                 td
-                                    span(ng-if="entity.schoolStatus==30") 调课
-                                    span(ng-if="entity.schoolStatus==20") 停课
-                                    span(ng-if="entity.schoolStatus==10") 增课
+                                    span(ng-if="entity.adjustType==30") 调课
+                                    span(ng-if="entity.adjustType==20") 停课
+                                    span(ng-if="entity.adjustType==10") 增课
                                 td {{entity.teachingClassCode}}
                                 td {{entity.teachingClassName}}
                                 td  {{entity.eventDate}} 第{{entity.periodNo}}~{{entity.periodNo+entity.periodNum-1}}节 {{entity.classroom}}
-                                td {{entity.destEventDate}} 第{{entity.destPeriodNo}}~{{entity.destPeriodNo+entity.destPeriodNum-1}}节 {{entity.destClassroom}}
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')

@@ -69,6 +69,16 @@ angular.module('dleduWebApp')
                 }
                 this.tab = entity;
             },
+            checkDateZone:function (startDate,endDate) {
+                var star=new Date(startDate).getTime();
+                var end=new Date(endDate).getTime();
+                if(star<=end){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            },
             select2SemesterOptions: function () {
                 var _this = this;
                 return {
@@ -778,8 +788,8 @@ angular.module('dleduWebApp')
                 orgId: AuthService.getUser().orgId,
                 criteria: null,
                 opt:null,
-                startDate: null,
-                endDate: null
+                startTime: null,
+                endTime: null
 
             },
             //分页参数
@@ -793,6 +803,13 @@ angular.module('dleduWebApp')
             getAttendStopLogs: function () {
                 var _this = this;
                 var params = _this.params;
+                if(params.startTime&&params.endTime){
+                    var flag=$scope.attendFn.checkDateZone(params.startTime,params.endTime)
+                    if(!flag){
+                        messageService.openMsg("开始时间小于结束时间！");
+                        return ;
+                    }
+                }
                 params.pageNumber = _this.page.pageNumber;
                 params.pageSize = _this.page.pageSize;
                 EduManService.getAttendStopLogs(params).$promise
@@ -810,8 +827,8 @@ angular.module('dleduWebApp')
             params: {
                 orgId: AuthService.getUser().orgId,
                 criteria: null,
-                startDate: null,
-                endDate: null
+                startTime: null,
+                endTime: null
 
             },
             fixParams: {
@@ -836,6 +853,13 @@ angular.module('dleduWebApp')
             getAttendListByCondition: function () {
                 var _this = this;
                 var params = _this.params;
+                if(params.startTime&&params.endTime){
+                    var flag=$scope.attendFn.checkDateZone(params.startTime,params.endTime)
+                    if(!flag){
+                        messageService.openMsg("开始时间小于结束时间！");
+                        return ;
+                    }
+                }
                 params.pageNumber = _this.page.pageNumber;
                 params.pageSize = _this.page.pageSize;
                 EduManService.getAttendListByCondition(params).$promise
