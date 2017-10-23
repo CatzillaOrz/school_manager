@@ -117,7 +117,7 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
                 },
                 {
-                    "title": "调课",
+                    "title": "节假日补休调课",
                     "sref": "changecourse",
                     "active": "changecourse",
                     "icon": "signal",
