@@ -847,7 +847,7 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
             translate:function(key){
-                var data={"已到":1,"旷课":2,"请假":3,"迟到":4,"早退":5};
+                var data={"已到":1,"旷课":2,"迟到":3,"请假":4,"早退":5};
                 return data[key];
             },
             getAttendListByCondition: function () {
