@@ -2,6 +2,7 @@
 angular.module('dleduWebApp')
     .controller('studentGeoCtl', function ($scope, $http,$timeout,$interval ,GeoService, AuthService) {
         $scope.showLoading = false;
+        var timer;
         function getClassList(){
             return [
                 {
@@ -73,8 +74,10 @@ angular.module('dleduWebApp')
             ];
         };
         $scope.allData = {
-            classList:getClassList()
+            classList:getClassList(),
+            swiperList:[]
         }
+
         var imageList = [
             'image://../../assets/images/01.png',
             'image://../../assets/images/02.png',
@@ -332,7 +335,7 @@ angular.module('dleduWebApp')
                             interval: null
                         },
                         data: _.map(data,function(item){
-                            return item.teacherName+'(所授课程：'+item .courseName+')'
+                            return item.teacherName
                         }),
                         splitLine: {
                             show: false
@@ -426,7 +429,7 @@ angular.module('dleduWebApp')
                             },
                             data:[
                                 {
-                                    value: 335,
+                                    value: data.normal,
                                     itemStyle: {
                                         normal: {
                                             label: {
@@ -441,7 +444,7 @@ angular.module('dleduWebApp')
                                         }
                                     },
                                 },
-                                {value:310, itemStyle: {
+                                {value:data.late, itemStyle: {
                                     normal: {
                                         label: {
                                             show: false,
@@ -454,7 +457,7 @@ angular.module('dleduWebApp')
                                         color: '#4fb2ff'
                                     }
                                 }},
-                                {value:234, itemStyle: {
+                                {value:data.leave, itemStyle: {
                                     normal: {
                                         label: {
                                             show: false,
@@ -467,7 +470,7 @@ angular.module('dleduWebApp')
                                         color: '#ff9829'
                                     }
                                 }},
-                                {value:135, itemStyle: {
+                                {value:data.absenteeism, itemStyle: {
                                     normal: {
                                         label: {
                                             show: false,
@@ -497,7 +500,7 @@ angular.module('dleduWebApp')
                                 value: 0,
                                 label: {
                                     normal: {
-                                        formatter: data+'%',
+                                        formatter: data.rate+'%',
                                         textStyle: {
                                             color: '#ccc',
                                             fontSize: 15,
@@ -511,12 +514,23 @@ angular.module('dleduWebApp')
                 return option;
             },
             chart5:function(data){
+                var dataStyle = {
+                    normal: {
+                        label: {
+                            show: false,
+                        },
+                        labelLine: {
+                            show: false,
+                        },
+                    }
+                };
                 var option = {
                         calculable : true,
                     legend: {
                         orient:'vertical',
                         itemGap:12,
                         right:5,
+                        top:30,
                         padding: [
                             10,  // 上
                             10, // 右
@@ -527,33 +541,152 @@ angular.module('dleduWebApp')
                             color:'#00000',
                         },
                         data: _.map(data,function(item){
-                            return item.name;
+                            return item.name+"("+item.comprehensive+")"
                         })
                     },
-                        series: [
-                            {
-                                name: '每月生日人数占比',
-                                type: 'pie',
-                                color: ['#4273ff','#15a4ff','#00a05e','#0acb1c','#91e856','#eeb850','#ee8150','#e64545','#ce006b','#8800ce'],
-                                center: ['30%', '60%'],
-                                radius: ['20%', '50%'],
-                                roseType: 'area',
-                                data:_.map(data,function(item){
-                                    return {
-                                        name:item.name,
-                                        value:item.comprehensive
-                                    };
-                                })
-                            }
-                            ]
+                    series : [
+                        {
+                            name:'访问来源',
+                            type:'pie',
+                            radius : ['30%', '75%'],
+                            center: ['30%', '60%'],
+                            itemStyle : dataStyle,
+                            data:[
+                                {
+                                    value:data[0].comprehensive,
+                                    name:data[0].name+"("+data[0].comprehensive+")",
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                offset: 0,
+                                                color: 'rgba(152,251,152,1)'
+                                            }, {
+                                                offset: 1,
+                                                color: 'rgba(64,224,208,1)'
+                                            }]),
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                },
+                                {
+                                    value:data[1].comprehensive,
+                                    name:data[1].name+"("+data[1].comprehensive+")",
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                offset: 0,
+                                                color: 'rgba(5,15,88,1)'
+                                            }, {
+                                                offset: 1,
+                                                color: 'rgba(235,122,255,1)'
+                                            }]),
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                },
+                                {
+                                    value:data[2].comprehensive,
+                                    name:data[2].name+"("+data[2].comprehensive+")",
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                offset: 0,
+                                                color: 'rgba(5,193,255,1)'
+                                            }, {
+                                                offset: 1,
+                                                color: 'rgba(15,15,90,1)'
+                                            }]),
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                },
+                                {
+                                    value:data[3].comprehensive,
+                                    name:data[3].name+"("+data[3].comprehensive+")",
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                offset: 0,
+                                                color: 'rgba(255,34,34,1)'
+                                            }, {
+                                                offset: 1,
+                                                color: 'rgba(80,123,45,1)'
+                                            }]),
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                },
+                                {
+                                    value:data[4].comprehensive,
+                                    name:data[4].name+"("+data[4].comprehensive+")",
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                offset: 0,
+                                                color: 'rgba(75,0,130,1)'
+                                            }, {
+                                                offset: 1,
+                                                color: 'rgba(176,196,222,1)'
+                                            }]),
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ].sort(function (a, b) { return a.value - b.value; }),
+                            roseType: 'radius',
+                        },{
+                            name: '内环',
+                            type: 'pie',
+                            silent: true,
+                            clockWise: true,
+                            hoverAnimation: false,
+                            animationType: 'scale',
+                            radius: ['22%', '25%'],
+                            center: ['30%', '60%'],
+                            label: {
+                                normal: {
+                                    position: 'center'
+                                }
+                            },
+                            data: [{
+                                value: 100,
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgba(152,251,152,1)'
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgba(64,224,208,1)'
+                                        }])
+                                    }
+                                }
+                            }]
+                        }
+                    ]
                 };
                  return option;
             },
             chart6:function(data){
                 var dataStyle = {
                     normal: {
-                        label: {show:false},
-                        labelLine: {show:false},
+                        label: {
+                            show: false,
+                            textStyle: {
+                                fontSize: 12
+                            },
+                            position: 'top'
+                        },
+                        labelLine: {
+                            show: false,
+                            length: 50,
+                            smooth: 0.5
+                        },
                         shadowBlur: 40,
                         shadowColor: 'rgba(40, 40, 40, 0.5)',
                     }
@@ -585,7 +718,7 @@ angular.module('dleduWebApp')
                             color:'#00000',
                         },
                         data: _.map(data,function(item){
-                            return item.name;
+                            return item.name+'('+item.headmaster[0]+')'+'('+item.comprehensive+')';
                         })
                     },
                     series : [
@@ -597,14 +730,13 @@ angular.module('dleduWebApp')
                             radius : [62,70],
                             itemStyle : dataStyle,
                             hoverAnimation: false,
-
                             data:[
                                 {
                                     value:data[0].comprehensive,
-                                    name:data[0].name
+                                    name:data[0].name+'('+data[0].headmaster[0]+')'+'('+data[0].comprehensive+')'
                                 },
                                 {
-                                    value:data[0].comprehensive,
+                                    value:100-data[0].comprehensive,
                                     name:'invisible',
                                     itemStyle : placeHolderStyle
                                 }
@@ -622,10 +754,10 @@ angular.module('dleduWebApp')
                             data:[
                                 {
                                     value:data[1].comprehensive,
-                                    name:data[1].name
+                                    name:data[1].name+'('+data[1].headmaster[0]+')'+'('+data[1].comprehensive+')'
                                 },
                                 {
-                                    value:data[1].comprehensive,
+                                    value:100-data[1].comprehensive,
                                     name:'invisible',
                                     itemStyle : placeHolderStyle
                                 }
@@ -642,10 +774,10 @@ angular.module('dleduWebApp')
                             data:[
                                 {
                                     value:data[2].comprehensive,
-                                    name:data[2].name
+                                    name:data[2].name+'('+data[2].headmaster[0]+')'+'('+data[2].comprehensive+')'
                                 },
                                 {
-                                    value:data[2].comprehensive,
+                                    value:100-data[2].comprehensive,
                                     name:'invisible',
                                     itemStyle : placeHolderStyle
                                 }
@@ -662,10 +794,10 @@ angular.module('dleduWebApp')
                             data:[
                                 {
                                     value:data[3].comprehensive,
-                                    name:data[3].name
+                                    name:data[3].name+'('+data[3].headmaster[0]+')'+'('+data[3].comprehensive+')'
                                 },
                                 {
-                                    value:data[3].comprehensive,
+                                    value:100-data[3].comprehensive,
                                     name:'invisible',
                                     itemStyle : placeHolderStyle
                                 }
@@ -682,10 +814,10 @@ angular.module('dleduWebApp')
                             data:[
                                 {
                                     value:data[4].comprehensive,
-                                    name:data[4].name
+                                    name:data[4].name+'('+data[4].headmaster[0]+')'+'('+data[4].comprehensive+')'
                                 },
                                 {
-                                    value:data[4].comprehensive,
+                                    value:100-data[4].comprehensive,
                                     name:'invisible',
                                     itemStyle : placeHolderStyle
                                 }
@@ -817,9 +949,9 @@ angular.module('dleduWebApp')
         var myChart14 = echarts.init(document.getElementById('bottom-chart2'));
         var myChart15 = echarts.init(document.getElementById('bottom-chart3'));
         $scope.getEcharts = function(){
-            var orgId = AuthService.getUser().orgId;
+            $scope.orgId = AuthService.getUser().orgId;
             $scope.collegeName = AuthService.getUser().orgName;
-            var params = {orgId:orgId};
+            var params = {orgId:$scope.orgId};
             $timeout(function(){
                //地理化信息数据
                 function getOrgan(){
@@ -842,7 +974,7 @@ angular.module('dleduWebApp')
                     })
                 }
 
-                //本学期课程签到率Top10
+                //本学期教师签到率Top10
                 function attendancerate(){
                     GeoService.attendancerate(params).success(function(res){
                         if(res.data.length!=0){
@@ -851,42 +983,45 @@ angular.module('dleduWebApp')
                     })
                 }
 
+                //构造swiper的数据
+                function bulidSwiperData(data){
+                    var page = Math.ceil(data.length/8);
+                    for(var i=0;i<page;i++){
+                        var resList = data.slice(8*i,8*(i+1));
+                        var otherList = _.map(getClassList(),function(item,index){
+                            return _.extend(item,resList[index],{classId:'chart_'+i+'_'+index});
+                        });
+                        $scope.allData.swiperList.push(otherList);
+                    }
+                }
+
+                var getEcharts = function(){
+                    _.each($scope.allData.swiperList,function(item){
+                        _.each(item,function(item2){
+                            var chart = echarts.init(document.getElementById(item2.classId));
+                            chart.setOption(eduChartConfig.chart3(item2.classRate));
+                        })
+                    });
+                }
                 //实时教学班考勤展示
                 function realtimestatistics(){
                     GeoService.realtimestatistics(params).success(function(res){
                         if(res.data.length!=0){
-                            var page = Math.ceil(res.data.length/8);
-                            var id=0;
-                            var getGeoFun=function(id){
-                                $scope.allData.classList = getClassList();
-                                for(var i=0;i<page;i++){
-                                    if(id == i){
-                                        var resList = res.data.slice(8*i,8*(i+1));
-                                        _.each(resList,function(item,index){
-                                            $scope.allData.classList[index] = _.extend($scope.allData.classList[index],item);
-                                        });
-                                        $scope.$apply();
-                                        _.each($scope.allData.classList,function(item,index){
-                                            var chart = echarts.init(document.getElementById('chart_'+(index+1)));
-                                            chart.setOption(eduChartConfig.chart3(item.classRate));
-                                        });
-                                    }
-                                }
-                            }
+                            bulidSwiperData(res.data);
                             $timeout(function(){
-                                getGeoFun(id);
-                                id++;
-                                if(id == page){
-                                    id = 0;
-                                }
-                            },100);
-                            setInterval(function(){
-                                getGeoFun(id);
-                                id++;
-                                if(id == page){
-                                    id = 0;
-                                }
-                            },30000);
+                                new Swiper('.swiper-container', {
+                                    paginationClickable: true,
+                                    direction: 'horizontal',
+                                    updateOnImagesReady:true,
+                                    autoplay : 5000,
+                                    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                                    observeParents:true,//修改swiper的父元素时，自动初始化swiper
+                                    mousewheelControl:true
+                                });
+                            },200);
+                            $timeout(function(){
+                                getEcharts();
+                            },600)
                         }
                     });
                 }
@@ -894,6 +1029,7 @@ angular.module('dleduWebApp')
                 //实时热门评论20
                 function hotreviews(){
                     GeoService.hotreviews(params).success(function(res){
+                        $scope.viewsList=[];
                         if(res.data.length!=0){
                             $scope.viewsList = res.data;
                             $timeout(function() {
@@ -913,18 +1049,20 @@ angular.module('dleduWebApp')
                     realtimestatistics();
                     hotreviews();
                     getAttendancestatistics();
+                    $interval.cancel(timer);
                 },1800000);
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
                     $scope.termtoClass={
-                        "normal": res.data.normal,
-                        "absenteeism": res.data.absenteeism,
-                        "late": res.data.late,
-                        "leave": res.data.leave
+                        "normal": res.data.normal||0,
+                        "absenteeism": res.data.absenteeism||0,
+                        "late": res.data.late||0,
+                        "leave": res.data.leave||0
                     }
-                    myChart12.setOption(eduChartConfig.chart4(res.data.rate));
+                    myChart12.setOption(eduChartConfig.chart4(res.data));
                 })
-                //本学期教师综合排名top10
+                //本学期课程签到率top5
+
                 GeoService.teacherranking(params).success(function(res){
                     myChart13.setOption(eduChartConfig.chart5(res.data));
                 })

@@ -203,36 +203,41 @@
     .content-right{
       width:610px;
       height:760px;
-      margin: 5px;
-      display: flex;
-      flex-wrap: wrap;
-      .right-style{
-        margin:5px;
-        width:295px;
-        height:180px;
-        background: url("http://7xpscc.com1.z0.glb.clouddn.com/0d257471-29e3-4b82-b628-2a867f08c64d.png") no-repeat center center;
-        background-size:100% 100%;
-        position: relative;
-        .chart-title{
-          position: absolute;
-          top: 12px;
-          left: 25px;
-          color: #3fcdff;
-        }
-        .chart-discribe{
-          position: absolute;
-          top: 52px;
-          left: 180px;
-          line-height: 24px;
-          font-size: 12px;
-          color: #ccc;
+      .swiper-slide{
+        .swiper-margin{
           display: flex;
-          flex-direction: column;
+          flex-wrap: wrap;
+          margin:5px 0;
+          .right-style{
+            margin:5px;
+            width:295px;
+            height:180px;
+            background: url("http://7xpscc.com1.z0.glb.clouddn.com/0d257471-29e3-4b82-b628-2a867f08c64d.png") no-repeat center center;
+            background-size:100% 100%;
+            position: relative;
+            .chart-title{
+              position: absolute;
+              top: 12px;
+              left: 25px;
+              color: #3fcdff;
+            }
+            .chart-discribe{
+              position: absolute;
+              top: 52px;
+              left: 180px;
+              line-height: 24px;
+              font-size: 12px;
+              color: #ccc;
+              display: flex;
+              flex-direction: column;
+            }
+          }
+          .chart-margin{
+
+          }
         }
       }
-      .chart-margin{
 
-      }
     }
   }
   .bottom-line{
@@ -299,19 +304,19 @@
       }
       .left-top{
         top: 55px;
-        left: 50px;
+        left: 40px;
       }
       .left-bottom{
         top: 105px;
-        left: 50px;
+        left: 40px;
       }
       .right-top{
         top: 55px;
-        right: 50px;
+        right: 40px;
       }
       .right-bottom{
         top: 105px;
-        right: 50px;
+        right: 40px;
       }
     }
     .geo-bottom-chart1{
