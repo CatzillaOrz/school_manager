@@ -502,7 +502,7 @@ angular.module('dleduWebApp')
                                     normal: {
                                         formatter: data.rate+'%',
                                         textStyle: {
-                                            color: '#ccc',
+                                            color: '#fff',
                                             fontSize: 15,
                                         }
                                     }
@@ -928,7 +928,7 @@ angular.module('dleduWebApp')
                                     normal: {
                                         formatter: data+'%',
                                         textStyle: {
-                                            color: '#ccc',
+                                            color: '#fff',
                                             fontSize:15,
                                         }
                                     }

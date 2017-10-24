@@ -62,13 +62,14 @@
           position: absolute;
           top: 88px;
           right: 45px;
-          color: #ccc;
+          color: #fff;
         }
         .chart-data1{
           position: absolute;
           top: 130px;
           right: 45px;
-          color: #ccc;
+          color: #fff;
+
         }
         #educational_statistics{
           position: absolute;
@@ -126,7 +127,7 @@
           top: 70px;
           left: 315px;
           font-size: 12px;
-          color: #ccc;
+          color: #fff;
           display: flex;
           flex-direction: column;
           span{
@@ -167,7 +168,7 @@
         background-size:100% 100%;
         height: 180px;
         margin-top: 10px;
-        color: #ccc;
+        color: #fff;
         overflow: hidden;
         .ticker-title{
           height:30px;
@@ -227,7 +228,7 @@
               left: 180px;
               line-height: 24px;
               font-size: 12px;
-              color: #ccc;
+              color: #fff;
               display: flex;
               flex-direction: column;
             }

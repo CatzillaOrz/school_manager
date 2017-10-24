@@ -25,7 +25,11 @@
                 .ticker-content
                     ul
                         li(ng-repeat="views in viewsList")
-                            span(style="color:'#3fcdff'") {{views.strudentName}}在{{views.teacherName}}老师所带课程{{courseName}}发表评论：
+                            span 学生在
+                            span(style="color:#26a9ff;") {{views.teacherName}}
+                            span 老师所带课程
+                            span(style="color:#26a9ff;") {{views.courseName}}
+                            span 发表评论：
                             span {{views.content}}
         .content-right
             .swiper-container
