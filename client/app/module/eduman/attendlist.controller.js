@@ -887,6 +887,10 @@ angular.module('dleduWebApp')
             updateAttend: function () {
                 var _this = this;
                 var params = _this.fixParams;
+                if(_this.fixParams.type==_this.translate(_this.currentEntity.type)){
+                    ngDialog.close();
+                    return ;
+                }
                 params.rollcallId = _this.currentEntity.id,
                 EduManService.updateAttend(params).$promise
                         .then(function (data) {
