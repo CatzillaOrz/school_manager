@@ -30,21 +30,35 @@
                             .col-sm-7
                                 input.form-control(ng-disabled='semester.id' placeholder="学期编码不能为空且不能重复！" ng-model="semester.code" name="code" )
                         .form-group
-
-                            .col-sm-offset-3
-                                .col-sm-5
-                                    p.input-group
-                                        input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"  ng-model='semester.startDate' placeholder="请选择开始时间")
-                                        span.input-group-btn
-                                            button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
-                                                i.glyphicon.glyphicon-calendar
-                                .col-sm-1 至
-                                .col-sm-5
-                                    p.input-group
-                                        input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"   ng-model='semester.endDate' placeholder="请选择结束时间")
-                                        span.input-group-btn
-                                            button.btn.btn-default(type='button', ng-click='opened[$index][1]=!opened[$index][1]')
-                                                i.glyphicon.glyphicon-calendar
+                            label.col-sm-3.control-label 开始时间：
+                            .col-sm-7
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='semester.id' name="dateStart" placeholder='请选择开始日期' type='text' ng-model='semester.startDate' validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                        .form-group
+                            label.col-sm-3.control-label 结束时间：
+                            .col-sm-7
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='semester.id' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model='semester.endDate' validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                        //.form-group
+                        //
+                        //    .col-sm-offset-3
+                        //        .col-sm-5
+                        //            p.input-group
+                        //                input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"  ng-model='semester.startDate' placeholder="请选择开始时间")
+                        //                span.input-group-btn
+                        //                    button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
+                        //                        i.glyphicon.glyphicon-calendar
+                        //        .col-sm-1 至
+                        //        .col-sm-5
+                        //            p.input-group
+                        //                input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"   ng-model='semester.endDate' placeholder="请选择结束时间")
+                        //                span.input-group-btn
+                        //                    button.btn.btn-default(type='button', ng-click='opened[$index][1]=!opened[$index][1]')
+                        //                        i.glyphicon.glyphicon-calendar
 
                     div.text-center
                         .btn.btn-primary(ng-click="periodHandlerFn.addOneSemester()")
