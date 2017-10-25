@@ -524,6 +524,57 @@ angular.module('dleduWebApp')
                         },
                     }
                 };
+                var normalStyle=[{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(152,251,152,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(64,224,208,1)'
+                    }]),
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }, {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(5,15,88,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(235,122,255,1)'
+                    }]),
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(5,193,255,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(15,15,90,1)'
+                    }]),
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(255,34,34,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(80,123,45,1)'
+                    }]),
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }, {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(75,0,130,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(176,196,222,1)'
+                    }]),
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }];
                 var option = {
                         calculable : true,
                     legend: {
@@ -551,93 +602,15 @@ angular.module('dleduWebApp')
                             radius : ['30%', '75%'],
                             center: ['30%', '60%'],
                             itemStyle : dataStyle,
-                            data:[
-                                {
-                                    value:data[0].comprehensive,
-                                    name:data[0].name+"("+data[0].comprehensive+")",
+                            data: _.map(data,function(item,index){
+                                return {
+                                    value:item.comprehensive,
+                                    name:item.name+"("+item.comprehensive+")",
                                     itemStyle: {
-                                        normal: {
-                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                offset: 0,
-                                                color: 'rgba(152,251,152,1)'
-                                            }, {
-                                                offset: 1,
-                                                color: 'rgba(64,224,208,1)'
-                                            }]),
-                                            shadowBlur: 200,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
-                                    }
-                                },
-                                {
-                                    value:data[1].comprehensive,
-                                    name:data[1].name+"("+data[1].comprehensive+")",
-                                    itemStyle: {
-                                        normal: {
-                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                offset: 0,
-                                                color: 'rgba(5,15,88,1)'
-                                            }, {
-                                                offset: 1,
-                                                color: 'rgba(235,122,255,1)'
-                                            }]),
-                                            shadowBlur: 200,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
-                                    }
-                                },
-                                {
-                                    value:data[2].comprehensive,
-                                    name:data[2].name+"("+data[2].comprehensive+")",
-                                    itemStyle: {
-                                        normal: {
-                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                offset: 0,
-                                                color: 'rgba(5,193,255,1)'
-                                            }, {
-                                                offset: 1,
-                                                color: 'rgba(15,15,90,1)'
-                                            }]),
-                                            shadowBlur: 200,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
-                                    }
-                                },
-                                {
-                                    value:data[3].comprehensive,
-                                    name:data[3].name+"("+data[3].comprehensive+")",
-                                    itemStyle: {
-                                        normal: {
-                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                offset: 0,
-                                                color: 'rgba(255,34,34,1)'
-                                            }, {
-                                                offset: 1,
-                                                color: 'rgba(80,123,45,1)'
-                                            }]),
-                                            shadowBlur: 200,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
-                                    }
-                                },
-                                {
-                                    value:data[4].comprehensive,
-                                    name:data[4].name+"("+data[4].comprehensive+")",
-                                    itemStyle: {
-                                        normal: {
-                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                offset: 0,
-                                                color: 'rgba(75,0,130,1)'
-                                            }, {
-                                                offset: 1,
-                                                color: 'rgba(176,196,222,1)'
-                                            }]),
-                                            shadowBlur: 200,
-                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                        }
+                                        normal:normalStyle[index]
                                     }
                                 }
-                            ].sort(function (a, b) { return a.value - b.value; }),
+                            }).sort(function (a, b) { return a.value - b.value; }),
                             roseType: 'radius',
                         },{
                             name: '内环',
@@ -1030,8 +1003,13 @@ angular.module('dleduWebApp')
                 function hotreviews(){
                     GeoService.hotreviews(params).success(function(res){
                         $scope.viewsList=[];
+                        var colorList=['#4273ff','#15a4ff','#00a05e','#0acb1c','#91e856','#eeb850','#ee8150','#e64545','#ce006b','#8800ce'];
                         if(res.data.length!=0){
-                            $scope.viewsList = res.data;
+                            $scope.viewsList = _.map(res.data,function(item){
+                                item.nameColor = colorList[Math.ceil(Math.random()*10)-1];
+                                item.classColor = colorList[Math.ceil(Math.random()*10)-1];
+                                return item;
+                            });
                             $timeout(function() {
                                 $('.ticker-content').vTicker();
                             },100)

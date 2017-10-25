@@ -26,9 +26,9 @@
                     ul
                         li(ng-repeat="views in viewsList")
                             span 学生在
-                            span(style="color:#26a9ff;") {{views.teacherName}}
+                            span(style="color:{{views.nameColor}}") {{views.teacherName}}
                             span 老师所带课程
-                            span(style="color:#26a9ff;") {{views.courseName}}
+                            span(style="color:{{views.classColor}}") {{views.courseName}}
                             span 发表评论：
                             span {{views.content}}
         .content-right
