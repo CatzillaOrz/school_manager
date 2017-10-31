@@ -11039,9 +11039,9 @@ aside {
   $bgcolorA:#fff;
   $bgcolorB:#fff;
   display: block;
-  height: 100px;
+  height: 50px;
   margin: 0;
-  padding: 0 13px 0 0;
+  padding: 0 10px 0 0;
   background-color: $bgcolorA;
   background-image: -moz-linear-gradient(top, $bgcolorA, $bgcolorB);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from($bgcolorA), to($bgcolorB));
@@ -11280,22 +11280,23 @@ aside {
 }
 
 #header > :first-child, aside {
-  width: 290px
+  width: 220px
 }
 #header>:first-child {
   //background: $brand-primary;
-  background: #009768;
+  background: #54BF9B;
 }
 #left-panel {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 904;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 #main {
-  margin-left: 290px;
+  margin-left: 240px;
+  margin-right: 20px;
   padding: 0;
   padding-bottom: 52px;
   min-height: 500px;
@@ -11324,7 +11325,7 @@ aside {
 }
 
 #ribbon .breadcrumb li:last-child, #ribbon .breadcrumb > .active {
-  color: $text-color;
+  color: $text-active;
 }
 
 .fixed-ribbon #ribbon {
@@ -11437,7 +11438,7 @@ nav > ul > li:last-child.open {
 
 nav ul li a {
   line-height: normal;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px 10px 10px 11px;
   margin: 10px 10px;
   color: #c0bbb7;
@@ -11602,7 +11603,7 @@ nav ul ul li {
 
 nav ul ul li > a {
   padding-left: 42px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   outline: 0
 }
@@ -15303,9 +15304,9 @@ html.hidden-menu-mobile-lock {
 }
 
 .no-padding .dataTables_wrapper table, .no-padding > table {
-  border: none !important;
-  margin-bottom: 0 !important;
-  border-bottom-width: 0 !important
+  //border: none !important;
+  //margin-bottom: 0 !important;
+  //border-bottom-width: 0 !important
 }
 
 .no-padding-bottom {
