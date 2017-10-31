@@ -17,7 +17,7 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-9
+                        .col-xs-12
                             form.form-inline
                                 .form-group.col-sm-4.margin-top-5
                                     label 学期：
@@ -39,7 +39,7 @@
                                 .form-group.col-sm-4.margin-top-5
                                     label 教师：
                                     input.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
-                        .col-sm-3.hidden-xs
+                        .col-sm-12.hidden-xs
                             .ColVis
                                 button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                     span 查询
