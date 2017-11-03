@@ -13,14 +13,14 @@
                 .col-md-12.padding-bottom-10.padding-top-10
                     .col-md-12.padding-bottom-10.padding-top-10
                         form.form-inline
-                            .form-group.col-md-4
+                            .form-group.col-md-5
                                 label.control-label 教师姓名：
-                                input.form-control(type="text" placeholder="请输入教师姓名" ng-model="roleDisted.params.name")
-                            .form-group.col-md-4
+                                input.form-control(style="width:auto" type="text" placeholder="请输入教师姓名" ng-model="roleDisted.params.name")
+                            .form-group.col-md-5
                                 label.control-label 角色权限：
-                                select.form-control(ng-model="roleDisted.params.role" ui-select2="roleDisted.getResultOption()" )
+                                select.form-control(style="width:auto" ng-model="roleDisted.params.role" ui-select2="roleDisted.getResultOption()" )
                                     option(ng-repeat="record in roleDisted.roles" value="{{record.id}}" ) {{record.text}}
-                            .form-group.col-md-4
+                            .form-group.col-md-2
                                 .ColVis
                                     button.btn.btn-primary(ng-click="roleDisted.getDistedList()")
                                         span 查询

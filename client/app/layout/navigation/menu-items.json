@@ -5,7 +5,7 @@
             "sref": "home",
             "active": "home",
             "icon": "home",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         },
         {
             "title": "学校信息管理",
@@ -137,7 +137,7 @@
             "sref": "attendlist",
             "icon": "navicon",
             "active": "eduman",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
             "items":[
                 {
                     "title": "考勤记录",
@@ -161,7 +161,8 @@
                     "title": "电子围栏",
                     "sref": "elecfence",
                     "active": "elecfence",
-                    "icon": "barcode"
+                    "icon": "barcode",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 }
             ]
         },
@@ -203,7 +204,7 @@
             "sref": "distlist",
             "icon": "navicon",
             "active": "rolemanager",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
             "items":[
                 {
                     "title": "角色分配",

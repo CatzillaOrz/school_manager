@@ -25,6 +25,8 @@ function request(options) {
         _host = Config.backend_api.api_gateway+"diandian_api";
     } else if (options.host && options.host == 'em') {
         _host = Config.backend_api.em_host;
+    } else if (options.host && options.host == 'local') {
+        _host = 'http://172.16.40.107:8081';
     } else  if (options.host && options.host == 'pt') {
         _host = Config.backend_api.pt_host;
     } else  if (options.host && options.host == 'hy') {

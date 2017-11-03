@@ -37,7 +37,9 @@ angular.module('dleduWebApp')
                          //$state.go('index');
                         if(user.roleNames){
                             if(user.roleNames.toString().indexOf("ROLE_ORG_ADMIN") != -1 || user.roleNames.toString().indexOf("ROLE_COLLEGE_ADMIN") != -1
-                                || user.roleNames.toString().indexOf("ROLE_ORG_MANAGER") != -1){//
+                                || user.roleNames.toString().indexOf("ROLE_ORG_MANAGER") != -1 || user.roleNames.toString().indexOf("ROLE_ORG_DATAVIEW") != -1
+                                || user.roleNames.toString().indexOf("ROLE_COLLEG_DATAVIEW") != -1 || user.roleNames.toString().indexOf("ROLE_ORG_EDUCATIONALMANAGER") != -1
+                                || user.roleNames.toString().indexOf("ROLE_COLLEG_EDUCATIONALMANAGER") != -1){//
                                 that.toRedirectUrl();
                             }else {
                                 messageService.openMsg("您没有管理员权限！")

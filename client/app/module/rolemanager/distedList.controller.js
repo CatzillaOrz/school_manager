@@ -23,7 +23,10 @@ angular.module('dleduWebApp')
             },
 
             getResultOption: function () {
-                this.roles = [{id: 'all', text: '全部'}, {id: 'ROLE_ORG_MANAGER', text: '校级管理员'}, {id: 'ROLE_COLLEGE_ADMIN', text: '院级管理员'}];
+                this.roles = [{id: 'all', text: '全部'},
+                    {id: 'ROLE_ORG_MANAGER', text: '校级超级管理员'}, {id: 'ROLE_ORG_EDUCATIONALMANAGER', text: '校级教务管理'}, {id: 'ROLE_ORG_DATAVIEW', text: '校级数据查看'},
+                    {id: 'ROLE_COLLEGE_ADMIN', text: '院级超级管理员'}, {id: 'ROLE_COLLEG_EDUCATIONALMANAGER', text: '院级教务管理'}, {id: 'ROLE_COLLEG_DATAVIEW', text: '院级数据查看'}
+                ];
                 //return {minimumResultsForSearch: -1};
             },
 
@@ -83,19 +86,36 @@ angular.module('dleduWebApp')
             isCancle: function(record){
                 var roleName = AuthService.getUser().roleNames.toString();
                 var roleByList = "ROLE_ORG_MANAGER";
-                if(record.roleName == '校级管理员'){
+                if(record.roleName == '校级超级管理员'){
                     roleByList = 'ROLE_ORG_MANAGER';
-                }else if(record.roleName == '院级管理员'){
+                }else if(record.roleName == '院级超级管理员'){
                     roleByList = 'ROLE_COLLEGE_ADMIN';
+                }else if(record.roleName == '校级教务管理'){
+                    roleByList = 'ROLE_ORG_EDUCATIONALMANAGER';
+                }else if(record.roleName == '校级数据查看'){
+                    roleByList = 'ROLE_ORG_DATAVIEW';
+                }else if(record.roleName == '院级教务管理'){
+                    roleByList = 'ROLE_COLLEG_EDUCATIONALMANAGER';
+                }else if(record.roleName == '院级数据查看'){
+                    roleByList = 'ROLE_COLLEG_DATAVIEW';
                 }
+
                 if(roleName.indexOf("ROLE_ORG_ADMIN") != -1){
                     return true;
                 }else if(roleName.indexOf("ROLE_ORG_MANAGER") != -1){
-                    if(roleByList == 'ROLE_ORG_MANAGER'){
+                    if(roleByList == 'ROLE_ORG_MANAGER' || roleByList == 'ROLE_ORG_ADMIN'){
                         return false;
-                    }else if(roleByList == 'ROLE_COLLEGE_ADMIN'){
+                    }else {
                         return true;
                     }
+                }else if(roleName.indexOf("ROLE_COLLEGE_ADMIN") != -1){
+                    if(roleByList == 'ROLE_COLLEG_EDUCATIONALMANAGER' || roleByList == 'ROLE_COLLEG_DATAVIEW'){
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }else{
+                    return false;
                 }
             },
 
