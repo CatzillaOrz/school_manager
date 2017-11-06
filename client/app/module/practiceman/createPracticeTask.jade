@@ -21,12 +21,22 @@
                             | 任务完成时间段：
                         .col-sm-4
                             p.input-group
+                                .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="handleFn.params.beginDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                            //p.input-group
                                 input.form-control(type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.beginDate' placeholder="请选择开始时间")
                                 span.input-group-btn
                                     button.btn.btn-default(type='button')
                                         i.glyphicon.glyphicon-calendar
                         .col-sm-4
                             p.input-group
+                                .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="handleFn.params.endDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                            //p.input-group
                                 input.form-control(type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"   ng-model='handleFn.params.endDate' placeholder="请选择结束时间")
                                 span.input-group-btn
                                     button.btn.btn-default(type='button')
