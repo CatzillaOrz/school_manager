@@ -304,6 +304,19 @@ angular.module('dleduWebApp')
                     teacherName:""
                 }
             })
-
+            .state('instructor', {
+                parent: 'base',
+                url   : '/instructor',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'instructorAttendCtrl',
+                        templateUrl: 'app/module/eduman/instructorAttend.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '导员考勤'
+                }
+            })
 		//
 	});

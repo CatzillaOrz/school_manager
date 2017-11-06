@@ -32,11 +32,13 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 专业名称
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学院
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 创建时间
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                th 序号
+                                th 专业名称
+                                th 学院
+                                th 下辖班级
+                                th 下辖学生
+                                th 创建时间
+                                th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="major in majorListFn.majorList")
                                 td.sorting_1 {{$index+1 + ((majorListFn.page.pageNumber==0?majorListFn.page.pageNumber+1:majorListFn.page.pageNumber)-1)*10}}
@@ -44,6 +46,10 @@
                                     span.responsiveExpander
                                     | {{major.name}}
                                 td  {{major.collegeName}}
+                                td.expand
+                                    a.cursor-pointer(ui-sref="classlist({collegeId:major.collegeId,professionalId:major.id})") 查看
+                                td.expand
+                                    a.cursor-pointer(ui-sref="studentlist({collegeId:major.collegeId,professionalId:major.id})") 查看
                                 td  {{major.createdDate}}
                                 td
                                     a.handle(ui-sref="majorEdit({id:major.id})")

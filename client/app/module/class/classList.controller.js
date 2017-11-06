@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('ClassListCtrl', function ($scope, $state, $window, ClassService,AuthService,messageService,CommonService,
-                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout, RoleAuthService) {
+                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout, RoleAuthService,CollegeService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -34,11 +34,15 @@ angular.module('dleduWebApp')
             selectCollege2Options: function () {
                 var _this = this;
                 return {
-
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
-                        pageSize: 100,
+                        pageSize: 1000,
                         managerId: AuthService.getUser().id
                     }, "name"),
 
@@ -51,11 +55,6 @@ angular.module('dleduWebApp')
                         _this.collegeDropList.push(data);
                         return data.name;
                     },
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true
                 }
             },
             //专业下拉列表配置
@@ -102,6 +101,21 @@ angular.module('dleduWebApp')
                         return data.name;
                     }
                 }
+            },
+            getCollegeDropList: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 0,
+                    pageSize: 1000,
+                    managerId: AuthService.getUser().id
+                }
+                CollegeService.getCollegeDropList(params).$promise
+                    .then(function (data) {
+                        that.collegeDropList =data.data;
+                    })
+                    .catch(function (error) {
+                    })
             },
             // 获取班级列表
             getClassList: function () {
@@ -216,14 +230,22 @@ angular.module('dleduWebApp')
             },
 
             init: function () {
-                this.getClassList();
+                var _this=this;
+               _this.params.collegeId=$state.params.collegeId;
+               _this.params.professionalId=$state.params.professionalId;
+               _this.getCollegeDropList();
+               _this.getClassList();
+
             }
         };
         $scope.classListFn.init();
         $timeout(function () {
             $scope.$watch('classListFn.params.collegeId', function(newValue, oldValue) {
-                if(!newValue){
+                if(newValue==-1){
                     $scope.classListFn.params.professionalId=null;
+                }
+                if(!newValue){
+                    $scope.classListFn.params.professionalId=oldValue;
                 }
                 if (newValue!=oldValue){
                     $scope.classListFn.majorDropList=[];

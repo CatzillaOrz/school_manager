@@ -161,8 +161,14 @@
                     "title": "电子围栏",
                     "sref": "elecfence",
                     "active": "elecfence",
-                    "icon": "barcode",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
+                    "icon": "barcode"
+                },
+                {
+                    "title": "导员考勤",
+                    "sref": "instructor",
+                    "active": "instructor",
+                    "icon": "barcode"
                 }
             ]
         },

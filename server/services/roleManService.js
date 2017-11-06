@@ -14,7 +14,7 @@ var RoleManService = {
     //查询已分配角色列表
     getDistedRoleList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'local',
+            host: 'gateway-org',
             path: '/v1/role/distributionlist',
             params: params,
             access_token: access_token
@@ -33,7 +33,7 @@ var RoleManService = {
     //分配角色
     distRole: function (params, access_token, callback) {
         RestClient.post({
-            host: 'local',
+            host: 'gateway-org',
             path: '/v1/role/distribution',
             params: params
         }).then(function (res) {
@@ -51,7 +51,7 @@ var RoleManService = {
     cancleRole: function (params, access_token, callback) {
         params.accessToken = access_token;
         RestClient.delete({
-            host: 'local',
+            host: 'gateway-org',
             path: '/v1/role/deleterole',
             params: params
         }).then(function (res) {

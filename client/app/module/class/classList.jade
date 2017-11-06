@@ -22,8 +22,8 @@
                                 .form-group.col-sm-3.margin-top-5
                                     label 院系：
                                     select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
-                                        option(value="") 全部
-                                        option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-sm-3.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )

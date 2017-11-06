@@ -125,9 +125,8 @@ var AccountService = {
   },
     getAccount: function (access_token, callback) {
         RestClient.get({
-             host:'dd',
-            path: '/api/phone/v1/user/infonew',
-            //path: '/api/web/v1/users/userinfo',
+             //host:'dd',
+            path: '/api/web/v1/users/userinfo',
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -240,7 +239,26 @@ var AccountService = {
             .catch(function (e) {
                 callback(e);
             });
-    }
+    },
+    unlockBindPhoneAndResetPassword: function(id,access_token,callback){
+        RestClient.put({
+            path: '/api/web/v1/users/unbindphoneandpwdbyid',
+            access_token:access_token,
+            body:{id:id}
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                ErrorCode.getErrorSync(res.entity)
+                    .then(function(err){
+                        callback(err);
+                    });
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
 };
 
 Promise.promisifyAll(AccountService, {suffix: "Sync"});

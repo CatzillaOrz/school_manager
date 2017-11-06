@@ -94,7 +94,7 @@
                 label.radio-inline(ng-if="roleDist.isUseAuth('schoo_data')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="2" )
                     | 校级数据查看
-                label.radio-inline(ng-if="roleDist.isUseAuth('college_sup')")
+                label.radio-inline(ng-if="roleDist.isUseAuth('college_sup')" style="margin-left:0;")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="3" )
                     | 院级超级管理员
                 label.radio-inline(ng-if="roleDist.isUseAuth('college_edu')")
