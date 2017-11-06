@@ -295,6 +295,11 @@ td.term-disable{
     font-size: 0;
     white-space: nowrap;
 }
+.input-append input[type=text]{
+    width: 100%;
+    width:calc(100% - 30px)!important;
+    display:inline-block;
+}
 .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
     -webkit-border-radius: 0 4px 4px 0;
     -moz-border-radius: 0 4px 4px 0;
