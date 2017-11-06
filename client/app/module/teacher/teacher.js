@@ -31,7 +31,7 @@ angular.module('dleduWebApp')
             // })
             .state('teacherlist', {
                 parent: 'teacher',
-                url   : '/teacher/list',
+                url   : '/teacher/list/:collegeId',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

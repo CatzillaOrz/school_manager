@@ -24,5 +24,6 @@ router.get('/signup_valid_phone_code', controller.validPhoneCode);
  */
 router.put('/validemail', controller.validEmail);
 router.put('/resetPassword', auth.isSignedIn,controller.resetPassword);
+router.put('/unlockBindPhoneAndResetPassword', auth.isSignedIn,controller.unlockBindPhoneAndResetPassword);
 
 module.exports = router;

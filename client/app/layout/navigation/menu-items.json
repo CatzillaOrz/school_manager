@@ -162,6 +162,12 @@
                     "sref": "elecfence",
                     "active": "elecfence",
                     "icon": "barcode"
+                },
+                {
+                    "title": "导员考勤",
+                    "sref": "instructor",
+                    "active": "instructor",
+                    "icon": "barcode"
                 }
             ]
         },

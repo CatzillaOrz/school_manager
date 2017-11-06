@@ -23,12 +23,12 @@
                                     label 院系：
                                     select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
                                         option(value="") 全部
-                                        option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                        option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ng-selected="studentListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-sm-3
                                     label 专业：
                                     select.select2.form-control(ng-model="studentListFn.params.professionalId" ui-select2="studentListFn.select2MajorOptions()"  )
                                         option(value="") 全部
-                                        option(ng-repeat="major in studentListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                        option(ng-repeat="major in studentListFn.majorDropList" value="{{major.id}}" ng-selected="studentListFn.params.professionalId==major.id") {{major.name}}
                                 .form-group.col-sm-3
                                     label 行政班级：
                                     select.select2.form-control(ng-model="studentListFn.params.classesId" ui-select2="studentListFn.select2ClassOptions()")
@@ -84,6 +84,9 @@
                                     a.handle(ng-click="studentListFn.resetPasswordPrompt(student)")
                                         i.fa.fa-repeat
                                         span 重置密码
+                                    a.handle(ng-click="studentListFn.unlockPrompt(student)")
+                                        i.fa.fa-unlock-alt
+                                        span 解绑手机
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs

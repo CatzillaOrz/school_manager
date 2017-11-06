@@ -9,7 +9,7 @@ angular.module('dleduWebApp')
             })
             .state('classlist', {
                 parent: 'class',
-                url   : '/class/list',
+                url   : '/class/list/:collegeId/:professionalId',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
