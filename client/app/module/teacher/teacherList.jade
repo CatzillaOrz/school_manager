@@ -22,8 +22,8 @@
                                 .form-group.col-sm-3.margin-top-5
                                     label 院系：
                                     select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()" )
-                                        option(value="") 全部
-                                        option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ng-selected="teacherListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-sm-3.margin-top-5
                                     label 教师：
                                     input.form-control(type='search', placeholder='按教师名称或者工号查询',  ng-model="teacherListFn.params.name")
@@ -67,6 +67,9 @@
                                     a.handle(ng-click="teacherListFn.resetPasswordPrompt(teacher)")
                                         i.fa.fa-repeat
                                         span 重置密码
+                                    a.handle(ng-click="teacherListFn.unlockPrompt(teacher)")
+                                        i.fa.fa-unlock-alt
+                                        span 解绑手机
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')

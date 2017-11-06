@@ -3451,6 +3451,42 @@ a:focus {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555; }
 
+#mapContainer {
+  height: 500px;
+  border: 1px solid #b3b3b3;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); }
+
+.map-data-contain {
+  height: 450px;
+  width: 300px;
+  border: 1px solid #b3b3b3;
+  position: absolute;
+  bottom: 20px;
+  z-index: 9999;
+  background: #fff;
+  right: 20px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  -khtml-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  -ms-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); }
+  .map-data-contain .title {
+    background: #DFE2EB;
+    color: #434858;
+    text-align: center;
+    font-size: 16px; }
+  .map-data-contain .fixed-table-head table tbody {
+    display: block;
+    height: 357px;
+    overflow-y: scroll; }
+  .map-data-contain .fixed-table-head table thead, .map-data-contain .fixed-table-head tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; }
+  .map-data-contain .fixed-table-head table thead {
+    width: calc( 100% - 1em ); }
+
 .loading-img {
   width: 100%;
   height: 100%;
@@ -3509,12 +3545,12 @@ a:focus {
           position: absolute;
           top: 88px;
           right: 45px;
-          color: #ccc; }
+          color: #fff; }
         .student-geo .student-geo-content .content-left .left-style .chart-data1 {
           position: absolute;
           top: 130px;
           right: 45px;
-          color: #ccc; }
+          color: #fff; }
         .student-geo .student-geo-content .content-left .left-style #educational_statistics {
           position: absolute;
           left: 0px;
@@ -3561,7 +3597,7 @@ a:focus {
           top: 70px;
           left: 315px;
           font-size: 12px;
-          color: #ccc;
+          color: #fff;
           display: flex;
           flex-direction: column; }
           .student-geo .student-geo-content .content-left .left-style-two .chart-discribe span {
@@ -3595,7 +3631,7 @@ a:focus {
         background-size: 100% 100%;
         height: 180px;
         margin-top: 10px;
-        color: #ccc;
+        color: #fff;
         overflow: hidden; }
         .student-geo .student-geo-content .content-middle .hot-ticker .ticker-title {
           height: 30px;
@@ -3622,31 +3658,32 @@ a:focus {
               margin: 0 20px !important; }
     .student-geo .student-geo-content .content-right {
       width: 610px;
-      height: 760px;
-      margin: 5px;
-      display: flex;
-      flex-wrap: wrap; }
-      .student-geo .student-geo-content .content-right .right-style {
-        margin: 5px;
-        width: 295px;
-        height: 180px;
-        background: url("http://7xpscc.com1.z0.glb.clouddn.com/0d257471-29e3-4b82-b628-2a867f08c64d.png") no-repeat center center;
-        background-size: 100% 100%;
-        position: relative; }
-        .student-geo .student-geo-content .content-right .right-style .chart-title {
-          position: absolute;
-          top: 12px;
-          left: 25px;
-          color: #3fcdff; }
-        .student-geo .student-geo-content .content-right .right-style .chart-discribe {
-          position: absolute;
-          top: 52px;
-          left: 180px;
-          line-height: 24px;
-          font-size: 12px;
-          color: #ccc;
-          display: flex;
-          flex-direction: column; }
+      height: 760px; }
+      .student-geo .student-geo-content .content-right .swiper-slide .swiper-margin {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 5px 0; }
+        .student-geo .student-geo-content .content-right .swiper-slide .swiper-margin .right-style {
+          margin: 5px;
+          width: 295px;
+          height: 180px;
+          background: url("http://7xpscc.com1.z0.glb.clouddn.com/0d257471-29e3-4b82-b628-2a867f08c64d.png") no-repeat center center;
+          background-size: 100% 100%;
+          position: relative; }
+          .student-geo .student-geo-content .content-right .swiper-slide .swiper-margin .right-style .chart-title {
+            position: absolute;
+            top: 12px;
+            left: 25px;
+            color: #3fcdff; }
+          .student-geo .student-geo-content .content-right .swiper-slide .swiper-margin .right-style .chart-discribe {
+            position: absolute;
+            top: 52px;
+            left: 180px;
+            line-height: 24px;
+            font-size: 12px;
+            color: #fff;
+            display: flex;
+            flex-direction: column; }
   .student-geo .bottom-line {
     width: 100%;
     height: 40px;
@@ -3702,16 +3739,16 @@ a:focus {
         left: 205px; }
       .student-geo .student-geo-bottom .geo-bottom-chart .left-top {
         top: 55px;
-        left: 50px; }
+        left: 40px; }
       .student-geo .student-geo-bottom .geo-bottom-chart .left-bottom {
         top: 105px;
-        left: 50px; }
+        left: 40px; }
       .student-geo .student-geo-bottom .geo-bottom-chart .right-top {
         top: 55px;
-        right: 50px; }
+        right: 40px; }
       .student-geo .student-geo-bottom .geo-bottom-chart .right-bottom {
         top: 105px;
-        right: 50px; }
+        right: 40px; }
     .student-geo .student-geo-bottom .geo-bottom-chart1 {
       width: 450px;
       height: 180px;

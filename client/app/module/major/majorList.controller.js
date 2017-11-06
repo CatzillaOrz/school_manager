@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('MajorListCtrl', function ($scope, MajorService,AuthService,messageService,CommonService, ngDialog,
+    .controller('MajorListCtrl', function ($scope, $state,MajorService,AuthService,messageService,CommonService, ngDialog,
                                            Upload, ImpBatchService, RoleAuthService) {
         $scope.majorListFn={
             //专业列表
@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
             currentMajor: {},
             myFile: null, //选择的文件对象
             errorInfos: [], //返回的错误信息
+            collegeId:null,
             //分页
             page: {
                 totalElements: 0,
@@ -33,6 +34,7 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     managerId: AuthService.getUser().id,
+                    collegeId:that.collegeId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
@@ -53,6 +55,7 @@ angular.module('dleduWebApp')
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize,
+                    collegeId:that.collegeId,
                     managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
@@ -132,6 +135,7 @@ angular.module('dleduWebApp')
             },
 
             init: function () {
+                this.collegeId=$state.params.collegeId;
                 this.getMajorList();
             }
         };
