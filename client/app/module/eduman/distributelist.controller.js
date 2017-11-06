@@ -39,6 +39,8 @@ angular.module('dleduWebApp')
 				this.queryOption.teacherName = '';
 				this.queryOption.courseName = '';
 				this.page.pageNumber = 1;
+				this.page.totalElements = 0;
+				this.page.totalPages = 0;
 				this.records = [];
 				if(type == 'uncomplete'){
 					//切换后清空选择分配列表
@@ -59,7 +61,9 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
 					id: this.quesId,
-					managerId: AuthService.getUser().id
+					managerId: AuthService.getUser().id,
+					teacherName: that.queryOption.teacherName,
+					courseName: that.queryOption.courseName,
 				};
 				EduManService.getEvaQuesDist(params).$promise
 					.then(function (data) {
@@ -80,7 +84,9 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
 					quId: that.quesId,
-					managerId: AuthService.getUser().id
+					managerId: AuthService.getUser().id,
+					teacherName: that.queryOption.teacherName,
+					courseName: that.queryOption.courseName,
 				};
 				EduManService.getEvaQuesUnDist(params).$promise
 					.then(function (data) {
@@ -123,7 +129,7 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
+					pageNumber: 1,
 					pageSize: that.page.pageSize,
 					teacherName: that.queryOption.teacherName,
 					courseName: that.queryOption.courseName,
@@ -170,6 +176,7 @@ angular.module('dleduWebApp')
 				EduManService.deleteEvaQues(params).$promise
 					.then(function (data) {
 						messageService.openMsg("撤销分配成功！");
+						that.page.pageNumber = 1;
 						that.getEvaQuesDist();
 					})
 					.catch(function (error) {
@@ -201,6 +208,8 @@ angular.module('dleduWebApp')
 				EduManService.distQuestionaire(params).$promise
 					.then(function (data) {
 						messageService.openMsg("分配成功！");
+						that.selDistObj = [];
+						that.page.pageNumber = 1;
 						that.getEvaQuesUnDist();
 					})
 					.catch(function (error) {
