@@ -28,10 +28,8 @@
             span.widget-icon
                 i.fa.fa-table
             h2 查询结果 {{roleDist.currentRecord ? "(当前选中教师:" + roleDist.currentRecord.name + "(" + roleDist.currentRecord.jobNumber + "))" : ''}}
-            button.btn.btn-primary.set-elecfence(ng-click="roleDist.distSchoolMan()" ng-if="roleDist.isUseAuth('school')")
-                span 分配为校级管理员
-            button.btn.btn-primary.set-elecfence(ng-click="roleDist.distColMan()" )
-                span 分配为院级管理员
+            button.btn.btn-primary.set-elecfence(ng-click="roleDist.distManAuth()" ng-if="roleDist.isUseAuth('authority')")
+                span 分配权限
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         div(role='content')
@@ -74,4 +72,37 @@
     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
         div.no-border 权限说明
         div.no-border 1、校级管理员可以对全校数据进行查看和编辑操作，且可以管理院级管理员角色
-        div.no-border 2、院级管理员仅可以对本学院的数据进行查看和部分的编辑操作
+        div.no-border 2、校级教务仅可以操作教务管理模块（考勤记录、评教问卷、课程评分、电子围栏）
+        div.no-border 3、校级数据查看角色仅可以查看本校教务管理模块的数据，无修改编辑权限（考勤记录、评教问卷、课程评分）
+        div.no-border
+        div.no-border 4、院级超级管理员可对其本学院的数据进行查看和部分的编辑操作
+        div.no-border 5、院级教务管理仅可以操作其本学院的教务管理模块（考勤记录、评教问卷、课程评分、电子围栏）
+        div.no-border 6、院级数据查看角色仅可以查看其所在学院的教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分）
+
+    script(type='text/ng-template',id='distDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-wrench
+                span.buld 你给{{roleDist.currentRecord.name}}分配的权限是：
+            .repeat_content.content-no-scorll
+                label.radio-inline(ng-if="roleDist.isUseAuth('school_sup')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="0" )
+                    | 校级超级管理员
+                label.radio-inline(ng-if="roleDist.isUseAuth('schoo_edu')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="1" )
+                    | 校级教务管理
+                label.radio-inline(ng-if="roleDist.isUseAuth('schoo_data')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="2" )
+                    | 校级数据查看
+                label.radio-inline(ng-if="roleDist.isUseAuth('college_sup')" style="margin-left:0;")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="3" )
+                    | 院级超级管理员
+                label.radio-inline(ng-if="roleDist.isUseAuth('college_edu')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="4" )
+                    | 院级教务管理
+                label.radio-inline(ng-if="roleDist.isUseAuth('college_data')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="5" )
+                    | 院级数据查看
+            .attend-dialog-footer
+                button.btn.btn-defualt.dialog-btn(ng-click="closeThisDialog()") 取消
+                button.btn.btn-primary.dialog-btn(ng-click="roleDist.distRole()") 确定

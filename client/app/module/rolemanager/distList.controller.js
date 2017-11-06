@@ -60,46 +60,33 @@ angular.module('dleduWebApp')
 					managerId: AuthService.getUser().id,
 				}
 				params.userId = _this.currentRecord.id;
-				if(_this.distType == 'school'){
-					params.roleName = 'ROLE_ORG_MANAGER';
-				}else{
-					params.roleName = 'ROLE_COLLEGE_ADMIN';
-				}
+				params.roleName = _this.distType;
 				RoleManagerService.distRole(params).$promise
 					.then(function (data) {
+						ngDialog.close();
 						if(data.success){
 							messageService.openMsg("分配权限成功！");
 						}else{
 							messageService.openMsg(data.message);
 						}
-
-
 					})
 					.catch(function (error) {
+						ngDialog.close();
 						messageService.openMsg(CommonService.exceptionPrompt(error, "分配权限失败！"));
 					})
 			},
 
-			//分配提示
-			distPrompt: function (type) {
+
+			//分配权限
+			distManAuth: function(){
 				if(!this.currentRecord){
 					messageService.openMsg("请先选择分配人！");
 					return;
 				}
-				this.distType = type;
-				var that = this;
-				var distType =  type == 'school' ? '校级管理员' : '院级管理员';
-				messageService.getMsg("您确定将"+ that.currentRecord.name +"分配为"+ distType +"吗？", that.distRole)
-			},
-
-			//分配院级管理员
-			distColMan: function(){
-				this.distPrompt('col');
-			},
-
-			//分配校级管理员
-			distSchoolMan: function(){
-				this.distPrompt('school');
+				ngDialog.open({
+					template: 'distDialog',
+					scope: $scope
+				});
 			},
 
 			//选择分配
