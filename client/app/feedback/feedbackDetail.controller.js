@@ -38,6 +38,8 @@ angular.module('dleduWebApp')
                             _this.findCommentById();
                             _this.isReplay = false;
                             _this.replayContent = '';
+                            _this.replayBut = "回复";
+                            _this.replayName = '发表评论';
                         }
                     })
                 }else{
@@ -46,6 +48,8 @@ angular.module('dleduWebApp')
                             _this.findCommentById();
                             _this.isReplay = false;
                             _this.replayContent = '';
+                            _this.replayBut = "回复";
+                            _this.replayName = '发表评论';
                         }
                     })
                 }

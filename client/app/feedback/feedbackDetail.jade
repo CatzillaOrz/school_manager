@@ -3,13 +3,13 @@
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
-            h2 {{newsHandle.title}}
+            h2 问题反馈详情
         .widget-body
-            .feedback-detail 曹兴军&nbsp&nbsp{{feedbackFun.feedback.createdDate}}
+            .feedback-detail {{feedbackFun.feedback.name}}&nbsp&nbsp{{feedbackFun.feedback.createdDate}}
             .feedback-detail {{feedbackFun.feedback.description}}
             .feedback-detail
                 .picture-list
-                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="feedbackPicture" )
+                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}" )
             .feedback-detail 评论
             .feedback-detail
                 .middle-line
