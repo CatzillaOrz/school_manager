@@ -1,0 +1,39 @@
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{newsHandle.title}}
+        .widget-body
+            .feedback-detail 曹兴军&nbsp&nbsp{{feedbackFun.feedback.createdDate}}
+            .feedback-detail {{feedbackFun.feedback.description}}
+            .feedback-detail
+                .picture-list
+                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="feedbackPicture" )
+            .feedback-detail 评论
+            .feedback-detail
+                .middle-line
+            .feedback-detail.feedback-bottom-line(ng-repeat="comment in feedbackFun.commentList")
+                .feedback-comment-avatar
+                    img(src="{{comment.avatar?comment.avatar:'http://7xpscc.com1.z0.glb.clouddn.com/b4f3c4bc-7d81-4cd0-9ffc-f77b1f845a79.png'}}")
+                    .feedback-comment-content
+                        .comment-name
+                            span {{comment.name}}&nbsp&nbsp{{comment.createdDate}}
+                        .comment-content
+                            span {{comment.content}}
+                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)") 删除
+                .feedback-comment-avatar(ng-repeat="demain in comment.ccommentListDomains")
+                    img(src="{{demain.avatar?demain.avatar:'http://7xpscc.com1.z0.glb.clouddn.com/b4f3c4bc-7d81-4cd0-9ffc-f77b1f845a79.png'}}")
+                    .feedback-comment-content
+                        .comment-name
+                           span {{demain.name}}&nbsp&nbsp{{demain.createdDate}}
+                        .comment-content
+                           span 回复{{comment.name}}:{{demain.content}}
+                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(demain)") {{feedbackFun.replayBut}}
+                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)") 删除
+            .feedback-detail
+                textarea#desc(ng-model="feedbackFun.replayContent")
+                .reply-call
+                    button(ng-click="feedbackFun.replayComment()") {{feedbackFun.replayName}}
+
+
