@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('StudentListCtrl', function ($scope, AuthService,StudentService,messageService,CommonService,
+    .controller('StudentListCtrl', function ($scope,$state, CollegeService,MajorService,AuthService,StudentService,messageService,CommonService,
                                              ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService,
                                              $timeout, RoleAuthService) {
         $scope.studentListFn={
@@ -152,6 +152,41 @@ angular.module('dleduWebApp')
                     }
                 }
             },
+            getCollegeDropList: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 0,
+                    pageSize: 1000,
+                    managerId: AuthService.getUser().id
+                }
+                CollegeService.getCollegeDropList(params).$promise
+                    .then(function (data) {
+                        that.collegeDropList =data.data;
+                    })
+                    .catch(function (error) {
+                    })
+            },
+            //专业下拉列表查询
+            getMajorDropList:function () {
+                var that=this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: 100
+                }
+                params.collegeId=that.params.collegeId;
+                MajorService.getMajorDropList(params).$promise
+                    .then(function (data) {
+                        that.majorDropList=data.data;
+                        if(!that.isInit&& $state.current.name=="studentEdit"){
+                            that.getMajorById(that.majorId);
+                        }
+
+                    })
+                    .catch(function (error) {
+                    })
+            },
             // 获取学生列表
             getStudentList: function () {
                 var that = this;
@@ -235,7 +270,22 @@ angular.module('dleduWebApp')
                 that.currentStudent = entity;
                 messageService.getMsg("您确定要重置"+that.currentStudent.name+"的密码吗？", that.resetPassword)
             },
-
+            unlockBindPhoneAndResetPassword: function () {
+                var _this = $scope.studentListFn;
+                AccountService.unlockBindPhoneAndResetPassword( _this.currentStudent.id)
+                    .success(function (data) {
+                        messageService.openMsg("解绑手机成功！");
+                        _this.getStudentList();
+                    })
+                    .error(function (error) {
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"解绑手机失败！"));
+                    })
+            },
+            unlockPrompt: function (entity) {
+                var that=this;
+                that.currentStudent = entity;
+                messageService.getMsg("解绑手机的同时将重置为初始密码，是否继续？", that.unlockBindPhoneAndResetPassword)
+            },
             /**
              * 弹出批量导入弹出框
              */
@@ -314,7 +364,12 @@ angular.module('dleduWebApp')
              */
             exportData: function(){
                 var orgId = AuthService.getUser().orgId;
-                StudentService.exportData({orgId: orgId, userId: AuthService.getUser().id}).$promise
+                var params = {orgId: orgId, userId: AuthService.getUser().id};
+               /* params.collegeId = this.params.collegeId;
+                params.professionalId = this.params.professionalId;
+                params.classesId = this.params.classesId;
+                params.name = this.params.name;*/
+                StudentService.exportData(params).$promise
                     .then(function (data) {
                         window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId;
                     })
@@ -324,6 +379,10 @@ angular.module('dleduWebApp')
             },
 
             init: function () {
+                this.params.collegeId=$state.params.collegeId;
+                this.params.professionalId=$state.params.professionalId;
+                this.getCollegeDropList();
+                this.getMajorDropList();
                 this.getStudentList();
             }
         };

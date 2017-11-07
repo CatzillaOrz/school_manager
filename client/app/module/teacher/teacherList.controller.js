@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('TeacherListCtrl', function ($scope, TeacherService,AuthService,messageService,CommonService,
+    .controller('TeacherListCtrl', function ($scope,$state,CollegeService, TeacherService,AuthService,messageService,CommonService,
                                              ngDialog, Upload, ImpBatchService, AccountService,Select2LoadOptionsService,
                                              RoleAuthService) {
         $scope.teacherListFn={
@@ -100,6 +100,21 @@ angular.module('dleduWebApp')
 
                     })
             },
+            getCollegeDropList: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 0,
+                    pageSize: 1000,
+                    managerId: AuthService.getUser().id
+                }
+                CollegeService.getCollegeDropList(params).$promise
+                    .then(function (data) {
+                        that.collegeDropList =data.data;
+                    })
+                    .catch(function (error) {
+                    })
+            },
             //删除
             deleteTeacher: function () {
                 var _this = $scope.teacherListFn;
@@ -127,7 +142,7 @@ angular.module('dleduWebApp')
                 AccountService.resetPassword( _this.currentTeacher.id)
                     .success(function (data) {
                         messageService.openMsg("重置密码成功！");
-                        _this.getStudentList();
+                        _this.getTeacherList();
                     })
                     .error(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error,"重置密码失败！"));
@@ -138,7 +153,22 @@ angular.module('dleduWebApp')
                 that.currentTeacher = entity;
                 messageService.getMsg("您确定要重置"+that.currentTeacher.name+"的密码吗？", that.resetPassword)
             },
-
+            unlockBindPhoneAndResetPassword: function () {
+                var _this = $scope.teacherListFn;
+                AccountService.unlockBindPhoneAndResetPassword(_this.currentTeacher.id)
+                    .success(function (data) {
+                        messageService.openMsg("解绑手机成功！");
+                        _this.getTeacherList();
+                    })
+                    .error(function (error) {
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"解绑手机失败！"));
+                    })
+            },
+            unlockPrompt: function (entity) {
+                var that=this;
+                that.currentTeacher = entity;
+                messageService.getMsg("解绑手机的同时将重置为初始密码，是否继续？", that.unlockBindPhoneAndResetPassword)
+            },
             /**
              * 弹出批量导入弹出框
              */
@@ -213,6 +243,8 @@ angular.module('dleduWebApp')
             },
 
             init: function () {
+                this.params.collegeId=$state.params.collegeId;
+                this.getCollegeDropList();
                 this.getTeacherList();
             }
         };

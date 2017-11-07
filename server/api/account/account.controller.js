@@ -68,4 +68,13 @@ module.exports = {
                 res.status(500).json(e);
             });
     },
+    unlockBindPhoneAndResetPassword: function (req, res) {
+        AccountService.unlockBindPhoneAndResetPasswordSync(req.query.id, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(500).json(e);
+            });
+    },
 };
