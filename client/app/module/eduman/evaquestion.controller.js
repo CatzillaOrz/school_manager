@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService) {
+	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService, RoleAuthService) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
@@ -13,6 +13,11 @@ angular.module('dleduWebApp')
 				totalPages: 0,
 				pageNumber: 1,
 				pageSize: 10
+			},
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
 			},
 
 			// 获取评教问卷列表

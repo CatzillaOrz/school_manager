@@ -3,7 +3,8 @@
  * 分配页面
  */
 angular.module('dleduWebApp')
-	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService, Select2LoadOptionsService, CollegeService) {
+	.controller('DistributeListCtrl', function ($scope, $state, AuthService, EduManService, messageService,
+												Select2LoadOptionsService, CollegeService, RoleAuthService) {
 		$scope.distributeListFn={
 			//问卷id
 			quesId: 0,
@@ -33,6 +34,11 @@ angular.module('dleduWebApp')
 			queryOption: {
 				courseName: '',
 				teacherName: '',
+			},
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
 			},
 
 			switchType: function(type){
