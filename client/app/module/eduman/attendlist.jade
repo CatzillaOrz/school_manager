@@ -13,7 +13,7 @@
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 行政班考勤
-                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(3)")
+                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(3)" ng-if="isUseAuth('classRate')")
                     a(data-toggle='tab', aria-expanded='false')
                         i.fa.fa-lg.fa-pencil
                         span.hidden-mobile.hidden-tablet
@@ -624,7 +624,7 @@
                         //                    .col-sm-6.col-xs-12
                         //                        .dataTables_paginate.paging_simple_numbers
                         //                            ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-                    #hr3.tab-pane
+                    #hr3.tab-pane(ng-if="isUseAuth('classRate')")
                         .college-handle-container
                             .jarviswidget-color-blueDark
                                 .widget-body
@@ -757,7 +757,7 @@
                                                     th 签到时间
                                                     th 备注
                                                     th 修改记录
-                                                    th 操作
+                                                    th(ng-if="isUseAuth('modAttendance')") 操作
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendFixFn.attendList")
                                                     td.sorting_1 {{$index+1 + ((attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber+1:attendFixFn.page.pageNumber)-1)*10}}
@@ -773,7 +773,7 @@
                                                     td
                                                         span(ng-if="!attend.recordNumber") 暂无修改记录
                                                         a(ng-click="attendFixFn.detailOpen(attend)" ng-if="attend.recordNumber") 查看
-                                                    td
+                                                    td(ng-if="isUseAuth('modAttendance')")
                                                         a(ng-click="attendFixFn.fixOpen(attend)") 修改
 
                                         .dt-toolbar-footer

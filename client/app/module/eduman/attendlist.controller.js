@@ -2,7 +2,15 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService, ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService, ngDialog) {
+    .controller('AttendListCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService,
+                                            ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService,
+                                            ngDialog, RoleAuthService) {
+
+        //控制按钮权限
+        $scope.isUseAuth = function(type){
+            return RoleAuthService.isUseAuthority(type);
+        };
+
         //当天时间
         var today = new Date().Format("yyyy-MM-dd");
         $scope.attendFn = {
@@ -37,6 +45,7 @@ angular.module('dleduWebApp')
                 pageNumber: 0,
                 pageSize: 10
             },
+
             switchOneTab: function (index) {
                 var _this = this;
                 if (index == 1) {
