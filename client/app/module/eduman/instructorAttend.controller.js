@@ -8,10 +8,18 @@ angular.module('dleduWebApp')
         $scope.insAttendFn={
             currentEntity: {},
             collegeDropList:[],
+            showMap:false,
             params:{
-                collegeId:""
-
+                orgId: AuthService.getUser().orgId,
+                collegeId:null,
+                nj:null,
+                status:"1",
+                startDate:today,
+                endDate:today,
+                managerId: AuthService.getUser().id
             },
+            rollCallList:[],
+            RollCallDetailsList:[],
             map:null,
             markers:[],
             infoWindow:{},
@@ -77,67 +85,112 @@ angular.module('dleduWebApp')
                _this.map.setCenter(position);
            },
             //创建标记
-            createMaker:function (lnglats) {
+            createMaker:function (list) {
                 var _this=this;
                 _this.map.clearMap();
                 _this.markers=[];
-                for(var i = 0,marker; i < lnglats.length; i++){
-                    marker=new AMap.Marker({
-                        position:lnglats[i],
-                        map:_this.map,
-                        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-                    });
-                    marker.data={
-                        id:i,
-                        name:"新刚"+i,
-                        number:'sdsd'
-                    };
-                    //给Marker绑定单击事件
-                    marker.on('click', _this.markerClick);
-                    _this.markers.push(marker);
-                }
-            },
-            //创建弹出框
-            openInfoWindow:function(map,posions,data) {
-                var _this=this;
-                //构建信息窗体中显示的内容
-                var info = [];
-                info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>"+data.name+"</b>");
-                info.push("电话 : 010-84107000   邮编 : 100102");
-                info.push("地址 :北京市朝阳区望京阜荣街10号首开广场4层</div></div>");
-
-                _this.infoWindow = new AMap.InfoWindow({
-                    content: info.join("<br>") , //使用默认信息窗体框样式，显示信息内容
-                    offset: new AMap.Pixel(0, -30)
-                });
-                _this.infoWindow.open(map, posions);
-                //图标更换
-                angular.forEach(_this.markers,function (marker) {
-                    if(marker.data.id==data.id){
-                        marker.setIcon("http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png");
-                    }else {
-                        marker.setIcon("http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png");
+                angular.forEach(list,function (data) {
+                    if(data.lltudes){
+                       var marker=new AMap.Marker({
+                            position:data.lltudes,
+                            map:_this.map,
+                            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                        });
+                        marker.data=data;
+                        //给Marker绑定单击事件
+                        marker.on('click', _this.markerClick);
+                        _this.markers.push(marker);
                     }
                 })
+            },
+            //创建弹出框
+            openInfoWindow:function(data) {
+                var _this=this;
+                //构建信息窗体中显示的内容
+                if(data.lltudes){
+                    var info = [];
+                    info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>"+data.sname+"</b>");
+                    info.push("学号 :"+data.jobNumber);
+                    info.push("签到时间 :"+data.signTime+"</div></div>");
+
+                    _this.infoWindow = new AMap.InfoWindow({
+                        content: info.join("<br>") , //使用默认信息窗体框样式，显示信息内容
+                        offset: new AMap.Pixel(0, -30)
+                    });
+                    _this.infoWindow.open(_this.map, data.lltudes);
+                    //图标更换
+                    angular.forEach(_this.markers,function (marker) {
+                        if(marker.data.id==data.id){
+                            marker.setIcon("http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png");
+                        }else {
+                            marker.setIcon("http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png");
+                        }
+                    })
+                }
             },
             //标记物点击事件
             markerClick:function (e) {
                 var _this=$scope.insAttendFn;
-                _this.openInfoWindow(_this.map, e.target.getPosition(),e.target.data);
+                _this.openInfoWindow(e.target.data);
             },
+            //获取导员点名列表
+            getInsRollCallList:function () {
+                var _this = this;
+                var params = _this.params;
+                params.pageNumber=_this.page.pageNumber;
+                params.pageSize=_this.page.pageSize;
+                EduManService.getInsRollCallList(params).$promise
+                    .then(function (data) {
+                        _this.rollCallList = data.data;
+                        _this.page = data.page;
+                    })
+                    .catch(function (error) {
 
+                    })
+            },
+            //获取详细
+            getClassRollCallDetails:function (rid,classId) {
+                var _this=this;
+                var params = {
+                    rid:rid,
+                    classId:classId,
+                    managerId:AuthService.getUser().id
+                };
+                EduManService.getClassRollCallDetails(params).$promise
+                    .then(function (data) {
+                        _this.RollCallDetailsList = data.data;
+                        //设置地图中心位置
+                        if(data.center.length!=0){
+                            _this.setMapCenter(data.center);
+                            _this.showMap=true;
+                        }else {
+                            _this.showMap=false;
+                        }
+
+                        //设置标记
+                        if(_this.RollCallDetailsList){
+                            _this.createMaker(_this.RollCallDetailsList);
+                        }
+
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            openMap:function (entity) {
+                var _this=this;
+                _this.currentEntity=entity;
+                _this.getClassRollCallDetails(entity.rid,entity.classId);
+            },
             init:function () {
                var _this=this;
+                _this.getInsRollCallList();
                var position={
                 x:116.40,
                 y:39.91
                };
-                var lnglats=[//也可以使用LngLat对象
-                    [116.368904,39.923423],[116.382122,39.921176],
-                    [116.387271,39.922501],[116.398258,39.914600]
-                ];
                 _this.createMap(position);
-                _this.createMaker(lnglats);
+                //_this.createMaker(lnglats);
             }
         };
         $scope.insAttendFn.init();

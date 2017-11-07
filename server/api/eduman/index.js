@@ -58,5 +58,7 @@ router.get('/getAttendListByCondition',auth.isSignedIn, controller.getAttendList
 router.get('/getAttendChangeLog',auth.isSignedIn, controller.getAttendChangeLog);
 router.put('/updateAttend',auth.isSignedIn, controller.updateAttend);
 router.get('/getAttendStopLogs',auth.isSignedIn, controller.getAttendStopLogs);
+router.get('/getInsRollCallList',auth.isSignedIn, controller.getInsRollCallList);
+router.get('/getClassRollCallDetails',auth.isSignedIn, controller.getClassRollCallDetails);
 
 module.exports = router;

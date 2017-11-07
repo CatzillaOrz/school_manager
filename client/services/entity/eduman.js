@@ -227,6 +227,14 @@ angular.module('dleduWebService')
                 var eduman = $resource('api/eduman/getAttendStopLogs');
                 return eduman.get(params);
             },
+            getInsRollCallList:function (params) {
+                var eduman = $resource('api/eduman/getInsRollCallList');
+                return eduman.get(params);
+            },
+            getClassRollCallDetails:function (params) {
+                var eduman = $resource('api/eduman/getClassRollCallDetails');
+                return eduman.get(params);
+            },
 		}
 
 	});
