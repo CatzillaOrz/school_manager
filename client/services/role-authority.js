@@ -71,9 +71,13 @@ angular.module('dleduWebService')
                     "url": "attendlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "get,imp,trend",
-                        "ROLE_ORG_MANAGER": "get,imp,trend",
-                        "ROLE_COLLEGE_ADMIN": "get"
+                        "ROLE_ORG_ADMIN": "get,imp,trend,classRate,modAttendance",
+                        "ROLE_ORG_MANAGER": "get,imp,trend,classRate,modAttendance",
+                        "ROLE_COLLEGE_ADMIN": "get,imp,trend,modAttendance",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "get,imp,trend,modAttendance",
+                        "ROLE_ORG_DATAVIEW": "get",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "get,imp,trend,modAttendance",
+                        "ROLE_COLLEG_DATAVIEW": "get"
                     }
                 },
                 {
@@ -89,9 +93,26 @@ angular.module('dleduWebService')
                     "url": "evaquestion",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "batchadd,add,update,del,get,imp,exp",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp",
-                        "ROLE_COLLEGE_ADMIN": "get"
+                        "ROLE_ORG_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_MANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEGE_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_ORG_DATAVIEW": "show,static",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEG_DATAVIEW": "show,static"
+                    }
+                },
+                {
+                    "url": "distributelist",
+                    "roles":
+                    {
+                        "ROLE_ORG_ADMIN": "dist,cancleDist",
+                        "ROLE_ORG_MANAGER": "dist,cancleDist",
+                        "ROLE_COLLEGE_ADMIN": "dist,cancleDist",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "dist,cancleDist",
+                        "ROLE_ORG_DATAVIEW": "",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "dist,cancleDist",
+                        "ROLE_COLLEG_DATAVIEW": ""
                     }
                 },
                 {
@@ -100,7 +121,11 @@ angular.module('dleduWebService')
                     {
                         "ROLE_ORG_ADMIN": "add,get",
                         "ROLE_ORG_MANAGER": "add,get",
-                        "ROLE_COLLEGE_ADMIN": "get"
+                        "ROLE_COLLEGE_ADMIN": "get",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "get",
+                        "ROLE_ORG_DATAVIEW": "get",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "get",
+                        "ROLE_COLLEG_DATAVIEW": "get"
                     }
                 },
                 {
@@ -125,8 +150,13 @@ angular.module('dleduWebService')
                     "url": "distlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "school,college",
-                        "ROLE_ORG_MANAGER": "college"
+                        "ROLE_ORG_ADMIN": "authority, school_sup, college_sup, schoo_data, schoo_edu, college_data, college_edu",
+                        "ROLE_ORG_MANAGER": "authority, school_sup, college_sup, schoo_data, schoo_edu, college_data, college_edu",
+                        "ROLE_COLLEGE_ADMIN": "authority, college_data, college_edu",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "",
+                        "ROLE_ORG_DATAVIEW": "",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "",
+                        "ROLE_COLLEG_DATAVIEW": ""
                     }
                 }
             ]

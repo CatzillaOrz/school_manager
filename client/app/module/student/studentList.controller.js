@@ -364,7 +364,12 @@ angular.module('dleduWebApp')
              */
             exportData: function(){
                 var orgId = AuthService.getUser().orgId;
-                StudentService.exportData({orgId: orgId, userId: AuthService.getUser().id}).$promise
+                var params = {orgId: orgId, userId: AuthService.getUser().id};
+               /* params.collegeId = this.params.collegeId;
+                params.professionalId = this.params.professionalId;
+                params.classesId = this.params.classesId;
+                params.name = this.params.name;*/
+                StudentService.exportData(params).$promise
                     .then(function (data) {
                         window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId;
                     })

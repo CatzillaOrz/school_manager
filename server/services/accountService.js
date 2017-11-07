@@ -125,11 +125,14 @@ var AccountService = {
   },
     getAccount: function (access_token, callback) {
         RestClient.get({
-            // host:'dd',
+             //host:'dd',
             path: '/api/web/v1/users/userinfo',
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {
+                if(res.entity.role && typeof res.entity.role == 'string'){
+                    res.entity.roleNames = res.entity.role.split(',');
+                }
                 callback(null, res.entity);
             } else {
                 ErrorCode.getErrorSync(res.entity)

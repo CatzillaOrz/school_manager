@@ -108,7 +108,7 @@
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
-                            .panel.panel-default.no-border(style="box-shadow:none!important;")
+                            .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
 
                 #hr2.tab-pane
@@ -184,10 +184,10 @@
                                                 td {{record.assessCount+'/'+record.totalCount}}
                                                 td {{record.assginDate}}
                                                 td
-                                                    a.handle(ng-show="record.assAndCanStuatus=='10'" ng-click="distributeListFn.deletePrompt(record)")
+                                                    a.handle(ng-if="distributeListFn.isUseAuth('cancleDist')&&record.assAndCanStuatus=='10'" ng-click="distributeListFn.deletePrompt(record)")
                                                         i.fa.fa-pencil-square-o
                                                         span 撤销分配&nbsp;&nbsp;
-                                                    a.handle.disable-style(ng-show="record.assAndCanStuatus=='20'")
+                                                    a.handle.disable-style(ng-if="distributeListFn.isUseAuth('cancleDist')&&record.assAndCanStuatus=='20'")
                                                         i.fa.fa-pencil-square-o
                                                         span 已撤销&nbsp;&nbsp;
                                                     a.handle(ui-sref="evaquestatic({id:record.id})")

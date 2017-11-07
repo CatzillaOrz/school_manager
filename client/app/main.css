@@ -3337,14 +3337,13 @@ a:focus {
   margin-bottom: 5px;
   font-size: 0;
   white-space: nowrap; }
-
 .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
   -webkit-border-radius: 0 4px 4px 0;
   -moz-border-radius: 0 4px 4px 0;
   border-radius: 0 4px 4px 0; }
 
 .input-append .add-on, .input-prepend .add-on {
-  width: 30px;
+  width: 50px;
   height: 30px; }
 
 .input-append .add-on, .input-append .btn, .input-append .btn-group {
