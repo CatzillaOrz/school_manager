@@ -806,7 +806,35 @@ var EduManService = {
                 callback(ErrorCode.errorHandle(res));
             }
         })
-    }
+    },
+    getInsRollCallList: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/instructor/rollcall',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getClassRollCallDetails: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'dd',
+            path: '/api/web/v1/rollcall/classdetails',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
 };
 
 

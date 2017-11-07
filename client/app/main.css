@@ -1018,6 +1018,8 @@ a:focus {
     position: relative;
     left: 76px;
     top: 50px; }
+  .college-list-container .current {
+    background: #54BF9B !important; }
 
 .margin-left-10 {
   margin-left: 10px !important; }
@@ -3452,16 +3454,16 @@ a:focus {
   background-color: #555; }
 
 #mapContainer {
-  height: 500px;
+  height: 266px;
   border: 1px solid #b3b3b3;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); }
 
 .map-data-contain {
-  height: 450px;
+  height: 266px;
   width: 300px;
   border: 1px solid #b3b3b3;
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   z-index: 9999;
   background: #fff;
   right: 20px;
@@ -3478,7 +3480,7 @@ a:focus {
     font-size: 16px; }
   .map-data-contain .fixed-table-head table tbody {
     display: block;
-    height: 357px;
+    height: 172px;
     overflow-y: scroll; }
   .map-data-contain .fixed-table-head table thead, .map-data-contain .fixed-table-head tbody tr {
     display: table;
