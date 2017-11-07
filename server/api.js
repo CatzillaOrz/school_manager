@@ -20,4 +20,5 @@ module.exports = function(app){
   app.use('/api/news', require('./api/news'));
   app.use('/api/rolemanger', require('./api/rolemanger'));//权限管理
   app.use('/api/geo', require('./api/geo'));
+  app.use('/api/feedback', require('./api/feedback'));
 };

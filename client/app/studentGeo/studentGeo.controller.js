@@ -1,8 +1,7 @@
 'use strict';
 angular.module('dleduWebApp')
     .controller('studentGeoCtl', function ($scope, $http,$timeout,$interval ,GeoService, AuthService) {
-        $scope.showLoading = false;
-        var timer;
+        $scope.showLoading = true;
         function getClassList(){
             return [
                 {
@@ -929,6 +928,7 @@ angular.module('dleduWebApp')
                //地理化信息数据
                 function getOrgan(){
                     GeoService.getOrgan(params).success(function (res) {
+                        $scope.showLoading = false;
                         if(res.data.lltudes.length!=0){
                             myChart2.setOption(eduChartConfig.geoChart(res.data));
                         }
@@ -958,6 +958,7 @@ angular.module('dleduWebApp')
 
                 //构造swiper的数据
                 function bulidSwiperData(data){
+                    $scope.allData.swiperList=[];
                     var page = Math.ceil(data.length/8);
                     for(var i=0;i<page;i++){
                         var resList = data.slice(8*i,8*(i+1));
@@ -996,6 +997,16 @@ angular.module('dleduWebApp')
                                 getEcharts();
                             },600)
                         }
+                        else{
+                            $timeout(function(){
+                                _.each(getClassList,function(item){
+                                    _.each(item,function(item2){
+                                        var chart = echarts.init(document.getElementById(item2.classId));
+                                        chart.setOption(eduChartConfig.chart3(item2.classRate));
+                                    })
+                                });
+                            },200)
+                        }
                     });
                 }
 
@@ -1022,12 +1033,7 @@ angular.module('dleduWebApp')
                 realtimestatistics();
                 hotreviews();
                 $interval(function() {
-                    getOrgan();
-                    attendancerate();
-                    realtimestatistics();
-                    hotreviews();
-                    getAttendancestatistics();
-                    $interval.cancel(timer);
+                    window.location.reload();
                 },1800000);
                 //本学期到课率汇总
                 GeoService.termtoclassrate(params).success(function(res){
