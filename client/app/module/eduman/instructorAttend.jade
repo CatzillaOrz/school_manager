@@ -94,16 +94,16 @@
                     #mapContainer(ng-show="insAttendFn.showMap")
                     div.map-data-contain(ng-show="insAttendFn.showMap")
                         .title 班级详情
-                        .filter
+                        .filter(ng-init="state='all';isRead='all'")
                             .form-inline
                                 .form-group.col-sm-6
-                                    select.form-control
-                                        option(value="") 全部
+                                    select.form-control(ng-model="state")
+                                        option(value="all") 全部
                                         option 未提交
                                         option 已提交
                                 .form-group.col-sm-6
-                                    select.form-control
-                                        option(value="") 全部
+                                    select.form-control(ng-model="isRead")
+                                        option(value="all") 全部
                                         option 已读
                                         option 未读
                         .fixed-table-head
@@ -114,7 +114,7 @@
                                         th 状态
                                         th 是否通知阅读
                                 tbody
-                                    tr.cursor-pointer(ng-repeat="stu in insAttendFn.RollCallDetailsList" ng-click="insAttendFn.openInfoWindow(stu)")
+                                    tr.cursor-pointer(ng-repeat="stu in insAttendFn.RollCallDetailsList" ng-click="insAttendFn.openInfoWindow(stu)" ng-show="(state=='all'||state==stu.state)&&(isRead=='all'||isRead==stu.isRead)")
                                         td {{stu.sname}}
                                         td {{stu.state}}
                                         td {{stu.isRead}}
