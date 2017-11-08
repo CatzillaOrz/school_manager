@@ -837,7 +837,8 @@ angular.module('dleduWebApp')
                 orgId: AuthService.getUser().orgId,
                 criteria: null,
                 startTime: null,
-                endTime: null
+                endTime: null,
+                managerId: AuthService.getUser().id
 
             },
             fixParams: {
