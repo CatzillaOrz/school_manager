@@ -136,6 +136,7 @@ angular.module('dleduWebApp')
             //获取导员点名列表
             getInsRollCallList:function () {
                 var _this = this;
+                _this.showMap=false;
                 var params = _this.params;
                 params.pageNumber=_this.page.pageNumber;
                 params.pageSize=_this.page.pageSize;
