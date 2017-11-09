@@ -36,7 +36,8 @@ angular.module('dleduWebApp')
                 semesterId: null,
                 classesId: null,
                 courseName: null,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             //分页参数
             page: {
@@ -278,7 +279,8 @@ angular.module('dleduWebApp')
                     courseName: _this.params.courseName,
                     teacherName: _this.params.teacherName,
                     pageNumber: _this.page.pageNumber,
-                    pageSize: _this.page.pageSize
+                    pageSize: _this.page.pageSize,
+                    managerId: AuthService.getUser().id
                 };
                 EduManService.teachClassAttendExport(params).$promise
                     .then(function (data) {
@@ -372,7 +374,8 @@ angular.module('dleduWebApp')
                 collegeId: null,
                 beginDate: today,
                 endDate: today,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             attendList: [],
             getTeachingclassAttendByTeacher: function () {
@@ -417,7 +420,8 @@ angular.module('dleduWebApp')
                 courseName: null,
                 beginDate: today,
                 endDate: today,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             attendList: [],
             ///api/web/v1/attendance/attendanceByPeriod
@@ -470,7 +474,8 @@ angular.module('dleduWebApp')
                 courseName: null,
                 beginDate: today,
                 endDate: today,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             attendList: [],
             getClassAttendanceGroupByCollege: function () {
@@ -518,7 +523,8 @@ angular.module('dleduWebApp')
                 courseName: null,
                 beginDate: today,
                 endDate: today,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             majorDropList: [],
             attendList: [],
@@ -614,7 +620,8 @@ angular.module('dleduWebApp')
                 courseName: null,
                 beginDate: today,
                 endDate: today,
-                teacherName: null
+                teacherName: null,
+                managerId: AuthService.getUser().id
             },
             attendList: [],
             majorDropList: [],
@@ -798,7 +805,8 @@ angular.module('dleduWebApp')
                 criteria: null,
                 opt:null,
                 startTime: null,
-                endTime: null
+                endTime: null,
+                managerId: AuthService.getUser().id
 
             },
             //分页参数
