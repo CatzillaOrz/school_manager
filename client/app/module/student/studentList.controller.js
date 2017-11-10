@@ -372,6 +372,7 @@ angular.module('dleduWebApp')
                 params.managerId = AuthService.getUser().id;
                 params.pageNumber = 1,
                 params.pageSize = 1,
+                CommonService.delEmptyProperty(params);
                 StudentService.getStudentList(params).$promise
                     .then(function (data) {
                         if(data.data.length == 0){
@@ -379,8 +380,10 @@ angular.module('dleduWebApp')
                             return;
                         }
                         window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId
-                            +"&collegeId=" + params.collegeId + "&professionalId=" + params.professionalId + "&classesId=" + params.classesId
-                            + "&name=" + params.name;
+                            + (params.collegeId ? "&collegeId=" + params.collegeId : '')
+                            + (params.professionalId ? "&professionalId=" + params.professionalId : '')
+                            + (params.classesId ? "&classesId=" + params.classesId : '')
+                            + (params.name ? "&name=" + params.name : '');
                     })
                     .catch(function (error) {
 
