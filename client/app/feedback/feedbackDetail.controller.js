@@ -19,7 +19,14 @@ angular.module('dleduWebApp')
             findCommentById:function () {
                 var _this=this;
                 FeedbackService.findCommentById({id:$state.params.id}).success(function (data) {
-                    _this.commentList = data
+                    _this.commentList = _.map(data,function(item){
+                        item.isShowDelBut = false;
+                        item.ccommentListDomains=_.map(item.ccommentListDomains,function(item2){
+                            item2.isShowReplayBut = false;
+                            return item2;
+                        })
+                        return item;
+                    })
                 })
             },
             replayOrCancel:function (demain) {
