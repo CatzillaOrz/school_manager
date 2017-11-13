@@ -35,13 +35,13 @@ body{
 }
 .form-control{
   background-color: #F6F6F6!important;
-  border: 1px solid #E1E3E8!important;
+  border: 1px solid #E1E3E8;
   border-radius: 4px!important;
   -webkit-border-radius: 4px !important;
 }
 .select2-container--default .select2-selection--single {
   background-color: #F6F6F6!important;
-  border: 1px solid #E1E3E8!important;
+  border: 1px solid #E1E3E8;
   border-radius: 4px!important;
 }
 @import '../app/layout/layout.scss';
