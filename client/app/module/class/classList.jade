@@ -17,28 +17,28 @@
             .widget-body.no-padding
                 .dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.margin-bottom-10
+                        .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
-                                .form-group.col-sm-2.margin-top-5
+                                .form-group.col-sm-4.margin-top-5.no-padding
                                     label 院系：
                                     select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
-                                .form-group.col-sm-2.margin-top-5
+                                .form-group.col-sm-4.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )
                                         option(value="") 全部
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                .form-group.col-sm-2.margin-top-5
+                                .form-group.col-sm-4.margin-top-5
                                     label 年级：
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear")
-                                .form-group.col-sm-2.margin-top-5
+                                .form-group.col-sm-4.margin-top-5.no-padding
                                     label 班级：
                                     input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
-                                .form-group.col-sm-2.margin-top-5
+                                .form-group.col-sm-4.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按班级导员姓名',  ng-model="classListFn.params.masterName")
-                        .col-sm-12.hidden-xs.margin-bottom-10
+                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
                                 button.btn.btn-primary(ng-click="classListFn.getClassList()")
                                     span 查询
                                 .speace-10
@@ -56,9 +56,6 @@
                                 th 专业
                                 th 年级
                                 th 导员
-                                th 在校状态
-                                th 入学日期
-                                th 毕业日期
                                 th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="class in classListFn.classList")
@@ -71,14 +68,12 @@
                                 td {{class.teachingYear}}
                                 td {{class.teachers}}
                                 td
-                                    span(ng-if="class.schoolStatus==10") 在校
-                                    span(ng-if="class.schoolStatus==20") 毕业
-                                td {{class.inSchoolDate}}
-                                td {{class.outSchoolDate }}
-                                td
                                     a.handle(ui-sref="classEdit({id:class.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
+                                    a.handle(ui-sref="classDetail({id:class.id})")
+                                        i.fa.fa-eye
+                                        span 查看
                                     a.handle(ng-click="classListFn.deletePrompt(class)")
                                         i.fa.fa-trash-o
                                         span 删除
