@@ -17,33 +17,34 @@
             .widget-body.no-padding
                 .dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-10
+                        .col-xs-12.margin-bottom-10
                             form.form-inline
-                                .form-group.col-sm-3.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 院系：
                                     select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
-                                .form-group.col-sm-3.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )
                                         option(value="") 全部
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                .form-group.col-sm-3.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 年级：
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear")
-                                .form-group.col-sm-3.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 班级：
                                     input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
-                                .form-group.col-sm-3.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按班级导员姓名',  ng-model="classListFn.params.masterName")
-                        .col-sm-2.hidden-xs
-                            .ColVis
+                        .col-sm-12.hidden-xs.margin-bottom-10
                                 button.btn.btn-primary(ng-click="classListFn.getClassList()")
                                     span 查询
+                                .speace-10
                                 button.btn.btn-primary(ui-sref="classCreat")
                                     span 新建
+                                .speace-10
                                 button.btn.btn-primary(type='button' ng-click="classListFn.openImpBatch()" ng-if="classListFn.isUseAuth('imp')")
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')

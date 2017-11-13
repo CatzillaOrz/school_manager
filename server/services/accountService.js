@@ -242,9 +242,8 @@ var AccountService = {
     },
     unlockBindPhoneAndResetPassword: function(id,access_token,callback){
         RestClient.put({
-            path: '/api/web/v1/users/unbindphoneandpwdbyid',
+            path: '/api/web/v1/users/unbindphoneandpwdbyid?id='+id,
             access_token:access_token,
-            body:{id:id}
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);

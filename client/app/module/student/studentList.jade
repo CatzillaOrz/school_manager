@@ -17,9 +17,9 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-9
+                        .col-xs-12.no-padding.margin-bottom-10
                             form.form-inline
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3.no-padding
                                     label 院系：
                                     select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
                                         option(value="") 全部
@@ -37,17 +37,19 @@
 
                                 .form-group.col-sm-3
                                     label 学生：
-                                    input.form-control(type='search', placeholder='按学生名称或者学号查询', ng-model="studentListFn.params.name")
-                        .col-sm-3.hidden-xs
-                            .ColVis
-                                button.btn.btn-primary(ng-click="studentListFn.getStudentList()")
-                                    span 查询
-                                button.btn.btn-primary(ui-sref="studentCreat")
-                                    span 新建
-                                button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()" ng-if="studentListFn.isUseAuth('imp')")
-                                    span 批量导入
-                                button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()" ng-if="studentListFn.isUseAuth('exp')")
-                                    span 导出学生
+                                    input.form-control(type='search', placeholder='名称或学号', ng-model="studentListFn.params.name")
+                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
+                            button.btn.btn-primary(ng-click="studentListFn.getStudentList()")
+                                span 查询
+                            .speace-10
+                            button.btn.btn-primary(ui-sref="studentCreat")
+                                span 新建
+                            .speace-10
+                            button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()" ng-if="studentListFn.isUseAuth('imp')")
+                                span 批量导入
+                            .speace-10
+                            button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()" ng-if="studentListFn.isUseAuth('exp')")
+                                span 导出学生
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')

@@ -206,7 +206,7 @@ a:focus {outline: none;}
 }
 .form-inline{
   .form-control{
-    width:135px ;
+    min-width:135px ;
   }
 }
 .height-auto{
@@ -232,6 +232,9 @@ a:focus {outline: none;}
 }
 .inline-block{
   display: inline-block;
+}
+.center{
+  text-align: center;
 }
 .select-box{
   border:1px solid #ccc;

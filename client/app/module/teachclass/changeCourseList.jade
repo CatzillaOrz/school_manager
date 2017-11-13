@@ -16,10 +16,10 @@
             // widget content
             .widget-body.no-padding
                 .dataTables_wrapper.form-inline.no-footer
-                    .dt-toolbar
-                        .col-xs-10
+                    .dt-toolbar.margin-bottom-10
+                        .col-xs-10.no-padding
                             form.form-inline
-                                .form-group.col-sm-3
+                                .form-group.col-sm-3.no-padding
                                     label.control-label  教师：
                                     input.form-control(type="text" ng-model="changeCourseListFn.params.teacher" placeholder="请输教师名称或工号" )
                                 .form-group.col-sm-3
@@ -42,7 +42,7 @@
                                         span.add-on
                                             i.icon-calendar.glyphicon.glyphicon-calendar
 
-                        .col-sm-2.hidden-xs
+                        .col-sm-2.hidden-xs.margin-bottom-10
                             .ColVis
                                 button.btn.btn-primary(ng-click="changeCourseListFn.getTeacherChangeCourseList()")
                                     span 查询
