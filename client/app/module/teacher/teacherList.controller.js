@@ -52,7 +52,7 @@ angular.module('dleduWebApp')
                         return data.name;
                     },
                     placeholder: {
-                        id: -1, // the value of the option
+                        id: "", // the value of the option
                         text: '全部'
                     },
                     allowClear: true
