@@ -16,38 +16,39 @@
             // widget content
             .widget-body.no-padding
                 .dataTables_wrapper.form-inline.no-footer
-                    .dt-toolbar
-                        .col-xs-10
-                            form.form-inline
-                                .form-group.col-sm-3
-                                    label 院系：
-                                    select.select2.form-control(ng-model="insAttendFn.params.collegeId" ui-select2="insAttendFn.selectCollege2Options()" )
-                                        option(value="") 全部
-                                        option(ng-repeat="college in insAttendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                .form-group.col-sm-3
-                                    label 导员：
-                                    input.form-control(type='search', placeholder='请输入导员名称或工号',  ng-model="insAttendFn.params.nj")
-                                .form-group.col-sm-3
-                                    label 状态：
-                                    select.form-control(ng-model="insAttendFn.params.status")
-                                        option(value="0") 未点名
-                                        option(value="1" selected = "selected") 已点名
-                                .form-group.col-sm-6.margin-top-5
-                                    label.control-label 时间段：
-                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="insAttendFn.params.startDate" validator="required")
-                                        span.add-on
-                                            i.icon-calendar.glyphicon.glyphicon-calendar
+                    .col-md-12
+                        form.form-inline
+                            .form-group.col-md-4
+                                label 院系：
+                                select.select2.form-control(ng-model="insAttendFn.params.collegeId" ui-select2="insAttendFn.selectCollege2Options()" )
+                                    option(value="") 全部
+                                    option(ng-repeat="college in insAttendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                            .form-group.col-md-4
+                                label 导员：
+                                input.form-control(type='search', placeholder='请输入导员名称或工号',  ng-model="insAttendFn.params.nj")
+                            .form-group.col-md-4
+                                label 状态：
+                                select.form-control(ng-model="insAttendFn.params.status")
+                                    option(value="0") 未点名
+                                    option(value="1" selected = "selected") 已点名
+                    .col-md-12.padding-top-10.padding-bottom-10
+                        form.form-inline
+                            .form-group.col-md-8
+                                label.control-label 时间段：
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="insAttendFn.params.startDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
 
-                                    .inline-block -
-                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="insAttendFn.params.endDate" validator="required")
-                                        span.add-on
-                                            i.icon-calendar.glyphicon.glyphicon-calendar
-                        .col-sm-2.hidden-xs
-                            .ColVis
-                                button.btn.btn-primary(ng-click="insAttendFn.getInsRollCallList()")
-                                    span 查询
+                                .inline-block --
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="insAttendFn.params.endDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                            .form-group.col-md-4
+                                .ColVis
+                                    button.btn.btn-primary(ng-click="insAttendFn.getInsRollCallList()")
+                                        span 查询
                     table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
