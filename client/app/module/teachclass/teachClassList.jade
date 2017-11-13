@@ -16,30 +16,30 @@
             // widget content
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
-                    .dt-toolbar
-                        .col-xs-12.no-padding
-                            form.form-inline
-                                .form-group.col-sm-2.margin-top-5.no-padding
-                                    label 学期：
+                    .dt-toolbar.row
+                        .col-md-12.no-padding
+                            form.form-inline.row
+                                .form-group.col-md-4.margin-top-5.no-padding
+                                    label.control-label(for="ddd") 学期：
                                     select#ddd.select2.form-control( ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()" )
                                         option(value="") 全部
                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassListFn.schoolYearDropList")
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
-                                .form-group.col-sm-2.margin-top-5
-                                    label 选课类型：
-                                    select.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
+                                .form-group.col-md-4.margin-top-5
+                                    label.control-label(for="id2")  选课类型：
+                                    select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
                                         option(value="") 全部
                                         option(value="10" ) 必修
                                         option(value="20" ) 选修
-                                .form-group.col-sm-3.margin-top-5.center
-                                    label 课程名称：
-                                    input.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
-                                .form-group.col-sm-2.margin-top-5
-                                    label 教学班：
-                                    input.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
-                                .form-group.col-sm-2.margin-top-5
-                                    label 教师：
-                                    input.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
+                                .form-group.col-md-4.margin-top-5.center
+                                    label.control-label(for="id3") 课程名称：
+                                    input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
+                                .form-group.col-md-4.margin-top-5
+                                    label.control-label(for="id4") 教学班：
+                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
+                                .form-group.col-md-4.margin-top-5
+                                    label.control-label(for="id5") 教师：
+                                    input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
                         .col-sm-12.margin-top-10.margin-bottom-10.no-padding
                             button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                 span 查询

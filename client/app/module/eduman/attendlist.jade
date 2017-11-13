@@ -126,7 +126,7 @@
                                             .col-xs-10
                                                 form.form-inline
                                                     .form-group.col-sm-3
-                                                        label 院系：
+                                                        label.control-label 院系：
                                                             select.select2.form-control(ng-model="attendTeacherFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                                                                 option(value="") 全部
                                                                 option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
