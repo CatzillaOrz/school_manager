@@ -9,7 +9,7 @@
             .feedback-detail {{feedbackFun.feedback.description}}
             .feedback-detail
                 .picture-list
-                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}" )
+                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}"  ng-click="feedbackFun.openPicture(feedbackPicture)")
             .feedback-detail 评论
             .feedback-detail
                 .middle-line
