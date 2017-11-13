@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('feedbackDetailCtl', function ($scope,FeedbackService, $state,CommonService) {
+    .controller('feedbackDetailCtl', function ($scope,FeedbackService, $state,messageService) {
         $scope.feedbackFun={
             feedback:{},
             commentList:[],
@@ -19,7 +19,14 @@ angular.module('dleduWebApp')
             findCommentById:function () {
                 var _this=this;
                 FeedbackService.findCommentById({id:$state.params.id}).success(function (data) {
-                    _this.commentList = data
+                    _this.commentList = _.map(data,function(item){
+                        item.isShowDelBut = false;
+                        item.ccommentListDomains=_.map(item.ccommentListDomains,function(item2){
+                            item2.isShowReplayBut = false;
+                            return item2;
+                        })
+                        return item;
+                    })
                 })
             },
             replayOrCancel:function (demain) {
@@ -30,8 +37,16 @@ angular.module('dleduWebApp')
                 _this.replayBut = _this.isReplay?"取消":"回复";
                 _this.replayName =  _this.isReplay?'确认回复':'发表评论';
             },
+            openPicture:function(url){
+                window.open(url);
+            },
             replayComment:function () {
+
                 var _this=this;
+                if(_this.replayContent == ''){
+                    messageService.openMsg("评论内容不能为空！");
+                    return;
+                }
                 if(_this.isReplay){
                     FeedbackService.saveCComment({newFeedbackComment:{id:_this.replayId},content:_this.replayContent}).success(function (data) {
                         if(data.cause =="success" ){

@@ -829,6 +829,7 @@ angular.module('dleduWebApp')
                 }
                 params.pageNumber = _this.page.pageNumber;
                 params.pageSize = _this.page.pageSize;
+                params.managerId = AuthService.getUser().id;
                 EduManService.getAttendStopLogs(params).$promise
                     .then(function (data) {
                         _this.attendList = data.data;

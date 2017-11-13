@@ -364,14 +364,33 @@ angular.module('dleduWebApp')
              */
             exportData: function(){
                 var orgId = AuthService.getUser().orgId;
-                var params = {orgId: orgId, userId: AuthService.getUser().id};
-               /* params.collegeId = this.params.collegeId;
+                var params = {orgId: orgId};
+                params.collegeId = this.params.collegeId;
                 params.professionalId = this.params.professionalId;
                 params.classesId = this.params.classesId;
-                params.name = this.params.name;*/
+                params.name = this.params.name;
+                params.managerId = AuthService.getUser().id;
+                params.pageNumber = 1,
+                params.pageSize = 1,
+                CommonService.delEmptyProperty(params);
+                StudentService.getStudentList(params).$promise
+                    .then(function (data) {
+                        if(data.data.length == 0){
+                            messageService.openMsg("没有数据可以导出！");
+                            return;
+                        }
+                        window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId
+                            + (params.collegeId ? "&collegeId=" + params.collegeId : '')
+                            + (params.professionalId ? "&professionalId=" + params.professionalId : '')
+                            + (params.classesId ? "&classesId=" + params.classesId : '')
+                            + (params.name ? "&name=" + params.name : '');
+                    })
+                    .catch(function (error) {
+
+                    })
                 StudentService.exportData(params).$promise
                     .then(function (data) {
-                        window.location.href = ImpBatchService.getEnvHost() + '/v1/students/exportstudents?orgId='+orgId;
+
                     })
                     .catch(function (error) {
 

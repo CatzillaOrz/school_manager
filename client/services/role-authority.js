@@ -119,12 +119,12 @@ angular.module('dleduWebService')
                     "url": "elecfence",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,get",
-                        "ROLE_ORG_MANAGER": "add,get",
-                        "ROLE_COLLEGE_ADMIN": "get",
-                        "ROLE_ORG_EDUCATIONALMANAGER": "get",
+                        "ROLE_ORG_ADMIN": "add,get,pushMessage",
+                        "ROLE_ORG_MANAGER": "add,get,pushMessage",
+                        "ROLE_COLLEGE_ADMIN": "get,pushMessage",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "get,pushMessage",
                         "ROLE_ORG_DATAVIEW": "get",
-                        "ROLE_COLLEG_EDUCATIONALMANAGER": "get",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "get,pushMessage",
                         "ROLE_COLLEG_DATAVIEW": "get"
                     }
                 },

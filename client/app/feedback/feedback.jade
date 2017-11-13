@@ -61,9 +61,9 @@
                                     span(ng-if="feedback.messenger==1") 是
                                     span(ng-if="feedback.messenger==0") 否
                                 td {{feedback.name}}
-                                td {{feedback.personId}}
-                                td {{feedback.classes}}
-                                td {{feedback.grade}}
+                                td {{feedback.personId?feedback.personId:''}}
+                                td {{feedback.classes?feedback.classes:''}}
+                                td {{feedback.grade?feedback.grade:''}}
                                 td {{feedback.collegeName}}
                                 td {{feedback.description}}
                                 td

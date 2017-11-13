@@ -9,28 +9,28 @@
             .feedback-detail {{feedbackFun.feedback.description}}
             .feedback-detail
                 .picture-list
-                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}" )
+                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}"  ng-click="feedbackFun.openPicture(feedbackPicture)")
             .feedback-detail 评论
             .feedback-detail
                 .middle-line
             .feedback-detail.feedback-bottom-line(ng-repeat="comment in feedbackFun.commentList")
-                .feedback-comment-avatar
-                    img(src="{{comment.avatar?comment.avatar:'http://7xpscc.com1.z0.glb.clouddn.com/b4f3c4bc-7d81-4cd0-9ffc-f77b1f845a79.png'}}")
+                .feedback-comment-avatar(ng-mouseenter="comment.isShowDelBut = true"  ng-mouseleave="comment.isShowDelBut = false")
+                    img(src="{{comment.avatar?comment.avatar:'../../assets/images/avatar.png'}}")
                     .feedback-comment-content
                         .comment-name
                             span {{comment.name}}&nbsp&nbsp{{comment.createdDate}}
                         .comment-content
                             span {{comment.content}}
-                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)") 删除
-                .feedback-comment-avatar(ng-repeat="demain in comment.ccommentListDomains")
-                    img(src="{{demain.avatar?demain.avatar:'http://7xpscc.com1.z0.glb.clouddn.com/b4f3c4bc-7d81-4cd0-9ffc-f77b1f845a79.png'}}")
+                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)" ng-show="comment.isShowDelBut") 删除
+                .feedback-comment-avatar(ng-repeat="demain in comment.ccommentListDomains" ng-mouseenter="demain.isShowReplayBut = true" ng-mouseleave="demain.isShowReplayBut = false")
+                    img(src="{{demain.avatar?demain.avatar:'../../assets/images/avatar.png'}}")
                     .feedback-comment-content
                         .comment-name
                            span {{demain.name}}&nbsp&nbsp{{demain.createdDate}}
                         .comment-content
-                           span 回复{{comment.name}}:{{demain.content}}
-                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(demain)") {{feedbackFun.replayBut}}
-                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)") 删除
+                           span {{demain.content}}
+                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(demain)" ng-show="demain.isShowReplayBut") {{feedbackFun.replayBut}}
+                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)" ng-show="demain.isShowReplayBut") 删除
             .feedback-detail
                 textarea#desc(ng-model="feedbackFun.replayContent")
                 .reply-call
