@@ -27,7 +27,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 查询结果 {{roleDist.currentRecord ? "(当前选中教师:" + roleDist.currentRecord.name + "(" + roleDist.currentRecord.jobNumber + "))" : ''}}
+            h2.zhixin-font-color 查询结果 {{roleDist.currentRecord ? "(当前选中教师:" + roleDist.currentRecord.name + "(" + roleDist.currentRecord.jobNumber + "))" : ''}}
             button.btn.btn-primary.set-elecfence(ng-click="roleDist.distManAuth()" ng-if="roleDist.isUseAuth('authority')")
                 span 分配权限
             span.jarviswidget-loader
