@@ -17,41 +17,44 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12
+                        .col-xs-12.no-padding
                             form.form-inline
-                                .form-group.col-sm-4.margin-top-5
+                                .form-group.col-sm-2.margin-top-5.no-padding
                                     label 学期：
                                     select#ddd.select2.form-control( ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()" )
+                                        option(value="") 全部
                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassListFn.schoolYearDropList")
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
-                                .form-group.col-sm-4.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 选课类型：
                                     select.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
                                         option(value="") 全部
                                         option(value="10" ) 必修
                                         option(value="20" ) 选修
-                                .form-group.col-sm-4.margin-top-5
+                                .form-group.col-sm-3.margin-top-5.center
                                     label 课程名称：
                                     input.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
-                                .form-group.col-sm-4.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 教学班：
                                     input.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
-                                .form-group.col-sm-4.margin-top-5
+                                .form-group.col-sm-2.margin-top-5
                                     label 教师：
                                     input.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
-                        .col-sm-12.hidden-xs
-                            .ColVis
-                                button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
-                                    span 查询
-                                button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")
-                                    span 批量排课
-                                .speace-10
-                                button.btn.btn-primary.margin-top-5(ui-sref="teachClassCreat" ng-if="teachClassListFn.isUseAuth('add')")
-                                    span 新建教学班
-                                button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('optional')" ng-if="teachClassListFn.isUseAuth('imp')")
-                                    span 按选修课批量导入
-                                button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')" ng-if="teachClassListFn.isUseAuth('imp')")
-                                    span 按必修课批量导入
+                        .col-sm-12.margin-top-10.margin-bottom-10.no-padding
+                            button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
+                                span 查询
+                            .speace-10
+                            button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")
+                                span 批量排课
+                            .speace-10
+                            button.btn.btn-primary.margin-top-5(ui-sref="teachClassCreat" ng-if="teachClassListFn.isUseAuth('add')")
+                                span 新建教学班
+                            .speace-10
+                            button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('optional')" ng-if="teachClassListFn.isUseAuth('imp')")
+                                span 按选修课批量导入
+                            .speace-10
+                            button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')" ng-if="teachClassListFn.isUseAuth('imp')")
+                                span 按必修课批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')

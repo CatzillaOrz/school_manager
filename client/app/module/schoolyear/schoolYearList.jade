@@ -1,106 +1,102 @@
-#wid-id-7.tabBlock.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
-    header(role='heading')
-        .jarviswidget-ctrls(role='menu')
-            a.button-icon.jarviswidget-toggle-btn(href='javascript:void(0);', rel='tooltip', title='', data-placement='bottom', data-original-title='Collapse')
-                i.fa.fa-minus
-            a.button-icon.jarviswidget-delete-btn(href='javascript:void(0);', rel='tooltip', title='', data-placement='bottom', data-original-title='Delete')
-                i.fa.fa-times
-        ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
-            li.tabBlock-tab.cursor-pointer.active
-                a(data-toggle='tab', aria-expanded='true')
-                    i.fa.fa-lg.fa-calendar
-                    span.hidden-mobile.hidden-tablet  学期信息
-            li.tabBlock-tab.cursor-pointer
-                a(data-toggle='tab', aria-expanded='false')
-                    i.fa.fa-lg.fa-clock-o
-                    span.hidden-mobile.hidden-tablet
-                        | 课节信息
-                        //span.label.bg-color-blue.txt-color-white
-                            | label
-                            i.fa.fa-exclamation
-        span.jarviswidget-loader
-            i.fa.fa-refresh.fa-spin
-    // widget div
-    div(role='content')
-        // widget edit box
-        .jarviswidget-editbox
-            // This area used as dropdown edit box
-        // end widget edit box
-        // widget content
-        .widget-body
-            .tab-content
-                #hr1.tab-pane.active
-                    .tabbable.tabs-below
-                        .tab-content.padding-10
-                            .col-xs-12.col-sm-6.no-padding.margin-bottom-10
-                                .col-sm-6.no-padding
-                                    .input-group
-                                        input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称')
-                                        span.input-group-btn(ng-click="preiodFn.findSchoolYearByPage()")
-                                            button.btn.btn-primary(type='button')
-                                                i.glyphicon.glyphicon-search
-                            .col-sm-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
-                                .ColVis
-                                    button.btn.btn-primary(ui-sref="periodCreate" ng-if="preiodFn.isUseAuth('add')")
-                                        span 新建
-                            table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.cursor-pointer.active
+                    a(data-toggle='tab', aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  学期信息
+                li.tabBlock-tab.cursor-pointer
+                    a(data-toggle='tab', aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 课节信息
+                            //span.label.bg-color-blue.txt-color-white
+                                | label
+                                i.fa.fa-exclamation
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body
+                .tab-content
+                    #hr1.tab-pane.active
+                        .tabbable.tabs-below
+                            .tab-content.padding-10
+                                .col-xs-12.col-sm-6.no-padding.margin-bottom-10
+                                    .col-sm-6.no-padding
+                                        .input-group
+                                            input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称')
+                                            span.input-group-btn(ng-click="preiodFn.findSchoolYearByPage()")
+                                                button.btn.btn-primary(type='button')
+                                                    i.glyphicon.glyphicon-search
+                                .col-sm-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
+                                    .ColVis
+                                        button.btn.btn-primary(ui-sref="periodCreate" ng-if="preiodFn.isUseAuth('add')")
+                                            span 新建
+                                table.table.table-condensed.table-bordered.table-hover.margin-bottom-0(ng-table='demo.tableParams')
 
-                                tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
-                                    td(colspan='6')
-                                        a(href='', )
-                                            span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
-                                            strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
-                                            span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})" ng-if="preiodFn.isUseAuth('update')") 编辑
-                                            span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)" ng-if="preiodFn.isUseAuth('del')") 删除
-                                tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
-                                    td(sortable="'name'", data-title="'学期'", groupable="'country'")
-                                        | {{schoolTerm.name}}
-                                    td(sortable="'code'", data-title="'学期编号'", groupable="'code'")
-                                        | {{schoolTerm.code}}
-                                    td(sortable="'startDate'", data-title="'开始日期'", groupable="'name'")
-                                        | {{schoolTerm.startDate}}
-                                    td(sortable="'endDate'", data-title="'结束日期'", groupable="'age'")
-                                        | {{schoolTerm.endDate}}
-                                    td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
-                                        span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
-                                        span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
-                                    td.cursor-pointer(sortable="'numWeek'", data-title="'操作'")
-                                        a(href='', )
-                                            span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)" ng-if="preiodFn.isUseAuth('del')") 删除
-                            .dt-toolbar-footer
-                                .col-sm-6.col-xs-12.hidden-xs
-                                    #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                        | 显示第
-                                        span.txt-color-darken {{preiodFn.page.pageNumber==0?preiodFn.page.pageNumber*10:(preiodFn.page.pageNumber-1)*10+1}}
-                                        |  到
-                                        span.txt-color-darken {{((preiodFn.page.pageNumber==0?preiodFn.page.pageNumber+1:preiodFn.page.pageNumber)-1)*10+preiodFn.schoolYearList.length}}
-                                        |  条 总共
-                                        span.text-primary {{preiodFn.page.totalElements}}
-                                        |  条记录
-                                .col-sm-6.col-xs-12
-                                    #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                        ul.pagination-sm(uib-pagination, total-items='preiodFn.page.totalElements', max-size='preiodFn.page.pageSize' ng-model='preiodFn.page.pageNumber',ng-change="preiodFn.findSchoolYearByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                    tr.ng-table-group(ng-repeat-start='schoolYear in preiodFn.schoolYearList')
+                                        td(colspan='6')
+                                            a(href='', )
+                                                span.glyphicon(ng-class="{ 'glyphicon-chevron-right': schoolYear.$hideRows, 'glyphicon-chevron-down': !schoolYear.$hideRows }" ng-click='schoolYear.$hideRows = !schoolYear.$hideRows')
+                                                strong(ng-click='schoolYear.$hideRows = !schoolYear.$hideRows') {{ schoolYear.name }}
+                                                span.margin-left-10(ui-sref="periodEdit({id:schoolYear.id})" ng-if="preiodFn.isUseAuth('update')") 编辑
+                                                span.margin-left-10(ng-click="preiodFn.deleteSchoolYearPrompt(schoolYear)" ng-if="preiodFn.isUseAuth('del')") 删除
+                                    tr(ng-hide='schoolYear.$hideRows', ng-repeat='schoolTerm in schoolYear.semesterList', ng-repeat-end='')
+                                        td(sortable="'name'", data-title="'学期'", groupable="'country'")
+                                            | {{schoolTerm.name}}
+                                        td(sortable="'code'", data-title="'学期编号'", groupable="'code'")
+                                            | {{schoolTerm.code}}
+                                        td(sortable="'startDate'", data-title="'开始日期'", groupable="'name'")
+                                            | {{schoolTerm.startDate}}
+                                        td(sortable="'endDate'", data-title="'结束日期'", groupable="'age'")
+                                            | {{schoolTerm.endDate}}
+                                        td.cursor-pointer(sortable="'numWeek'", data-title="'学周'")
+                                            span(ng-if="!schoolTerm.numWeek" ng-click="preiodFn.addSemesterWeek(schoolTerm.id)") 生成学周
+                                            span(ng-if="schoolTerm.numWeek") {{schoolTerm.numWeek}}
+                                        td.cursor-pointer(sortable="'numWeek'", data-title="'操作'")
+                                            a(href='', )
+                                                span.margin-left-10(ng-click="preiodFn.deleteTermPrompt(schoolTerm.id)" ng-if="preiodFn.isUseAuth('del')") 删除
+                                .dt-toolbar-footer
+                                    .col-sm-6.col-xs-12.hidden-xs
+                                        #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                            | 显示第
+                                            span.txt-color-darken {{preiodFn.page.pageNumber==0?preiodFn.page.pageNumber*10:(preiodFn.page.pageNumber-1)*10+1}}
+                                            |  到
+                                            span.txt-color-darken {{((preiodFn.page.pageNumber==0?preiodFn.page.pageNumber+1:preiodFn.page.pageNumber)-1)*10+preiodFn.schoolYearList.length}}
+                                            |  条 总共
+                                            span.text-primary {{preiodFn.page.totalElements}}
+                                            |  条记录
+                                    .col-sm-6.col-xs-12
+                                        #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                            ul.pagination-sm(uib-pagination, total-items='preiodFn.page.totalElements', max-size='preiodFn.page.pageSize' ng-model='preiodFn.page.pageNumber',ng-change="preiodFn.findSchoolYearByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
-                #hr2.tab-pane
-                    .tabbable.tabs-below
-                        .tab-content.padding-10
-                            .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
-                                .ColVis
-                                    button.btn.btn-primary(ui-sref="semesterCreate" ng-if="preiodFn.isUseAuth('addtime')")
-                                        span 添加新的时段
-                            table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
-                                tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
-                                    td(sortable="'country'", data-title="'课节'", groupable="'country'")
-                                        | {{schoolTerm.name}}
-                                    td(sortable="'name'", data-title="'上课时间'", groupable="'name'")
-                                        | {{schoolTerm.startTime}}
-                                    td(sortable="'age'", data-title="'下课时间'", groupable="'age'")
-                                        | {{schoolTerm.endTime}}
-                                    td(sortable="'money'", data-title="'操作'")
-                                        a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})" ng-if="preiodFn.isUseAuth('update')")
-                                            i.fa.fa-pencil-square-o
-                                            span 编辑
-                                        a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)" ng-if="preiodFn.isUseAuth('del')")
-                                            i.fa.fa-trash-o
-                                            span 删除
-    // end widget div
+                    #hr2.tab-pane
+                        .tabbable.tabs-below
+                            .tab-content.padding-10
+                                .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
+                                    .ColVis
+                                        button.btn.btn-primary(ui-sref="semesterCreate" ng-if="preiodFn.isUseAuth('addtime')")
+                                            span 添加新的时段
+                                table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
+                                    tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
+                                        td(sortable="'country'", data-title="'课节'", groupable="'country'")
+                                            | {{schoolTerm.name}}
+                                        td(sortable="'name'", data-title="'上课时间'", groupable="'name'")
+                                            | {{schoolTerm.startTime}}
+                                        td(sortable="'age'", data-title="'下课时间'", groupable="'age'")
+                                            | {{schoolTerm.endTime}}
+                                        td(sortable="'money'", data-title="'操作'")
+                                            a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})" ng-if="preiodFn.isUseAuth('update')")
+                                                i.fa.fa-pencil-square-o
+                                                span 编辑
+                                            a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)" ng-if="preiodFn.isUseAuth('del')")
+                                                i.fa.fa-trash-o
+                                                span 删除
+        // end widget div

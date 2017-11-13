@@ -41,8 +41,8 @@ angular.module('dleduWebApp')
                 var _this = this;
                 return {
                     placeholder: {
-                        id: -1, // the value of the option
-                        text: '按学期筛选'
+                        id: "", // the value of the option
+                        text: '全部'
                     },
                     allowClear: true,
                     ajax: {

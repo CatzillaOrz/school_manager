@@ -3861,7 +3861,7 @@ body.nooverflow {
 }
 
 .jarviswidget-color-blueDark .nav-tabs li:not(.active) a, .jarviswidget-color-blueDark > header > .jarviswidget-ctrls a {
-    color: #fff !important
+    color: #333 !important
 }
 
 .jarviswidget-color-blueDark .nav-tabs li a:hover {
@@ -4092,9 +4092,9 @@ body.nooverflow {
 }
 
 .jarviswidget header .nav-tabs > li > a {
-    border-radius: 0;
-    border: none;
-    padding: 7px 15px 6px
+    //border-radius: 0;
+    //border: none;
+    //padding: 7px 15px 6px
 }
 
 .jarviswidget header:first-child .nav-tabs {
