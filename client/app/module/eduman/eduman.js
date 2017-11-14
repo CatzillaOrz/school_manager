@@ -287,4 +287,36 @@ angular.module('dleduWebApp')
                     teacherName:""
                 }
             })
+            .state('attendStudent', {
+                parent: 'attendlist',
+                url   : '/attendstudent/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'AttendStudentCtr',
+                        templateUrl: 'app/module/eduman/attendStudent.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '考勤趋势详情'
+                },
+                data:{
+                    teacherName:""
+                }
+            })
+            .state('instructor', {
+                parent: 'base',
+                url   : '/instructor',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'instructorAttendCtrl',
+                        templateUrl: 'app/module/eduman/instructorAttend.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '导员考勤'
+                }
+            })
+		//
 	});

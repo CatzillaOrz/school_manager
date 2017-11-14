@@ -4,7 +4,8 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('CourseListCtrl', function ($scope, CourseService, AuthService, messageService,CommonService, ImpBatchService, ngDialog) {
+	.controller('CourseListCtrl', function ($scope, CourseService, AuthService, messageService,CommonService,
+											ImpBatchService, ngDialog, RoleAuthService) {
 		$scope.courseListFn = {
 			//课程列表
 			courseList: [],
@@ -20,6 +21,11 @@ angular.module('dleduWebApp')
 			},
 			params: {
 				name: "",
+			},
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
 			},
 
 			// 获取课程列表

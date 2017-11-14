@@ -318,7 +318,7 @@ h6 {
 
 .azx-school-header {
   background-color: #f8f8f8;
-  font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
+  font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
   .azx-school-header .school-header {
     background: #ffffff;
     height: 50px;
@@ -407,7 +407,7 @@ h6 {
               font-size: 11px;
               padding: 2px;
               background: #f95a5a;
-              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+              font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
               font-weight: 400;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -422,7 +422,7 @@ h6 {
         min-width: 41px;
         float: right;
         color: #666;
-        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
         background-color: #fff;
         font-size: 12px;
         line-height: 1em;
@@ -453,7 +453,7 @@ h6 {
           .azx-school-header .school-header .school-nav-bar .navigation ul li {
             text-align: center;
             vertical-align: middle;
-            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+            font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
             float: left;
             padding: 0px 20px;
             font-size: 14px;
@@ -552,7 +552,7 @@ h6 {
           width: 104px\9;
           height: 35px; }
       .azx-header .nav-fiexd-box .nav-container .navigation {
-        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
         height: 48px;
         float: right;
         margin: 0 0 0 30px;
@@ -645,7 +645,7 @@ h6 {
               font-size: 11px;
               padding: 2px;
               background: #f95a5a;
-              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+              font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
               font-weight: 400;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -660,7 +660,7 @@ h6 {
         min-width: 100px;
         float: right;
         color: #ffffff;
-        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
         background-color: #29c192;
         border-color: #29c192;
         font-weight: bold;
@@ -701,7 +701,7 @@ h6 {
         .azx-header .nav-sub .nav-sub-container {
           width: 1200px; } }
       .azx-header .nav-sub .nav-sub-container ul li {
-        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
         float: left;
         margin: 0;
         padding: 0 30px;

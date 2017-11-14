@@ -42,6 +42,9 @@
   left: 76px;
   top: 50px;
 }
+  .current{
+    background: #54BF9B !important;
+  }
 }
 .margin-left-10 {
   margin-left: 10px !important
@@ -83,6 +86,14 @@
     max-height:300px;
     overflow-y:scroll;
   }
+  .content-no-scorll{
+    margin-top:5px;
+    cursor:default;
+    min-height:74px;
+    max-height:300px;
+    text-align: center;
+
+  }
   .repeat_content{
       table{
         width:100%;
@@ -107,6 +118,13 @@
         }
       }
   }
+    .attend-dialog-footer{
+      margin: 10px auto;
+      text-align:center;
+      .dialog-btn{
+        margin: 0 20px;
+      }
+    }
     .repeat_footer{
       .repeat_button{
         margin: 20px auto;
@@ -204,5 +222,6 @@
       }
     }
   }
+
 }
 

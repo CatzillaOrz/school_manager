@@ -5,7 +5,7 @@
 
 angular.module('dleduWebApp')
 	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
-												Upload, UploadService, ImpBatchService, ngDialog) {
+												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -14,6 +14,9 @@ angular.module('dleduWebApp')
 			myFile: null, //选择的文件对象
 			errorInfos: null, //返回的错误信息
 			impType: '', //导入类型，按班级还是学生
+            schoolYearDropList:[],
+			//当前登录用户id
+			currentId: AuthService.getUser().id,
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -22,8 +25,75 @@ angular.module('dleduWebApp')
 			},
             allChedked:false,
 			params: {
-				name: ""
+				name: "",
+				semesterId:"",
+				mustOrOption:"",
+				courseName:"",
+                teacherName:""
 			},
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
+			},
+
+            select2SemesterOptions: function () {
+                var _this = this;
+                return {
+                    placeholder: {
+                        id: "", // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: {
+                        url: "api/schoolyear/getSchoolYearDropList",
+                        dataType: 'json',
+                        //delay: 250,
+                        data: function (query) {
+                            var params = {
+                                orgId: AuthService.getUser().orgId,
+                                pageNumber: 1,
+                                pageSize: 100,
+
+
+                            }
+                            params.name = query.term;
+                            return params;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            _this.schoolYearDropList = _this.select2GroupFormat(data.data);
+                            return {
+                                results: _this.schoolYearDropList,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: true
+                    },
+
+                }
+            },
+            //学期下拉列表分组数据格式化
+            select2GroupFormat: function (dataList) {
+                var result = []
+                angular.forEach(dataList, function (data) {
+                    var obj = {
+                        text: data.name,
+                        children: []
+                    };
+                    angular.forEach(data.semesterIdNameList, function (sememster) {
+                        var objChild = {
+                            id: sememster.id,
+                            text: sememster.name
+                        };
+                        obj.children.push(objChild);
+                    })
+                    result.push(obj);
+                })
+                return result;
+            },
             allCheck:function(m){
 			    var _this = this;
                 //_this.allChedked = !_this.allChedked;
@@ -68,10 +138,14 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					pageNumber: that.page.pageNumber,
+					pageNumber: 1,
 					pageSize: that.page.pageSize
 				};
-				params.name = that.params.name;
+				params.semesterId = that.params.semesterId;
+                params.mustOrOption = that.params.mustOrOption;
+                params.courseName = that.params.courseName;
+                params.teacherName = that.params.teacherName;
+                params.name = that.params.name;
 				TeachClassService.getTeachClassList(params).$promise
 					.then(function (data) {
 						that.teachClassList = data.data;
@@ -89,7 +163,11 @@ angular.module('dleduWebApp')
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize
 				};
-				params.name = that.params.name;
+                params.semesterId = that.params.semesterId;
+                params.mustOrOption = that.params.mustOrOption;
+                params.courseName = that.params.courseName;
+                params.teacherName = that.params.teacherName;
+                params.name = that.params.name;
 				TeachClassService.getTeachClassList(params).$promise
 					.then(function (data) {
 						that.teachClassList = data.data;

@@ -52,5 +52,14 @@ angular.module('dleduWebService')
                 }
             });
         },
+        unlockBindPhoneAndResetPassword: function(userId){
+            return $http({
+                method: 'PUT',
+                url: 'api/account/unlockBindPhoneAndResetPassword',
+                params: {
+                    id: userId
+                }
+            });
+        },
     }
   });

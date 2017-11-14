@@ -22,10 +22,10 @@
     <meta name="keywords" content="教育,在线教育,教育平台,招聘,招聘平台,鼎利,世纪鼎利">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-   <link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/lib/azxcommon.css"/>
+    <link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/lib/azxcommon.css"/>
 
     <!--<link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/azxcommon-testheader.css " />-->
-   <!-- build:css(client) app/vendor.css -->
+    <!-- build:css(client) app/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/swiper/dist/css/swiper.css" />
     <link rel="stylesheet" href="bower_components/cropper/dist/cropper.css" />
@@ -55,6 +55,8 @@
     <!-- endbuild -->
     <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
     <script src="http://webapi.amap.com/maps?v=1.3&key=c2a2ed5f29041a7b9502900ccd62e6a4"></script>
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
     <!--<script src="http://oli56k5b0.bkt.clouddn.com/lib/azxLoader.js"></script>-->
 </head>
 <body ng-app="dleduWebApp" >
@@ -80,7 +82,6 @@
 <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
 <script src="bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
 <script src="bower_components/js-cookie/src/js.cookie.js"></script>
-<script src="bower_components/lodash/dist/lodash.compat.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/swiper/dist/js/swiper.js"></script>
 <script src="bower_components/cropper/dist/cropper.js"></script>
@@ -98,7 +99,7 @@
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 <script src="bower_components/echarts/dist/echarts.js"></script>
 <script src="bower_components/pickadate/lib/translations/zh_CN.js"></script>
-
+<script src="bower_components/lodash/lodash.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -126,10 +127,12 @@
 <script src="components/bootstrapDatePicker/datepicker.js"></script>
 <script src="components/dateTimePicker/dateTimePicker.js"></script>
 <script src="components/dateTimePicker/angular-local_zh-cn.js"></script>
+
 <!--<script src="components/ng-jcrop/js/jquery.Jcrop.js"></script> -->
 <!--<script src="components/ng-jcrop/ng-jcrop.js"></script>-->
 
 <script src="services/upload.js"></script>
+<script src="services/role-authority.js"></script>
 <script src="filters/index.js"></script>
 <script src="app/app.js"></script>
 <!-- injector:js -->
@@ -139,8 +142,18 @@
 <script src="app/account/account.js"></script>
 <script src="app/account/signin.controller.js"></script>
 
- <script src="app/home/home.js"></script>
+<script src="app/home/home.js"></script>
 <script src="app/home/home.controller.js"></script>
+
+<script src="app/studentGeo/geoIndex.js"></script>
+<script src="services/entity/geo.js"></script>
+<script src="app/studentGeo/studentGeo.controller.js"></script>
+<script src="app/studentGeo/geoHome.controller.js"></script>
+
+<script src="app/feedback/feedback.js"></script>
+<script src="services/entity/feedback.js"></script>
+<script src="app/feedback/feedback.controller.js"></script>
+<script src="app/feedback/feedbackDetail.controller.js"></script>
 
 <script src="app/module/college/college.js"></script>
 <script src="services/entity/college.js"></script>
@@ -191,6 +204,10 @@
 <script src="app/module/teachclass/teachClassUpdateTeacher.controller.js"></script>
 <script src="app/module/teachclass/teachClassUpdateStudent.controller.js"></script>
 <script src="app/module/teachclass/teachClassUpdateClasses.controller.js"></script>
+<script src="app/module/teachclass/holidayMan.controller.js"></script>
+<script src="app/module/teachclass/changeCourse.controlle.js"></script>
+<script src="app/module/teachclass/editHoliday.controller.js"></script>
+<script src="app/module/teachclass/changeCourseList.controlle.js"></script>
 
 <script src="app/module/school/school.js"></script>
 <script src="services/entity/school.js"></script>
@@ -235,6 +252,7 @@
 <script src="app/module/eduman/elecfenceMapEdit.controller.js"></script>
 <script src="app/module/eduman/classTrend.controller.js"></script>
 <script src="app/module/eduman/courseSingle.controller.js"></script>
+<script src="app/module/eduman/instructorAttend.controller.js"></script>
 
 <script src="app/module/practiceman/practiceman.js"></script>
 <script src="services/entity/practiceman.js"></script>
@@ -242,11 +260,20 @@
 <script src="app/module/practiceman/entTutorMan.controller.js"></script>
 <script src="app/module/practiceman/editEntTutor.controller.js"></script>
 <script src="app/module/practiceman/createPracticeGroup.controller.js"></script>
+<script src="app/module/practiceman/practiceManStats.controller.js"></script>
+<script src="app/module/practiceman/practicePeople.controller.js"></script>
+<script src="app/module/practiceman/practiceTasklist.controller.js"></script>
+<script src="app/module/practiceman/createPracticeTask.controller.js"></script>
 
 <script src="app/module/news/news.js"></script>
 <script src="services/entity/news.js"></script>
 <script src="app/module/news/newsList.controller.js"></script>
 <script src="app/module/news/newsHandle.controller.js"></script>
+
+<script src="app/module/rolemanager/rolemanager.js"></script>
+<script src="services/entity/rolemanager.js"></script>
+<script src="app/module/rolemanager/distList.controller.js"></script>
+<script src="app/module/rolemanager/distedList.controller.js"></script>
 
 <!-- endinjector -->
 <!-- endbuild -->
@@ -256,6 +283,11 @@
 <script src="http://oli56k5b0.bkt.clouddn.com/lib/azxcommon.js"></script>
 <!--<script src="http://oli56k5b0.bkt.clouddn.com/azxcommon-testheader.js"></script>-->
 <script src="assets/marquee/jquery.liMarquee.js"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=Wx35DeCznKblyNxO2sQzY464Vr5pSFGm"></script>
+<script src="assets/echarts.min.js"></script>
+<script src="http://echarts.baidu.com/resource/echarts-liquidfill-1.0.4/dist/echarts-liquidfill.js"></script>
+<script src="assets/bmap.min.js"></script>
+<script src="assets/jquery.vticker.js"></script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 var _ = require('lodash'),
     PracticeManService = require('../../services/practiceManService');
+var XLSX = require('xlsx');
 
 module.exports = {
     getEntTutorList: function (req, res) {
@@ -43,7 +44,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    updateEntTutor:function (req,res) {
+    updateEntTutor: function (req, res) {
         PracticeManService.updateEntTutorSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -63,7 +64,7 @@ module.exports = {
             })
     },
 
-    updatePracticeGroup:function (req,res) {
+    updatePracticeGroup: function (req, res) {
         PracticeManService.updatePracticeGroupSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -112,6 +113,163 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getPeopleStats: function (req, res) {
+        PracticeManService.getPeopleStatsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getTaskStats: function (req, res) {
+        PracticeManService.getTaskStatsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getCompanyName: function (req, res) {
+        PracticeManService.getCompanyNameSync(req.query, req.user.access_token)
+            .then(function (data) {
+                for (var i = 0, len = data.data.length; i < len; i++) {
+                    var temp = data.data[i];
+                    temp.id = i + 1;
+                }
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getPeopleDetail: function (req, res) {
+        PracticeManService.getPeopleDetailSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportPeople: function (req, res) {
+        PracticeManService.getPeopleDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                //res.json(data);
+                var datas = [
+                    ["学号", "姓名", "性别", "是否实践", "联系电话", "实习公司", "企业导师", "导师电话"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    datas.push([item.jobNum, item.studentName, item.studentSex, item.whetherPractice == 'join' ? '是' : '否',
+                        item.studentPhone, item.enterpriseName, item.mentorName, item.mentorPhone]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(datas);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "实践学生信息");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportPeopleStats: function (req, res) {
+        PracticeManService.getPeopleStatsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                //res.json(data);
+                var datas = [
+                    ["院系", "专业", "班级", "学生人数", "实践人数", "未实践人数"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    datas.push([item.collegeName, item.professionalName, item.className, item.stuNum,
+                        item.praticeNum, item.notPraticeNum]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(datas);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "实践人数统计");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportTaskStats: function (req, res) {
+        PracticeManService.getTaskStatsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                //res.json(data);
+                var datas = [
+                    ["学号", "姓名", "实习公司", "企业导师", "总任务", "通过", "未通过", "被打回", "待审核", "未提交"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    datas.push([item.jobNum, item.studentName, item.enterpriseName, item.mentorName,
+                        item.totalNum, item.passNum, item.notPassNum, item.backToNum, item.checkPendingNum, item.uncommitNum]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(datas);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "实践任务统计");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getWeekTaskList: function (req, res) {
+        PracticeManService.getWeekTaskListSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    putWeekTask: function (req, res) {
+        PracticeManService.putWeekTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getWeekTaskDetail: function (req, res) {
+        PracticeManService.getWeekTaskDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteWeekTask: function (req, res) {
+        PracticeManService.deleteWeekTaskSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addWeekTask: function (req, res) {
+        PracticeManService.addWeekTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getGrouplistByOrgId: function (req, res) {
+        PracticeManService.getGrouplistByOrgIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    }
 };
 
 

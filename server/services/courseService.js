@@ -30,9 +30,10 @@ var CourseService = {
 
 	//查询课程评分
 	getCourseListIn: function (params, access_token, callback) {
+		params.accessToken = "Bearer " + access_token;
 		RestClient.get({
 			host: 'dd',
-			path: '/api/web/v1/courseAssess/queryCourseAssess',
+			path: '/api/web/v1/courseAssess/queryCourseAssessList',
 			access_token: access_token,
 			params: params
 		}).then(function (res) {

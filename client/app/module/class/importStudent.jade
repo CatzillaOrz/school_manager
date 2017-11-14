@@ -37,6 +37,11 @@
                                 td {{student.name}}
                                 td {{student.jobNumber}}
                                 td {{student.sex}}
+                    .dt-toolbar-footer
+                        .col-xs-12
+                            .dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='importStudentFn.page.totalElements', max-size='importStudentFn.page.pageSize' ng-model='importStudentFn.page.pageNumber',ng-change="importStudentFn.findStudentByKey()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
                 .col-sm-1
                 .col-sm-4
                     fieldset

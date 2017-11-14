@@ -19,16 +19,16 @@
                     .dt-toolbar
                         .col-xs-10
                             form.form-inline
-                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.semester")
+                                .form-group.col-sm-5(ng-if="attendDetailFn.selected.semester")
                                     label 学期选择：
                                     .form-control.no-border {{attendDetailFn.selected.semester}}
-                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.courseName")
+                                .form-group.col-sm-5(ng-if="attendDetailFn.selected.courseName")
                                     label 课程名称：
                                     .form-control.no-border {{attendDetailFn.selected.courseName}}
-                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.code")
+                                .form-group.col-sm-5(ng-if="attendDetailFn.selected.code")
                                     label 课程编号：
                                     .form-control.no-border {{attendDetailFn.selected.code}}
-                                .form-group.col-sm-3(ng-if="attendDetailFn.selected.teacherName")
+                                .form-group.col-sm-5(ng-if="attendDetailFn.selected.teacherName")
                                     label 授课教师：
                                     .form-control.no-border {{attendDetailFn.selected.teacherName}}
 

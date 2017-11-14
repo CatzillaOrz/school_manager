@@ -206,12 +206,13 @@ a:focus {outline: none;}
 }
 .form-inline{
   .form-control{
-    width:200px ;
+    min-width:135px ;
   }
 }
 .height-auto{
   height: auto;
   min-height: 50px;
+
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content{
@@ -227,5 +228,38 @@ a:focus {outline: none;}
     float: left;
     width: 20px !important;
 
+  }
+}
+.inline-block{
+  display: inline-block;
+}
+.center{
+  text-align: center;
+}
+.select-box{
+  border:1px solid #ccc;
+  list-style: none;
+  margin:0;
+  padding:0;
+  min-height:100px;
+  overflow-y: auto;
+  .select-item{
+    list-style: none;
+    margin:0;
+    padding:0 10px;
+    input[type=checkbox]{
+      float:left;
+      left: 0;
+      margin-right: 10px;
+    }
+    .item-label{
+      position: relative;
+      display: inline-block;
+      padding-left: 0;
+      margin-bottom: 0;
+      vertical-align: middle;
+      font-weight: normal;
+      cursor: pointer;
+    }
   }
 }

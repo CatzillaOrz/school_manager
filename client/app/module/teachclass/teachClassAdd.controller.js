@@ -173,7 +173,8 @@ angular.module('dleduWebApp')
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
-                        pageSize: 100
+                        pageSize: 100,
+                        managerId: AuthService.getUser().id
                     },"name"),
 
                     templateResult: function (data) {
@@ -257,9 +258,13 @@ angular.module('dleduWebApp')
             getSimpleTeachers:function () {
                 var _this=this;
                 var params=_this.searchParams;
+                params.pageSize=_this.page.pageSize;
+                params.pageNumber=_this.page.pageNumber;
+                params.userId = AuthService.getUser().id;
                 TeacherService.getSimpleTeachers(params).$promise
                     .then(function (data) {
                         _this.teacherList = data.data;
+                        _this.page=data.page;
 
                     })
                     .catch(function (error) {
@@ -270,10 +275,13 @@ angular.module('dleduWebApp')
             getSimpleStudents:function () {
                 var _this=this;
                 var params=_this.searchStudentParams;
+                params.pageSize=_this.page.pageSize;
+                params.pageNumber=_this.page.pageNumber;
+                params.userId = AuthService.getUser().id;
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList = data.data;
-
+                        _this.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -293,6 +301,16 @@ angular.module('dleduWebApp')
                 }
                 this.step = this.step - 1;
             },
+            //查询参数重置
+            resetParams: function () {
+                var _this = this;
+                _this.page = {
+                    totalElements: 0,
+                    totalPages: 0,
+                    pageNumber: 1,
+                    pageSize: 10
+                };
+            },
            //选择的老师
             selectTeacher:function (entity) {
                 var _this=this;
@@ -302,7 +320,7 @@ angular.module('dleduWebApp')
                     }
                 });
                 if(temp.length==0){
-                    _this.selectTeacherList.splice(0,0,entity);
+                    _this.selectTeacherList.push(entity);
                 }
             },
             //移除老师

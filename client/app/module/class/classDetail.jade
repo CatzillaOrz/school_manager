@@ -76,9 +76,9 @@
                 table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
                     thead
                         tr(role='row')
-                            th.text-left
+                            th.all-check
                               input(type="checkbox" ng-click="classDetailFn.all(classDetailFn.selectAll)" ng-model="classDetailFn.selectAll" )
-                              | 全选
+                              span 全选
                             th
                                 i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
                                 |  姓名
@@ -137,6 +137,7 @@
                                 td {{student.name}}
                                 td {{student.jobNumber}}
                                 td {{student.sex}}
+
                 .col-sm-1
                 .col-sm-4
                     form.form-horizontal(name="studentForm")

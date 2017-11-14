@@ -311,6 +311,168 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getAttendacneSettingList: function (req, res) {
+        EduManService.getAttendacneSettingListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getTeachingclassAttendByTeacher: function (req, res) {
+        EduManService.getTeachingclassAttendByTeacherSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAttendanceByPeriod: function (req, res) {
+        EduManService.getAttendanceByPeriodSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getClassAttendanceGroupByPro: function (req, res) {
+        EduManService.getClassAttendanceGroupByProSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getClassAttendanceGroupByclass: function (req, res) {
+        EduManService.getClassAttendanceGroupByclassSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getClassAttendanceGroupByCollege: function (req, res) {
+        EduManService.getClassAttendanceGroupByCollegeSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportTeachingclassByTeacher: function (req, res) {
+        EduManService.exportTeachingclassByTeacherSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportClassAttendanceByPeriod: function (req, res) {
+        EduManService.exportClassAttendanceByPeriodSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportClassAttendanceGroupByCollege: function (req, res) {
+        EduManService.exportClassAttendanceGroupByCollegeSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportClassAttendanceGroupByPro: function (req, res) {
+        EduManService.exportClassAttendanceGroupByProSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportClassAttendanceGroupByclass: function (req, res) {
+        EduManService.exportClassAttendanceGroupByclassSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateAttendacne: function (req, res) {
+        EduManService.updateAttendacneSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAttendListByCondition: function (req, res) {
+        EduManService.getAttendListByConditionSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAttendChangeLog: function (req, res) {
+        EduManService.getAttendChangeLogSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateAttend: function (req, res) {
+        EduManService.updateAttendSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAttendStopLogs: function (req, res) {
+        EduManService.getAttendStopLogsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getInsRollCallList: function (req, res) {
+        EduManService.getInsRollCallListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getClassRollCallDetails: function (req, res) {
+        EduManService.getClassRollCallDetailsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

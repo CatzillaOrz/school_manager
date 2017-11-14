@@ -1,32 +1,32 @@
 #header {
 
   #logo-group {
-    padding: 22px 10px 22px 20px;
-    height: 100px;
+    padding: 5px 10px 5px 0px;
+    height: 50px;
     #logo {
-      width: 66px;
-      height: 66px;
+      width: 40px;
+      height: 40px;
       img {
-        width: 66px;
-        height: 66px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
       }
     }
     #orgName {
       color: $text-color-lightest;
-      line-height: 50px;
+      line-height: 37px;
       margin-left: 10px;
-      font-size: 20px;
+      font-size: 14px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 150px;
+      width: 140px;
     }
   }
   .account {
     height: $nav-container-height;
     float: right;
-    margin: 26px 30px 26px 10px;
+   // margin: 26px 30px 26px 10px;
     display: table;
 
     li {

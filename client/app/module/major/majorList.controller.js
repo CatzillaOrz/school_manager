@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('MajorListCtrl', function ($scope, MajorService,AuthService,messageService,CommonService, ngDialog,
-                                           Upload, ImpBatchService) {
+    .controller('MajorListCtrl', function ($scope, $state,MajorService,AuthService,messageService,CommonService, ngDialog,
+                                           Upload, ImpBatchService, RoleAuthService) {
         $scope.majorListFn={
             //专业列表
             majorList: [],
@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
             currentMajor: {},
             myFile: null, //选择的文件对象
             errorInfos: [], //返回的错误信息
+            collegeId:null,
             //分页
             page: {
                 totalElements: 0,
@@ -22,11 +23,18 @@ angular.module('dleduWebApp')
                 name:"",
             },
 
+            //控制按钮权限
+            isUseAuth: function(type){
+                return RoleAuthService.isUseAuthority(type);
+            },
+
             // 获取专业列表
             getMajorList: function () {
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
+                    managerId: AuthService.getUser().id,
+                    collegeId:that.collegeId,
                     pageNumber: that.page.pageNumber,
                     pageSize: that.page.pageSize
                 };
@@ -46,7 +54,9 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: that.page.pageNumber,
-                    pageSize: that.page.pageSize
+                    pageSize: that.page.pageSize,
+                    collegeId:that.collegeId,
+                    managerId: AuthService.getUser().id
                 };
                 params.name=that.params.name;
                 MajorService.getMajorList(params).$promise
@@ -125,6 +135,7 @@ angular.module('dleduWebApp')
             },
 
             init: function () {
+                this.collegeId=$state.params.collegeId;
                 this.getMajorList();
             }
         };

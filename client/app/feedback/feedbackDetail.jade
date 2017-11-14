@@ -1,0 +1,39 @@
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 问题反馈详情
+        .widget-body
+            .feedback-detail {{feedbackFun.feedback.name}}&nbsp&nbsp{{feedbackFun.feedback.createdDate}}
+            .feedback-detail {{feedbackFun.feedback.description}}
+            .feedback-detail
+                .picture-list
+                    img(ng-repeat="feedbackPicture in feedbackFun.feedback.pictureUrls" src="{{feedbackPicture}}"  ng-click="feedbackFun.openPicture(feedbackPicture)")
+            .feedback-detail 评论
+            .feedback-detail
+                .middle-line
+            .feedback-detail.feedback-bottom-line(ng-repeat="comment in feedbackFun.commentList")
+                .feedback-comment-avatar(ng-mouseenter="comment.isShowDelBut = true"  ng-mouseleave="comment.isShowDelBut = false")
+                    img(src="{{comment.avatar?comment.avatar:'../../assets/images/avatar.png'}}")
+                    .feedback-comment-content
+                        .comment-name
+                            span {{comment.name}}&nbsp&nbsp{{comment.createdDate}}
+                        .comment-content
+                            span {{comment.content}}
+                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)" ng-show="comment.isShowDelBut") 删除
+                .feedback-comment-avatar(ng-repeat="demain in comment.ccommentListDomains" ng-mouseenter="demain.isShowReplayBut = true" ng-mouseleave="demain.isShowReplayBut = false")
+                    img(src="{{demain.avatar?demain.avatar:'../../assets/images/avatar.png'}}")
+                    .feedback-comment-content
+                        .comment-name
+                           span {{demain.name}}&nbsp&nbsp{{demain.createdDate}}
+                        .comment-content
+                           span {{demain.content}}
+                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(demain)" ng-show="demain.isShowReplayBut") {{feedbackFun.replayBut}}
+                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)" ng-show="demain.isShowReplayBut") 删除
+            .feedback-detail
+                textarea#desc(ng-model="feedbackFun.replayContent")
+                .reply-call
+                    button(ng-click="feedbackFun.replayComment()") {{feedbackFun.replayName}}
+
+

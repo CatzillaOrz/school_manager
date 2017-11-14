@@ -21,5 +21,18 @@ router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupI
 router.put('/updatePracticeGroup',auth.isSignedIn, controller.updatePracticeGroup);
 router.delete('/delPracticeGroup',auth.isSignedIn, controller.delPracticeGroup);
 router.get('/isExistInGroup',auth.isSignedIn, controller.isExistInGroup);
+router.post('/getPeopleStats',auth.isSignedIn, controller.getPeopleStats);
+router.post('/getTaskStats',auth.isSignedIn, controller.getTaskStats);
+router.get('/getCompanyName',auth.isSignedIn, controller.getCompanyName);
+router.post('/getPeopleDetail',auth.isSignedIn, controller.getPeopleDetail);
+router.get('/exportPeople',auth.isSignedIn, controller.exportPeople);
+router.get('/exportPeopleStats',auth.isSignedIn, controller.exportPeopleStats);
+router.get('/exportTaskStats',auth.isSignedIn, controller.exportTaskStats);
+router.get('/getWeekTaskList',auth.isSignedIn, controller.getWeekTaskList);
+router.put('/putWeekTask',auth.isSignedIn, controller.putWeekTask);
+router.get('/getWeekTaskDetail',auth.isSignedIn, controller.getWeekTaskDetail);
+router.delete('/deleteWeekTask',auth.isSignedIn, controller.deleteWeekTask);
+router.post('/addWeekTask',auth.isSignedIn, controller.addWeekTask);
+router.get('/getGrouplistByOrgId',auth.isSignedIn, controller.getGrouplistByOrgId);
 
 module.exports = router;

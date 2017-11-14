@@ -1,0 +1,155 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul#myTab.nav.nav-tabs.pull-left.in
+                li.active(ng-click="practiceStats.switchType('people')")
+                    a(data-toggle='tab',href='#hr1', aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  实践人数统计
+                li(ng-click="practiceStats.switchType('task')")
+                    a(data-toggle='tab', href='#hr2', aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 实践任务统计
+        // widget div
+        div(role='content')
+            .jarviswidget-editbox
+            .widget-body.no-padding
+                .tab-content
+                    #hr1.tab-pane.active(ng-if="practiceStats.tabType=='people'")
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-10
+                                                form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label 院系：
+                                                            select.select2.form-control(ng-model="practiceStats.peopleOption.collegeId" ui-select2="practiceStats.selectCollege2Options()" )
+                                                                option(value="0") 全部
+                                                                option(ng-repeat="college in practiceStats.collegeDropList" value="{{college.id}}" ) {{college.name}}
+                                                    .form-group.col-sm-3
+                                                        label 专业：
+                                                            select.select2.form-control(ng-model="practiceStats.peopleOption.professionalId" ui-select2="practiceStats.select2MajorOptions()" )
+                                                                option(value='0') 全部
+                                                                option(ng-repeat="major in practiceStats.majorDropList" value="{{major.id}}" ) {{major.name}}
+
+                                            .col-sm-2.col-xs-6.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="practiceStats.getPeopleStats()")
+                                                        span 查询
+                                                    //button.btn.btn-primary(ng-click="practiceStats.getTeachClassAttendList()")
+                                                        span 查看统计图
+                                                    button.btn.btn-primary(ng-click="practiceStats.exportPeopleStats()")
+                                                        span 导出
+                                        table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                    th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 院系
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 专业
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 班级
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学生人数
+                                                    th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 实践人数
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 未实践人数
+                                                    th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in practiceStats.records")
+                                                    td.sorting_1 {{$index+1 + ((practiceStats.page.pageNumber==0?practiceStats.page.pageNumber+1:practiceStats.page.pageNumber)-1)*10}}
+                                                    td  {{record.collegeName}}
+                                                    td  {{record.professionalName}}
+                                                    td  {{record.className}}
+                                                    td  {{record.stuNum}}
+                                                    td  {{record.praticeNum}}
+                                                    td  {{record.notPraticeNum}}
+                                                    td
+                                                        a.handle(ui-sref="practicepeople({id:record.classId})")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 查看详情
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{practiceStats.page.totalElements==0?0:(((practiceStats.page.pageNumber)-1)*practiceStats.page.pageSize+1)}}
+                                                    |  到
+                                                    span.txt-color-darken {{((practiceStats.page.pageNumber==0?practiceStats.page.pageNumber+1:practiceStats.page.pageNumber)-1)*practiceStats.page.pageSize+practiceStats.records.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{practiceStats.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='practiceStats.page.totalElements', max-size='practiceStats.page.pageSize' ng-model='practiceStats.page.pageNumber',ng-change="practiceStats.getPeopleStats()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr2.tab-pane(ng-if="practiceStats.tabType=='task'")
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-10
+                                                form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label 学生姓名：
+                                                        input.form-control(type='search', placeholder='按学生姓名查询', aria-controls='datatable_col_reorder' ng-model="practiceStats.taskOption.name")
+
+                                                    .form-group.col-sm-3
+                                                        label 实践公司：
+                                                            select.select2.form-control(ng-model="practiceStats.taskOption.enterpriseName" ui-select2="practiceStats.selectCompany2Options()"  )
+                                                                option(value="0") 全部
+                                                                option(ng-repeat="company in practiceStats.companyList" value="{{company.id}}" ) {{company.name}}
+
+                                            .col-sm-2.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="practiceStats.getTaskStats()")
+                                                        span 查询
+                                                    //button.btn.btn-primary(ng-click="practiceStats")
+                                                        span 查看统计图
+                                                    button.btn.btn-primary(ng-click="practiceStats.exportTaskStats()")
+                                                        span 导出
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学号
+                                                        th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 姓名
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 实习公司
+                                                        th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 企业导师
+                                                        th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 总任务
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 通过
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 未通过
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 被打回
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 待审核
+                                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 未提交
+                                                        //th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in practiceStats.records")
+                                                    td.sorting_1 {{$index+1 + ((practiceStats.page.pageNumber==0?practiceStats.page.pageNumber+1:practiceStats.page.pageNumber)-1)*10}}
+                                                    td {{record.jobNum}}
+                                                    td {{record.studentName}}
+                                                    td {{record.enterpriseName}}
+                                                    td {{record.mentorName}}
+                                                    td {{record.totalNum}}
+                                                    td {{record.passNum}}
+                                                    td {{record.notPassNum}}
+                                                    td {{record.backToNum}}
+                                                    td {{record.checkPendingNum}}
+                                                    td {{record.uncommitNum}}
+                                                    //td
+                                                        a.handle(ng-click="")
+                                                            i.fa.fa-pencil-square-o
+                                                            span 统计图
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{practiceStats.page.totalElements==0?0:(((practiceStats.page.pageNumber)-1)*practiceStats.page.pageSize+1)}}
+                                                    |  到
+                                                    span.txt-color-darken {{((practiceStats.page.pageNumber==0?practiceStats.page.pageNumber+1:practiceStats.page.pageNumber)-1)*practiceStats.page.pageSize+practiceStats.records.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{practiceStats.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='practiceStats.page.totalElements', max-size='practiceStats.page.pageSize' ng-model='practiceStats.page.pageNumber',ng-change="practiceStats.getTaskStats()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

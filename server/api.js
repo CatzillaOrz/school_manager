@@ -17,5 +17,8 @@ module.exports = function(app){
   app.use('/api/notice', require('./api/notice'));
   app.use('/api/eduman', require('./api/eduman')); //教务管理
   app.use('/api/practiceman', require('./api/practiceman')); //实践管理
-    app.use('/api/news', require('./api/news'));
+  app.use('/api/news', require('./api/news'));
+  app.use('/api/rolemanger', require('./api/rolemanger'));//权限管理
+  app.use('/api/geo', require('./api/geo'));
+  app.use('/api/feedback', require('./api/feedback'));
 };

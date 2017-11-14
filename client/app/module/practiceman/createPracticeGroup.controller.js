@@ -93,7 +93,8 @@ angular.module('dleduWebApp')
 					ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
 						orgId: AuthService.getUser().orgId,
 						pageNumber: 1,
-						pageSize: 100
+						pageSize: 100,
+						managerId: AuthService.getUser().id
 					}, "name"),
 
 					templateResult: function (data) {
@@ -161,6 +162,7 @@ angular.module('dleduWebApp')
 				var _this = this;
 				var params = _this.searchParams;
 				params.pageSize = 20;
+				params.userId = AuthService.getUser().id;
 				TeacherService.getSimpleTeachers(params).$promise
 					.then(function (data) {
 						_this.teacherList = data.data;
@@ -196,6 +198,7 @@ angular.module('dleduWebApp')
 				var _this = this;
 				var params = _this.searchStudentParams;
 				params.pageSize = 20;
+				params.userId = AuthService.getUser().id;
 				StudentService.getSimpleStudents(params).$promise
 					.then(function (data) {
 						_this.studentList = data.data;

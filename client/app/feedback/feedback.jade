@@ -1,0 +1,90 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 问题反馈列表
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .form-group.col-sm-3
+                            #datatable_col_reorder_filter.dataTables_filter
+                                label
+                                    input.form-control(type='search', placeholder='姓名/学号/工号', ng-model="feedbackFun.params.userName")
+                                    span.input-group-addon.pull-right.cursor-pointer.btn-primary.search-btn(ng-click="feedbackFun.getFeedbackList()")
+                                        i.glyphicon.glyphicon-search
+                        .form-group.col-sm-3
+                            label 信息员：
+                                select.select2.form-control(ng-model="feedbackFun.params.messenger" )
+                                    option(value="") 全部
+                                    option(value="1") 是
+                                    option(value="0") 否
+                        .form-group.col-sm-3
+                            label 状态：
+                                select.select2.form-control(ng-model="feedbackFun.params.finished" )
+                                    option(value="") 全部
+                                    option(value="1") 已完成
+                                    option(value="0") 未完成
+                         .col-sm-3.col-xs-6.hidden-xs
+                            .ColVis
+                                button.btn.btn-primary(ng-click="feedbackFun.getFeedbackList()")
+                                    span 检索
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th 序号
+                                th 反馈时间
+                                th 信息员
+                                th 姓名
+                                th 学号/工号
+                                th 班级
+                                th 年级
+                                th 学院
+                                th 反馈内容摘要
+                                th 状态
+                                th 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="feedback in feedbackFun.feedbackList")
+                                td {{$index+1 + ((feedbackFun.page.pageNumber==0?feedbackFun.page.pageNumber+1:feedbackFun.page.pageNumber)-1)*10}}
+                                td {{feedback.createdDate}}
+                                td
+                                    span(ng-if="feedback.messenger==1") 是
+                                    span(ng-if="feedback.messenger==0") 否
+                                td {{feedback.name}}
+                                td {{feedback.personId?feedback.personId:''}}
+                                td {{feedback.classes?feedback.classes:''}}
+                                td {{feedback.grade?feedback.grade:''}}
+                                td {{feedback.collegeName}}
+                                td {{feedback.description}}
+                                td
+                                    span(ng-if="feedback.finished==0") 未完成
+                                    span(ng-if="feedback.finished==1") 已完成
+                                td
+                                    a.handle(ui-sref="feedbackdetail({id:feedback.id})")
+                                        i.fa.fa-trash-o
+                                        span 查看
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{feedbackFun.page.pageNumber==0?feedbackFun.page.pageNumber*10:(feedbackFun.page.pageNumber-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((feedbackFun.page.pageNumber==0?feedbackFun.page.pageNumber+1:feedbackFun.page.pageNumber)-1)*10+feedbackFun.feedbackList.length}}
+                                |  条 总共
+                                span.text-primary {{feedbackFun.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='feedbackFun.page.totalElements', max-size='feedbackFun.page.pageSize' ng-model='feedbackFun.page.pageNumber',ng-change="feedbackFun.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+

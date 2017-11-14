@@ -15,39 +15,65 @@
             // end widget edit box
             // widget content
             .widget-body.no-padding
-                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                .dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.col-sm-6
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按班级名称查询', aria-controls='datatable_col_reorder' ng-model="classListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="classListFn.getClassList()")
-                                        i.glyphicon.glyphicon-search
-                        .col-sm-6.col-xs-6.hidden-xs
-                            .ColVis
+                        .col-xs-12.margin-bottom-10.no-padding
+                            form.form-inline
+                                .form-group.col-sm-4.margin-top-5.no-padding
+                                    label 院系：
+                                    select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
+                                .form-group.col-sm-4.margin-top-5
+                                    label 专业：
+                                    select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )
+                                        option(value="") 全部
+                                        option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                .form-group.col-sm-4.margin-top-5
+                                    label 年级：
+                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear")
+                                .form-group.col-sm-4.margin-top-5.no-padding
+                                    label 班级：
+                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
+                                .form-group.col-sm-4.margin-top-5
+                                    label 导员：
+                                    input.form-control(type='search', placeholder='按班级导员姓名',  ng-model="classListFn.params.masterName")
+                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
+                                button.btn.btn-primary(ng-click="classListFn.getClassList()")
+                                    span 查询
+                                .speace-10
                                 button.btn.btn-primary(ui-sref="classCreat")
                                     span 新建
-                                button.btn.btn-primary(type='button' ng-click="classListFn.openImpBatch()")
+                                .speace-10
+                                button.btn.btn-primary(type='button' ng-click="classListFn.openImpBatch()" ng-if="classListFn.isUseAuth('imp')")
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 班级名称
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 学院
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 专业
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                th 序号
+                                th 班级名称
+                                th 学院
+                                th 专业
+                                th 年级
+                                th 导员
+                                th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="class in classListFn.classList")
                                 td.sorting_1 {{$index+1 + ((classListFn.page.pageNumber==0?classListFn.page.pageNumber+1:classListFn.page.pageNumber)-1)*10}}
-                                td.expand
-                                    a(ui-sref="classDetail({id:class.id})") {{class.name}}
+                                td.expand(ng-if="classListFn.isUseAuth('href')")
+                                    a.handle(ui-sref="classDetail({id:class.id})") {{class.name}}
+                                td.expand(ng-if="!classListFn.isUseAuth('href')") {{class.name}}
                                 td {{class.collegeName}}
                                 td {{class.professionalName}}
+                                td {{class.teachingYear}}
+                                td {{class.teachers}}
                                 td
                                     a.handle(ui-sref="classEdit({id:class.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
+                                    a.handle(ui-sref="classDetail({id:class.id})")
+                                        i.fa.fa-eye
+                                        span 查看
                                     a.handle(ng-click="classListFn.deletePrompt(class)")
                                         i.fa.fa-trash-o
                                         span 删除

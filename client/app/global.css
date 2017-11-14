@@ -11269,15 +11269,13 @@ table.has-columns-hidden > tbody > tr.row-detail > td > ul > li > span.columnTit
   padding: 6px 7px 1px;
   width: 100%;
   float: left;
-  border-bottom: 1px solid #ccc;
-  background: #fafafa; }
+  background: #ffffff; }
 
 .dt-toolbar-footer {
-  background: #fafafa;
+  background: #fff;
   font-size: 11px;
   overflow: hidden;
   padding: 5px 10px;
-  border-top: 1px solid #ccc;
   -webkit-box-shadow: inset 0 1px #fff;
   -moz-box-shadow: inset 0 1px #fff;
   -ms-box-shadow: inset 0 1px #fff;
@@ -12610,7 +12608,7 @@ article.sortable-grid {
   margin-bottom: 0; }
 
 .jarviswidget > header {
-  height: 34px;
+  height: 40px;
   padding: 0;
   line-height: 40px; }
 
@@ -12629,12 +12627,14 @@ article.sortable-grid {
   height: 100%;
   width: auto;
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   position: relative;
   margin: 0;
   line-height: 34px;
   font-weight: 400;
-  letter-spacing: 0; }
+  letter-spacing: 0;
+  color: #434858;
+  font-weight: 600; }
 
 .jarviswidget > header > h2 {
   margin-left: 10px;
@@ -12728,7 +12728,7 @@ article.sortable-grid {
   border-left: none; }
 
 .widget-body.no-padding {
-  margin: -13px -13px 0; }
+  margin: 0px 10px 10px 10px; }
 
 .widget-body.no-padding .alert {
   margin: 0 0 10px;
@@ -13012,12 +13012,12 @@ body.nooverflow {
   color: #333 !important; }
 
 .jarviswidget-color-blueDark > header {
-  border-color: #45474b !important;
-  background: #4c4f53;
-  color: #fff; }
+  border-color: #DFE2EB !important;
+  background: #DFE2EB;
+  color: #434858; }
 
 .jarviswidget-color-blueDark .nav-tabs li:not(.active) a, .jarviswidget-color-blueDark > header > .jarviswidget-ctrls a {
-  color: #fff !important; }
+  color: #333 !important; }
 
 .jarviswidget-color-blueDark .nav-tabs li a:hover {
   color: #333 !important; }
@@ -13204,11 +13204,6 @@ body.nooverflow {
 
 .jarviswidget header .nav-tabs {
   border-bottom-color: transparent; }
-
-.jarviswidget header .nav-tabs > li > a {
-  border-radius: 0;
-  border: none;
-  padding: 7px 15px 6px; }
 
 .jarviswidget header:first-child .nav-tabs {
   float: left; }
@@ -24698,9 +24693,9 @@ aside {
 
 #header {
   display: block;
-  height: 100px;
+  height: 50px;
   margin: 0;
-  padding: 0 13px 0 0;
+  padding: 0 10px 0 0;
   background-color: #fff;
   background-image: -moz-linear-gradient(top, #fff, #fff);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#fff));
@@ -24910,22 +24905,22 @@ aside {
   text-decoration: none !important; }
 
 #header > :first-child, aside {
-  width: 290px; }
+  width: 220px; }
 
 #header > :first-child {
-  background: #009768; }
+  background: #54BF9B; }
 
 #left-panel {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 904;
-  padding-top: 100px; }
+  padding-top: 50px; }
 
 #main {
-  margin-left: 290px;
+  margin-left: 240px;
+  margin-right: 20px;
   padding: 0;
-  padding-bottom: 52px;
   min-height: 500px;
   position: relative; }
 
@@ -24946,7 +24941,7 @@ aside {
   text-decoration: none !important; }
 
 #ribbon .breadcrumb li:last-child, #ribbon .breadcrumb > .active {
-  color: #666666; }
+  color: #54BF9B; }
 
 .fixed-ribbon #ribbon {
   position: fixed;
@@ -25038,7 +25033,7 @@ nav > ul > li:last-child.open {
 
 nav ul li a {
   line-height: normal;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px 10px 10px 11px;
   margin: 10px 10px;
   color: #c0bbb7;
@@ -25178,7 +25173,7 @@ nav ul ul li {
 
 nav ul ul li > a {
   padding-left: 42px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   outline: 0; }
 
@@ -28254,11 +28249,6 @@ html.hidden-menu-mobile-lock {
 
 .no-padding > pre {
   margin: 30px; }
-
-.no-padding .dataTables_wrapper table, .no-padding > table {
-  border: none !important;
-  margin-bottom: 0 !important;
-  border-bottom-width: 0 !important; }
 
 .no-padding-bottom {
   padding-bottom: 0 !important; }

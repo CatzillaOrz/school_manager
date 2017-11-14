@@ -40,7 +40,7 @@ angular.module('dleduWebApp')
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
                                 pageSize: 100,
-
+                                managerId: AuthService.getUser().id
                             }
                             params.name=query.term;
                             return params;
@@ -206,7 +206,7 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.classStudentList=_this.dataHandler(data.data);
                         _this.page=data.page;
-                        _this.page.pageNumber++;
+                       // _this.page.pageNumber++;
                     })
                     .catch(function (error) {
                         //messageService.openMsg("班级添加失败")
@@ -264,7 +264,8 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.findClassStudent();
                        _this.isTransfer=false;
-
+                       _this.selectAll=false;
+                       _this.all(_this.selectAll);
                     })
                     .catch(function (error) {
                         messageService.openMsg("转出班级失败")

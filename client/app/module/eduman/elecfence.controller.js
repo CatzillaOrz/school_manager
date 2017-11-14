@@ -3,7 +3,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
-										   MajorService, CollegeService, ClassService, messageService, CommonService) {
+										   MajorService, CollegeService, ClassService, messageService, CommonService, RoleAuthService) {
 		$scope.evaFenceFn = {
 			//结果中离线的人数，
 			allLeave: 0,
@@ -55,6 +55,12 @@ angular.module('dleduWebApp')
 			locations: [],//当前位置
 			isOnlines: [],//是否在线
 
+
+			//控制按钮权限
+			isUseAuth: function(type){
+				return RoleAuthService.isUseAuthority(type);
+			},
+
 			//获取结果筛选条件
 			getResultOption: function (type) {
 				if (type == "isLeaveSchool") {
@@ -100,7 +106,8 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: 100
+					pageSize: 500,
+					managerId: AuthService.getUser().id
 				}
 				CollegeService.getCollegeDropList(params).$promise
 					.then(function (data) {
@@ -216,8 +223,9 @@ angular.module('dleduWebApp')
 				this.params.pageNumber = that.page.pageNumber;
 				this.params.pageSize = that.page.pageSize;
 				this.params.time = new Date(this.date).getTime();
-				this.params.organId = AuthService.getUser().orgId;
+				this.params.orgId = AuthService.getUser().orgId;
 				var params = angular.copy(this.params);
+				params.managerId = AuthService.getUser().id;
 				CommonService.delEmptyProperty(params);
 				EduManService.getElecFenceList(params).$promise
 					.then(function (data) {

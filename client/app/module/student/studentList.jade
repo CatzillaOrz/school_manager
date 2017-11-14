@@ -17,33 +17,55 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-12.col-sm-6
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按学生名称查询', aria-controls='datatable_col_reorder' ng-model="studentListFn.params.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.btn-primary.search-btn(ng-click="studentListFn.getStudentList()")
-                                        i.glyphicon.glyphicon-search
-                        .col-sm-6.col-xs-6.hidden-xs
-                            .ColVis
-                                button.btn.btn-primary(ui-sref="studentCreat")
-                                    span 新建
-                                button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()")
-                                    span 批量导入
-                                button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()")
-                                    span 导出学生
+                        .col-md-12.no-padding.margin-bottom-10
+                            form.form-inline
+                                .form-group.col-md-4.no-padding
+                                    label.control-label 院系：
+                                    select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
+                                        option(value="") 全部
+                                        option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ng-selected="studentListFn.params.collegeId==college.id") {{college.name}}
+                                .form-group.col-md-4
+                                    label.control-label 专业：
+                                    select.select2.form-control(ng-model="studentListFn.params.professionalId" ui-select2="studentListFn.select2MajorOptions()"  )
+                                        option(value="") 全部
+                                        option(ng-repeat="major in studentListFn.majorDropList" value="{{major.id}}" ng-selected="studentListFn.params.professionalId==major.id") {{major.name}}
+                                .form-group.col-md-4
+                                    label.control-label 行政班级：
+                                    select.select2.form-control(ng-model="studentListFn.params.classesId" ui-select2="studentListFn.select2ClassOptions()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in studentListFn.classDropList" value="{{class.id}}") {{class.name}}
+
+                                .form-group.col-md-4.margin-top-10.no-padding
+                                    label.control-label 学生：
+                                    input.form-control(type='search', placeholder='名称或学号', ng-model="studentListFn.params.name")
+                                .form-group.col-md-8.margin-top-10
+                                    .ColVis
+                                        button.btn.btn-primary(ng-click="studentListFn.getStudentList()")
+                                            span 查询
+                                        .speace-10
+                                        button.btn.btn-primary(ui-sref="studentCreat")
+                                            span 新建
+                                        .speace-10
+                                        button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()" ng-if="studentListFn.isUseAuth('imp')")
+                                            span 批量导入
+                                        .speace-10
+                                        button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()" ng-if="studentListFn.isUseAuth('exp')")
+                                            span 导出学生
+                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
+
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 学号
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 姓名
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 性别
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 院系
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 专业
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 班级
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 邮箱
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 手机号
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                                th 序号
+                                th 学号
+                                th 姓名
+                                th 性别
+                                th 院系
+                                th 专业
+                                th 班级
+                                th 邮箱
+                                th 手机号
+                                th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="student in studentListFn.studentList")
                                 td.sorting_1 {{$index+1 + ((studentListFn.page.pageNumber==0?studentListFn.page.pageNumber+1:studentListFn.page.pageNumber)-1)*10}}
@@ -67,6 +89,9 @@
                                     a.handle(ng-click="studentListFn.resetPasswordPrompt(student)")
                                         i.fa.fa-repeat
                                         span 重置密码
+                                    a.handle(ng-click="studentListFn.unlockPrompt(student)")
+                                        i.fa.fa-unlock-alt
+                                        span 解绑手机
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
