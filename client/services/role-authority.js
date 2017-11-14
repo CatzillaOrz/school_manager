@@ -151,7 +151,7 @@ angular.module('dleduWebService')
                     "roles":
                     {
                         "ROLE_ORG_ADMIN": "authority, school_sup, college_sup, schoo_data, schoo_edu, college_data, college_edu",
-                        "ROLE_ORG_MANAGER": "authority, school_sup, college_sup, schoo_data, schoo_edu, college_data, college_edu",
+                        "ROLE_ORG_MANAGER": "authority, college_sup, schoo_data, schoo_edu, college_data, college_edu",
                         "ROLE_COLLEGE_ADMIN": "authority, college_data, college_edu",
                         "ROLE_ORG_EDUCATIONALMANAGER": "",
                         "ROLE_ORG_DATAVIEW": "",
