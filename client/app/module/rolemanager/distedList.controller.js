@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
                             messageService.openMsg("取消权限成功！");
                             _this.getDistedList();
                         }else{
-                            messageService.openMsg("取消权限失败！");
+                            messageService.openMsg(data.message);
                         }
                     })
                     .catch(function (error) {
