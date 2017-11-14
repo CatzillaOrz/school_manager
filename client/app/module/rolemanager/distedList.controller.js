@@ -60,15 +60,15 @@ angular.module('dleduWebApp')
                 var params = {
                     userId: _this.currentRecord.id
                 }
-                if(_this.currentRecord.roleName == '校级管理员'){
-                    params.roleName = 'ROLE_ORG_MANAGER';
-                }else if(_this.currentRecord.roleName == '院级管理员'){
-                    params.roleName = 'ROLE_COLLEGE_ADMIN';
-                }
+                params.roleName = _this.currentRecord.role;
                 RoleManagerService.cancleRole(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("取消权限成功！");
-                        _this.getDistedList();
+                        if(data && data.sussess){
+                            messageService.openMsg("取消权限成功！");
+                            _this.getDistedList();
+                        }else{
+                            messageService.openMsg("取消权限失败！");
+                        }
                     })
                     .catch(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error, "取消权限失败！"));
@@ -85,21 +85,7 @@ angular.module('dleduWebApp')
             //是否可以取消权限
             isCancle: function(record){
                 var roleName = AuthService.getUser().roleNames.toString();
-                var roleByList = "ROLE_ORG_MANAGER";
-                if(record.roleName == '校级超级管理员'){
-                    roleByList = 'ROLE_ORG_MANAGER';
-                }else if(record.roleName == '院级超级管理员'){
-                    roleByList = 'ROLE_COLLEGE_ADMIN';
-                }else if(record.roleName == '校级教务管理'){
-                    roleByList = 'ROLE_ORG_EDUCATIONALMANAGER';
-                }else if(record.roleName == '校级数据查看'){
-                    roleByList = 'ROLE_ORG_DATAVIEW';
-                }else if(record.roleName == '院级教务管理'){
-                    roleByList = 'ROLE_COLLEG_EDUCATIONALMANAGER';
-                }else if(record.roleName == '院级数据查看'){
-                    roleByList = 'ROLE_COLLEG_DATAVIEW';
-                }
-
+                var roleByList = record.role;
                 if(roleName.indexOf("ROLE_ORG_ADMIN") != -1){
                     return true;
                 }else if(roleName.indexOf("ROLE_ORG_MANAGER") != -1){
