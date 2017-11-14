@@ -64,6 +64,7 @@
                                 th 已提交人数
                                 th 未提交人数
                                 th 请假人数
+                                th 操作
                         tbody
                             tr.odd.cursor-pointer(ng-repeat="rollCall in insAttendFn.rollCallList" ng-click="insAttendFn.openMap(rollCall)", ng-class="{'current':rollCall==insAttendFn.currentEntity}")
                                 td.sorting_1 {{$index+1 + ((insAttendFn.page.pageNumber==0?insAttendFn.page.pageNumber+1:insAttendFn.page.pageNumber)-1)*10}}
@@ -78,6 +79,9 @@
                                 td {{rollCall.submitted}}
                                 td {{rollCall.uncommitted}}
                                 td {{rollCall.leave}}
+                                td
+                                    span(ng-click="insAttendFn.openMap(rollCall)" ng-if="rollCall.submitted!=0") 查看地图
+                                    span(ng-if="rollCall.submitted==0") -
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
