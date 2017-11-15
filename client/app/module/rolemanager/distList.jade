@@ -70,14 +70,14 @@
                                     ul.pagination-sm(uib-pagination, total-items='roleDist.page.totalElements', max-size='roleDist.page.pageSize' ng-model='roleDist.page.pageNumber',ng-change="roleDist.findTeacherByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
-        div.no-border 权限说明
-        div.no-border 1、校级管理员可以对全校数据进行查看和编辑操作，且可以管理和分配其他角色
-        div.no-border 2、校级教务管理仅可以操作教务管理模块（考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
-        div.no-border 3、校级数据查看角色仅可以查看本校教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
+        div.no-border.txt-color-red 权限说明
+        div.no-border.txt-color-red 1、校级管理员可以对全校数据进行查看和编辑操作，且可以管理和分配其他角色
+        div.no-border.txt-color-red 2、校级教务管理仅可以操作教务管理模块（考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
+        div.no-border.txt-color-red 3、校级数据查看角色仅可以查看本校教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
         div.no-border
-        div.no-border 4、院级超级管理员可对其本学院的数据进行查看和部分的编辑操作，且可以管理和分配院级教务和院级数据查看
-        div.no-border 5、院级教务管理仅可以操作其本学院的教务管理模块（考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
-        div.no-border 6、院级数据查看角色仅可以查看其所在学院的教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
+        div.no-border.txt-color-red 4、院级超级管理员可对其本学院的数据进行查看和部分的编辑操作，且可以管理和分配院级教务和院级数据查看
+        div.no-border.txt-color-red 5、院级教务管理仅可以操作其本学院的教务管理模块（考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
+        div.no-border.txt-color-red.padding-bottom-10 6、院级数据查看角色仅可以查看其所在学院的教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
 
     script(type='text/ng-template',id='distDialog')
         .repeatLoad
