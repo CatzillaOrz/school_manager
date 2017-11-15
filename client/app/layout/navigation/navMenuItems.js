@@ -77,7 +77,8 @@
                 var user = AuthService.getUser();
                 var roleNames = user.roleNames;
                 for(var i = 0, length = roleNames.length; i < length; i++){
-                    if(auth.role.indexOf(roleNames[i]) != -1){
+                    var roleName = roleNames[i];
+                    if(roleName && roleName != '' && auth.role.indexOf(roleName) != -1){
                         return true;
                         break;
                     }
