@@ -61,6 +61,9 @@ angular.module('dleduWebApp')
 				}
 				params.userId = _this.currentRecord.id;
 				params.roleName = _this.distType;
+				if(_this.distType == 'school'){
+					return;
+				}
 				RoleManagerService.distRole(params).$promise
 					.then(function (data) {
 						ngDialog.close();

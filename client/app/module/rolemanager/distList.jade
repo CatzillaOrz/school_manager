@@ -102,7 +102,7 @@
             .repeat_header
                 i.fa.fa-wrench
                 span.buld 你给{{roleDist.currentRecord.name}}分配的权限是：
-            .repeat_content.content-no-scorll
+            .repeat_content.content-no-scorll(style="min-width:auto!important")
                 label.radio-inline(ng-if="roleDist.isUseAuth('school_sup')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="0" )
                     | 校级超级管理员
@@ -121,6 +121,8 @@
                 label.radio-inline(ng-if="roleDist.isUseAuth('college_data')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="5" )
                     | 院级数据查看
+            .tip-role(style="padding-left:30px")
+                span.buld.txt-color-red(ng-if="roleDist.distType == 'school'") 请先选择权限
             .attend-dialog-footer
                 button.btn.btn-defualt.dialog-btn(ng-click="closeThisDialog()") 取消
                 button.btn.btn-primary.dialog-btn(ng-click="roleDist.distRole()") 确定
