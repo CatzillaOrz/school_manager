@@ -78,7 +78,7 @@
                 var roleNames = user.roleNames;
                 for(var i = 0, length = roleNames.length; i < length; i++){
                     var roleName = roleNames[i];
-                    if(roleName && roleName != null && auth.role.indexOf(roleNames[i]) != -1){
+                    if(roleName && roleName != null && auth.role.indexOf(roleName) != -1){
                         return true;
                         break;
                     }
