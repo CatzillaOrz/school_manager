@@ -244,17 +244,20 @@ angular.module('dleduWebApp')
             },
            init:function () {
                 var _this=this;
-
                _this.toEmHostInit();
                _this.schoolInfo=  CommonService.getSchool();
-               _this.params.orgId=_this.schoolInfo.id;
-               _this.currentActive=$state.current.name;
-                _this.getShuffImageList();
-               _this.getHotMajorList();
-               _this.getExcellentTeacherList();
-               _this.getBoutiqueCourseList();
-               _this.getLogoList();
-               _this.getNewsListByOrg();
+               if(_this.schoolInfo){
+                   _this.params.orgId=_this.schoolInfo.id;
+                   _this.currentActive=$state.current.name;
+                   _this.getShuffImageList();
+                   _this.getHotMajorList();
+                   _this.getExcellentTeacherList();
+                   _this.getBoutiqueCourseList();
+                   _this.getLogoList();
+                   _this.getNewsListByOrg();
+               }else {
+                   CommonService.msgDialog("您输入的地址有误!", 2);
+               }
            }
         };
         $timeout(function () {
