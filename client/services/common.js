@@ -57,22 +57,26 @@ angular.module('dleduWebService')
                 if (school) {
                     return school;
                 } else {
-                    var url = $location.host().split('.')[0];
-                    // url = "sjlb";
-                    var params = {
-                        domainname: url
-                    };
-                    SchoolService.getSchoolByDomain(params).$promise
-                        .then(function (data) {
-                            school = data;
-                            document.title = school.name;
+                    var domain = $location.host();
+                    var code = domain.split('.')[0];
+                    var ipReg=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/ ;
+                    var isIp=ipReg.test(domain);
+                    if (domain != "localhost"&&!isIp) {
+                        var params = {
+                            domainname: code
+                        };
+                        SchoolService.getSchoolByDomain(params).$promise
+                            .then(function (data) {
+                                school = data;
+                                document.title = school.name;
 
-                            _this.setSchool(school);
-                            return school;
-                        })
-                        .catch(function (error) {
+                                _this.setSchool(school);
+                                return school;
+                            })
+                            .catch(function (error) {
 
-                        })
+                            })
+                    }
                 }
             },
             setSchool: function (school) {
@@ -92,7 +96,7 @@ angular.module('dleduWebService')
                     str = str.replace(/\s*/g, "");
                     str = str.replace(/<[^>]*>/g, "");
                     str = str.replace(/&nbsp;/g, "");
-                    if(len){
+                    if (len) {
                         if (str_len < len) {
                             return str;
                         }
@@ -101,7 +105,7 @@ angular.module('dleduWebService')
                         text = str.charAt(i);
                         cut = cut.concat(text);
                         str_length++;
-                        if(len){
+                        if (len) {
                             if (str_length >= len) {
                                 cut = cut.concat('...');
                                 return cut.join('');
@@ -117,28 +121,28 @@ angular.module('dleduWebService')
              * @param defualt 默认提示
              * @returns {*}
              */
-            exceptionPrompt:function (error,defualt) {
+            exceptionPrompt: function (error, defualt) {
                 var re = /[^\u4e00-\u9fa5]/;
-                var errorMessage=error.data.replace(/\d+/g,'');
-                errorMessage=errorMessage.replace(/[a-zA-Z]/g,'');
-                errorMessage=errorMessage.replace('[','');
-                errorMessage=errorMessage.replace(']','');
-                errorMessage=errorMessage.replace('，','');
-                errorMessage=errorMessage.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|||\-|\_|\+|\=|\||\\|||\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,"");
-                if(re.test(errorMessage)){
-                   return defualt
-                }else {
+                var errorMessage = error.data.replace(/\d+/g, '');
+                errorMessage = errorMessage.replace(/[a-zA-Z]/g, '');
+                errorMessage = errorMessage.replace('[', '');
+                errorMessage = errorMessage.replace(']', '');
+                errorMessage = errorMessage.replace('，', '');
+                errorMessage = errorMessage.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|||\-|\_|\+|\=|\||\\|||\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+                if (re.test(errorMessage)) {
+                    return defualt
+                } else {
                     return errorMessage;
 
                 }
             },
 
-			/**
-			 *
+            /**
+             *
              * @param status 是否隐藏
              * @param type 添加类型 part局部添加 all整个添加
              */
-            addLoading: function(status, type) {
+            addLoading: function (status, type) {
 
             },
 
@@ -146,7 +150,7 @@ angular.module('dleduWebService')
              *
              * @param obj 要处理的对象。全是属性
              */
-            delEmptyProperty: function(obj) {
+            delEmptyProperty: function (obj) {
                 for (var property in obj) {
                     if (!obj[property] || obj[property] == '') {
                         delete obj[property];
