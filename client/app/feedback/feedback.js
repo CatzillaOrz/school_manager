@@ -10,7 +10,7 @@ angular.module('dleduWebApp')
             .state('feedbackhome', {
                 parent: 'feedback',
                 url   : '/feedback/home',
-                access: {requiredLogin: true},
+                access: {requiredLogin: false},
                 views : {
                     'content@base': {
                         controller : 'feedbackCtl',
@@ -23,8 +23,8 @@ angular.module('dleduWebApp')
             })
             .state('feedbackdetail', {
                 parent: 'feedback',
-                url   : '/feedback/detail/:id',
-                access: {requiredLogin: true},
+                url   : '/feedback/detail/:id&:finished',
+                access: {requiredLogin: false},
                 views : {
                     'content@base': {
                         controller : 'feedbackDetailCtl',

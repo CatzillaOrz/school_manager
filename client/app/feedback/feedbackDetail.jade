@@ -21,7 +21,7 @@
                             span {{comment.name}}&nbsp&nbsp{{comment.createdDate}}
                         .comment-content
                             span {{comment.content}}
-                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)" ng-show="comment.isShowDelBut") 删除
+                        .comment-del-but(ng-click="feedbackFun.delComment(comment.id)" ng-show="feedbackFun.finished !=1&&comment.isShowDelBut") 删除
                 .feedback-comment-avatar(ng-repeat="demain in comment.ccommentListDomains" ng-mouseenter="demain.isShowReplayBut = true" ng-mouseleave="demain.isShowReplayBut = false")
                     img(src="{{demain.avatar?demain.avatar:'../../assets/images/avatar.png'}}")
                     .feedback-comment-content
@@ -29,9 +29,9 @@
                            span {{demain.name}}&nbsp&nbsp{{demain.createdDate}}
                         .comment-content
                            span {{demain.content}}
-                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(demain)" ng-show="demain.isShowReplayBut") {{feedbackFun.replayBut}}
-                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)" ng-show="demain.isShowReplayBut") 删除
-            .feedback-detail
+                        .comment-replay-but( ng-click="feedbackFun.replayOrCancel(comment.id,demain.name)" ng-show="feedbackFun.finished !=1&&demain.isShowReplayBut") {{feedbackFun.replayBut}}
+                        .comment-del-but(ng-click="feedbackFun.delCComment(demain.id)" ng-show="feedbackFun.finished !=1&&demain.isShowReplayBut") 删除
+            .feedback-detail(ng-show="feedbackFun.finished !=1")
                 textarea#desc(ng-model="feedbackFun.replayContent")
                 .reply-call
                     button(ng-click="feedbackFun.replayComment()") {{feedbackFun.replayName}}
