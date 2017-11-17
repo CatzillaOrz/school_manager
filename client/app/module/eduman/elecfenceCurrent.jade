@@ -33,10 +33,10 @@
                                 .col-sm-6
                                     span 联系方式：
                                     span {{ElecFenceCurrentFn.locusList.userPhone}}
-                    div(role='content' )
+                    div(role='content' style="padding:0;")
                         .jarviswidget-editbox
-                        .widget-body.no-padding
-                            #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer(style="position:absolute;z-index:200;" ng-if="ElecFenceCurrentFn.isShow")
+                        .widget-body.no-padding(style="margin:0;")
+                            #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer(style="position:absolute;z-index:200;" ng-if="isShow")
                                 table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(style="width:430px;margin-top:0!important" role='grid', aria-describedby='datatable_col_reorder_info')
                                     thead
                                         tr(role='row')

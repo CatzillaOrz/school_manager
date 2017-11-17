@@ -3,7 +3,8 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
-										   MajorService, CollegeService, ClassService, messageService, CommonService, RoleAuthService) {
+										   MajorService, CollegeService, ClassService, messageService, CommonService, RoleAuthService, ngDialog) {
+		$scope.isShow = false;
 		$scope.evaFenceFn = {
 			//结果中离线的人数，
 			allLeave: 0,
@@ -39,7 +40,7 @@ angular.module('dleduWebApp')
 				isLoginId: null,
 				isAtSchool: null,
 				isOline: null,
-				isLogin: null,
+				isLogin: '1',
 				time: '',
 				name: null,
 				jobNumber: null,
@@ -56,6 +57,25 @@ angular.module('dleduWebApp')
 			isOnlines: [],//是否在线
 
 
+			//当天轨迹信息
+			locusList: null,
+			//轨迹坐标点
+			orbits: [],
+			//参数
+			paramsOribit:{
+				id: 0,
+				date: '',
+			},
+
+			directUrl:'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png',
+			isShowQueryDialog: false,
+			mapObjs: {
+				markersOribit: [],
+				markers: [],
+				lineArr: [],
+				map: null
+			},
+
 			//控制按钮权限
 			isUseAuth: function(type){
 				return RoleAuthService.isUseAuthority(type);
@@ -64,18 +84,18 @@ angular.module('dleduWebApp')
 			//获取结果筛选条件
 			getResultOption: function (type) {
 				if (type == "isLeaveSchool") {
-					this.isLeaveSchools = [{id: null, text: '是否曾离校'}, {id: 1, text: '是'}, {id: 0, text: '否'}, {
+					this.isLeaveSchools = [{id: null, text: '请选择'}, {id: '1', text: '是'}, {id: '0', text: '否'}, {
 						id: 2,
 						text: '未知'
 					}];
 				} else if (type == "isActive") {
-					this.isActives = [{id: null, text: '是否未激活'}, {id: 0, text: '是'}, {id: 1, text: '否'}];
+					this.isActives = [{id: null, text: '请选择'}, {id: '0', text: '是'}, {id: '1', text: '否'}];
 				} else if (type == "isLogin") {
-					this.isLogins = [{id: null, text: '当天是否登录'}, {id: 1, text: '是'}, {id: 0, text: '否'}];
+					this.isLogins = [{id: null, text: '请选择'}, {id: '1', text: '是'}, {id: '0', text: '否'}];
 				} else if (type == "location") {
-					this.locations = [{id: null, text: '当前位置'}, {id: 1, text: '在校'}, {id: 0, text: '离校'}, {id: 2, text: '未知'}];
+					this.locations = [{id: null, text: '请选择'}, {id: '1', text: '在校'}, {id: '0', text: '离校'}, {id: '2', text: '未知'}];
 				} else if (type == "isOnline") {
-					this.isOnlines = [{id: null, text: '在线状态'}, {id: 1, text: '在线'}, {id: 0, text: '离线'}];
+					this.isOnlines = [{id: null, text: '请选择'}, {id: '1', text: '在线'}, {id: '0', text: '离线'}];
 				}
 
 				//return {minimumResultsForSearch: -1};
@@ -231,7 +251,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.allLeave = data.onceLeave;
 						that.currentLeave = data.nowLeave;
-						that.records = data.pagedata.data;
+						that.records= data.pagedata.data;
 						that.page = data.pagedata.page;
 						that.page.pageNumber++;
 					})
@@ -280,6 +300,169 @@ angular.module('dleduWebApp')
 			setFence: function () {
 				$state.go('elecfencecreate');
 			},
+
+			//点击隐藏div
+			showListOribit: function(){
+				if(!this.isShowQueryDialog){
+					this.isShowQueryDialog = true;
+					this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/675e01b3-d38a-49ed-8929-df724d05bb81.png';
+				}else{
+					this.isShowQueryDialog = false;
+					this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
+				}
+			},
+
+			//当天轨迹
+			goCurrentOribit: function(index){
+				var record = this.records[index];
+				this.paramsOribit.id = record.id;
+				this.paramsOribit.date = this.params.time;
+				var that = this;
+				var params = {
+					template: 'oribitDialog',
+					width: 1000,
+					height: 600,
+					scope: $scope,
+					onOpenCallback: function(){
+						that.initOribit();
+					}
+				};
+				//初始化点击展开按钮
+				this.isShowQueryDialog = false;
+				this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
+				ngDialog.open(params);
+			},
+
+			// 获取当天轨迹
+			getElecFenceCurrent: function () {
+				var that = this;
+				var params = {
+					organId: AuthService.getUser().orgId
+				};
+				params.userId = that.paramsOribit.id;
+				params.time  = that.paramsOribit.date;
+				EduManService.getElecFenceCurrent(params).$promise
+					.then(function (data) {
+						that.locusList = data;
+						that.orbits = that.getOrbits(data.useElectricFenceUserDaominList);
+						that.orbit(that.orbits);
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+			/**
+			 * 从返回的数据中获取轨迹列表
+			 */
+			getOrbits: function(data){
+				var lonlats = [];
+				angular.forEach(data, function(item){
+					var data = item.lltude.split('-');
+					var tempArr = [];
+					tempArr.push(data[0], data[1]);
+					lonlats.push(tempArr);
+				})
+				return  lonlats;
+			},
+
+
+			/**
+			 * 查询轨迹点信息
+			 * @param id
+			 */
+			getOrbitValue: function(marker){
+				var id = marker.getExtData();
+				this.showInfoDialogOribit(marker, $scope.orbitRecord[id])
+			},
+
+			//显示轨迹时用的弹出窗口
+			showInfoDialogOribit: function (marker, data){
+				var content = [];
+				content.push("所在地：" + (data.address ? data.address : ''));
+				content.push("时间：" + (data.noticeTime ? data.noticeTime : ''));
+
+				var infoWindow = new AMap.InfoWindow({
+					isCustom: true,  //使用自定义窗体
+					content: createInfoWindow('当天轨迹', content.join("<br/>")),
+					offset: new AMap.Pixel(10, -45)
+				});
+				infoWindow.open($scope.elecMapShow.map, marker.getPosition());
+			},
+
+			/**
+			 * 根据坐标值绘制轨迹
+			 * @param datas
+			 */
+			orbit: function (datas) {
+				var that = this;
+				var lineArr = [], polyline, passedPolyline;
+				this.mapObjs.map.remove(that.mapObjs.markersOribit);
+				this.mapObjs.map.remove(that.mapObjs.markers);
+				this.mapObjs.map.remove(that.mapObjs.lineArr);
+				if (datas.length == 0) {
+					return;
+				}
+				//创建marker
+				for (var j = 0; j < datas.length; j++) {
+					var temp = datas[j];
+					var lonlat = temp;
+					lineArr.push([lonlat[1], lonlat[0]]);
+					var imgSrc = "http://omh5h0gd2.bkt.clouddn.com/titles.jpg";
+					var content = "<div class='elecmap-tip'><img src=" + imgSrc + " style='width:20px;height:20px;'></div> ";
+					var marker = new AMap.Marker({
+						map: this.mapObjs.map,
+						position: [lonlat[1], lonlat[0]],
+						extData: j,
+						content: content,
+						offset: new AMap.Pixel(-7, -10)
+					});
+					that.mapObjs.markersOribit.push(marker);
+
+					//鼠标点击marker弹出自定义的信息窗体
+					AMap.event.addListener(marker, 'click', function (obj) {
+						//$scope.getOrbitValue(obj.target);
+					});
+				}
+
+				this.mapObjs.map.setFitView();
+				this.mapObjs.map.setCenter([lineArr[0][0], lineArr[0][1]]);
+
+				// 绘制轨迹
+				polyline = new AMap.Polyline({
+					map: that.mapObjs.map,
+					path: lineArr,
+					strokeColor: "#369AFF",  //线颜色
+					strokeOpacity: 0.9,     //线透明度
+					strokeWeight: 6,      //线宽
+					showDir: true
+				});
+				that.mapObjs.lineArr.push(polyline);
+				passedPolyline = new AMap.Polyline({
+					map: that.mapObjs.map,
+					strokeColor: "#F00",  //线颜色
+					strokeWeight: 3,      //线宽
+				});
+			},
+
+
+
+			//地图
+			createMapobj: function(){
+				this.mapObjs.map = new AMap.Map('elecmap', {
+					resizeEnable: true,
+					zoom:13
+				});
+			},
+
+			//初始化当前轨迹页面
+			initOribit: function () {
+				var that = $scope.evaFenceFn;
+				that.createMapobj();
+				that.getElecFenceCurrent();
+			},
+
+
 
 			init: function () {
 				this.getCollegeDropList();
@@ -351,4 +534,26 @@ angular.module('dleduWebApp')
 				}
 			});
 		});
+	})
+	.directive('scrollTop', function($window){
+		return {
+			restrict: 'A',
+			scope: false,   // 默认值
+			link: function(scope, element, attrs) {
+				scope.isShow = false;
+				angular.element(element).on('scroll', onScroll);
+				function onScroll(){
+					var offsetTop = element[0].scrollTop;
+					if(offsetTop > 0){
+						scope.$apply(function () {
+							scope.isShow = true;
+						});
+					}else{
+						scope.$apply(function () {
+							scope.isShow = false;
+						});
+					}
+				}
+			}
+		}
 	});
