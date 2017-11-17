@@ -324,6 +324,7 @@ angular.module('dleduWebApp')
 					height: 600,
 					scope: $scope,
 					onOpenCallback: function(){
+						console.log("****");
 						console.log(typeof that.initOribit);
 						that.initOribit();
 					}
