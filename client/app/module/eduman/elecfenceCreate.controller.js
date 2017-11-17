@@ -165,15 +165,22 @@ angular.module('dleduWebApp')
 			 * 保存设置
 			 */
 			saveSet: function(){
-				if(this.elecSet.termSelectedId){
-					var data = $('#starttime').data('datepicker');
-					this.elecSet.selectTime = data.selectTime;
-					this.elecSet.unSelectTime = data.unSelectTime;
-				}
+
 				//获取经纬度
 				if(this.polyVer.length == 0){
 					messageService.openMsg("请先设置多边形!");
 					return;
+				}
+
+				if(this.elecSet.termSelectedId && this.elecSet.termSelectedId == 0){
+					messageService.openMsg("请先创建学期!");
+					return;
+				}
+
+				if(this.elecSet.termSelectedId && this.elecSet.termSelectedId != 0){
+					var data = $('#starttime').data('datepicker');
+					this.elecSet.selectTime = data.selectTime;
+					this.elecSet.unSelectTime = data.unSelectTime;
 				}
 
 				var paramsObj = {lltudes: this.polyVer, monitorDate: this.elecSet.selectTime, nomonitorDate: this.elecSet.unSelectTime,
