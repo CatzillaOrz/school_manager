@@ -448,16 +448,18 @@ angular.module('dleduWebApp')
 
 
 			//地图
-			mapobj: function(){
+			createMapobj: function(){
 				this.mapObjs.map = new AMap.Map('elecmap', {
 					resizeEnable: true,
 					zoom:13
 				});
+				console.log(this.mapObjs.map);
 			},
 
 			//初始化当前轨迹页面
 			initOribit: function () {
-				this.mapobj();
+				console.log(this.mapObjs.map);
+				this.createMapobj();
 				this.getElecFenceCurrent();
 			},
 
