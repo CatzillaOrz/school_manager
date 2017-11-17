@@ -164,27 +164,4 @@ angular.module('dleduWebApp')
 		};
 		$scope.ElecFenceCurrentFn.init();
 		$scope.isShow = false;
-	})
-	.directive('scrollTop', function($window){
-		return {
-			restrict: 'A',
-			scope: false,   // 默认值
-			link: function(scope, element, attrs) {
-				scope.isShow = false;
-				angular.element(element).on('scroll', onScroll);
-				function onScroll(){
-					var offsetTop = element[0].scrollTop;
-					if(offsetTop > 0){
-						scope.$apply(function () {
-							scope.isShow = true;
-						});
-					}else{
-						scope.$apply(function () {
-							scope.isShow = false;
-						});
-					}
-				}
-			}
-		}
 	});
-
