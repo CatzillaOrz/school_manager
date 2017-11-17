@@ -317,14 +317,15 @@ angular.module('dleduWebApp')
 				var record = this.records[index];
 				this.paramsOribit.id = record.id;
 				this.paramsOribit.date = this.params.time;
+				var that = this;
 				var params = {
 					template: 'oribitDialog',
 					width: 1000,
 					height: 600,
 					scope: $scope,
-					//controller: 'OribitCtrl',
 					onOpenCallback: function(){
-						$scope.evaFenceFn.initOribit();
+						console.log(typeof that.initOribit);
+						that.initOribit();
 					}
 				};
 				//初始化点击展开按钮
@@ -453,13 +454,10 @@ angular.module('dleduWebApp')
 					resizeEnable: true,
 					zoom:13
 				});
-				console.log("***");
-				console.log("+++"+this.mapObjs.map);
 			},
 
 			//初始化当前轨迹页面
 			initOribit: function () {
-				console.log("+++"+this.mapObjs.map);
 				var that = $scope.evaFenceFn;
 				that.createMapobj();
 				that.getElecFenceCurrent();
