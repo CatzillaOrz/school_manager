@@ -139,7 +139,11 @@ angular.module('dleduWebApp')
 				var semeter = this.getSemeterById(newVal);
 				if(this.record){
 					if(this.record.semesterId == newVal){
-						params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), false);
+						if(this.record.monitorDate){//没有获取到监控日期
+							params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), true);
+						}else{
+							params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), false);
+						}
 					}else {
 						params = this.getWeekAndWeekend(new Date(semeter.startDate + ' 00:00:00'), new Date(semeter.endDate + ' 00:00:00'), true);
 					}
