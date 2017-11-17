@@ -453,14 +453,16 @@ angular.module('dleduWebApp')
 					resizeEnable: true,
 					zoom:13
 				});
-				console.log(this.mapObjs.map);
+				console.log("***");
+				console.log("+++"+this.mapObjs.map);
 			},
 
 			//初始化当前轨迹页面
 			initOribit: function () {
-				console.log(this.mapObjs.map);
-				this.createMapobj();
-				this.getElecFenceCurrent();
+				console.log("+++"+this.mapObjs.map);
+				var that = $scope.evaFenceFn;
+				that.createMapobj();
+				that.getElecFenceCurrent();
 			},
 
 
