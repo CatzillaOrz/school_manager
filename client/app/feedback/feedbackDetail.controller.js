@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
             replayName:'发表评论',
             replayBut:'回复',
             replayId:null,
+            finished:$state.params.finished,
             findFeedbackById:function () {
                 var _this=this;
                 FeedbackService.findFeedbackById({id:$state.params.id}).success(function (data) {
@@ -29,11 +30,11 @@ angular.module('dleduWebApp')
                     })
                 })
             },
-            replayOrCancel:function (demain) {
+            replayOrCancel:function (id,name) {
                 var _this=this;
                 _this.isReplay = !_this.isReplay;
-                _this.replayId = demain.id;
-                _this.replayContent = _this.isReplay?"回复"+demain.name+':':'';
+                _this.replayId = id;
+                _this.replayContent = _this.isReplay?"回复"+name+':':'';
                 _this.replayBut = _this.isReplay?"取消":"回复";
                 _this.replayName =  _this.isReplay?'确认回复':'发表评论';
             },

@@ -70,7 +70,7 @@
                                     span(ng-if="feedback.finished==0") 未完成
                                     span(ng-if="feedback.finished==1") 已完成
                                 td
-                                    a.handle(ui-sref="feedbackdetail({id:feedback.id})")
+                                    a.handle(ui-sref="feedbackdetail({id:feedback.id,finished:feedback.finished})")
                                         i.fa.fa-trash-o
                                         span 查看
                     .dt-toolbar-footer
