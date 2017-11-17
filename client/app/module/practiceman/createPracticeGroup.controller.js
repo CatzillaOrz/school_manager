@@ -197,7 +197,7 @@ angular.module('dleduWebApp')
 			getSimpleStudents: function () {
 				var _this = this;
 				var params = _this.searchStudentParams;
-				params.pageSize = 20;
+				params.pageSize = 100;
 				params.userId = AuthService.getUser().id;
 				StudentService.getSimpleStudents(params).$promise
 					.then(function (data) {
