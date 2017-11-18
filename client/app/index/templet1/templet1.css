@@ -20,42 +20,38 @@
     height: inherit; }
     .templet1-container .shade .solid-conatier1 {
       position: fixed;
-      width: 110%;
-      height: 110%;
-      margin: -10%;
-      animation-duration: 0.1s; }
+      width: 200%;
+      height: 200%;
+      margin: -10%; }
       .templet1-container .shade .solid-conatier1 .solid-heng0 {
         position: fixed;
         width: 100%;
-        opacity: 0.2;
+        opacity: 0.1;
         background-position-y: 10px;
         margin-top: 10px;
         background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_heng.png);
         height: inherit;
         animation-name: LinefadeInUp;
-        animation-duration: 1s;
-        animation-delay: 1s; }
+        animation-duration: 1s; }
       .templet1-container .shade .solid-conatier1 .solid-shu0 {
         position: fixed;
         width: 100%;
-        opacity: 0.2;
+        opacity: 0.1;
         background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_shu.png);
         height: inherit;
         background-position-x: 10px;
         margin-right: 10px;
         animation-name: LinefadeInLeft;
-        animation-duration: 1s;
-        animation-delay: 1s; }
+        animation-duration: 1s; }
     .templet1-container .shade .solid-conatier2 {
       position: fixed;
-      width: 110%;
-      height: 110%;
-      margin: -10%;
-      animation-duration: 0.05s; }
+      width: 200%;
+      height: 200%;
+      margin: -10%; }
       .templet1-container .shade .solid-conatier2 .solid-heng1 {
         position: fixed;
         width: 100%;
-        opacity: 0.1;
+        opacity: 0.05;
         background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_heng.png);
         height: inherit;
         background-position-y: 0px;
@@ -65,14 +61,13 @@
       .templet1-container .shade .solid-conatier2 .solid-shu1 {
         position: fixed;
         width: 100%;
-        opacity: 0.1;
+        opacity: 0.05;
         background-position-x: 0px;
         margin-right: 0px;
         background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_shu.png);
         height: inherit;
         animation-name: LinefadeInLeft;
-        animation-duration: 1s;
-        animation-delay: 1s; }
+        animation-duration: 1s; }
     .templet1-container .shade .header {
       position: fixed;
       width: 100%;
@@ -150,6 +145,7 @@
       bottom: 28px;
       text-align: center;
       width: 100%;
-      color: #fff; }
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px; }
 
 /*# sourceMappingURL=templet1.css.map */
