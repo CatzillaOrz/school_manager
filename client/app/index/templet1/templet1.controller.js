@@ -17,10 +17,12 @@ angular.module('dleduWebApp')
         function moveBackground() {
             x += (lFollowX - x) * friction;
             y += (lFollowY - y) * friction;
-            traX = x == 0 ? -x : (-x + 10);
-            traY = y == 0 ? -y : (-y + 10);
+            traX =  -x + 10;
+            traY = -y + 10;
             var translate1 = 'translate(' + x + 'px, ' + y + 'px)';
             var translate2 = 'translate(' + traX + 'px, ' + traY + 'px)';
+            $(".solid-conatier1").animate({"webkitAnimationDuration":"5s","-webkit-animation-duration":"5s"});
+            $(".solid-conatier2").animate({"webkitAnimationDuration":"10s","-webkit-animation-duration":"10s"});
             $('.solid-conatier1').css({
                 '-webit-transform': translate1,
                 '-moz-transform': translate1,
@@ -30,16 +32,14 @@ angular.module('dleduWebApp')
                 '-webit-transform': translate2,
                 '-moz-transform': translate2,
                 'transform': translate2,
-                'animation-duration': delay
+                '-webkit-animation': delay
             });
-
 
             window.requestAnimationFrame(moveBackground);
         }
-
-        $(window).on('mousemove click', function (e) {
-            var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
-            var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        $(window).on('mouseover', function (e) {
+            var lMouseX = $(window).width() / 2 - e.clientX;
+            var lMouseY = $(window).height() / 2 - e.clientY;
             lFollowX = (10 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
             lFollowY = (10 * lMouseY) / 100;
         });
