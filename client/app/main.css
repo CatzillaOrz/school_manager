@@ -66,7 +66,17 @@ h6 {
 /**
 所有子页面的独立样式都放这里
 */
+html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute; }
+
 body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
   background-color: #EFF3F6; }
 
