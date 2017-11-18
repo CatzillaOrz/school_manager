@@ -18,7 +18,6 @@ common scss
 /**
  * Created by Secmax on 16/5/20.
  */
-@import url(../app/index/templet1/templet1.css);
 h1 {
   font-size: 28px;
   font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
@@ -3925,5 +3924,155 @@ a:focus {
 
 .feedback-bottom-line {
   border-bottom: 1px solid #adaaaa; }
+
+.templet1-container {
+  width: 100%;
+  height: 100%;
+  background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-bg.png) center center no-repeat;
+  background-size: cover;
+  overflow: hidden; }
+@keyframes LinefadeInLeft {
+  from {
+    transform: translate3d(-2000px, 0, 0); }
+  to {
+    transform: none; } }
+@keyframes LinefadeInUp {
+  from {
+    transform: translate3d(0, 2000px, 0); }
+  to {
+    transform: none; } }
+  .templet1-container .shade {
+    opacity: 0.9;
+    background: #3D8DFF;
+    height: inherit; }
+    .templet1-container .shade .solid-conatier1 {
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      margin: -10%; }
+      .templet1-container .shade .solid-conatier1 .solid-heng0 {
+        position: fixed;
+        width: 100%;
+        opacity: 0.1;
+        background-position-y: 10px;
+        margin-top: 10px;
+        background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_heng.png);
+        height: inherit;
+        animation-name: LinefadeInUp;
+        animation-duration: 1s; }
+      .templet1-container .shade .solid-conatier1 .solid-shu0 {
+        position: fixed;
+        width: 100%;
+        opacity: 0.1;
+        background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_shu.png);
+        height: inherit;
+        background-position-x: 10px;
+        margin-right: 10px;
+        animation-name: LinefadeInLeft;
+        animation-duration: 1s; }
+    .templet1-container .shade .solid-conatier2 {
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      margin: -10%; }
+      .templet1-container .shade .solid-conatier2 .solid-heng1 {
+        position: fixed;
+        width: 100%;
+        opacity: 0.05;
+        background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_heng.png);
+        height: inherit;
+        background-position-y: 0px;
+        margin-top: 0px;
+        animation-name: LinefadeInUp;
+        animation-duration: 1s; }
+      .templet1-container .shade .solid-conatier2 .solid-shu1 {
+        position: fixed;
+        width: 100%;
+        opacity: 0.05;
+        background-position-x: 0px;
+        margin-right: 0px;
+        background: url(http://oli56k5b0.bkt.clouddn.com/school/templet1-solid_shu.png);
+        height: inherit;
+        animation-name: LinefadeInLeft;
+        animation-duration: 1s; }
+    .templet1-container .shade .header {
+      position: fixed;
+      width: 100%;
+      animation-duration: 0.3s;
+      animation-delay: 1s;
+      z-index: 999; }
+      .templet1-container .shade .header .azx-school-header {
+        position: relative;
+        color: #fff;
+        background: transparent;
+        border: none; }
+        .templet1-container .shade .header .azx-school-header .school-header {
+          background: none;
+          border: none;
+          height: 56px;
+          padding-top: 16px; }
+          .templet1-container .shade .header .azx-school-header .school-header .border-top {
+            display: none; }
+          .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar {
+            width: 1200px;
+            margin: 0px auto; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .logo {
+              height: 40px; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .btn-login {
+              color: #fff;
+              border: 1px solid #fff;
+              background: transparent; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .btn-login:hover {
+              color: #509EFF;
+              border: 1px solid #fff;
+              background: #fff; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .navigation ul li {
+              color: #fff; }
+    .templet1-container .shade .context {
+      width: 1200px;
+      margin: 0px auto;
+      height: inherit; }
+      .templet1-container .shade .context .context1 {
+        height: 37.9%;
+        width: 100%;
+        text-align: center;
+        animation-duration: 1s;
+        animation-delay: 1s; }
+        .templet1-container .shade .context .context1 .logo-mark {
+          width: 100%;
+          bottom: 0;
+          position: absolute;
+          margin-left: auto;
+          margin-right: auto; }
+          .templet1-container .shade .context .context1 .logo-mark img {
+            width: 150px;
+            height: 130px; }
+      .templet1-container .shade .context .context2 {
+        margin-top: 40px;
+        width: 100%;
+        text-align: center;
+        animation-duration: 1s;
+        animation-delay: 1.1s; }
+        .templet1-container .shade .context .context2 img {
+          width: 560px;
+          height: 40px; }
+      .templet1-container .shade .context .context3 {
+        margin-top: 40px;
+        width: 100%;
+        text-align: center;
+        animation-duration: 1s;
+        animation-delay: 1.2s; }
+        .templet1-container .shade .context .context3 img {
+          width: 430px;
+          height: 54px; }
+    .templet1-container .shade .footer {
+      animation-delay: 1.6s;
+      animation-duration: 0.3s;
+      position: absolute;
+      bottom: 28px;
+      text-align: center;
+      width: 100%;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px; }
 
 /*# sourceMappingURL=main.css.map */
