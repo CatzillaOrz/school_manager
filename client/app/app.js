@@ -70,7 +70,7 @@ angular.module('dleduWebApp', [
                 return response;
             },
             'request': function (config) {
-                if(config.url.split('/').indexOf('geo') == -1){
+                if(config.url.split('/').indexOf('geo') == -1&&config.url.split('/').indexOf('templet1') == -1&&config.method!="JSONP"){
                     loading(true,'all')
                 }
                 return config;
@@ -132,7 +132,11 @@ angular.module('dleduWebApp', [
             //入口路由配置
             $urlRouterProvider
                 .otherwise('/apprenticeship');
+        }else if(domain=='gllg'){
+            $urlRouterProvider
+                .otherwise('/templet1');
         }else{
+
             //入口路由配置
             $urlRouterProvider
                 .otherwise('/index');

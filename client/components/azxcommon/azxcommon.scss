@@ -34,12 +34,15 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
   background: #fff;
 }
 .azx-school-header{
+  position: relative;
   background-color: $navbar-default-bg;
   font-family: $font-family-sans-serif;
   .school-header {
     background: #ffffff;
     height: 50px;
     width: 100%;
+    z-index: 999;
+    position: relative;
     border-bottom: 1px solid #eeeeee;
     .border-top {
       width: 100%;
@@ -56,7 +59,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        height: 45px;
+        height: 46px;
       }
       .account {
         height: $nav-container-height;
@@ -71,7 +74,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
           }
         }
         .user-menu {
-          width: 130px;
+          width: 145px;
           padding: 0;
           height: $nav-container-height;
           display: table-cell;
@@ -235,7 +238,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
     position: relative;
     z-index: 999;
     background: #ffffff;
-    @include box-shadow2(0, 4px, 5px, rgba(0, 0, 0, 0.1));
+    // @include box-shadow2(0, 4px, 5px, rgba(0, 0, 0, 0.1));
     .border-top {
       width: 100%;
       height: $border-top-height;
@@ -324,10 +327,24 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
             }
           }
           &:hover {
-            background: #f5f5f5;
-            color: lighten($brand-logo, 5%);
+            // background: #f5f5f5;
+            color: $brand-hover;
             cursor: pointer;
           }
+
+        }
+        .active{
+          color: $brand-hover;
+          position:relative;
+          .keyline{
+            height:2px;
+            position:absolute;
+            width:16px;
+            background:#28b780;
+            left:40%;
+            bottom:10px;
+          }
+
         }
       }
       .account {
@@ -337,13 +354,13 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
         display: table;
         li {
           &:hover {
-            background: #f5f5f5;
+            // background: #f5f5f5;
             color: $brand-logo;
             cursor: pointer;
           }
         }
         .user-menu {
-          width: 130px;
+          width: 145px;
           padding: 0;
           height: $nav-container-height;
           display: table-cell;
@@ -419,18 +436,16 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
         }
       }
       .btn-login {
-        height: 30px;
+        height: 29px;
         margin-top: 8px;
         margin-left: 20px;
-        padding: 4px 20px;
-        min-width: 100px;
+        padding: 4px 10px;
+        min-width: 41px;
         float: right;
-        color: #ffffff;
+        color: #666;
         font-family: $font-family-sans-serif;
-        background-color: $brand-primary;
-        border-color: darken($brand-primary, 0.1);
-        font-weight: bold;
-        font-size: 14px;
+        background-color: #fff;
+        font-size: 12px;
         line-height: 1em;
         text-decoration: none;
         text-align: center;
@@ -439,11 +454,16 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
         -moz-appearance: none;
         appearance: none;
         cursor: pointer;
-        border: none;
+        border: 1px solid #8b8b8b;
         box-sizing: border-box;
         transition-property: all;
         transition-duration: .3s;
-        border-radius: 5px;
+        border-radius: 4px;
+      }
+      .btn-login:hover{
+        background-color:$brand-hover;
+        color:#fff;
+        border: 1px solid $brand-hover;
       }
     }
   }
@@ -459,7 +479,6 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
     .nav-sub-container {
       margin: 0 auto;
       height: $subnav-height;
-      padding: 0 15px;
       box-sizing: border-box;
       overflow: hidden;
       @media only screen and (min-width: 1px) and (max-width: 899px) {
@@ -476,7 +495,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
           font-family: $font-family-sans-serif;
           float: left;
           margin: 0;
-          padding: 0 30px;
+          padding: 0 22px;
           line-height: $subnav-height + 2;
           font-size: 14px;
           font-weight: 400;
@@ -505,7 +524,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
   }
   .nav-fiexd-box {
     position: fixed;
-    background: rgba(255, 255, 255, .8) !important;
+    background: rgba(255, 255, 255, .9) !important;
     height: $nav-height;
     .nav-container {
       height: $nav-container-height;
@@ -548,7 +567,9 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
             border: 1px solid $brand-logo;
             border-radius: 25px!important;
           }
+
         }
+
       }
       .account {
         height: $nav-container-height;
@@ -576,7 +597,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
   }
   .nav-fiexd-box {
     position: fixed;
-    background: rgba($brand-inverse, .5) !important;
+    background: rgba($brand-inverse, .9) !important;
     .nav-container {
       color: #ffffff;
       .azxlogo {
@@ -735,7 +756,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
 //** footer
 .azx-footer {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #3c3c3c;
   //border-top: 1px solid #eeeeee;
   min-height: 60px;
   .footer-content {
@@ -754,12 +775,21 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
     .azx-logo-gray {
       display: inline-block;
       padding-right: 30px;
-      border-right: 1px solid #dddddd;
+      border-right: 1px solid #6c6c6c;
       #azxlogo {
         width: auto;
         width: 104px\9;
         height: 35px;
       }
+    }
+    .azx-logo-white{
+      width: 117px;
+      color: #fff;
+      position: absolute;
+      left: 0px;
+      top: 18px;
+      border-right: 1px solid #ccc;
+      padding-right: 20px;
     }
     .version {
       font-size: 12px;
@@ -769,7 +799,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
     .Copyright {
       display: inline-block;
       font-size: 12px;
-      color: #999;
+      color: #ccc;
       span {
         color: #ccc;
       }
@@ -780,7 +810,7 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
         color: #999;
         margin: 5px 10px;
         &:hover {
-          color: #666;
+          color: #ccc;
         }
       }
     }
@@ -798,11 +828,12 @@ $avatar-size: 20 30 40 50 60 70 80 100 120 150;
     }
     .footer-right {
       display: inline-block;
-      margin-left: 30px;
+      margin-left:149px;
+      margin-top:2px;
     }
     .float-right {
       position: absolute;
-      bottom: 20px;
+      bottom: 23px;
       right: 80px;
       z-index: 5000;
     }

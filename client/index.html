@@ -22,7 +22,7 @@
     <meta name="keywords" content="教育,在线教育,教育平台,招聘,招聘平台,鼎利,世纪鼎利">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/lib/azxcommon.css"/>
+    <!--<link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/lib/azxcommon.css"/>-->
 
     <!--<link rel="stylesheet" href="http://oli56k5b0.bkt.clouddn.com/azxcommon-testheader.css " />-->
     <!-- build:css(client) app/vendor.css -->
@@ -41,6 +41,7 @@
     <link rel="stylesheet" type="text/css" href="bower_components/angular-native-datepicker/build/themes/classic.date.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/angular-native-datepicker/build/themes/default.date.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/angular-native-datepicker/build/themes/default.time.css"/>
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -64,7 +65,7 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-<div ui-view="root"></div>
+<div ui-view="root" style="height:inherit;"></div>
 
 <!-- build:js({client,node_modules}) app/vendor.js -->
 <!-- bower:js -->
@@ -135,6 +136,7 @@
 <script src="services/role-authority.js"></script>
 <script src="filters/index.js"></script>
 <script src="app/app.js"></script>
+<script src="components/azxcommon/azxcommon.js"></script>
 <!-- injector:js -->
 <script src="app/layout/layout.controller.js"></script>
 <script src="app/layout/navigation/navMenu.js"></script>
@@ -275,6 +277,8 @@
 <script src="app/module/rolemanager/distList.controller.js"></script>
 <script src="app/module/rolemanager/distedList.controller.js"></script>
 
+<script src="app/index/templet1/templet1.js"></script>
+<script src="app/index/templet1/templet1.controller.js"></script>
 <!-- endinjector -->
 <!-- endbuild -->
 <script src="components/ueditor/ueditor.config.js"></script>
