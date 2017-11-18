@@ -18,6 +18,7 @@ common scss
 /**
  * Created by Secmax on 16/5/20.
  */
+@import url(../app/index/templet1/templet1.css);
 h1 {
   font-size: 28px;
   font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;

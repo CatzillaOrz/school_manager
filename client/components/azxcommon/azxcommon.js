@@ -11,6 +11,13 @@ angular.module("azx.common", ['ui.bootstrap'])
  * 账号相关服务
  */
     .factory('AuthService', ['$rootScope', '$http', '$q', '$window', function ($rootScope, $http, $q, $window) {
+        var _headerLink = {
+            DEV: ['aizhixindev.com', 'em.aizhixindev.com', 'pt.aizhixindev.com', 'hy.aizhixindev.com', 'dd.aizhixindev.com', 'school.aizhixindev.com'],
+            TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com', 'schooltest.aizhixin.com'],
+            PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'school.dlztc.com'],
+            SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com'],
+            PRODUCT:['zhixin','em','pt','hy','dd','school']
+        };
         var AuthService = {
             setUser: function (user) {
                 for (var _k in user) {
@@ -24,35 +31,34 @@ angular.module("azx.common", ['ui.bootstrap'])
                         if (!user.role) {
                             user.role = role;
                         } else if (user.role == 'ROLE_TEACHER') {
-                            // console.error('用户角色冲突，不能既是老师又是学生，请联系学院平台管理员查验数据。');
+                            // //console.error('用户角色冲突，不能既是老师又是学生，请联系学院平台管理员查验数据。');
                         }
                     } else if (role == 'ROLE_TEACHER') {
                         if (!user.role) {
                             user.role = role;
                         } else if (user.role == 'ROLE_STUDENT') {
-                            // console.error('用户角色冲突，不能既是老师又是学生，请联系学院平台管理员查验数据。');
+                            // //console.error('用户角色冲突，不能既是老师又是学生，请联系学院平台管理员查验数据。');
                         }
+                    }else if(role == "ROLE_ORG_ADMIN"){
+                        user.role = role;
                     }
                 });
                 var domain = $window.document.domain.split('.').reverse()[1];
-                console.log(domain);
-                if (domain == 'dlztc') {
-                    Cookies.set('user', user, {domain: '.dlztc.com'});
-                } else if (domain == 'aizhixin') {
-                    Cookies.set('user', user, {domain: '.aizhixin.com'});
+                ////console.log(domain);
+                if (domain) {
+                    Cookies.set('user', user, {domain: '.'+domain+'.com'});
+                    Cookies.set('authorize', true, {domain: '.'+domain+'.com'});
                 } else {
                     Cookies.set('user', user);
+                    Cookies.set('authorize', true);
                 }
                 $rootScope.user = user;
             },
             clearUser: function () {
                 var domain = $window.document.domain.split('.').reverse()[1];
-                if (domain == 'dlztc') {
-                    Cookies.remove('user', {domain: '.dlztc.com'});
-                    Cookies.remove('authorize', {domain: '.dlztc.com'});
-                } else if (domain == 'aizhixin') {
-                    Cookies.remove('user', {domain: '.aizhixin.com'});
-                    Cookies.remove('authorize', {domain: '.aizhixin.com'});
+                if (domain) {
+                    Cookies.remove('user', {domain: '.'+domain+'.com'});
+                    Cookies.remove('authorize', {domain: '.'+domain+'.com'});
                 } else {
                     Cookies.remove('user');
                     Cookies.remove('authorize');
@@ -60,8 +66,40 @@ angular.module("azx.common", ['ui.bootstrap'])
                 $rootScope.user = undefined;
             },
             getUser: function () {
-                // console.log(Cookies.getJSON('user'));
+                // //console.log(Cookies.getJSON('user'));
                 return Cookies.getJSON('user');
+            },
+            setSiginPosition:function () {
+                var _this=this;
+                var isCustomize=_this.isCustomize();
+                var domain = $window.document.domain.split('.').reverse()[1];
+                if(!isCustomize){
+                    ////console.log(domain);
+                    if (domain) {
+                        Cookies.set("setSiginPosition","aizhixin", {domain: '.'+domain+'.com'});
+                    } else {
+                        Cookies.set("setSiginPosition","aizhixin");
+                    }
+
+                }else {
+                    if (domain) {
+                        Cookies.set("setSiginPosition","school", {domain: '.'+domain+'.com'});
+                    } else {
+                        Cookies.set("setSiginPosition","school");
+                    }
+                }
+            },
+            clearSiginPosition:function () {
+                var domain = $window.document.domain.split('.').reverse()[1];
+                if (domain) {
+                    Cookies.remove("setSiginPosition", {domain: '.'+domain+'.com'});
+                } else {
+                    Cookies.remove('setSiginPosition');
+                }
+
+            },
+            getSiginPosition:function () {
+                return Cookies.get("setSiginPosition");
             },
             signIn: function (username, password) {
                 var deferred = $q.defer();
@@ -70,17 +108,10 @@ angular.module("azx.common", ['ui.bootstrap'])
                     password: password
                 })
                     .success(function (user) {
-                        console.log(user);
+                        // //console.log(user);
                         if (!!user) {
                             AuthService.setUser(user);
-                            var domain = $window.document.domain.split('.').reverse()[1];
-                            if (domain == 'dlztc') {
-                                Cookies.set('authorize', true, {domain: '.dlztc.com'});
-                            } else if (domain == 'aizhixin') {
-                                Cookies.set('authorize', true, {domain: '.aizhixin.com'});
-                            } else {
-                                Cookies.set('authorize', true);
-                            }
+                            AuthService.setSiginPosition();
                             deferred.resolve(user);
                             return user;
                         }
@@ -90,23 +121,17 @@ angular.module("azx.common", ['ui.bootstrap'])
                     });
                 return deferred.promise;
             },
+            //扫码登录
             qrcodeSignIn: function (token) {
                 var deferred = $q.defer();
                 $http.post("api/qrcodeSignIn", {
                     token: token
                 })
                     .success(function (user) {
-                        console.log(user);
+                        // //console.log(user);
                         if (!!user) {
                             AuthService.setUser(user);
-                            var domain = $window.document.domain.split('.').reverse()[1];
-                            if (domain == 'dlztc') {
-                                Cookies.set('authorize', true, {domain: '.dlztc.com'});
-                            } else if (domain == 'aizhixin') {
-                                Cookies.set('authorize', true, {domain: '.aizhixin.com'});
-                            } else {
-                                Cookies.set('authorize', true);
-                            }
+                            AuthService.setSiginPosition();
                             deferred.resolve(user);
                             return user;
                         }
@@ -134,21 +159,109 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }
             },
             signOut: function (redirectUrl) {
+                var  siginPosition=AuthService.getSiginPosition();
                 AuthService.clearUser();
-                $window.location.href = redirectUrl || '/';
+                AuthService.clearSiginPosition();
                 $http.post("api/account/signout");
+                //1.判断是否定制化
+                var isCustomize=AuthService.isCustomize();
+                //2.如果是定制化，判断是否是开卷 若是开卷 退出首页为路由为schindex 否则 判断登录时入口 若是从知新登入的 退出知新首页 若是从学校登录 退出当前定制首页
+                var emReg=/\b\w*\b\.\bem\b\.\w*/;
+                var isEm=emReg.test($window.location.hostname);
+                if (isCustomize) {
+                    if(isEm){
+                        $window.location.href = redirectUrl || '/schindex';
+                    }else {
+                        if(siginPosition=="aizhixin"){
+                            AuthService.navigation(0,"/")
+                        }else {
+                            $window.location.href = redirectUrl || '/';
+                        }
+                    }
+                }else {//3.若果非定制化，退出到当前业务模块首页。
+                    $window.location.href = redirectUrl || '/';
+                }
             },
             authorize: function () {
                 return Cookies.getJSON('authorize');
             },
+            //判断环境
+            getCurrentEvn:function(){
+                var devReg=/(\b\w*\.\b)?aizhixindev\.com/;
+                var testReg=/(\b\w*\.\b)?aizhixintest\.com/;
+                var pdeReg=/(\b\w*\.\b)?dlztc\.com/;
+                var sdeReg=/(\b\w*\.\b)?aizhixin\.com/;
+                var _hostname = $window.location.hostname.replace('www.','');
+                if(devReg.test(_hostname)){
+                    return "DEV";
+                }else if(testReg.test(_hostname)){
+                    return "TEST";
+                }else if(pdeReg.test(_hostname)){
+                    return "PDE";
+                }else if(sdeReg.test(_hostname)){
+                    return "SDE";
+                }
+            },
+            //判断是否定制化 ture :为是
+            isCustomize:function(){
+                var devReg=/(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\bpassport\.\b)aizhixindev\.com$|^aizhixindev\.com$/;
+                var testReg=/(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\bpassport\.\b)aizhixintest\.com$|^aizhixintest\.com$/;
+                var pdeReg=/(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\bpassport\.\b)dlztc\.com$|^dlztc\.com$/;
+                var sdeReg=/(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\bpassport\.\b)aizhixin\.com$|^aizhixin\.com$/;
+                var _env=this.getCurrentEvn();
+                var pathname=$window.location.pathname;
+                var _hostname ='';
+                if(pathname=="/login"){
+                    _hostname= $window.document.referrer.replace('www.','').replace("http://",'').split("/")[0];
+                }else {
+                    _hostname= $window.location.hostname.replace('www.','');
+                }
+                if(_env=="DEV"){
+                    if(devReg.test(_hostname)){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }else if(_env=="TEST"){
+                    if(testReg.test(_hostname)){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }else if(_env=="PDE"){
+                    if(pdeReg.test(_hostname)){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }else if(_env=="SDE"){
+                    if(sdeReg.test(_hostname)){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }
+            },
+            //获取当前环境下的所有域名
+            getCurrentEnvDomain:function () {
+                var env=AuthService.getCurrentEvn();
+                return _headerLink[env];
+            },
+            /**
+             *根据产品名获取当前环境下的产品对应的域名
+             * @param product 为产品例如 zhixin em pt dd school
+             * @returns {*} 所要获取的当前环境下产品域名 若输入若输入的产品不存在 返回undefined
+             */
+            getCurrentEnvDomainByProduct:function (product) {
+                var domains=AuthService.getCurrentEnvDomain();
+                var domainObj={};
+                angular.forEach(domains,function (domain,index) {
+                    domainObj[_headerLink.PRODUCT[index]]=domain
+                });
+                return domainObj[product];
+            },
+            //根据当前域名查找当前环境下的所有域名 （不推荐使用）
             contrastDomain: function (host) {
-                //各开发环境域名配置
-                var _headerLink = {
-                    DEV: ['dledudev.aizhixin.com', 'emdev.aizhixin.com', 'ptdev.aizhixin.com', 'hydev.aizhixin.com', 'dddev.aizhixin.com', 'schooldev.aizhixin.com'],
-                    TEST: ['dledutest.aizhixin.com', 'emtest.aizhixin.com', 'pttest.aizhixin.com', 'hytest.aizhixin.com', 'ddtest.aizhixin.com', 'schooltest.aizhixin.com'],
-                    PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'schooluat.dlztc.com'],
-                    SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'school.aizhixin.com']
-                };
                 var _urlarr = [];
                 for (var _k in _headerLink) {
                     angular.forEach(_headerLink[_k], function (obj) {
@@ -165,33 +278,90 @@ angular.module("azx.common", ['ui.bootstrap'])
              * @param pathname 需要跳转到的具体功能模块
              */
             navigation: function (link, pathname) {
-                var _tempArr = $window.location.hostname.split(".");
-                var _hostname = $window.location.hostname;
-                if (_tempArr.length == 4) {
-                    _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length)
-                }
-                var _host = $window.location.host;
-                var _urlarr = this.contrastDomain(_hostname);
+                //1.判断环境
+                //2.获取当前环境下的所有域名
+                var currentEnvUrls=AuthService.getCurrentEnvDomain();
+                //3.判断是否定制化
+                var isCustomize=AuthService.isCustomize();
+                //4.如果定制化判断是否登录，未登录直接跳转，登录，检查三级域名是否和学校orgCode一致，不一致以学校orgCode为准进行跳转(处理localhost或其他情况)
+                //5.如果非定制化直接跳转，
+                var _hostname = $window.location.hostname.replace('www.','');
                 var _pathname = pathname || '';
-                if (_hostname != 'localhost' && _urlarr.length > 0) {
-                    if (link == 5 && AuthService.getUser()) {
-                        $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + _urlarr[link] + _pathname;
-                    } else {
-                        if (_tempArr.length == 4) {
-                            $window.location.href = 'http://' + _tempArr[0] + '.' + _urlarr[link] + _pathname;
-                        } else {
-                            $window.location.href = 'http://' + _urlarr[link] + _pathname;
-                        }
+                var loginReg=/\b\login\b\w*/;
+                var isLogin=loginReg.test(pathname);
+                if(_hostname != 'localhost' && currentEnvUrls.length > 0){//非异常域名处理
+                    if(isCustomize){//定制化跳转
+                        var threeLevel = $window.location.hostname.replace('www.','').split(".")[0];
+                        if(AuthService.getUser()){
+                            if(pathname=="/userCenter"||pathname=="/account"){//账户类增加passport
+                                $window.location.href = 'http://' + AuthService.getUser().orgCode + '.'+'passport.' + currentEnvUrls[link] + _pathname;
+                            }else {
+                                $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + currentEnvUrls[link] + _pathname;
+                            }
+                        }else {
+                            if(isLogin){//账户类增加passport
+                                $window.location.href = 'http://'  + threeLevel  + '.'+'passport.' + currentEnvUrls[link] + _pathname;
+                            }else {
+                                $window.location.href = 'http://' + threeLevel + '.' + currentEnvUrls[link] + _pathname;
+                            }
 
+                        }
+                    }else {//非定制化跳转
+                        if(AuthService.getUser()){//账户类增加passport
+                            if(pathname=="/userCenter"||pathname=="/account"){//账户类增加passport
+                                $window.location.href = 'http://' +'passport.'+ currentEnvUrls[link] + _pathname;
+                            }else {
+                                $window.location.href = 'http://' + currentEnvUrls[link] + _pathname;
+                            }
+                        }else {
+                            if(isLogin){//账户类增加passport
+                                $window.location.href = 'http://'+'passport.' + currentEnvUrls[link] + _pathname;
+                            }else {
+                                $window.location.href = 'http://' + currentEnvUrls[link] + _pathname;
+                            }
+
+                        }
                     }
-                } else {
+                }else {//异常域名处理
+                    var _host = $window.location.host;
                     (!!_pathname ? $window.location.href = 'http://' + _host + _pathname : console.warn('没有发现跳转路径'));
                 }
+
+                // var _tempArr = $window.location.hostname.replace('www.','').split(".");
+                // var _hostname = $window.location.hostname.replace('www.','');
+                // var _urlarr = this.contrastDomain(_hostname);
+                // if (!_urlarr||_urlarr.length==0) {
+                //     _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length);
+                //     _urlarr = this.contrastDomain(_hostname);
+                // }
+                // var _host = $window.location.host;
+                // var _pathname = pathname || '';
+                // if (_hostname != 'localhost' && _urlarr.length > 0) {
+                //     if (link == 5 && AuthService.getUser()) {
+                //         $window.location.href = 'http://' + AuthService.getUser().orgCode + '.' + _urlarr[link] + _pathname;
+                //     }else if(link == 0){
+                //         $window.location.href = 'http://' + _urlarr[link] + _pathname;
+                //     }else {
+                //         if (_tempArr.length == 4) {
+                //             $window.location.href = 'http://' + _tempArr[0] + '.' + _urlarr[link] + _pathname;
+                //         } else {
+                //             // if($window.location.pathname=='/login'){
+                //             //     $window.location.href = 'http://' + _tempArr[0] + '.' + _urlarr[link] + _pathname;
+                //             // }else {
+                //             //
+                //             // }
+                //             $window.location.href = 'http://' + _urlarr[link] + _pathname;
+                //         }
+                //
+                //     }
+                // } else {
+                //     (!!_pathname ? $window.location.href = 'http://' + _host + _pathname : console.warn('没有发现跳转路径'));
+                // }
             },
             browser: {
                 versions: function () {
                     var u = navigator.userAgent, app = navigator.appVersion;
-                    console.log(u);
+                    //console.log(u);
                     return {//移动终端浏览器版本信息
                         trident: u.indexOf('Trident') > -1, //IE内核
                         presto: u.indexOf('Presto') > -1, //opera内核
@@ -363,7 +533,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             // '               <li ng-click="headerFn.navigate(0)">首页' +
             // '                   <svg ng-if="headerFn.user && subnav.index == 0" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
             // '               </li>' +
-            '               <li ng-repeat="mnav in navigation.mainNav" ng-class="{active:mnav.host==headerFn.currentTab}" ng-click="headerFn.mainNavigate(mnav)">{{mnav.name}}' +
+            '               <li ng-repeat="mnav in navigation.mainNav" ng-class="{active:mnav.host==headerFn.currentTab}" ng-if="headerFn.emAdminRouter(mnav)" ng-click="headerFn.mainNavigate(mnav)">{{mnav.name}}' +
             // '                   <svg ng-if="headerFn.user && subnav.index == $index+1" class="subnav-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 12,10 6,4""/></svg>' +
             '                   <div class="keyline"></div>' +
             '               </li>' +
@@ -415,7 +585,10 @@ angular.module("azx.common", ['ui.bootstrap'])
                     authority: function (entity) {
                         var _this = this;
                         if (entity.role && entity.role == "admin") {
-                            return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                            return (_this.user.roleNames.toString().indexOf("ROLE_ADMIN") > -1 || _this.user.roleNames.toString().indexOf("ROLE_ORG_ADMIN") != -1 || _this.user.roleNames.toString().indexOf("ROLE_COLLEGE_ADMIN") != -1
+                            || _this.user.roleNames.toString().indexOf("ROLE_ORG_MANAGER") != -1 || _this.user.roleNames.toString().indexOf("ROLE_ORG_DATAVIEW") != -1
+                            || _this.user.roleNames.toString().indexOf("ROLE_COLLEG_DATAVIEW") != -1 || _this.user.roleNames.toString().indexOf("ROLE_ORG_EDUCATIONALMANAGER") != -1
+                            || _this.user.roleNames.toString().indexOf("ROLE_COLLEG_EDUCATIONALMANAGER") != -1);
                         } else {//
                             return true;
                         }
@@ -440,6 +613,18 @@ angular.module("azx.common", ['ui.bootstrap'])
                     },
                     subNavigate: function (path) {
                         $window.location.href = $window.location.protocol + '//' + $window.location.host + path;
+                    },
+                    emAdminRouter:function (entity) {
+                        var _this=this;
+                        if(entity.host==1){
+                            if((_this.user&&_this.user.role)||!(_this.user)){
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        }else {
+                            return true;
+                        }
                     },
                     menuRoute: function () {
                         var that = this;
@@ -537,13 +722,13 @@ angular.module("azx.common", ['ui.bootstrap'])
                  'X-Requested-With':null
                  }
                  }).success(function (data) {
-                 console.log(data);
+                 //console.log(data);
                  });*/
                 /*$http.get('http://oli56k5b0.bkt.clouddn.com/api/navigation.json' + new Date().getTime()).then(function (res) {
                  $scope.navigation = res.data;
                  });*/
                 $rootScope.$watch('user', function () {
-                    // console.log($rootScope.user);
+                    // //console.log($rootScope.user);
                     $scope.headerFn.user = $rootScope.user;
                     $scope.headerFn.menuRoute();
                 }, true);
@@ -583,7 +768,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<div class="school-header">' +
             '<div class="border-top"></div>' +
             ' <div class="school-nav-bar">' +
-            '<div class="logo"><img ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/logo.jpg\' }}" class="logo"/></div>' +
+            '<div class="logo"><img id="logo" ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/logo.jpg\' }}" class="logo"/></div>' +
             '<ul ng-if="indexFn.user" class="account">' +
             '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
@@ -600,9 +785,6 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<ul>' +
             '<li ng-click="indexFn.navigate(5,&quot;/&quot;)" >学校首页' +
             '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/index\'" class="keyline"></div>' +
-            '</li>' +
-            '<li ng-click="indexFn.navigate(5,&quot;/overview&quot;)">学校概况' +
-            '<div ng-if="indexFn.currentTab==5&&indexFn.currentRouter==\'/overview\'" class="keyline"></div>' +
             '</li>' +
             '<li ng-click="indexFn.navigate(1,&quot;/schindex&quot;)" ng-if="!indexFn.authority()">课程中心' +
             '<div ng-if="indexFn.currentTab==1" class="keyline"></div>' +
@@ -632,14 +814,14 @@ angular.module("azx.common", ['ui.bootstrap'])
                     currentTab: 5,
                     currentRouter: "index",
                     signIn: function () {
-                        var _pathName = '';
-                        if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
-                            _pathName = '/login?redirectUrl=' + $scope.redirectUrl;
-                        } else if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") == -1) {
-                            _pathName = '/login?redirectUrl=' + $window.location.protocol + '//' + $window.location.host + $scope.redirectUrl;
-                        } else {
-                            _pathName = '/login';
-                        }
+                        var _pathName = '/login?redirectUrl=' + $window.location.protocol + '//' + $window.location.host ;
+                        // if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") >= 0) {
+                        //     _pathName = '/login?redirectUrl=' + $scope.redirectUrl;
+                        // } else if (!!$scope.redirectUrl && $scope.redirectUrl.indexOf("http://") == -1) {
+                        //     _pathName = '/login?redirectUrl=' + $window.location.protocol + '//' + $window.location.host + $scope.redirectUrl;
+                        // } else {
+                        //     _pathName = '/login';
+                        // }
                         AuthService.navigation(0, _pathName);
                     },
                     signOut: function () {
@@ -651,7 +833,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                     authority: function () {
                         var _this = this;
                         if(_this.user){
-                            return ("ROLE_ADMIN".indexOf(_this.user.roleNames.toString()) > -1 || "ROLE_ORG_ADMIN".indexOf(_this.user.roleNames.toString()) > -1);
+                            return (_this.user.roleNames.toString().indexOf("ROLE_ADMIN") > -1 || _this.user.roleNames.toString().indexOf("ROLE_ORG_ADMIN") != -1 || _this.user.roleNames.toString().indexOf("ROLE_COLLEGE_ADMIN") != -1|| _this.user.roleNames.toString().indexOf("ROLE_ORG_MANAGER") != -1);
                         }else {
                             return false;
                         }
@@ -664,12 +846,14 @@ angular.module("azx.common", ['ui.bootstrap'])
                         if (_tempArr.length == 4) {
                             _hostname = _hostname.substring(_hostname.indexOf('.') + 1, _hostname.length)
                         }
+
+
                         var _host = $window.location.host;
                         var _urlarr = AuthService.contrastDomain(_hostname);
                         var code = $location.host().split('.')[0];
-                       // code = "kjkf";
-                       var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
-                       //url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                        // code = "kjkf";
+                        var url = 'http://' + code + '.' + _urlarr[5] + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
+                        //url = 'http://localhost:9000' + '/api/school/getSchoolOra?domainname=' + code+"&callback=JSON_CALLBACK";
                         // var script = document.createElement("script");  //创建script标签
                         // script.type = "text\/javascript";
                         // script.onload = script.onreadystatechange = function () {
@@ -685,22 +869,22 @@ angular.module("azx.common", ['ui.bootstrap'])
                         // script.src = url;
                         // $('body').append(script);   //将标签插入body尾部
                         // $http.jsonp(url, {jsonpCallbackParam: 'callback'}).then(function (data) {
-                        //     console.log(data);
+                        //     //console.log(data);
                         // }, function (error) {
-                        //     console.log(error);
+                        //     //console.log(error);
                         // });
                         $http({method: "JSONP", url: url,cache: $templateCache}).
-                            success(function (data) {
-                                angular.forEach(data.data, function (temp) {
-                                    if (temp.logoSort == 2) {
-                                        _this.schoolLogo = temp;
-                                    }
-                                })
+                        success(function (data) {
+                            angular.forEach(data.data, function (temp) {
+                                if (temp.logoSort == 2) {
+                                    _this.schoolLogo = temp;
+                                }
+                            })
                         })
                         // then(function(response) {
-                        //     console.log(response);
+                        //     //console.log(response);
                         // }, function(response) {
-                        //     console.log(response);
+                        //     //console.log(response);
                         // });
                         // var load=$interval(function() {
                         //     if(GLOB_SCHOOL){
@@ -760,7 +944,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 $scope.indexFn.init();
 
                 $rootScope.$watch('user', function () {
-                    // console.log($rootScope.user);
+                    // //console.log($rootScope.user);
                     $scope.indexFn.user = $rootScope.user;
                     //$scope.headerFn.menuRoute();
                 }, true);
@@ -877,10 +1061,10 @@ angular.module("azx.common", ['ui.bootstrap'])
                             _pageHeight = $window.document.body.offsetHeight;
                             _scrollHeight = $window.document.body.scrollHeight;
                             if (_scrollHeight > _pageHeight) {
-                                // console.log('有滚动条');
+                                // //console.log('有滚动条');
                                 element.removeClass('footer-fiexd');
                             } else {
-                                // console.log("无滚动条");
+                                // //console.log("无滚动条");
                                 element.addClass('footer-fiexd');
                             }
                         }, 500, 5);
@@ -1238,7 +1422,7 @@ angular.module('validation.directive', ['validation.provider']);
             var idx = 0;
 
             if (form === undefined) {
-                console.error('This is not a regular Form name scope');
+                //console.error('This is not a regular Form name scope');
                 deferred.reject('This is not a regular Form name scope');
                 return deferred.promise;
             }
@@ -1306,7 +1490,7 @@ angular.module('validation.directive', ['validation.provider']);
          */
         this.reset = function (form) {
             if (form === undefined) {
-                console.error('This is not a regular Form name scope');
+                //console.error('This is not a regular Form name scope');
                 return;
             }
 
@@ -1628,7 +1812,7 @@ angular.module('validation.directive', ['validation.provider']);
             };
 
             if (expression === undefined) {
-                console.error('You are using undefined validator "%s"', validator);
+                //console.error('You are using undefined validator "%s"', validator);
                 if (leftValidation.length) return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
                 else return;
             }

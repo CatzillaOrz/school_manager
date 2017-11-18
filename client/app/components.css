@@ -317,12 +317,15 @@ h6 {
   background: #fff; }
 
 .azx-school-header {
+  position: relative;
   background-color: #f8f8f8;
   font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
   .azx-school-header .school-header {
     background: #ffffff;
     height: 50px;
     width: 100%;
+    z-index: 999;
+    position: relative;
     border-bottom: 1px solid #eeeeee; }
     .azx-school-header .school-header .border-top {
       width: 100%;
@@ -337,7 +340,7 @@ h6 {
         display: inline-block;
         vertical-align: middle;
         width: 206px;
-        height: 45px; }
+        height: 46px; }
       .azx-school-header .school-header .school-nav-bar .account {
         height: 48px;
         float: right;
@@ -347,7 +350,7 @@ h6 {
           color: #58b5a2;
           cursor: pointer; }
         .azx-school-header .school-header .school-nav-bar .account .user-menu {
-          width: 130px;
+          width: 145px;
           padding: 0;
           height: 48px;
           display: table-cell;
@@ -487,13 +490,7 @@ h6 {
     height: 50px;
     position: relative;
     z-index: 999;
-    background: #ffffff;
-    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    -khtml-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    -ms-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    -o-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); }
+    background: #ffffff; }
     .azx-header .nav-fiexd-box .border-top {
       width: 100%;
       height: 2px;
@@ -572,20 +569,28 @@ h6 {
             .azx-header .nav-fiexd-box .nav-container .navigation li .subnav-arrow polygon {
               fill: #25b085; }
           .azx-header .nav-fiexd-box .nav-container .navigation li:hover {
-            background: #f5f5f5;
-            color: #6abdac;
+            color: #28b780;
             cursor: pointer; }
+        .azx-header .nav-fiexd-box .nav-container .navigation .active {
+          color: #28b780;
+          position: relative; }
+          .azx-header .nav-fiexd-box .nav-container .navigation .active .keyline {
+            height: 2px;
+            position: absolute;
+            width: 16px;
+            background: #28b780;
+            left: 40%;
+            bottom: 10px; }
       .azx-header .nav-fiexd-box .nav-container .account {
         height: 48px;
         float: right;
         margin: 0 0 0 8px;
         display: table; }
         .azx-header .nav-fiexd-box .nav-container .account li:hover {
-          background: #f5f5f5;
           color: #58b5a2;
           cursor: pointer; }
         .azx-header .nav-fiexd-box .nav-container .account .user-menu {
-          width: 130px;
+          width: 145px;
           padding: 0;
           height: 48px;
           display: table-cell;
@@ -653,18 +658,16 @@ h6 {
               text-align: center;
               letter-spacing: 1px; }
       .azx-header .nav-fiexd-box .nav-container .btn-login {
-        height: 30px;
+        height: 29px;
         margin-top: 8px;
         margin-left: 20px;
-        padding: 4px 20px;
-        min-width: 100px;
+        padding: 4px 10px;
+        min-width: 41px;
         float: right;
-        color: #ffffff;
+        color: #666;
         font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
-        background-color: #29c192;
-        border-color: #29c192;
-        font-weight: bold;
-        font-size: 14px;
+        background-color: #fff;
+        font-size: 12px;
         line-height: 1em;
         text-decoration: none;
         text-align: center;
@@ -673,11 +676,15 @@ h6 {
         -moz-appearance: none;
         appearance: none;
         cursor: pointer;
-        border: none;
+        border: 1px solid #8b8b8b;
         box-sizing: border-box;
         transition-property: all;
         transition-duration: .3s;
-        border-radius: 5px; }
+        border-radius: 4px; }
+      .azx-header .nav-fiexd-box .nav-container .btn-login:hover {
+        background-color: #28b780;
+        color: #fff;
+        border: 1px solid #28b780; }
   .azx-header .nav-sub {
     width: 100%;
     background-color: #29c192;
@@ -688,7 +695,6 @@ h6 {
     .azx-header .nav-sub .nav-sub-container {
       margin: 0 auto;
       height: 50px;
-      padding: 0 15px;
       box-sizing: border-box;
       overflow: hidden; }
       @media only screen and (min-width: 1px) and (max-width: 899px) {
@@ -704,7 +710,7 @@ h6 {
         font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
         float: left;
         margin: 0;
-        padding: 0 30px;
+        padding: 0 22px;
         line-height: 52px;
         font-size: 14px;
         font-weight: 400;
@@ -719,7 +725,7 @@ h6 {
   height: 0; }
 .alpha-light-nav .nav-fiexd-box {
   position: fixed;
-  background: rgba(255, 255, 255, 0.8) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
   height: 80px; }
   .alpha-light-nav .nav-fiexd-box .nav-container {
     height: 78px; }
@@ -771,7 +777,7 @@ h6 {
   height: 0; }
 .alpha-dark-nav .nav-fiexd-box {
   position: fixed;
-  background: rgba(36, 42, 49, 0.5) !important; }
+  background: rgba(36, 42, 49, 0.9) !important; }
   .alpha-dark-nav .nav-fiexd-box .nav-container {
     color: #ffffff; }
     .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo {
@@ -861,7 +867,7 @@ h6 {
 
 .azx-footer {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #3c3c3c;
   min-height: 60px; }
   .azx-footer .footer-content {
     margin: 0 auto;
@@ -879,11 +885,19 @@ h6 {
     .azx-footer .footer-content .azx-logo-gray {
       display: inline-block;
       padding-right: 30px;
-      border-right: 1px solid #dddddd; }
+      border-right: 1px solid #6c6c6c; }
       .azx-footer .footer-content .azx-logo-gray #azxlogo {
         width: auto;
         width: 104px\9;
         height: 35px; }
+    .azx-footer .footer-content .azx-logo-white {
+      width: 117px;
+      color: #fff;
+      position: absolute;
+      left: 0px;
+      top: 18px;
+      border-right: 1px solid #ccc;
+      padding-right: 20px; }
     .azx-footer .footer-content .version {
       font-size: 12px;
       text-align: left;
@@ -891,7 +905,7 @@ h6 {
     .azx-footer .footer-content .Copyright {
       display: inline-block;
       font-size: 12px;
-      color: #999; }
+      color: #ccc; }
       .azx-footer .footer-content .Copyright span {
         color: #ccc; }
     .azx-footer .footer-content .QRcode {
@@ -900,7 +914,7 @@ h6 {
         color: #999;
         margin: 5px 10px; }
         .azx-footer .footer-content .QRcode i.fa:hover {
-          color: #666; }
+          color: #ccc; }
     .azx-footer .footer-content .popover-title {
       text-align: center; }
     .azx-footer .footer-content .barcode {
@@ -911,10 +925,11 @@ h6 {
         height: 120px; }
     .azx-footer .footer-content .footer-right {
       display: inline-block;
-      margin-left: 30px; }
+      margin-left: 149px;
+      margin-top: 2px; }
     .azx-footer .footer-content .float-right {
       position: absolute;
-      bottom: 20px;
+      bottom: 23px;
       right: 80px;
       z-index: 5000; }
 
