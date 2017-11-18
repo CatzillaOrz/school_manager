@@ -44,4 +44,7 @@ angular.module('dleduWebApp')
             lFollowY = (10 * lMouseY) / 100;
         });
         moveBackground()
+        $scope.template1Fn={
+            product:CommonService.product
+        }
     });

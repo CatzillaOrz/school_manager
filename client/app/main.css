@@ -3197,7 +3197,7 @@ a:focus {
     right: 0;
     line-height: 36px;
     width: 470px;
-    background: #ffffff;
+    background: #fff;
     padding: 0 10px;
     cursor: pointer; }
     #elecmap .queryDialog .form-horizontal .control-group > label {
@@ -3511,6 +3511,12 @@ a:focus {
     table-layout: fixed; }
   .map-data-contain .fixed-table-head table thead {
     width: calc( 100% - 1em ); }
+
+.showInfoDialog {
+  z-index: 1001;
+  position: absolute;
+  right: 0;
+  top: 150px; }
 
 .loading-img {
   width: 100%;
