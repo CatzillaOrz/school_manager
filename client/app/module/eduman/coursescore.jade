@@ -17,23 +17,23 @@
             .widget-body.no-padding 
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar.padding-bottom-10
-                        .col-xs-10
+                        .col-xs-12
                             form.form-inline
-                                .form-group.col-sm-4
+                                .form-group.col-sm-3
                                     label.control-label 学期选择：
                                         select.form-control(ng-model="courseListFn.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
                                             optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in courseListFn.schoolYearDropList")
                                                 option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}     
-                                .form-group.col-sm-4
+                                .form-group.col-sm-3
                                     label.control-label 课程名称：
                                     input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.courseName")
-                                .form-group.col-sm-4
+                                .form-group.col-sm-3
                                     label.control-label 授课教师：
                                     input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
-                        .col-xs-2.hidden-xs
-                                .ColVis
-                                    button.btn.btn-primary(ng-click="courseListFn.getCourseListIn()")
-                                        span 查询
+                                .form-group.col-sm-3
+                                    .ColVis
+                                        button.btn.btn-primary(ng-click="courseListFn.getCourseListIn()")
+                                            span 查询
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')

@@ -146,7 +146,59 @@ angular.module('dleduWebApp')
 				//marker.moveAlong(lineArr, 10000);
 			},
 
+			/**
+			 * 加载地图设置信息
+			 * @param options
+			 */
+			loadSetInfo: function(){
+				var that = this;
+				EduManService.getElecSetInfo({organId: AuthService.getUser().orgId}).$promise
+					.then(function(data){
+						if(typeof data.lltudes != 'undefined'){//第一次进入设置
+							//绘制多边形
+							var verNew = [], verNews = [];
+							for(var i = 0, length = data.lltudes.length; i < length; i++){
+								verNew = [];
+								var temp = data.lltudes[i];
+								for(var j = 0; j < temp.length; j++){
+									var lonlat = temp[j];
+									verNew.push({longitude: parseFloat(lonlat.longitude), latitude: parseFloat(lonlat.latitude)});
+								}
+								verNews.push(verNew);
+							}
+							that.drawPolygon(verNews);
+						}
+					})
+					.catch(function(e){
 
+					});
+			},
+
+			/**
+			 * 显示多变形
+			 * @type {Polygon|{type, shape, buildPath}|*}
+			 */
+			drawPolygon: function(polyVers){
+				var ver = [];
+				var polygons = polyVers;
+				for(var i = 0; i < polygons.length; i++){
+					ver = [];
+					var polygonVer = polygons[i];
+					for(var j = 0; j < polygonVer.length; j++){
+						ver.push([parseFloat(polygonVer[j].longitude), parseFloat(polygonVer[j].latitude)]);
+					}
+
+					var polygonObj = new AMap.Polygon({
+						path: ver,    //设置多边形轮廓的节点数组
+						strokeColor:"#1791fc",
+						strokeOpacity:0.8,
+						strokeWeight:2,
+						fillColor: "#1791fc",
+						fillOpacity: 0.35
+					});
+					polygonObj.setMap(this.mapObjs.map);
+				}
+			},
 
 			//地图
 			mapobj: function(){
@@ -159,31 +211,10 @@ angular.module('dleduWebApp')
 			init: function () {
 				this.mapobj();
 				this.getElecFenceCurrent();
+				this.loadSetInfo();
 			}
 	
 		};
 		$scope.ElecFenceCurrentFn.init();
-	})
-	.directive('scrollTop', function($window){
-		return {
-			restrict: 'A',
-			scope: false,   // 默认值
-			link: function(scope, element, attrs) {
-				scope.ElecFenceCurrentFn.isShow = false;
-				angular.element(element).on('scroll', onScroll);
-				function onScroll(){
-					var offsetTop = element[0].scrollTop;
-					if(offsetTop > 0){
-						scope.$apply(function () {
-							scope.ElecFenceCurrentFn.isShow = true;
-						});
-					}else{
-						scope.$apply(function () {
-							scope.ElecFenceCurrentFn.isShow = false;
-						});
-					}
-				}
-			}
-		}
+		$scope.isShow = false;
 	});
-
