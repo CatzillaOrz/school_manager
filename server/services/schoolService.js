@@ -327,10 +327,9 @@ var SchoolService = {
             params:params
         }).then(function (res) {
             if (res.status.code == 200) {
-
                 callback(null, res.entity);
             } else {
-                callback(e);
+                callback(ErrorCode.errorHandle(res));
             }
         })
             .catch(function (e) {
@@ -378,6 +377,7 @@ var SchoolService = {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
+
                 callback(ErrorCode.errorHandle(res));
             }
         })
