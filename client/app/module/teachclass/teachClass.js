@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 				}
 			})
 			.state('teachClassCreat', {
-				parent: 'teachclass',
+				parent: 'teachclasslist',
 				url: '/teachclasscreate',
 				access: {requiredLogin: true},
 				views: {
@@ -40,7 +40,7 @@ angular.module('dleduWebApp')
 				}
 			})
             .state('teachClassDetail', {
-                parent: 'teachclass',
+                parent: 'teachclasslist',
                 url: '/teachclass/detail/:id',
                 access: {requiredLogin: true},
                 views: {

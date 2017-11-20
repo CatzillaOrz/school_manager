@@ -379,7 +379,8 @@ angular.module('dleduWebApp')
                 });
                 _this.teachWeekListB = angular.copy(_this.teachWeekList);
                 _this.courseCard.endWeekNo != 1 ? _this.teachWeekListB = _this.teachWeekListB  : _this.teachWeekListB;
-                _this.courseCard.endWeek = _this.teachWeekListB[0];
+                //_this.courseCard.endWeek = _this.teachWeekListB[0];
+                _this.courseCard.endWeek = _this.courseCard.endWeekNo != 1 ?  _this.teachWeekListB[_this.courseCard.endWeekNo - 1] : _this.teachWeekListB[0];
                 ngDialog.open({
                     template: 'app/module/agenda/editCourseCard.html',
                     showClose: false,
