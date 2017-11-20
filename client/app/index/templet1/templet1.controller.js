@@ -21,8 +21,8 @@ angular.module('dleduWebApp')
             traY = -y + 10;
             var translate1 = 'translate(' + x + 'px, ' + y + 'px)';
             var translate2 = 'translate(' + traX + 'px, ' + traY + 'px)';
-            $(".solid-conatier1").animate({"webkitAnimationDuration":"5s","-webkit-animation-duration":"5s"});
-            $(".solid-conatier2").animate({"webkitAnimationDuration":"10s","-webkit-animation-duration":"10s"});
+            // $(".solid-conatier1").animate({"webkitAnimationDuration":"5s","-webkit-animation-duration":"5s"});
+            // $(".solid-conatier2").animate({"webkitAnimationDuration":"10s","-webkit-animation-duration":"10s"});
             $('.solid-conatier1').css({
                 '-webit-transform': translate1,
                 '-moz-transform': translate1,
