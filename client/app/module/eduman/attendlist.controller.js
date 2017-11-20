@@ -445,11 +445,16 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 EduManService.exportClassAttendanceByPeriod(params).$promise
                     .then(function (data) {
-                        location.href = data.message + '?attname=' + data.fileName;
+                        if(data.message&&data.fileName){
+                            location.href = data.message + '?attname=' + data.fileName;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+
 
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //分页参数
@@ -498,11 +503,16 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 EduManService.exportClassAttendanceGroupByCollege(params).$promise
                     .then(function (data) {
-                        location.href = data.message + '?attname=' + data.fileName;
+                        if(data.message&&data.fileName){
+                            location.href = data.message + '?attname=' + data.fileName;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+
 
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //分页参数
@@ -594,11 +604,16 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 EduManService.exportClassAttendanceGroupByPro(params).$promise
                     .then(function (data) {
-                        location.href = data.message + '?attname=' + data.fileName;
+                        if(data.message&&data.fileName){
+                            location.href = data.message + '?attname=' + data.fileName;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+
 
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //分页参数
@@ -736,11 +751,16 @@ angular.module('dleduWebApp')
                 var params = _this.params;
                 EduManService.exportClassAttendanceGroupByclass(params).$promise
                     .then(function (data) {
-                        location.href = data.message + '?attname=' + data.fileName;
+                        if(data.message&&data.fileName){
+                            location.href = data.message + '?attname=' + data.fileName;
+                        }else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+
 
                     })
                     .catch(function (error) {
-
+                        messageService.openMsg("生成导出文件失败！");
                     })
             },
             //分页参数

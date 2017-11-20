@@ -238,7 +238,7 @@ module.exports = {
             var result=callback+'('+entityStr+')';
             res.send(result);
         }).catch(function (e) {
-           // res.status(e.code).send(e.message);
+           res.status(e.code).send(e.message);
             });
     }
 };
