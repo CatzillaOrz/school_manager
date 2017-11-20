@@ -15,7 +15,7 @@
                                     label.select.col-xs-12
                                         //input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
                                         select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.courseCardForm.teachingClass)' ng-model="schedule.courseCardForm.teachingClass" ng-disabled='schedule.bulk')
-                                        i
+                                        i(ng-show="schedule.teachClasses.length > 1")
                                     .clearfix
                             fieldset
                                 section
