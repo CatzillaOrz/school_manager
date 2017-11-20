@@ -193,7 +193,7 @@ module.exports = {
                 res.json(data);
             })
             .catch(function (e) {
-               // res.status(e.code).send(e.message);
+                res.status(e.code).send(e.message);
             })
     },
     getBoutiqueCourseDropList: function (req, res) {
@@ -224,22 +224,22 @@ module.exports = {
             })
     },
     getSchoolOra: function (req, res) {
-        var callback=req.query.callback;
+        var callback = req.query.callback;
 
         SchoolService.getSchoolByDomainSync(req.query)
             .then(function (data) {
-                var params={
-                    orgId:data.id
+                var params = {
+                    orgId: data.id
                 };
-
                 return SchoolService.getLogoListSync(params)
             }).then(function (entity) {
-            var entityStr=JSON.stringify(entity);//"var GLOB_SCHOOL="+
-            var result=callback+'('+entityStr+')';
+            var entityStr = JSON.stringify(entity);//"var GLOB_SCHOOL="+
+            var result = callback + '(' + entityStr + ')';
             res.send(result);
         }).catch(function (e) {
-           res.status(e.code).send(e.message);
-            });
+            console.log(e);
+            res.status(e.code).send(e.message);
+        });
     }
 };
 

@@ -61,7 +61,7 @@ angular.module('dleduWebService')
                     var code = domain.split('.')[0];
                     var ipReg=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/ ;
                     var isIp=ipReg.test(domain);
-                    if (domain != "localhost"&&!isIp) {
+                   // if (domain != "localhost"&&!isIp) {
                         var params = {
                             domainname: code
                         };
@@ -76,7 +76,7 @@ angular.module('dleduWebService')
                             .catch(function (error) {
 
                             })
-                    }
+                   // }
                 }
             },
             setSchool: function (school) {
