@@ -123,14 +123,14 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.params.name = data.name;
                         _this.params.code = data.code;
-                       _this.getCourseById(_this.params.courseId);
+                        _this.params.courseId = data.courseId;
                        // _this.getSchoolYearDropList();
                        // _this.getSchoolYearById(_this.params.semesterId);
-                        _this.params.courseId = data.courseId;
                        // var currentSemester=_this.getSelected(data.semesterId,_this.schoolYearDropList);
                       //  _this.schoolYearDropList=[];
                         //_this.schoolYearDropList.push(currentSemester);
                         _this.params.semesterId = data.semesterId;
+                        _this.getCourseById(_this.params.courseId);
                         function formatState(state) {
                             _this.params.semesterId = state.id;
                             var $state = $(
