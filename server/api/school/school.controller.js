@@ -226,7 +226,8 @@ module.exports = {
     getSchoolOra: function (req, res) {
         var callback = req.query.callback;
         var result={
-            logos:{}
+            logos:{},
+            data:{}
         };
 
         SchoolService.getSchoolByDomainSync(req.query)
