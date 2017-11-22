@@ -4,6 +4,7 @@ angular.module('dleduWebApp')
     .controller('IndexCtrl', function ($scope, $rootScope,AuthService, CollegeService,NoticeService, $state, messageService, $timeout,SchoolService,CommonService,$location,$window,NewsService) {
         $rootScope.user = AuthService.getUser();
         $scope.indexFn={
+            product:CommonService.product,
             user: $rootScope.user,
             schoolInfo:{},
             schoolLogo:"",
