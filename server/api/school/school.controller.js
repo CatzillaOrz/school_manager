@@ -225,7 +225,7 @@ module.exports = {
     },
     getSchoolOra: function (req, res) {
         var callback = req.query.callback;
-        var result={
+        var resultData={
             logos:{},
             data:{}
         };
@@ -237,11 +237,11 @@ module.exports = {
                 };
                 return SchoolService.getLogoListSync(params)
             }).then(function (entity) {
-            result.logos=entity.data;
+            resultData.logos=entity.data;
             return SchoolService.getSchoolByDomainSync(req.query);
         }).then(function (schoolData) {
-            result.data=schoolData;
-            var entityStr = JSON.stringify(result);//"var GLOB_SCHOOL="+
+            resultData.data=schoolData;
+            var entityStr = JSON.stringify(resultData);//"var GLOB_SCHOOL="+
             var result = callback + '(' + entityStr + ')';
             res.send(result);
         }).catch(function (e) {
