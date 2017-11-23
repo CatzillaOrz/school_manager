@@ -9,7 +9,7 @@
             h2 {{'评教问卷信息'}}
         .widget-body(style="padding:13px 0 0 0")
             form.form-horizontal(name="evaquesForm")
-                .md-form(style="min-height:auto")
+                .md-form
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
@@ -19,26 +19,26 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 问卷总分：
-                        .col-sm-7
-                            input.form-control(placeholder="请填写大于0的整数" ng-model="evaQuesModFn.params.totalScore"  name="alltotal" validator="required, integergt0")
-                    .form-group
-                        label.col-sm-3.control-label
-                            span.required *
                             | 截止时间：
                         .col-sm-7
-                            //p.input-group
-                                input.form-control(type='text', ng-class="{'date-input-error': evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required}" uib-datepicker-popup='yyyy-MM-dd',ng-init="opened[$index][0]=false" ng-click='opened[$index][0]=!opened[$index][0]' ng-model='evaQuesModFn.params.endDate',name="date" required is-open='opened[$index][0]', datepicker-options='evaQuesModFn.datePick.dateOptions'  close-text='Close')
-                                span.input-group-btn
-                                    button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
-                                        i.glyphicon.glyphicon-calendar
-                                .tooltip.top-right.ng-scope(role='tooltip' ng-show='evaquesForm.date.$dirty&&evaquesForm.date.$invalid&&evaquesForm.date.$error.required')
-                                    .tooltip-arrow
-                                    .tooltip-inner 必填项
                             .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
                                 input.form-control(size='16', ng-disabled='true' name="date" placeholder='请选择截止时间' type='text' ng-model="evaQuesModFn.params.endDate" validator="required")
                                 span.add-on
                                     i.icon-calendar.glyphicon.glyphicon-calendar
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 问卷类型：
+                        .col-sm-7
+                            label.checkbox-inline
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.quantification" ng-model="evaQuesModFn.params.quantification")
+                                | 是否量化
+                            label.checkbox-inline
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.choiceQuestion" ng-model="evaQuesModFn.params.choiceQuestion")
+                                | 选项型
+                    .form-group
+                        label.col-sm-3.control-label
+                        .col-sm-7 提示：量化型问卷可以自动生成统计信息并可以导出为报表，非量化型的问卷需要人工查看问卷结果。
                 .panel.panel-default.no-border
                     .jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
@@ -46,53 +46,82 @@
                                 i.fa.fa-table
                             h2 {{'评教题目'}}
                 .widget-body(style='border:0;')
-                    .dataTables_wrapper.form-inline(role='grid')
-                        #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dataTables_wrapper(role='grid')
+                        #datatable_col_reorder_wrapper.dataTables_wrapper.no-footer
                             table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
                                 thead
                                     tr(role='row')
                                         th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 评测题目
-                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 分值(仅限整数)
-                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 80px;')
+                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 180px;') 题目信息
+                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 50px;')
                                             i.fa.fa-plus-circle(style="font-size:16px;" title="新增" ng-click="evaQuesModFn.addQues()")
                                 tbody
-                                    tr.odd(role='row' ng-repeat="record in evaQuesModFn.quesLists")
-                                        td.sorting_1 {{$index+1}}
+                                    tr.odd(role='row' ng-repeat="record in evaQuesModFn.quesLists" ng-init="outerIndex = $index")
+                                        td.sorting_1
+                                            span {{$index+1}}
+                                            input(type="hidden" ng-model="record.no" ng-value="record.no=outerIndex+1")
                                         td
-                                            .form-group
-                                                textarea.form-control(ng-model="record.name" name="{{'textarea'+$index}}" validator="required, maxlength=200")
-                                        td
-                                            .form-group
-                                                input.form-control(type="text" ng-model="record.score" name="{{'score'+$index}}" validator="required, integergt0")
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 题目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.name" name="{{'textarea'+ $index}}" validator="required, maxlength=200")
+                                            .row.no-margin(ng-if='evaQuesModFn.params.quantification && !evaQuesModFn.params.choiceQuestion')
+                                                .form-group
+                                                    .row.no-margin.padding-10 分值（仅限整数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'scoreaa'+ $index}}" validator="required, integergt0" ng-change="evaQuesModFn.calcAllTotal(evaQuesModFn.quesLists)")
+                                            .row.no-margin(ng-if='!evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion')
+                                                .form-group.no-margin
+                                                    .col-sm-1.padding-10
+                                                        label 选项
+                                                    .col-sm-10.padding-10
+                                                        input(type="checkbox" ng-checked="record.radio" ng-model="record.radio")
+                                                        |  是否多选
+                                                    .col-sm-1.padding-10
+                                                        i.fa.fa-plus-circle(style="font-size:16px;margin-right:10px;" title="新增" ng-click="evaQuesModFn.addQuesOption(outerIndex)")
+                                                .form-group.no-margin(ng-repeat="quesOption in record.questionChioce")
+                                                    .col-sm-1.padding-10
+                                                        span.margin-right-10 {{evaQuesModFn.convertToLetter($index+1)}}
+                                                    .col-sm-10.padding-10
+                                                        textarea.form-control.margin-right-10(ng-model="quesOption.content" name="{{'optioncontent0'+outerIndex +$index}}" validator="required, maxlength=200")
+                                                        input(type="hidden" ng-model="quesOption.choice" ng-value="quesOption.choice=evaQuesModFn.convertToLetter($index+1)")
+                                                    .col-sm-1.padding-10
+                                                        a.handle(ng-click="evaQuesModFn.delQuesOption(outerIndex)")
+                                                            i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                            .row.no-margin(ng-if='evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion')
+                                                .form-group.no-margin
+                                                    .col-sm-1.padding-10
+                                                        label 选项
+                                                    .col-sm-8.padding-10
+                                                        input(type="checkbox" ng-checked="record.radio" ng-model="record.radio" ng-change="evaQuesModFn.calcOptionScore(record, record.radio)")
+                                                        |  是否多选
+                                                    .col-sm-2.padding-10
+                                                        label.margin-left-10 分值:{{record.score}}
+                                                    .col-sm-1.padding-10
+                                                        i.fa.fa-plus-circle(style="font-size:16px;margin-right:10px;" title="新增" ng-click="evaQuesModFn.addQuesOption(outerIndex, $index)")
+                                                .form-group.no-margin(ng-repeat="quesOption in record.questionChioce")
+                                                    .col-sm-1.padding-10
+                                                        span.margin-right-10 {{evaQuesModFn.convertToLetter($index+1)}}
+                                                    .col-sm-8.padding-10
+                                                        .form-group.no-margin
+                                                            textarea.form-control.margin-right-10(ng-model="quesOption.content" name="{{'optioncontent1'+ outerIndex +$index}}" validator="required, maxlength=200")
+                                                    .col-sm-2.padding-10
+                                                        .form-group.no-margin
+                                                            input.form-control.margin-right-10(type="text" ng-model="quesOption.score" name="{{'optionscore'+ outerIndex + $index}}" validator="required, number" ng-change="evaQuesModFn.calcOptionScore(record, record.radio)")
+                                                            input(type="hidden" ng-model="quesOption.choice" ng-value="quesOption.choice=evaQuesModFn.convertToLetter($index+1)")
+                                                    .col-sm-1.padding-10
+                                                        a.handle(ng-click="evaQuesModFn.delQuesOption(outerIndex,$index)")
+                                                            i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
                                         td
                                             a.handle(ng-click="evaQuesModFn.delQues($index)")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                                tr.odd(role='row' ng-repeat="record in evaQuesModFn.quesLists" ng-init="outerIndex = $index")
+                                    tr(role='row' ng-if='(evaQuesModFn.params.quantification && !evaQuesModFn.params.choiceQuestion)||(evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion)')
+                                        td(colspan="3" )
+                                            .row.margin-left-10.padding-5 {{'问卷总分:' + evaQuesModFn.params.totalScore}}
+                                            .row.margin-left-10.padding-5(ng-show="evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion") {{'提示：单选题目按其中某选项的最高分为该题目分数，多选题目按其选项分数总和为该题目分数。'}}
                 .form-actions(style="border-top:none;margin:0")
                     .row
                         .col-md-12(style="text-align:left")
                             a.btn.btn-primary(ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 保存评教问卷
-    //.jarviswidget.jarviswidget-color-blueDark
-        button.btn.btn-success(ng-click='evaQuesModFn.saveQues()') 保存评教问卷
-
-                //.form-actions
-                    .row
-                        .col-md-12
-                            a.btn.btn-primary(ng-click="evaQuesModFn.submit()" validation-submit="evaquesForm") 提交
-                            .speace-10
-                            a.btn.btn-default(ui-sref="evaquestion") 取消
-
-    //.jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
-        header(role='heading')
-            span.widget-icon
-                i.fa.fa-table
-            h2 {{handleFn.title}}
-        .widget-body
-            .finish-prompt
-                h3.prompt {{handleFn.completeMSG}}
-                .icon
-                    i.fa.fa-check-circle
-            .form-actions
-                .row
-                    .col-md-12
-                        a.btn.btn-default(ui-sref="classlist") 返回班级信息

@@ -11,42 +11,14 @@ angular.module('dleduWebApp')
 			id: $state.params.id,
 			params: {
 				name: '',
-				totalScore: '',
+				totalScore: 0,
 				endDate: '',
-				questions: []
+				questions: [], //问题
+				quantification: false, //是否量化
+				choiceQuestion: false, //选项型
 			},
 
 			quesLists: [],//临时保存题目
-			question:{
-				name: '',
-				score: 0,
-			},
-
-			//时间组件配置
-			datePick: {
-				inlineOptions: {
-					//customClass: getDayClass,
-					minDate: new Date(),
-					showWeeks: true
-				},
-				dateOptions: {
-					//dateDisabled: $scope.periodHandlerFn.datePick.disabled,
-					formatYear: 'yy',
-					maxDate: new Date(2020, 5, 22),
-					minDate: new Date(),
-					startingDay: 1
-				},
-				disabled: function (data) {
-					var date = data.date,
-						mode = data.mode;
-					return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-				},
-				toggleMin: function () {
-					this.inlineOptions.minDate = this.inlineOptions.minDate ? null : new Date();
-					this.dateOptions.minDate = this.inlineOptions.minDate;
-				},
-			},
-
 
 			// 获取评教问卷信息
 			getEvaQuesInfo: function () {
@@ -67,8 +39,14 @@ angular.module('dleduWebApp')
 			},
 
 			//点击加号
-			addQues: function($index){
-				this.quesLists.push({name: '', score: 0});
+			addQues: function(){
+				this.quesLists.push({
+					name: '',//题目
+					score: 0,//分数
+					no: 0,
+					radio: false, //是否多选 true多选
+					questionChioce: []//选择题
+				});
 			},
 
 			//点击删除
@@ -76,23 +54,26 @@ angular.module('dleduWebApp')
 				this.quesLists.splice($index, 1);
 			},
 
+			//增加题目选项
+			addQuesOption: function($index){
+				var parent = this.quesLists[$index];
+				var obj = {content:'', score:0};
+				parent.questionChioce.push(obj);
+			},
+
+			//删除题目选项
+			delQuesOption: function($parentIndex, $childeIndex){
+				var parent = this.quesLists[$parentIndex];
+				parent.questionChioce.splice($childeIndex, 1);
+			},
+
 			//保存题目
 			saveQues: function(){
 				var questions = this.quesLists;
 				this.params.questions = questions;
 				var params = this.params;
-				//this.params.endDate = $filter('date')(this.params.endDate, 'yyyy-MM-dd hh:mm:ss');
 				if(this.params.questions.length == 0){
 					messageService.openMsg("请添加题目!");
-					return;
-				}
-				var allScore = 0;
-				for(var j = 0; j < questions.length; j++){
-					allScore += parseInt(questions[j].score);
-					questions[j].no = j+1;
-				}
-				if(allScore != this.params.totalScore){
-					messageService.openMsg("题目总分和问卷总分不相等!");
 					return;
 				}
 				var dateTimeStamp = new Date(params.endDate).getTime();
@@ -101,6 +82,14 @@ angular.module('dleduWebApp')
 					messageService.openMsg("截止日期不能小于今天!");
 					return;
 				}
+				var tips = this.showNoOptionTip(questions);
+				if(this.params.choiceQuestion){
+					if(tips.length > 0){
+						messageService.openMsg("请给第" + tips.join(',') + "题目添加选项！");
+						return;
+					}
+				}
+
 				if($state.params.id){
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
@@ -139,13 +128,81 @@ angular.module('dleduWebApp')
 				this.saveQues();
 			},
 
+			/**
+			 * 提示选项题没有增加选项
+			 */
+			showNoOptionTip: function(objs){
+				var noOptionArr = [];//记录没有选择的选择题号
+				for(var i = 0, len = objs.length; i < len; i++){
+					var options = objs[i].questionChioce;
+					if(options.length == 0){
+						noOptionArr.push(i + 1);
+					}
+				}
+				return noOptionArr;
+			},
+
+			/**
+			 * 将数字转换成对象字母
+			 * @param num
+			 * @returns {string}
+			 */
+			convertToLetter: function(num){
+				return num <= 26 ?
+					String.fromCharCode(num + 64) : convert(~~((num - 1) / 26)) + convert(num % 26 || 26);
+			},
+
+			/**
+			 * 计算总分
+			 */
+			calcAllTotal: function(arr){
+				var total = 0;
+				//计算总分
+				for(var i = 0, len = arr.length; i < len; i++){
+					var ques = arr[i];
+					if(!isNaN(parseInt(ques.score))){
+						total += parseInt(ques.score);
+					}
+
+				}
+				this.params.totalScore = total;
+			},
+
+			/**
+			 * 计算选项分数
+			 */
+			calcOptionScore: function(record, isManyOption){
+				var total = 0;
+				//计算总分
+				for(var i = 0, len = record.questionChioce.length; i < len; i++){
+					var option = record.questionChioce[i], score = option.score;
+					if(!isNaN(parseInt(score))){
+						if(isManyOption){//多选时
+							total += parseInt();
+						}else{//单选找出最大分数
+							if(parseInt(score) > total){
+								total = parseInt(score);
+							}
+						}
+					}
+				}
+				record.score = total;
+				this.calcAllTotal(this.quesLists);
+			},
+
+
 			init: function () {
-				this.datePick.toggleMin();
 				if($state.params.id){
 					this.isEditOrAdd = true;
 					this.getEvaQuesInfo($state.params.id);
 				}else{
-					this.quesLists.push({name: '', score: 0});
+					this.quesLists.push({
+						name: '',//题目
+						score: 0,//分数
+						no: 0,
+						radio: false, //是否多选 true多选
+						questionChioce: []//选择题
+					});
 				}
 			}
 		};
