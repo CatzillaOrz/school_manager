@@ -83,10 +83,13 @@ angular.module('dleduWebApp')
 					return;
 				}
 				var tips = this.showNoOptionTip(questions);
-				if(tips.length > 0){
-					messageService.openMsg("请给第" + tips.join(',') + "题目添加选项！");
-					return;
+				if(this.params.choiceQuestion){
+					if(tips.length > 0){
+						messageService.openMsg("请给第" + tips.join(',') + "题目添加选项！");
+						return;
+					}
 				}
+
 				if($state.params.id){
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
