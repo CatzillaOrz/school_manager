@@ -23,7 +23,6 @@ angular.module('dleduWebApp')
 			selDistObj: [],
 			//页面全选
 			checkAllRecord: false,
-			collegeDropList: [],
 			//查询类型
 			queryTypes: [{value: 10, name: '按教学班'},
 				{value: 20, name: '按行政班'}, {value: 30, name: '按专业'}, {value: 40, name: '按院系'},
