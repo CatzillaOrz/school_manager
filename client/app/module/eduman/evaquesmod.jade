@@ -38,7 +38,7 @@
                                 | 选项型
                     .form-group
                         label.col-sm-3.control-label
-                        .col-sm-7 提示：量化型问卷可以自动生成统计信息并可以导出为报表，非量化型的问卷需要人工查看问卷结果。
+                        .col-sm-7.txt-color-red 提示：量化型问卷可以自动生成统计信息并可以导出为报表，非量化型的问卷需要人工查看问卷结果。
                 .panel.panel-default.no-border
                     .jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
@@ -120,7 +120,7 @@
                                     tr(role='row' ng-if='(evaQuesModFn.params.quantification && !evaQuesModFn.params.choiceQuestion)||(evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion)')
                                         td(colspan="3" )
                                             .row.margin-left-10.padding-5 {{'问卷总分:' + evaQuesModFn.params.totalScore}}
-                                            .row.margin-left-10.padding-5(ng-show="evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion") {{'提示：单选题目按其中某选项的最高分为该题目分数，多选题目按其选项分数总和为该题目分数。'}}
+                                            .row.margin-left-10.padding-5.txt-color-red(ng-show="evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion") {{'提示：单选题目按其中某选项的最高分为该题目分数，多选题目按其选项分数总和为该题目分数。'}}
                 .form-actions(style="border-top:none;margin:0")
                     .row
                         .col-md-12(style="text-align:left")

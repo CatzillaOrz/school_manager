@@ -224,7 +224,7 @@ var EduManService = {
     distQuestionaire: function (params, access_token, callback) {
         RestClient.post({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/assigned',
+            path: '/api/web/v2/assigned',
             access_token: access_token,
             entity: params
         }).then(function (res) {

@@ -44,21 +44,44 @@
                             // widget content
                             .widget-body.no-padding(style="min-height:auto!important")
                                 .dt-toolbar.padding-bottom-10
-                                    .col-xs-10
+                                    .col-xs-12
                                         #datatable_col_reorder_filter
                                             form.form-inline
-                                                .form-group.col-md-4
+                                                .form-group.col-md-4.padding-10
+                                                    label.control-label
+                                                    select.form-control(type='text', ng-model="distributeListFn.queryOption.queryType"  ng-options="obj.name as obj.name for obj in distributeListFn.queryTypes"
+                                                    ng-change='distributeListFn.monitorType(distributeListFn.queryOption.queryType)')
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
                                                     label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
-                                                .form-group.col-md-4
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'||distributeListFn.queryOption.queryType=='按专业'")
+                                                    label.control-label 院&nbsp;&nbsp;系：
+                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                        option(value="-1") 全部
+                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" ng-selected="distributeListFn.queryOption.collegeId==college.id") {{college.name}}
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'||distributeListFn.queryOption.queryType=='按行政班'")
+                                                    label.control-label 专&nbsp;&nbsp;业：
+                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.professionalId" ui-select2="distributeListFn.select2MajorOptions(classListFn.collegeId)"  )
+                                                        option(value="") 全部
+                                                        option(ng-repeat="major in distributeListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'||distributeListFn.queryOption.queryType=='按行政班'")
+                                                    label.control-label 班级名称：
+                                                    input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
+                                                    label.control-label 班&nbsp;主&nbsp;任：
+                                                    input.form-control(type="text" placeholder="请填写输入班主任姓名" ng-model="distributeListFn.queryOption.classHeader")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
                                                     label.control-label 授课教师：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName")
-
-                                    .col-sm-2.col-xs-6.hidden-xs
-                                        .ColVis
-                                            button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
-                                                span 查询
-
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按专业'")
+                                                    label.control-label 专业名称：
+                                                    input.form-control(type="text" placeholder="请填写输入专业名称" ng-model="distributeListFn.queryOption.majorName")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按院系'")
+                                                    label.control-label 院系名称：
+                                                    input.form-control(type="text" placeholder="请填写院系名称" ng-model="distributeListFn.queryOption.collegeName")
+                                                .form-group.col-md-4.padding-10
+                                                    button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
+                                                        span 查询
                     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
@@ -74,7 +97,77 @@
                                 // This area used as dropdown edit box
                             // end widget edit box
                             // widget content
-                            .widget-body.no-padding
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
+                                #datatable_col_reorder_wrapper6.dataTables_wrapper.form-inline.no-footer
+                                    table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                    | 全选
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级编号
+                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级名称
+                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 课程名称
+                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="record in distributeListFn.records")
+                                                td
+                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
+                                                td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
+                                                td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
+                                                td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
+                                                td {{record.courseName=='null'? '--':record.courseName}}
+                                                td {{record.teacherName=='null'? '--':record.teacherName}}
+
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            #datatable_col_reorder_info6.dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
+                                                |  到
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
+                                                |  条 总共
+                                                span.text-primary {{distributeListFn.page.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            #datatable_col_reorder_paginate6.dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
+                                #datatable_col_reorder_wrapper5.dataTables_wrapper.form-inline.no-footer
+                                    table#datatable_col_reorder5.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                    | 全选
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级编号
+                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 班级名称
+                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 班主任
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="record in distributeListFn.records")
+                                                td
+                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
+                                                td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
+                                                td {{record.code}}
+                                                td {{record.name}}
+                                                td {{record.teachers}}
+
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            #datatable_col_reorder_info5.dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
+                                                |  到
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
+                                                |  条 总共
+                                                span.text-primary {{distributeListFn.page.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            #datatable_col_reorder_paginate5.dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getClasses()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按专业'")
                                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
@@ -82,18 +175,16 @@
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
                                                     | 全选
-                                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 选课编号
-                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 课程名称
-                                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 授课教师
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 专业名称
+                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 所属院系
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td.sorting_1 {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
-                                                td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
-                                                td {{record.courseName=='null'? '--':record.courseName}}
-                                                td {{record.teacherName=='null'? '--':record.teacherName}}
+                                                td {{record.name}}
+                                                td {{record.collegeName}}
 
                                     .dt-toolbar-footer
                                         .col-sm-6.col-xs-12.hidden-xs
@@ -107,7 +198,67 @@
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getMajor()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按院系'")
+                                #datatable_col_reorder_wrapper3.dataTables_wrapper.form-inline.no-footer
+                                    table#datatable_col_reorder3.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                    | 全选
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 院系名称
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="record in distributeListFn.records")
+                                                td
+                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
+                                                td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
+                                                td {{record.name}}
+
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            #datatable_col_reorder_info3.dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
+                                                |  到
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
+                                                |  条 总共
+                                                span.text-primary {{distributeListFn.page.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            #datatable_col_reorder_paginate3.dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getCollege()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按学校'")
+                                #datatable_col_reorder_wrapper4.dataTables_wrapper.form-inline.no-footer
+                                    table#datatable_col_reorder4.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                    | 全选
+                                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学校名称
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="record in distributeListFn.records")
+                                                td
+                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
+                                                td {{record.orgName}}
+
+                                    //.dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            #datatable_col_reorder_info4.dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
+                                                |  到
+                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
+                                                |  条 总共
+                                                span.text-primary {{distributeListFn.page.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            #datatable_col_reorder_paginate4.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
+
+
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
 

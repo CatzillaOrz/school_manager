@@ -2,10 +2,11 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService, RoleAuthService) {
+	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
+			record: null,
 			//当前操作的class
 			currentRecord: {},
 			page: {
@@ -38,10 +39,38 @@ angular.module('dleduWebApp')
 					})
 			},
 
-
 			//根据名称查询
 			findClassByPage: function () {
 				this.getEvaQuesList();
+			},
+
+			// 获取评教问卷信息
+			getEvaQuesInfo: function (id) {
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					id: id
+				};
+				EduManService.getEvaQuesInfo(params).$promise
+					.then(function (data) {
+						that.record = data;
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+			/**
+			 * 预览问卷
+			 */
+			preViewQue: function($index){
+				var id = this.records[$index].id;
+				this.getEvaQuesInfo(id);
+				ngDialog.open({
+					template: 'queInfoDialog',
+					width: 700,
+					scope: $scope
+				})
 			},
 
 			init: function () {
