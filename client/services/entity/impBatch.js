@@ -100,11 +100,11 @@ angular.module('dleduWebService')
 			//获取环境
 			getEnvHost: function(){
 				var hostname = window.location.hostname;
-				var host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
-				if(hostname.indexOf('schooldev.aizhixin.com') != -1){
-					host = 'http://gatewaydev.aizhixin.com/zuul/org-manager';
-				}else if(hostname.indexOf('schooltest.aizhixin.com') != -1){
-					host = 'http://gatewaytest.aizhixin.com/zuul/org-manager';
+				var host = 'http://gateway.aizhixindev.com/zuul/org-manager';
+				if(hostname.indexOf('school.aizhixindev.com') != -1){
+					host = 'http://gateway.aizhixindev.com/zuul/org-manager';
+				}else if(hostname.indexOf('school.aizhixintest.com') != -1){
+					host = 'http://gateway.aizhixintest.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.dlztc.com') != -1){
 					host = 'http://gateway.dlztc.com/zuul/org-manager';
 				}else if(hostname.indexOf('school.aizhixin.com') != -1){
