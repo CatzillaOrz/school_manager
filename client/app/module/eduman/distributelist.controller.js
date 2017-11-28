@@ -265,7 +265,7 @@ angular.module('dleduWebApp')
 					postParams.profIds = this.getIds();
 				} else if (type == '按行政班') {
 					postParams.assignType = 20;
-					postParams.profIds = this.getIds();
+					postParams.classesIds = this.getIds();
 				} else if (type == '按教学班') {
 					postParams.assignType = 10;
 					postParams.teachingClasses = this.selDistObj;
