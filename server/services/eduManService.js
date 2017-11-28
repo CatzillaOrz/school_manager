@@ -51,12 +51,17 @@ var EduManService = {
 
     //撤销评教问卷
     deleteEvaQues: function (params, access_token, callback) {
-        RestClient.delete({
+        var urlParam = {
             host: 'dd',
-            path: '/api/web/v1/questionnaire/cancelAssigned/' + params.id,
-            access_token: access_token,
-            params: {userId: params.userId}
-        }).then(function (res) {
+            path: '/api/web/v1/questionnaire/cancelAssignedList',
+            access_token: access_token
+        }
+        if(params.delType == 'all'){//删除所有
+            urlParam.path = '/api/web/v1/questionnaire/cancelAssignedAll?questionnaireId=' + params.questionnaireId;
+        }else{
+            urlParam.entity = params.ids.split(",");
+        }
+        RestClient.delete(urlParam).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);
             } else {
@@ -109,7 +114,7 @@ var EduManService = {
         params.accessToken = "Bearer " + access_token;
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/assignQuesniareList/query',
+            path: '/api/web/v2/findassigned',
             access_token: access_token,
             params: params
         }).then(function (res) {
