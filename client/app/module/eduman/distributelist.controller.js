@@ -216,7 +216,7 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.currentRecord = entity;
 				that.delType = delType;
-				if(that.records.length == 0 || that.selDistObj.length == 0){
+				if(that.delType != 'single' && (that.records.length == 0 || that.selDistObj.length == 0)){
 					messageService.openMsg("请先选择删除对象！");
 					return;
 				}
