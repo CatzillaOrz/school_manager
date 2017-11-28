@@ -178,7 +178,7 @@ angular.module('dleduWebApp')
 					var option = record.questionChioce[i], score = option.score;
 					if(!isNaN(parseInt(score))){
 						if(isManyOption){//多选时
-							total += parseInt();
+							total += parseInt(score);
 						}else{//单选找出最大分数
 							if(parseInt(score) > total){
 								total = parseInt(score);
