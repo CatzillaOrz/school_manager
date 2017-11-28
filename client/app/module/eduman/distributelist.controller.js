@@ -8,6 +8,8 @@ angular.module('dleduWebApp')
 		$scope.distributeListFn = {
 			//问卷id
 			quesId: 0,
+			//tab类型 uncomplete 未分配列表 complete已分配列表
+			tabType: 'uncomplete',
 			//学期列表
 			schoolYearDropList: [],
 			//问卷列表
@@ -23,10 +25,15 @@ angular.module('dleduWebApp')
 			selDistObj: [],
 			//页面全选
 			checkAllRecord: false,
+			//删除标识
+			delType: 'single',
 			//查询类型
 			queryTypes: [{value: 10, name: '按教学班'},
 				{value: 20, name: '按行政班'}, {value: 30, name: '按专业'}, {value: 40, name: '按院系'},
 				{value: 50, name: '按学校'}],
+			//已分配的查询类型
+			assignedQueTypes: [{value: 0, name: '班级类型'},{value: 10, name: '教学班'},
+				{value: 20, name: '行政班'}],
 
 			page: {
 				totalElements: 0,
@@ -54,6 +61,7 @@ angular.module('dleduWebApp')
 			},
 
 			switchType: function (type) {
+				this.tabType = type;
 				this.queryOption.teacherName = '';
 				this.queryOption.courseName = '';
 				this.page.pageNumber = 1;
@@ -61,11 +69,13 @@ angular.module('dleduWebApp')
 				this.page.totalPages = 0;
 				this.records = [];
 				if (type == 'uncomplete') {
+					this.queryOption.queryType = '按教学班';
 					//切换后清空选择分配列表
 					this.selDistObj = [];
 					this.checkAllRecord = false;
 					this.getEvaQuesUnDist();
 				} else {
+					this.queryOption.queryType = '班级类型';
 					this.getEvaQuesDist();
 				}
 			},
@@ -76,16 +86,26 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
+					managerId: AuthService.getUser().id,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					id: this.quesId,
-					managerId: AuthService.getUser().id,
-					teacherName: that.queryOption.teacherName,
-					courseName: that.queryOption.courseName,
+					questionnaireId: this.quesId,
+					teacherName: that.queryOption.classHeader,
+					name: that.queryOption.className, //班级名称
 				};
+				var type = this.queryOption.queryType;
+				if (type == '教学班') {
+					params.classType = 10;
+				} else if (type == '行政班') {
+					params.classType = 20;
+				}
 				EduManService.getEvaQuesDist(params).$promise
 					.then(function (data) {
 						that.records = data.data;
+						//增加check属性
+						that.addCheckProperty(that.records);
+						that.checkAllRecord = false;
+						that.showSelDistList(data.data);
 						that.page = data.page;
 					})
 					.catch(function (error) {
@@ -147,77 +167,60 @@ angular.module('dleduWebApp')
 						}
 					}
 				}
-				if (calcCount == lenRecord) {
+				if (calcCount == lenRecord && calcCount) {
 					this.checkAllRecord = true;
 				}
 			},
 
 			//根据条件查询
 			findByOption: function (type) {
-				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: 1,
-					pageSize: that.page.pageSize,
-					teacherName: that.queryOption.teacherName,
-					courseName: that.queryOption.courseName,
-					managerId: AuthService.getUser().id
-				};
-				if (that.queryOption.courseName == '') {
-					delete params.courseName;
-				}
-				if (that.queryOption.teacherName == '') {
-					delete params.teacherName;
-				}
-
 				if (type == 'uncomplete') {
 					//params.quId = this.quesId;
 					this.monitorType(this.queryOption.queryType);
-					/*EduManService.getEvaQuesUnDist(params).$promise
-						.then(function (data) {
-							that.records = data.data;
-							that.page = data.page;
-						})
-						.catch(function (error) {
-
-						})*/
 				} else {
-					params.id = this.quesId;
-					EduManService.getEvaQuesDist(params).$promise
-						.then(function (data) {
-							that.records = data.data;
-							that.page = data.page;
-						})
-						.catch(function (error) {
-
-						})
+					this.getEvaQuesDist();
 				}
 
 			},
 
-			//撤销分配
-			cancleDist: function (index) {
+			//删除分配
+			cancleDist: function () {
 				var that = $scope.distributeListFn;
-				var params = {
-					id: that.currentRecord.id,
-					userId: AuthService.getUser().id,
+				var params = {delType: that.delType, ids: [], questionnaireId: that.quesId};
+				if(that.delType == 'single'){
+					params.ids = that.currentRecord.id;
+				}else if(that.delType == 'batch'){
+					params.ids = that.getIds().toString();
 				}
 				EduManService.deleteEvaQues(params).$promise
 					.then(function (data) {
-						messageService.openMsg("撤销分配成功！");
-						that.page.pageNumber = 1;
-						that.getEvaQuesDist();
+						if(data.trueMSG){
+							that.selDistObj = [];
+							messageService.openMsg("删除分配成功！");
+							that.page.pageNumber = 1;
+							that.getEvaQuesDist();
+						}else{
+							messageService.openMsg("删除分配失败！");
+						}
 					})
 					.catch(function (error) {
-						messageService.openMsg("撤销分配失败！");
+						messageService.openMsg("删除分配失败！");
 					})
 			},
 
-			//删除提示
-			deletePrompt: function (entity) {
+			/**删除提示
+			 * @param entity
+			 * @param delType //删除类型 single、删除一个 batch批量删除、all删除所有
+			 */
+			deletePrompt: function (entity, delType) {
 				var that = this;
 				that.currentRecord = entity;
-				messageService.getMsg("您确定要撤销问卷吗？", that.cancleDist)
+				that.delType = delType;
+				if(that.records.length == 0 || that.selDistObj.length == 0){
+					messageService.openMsg("请先选择删除对象！");
+					return;
+				}
+				messageService.getMsg("您确定要删除问卷分配吗？", that.cancleDist);
 			},
 
 
@@ -286,9 +289,10 @@ angular.module('dleduWebApp')
 			selDist: function ($index) {
 				var selObj = this.records[$index];
 				if (selObj.check) {
-					var flag = false, selId = selObj.teachingClassesId;
+					var flag = false, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
 					for (var j = 0; j < this.selDistObj.length; j++) {
-						if (selId == this.selDistObj[j].teachingClassesId) {
+						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+						if (selId == id) {
 							flag = true;
 						}
 					}
@@ -296,9 +300,10 @@ angular.module('dleduWebApp')
 						this.selDistObj.push(selObj);
 					}
 				} else {
-					var selId = selObj.teachingClassesId;
+					var selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
 					for (var k = 0; k < this.selDistObj.length; k++) {
-						if (selId == this.selDistObj[k].teachingClassesId) {
+						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[k].teachingClassesId : this.selDistObj[k].id;
+						if (selId == id) {
 							this.selDistObj.splice(k, 1);
 							break;
 						}
@@ -545,14 +550,13 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				var users = AuthService.getUser();
 				this.quesId = $state.params.quesId;
-				if ($state.params.id == 1) {
+				if ($state.params.id == 1) { // id = 1 已经分配列表 0 未分配列表
 					$("#myTab  a:last").tab("show");
-					this.getCollegeDropList();
-					this.getEvaQuesDist();
+					this.switchType('complete');
 				} else {
-					this.getEvaQuesUnDist();
+					this.getCollegeDropList();
+					this.switchType('uncomplete');
 				}
 			}
 		};
