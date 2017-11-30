@@ -36,6 +36,9 @@
                             label.checkbox-inline
                                 input(type="checkbox" ng-checked="evaQuesModFn.params.choiceQuestion" ng-model="evaQuesModFn.params.choiceQuestion")
                                 | 选项型
+                            label.checkbox-inline
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.qcomment" ng-model="evaQuesModFn.params.qcomment")
+                                | 是否增加评语
                     .form-group
                         label.col-sm-3.control-label
                         .col-sm-7.txt-color-red 提示：量化型问卷可以自动生成统计信息并可以导出为报表，非量化型的问卷需要人工查看问卷结果。
