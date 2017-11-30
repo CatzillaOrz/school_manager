@@ -16,6 +16,7 @@ angular.module('dleduWebApp')
 				questions: [], //问题
 				quantification: false, //是否量化
 				choiceQuestion: false, //选项型
+				qcomment: false, //是否评论
 			},
 
 			quesLists: [],//临时保存题目
