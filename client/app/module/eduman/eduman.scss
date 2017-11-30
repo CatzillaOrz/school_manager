@@ -479,4 +479,10 @@ td.term-disable{
     right: 0;
     top: 150px;
 }
-
+.ques-static-list{
+    border-bottom: 1px solid #ddd;
+    padding: 8px 10px;
+}
+.ques-static-list:last-child{
+    border-bottom: none;
+}

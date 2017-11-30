@@ -168,11 +168,11 @@ var EduManService = {
             });
     },
 
-    //查询分题统计
-    getEvaQuesUnNormalStatic: function (params, access_token, callback) {
+    //查询未提交学生统计
+    getEvaQuesUncompleteStu: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/Quesniare/partStatistics',
+            path: params.type == 0 ? '/api/web/v2/totalNoCommitPeple' : '/api/web/v2/totalClassNoCommitPeple',
             access_token: access_token,
             params: params
         }).then(function (res) {
@@ -191,7 +191,7 @@ var EduManService = {
     getEvaQuesStaticInfo: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/assignQuesniare/queryById',
+            path: params.type == 0 ? '/api/web/v2/totalQuestionnaire' : '/api/web/v2/totalClassQuestionnaire',
             params: params,
             access_token: access_token
         }).then(function (res) {

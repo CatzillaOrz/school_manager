@@ -53,8 +53,8 @@ angular.module('dleduWebService')
 				return eduman.get(params);
 			},
 
-			getEvaQuesUnNormalStatic: function (params) {
-				var eduman = $resource('api/eduman/getEvaQuesUnNormalStatic');
+			getEvaQuesUncompleteStu: function (params) {
+				var eduman = $resource('api/eduman/getEvaQuesUncompleteStu');
 				return eduman.get(params);
 			},
 

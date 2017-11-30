@@ -19,7 +19,7 @@ router.get('/getEvaQuesDist',auth.isSignedIn, controller.getEvaQuesDist);
 router.get('/getEvaQuesUnDist',auth.isSignedIn, controller.getEvaQuesUnDist);
 router.get('/getEvaQuesNormalStatic',auth.isSignedIn, controller.getEvaQuesNormalStatic);
 router.get('/getEvaQuesStaticInfo',auth.isSignedIn, controller.getEvaQuesStaticInfo);
-router.get('/getEvaQuesUnNormalStatic',auth.isSignedIn, controller.getEvaQuesUnNormalStatic);
+router.get('/getEvaQuesUncompleteStu',auth.isSignedIn, controller.getEvaQuesUncompleteStu);
 router.get('/getEvaQuesResult',auth.isSignedIn, controller.getEvaQuesResult);
 router.post('/distQuestionaire',auth.isSignedIn, controller.distQuestionaire);
 router.get('/getTeachClassAttendList',auth.isSignedIn, controller.getTeachClassAttendList);
