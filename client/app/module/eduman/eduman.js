@@ -129,7 +129,7 @@ angular.module('dleduWebApp')
 			})
 			.state('evaquestatic', {
 				parent: 'distributelist',
-				url   : '/evaquestatic/:id',
+				url   : '/evaquestatic/:type/:id',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

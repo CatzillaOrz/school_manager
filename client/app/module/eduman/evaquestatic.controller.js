@@ -4,39 +4,33 @@
 angular.module('dleduWebApp')
 	.controller('EvaQueStaticCtrl', function ($scope, $state, ngDialog, AuthService, EduManService) {
 		$scope.evaQueStaticFn = {
+			//是否显示未提交人数
+			isShowUnCompelteStu: false,
 			//统计列表
 			records: [],
-			//基本信息
+			//统计基本信息
 			staticInfo: {},
 			quePersonInfo: null, //答题详情
-			id: 0,
+			id: 0, //判断链接从哪块过来。0从问卷列表过来，1从已分配页面过来
+			type: '', //判断统计所有问卷信息还是针对某个问卷
 			page: {
 				totalElements: 0,
 				totalPages: 0,
 				pageNumber: 1,
-				pageSize: 10
+				pageSize: 6
 			},
 
-			switchType: function(type){
-				this.page.pageNumber = 1;
-				this.records = [];
-				if(type == 'normal'){
-					this.getEvaQuesNormalStatic();
-				}else{
-					this.getEvaQuesUnNormalStatic();
-				}
-			},
-
-			// 获取评教问卷基本信息
+			// 获取评教问卷统计信息
 			getEvaQuesStaticInfo: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					id: that.id
+					type: that.type
 				};
+				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;;
 				EduManService.getEvaQuesStaticInfo(params).$promise
 					.then(function (data) {
-						that.staticInfo = data;
+						that.staticInfo = data.data;
 					})
 					.catch(function (error) {
 
@@ -44,27 +38,28 @@ angular.module('dleduWebApp')
 			},
 
 
-			// 获取评教问卷分题统计
-			getEvaQuesUnNormalStatic: function () {
+			// 获取评教问卷未提交学生信息
+			getEvaQuesUncompleteStu: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					questionnaireAssginId: that.id,
-					teachingClassId: that.staticInfo.teachingClassId
+					type: that.type
 				};
-				EduManService.getEvaQuesUnNormalStatic(params).$promise
+				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;
+				EduManService.getEvaQuesUncompleteStu(params).$promise
 					.then(function (data) {
 						that.records = data.data;
+						that.page = data.page;
 					})
 					.catch(function (error) {
 
 					})
 			},
 
-			// 获取评教问卷常规
-			getEvaQuesNormalStatic: function () {
+			//导出
+			exportExcel: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
@@ -80,6 +75,15 @@ angular.module('dleduWebApp')
 					.catch(function (error) {
 
 					})
+			},
+
+			//显示未提交人数
+			showUncompelteStu: function(){
+				if(!this.isShowUnCompelteStu){
+					this.isShowUnCompelteStu = true;
+				}else{
+					this.isShowUnCompelteStu = false;
+				}
 			},
 
 			//显示个人问卷详情
@@ -101,20 +105,11 @@ angular.module('dleduWebApp')
 				})
 			},
 
-			//计算平均的得分和试题分数
-			showScoreAndAvg: function(record){
-				if(record.totalCount){
-					var avg = (record.totalScore/record.totalCount).toFixed(2);
-					return '(满分' + record.score + '; 平均得分'+ avg + ')';
-				}else{
-					return '(满分' + record.score + '; 平均得分0.00)';
-				}
-			},
-
 			init: function () {
-				this.id = $state.params.id;
-				this.getEvaQuesNormalStatic();
+				this.id = $state.params.id; //问卷id;
+				this.type = $state.params.type;
 				this.getEvaQuesStaticInfo();
+				this.getEvaQuesUncompleteStu();
 			}
 		};
 		$scope.evaQueStaticFn.init();

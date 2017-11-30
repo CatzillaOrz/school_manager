@@ -44,8 +44,8 @@ module.exports = {
             })
     },
 
-    getEvaQuesUnNormalStatic: function (req, res) {
-        EduManService.getEvaQuesUnNormalStaticSync(req.query, req.user.access_token)
+    getEvaQuesUncompleteStu: function (req, res) {
+        EduManService.getEvaQuesUncompleteStuSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
