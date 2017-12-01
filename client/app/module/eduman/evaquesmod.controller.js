@@ -32,6 +32,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.params = data;
 						that.params.endDate = that.params.endDate.substring(0, 10);
+						that.convertRadio(that.params);
 						that.quesLists = that.params.questions;
 					})
 					.catch(function (error) {
@@ -94,6 +95,7 @@ angular.module('dleduWebApp')
 				if($state.params.id){
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
+					this.convertRadio(cloneParams);
 					EduManService.updateEvaQues(cloneParams).$promise
 						.then(function (data) {
 							if(data.trueMSG){
@@ -109,6 +111,7 @@ angular.module('dleduWebApp')
 				}else{
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
+					this.convertRadio(cloneParams);
 					EduManService.addEvaQues(cloneParams).$promise
 						.then(function (data) {
 							if(data.trueMSG){
@@ -121,6 +124,21 @@ angular.module('dleduWebApp')
 						.catch(function (error) {
 
 						})
+				}
+			},
+
+			/**
+			 * 置换里面的是否多选值
+			 */
+			convertRadio: function(params){
+				var questions = params.questions;
+				for(var i = 0, len = questions.length; i < len; i++){
+					var temp = questions[i];
+					if(temp.radio){
+						temp.radio = false;
+					}else{
+						temp.radio = true;
+					}
 				}
 			},
 
@@ -201,7 +219,7 @@ angular.module('dleduWebApp')
 						name: '',//题目
 						score: 0,//分数
 						no: 0,
-						radio: false, //是否多选 true多选
+						radio: false, //是否多选 true单选
 						questionChioce: []//选择题
 					});
 				}
