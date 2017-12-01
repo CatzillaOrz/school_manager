@@ -90,8 +90,8 @@
                         .span12.margin-left-0
                             span.spanshow.font-weight-600.margin-left-0 {{$index+1}}、{{que.name}}&nbsp;
                             span.txt-color-red.font-weight-600(ng-if="evaQuesListFn.record.quantification") ({{'满分' + que.score + '分'}})
-                            span.txt-color-red(ng-if="evaQuesListFn.record.choiceQuestion") ({{que.radio?'多选题':'单选题'}})
+                            span.txt-color-red(ng-if="evaQuesListFn.record.choiceQuestion") ({{!que.radio?'多选题':'单选题'}})
                         .span12.padding-5.margin-left-0(ng-repeat="option in que.questionChioce")
                             span.spanshow {{option.choice}}、
-                            input(type="{{que.radio?'checkbox':'radio'}}" ng-class="{true: 'checkbox-inline', false: 'radio-inline'}[que.radio]" ng-disabled='true')
+                            input(type="{{!que.radio?'checkbox':'radio'}}" ng-class="{true: 'checkbox-inline', false: 'radio-inline'}[!que.radio]" ng-disabled='true')
                             | {{' '+ option.content}}
