@@ -110,6 +110,13 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
+                    "title": "查看课表",
+                    "sref": "teachclasstable",
+                    "active": "teachclasstable",
+                    "icon": "pencil-square-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
                     "title": "节假日管理",
                     "sref": "holidayman",
                     "active": "holidayman",
