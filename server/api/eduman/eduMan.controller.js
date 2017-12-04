@@ -54,8 +54,8 @@ module.exports = {
             })
     },
 
-    getEvaQuesNormalStatic: function (req, res) {
-        EduManService.getEvaQuesNormalStaticSync(req.query, req.user.access_token)
+    lookComment: function (req, res) {
+        EduManService.lookCommentSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -74,8 +74,8 @@ module.exports = {
             })
     },
 
-    getEvaQuesResult: function (req, res) {
-        EduManService.getEvaQuesResultSync(req.query, req.user.access_token)
+    exportQuesResult: function (req, res) {
+        EduManService.exportQuesResultSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

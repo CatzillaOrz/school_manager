@@ -2,10 +2,10 @@
  * Created by Administrator on 2017/6/23.
  */
 angular.module('dleduWebApp')
-	.controller('EvaQueStaticCtrl', function ($scope, $state, ngDialog, AuthService, EduManService) {
+	.controller('EvaQueStaticCtrl', function ($scope, $state, $window, $filter, ngDialog, AuthService, EduManService, messageService) {
 		$scope.evaQueStaticFn = {
 			//是否显示未提交人数
-			isShowUnCompelteStu: false,
+			isShowUnCompelteStu: 'close', //默认未提交人数
 			//统计列表
 			records: [],
 			//统计基本信息
@@ -58,16 +58,17 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//导出
-			exportExcel: function () {
+			//查看已经提交的评语
+			lookComment: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					id: that.id
+					type: that.type
 				};
-				EduManService.getEvaQuesNormalStatic(params).$promise
+				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;
+				EduManService.lookComment(params).$promise
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
@@ -78,38 +79,53 @@ angular.module('dleduWebApp')
 			},
 
 			//显示未提交人数
-			showUncompelteStu: function(){
-				if(!this.isShowUnCompelteStu){
-					this.isShowUnCompelteStu = true;
-				}else{
-					this.isShowUnCompelteStu = false;
+			showUncompelteStu: function(type){
+				this.isShowUnCompelteStu = type;
+				this.page.pageNumber = 1;
+				if(this.isShowUnCompelteStu == 'uncomplete'){
+					this.getEvaQuesUncompleteStu();
+				}else if(this.isShowUnCompelteStu == 'look') {
+					this.lookComment();
 				}
 			},
 
-			//显示个人问卷详情
-			showQueInfo: function(index){
-				var questionnaireAssginStudentId = this.records[index].id;
-				var questionnaireAssginId = this.id;
-				var that = this;
-				EduManService.getEvaQuesResult({questionnaireAssginStudentId: questionnaireAssginStudentId, questionnaireAssginId: questionnaireAssginId}).$promise
+			//确定是否导出excel
+			confirmExcel: function(){
+				var endDate = $filter("date")(this.staticInfo.endDate, "yyyy-MM-dd"), currentDate = new Date().Format("yyyy-MM-dd");
+				var currentTime = new Date(currentDate + ' 00:00:00').getTime(), endTime = new Date(endDate + ' 00:00:00').getTime() + 86400000;
+				if(currentTime < endTime){
+					messageService.getMsg("该问卷还未结束，您确认现在导出报表吗？", this.exportQuesResult);
+				}else{
+					this.exportQuesResult();
+				}
+			},
+
+			//导出问卷答题结果
+			exportQuesResult: function(){
+				var that = $scope.evaQueStaticFn;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					type: that.type
+				};
+				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;
+				EduManService.exportQuesResult(params).$promise
 					.then(function(data){
-						that.quePersonInfo = data;
+						if(data && data.result){
+							$window.location.href = data.data;
+						}else{
+							messageService.openMsg("导出报表失败！");
+						}
 					})
 					.catch(function(e){
-
+						messageService.openMsg("导出报表异常！");
 					});
-				ngDialog.open({
-					template: 'queInfoDialog',
-					width: 600,
-					scope: $scope
-				})
 			},
 
 			init: function () {
 				this.id = $state.params.id; //问卷id;
 				this.type = $state.params.type;
 				this.getEvaQuesStaticInfo();
-				this.getEvaQuesUncompleteStu();
+				//this.getEvaQuesUncompleteStu();
 			}
 		};
 		$scope.evaQueStaticFn.init();
