@@ -150,10 +150,10 @@ var EduManService = {
     },
 
     //查询常规统计
-    getEvaQuesNormalStatic: function (params, access_token, callback) {
+    lookComment: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/Quesniare/regularStatistics',
+            path: params.type == 0 ? '/api/web/v2/totalCommitPepleComment' : '/api/web/v2/totalClassCommitPepleComment',
             access_token: access_token,
             params: params
         }).then(function (res) {
@@ -206,11 +206,11 @@ var EduManService = {
             });
     },
 
-    //查询学生答题详情
-    getEvaQuesResult: function (params, access_token, callback) {
+    //导出问卷详情
+    exportQuesResult: function (params, access_token, callback) {
         RestClient.get({
             host: 'dd',
-            path: '/api/web/v1/questionnaire/student/getQuestionsInfo',
+            path: params.type == 0 ? '/api/web/v2/erportQuestionnaire' : '/api/web/v2/erportClassQuestionnaire',
             params: params,
             access_token: access_token
         }).then(function (res) {

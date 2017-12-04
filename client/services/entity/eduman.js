@@ -43,8 +43,8 @@ angular.module('dleduWebService')
 				return eduman.get(params);
 			},
 
-			getEvaQuesNormalStatic: function (params) {
-				var eduman = $resource('api/eduman/getEvaQuesNormalStatic');
+			lookComment: function (params) {
+				var eduman = $resource('api/eduman/lookComment');
 				return eduman.get(params);
 			},
 
@@ -58,8 +58,8 @@ angular.module('dleduWebService')
 				return eduman.get(params);
 			},
 
-			getEvaQuesResult: function (params) {
-				var eduman = $resource('api/eduman/getEvaQuesResult');
+			exportQuesResult: function (params) {
+				var eduman = $resource('api/eduman/exportQuesResult');
 				return eduman.get(params);
 			},
 
