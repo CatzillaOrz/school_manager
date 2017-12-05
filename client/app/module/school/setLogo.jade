@@ -21,7 +21,7 @@
                 .btn-upload
                     input(type="file" ng-jcrop-input="{{logoFn.jcropType}}" ngf-select="logoFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
                 .upload-pic
-                    div(ng-jcrop="logoFn.obj.src" ng-jcrop-config-name="{{logoFn.jcropType}}" data-ng-jcrop-config-name="{{logoFn.jcropType}}" data-selection="logoFn.obj.selection" data-thumbnail="logoFn.obj.thumbnail")
+                    div(ng-jcrop="logoFn.obj.src" ng-jcrop-config-name="{{logoFn.jcropType}}"  data-selection="logoFn.obj.selection" data-thumbnail="logoFn.obj.thumbnail")
 
                 .splie-line
                 button.button.button-primary.button-rounded(type='submit' ng-click='logoFn.uploadImage($event)') 保存
