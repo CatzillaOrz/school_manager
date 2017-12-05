@@ -231,10 +231,6 @@ angular.module('dleduWebApp')
 					messageService.openMsg("请选择分配记录！");
 					return;
 				}
-				if (this.selDistObj.length > 30) {
-					messageService.openMsg("选择的课程数量一次不能超过30个！");
-					return;
-				}
 				var params = this.contructDistParams();
 
 				EduManService.distQuestionaire(params).$promise
