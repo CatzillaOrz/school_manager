@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '查看课表'
+                    label: '课表信息'
                 }
             })
             .state('teacherEdit', {

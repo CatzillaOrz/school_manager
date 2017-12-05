@@ -110,7 +110,7 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
-                    "title": "查看课表",
+                    "title": "课表信息",
                     "sref": "teacherListSimplify",
                     "active": "teacherListSimplify",
                     "icon": "pencil-square-o",
