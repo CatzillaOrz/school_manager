@@ -43,17 +43,20 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 周六
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 周日
                         tbody
-                            tr.odd(role='row' ng-repeat="teacher in teacherListFn.teacherList")
-                                td.sorting_1 {{$index+1 + ((teacherListFn.page.pageNumber==0?teacherListFn.page.pageNumber+1:teacherListFn.page.pageNumber)-1)*10}}
-                                td.expand
+                            tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTable")
+                                td.sorting_1 {{$index+1}}
+                                td.expand(ng-if='!table.courselist'")
                                     span.responsiveExpander
-                                    | {{teacher.jobNumber}}
-                                td {{teacher.name}}
-                                td {{teacher.sex}}
-                                td {{teacher.collegeName}}
-                                td {{teacher.email}}
-                                td {{teacher.phone}}
-                                td
-                                    a.handle(ui-sref="teachclasstable")
-                                        i.fa.fa-pencil-square-o
-                                        span 查看课表
+                                    | {{$index}}
+                                td.expand(ng-if='table.courselist', ng-repeat="list in table.courseList track by $index")
+                                    span.responsiveExpander
+                                    | {{list.lessonOrderNum === $index+1 ? list.whichLesson : '--'}}
+                                //- td {{table.name}}
+                                //- td {{table.sex}}
+                                //- td {{table.collegeName}}
+                                //- td {{table.email}}
+                                //- td {{table.phone}}
+                                //- td
+                                //-     a.handle(ui-sref="teachclasstable")
+                                //-         i.fa.fa-pencil-square-o
+                                //-         span {{ | '查看课表'}}
