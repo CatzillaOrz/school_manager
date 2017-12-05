@@ -111,8 +111,8 @@
                 },
                 {
                     "title": "查看课表",
-                    "sref": "teachclasstable",
-                    "active": "teachclasstable",
+                    "sref": "teacherListSimplify",
+                    "active": "teacherListSimplify",
                     "icon": "pencil-square-o",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
