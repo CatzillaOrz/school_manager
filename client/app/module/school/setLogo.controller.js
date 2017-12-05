@@ -46,9 +46,9 @@ angular.module('dleduWebApp')
                     ImageService.convertFileToImage(_this.imgFile, function (image) {
                         var cutImage=null;
                         if(_this.currentObjIndex==0|| _this.currentObjIndex==0){
-                            cutImage = ImageService.getCutImage(image, actionParams, 150, 150);
+                            cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
                         }else {
-                            cutImage = ImageService.getCutImage(image, actionParams, 206, 50);
+                            cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
                         }
                         UploadService.blobUploadToQiNiu(cutImage)
                             .then(function (resp) {
@@ -125,7 +125,7 @@ angular.module('dleduWebApp')
                 if(entity==0){
                     _this.jcropType="block";
                 }else {
-                    _this.jcropType="longBlock";
+                    _this.jcropType="long";
                 }
                 _this.currentObjIndex = entity;
                 _this.isSetLogo = !this.isSetLogo;
@@ -138,26 +138,39 @@ angular.module('dleduWebApp')
         $scope.logoFn.init();
     })
     .config(function (ngJcropConfigProvider) {
-
-        ngJcropConfigProvider.setPreviewStyle('upload', {
-            // 'width': '120px',
-            // 'height': '120px',
-            'overflow': 'hidden',
-            'margin-left': '80px'
+        ngJcropConfigProvider.setPreviewStyle('long',{
+            'width': '392px',
+            'height': '80px',
+           // 'overflow': 'hidden',
+            'margin-left': '50px'
         });
+        ngJcropConfigProvider.setPreviewStyle('block',{
+            'width': '50px',
+            'height': '50px',
+            'overflow': 'hidden',
+            'margin-left': '50px'
+        });
+        // ngJcropConfigProvider.setPreviewStyle('upload', {
+        //     // 'width': '120px',
+        //     // 'height': '120px',
+        //     'overflow': 'hidden',
+        //     'margin-left': '80px'
+        // });
 
         ngJcropConfigProvider.setJcropConfig('block', {
             bgColor: 'black',
             bgOpacity: .4,
-            aspectRatio: 1 / 1
+            aspectRatio: 1 / 1,
             // maxWidth: 250,
             // maxHeight: 250
+            trueSize: [50, 50]
         });
-        ngJcropConfigProvider.setJcropConfig('longBlock', {
-            // bgColor: 'black',
-            // bgOpacity: .4,
-            // aspectRatio:7 / 3,
-            // maxWidth: 420,
-            // maxHeight: 60
+        ngJcropConfigProvider.setJcropConfig('long', {
+            bgColor: 'black',
+            bgOpacity: .4,
+             aspectRatio:11 / 2.2,
+            maxWidth: 420,
+            maxHeight: 60,
+            trueSize: [392, 80]
         });
     });
