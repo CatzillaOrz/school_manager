@@ -124,6 +124,7 @@ angular.module('dleduWebApp')
 			},
 			scanData: function (entity) {
 				var tr = [];
+				entity = _.sortBy(entity, 'dayOfWeek');
 				for (var i = 0; i < 13; i++) {
 					var td = {
 						courseList: new Array(7)
@@ -139,6 +140,7 @@ angular.module('dleduWebApp')
 					}
 					tr.push(td);
 				}
+				// console.log(tr)
 				return tr;
 			},
 			init: function () {
