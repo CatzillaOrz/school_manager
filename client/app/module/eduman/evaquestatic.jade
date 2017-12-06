@@ -123,7 +123,7 @@
                                 td {{$index+1 + ((evaQueStaticFn.page.pageNumber==0?evaQueStaticFn.page.pageNumber+1:evaQueStaticFn.page.pageNumber)-1)*evaQueStaticFn.page.pageSize}}
                                 td {{record.classType==10?'教学班':'行政班'}}
                                 td {{record.stuName}}
-                                td {{record.classesName}}
+                                td {{record.classType==10?record.teachingClassName:record.classesName}}
                                 td {{record.profName}}
                                 td {{record.collegeName}}
                                 td {{record.comment}}
@@ -140,7 +140,7 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate5.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, items-per-page="evaQueStaticFn.page.pageSize" total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.getEvaQuesUncompleteStu()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, items-per-page="evaQueStaticFn.page.pageSize" total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.lookComment()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
     #wid-id-4.jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
