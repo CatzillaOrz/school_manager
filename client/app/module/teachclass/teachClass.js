@@ -131,7 +131,7 @@ angular.module('dleduWebApp')
             })
 			.state('teachclasstable', {
 				parent: 'base',
-				url: '/teachclasstable',
+				url: '/teachclasstable/:sId/:tId',
 				access: {requiredLogin: true},
 				views: {
 					'content@base': {
@@ -143,6 +143,20 @@ angular.module('dleduWebApp')
 					label: '教师课表'
 				}
 			})
+			.state('teachClassSimplify', {
+                parent: 'base',
+                url   : '/teachClassSimplify',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TeachClassListCtrl',
+                        templateUrl: 'app/module/teachclass/teachClassSimplify.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '课表信息'
+                }
+            })
 			.state('holidayman', {
 				parent: 'base',
 				url: '/holidayman',
