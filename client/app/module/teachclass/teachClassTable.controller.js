@@ -147,12 +147,12 @@ angular.module('dleduWebApp')
 		};
 		$scope.teachClassTableFn.init();
 		$scope.$watch('teachClassTableFn.params.tParams.weekId', function(valOld, valNew){
-			if(valNew){
+			if(valNew!==valOld){
 				$scope.teachClassTableFn.getTeachingTable();
 			}
 		})
 		$scope.$watch('teachClassTableFn.params.wParams.semesterId', function(valOld, valNew){
-			if(valNew){
+			if(valNew!==valOld){
 				$scope.teachClassTableFn.getWeekList();
 			}
 		})
