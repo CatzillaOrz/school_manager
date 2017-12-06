@@ -146,6 +146,12 @@
                     "icon": "pencil-square-o"
                 },
                 {
+                    "title": "教师课表",
+                    "sref": "teachClassSimplify",
+                    "active": "teachClassSimplify",
+                    "icon": "pencil-square-o"
+                },
+                {
                     "title": "课程评分",
                     "sref": "coursescore",
                     "active": "coursescore",
@@ -245,7 +251,7 @@
             "target":"_blank",
             "active": "geodetail",
             "icon": "bar-chart-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         }
     ]
 }

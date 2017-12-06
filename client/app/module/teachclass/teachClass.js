@@ -129,6 +129,34 @@ angular.module('dleduWebApp')
                     label: '教学班详情'
                 }
             })
+			.state('teachclasstable', {
+				parent: 'base',
+				url: '/teachclasstable/:sId/:tId',
+				access: {requiredLogin: true},
+				views: {
+					'content@base': {
+						controller: 'TeachClassTableCtrl',
+						templateUrl: 'app/module/teachclass/teachClassTable.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师课表'
+				}
+			})
+			.state('teachClassSimplify', {
+                parent: 'base',
+                url   : '/teachClassSimplify',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TeachClassListCtrl',
+                        templateUrl: 'app/module/teachclass/teachClassSimplify.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '课表信息'
+                }
+            })
 			.state('holidayman', {
 				parent: 'base',
 				url: '/holidayman',

@@ -356,6 +356,22 @@ var TeachClassService = {
             callback(e);
         });
     },
+	getCourseSchedulesByTeacher: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+            path: '/api/web/v1/teacher/course/getweek',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, {data :res.entity});
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
 	getImpMustResult: function (params, access_token, callback) {
 		RestClient.get({
 			host: 'gateway-org',

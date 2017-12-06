@@ -202,6 +202,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+	getCourseSchedulesByTeacher:function (req, res) {
+		TeachClassService.getCourseSchedulesByTeacherSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
 	getImpMustResult:function (req, res) {
 		TeachClassService.getImpMustResultSync(req.query, req.user.access_token)
 			.then(function (data) {

@@ -99,6 +99,10 @@ angular.module('dleduWebService')
                 var courseSchedule = $resource('api/teachclass/saveCourseSchedules');
                 return courseSchedule.save(params);
             },
+			getCourseSchedulesByTeacher: function (params) {
+				var courseSchedule = $resource('api/teachclass/getCourseSchedulesByTeacher');
+				return courseSchedule.get(params);
+			},
 			getImpMustResult: function (params) {
 				var courseSchedule = $resource('api/teachclass/getImpMustResult');
 				return courseSchedule.get(params);

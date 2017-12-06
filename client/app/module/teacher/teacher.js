@@ -43,6 +43,20 @@ angular.module('dleduWebApp')
                     label: '教师管理'
                 }
             })
+            .state('teacherListSimplify', {
+                parent: 'base',
+                url   : '/teacherListSimplify',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TeacherListCtrl',
+                        templateUrl: 'app/module/teacher/teacherListSimplify.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '课表信息'
+                }
+            })
             .state('teacherEdit', {
                 parent: 'teacher',
                 url   : '/teacheredit/:id',
