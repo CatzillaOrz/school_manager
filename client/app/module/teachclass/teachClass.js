@@ -131,7 +131,7 @@ angular.module('dleduWebApp')
             })
 			.state('teachclasstable', {
 				parent: 'base',
-				url: '/teachclasstable/:sId/:tId',
+				url: '/teachclasstable/:tId',
 				access: {requiredLogin: true},
 				views: {
 					'content@base': {
