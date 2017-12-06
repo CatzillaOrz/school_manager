@@ -15,8 +15,8 @@ angular.module('dleduWebApp')
 				TeachClassService.getCourseSchedulesByTeacher(params).$promise
 					.then(function (data) {
 						// that.teachingTable = data.data;
-						console.log(data.data);
 						that.teachingTable = that.scanData(data.data);
+						console.log(that.teachingTable);
 					})
 					.catch(function (error) {
 						console.log(error)
@@ -30,7 +30,6 @@ angular.module('dleduWebApp')
 					};
 					for (var j = 0; j < 7; j++) {
 						(entity[j].courseList).forEach(function (cl) {
-							debugger
 							if ((parseInt(cl.dayOfWeek)) === j + 1 && cl.lessonOrderNum === i + 1) {
 								td.courseList[j] = cl;
 							}

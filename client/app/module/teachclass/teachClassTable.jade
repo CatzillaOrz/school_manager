@@ -34,29 +34,17 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 周一
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 周二
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 周三
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 周四
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 94px;') 周五
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 95px;') 周六
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 周日
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='ID: activate to sort column descending', style='width: 50px;') 周/节
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周一
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周二
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周三
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周四
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周五
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周六
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周日
                         tbody
                             tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTable")
-                                td.sorting_1 {{$index+1}}
-                                td.expand(ng-if='!table.courselist'")
+                                td.sorting_1 第{{$index+1}}节课
+                                td.expand(ng-repeat="list in table.courseList track by $index")
                                     span.responsiveExpander
-                                    | {{$index}}
-                                td.expand(ng-if='table.courselist', ng-repeat="list in table.courseList track by $index")
-                                    span.responsiveExpander
-                                    | {{list.lessonOrderNum === $index+1 ? list.whichLesson : '--'}}
-                                //- td {{table.name}}
-                                //- td {{table.sex}}
-                                //- td {{table.collegeName}}
-                                //- td {{table.email}}
-                                //- td {{table.phone}}
-                                //- td
-                                //-     a.handle(ui-sref="teachclasstable")
-                                //-         i.fa.fa-pencil-square-o
-                                //-         span {{ | '查看课表'}}
+                                    | {{list.lessonOrderNum >= $index+1 ? list.teach_time : '-'}} - {{list.lessonOrderNum >= $index+1 ? list.teacher : '-'}}
