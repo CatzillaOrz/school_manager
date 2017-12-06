@@ -116,7 +116,7 @@
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
                                                 td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
-                                                td {{record.teachingClassCode=='null'?'--':record.teachingClassCode}}
+                                                td {{record.teachingClassName=='null'?'--':record.teachingClassName}}
                                                 td {{record.courseName=='null'? '--':record.courseName}}
                                                 td {{record.teacherName=='null'? '--':record.teacherName}}
 
