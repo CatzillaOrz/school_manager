@@ -223,6 +223,14 @@ angular.module('dleduWebApp')
 				}
 			},
 
+			/**
+			 * 监控量化选择选项变化
+			 */
+			monitorOptionChange: function(){
+				this.emptyDataScore(this.quesLists);//清空选择分数
+				this.params.totalScore = 0; //清空总分
+			},
+
 			init: function () {
 				if($state.params.id){
 					this.isEditOrAdd = true;
@@ -239,18 +247,4 @@ angular.module('dleduWebApp')
 			}
 		};
 		$scope.evaQuesModFn.init();
-		$timeout(function () {
-			$scope.$watch("evaQuesModFn.params.quantification", function(newValue, oldValue){
-				if(newValue != oldValue){
-					$scope.evaQuesModFn.emptyDataScore($scope.evaQuesModFn.quesLists);//清空选择分数
-					$scope.evaQuesModFn.params.totalScore = 0; //清空总分
-				}
-			});
-			$scope.$watch("evaQuesModFn.params.choiceQuestion", function(newValue, oldValue){
-				if(newValue != oldValue){
-					$scope.evaQuesModFn.emptyDataScore($scope.evaQuesModFn.quesLists);
-					$scope.evaQuesModFn.params.totalScore = 0;
-				}
-			});
-		});
 	});
