@@ -140,7 +140,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '查看课表'
+					label: '教师课表'
 				}
 			})
 			.state('holidayman', {

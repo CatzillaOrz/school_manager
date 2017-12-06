@@ -110,13 +110,6 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
-                    "title": "课表信息",
-                    "sref": "teacherListSimplify",
-                    "active": "teacherListSimplify",
-                    "icon": "pencil-square-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
                     "title": "节假日管理",
                     "sref": "holidayman",
                     "active": "holidayman",
@@ -150,6 +143,12 @@
                     "title": "考勤记录",
                     "sref": "attendlist",
                     "active": "attendlist",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "教师课表",
+                    "sref": "teacherListSimplify",
+                    "active": "teacherListSimplify",
                     "icon": "pencil-square-o"
                 },
                 {
@@ -252,7 +251,7 @@
             "target":"_blank",
             "active": "geodetail",
             "icon": "bar-chart-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         }
     ]
 }
