@@ -61,7 +61,8 @@ angular.module('dleduWebApp')
 						that.page = data.page;
 					})
 					.catch(function (error) {
-
+						that.requestEnd = true;
+						messageService.openMsg("查询异常！");
 					})
 			},
 
@@ -87,6 +88,8 @@ angular.module('dleduWebApp')
 						that.page = data.page;
 					})
 					.catch(function (error) {
+						that.requestEnd = true;
+						messageService.openMsg("查询异常！");
 
 					})
 			},
@@ -94,7 +97,13 @@ angular.module('dleduWebApp')
 			//显示未提交人数
 			showUncompelteStu: function(type){
 				this.isShowUnCompelteStu = type;
-				this.page.pageNumber = 1;
+				this.records = [];
+				this.page = {
+					totalElements: 0,
+					totalPages: 0,
+					pageNumber: 1,
+					pageSize: 6
+				};
 				if(this.isShowUnCompelteStu == 'uncomplete'){
 					this.getEvaQuesUncompleteStu();
 				}else if(this.isShowUnCompelteStu == 'look') {
