@@ -21,7 +21,7 @@
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassTableFn.params.wParams.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 学周：
-                                    select.form-control(ng-options="item.no for item in teachClassTableFn.weekDropList track by item.id" data-ng-change='teachClassTableFn.getTeachingTable()' ng-model="teachClassTableFn.params.tParams.weekId")
+                                    select.form-control(ng-options="item.id as item.no for item in teachClassTableFn.weekDropList track by item.id" data-ng-change='teachClassTableFn.getTeachingTable()' ng-model="teachClassTableFn.params.tParams.weekId")
                                     //- select.select2.form-control(ng-model="teachClassTableFn.params.tParams.weekId" ui-select2="teachClassTableFn.select2WeekOptions()" )
                                         option(ng-repeat="week in teachClassTableFn.weekDropList" value="{{week.id}}" ng-selected="teachClassTableFn.params.tParams.weekId==={{week.id}}") {{week.no}}
                         .col-sm-3.hidden-xs.margin-bottom-10
