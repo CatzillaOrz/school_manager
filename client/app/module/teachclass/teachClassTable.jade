@@ -42,4 +42,4 @@
                                 td.sorting_1 第{{$index+1}}节课
                                 td.expand(ng-repeat="list in table.courseList track by $index")
                                     span.responsiveExpander
-                                    | {{list.lessonOrderNum >= $index+1 ? list.teach_time : '-'}} - {{list.lessonOrderNum >= $index+1 ? list.teacher : '-'}} - {{list.lessonOrderNum >= $index+1 ? list.courseName : ''}}
+                                    | {{list.dayOfWeek || '-'}} - {{ list.whichLesson || '-'}} - {{list.courseName || ''}}
