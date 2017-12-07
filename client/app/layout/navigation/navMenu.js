@@ -83,7 +83,6 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
             };
             var activeMenu = function(tostate){
                 tostate = tostate || $state.current;
-                console.log($state.current);
                 var onstate = '';
                 if(tostate.parent != 'base'){
                     // onstate = onstate;
