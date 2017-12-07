@@ -64,7 +64,7 @@
                                                     select.select2.form-control(ng-model="distributeListFn.queryOption.professionalId" ui-select2="distributeListFn.select2MajorOptions(classListFn.collegeId)"  )
                                                         option(value="") 全部
                                                         option(ng-repeat="major in distributeListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'||distributeListFn.queryOption.queryType=='按行政班'")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
                                                     label.control-label 班级名称：
                                                     input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")

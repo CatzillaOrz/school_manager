@@ -125,6 +125,7 @@ angular.module('dleduWebApp')
 					managerId: AuthService.getUser().id,
 					teacherName: that.queryOption.teacherName,
 					courseName: that.queryOption.courseName,
+					//className: that.queryOption.className
 				};
 				EduManService.getEvaQuesUnDist(params).$promise
 					.then(function (data) {
