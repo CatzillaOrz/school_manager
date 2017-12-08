@@ -406,8 +406,10 @@ angular.module('dleduWebApp')
 							}
 						}
 					}
-					if(!flag){
-						this.selDistObj.push(selObj);
+					if(this.invertCheckRecord) {//反选的时候
+						if(!flag){
+							this.selDistObj.push(selObj);
+						}
 					}
 				}
 				this.checkAllRecord = false;
@@ -415,6 +417,7 @@ angular.module('dleduWebApp')
 					this.showSelDistList(this.records);
 				}else{
 					this.cloneSelDistObj = angular.copy(this.selDistObj);
+					this.showInvertSelDistList(this.records);
 				}
 			},
 
@@ -455,19 +458,37 @@ angular.module('dleduWebApp')
 						}
 					}
 				}else {//反选 全选的时候 删除保存的正选里面存在的元素
-					for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
-						var record = this.records[k];
-						var selId = record.teachingClassesId;
-						//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
-						for (var j = 0; j < this.selDistObj.length; j++) {
-							var id = this.selDistObj[j].teachingClassesId;
-							if (selId == id) {
-								this.selDistObj.splice(j, 1);
-								record.check = true;
-								break;
+					if (this.checkAllRecord){
+						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
+							var record = this.records[k];
+							var selId = record.teachingClassesId;
+							//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
+							for (var j = 0; j < this.selDistObj.length; j++) {
+								var id = this.selDistObj[j].teachingClassesId;
+								if (selId == id) {
+									this.selDistObj.splice(j, 1);
+									record.check = true;
+									break;
+								}
+							}
+						}
+					}else{
+						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
+							var record = this.records[k];
+							var selId = record.teachingClassesId, flag = false;
+							//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
+							for (var j = 0; j < this.selDistObj.length; j++) {
+								var id = this.selDistObj[j].teachingClassesId;
+								if (selId == id) {
+									flag = true;
+								}
+							}
+							if(!flag){
+								this.selDistObj.push(record);
 							}
 						}
 					}
+					this.showInvertSelDistList(this.records);
 				}
 			},
 
