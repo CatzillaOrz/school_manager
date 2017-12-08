@@ -104,7 +104,9 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 全选&nbsp;
+                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.invertCheckAll()" ng-checked="distributeListFn.invertCheckRecord" ng-model="distributeListFn.invertCheckRecord")
+                                                    | 反选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级编号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级名称
