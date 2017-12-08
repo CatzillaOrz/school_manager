@@ -3,7 +3,7 @@
  * 评教问卷新增，修改页面
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuesModCtrl', function ($scope, $state, AuthService, EduManService, messageService, $filter) {
+	.controller('EvaQuesModCtrl', function ($scope, $state, $timeout, AuthService, EduManService, messageService, $filter) {
 		$scope.evaQuesModFn={
 			isEditOrAdd: false, //true是编辑 false是新增
 			//问卷信息
@@ -209,6 +209,27 @@ angular.module('dleduWebApp')
 				this.calcAllTotal(this.quesLists);
 			},
 
+			/**
+			 * 切换时清空选项的分值
+			 */
+			emptyDataScore: function(arr){
+				for(var i = 0, len = arr.length; i < len; i++){
+					var ques = arr[i];
+					ques.score = 0;
+					for(var j = 0, lenChoice = ques.questionChioce.length; j < lenChoice; j++){
+						var option = ques.questionChioce[j];
+						option.score = 0;
+					}
+				}
+			},
+
+			/**
+			 * 监控量化选择选项变化
+			 */
+			monitorOptionChange: function(){
+				this.emptyDataScore(this.quesLists);//清空选择分数
+				this.params.totalScore = 0; //清空总分
+			},
 
 			init: function () {
 				if($state.params.id){

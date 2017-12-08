@@ -35,16 +35,16 @@
                     .col-sm-3
                 .row.padding-top-15
                     .col-sm-2
-                        span 调查人数：
+                        span 调查问卷数量：
                         span {{evaQueStaticFn.staticInfo.totalPeple}}
                     .col-sm-2
-                        span 已提交人数：
+                        span 已提交问卷数量：
                         span {{evaQueStaticFn.staticInfo.commitNum}}
                     .col-sm-2
                         span 已提交占比：
                         span {{evaQueStaticFn.staticInfo.commitZb}}
                     .col-sm-2
-                        span 未提交人数：
+                        span 未提交问卷数量：
                         span {{evaQueStaticFn.staticInfo.noCommitNum}}
                     .col-sm-2
                         span 未提交占比：
@@ -100,7 +100,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 未提交人名单
+            h2 评语列表
             span.widget-icon(style="float:right;right:15px;" ng-click="evaQueStaticFn.showUncompelteStu('close')")
                 i.fa.fa-times
         div(role='content')
@@ -112,6 +112,7 @@
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 班级类型
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 学生姓名
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 班级名称
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 所属专业
@@ -120,8 +121,9 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 td {{$index+1 + ((evaQueStaticFn.page.pageNumber==0?evaQueStaticFn.page.pageNumber+1:evaQueStaticFn.page.pageNumber)-1)*evaQueStaticFn.page.pageSize}}
+                                td {{record.classType==10?'教学班':'行政班'}}
                                 td {{record.stuName}}
-                                td {{record.classesName}}
+                                td {{record.classType==10?record.teachingClassName:record.classesName}}
                                 td {{record.profName}}
                                 td {{record.collegeName}}
                                 td {{record.comment}}
@@ -138,7 +140,7 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate5.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, items-per-page="evaQueStaticFn.page.pageSize" total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.getEvaQuesUncompleteStu()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, items-per-page="evaQueStaticFn.page.pageSize" total-items='evaQueStaticFn.page.totalElements', max-size='evaQueStaticFn.page.pageSize' ng-model='evaQueStaticFn.page.pageNumber',ng-change="evaQueStaticFn.lookComment()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
     #wid-id-4.jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             .jarviswidget-ctrls(role='menu')

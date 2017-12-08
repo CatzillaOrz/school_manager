@@ -128,7 +128,7 @@ angular.module('dleduWebApp')
 				}
 			})
 			.state('evaquestatic', {
-				parent: 'distributelist',
+				parent: 'evaquestion',
 				url   : '/evaquestatic/:type/:id',
 				access: {requiredLogin: true},
 				views : {

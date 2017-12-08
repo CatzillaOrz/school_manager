@@ -31,10 +31,10 @@
                             | 问卷类型：
                         .col-sm-7
                             label.checkbox-inline
-                                input(type="checkbox" ng-checked="evaQuesModFn.params.quantification" ng-model="evaQuesModFn.params.quantification")
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.quantification" ng-model="evaQuesModFn.params.quantification" ng-click="evaQuesModFn.monitorOptionChange()")
                                 | 是否量化
                             label.checkbox-inline
-                                input(type="checkbox" ng-checked="evaQuesModFn.params.choiceQuestion" ng-model="evaQuesModFn.params.choiceQuestion")
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.choiceQuestion" ng-model="evaQuesModFn.params.choiceQuestion" ng-click="evaQuesModFn.monitorOptionChange()")
                                 | 选项型
                             label.checkbox-inline
                                 input(type="checkbox" ng-checked="evaQuesModFn.params.qcomment" ng-model="evaQuesModFn.params.qcomment")
@@ -100,7 +100,7 @@
                                                         input(type="checkbox" ng-checked="record.radio" ng-model="record.radio" ng-change="evaQuesModFn.calcOptionScore(record, record.radio)")
                                                         |  是否多选
                                                     .col-sm-2.padding-10
-                                                        label.margin-left-10 分值:{{record.score}}
+                                                        label.margin-left-10 分值: {{record.score}}
                                                     .col-sm-1.padding-10
                                                         i.fa.fa-plus-circle(style="font-size:16px;margin-right:10px;" title="新增" ng-click="evaQuesModFn.addQuesOption(outerIndex, $index)")
                                                 .form-group.no-margin(ng-repeat="quesOption in record.questionChioce")

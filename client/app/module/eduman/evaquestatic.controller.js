@@ -13,6 +13,7 @@ angular.module('dleduWebApp')
 			quePersonInfo: null, //答题详情
 			id: 0, //判断链接从哪块过来。0从问卷列表过来，1从已分配页面过来
 			type: '', //判断统计所有问卷信息还是针对某个问卷
+			requestEnd: true, //判断请求是否结束
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -48,13 +49,20 @@ angular.module('dleduWebApp')
 					type: that.type
 				};
 				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;
+				if(!that.requestEnd){
+					messageService.openMsg("请稍候点击！");
+					return;
+				}
+				that.requestEnd = false;
 				EduManService.getEvaQuesUncompleteStu(params).$promise
 					.then(function (data) {
+						that.requestEnd = true;
 						that.records = data.data;
 						that.page = data.page;
 					})
 					.catch(function (error) {
-
+						that.requestEnd = true;
+						messageService.openMsg("查询异常！");
 					})
 			},
 
@@ -68,12 +76,20 @@ angular.module('dleduWebApp')
 					type: that.type
 				};
 				that.type == 0 ? params.questionnaireId = that.id : params.questionnaireAssginId = that.id;
+				if(!that.requestEnd){
+					messageService.openMsg("请稍候点击！");
+					return;
+				}
+				that.requestEnd = false;
 				EduManService.lookComment(params).$promise
 					.then(function (data) {
+						that.requestEnd = true;
 						that.records = data.data;
 						that.page = data.page;
 					})
 					.catch(function (error) {
+						that.requestEnd = true;
+						messageService.openMsg("查询异常！");
 
 					})
 			},
@@ -81,7 +97,13 @@ angular.module('dleduWebApp')
 			//显示未提交人数
 			showUncompelteStu: function(type){
 				this.isShowUnCompelteStu = type;
-				this.page.pageNumber = 1;
+				this.records = [];
+				this.page = {
+					totalElements: 0,
+					totalPages: 0,
+					pageNumber: 1,
+					pageSize: 6
+				};
 				if(this.isShowUnCompelteStu == 'uncomplete'){
 					this.getEvaQuesUncompleteStu();
 				}else if(this.isShowUnCompelteStu == 'look') {
