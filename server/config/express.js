@@ -31,9 +31,8 @@ module.exports = function (app) {
     app.set('view engine', 'jade');
     app.use(compression());
     //app.use(bodyParser.urlencoded({extended: false}));
-    app.use(bodyParser.json({limit: '50mb'}));
-    app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
-    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({limit: '5000kb', extended: true, parameterLimit:50000}));
+    app.use(bodyParser.json({limit : "5000kb"}));
     app.use(methodOverride());
     app.use(cookieParser());
     app.use(session({
