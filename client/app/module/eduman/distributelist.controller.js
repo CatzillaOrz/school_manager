@@ -218,10 +218,10 @@ angular.module('dleduWebApp')
 					EduManService.getEvaQuesUnDist(params).$promise
 						.then(function (data) {
 							//分配前。把之前选中元素反选
-							var params = {};
+							var params = {questionnaireId: that.quesId};
 							params.assignType = 10;
 							params.teachingClasses = that.invertAllRecords(data.data);
-							if (params.teachingClasses.length.length == 0) {
+							if (params.teachingClasses.length == 0) {
 								messageService.openMsg("请选择分配记录！");
 								return;
 							}
@@ -230,6 +230,7 @@ angular.module('dleduWebApp')
 									messageService.openMsg("分配成功！");
 									that.selDistObj = [];
 									that.page.pageNumber = 1;
+									that.invertCheckRecord = false;
 									that.findByOption('uncomplete');
 								})
 								.catch(function (error) {
@@ -322,7 +323,7 @@ angular.module('dleduWebApp')
 					var data = datas[i], flag = false;
 					for(var j = 0, lenSel = this.cloneSelDistObj.length; j < lenSel; j++ ){
 						var temp = this.cloneSelDistObj[j];
-						if((data.teachingClassesId == temp.teachingClassesId) && temp.check){
+						if(data.teachingClassesId == temp.teachingClassesId){
 							flag = true;
 						}
 					}
