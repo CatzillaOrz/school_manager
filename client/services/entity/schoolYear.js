@@ -73,9 +73,9 @@ angular.module('dleduWebService')
                 var semesterList = $resource('api/schoolyear/getSemesterById');
                 return semesterList.get(params);
             },
-            getCurrentWeek: function (params) {
+            getCurrentWeek: function () {
                 var currentWeek = $resource('api/schoolyear/getCurrentWeek');
-                return currentWeek.get(params);
+                return currentWeek.get({});
             }
 
         }
