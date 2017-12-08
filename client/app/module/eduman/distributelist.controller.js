@@ -23,8 +23,13 @@ angular.module('dleduWebApp')
 			dropKeyWord: "",
 			//记录选择的分配课程id
 			selDistObj: [],
+			cloneSelDistObj: [],
+			//反选的记录
+			invertSelDistObj: [],
 			//页面全选
 			checkAllRecord: false,
+			//反选
+			invertCheckRecord: false,
 			//删除标识
 			delType: 'single',
 			//查询类型
@@ -133,44 +138,17 @@ angular.module('dleduWebApp')
 						//增加check属性
 						that.addCheckProperty(that.records);
 						that.checkAllRecord = false;
-						that.showSelDistList(data.data);
+						if(that.invertCheckRecord){
+							that.showInvertSelDistList(data.data);
+						}else{
+							that.showSelDistList(data.data);
+						}
 						that.page = data.page;
 						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
 					})
-			},
-
-			/**
-			 * 对象数据添加check属性
-			 * @param records
-			 */
-			addCheckProperty: function (records) {
-				for (var i = 0, recordLen = records.length; i < recordLen; i++) {
-					var record = records[i];
-					record.check = false;
-				}
-			},
-
-			//还原之前选中的分配课程，在选择分配列表中的显示出来
-			showSelDistList: function (records) {
-				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
-				for (var k = 0, lenRecord = records.length; k < lenRecord; k++) {
-					var record = records[k], selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
-					//判断元素在之前元素里面是否已经存在，如果存在不添加
-					for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
-						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
-						if (selId == id) {
-							record.check = true;
-							calcCount++;
-							break;
-						}
-					}
-				}
-				if (calcCount == lenRecord && calcCount) {
-					this.checkAllRecord = true;
-				}
 			},
 
 			//根据条件查询
@@ -228,22 +206,131 @@ angular.module('dleduWebApp')
 			//分配问卷
 			distQuestionaire: function () {
 				var that = this;
-				if (this.selDistObj.length == 0) {
-					messageService.openMsg("请选择分配记录！");
-					return;
-				}
-				var params = this.contructDistParams();
+				if(this.invertCheckRecord){
+					//var params = this.contructDistParams();
+					var params = {
+						orgId: AuthService.getUser().orgId,
+						pageNumber: 1,
+						pageSize: that.page.totalElements,
+						quId: that.quesId,
+						managerId: AuthService.getUser().id,
+					};
+					EduManService.getEvaQuesUnDist(params).$promise
+						.then(function (data) {
+							//分配前。把之前选中元素反选
+							var params = {};
+							params.assignType = 10;
+							params.teachingClasses = that.invertAllRecords(data.data);
+							if (params.teachingClasses.length.length == 0) {
+								messageService.openMsg("请选择分配记录！");
+								return;
+							}
+							EduManService.distQuestionaire(params).$promise
+								.then(function (data) {
+									messageService.openMsg("分配成功！");
+									that.selDistObj = [];
+									that.page.pageNumber = 1;
+									that.findByOption('uncomplete');
+								})
+								.catch(function (error) {
+									messageService.openMsg("分配失败！");
+								})
+						})
+						.catch(function (error) {
 
-				EduManService.distQuestionaire(params).$promise
-					.then(function (data) {
-						messageService.openMsg("分配成功！");
-						that.selDistObj = [];
-						that.page.pageNumber = 1;
-						that.findByOption('uncomplete');
-					})
-					.catch(function (error) {
-						messageService.openMsg("分配失败！");
-					})
+						})
+				}else{
+					if (this.selDistObj.length == 0) {
+						messageService.openMsg("请选择分配记录！");
+						return;
+					}
+					var params = this.contructDistParams();
+					EduManService.distQuestionaire(params).$promise
+						.then(function (data) {
+							messageService.openMsg("分配成功！");
+							that.selDistObj = [];
+							that.page.pageNumber = 1;
+							that.findByOption('uncomplete');
+						})
+						.catch(function (error) {
+							messageService.openMsg("分配失败！");
+						})
+				}
+			},
+
+			/**
+			 * 对象数据添加check属性
+			 * @param records
+			 */
+			addCheckProperty: function (records) {
+				for (var i = 0, recordLen = records.length; i < recordLen; i++) {
+					var record = records[i];
+					record.check = false;
+				}
+			},
+
+			//还原之前选中的分配课程，在选择分配列表中的显示出来
+			showSelDistList: function (records) {
+				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
+				for (var k = 0, lenRecord = records.length; k < lenRecord; k++) {
+					var record = records[k], selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+					//判断元素在之前元素里面是否已经存在，如果存在不添加
+					for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
+						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+						if (selId == id) {
+							record.check = true;
+							calcCount++;
+							break;
+						}
+					}
+				}
+				if (calcCount == lenRecord && calcCount) {
+					this.checkAllRecord = true;
+				}
+			},
+
+			//还原之前反选的课程
+			showInvertSelDistList: function (datas) {
+				this.cloneSelDistObj = this.selDistObj;
+				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
+				for(var i = 0, len = datas.length; i < len; i++ ){
+					var data = datas[i], flag = false;
+					for(var j = 0, lenSel = this.cloneSelDistObj.length; j < lenSel; j++ ){
+						var temp = this.cloneSelDistObj[j];
+						if(data.teachingClassesId == temp.teachingClassesId){
+							flag = true;
+							calcCount++;
+						}
+					}
+					if(!flag){
+						data.check = true;
+					}else{
+						data.check = false;
+					}
+				}
+				if (calcCount == len && calcCount) {
+					this.checkAllRecord = true;
+				}
+			},
+
+			/**
+			 * 查询所有未分配的教学班
+			 */
+			invertAllRecords: function(datas){
+				var dataArr = [];
+				for(var i = 0, len = datas.length; i < len; i++ ){
+					var data = datas[i], flag = false;
+					for(var j = 0, lenSel = this.cloneSelDistObj.length; j < lenSel; j++ ){
+						var temp = this.cloneSelDistObj[j];
+						if((data.teachingClassesId == temp.teachingClassesId) && temp.check){
+							flag = true;
+						}
+					}
+					if(!flag){
+						dataArr.push(data);
+					}
+				}
+				return dataArr;
 			},
 
 			/**
@@ -286,28 +373,48 @@ angular.module('dleduWebApp')
 			selDist: function ($index) {
 				var selObj = this.records[$index];
 				if (selObj.check) {
-					var flag = false, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
+					var flag = false, index, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
 					for (var j = 0; j < this.selDistObj.length; j++) {
 						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
 						if (selId == id) {
 							flag = true;
+							index = j;
 						}
 					}
-					if (!flag) {
-						this.selDistObj.push(selObj);
+					if(this.invertCheckRecord){//反选的时候存在在反选里面的数据从原来数组里面删除
+						if (flag) {
+							this.selDistObj.splice(index, 1);
+						}
+					}else{
+						if (!flag) {
+							this.selDistObj.push(selObj);
+						}
 					}
 				} else {
-					var selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
+					var flag = false, index, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
 					for (var k = 0; k < this.selDistObj.length; k++) {
 						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[k].teachingClassesId : this.selDistObj[k].id;
-						if (selId == id) {
-							this.selDistObj.splice(k, 1);
-							break;
+						if(this.invertCheckRecord){//反选的时候
+							if (selId == id) {
+								flag = true;
+							}
+						}else{
+							if (selId == id) {
+								this.selDistObj.splice(k, 1);
+								break;
+							}
 						}
+					}
+					if(!flag){
+						this.selDistObj.push(selObj);
 					}
 				}
 				this.checkAllRecord = false;
-				this.showSelDistList(this.records);
+				if(!this.invertCheckRecord){
+					this.showSelDistList(this.records);
+				}else{
+					this.cloneSelDistObj = angular.copy(this.selDistObj);
+				}
 			},
 
 			//全选
@@ -344,6 +451,21 @@ angular.module('dleduWebApp')
 							}
 						}
 					}
+				}
+			},
+
+			//反选
+			invertCheckAll: function () {
+				this.checkAllRecord = false;
+				if(this.invertCheckRecord){
+					this.cloneSelDistObj = angular.copy(this.selDistObj);
+					for(var i = 0, len = this.records.length; i < len; i++){
+						var temp = this.records[i];
+						temp.check = !temp.check;
+					}
+				}else{
+					this.addCheckProperty(this.records);
+					this.showSelDistList(this.records);
 				}
 			},
 
