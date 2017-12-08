@@ -300,11 +300,11 @@ angular.module('dleduWebApp')
 						var temp = this.cloneSelDistObj[j];
 						if(data.teachingClassesId == temp.teachingClassesId){
 							flag = true;
-							calcCount++;
 						}
 					}
 					if(!flag){
 						data.check = true;
+						calcCount++;
 					}else{
 						data.check = false;
 					}
@@ -421,33 +421,49 @@ angular.module('dleduWebApp')
 			//全选
 			checkAll: function () {
 				//选择当前页所有记录
-				if (this.checkAllRecord) {
-					for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
-						var record = this.records[k];
-						var flag = false, selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
-						//判断元素在之前元素里面是否已经存在，如果存在不添加
-						for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
-							var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
-							if (selId == id) {
-								flag = true;
+				if(!this.invertCheckRecord){
+					if (this.checkAllRecord) {
+						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
+							var record = this.records[k];
+							var flag = false, selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+							//判断元素在之前元素里面是否已经存在，如果存在不添加
+							for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
+								var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+								if (selId == id) {
+									flag = true;
+								}
+							}
+							if (!flag) {
+								this.selDistObj.push(record);
+								record.check = true;
 							}
 						}
-						if (!flag) {
-							this.selDistObj.push(record);
-							record.check = true;
+
+					} else {//反选时当前页所有元素都被删除
+						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
+							var record = this.records[k];
+							var selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+							//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
+							for (var j = 0; j < this.selDistObj.length; j++) {
+								var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+								if (selId == id) {
+									this.selDistObj.splice(j, 1);
+									record.check = false;
+									break;
+								}
+							}
 						}
 					}
-
-				} else {//反选时当前页所有元素都被删除
+				}else {//反选 全选的时候 删除保存的正选里面存在的元素
 					for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
 						var record = this.records[k];
-						var selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+						var selId = record.teachingClassesId;
 						//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
 						for (var j = 0; j < this.selDistObj.length; j++) {
-							var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+							var id = this.selDistObj[j].teachingClassesId;
 							if (selId == id) {
 								this.selDistObj.splice(j, 1);
-								record.check = false;
+								record.check = true;
 								break;
 							}
 						}
@@ -458,13 +474,14 @@ angular.module('dleduWebApp')
 			//反选
 			invertCheckAll: function () {
 				this.checkAllRecord = false;
-				if(this.invertCheckRecord){
+				if(this.invertCheckRecord){//反选为true
 					this.cloneSelDistObj = angular.copy(this.selDistObj);
 					for(var i = 0, len = this.records.length; i < len; i++){
 						var temp = this.records[i];
 						temp.check = !temp.check;
 					}
-				}else{
+					this.showInvertSelDistList(this.records);
+				}else{//反选为false
 					this.addCheckProperty(this.records);
 					this.showSelDistList(this.records);
 				}
