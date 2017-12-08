@@ -103,6 +103,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.weekDropList = data.data;
 						that.params.tParams.weekId = data.data[0].id;
+						// console.log(that.params.tParams.weekId)
 						that.getTeachingTable();
 
 					})
