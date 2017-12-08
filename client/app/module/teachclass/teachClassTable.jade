@@ -21,8 +21,9 @@
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassTableFn.params.wParams.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 学周：
-                                    select.select2.form-control(ng-model="teachClassTableFn.params.tParams.weekId", ui-select2="" )
-                                        option(ng-repeat="week in teachClassTableFn.weekDropList" value="{{week.id}}" ng-selected="teachClassTableFn.params.tParams.weekId==week.id") {{week.no}}
+                                    select.form-control(ng-options="item.id as item.no for item in teachClassTableFn.weekDropList track by item.id" data-ng-change='teachClassTableFn.getTeachingTable()' ng-model="teachClassTableFn.params.tParams.weekId")
+                                    //- select.select2.form-control(ng-model="teachClassTableFn.params.tParams.weekId" ui-select2="teachClassTableFn.select2WeekOptions()" )
+                                        option(ng-repeat="week in teachClassTableFn.weekDropList" value="{{week.id}}" ng-selected="teachClassTableFn.params.tParams.weekId==={{week.id}}") {{week.no}}
                         .col-sm-3.hidden-xs.margin-bottom-10
                             .ColVis
                                 .btn.btn-default(ui-sref='teacherListSimplify') 返回                
@@ -41,5 +42,6 @@
                             tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTable")
                                 td.sorting_1 第{{$index+1}}节课
                                 td.expand(ng-repeat="list in table.courseList track by $index")
-                                    span.responsiveExpander
-                                    | {{list.dayOfWeek || '-'}} - {{ list.whichLesson || '-'}} - {{list.courseName || ''}}
+                                    span.responsiveExpander {{list.courseName || ''}}
+                                    p
+                                        small {{ list.whichLesson || ''}}

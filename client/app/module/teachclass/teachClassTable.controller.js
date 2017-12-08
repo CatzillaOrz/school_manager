@@ -102,7 +102,7 @@ angular.module('dleduWebApp')
 				SchoolYearService.getTeachWeekList(that.params.wParams).$promise
 					.then(function (data) {
 						that.weekDropList = data.data;
-						that.params.tParams.weekId = data.data[0].id
+						that.params.tParams.weekId = data.data[0].id;
 						that.getTeachingTable();
 
 					})
