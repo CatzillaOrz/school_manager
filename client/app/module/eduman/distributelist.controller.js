@@ -515,6 +515,7 @@ angular.module('dleduWebApp')
 				this.selDistObj = [];
 				this.page.pageNumber = 1;
 				this.checkAllRecord = false;
+				this.invertCheckRecord = false;
 				if (type == '按学校') {
 					this.getSchool();
 				} else if (type == '按院系') {
