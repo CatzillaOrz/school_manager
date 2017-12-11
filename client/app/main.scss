@@ -21,6 +21,19 @@ body{
   position: absolute;
   font-family: $font-family-sans-serif;
   background-color: #EFF3F6;
+  .table{
+    tbody{
+      tr{
+        .td-table-no-border-top-bottom{
+          border-bottom: none;
+          border-top: none;
+          background-color: lightcyan;
+        }
+      }
+      
+    }
+    
+  }
 }
 .swiper-pagination-bullet-active{
   width: 35px !important;
