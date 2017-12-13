@@ -26,6 +26,7 @@ router.get('/getPeriodById',auth.isSignedIn, controller.getPeriodById);
 router.get('/getTeachWeekList',auth.isSignedIn, controller.getTeachWeekList);
 router.get('/getSemesterList',auth.isSignedIn, controller.getSemesterList);
 router.get('/getSemesterById',auth.isSignedIn, controller.getSemesterById);
+router.get('/getCurrentWeek',auth.isSignedIn, controller.getCurrentWeek);
 
 
 module.exports = router;

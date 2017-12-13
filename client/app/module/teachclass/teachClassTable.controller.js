@@ -102,9 +102,7 @@ angular.module('dleduWebApp')
 				SchoolYearService.getTeachWeekList(that.params.wParams).$promise
 					.then(function (data) {
 						that.weekDropList = data.data;
-						that.params.tParams.weekId = data.data[0].id;
-						// console.log(that.params.tParams.weekId)
-						that.getTeachingTable();
+						that.params.tParams.weekId !== 0 && (that.getTeachingTable());
 
 					})
 					.catch(function (error) {
@@ -143,7 +141,20 @@ angular.module('dleduWebApp')
 				}
 				return tr;
 			},
+			getCurrentSemesterWeek : function () {
+				var that = this;
+				SchoolYearService.getCurrentWeek().$promise
+				.then(function (data) {
+					that.params.tParams.weekId = data.id;
+					that.getTeachingTable();
+
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+			},
 			init: function () {
+				this.getCurrentSemesterWeek();
 				this.getCurrentSemester();
 			}
 		};
