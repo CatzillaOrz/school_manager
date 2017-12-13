@@ -710,13 +710,21 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.quesId = $state.params.quesId;
-				if ($state.params.id == 1) { // id = 1 已经分配列表 0 未分配列表
-					$("#myTab  a:last").tab("show");
+				var isEnd = $state.params.type; //判断是否结束
+				this.isEnd = isEnd;
+				if(isEnd == "end"){
+					$("#comp").tab("show");
 					this.switchType('complete');
-				} else {
-					this.getCollegeDropList();
-					this.switchType('uncomplete');
+				}else{
+					if ($state.params.id == 1) { // id = 1 已经分配列表 0 未分配列表
+						$("#myTab  a:last").tab("show");
+						this.switchType('complete');
+					} else {
+						this.getCollegeDropList();
+						this.switchType('uncomplete');
+					}
 				}
+
 			}
 		};
 		$scope.distributeListFn.init();

@@ -3,18 +3,21 @@
 #wid-id-7.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
     header(role='heading')
         ul#myTab.nav.nav-tabs.pull-left.in
-            li.active(ng-click="distributeListFn.switchType('uncomplete')")
+            li.active(ng-click="distributeListFn.switchType('uncomplete')" ng-if="distributeListFn.isEnd =='unend'")
                 a(data-toggle='tab', href='#hr1', aria-expanded='true')
                     i.fa.fa-list
                     span.hidden-mobile.hidden-tablet  选择分配
             li(ng-click="distributeListFn.switchType('complete')")
-                a(data-toggle='tab', href='#hr2', aria-expanded='false')
+                a#comp(data-toggle='tab', href='#hr2', aria-expanded='false')
                     i.fa.fa-list-alt
                     span.hidden-mobile.hidden-tablet
                         |  已分配
-                        //span.label.bg-color-blue.txt-color-white
-                            | label
-                            i.fa.fa-exclamation
+        //ul.nav.nav-tabs.pull-left.in(ng-if="distributeListFn.isEnd =='end'")
+            li(ng-click="distributeListFn.switchType('complete')")
+                a#myTab1(data-toggle='tab', href='#hr2', aria-expanded='true')
+                    i.fa.fa-list-alt
+                    span.hidden-mobile.hidden-tablet
+                        |  已分配
         span.jarviswidget-loader
             i.fa.fa-refresh.fa-spin
     // widget div
@@ -26,7 +29,7 @@
         // widget content
         .widget-body
             .tab-content
-                #hr1.tab-pane.active
+                #hr1.tab-pane.active(ng-if="distributeListFn.isEnd =='unend'")
                     #wid-id-2.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
