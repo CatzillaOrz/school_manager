@@ -67,17 +67,17 @@ angular.module('dleduWebApp')
                 }
                 CollegeService.deleteCollege(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("学院删除成功！");
+                        messageService.openMsg("院系删除成功！");
                         _this.getCollegeList();
                     })
                     .catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error,"学院删除失败！"));
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"院系删除失败！"));
                     })
             },
             //删除提示弹出框
             deletePrompt: function (entity) {
                 this.currentCollege = entity;
-                messageService.getMsg("您确定要删除此学院吗？", this.deleteCollege);
+                messageService.getMsg("您确定要删除此院系吗？", this.deleteCollege);
             },
 
             /**

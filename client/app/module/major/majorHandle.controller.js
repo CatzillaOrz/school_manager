@@ -123,7 +123,7 @@ angular.module('dleduWebApp')
             submit: function () {
                 var that = this;
                 if (!that.collegeId) {
-                    messageService.openMsg("必须选择学院");
+                    messageService.openMsg("必须选择院系");
                     return;
                 }
                 if (that.handle == "编辑专业信息") {

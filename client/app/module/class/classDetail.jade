@@ -148,7 +148,7 @@
                             .form-group
                                 label.col-sm-3.control-label
                                     span.required *
-                                    | 选择学院：
+                                    | 选择院系：
                                 .col-sm-7
                                     select.form-control(ng-model="classDetailFn.collegeId" ui-select2 ="classDetailFn.select2CollegeOptions()")
                                         option(ng-repeat="college in classDetailFn.collegeDropList" value="{{college.id}}" ) {{college.name}}

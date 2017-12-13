@@ -64,7 +64,7 @@ angular.module('dleduWebApp')
 
 						if (data.id === '') { // adjust for custom placeholder values
 							_this.collegeDropList = [];
-							return '按学院筛选';
+							return '按院系筛选';
 						}
 						_this.collegeDropList.push(data);
 						return data.name;
