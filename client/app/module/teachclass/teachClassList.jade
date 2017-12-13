@@ -44,6 +44,9 @@
                             button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                 span 查询
                             .speace-10
+                            button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.reset()")
+                                span 重置
+                            .speace-10
                             button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")
                                 span 批量排课
                             .speace-10

@@ -31,7 +31,11 @@ angular.module('dleduWebApp')
 				courseName:"",
                 teacherName:""
 			},
-
+			reset : function(){
+				this.params.name = '';
+				this.params.courseName = '';
+				this.params.teacherName = '';
+			},
 			//控制按钮权限
 			isUseAuth: function(type){
 				return RoleAuthService.isUseAuthority(type);

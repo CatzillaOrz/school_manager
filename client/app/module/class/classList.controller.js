@@ -24,7 +24,11 @@ angular.module('dleduWebApp')
                 professionalId:"",
                 masterName:"",
                 teachingYear:""
-
+            },
+            reset : function(){
+                this.params.name='';
+                this.params.masterName='';
+                this.params.teachingYear='';
             },
             //控制按钮权限
             isUseAuth: function(type){
