@@ -95,7 +95,7 @@
                     tbody
                         tr.odd(role='row' ng-repeat="student in classDetailFn.classStudentList")
                             td
-                                input(type="checkbox" ng-checked="classDetailFn.selectAll" ng-model="student.state")
+                                input(type="checkbox" ng-checked="student.state" ng-model="student.state")
                             td {{student.name}}
                             td {{student.jobNumber}}
                             td {{student.sex}}
