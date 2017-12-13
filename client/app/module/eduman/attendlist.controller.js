@@ -58,7 +58,9 @@ angular.module('dleduWebApp')
                 } else if (index == 4) {
                     $scope.attendPauseFn.getAttendStopLogs();
                 } else if (index == 5) {
-                    //$scope.attendFixFn.getAttendListByCondition();
+                    $scope.attendFixFn.params.startTime = today;
+                    $scope.attendFixFn.params.endTime = today;
+                    $scope.attendFixFn.getAttendListByCondition();
                 }
 
             },
