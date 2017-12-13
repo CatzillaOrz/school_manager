@@ -115,7 +115,7 @@ angular.module('dleduWebApp')
 			})
 			.state('distributelist', {
 				parent: 'evaquestion',
-				url   : '/distributelist/:quesId/:id',
+				url   : '/distributelist/:quesId/:id/:type',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

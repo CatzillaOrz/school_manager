@@ -47,10 +47,10 @@
                                 td {{record.totalScore}}
                                 td {{record.teachingNum}}
                                 td
-                                    a.handle.disable-style(ng-if="evaQuesListFn.isUseAuth('dist')&&record.isEnd=='已截至'" )
+                                    //a.handle.disable-style(ng-if="evaQuesListFn.isUseAuth('dist')&&record.isEnd=='已截至'" )
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ng-if="evaQuesListFn.isUseAuth('dist')&&record.isEnd!='已截至'" ui-sref="distributelist({id:0,quesId:record.id})" )
+                                    a.handle(ng-if="evaQuesListFn.isUseAuth('dist')" ui-sref="distributelist({id:0,quesId:record.id,type:record.isEnd!='已截至'?'unend':'end'})" )
                                         i.fa.fa-pencil-square-o
                                         span 分配
                                     a.handle(ng-if="evaQuesListFn.isUseAuth('edit')&&record.teachingNum==0" ui-sref="evaquesedit({id:record.id})" )
