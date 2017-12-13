@@ -65,7 +65,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: true,
+                    allowClear: false,
                     ajax: {
                         url: "api/major/getMajorDropList",
                         dataType: 'json',

@@ -37,7 +37,7 @@
                                     input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
                                 .form-group.col-sm-4.margin-top-5
                                     label 导员：
-                                    input.form-control(type='search', placeholder='按导员姓名',  ng-model="classListFn.params.masterName")
+                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="classListFn.params.masterName")
                         .col-sm-12.hidden-xs.margin-bottom-10.no-padding
                                 button.btn.btn-primary(ng-click="classListFn.getClassList()")
                                     span 查询
@@ -53,7 +53,7 @@
                                 th 序号
                                 th 班级名称
                                 th 学院
-                                th 专业
+                                th 专业名称
                                 th 年级
                                 th 导员
                                 th 操作
