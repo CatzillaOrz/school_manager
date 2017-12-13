@@ -44,7 +44,7 @@ angular.module('dleduWebApp')
                 return{
                     placeholder: {
                         id: '-1', // the value of the option
-                        text: '按班级筛选'
+                        text: '按学院筛选'
                     },
                     allowClear: true,
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
