@@ -53,7 +53,7 @@ angular.module('dleduWebApp')
                 ClassService.getClassById(params).$promise
                     .then(function (data) {
                         that.classes=data;
-
+                        !that.selectClassesId && (that.findStudentByKey());
                     })
                     .catch(function (error) {
                         //messageService.openMsg("班级添加失败")
