@@ -33,8 +33,11 @@ body{
   .table{
     tbody{
       tr{
-        .td-table-no-border-top-bottom{
+        .td-table-no-border-bottom{
           border-bottom: none;
+          background-color: lightcyan;
+        }
+        .td-table-no-border-top{
           border-top: none;
           background-color: lightcyan;
         }
