@@ -371,6 +371,15 @@ angular.module('dleduWebApp')
                 params.collegeId = this.params.collegeId;
                 params.professionalId = this.params.professionalId;
                 params.classesId = this.params.classesId;
+                if(params.collegeId == -1){
+                    delete params.collegeId;
+                }
+                if(params.professionalId == -1){
+                    delete params.professionalId;
+                }
+                if(params.classesId == -1){
+                    delete params.classesId;
+                }
                 params.name = this.params.name;
                 params.managerId = AuthService.getUser().id;
                 params.pageNumber = 1,
