@@ -158,13 +158,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg("添加失败!请检查你的输入");
-                        }else {
-                            messageService.openMsg(error.data);
-
-                        }
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"更新失败,请检查你的输入!"));
                     })
             },
             //根据id查询课节
@@ -186,7 +180,7 @@ angular.module('dleduWebApp')
                 var that = this;
 
                 that.params.id = $state.params.id;
-                that.handle = $state.current.ncyBreadcrumbLabel;
+                that.handle = $state.current.ncyBreadcrumb.label;
                 if ($state.params.id) {
                     that.params.id = $state.params.id;
                     var params={

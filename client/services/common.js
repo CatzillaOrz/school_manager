@@ -127,6 +127,8 @@ angular.module('dleduWebService')
                 errorMessage = errorMessage.replace(/[a-zA-Z]/g, '');
                 errorMessage = errorMessage.replace('[', '');
                 errorMessage = errorMessage.replace(']', '');
+                errorMessage = errorMessage.replace('【', '');
+                errorMessage = errorMessage.replace('】', '');
                 errorMessage = errorMessage.replace('，', '');
                 errorMessage = errorMessage.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|||\-|\_|\+|\=|\||\\|||\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
                 if (re.test(errorMessage)) {

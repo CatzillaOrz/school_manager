@@ -22,25 +22,25 @@
                                 //span.required.font-14 *
                                 span 学期：
                             .col-sm-7
-                                input.form-control(ng-disabled='semester.id' placeholder="请填写不超过30个字学期名称" ng-model="semester.name" name="name" )
+                                input.form-control(ng-disabled='semester.id' placeholder="请填写不超过30个字学期名称" ng-model="semester.name" name="{{'name'+$index}}" )
                         .form-group
                             label.col-sm-3.control-label
                                 //span.required.font-14 *
                                 span 学期编码：
                             .col-sm-7
-                                input.form-control(ng-disabled='semester.id' placeholder="学期编码不能为空且不能重复！" ng-model="semester.code" name="code" )
+                                input.form-control(ng-disabled='semester.id' placeholder="学期编码不能为空且不能重复！" ng-model="semester.code" name="{{'code'+$index}}" )
                         .form-group
                             label.col-sm-3.control-label 开始时间：
                             .col-sm-7
                                 .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
-                                    input.form-control(size='16', ng-disabled='semester.id' name="dateStart" placeholder='请选择开始日期' type='text' ng-model='semester.startDate' validator="required")
+                                    input.form-control(size='16', ng-disabled='semester.id' name="{{'dateStart'+$index}}" placeholder='请选择开始日期' type='text' ng-model='semester.startDate' validator="required")
                                     span.add-on
                                         i.icon-calendar.glyphicon.glyphicon-calendar
                         .form-group
                             label.col-sm-3.control-label 结束时间：
                             .col-sm-7
                                 .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
-                                    input.form-control(size='16', ng-disabled='semester.id' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model='semester.endDate' validator="required")
+                                    input.form-control(size='16', ng-disabled='semester.id' name="{{'dateEnd'+$index}}" placeholder='请选择结束日期' type='text' ng-model='semester.endDate' validator="required")
                                     span.add-on
                                         i.icon-calendar.glyphicon.glyphicon-calendar
                         //.form-group
