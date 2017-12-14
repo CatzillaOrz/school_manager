@@ -1,6 +1,19 @@
 'use strict';
 
 angular.module('dleduWebService')
+    .directive('myEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.$eval(attrs.myEnter);
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    })
     .factory('CommonService', function ($window, ngDialog, $http, localStorageService, SchoolService, $location, $state) {
         return {
             product: {

@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按院系查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
+                                    input.form-control(type='search', placeholder='按院系查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name", my-enter="collegeListFn.getCollegeList()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="collegeListFn.getCollegeList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs

@@ -133,7 +133,7 @@
 
                                                     .form-group.col-sm-3
                                                         label.control-label  教师：
-                                                        input.form-control(type="text" ng-model="attendTeacherFn.params.teacherName" placeholder="请输入教师名称" )
+                                                        input.form-control(type="text" ng-model="attendTeacherFn.params.teacherName" placeholder="请输入教师名称", my-enter="attendTeacherFn.getTeachingclassAttendByTeacher()" )
                                                     .form-group.col-sm-6
                                                         label.control-label 时间段：
                                                         .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -202,10 +202,10 @@
                                             .col-xs-10
                                                 .form-group.col-sm-3
                                                     label.control-label  课程：
-                                                    input.form-control(type="text" ng-model="attendTimeFn.params.courseName" placeholder="请输入课程名称" )
+                                                    input.form-control(type="text" ng-model="attendTimeFn.params.courseName" placeholder="请输入课程名称", my-enter="attendTimeFn.getAttendanceByPeriod()" )
                                                 .form-group.col-sm-3
                                                     label.control-label 教师：
-                                                    input.form-control(type="text" ng-model="attendTimeFn.params.teacherName" placeholder="请输入授课教师" )
+                                                    input.form-control(type="text" ng-model="attendTimeFn.params.teacherName" placeholder="请输入授课教师", my-enter="attendTimeFn.getAttendanceByPeriod()" )
                                                 .form-group.col-sm-6
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -299,7 +299,7 @@
 
                                                 .form-group.col-sm-3
                                                     label.control-label  年级：
-                                                    input.form-control(type="text" ng-model="attendCollegeFn.params.grade" placeholder="请输入年级" )
+                                                    input.form-control(type="text" ng-model="attendCollegeFn.params.grade" placeholder="请输入年级", my-enter="attendCollegeFn.getClassAttendanceGroupByCollege()" )
                                                 .form-group.col-sm-6
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -377,7 +377,7 @@
                                                         option(ng-repeat="major in attendMajorFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                 .form-group.col-sm-4
                                                     label.control-label  年级：
-                                                    input.form-control(type="text" ng-model="attendMajorFn.params.grade" placeholder="请输入年级名称" )
+                                                    input.form-control(type="text" ng-model="attendMajorFn.params.grade" placeholder="请输入年级名称", my-enter="attendMajorFn.getClassAttendanceGroupByPro()" )
                                                 .form-group.col-sm-6.margin-top-10
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -463,7 +463,7 @@
 
                                                 .form-group.col-sm-4.margin-top-10
                                                     label.control-label  年级：
-                                                    input.form-control(type="text" ng-model="attendClassFn.params.grade" placeholder="请输入年级名称" )
+                                                    input.form-control(type="text" ng-model="attendClassFn.params.grade" placeholder="请输入年级名称", my-enter="attendClassFn.getClassAttendanceGroupByclass()" )
                                                 .form-group.col-sm-6.margin-top-10
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
@@ -650,7 +650,7 @@
                                             form.form-inline
                                                 .form-group.col-sm-4
                                                     label.control-label  学生名称：
-                                                    input.form-control(type="text" ng-model="attendPauseFn.params.criteria" placeholder="请输学生名称或学号" )
+                                                    input.form-control(type="text" ng-model="attendPauseFn.params.criteria" placeholder="请输学生名称或学号", my-enter="attendPauseFn.getAttendStopLogs()" )
                                                 .form-group.col-sm-4
                                                     label 操作类型：
                                                     select.select2.form-control(ng-model="attendPauseFn.params.opt" )
@@ -725,7 +725,7 @@
                                             form.form-inline
                                                 .form-group.col-sm-4
                                                     label.control-label  学生名称：
-                                                    input.form-control(type="text" ng-model="attendFixFn.params.criteria" placeholder="请输学生名称或学号" )
+                                                    input.form-control(type="text" ng-model="attendFixFn.params.criteria" placeholder="请输学生名称或学号", my-enter="attendFixFn.getAttendListByCondition()" )
                                                 .form-group.col-sm-6
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)

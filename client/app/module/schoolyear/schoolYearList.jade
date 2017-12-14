@@ -31,7 +31,7 @@
                                 .col-xs-12.col-sm-6.no-padding.margin-bottom-10
                                     .col-sm-6.no-padding
                                         .input-group
-                                            input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称')
+                                            input.form-control(type='text',ng-model="preiodFn.params.name" placeholder='请输入学期名称', my-enter="preiodFn.findSchoolYearByPage()")
                                             span.input-group-btn(ng-click="preiodFn.findSchoolYearByPage()")
                                                 button.btn.btn-primary(type='button')
                                                     i.glyphicon.glyphicon-search

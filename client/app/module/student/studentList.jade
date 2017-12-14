@@ -37,7 +37,7 @@
 
                                 .form-group.col-md-4.margin-top-10.no-padding
                                     label.control-label 学生：
-                                    input.form-control(type='search', placeholder='名称或学号', ng-model="studentListFn.params.name")
+                                    input.form-control(type='search', placeholder='名称或学号', ng-model="studentListFn.params.name", my-enter="studentListFn.getStudentList()")
                                 .form-group.col-md-8.margin-top-10
                                     .ColVis
                                         button.btn.btn-primary(ng-click="studentListFn.getStudentList()")

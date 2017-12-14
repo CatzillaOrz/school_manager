@@ -33,18 +33,18 @@
                                         option(value="20" ) 选修
                                 .form-group.col-md-4.margin-top-5.center
                                     label.control-label(for="id3") 课程名称：
-                                    input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
+                                    input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName", my-enter="teachClassListFn.getTeachClassList()")
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id4") 教学班：
-                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
+                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name", my-enter="teachClassListFn.getTeachClassList()")
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id5") 教师：
-                                    input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
+                                    input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName", my-enter="teachClassListFn.getTeachClassList()")
                         .col-sm-12.margin-top-10.margin-bottom-10.no-padding
                             button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                 span 查询
                             .speace-10
-                            button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.reset()")
+                            button.btn.btn-dafult.margin-top-5(ng-click="teachClassListFn.reset()")
                                 span 重置
                             .speace-10
                             button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")

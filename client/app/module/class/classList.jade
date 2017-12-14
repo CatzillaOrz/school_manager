@@ -31,18 +31,18 @@
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear")
+                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear", my-enter="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
+                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name", my-enter="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5
                                     label 导员：
-                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="classListFn.params.masterName")
+                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="classListFn.params.masterName", my-enter="classListFn.getClassList()")
                         .col-sm-12.hidden-xs.margin-bottom-10.no-padding
                                 button.btn.btn-primary(ng-click="classListFn.getClassList()")
                                     span 查询
                                 .speace-10
-                                button.btn.btn-primary(ng-click="classListFn.reset()")
+                                button.btn.btn-default(ng-click="classListFn.reset()")
                                     span 重置
                                 .speace-10
                                 button.btn.btn-primary(ui-sref="classCreat")
