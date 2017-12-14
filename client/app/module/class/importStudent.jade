@@ -54,14 +54,15 @@
                             .ColVis
                                 .dataTables_info(role='status', aria-live='polite')
                                     | 共 {{importStudentFn.selectedStudents.length}} 条数据
-                    table.table.table-striped.table-bordered.table-hover.dataTable
-                        tbody
-                            tr.odd(role='row' ng-repeat="student in importStudentFn.selectedStudents")
-                                td {{student.name}}
-                                td {{student.jobNumber}}
-                                td {{student.sex}}
-                                td.cursor-pointer(ng-click="importStudentFn.removeSelectedStudent(student)")
-                                    i.fa.fa-trash-o
+                    .table-outlay(style='height:470px;overflow-y:scroll;')
+                        table.table.table-striped.table-bordered.table-hover.dataTable
+                            tbody
+                                tr.odd(role='row' ng-repeat="student in importStudentFn.selectedStudents")
+                                    td {{student.name}}
+                                    td {{student.jobNumber}}
+                                    td {{student.sex}}
+                                    td.cursor-pointer(ng-click="importStudentFn.removeSelectedStudent(student)")
+                                        i.fa.fa-trash-o
             form.form-horizontal()
                 .form-actions
                     .row
