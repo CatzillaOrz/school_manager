@@ -60,7 +60,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: false
+                    allowClear: true
                 }
             },
             //专业下拉列表配置
@@ -71,7 +71,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: false,
+                    allowClear: true,
                     ajax: {
                         url: "api/major/getMajorDropList",
                         dataType: 'json',
@@ -116,7 +116,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: false,
+                    allowClear: true,
                     ajax: {
                         url: "api/class/geClassDropList",
                         dataType: 'json',
