@@ -34,7 +34,7 @@
                             tr(role='row')
                                 th 序号
                                 th 专业名称
-                                th 学院
+                                th 院系
                                 th 下辖班级
                                 th 下辖学生
                                 th 创建时间
@@ -92,12 +92,12 @@
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="majorListFn.downLoad()") 账号导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="majorListFn.downLoad()") 专业导入模板
                     tr
                         td.first_td 导入功能说明
                         td
                             ul
-                                li 1.请先下载账号导入模板
+                                li 1.请先下载专业导入模板
                                 li 2.根据模板内容样式填写账号相关信息
                                 li 3.选择要导入的账号文件，点击导入
     script(type='text/ng-template',id='importResultDialog')
