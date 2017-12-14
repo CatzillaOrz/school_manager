@@ -60,7 +60,7 @@
                         //                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in attendFn.schoolYearDropList")
                         //                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{attendFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
                         //                            //.form-group.col-sm-3
-                        //                            //    label.control-label  开课学院：
+                        //                            //    label.control-label  开课院系：
                         //                            //    select.form-control(ng-model="attendFn.params.collegeId" ui-select2="attendFn.selectCollege2Options()" )
                         //                            //        option(ng-repeat="college in attendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                         //
@@ -157,7 +157,7 @@
                                             thead
                                                 tr(role='row')
                                                     th 序号
-                                                    th 学院
+                                                    th 院系
                                                     th 工号
                                                     th 授课教师
                                                     th 应到
@@ -278,7 +278,7 @@
                         .col-xs-12.margin-top-10
                             .col-xs-6.no-padding
                                 button.btn.btn-default(ng-click="attendFn.switchTowTab('college')" ng-class="{'btn-primary':attendFn.tab=='college'}")
-                                    span 按学院
+                                    span 按院系
                                 button.btn.btn-default(ng-click="attendFn.switchTowTab('major')" ng-class="{'btn-primary':attendFn.tab=='major'}")
                                     span 按专业
                                 button.btn.btn-default(ng-click="attendFn.switchTowTab('class')" ng-class="{'btn-primary':attendFn.tab=='class'}")
@@ -323,7 +323,7 @@
                                             thead
                                                 tr(role='row')
                                                     th 序号
-                                                    th 学院
+                                                    th 院系
                                                     th 年级
                                                     th 应到
                                                     th 实到
@@ -401,7 +401,7 @@
                                             thead
                                                 tr(role='row')
                                                     th 序号
-                                                    th 学院
+                                                    th 院系
                                                     th 专业
                                                     th 年级
                                                     th 应到
@@ -488,7 +488,7 @@
                                             thead
                                                 tr(role='row')
                                                     th 序号
-                                                    th 学院
+                                                    th 院系
                                                     th 专业
                                                     th 班级
                                                     th 年级
@@ -688,7 +688,7 @@
                                                     th 班级
                                                     th 年级
                                                     th 专业
-                                                    th 学院
+                                                    th 院系
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendPauseFn.attendList")
                                                     td.sorting_1 {{$index+1 + ((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10}}

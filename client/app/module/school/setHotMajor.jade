@@ -32,7 +32,7 @@
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 专业名称
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 学院
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 院系
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 创建时间
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
@@ -78,7 +78,7 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 选择学院：
+                            | 选择院系：
                         .col-sm-7
                             select#collegeSelect2.form-control(ng-model="hotMajorFn.collegeId" ui-select2="hotMajorFn.select2CollegeOptions()" )
                                 option(ng-repeat="college in hotMajorFn.collegeDropList" value="{{college.id}}" selected="{{hotMajorFn.collegeId==college.id?'selected':''}}") {{college.name}}

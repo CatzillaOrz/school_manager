@@ -24,7 +24,11 @@ angular.module('dleduWebApp')
                 professionalId:"",
                 masterName:"",
                 teachingYear:""
-
+            },
+            reset : function(){
+                this.params.name='';
+                this.params.masterName='';
+                this.params.teachingYear='';
             },
             //控制按钮权限
             isUseAuth: function(type){
@@ -65,7 +69,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: true,
+                    allowClear: false,
                     ajax: {
                         url: "api/major/getMajorDropList",
                         dataType: 'json',

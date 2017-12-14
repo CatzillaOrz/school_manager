@@ -90,7 +90,7 @@
                             input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="majorListFn.myFile.name" )
                             .left.load_inner(ng-click='majorListFn.importantBatch(majorListFn.myFile)', type='button') 导入
                     tr
-                        td.first_td 模板下载
+                        td.first_td.downlaod-temp 模板下载
                         td
                             .load_inner_w(style="cursor:pointer" ng-click="majorListFn.downLoad()") 账号导入模板
                     tr
@@ -110,7 +110,7 @@
                     tr
                         td 错误行号
                         td 专业名称
-                        td 学院名称
+                        td 院系
                         td 错误信息
                     tr(ng-repeat="info in majorListFn.errorInfos")
                         td {{info.line}}

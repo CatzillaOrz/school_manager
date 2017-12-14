@@ -44,7 +44,7 @@ angular.module('dleduWebApp')
                 return{
                     placeholder: {
                         id: '-1', // the value of the option
-                        text: '按班级筛选'
+                        text: '按学院筛选'
                     },
                     allowClear: true,
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
@@ -123,7 +123,7 @@ angular.module('dleduWebApp')
             submit: function () {
                 var that = this;
                 if (!that.collegeId) {
-                    messageService.openMsg("必须选择学院");
+                    messageService.openMsg("必须选择院系");
                     return;
                 }
                 if (that.handle == "编辑专业信息") {

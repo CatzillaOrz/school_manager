@@ -102,7 +102,7 @@
                             input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="teacherListFn.myFile.name" )
                             .left.load_inner(ng-click='teacherListFn.importantBatch(teacherListFn.myFile)', type='button') 导入
                     tr
-                        td.first_td 模板下载
+                        td.first_td.downlaod-temp 模板下载
                         td
                             .load_inner_w(style="cursor:pointer" ng-click="teacherListFn.downLoad()") 账号导入模板
                     tr
@@ -128,7 +128,7 @@
                         td 错误行号
                         td 工号
                         td 姓名
-                        td 学院
+                        td 院系
                         td 错误信息
                     tr(ng-repeat="info in teacherListFn.errorInfos.teacherExcelDomainList")
                         td {{info.line}}

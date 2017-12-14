@@ -44,6 +44,9 @@
                             button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                 span 查询
                             .speace-10
+                            button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.reset()")
+                                span 重置
+                            .speace-10
                             button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")
                                 span 批量排课
                             .speace-10
@@ -122,7 +125,7 @@
                             input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="teachClassListFn.myFile.name" )
                             .left.load_inner(ng-click='teachClassListFn.importantBatch(teachClassListFn.myFile)', type='button') 导入
                     tr
-                        td.first_td 模板下载
+                        td.first_td.downlaod-temp 模板下载
                         td
                             .load_inner_w(style="cursor:pointer" ng-click="teachClassListFn.downLoad()") 账号导入模板
                     tr

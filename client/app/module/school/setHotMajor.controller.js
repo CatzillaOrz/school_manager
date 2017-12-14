@@ -284,7 +284,7 @@ angular.module('dleduWebApp')
                 params.specialtyId=_this.majorId;
                 params.userId=AuthService.getUser().id;
                 if(!params.collegeId){
-                    messageService.openMsg("请选择学院！");
+                    messageService.openMsg("请选择院系！");
                     return;
                 }
                 if(!params.specialtyId){

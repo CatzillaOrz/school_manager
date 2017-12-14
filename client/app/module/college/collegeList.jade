@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按学院名称查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
+                                    input.form-control(type='search', placeholder='按院系查询', aria-controls='datatable_col_reorder' ng-model="collegeListFn.params.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="collegeListFn.getCollegeList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
@@ -33,7 +33,7 @@
                         thead
                             tr(role='row')
                                 th 序号
-                                th 学院名称
+                                th 院系
                                 th 下辖专业
                                 th 下辖班级
                                 th 下辖教师
@@ -90,7 +90,7 @@
                             input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="collegeListFn.myFile.name" )
                             .left.load_inner(ng-click='collegeListFn.importantBatch(collegeListFn.myFile)', type='button') 导入
                     tr
-                        td.first_td 模板下载
+                        td.first_td.downlaod-temp 模板下载
                         td
                             .load_inner_w(style="cursor:pointer" ng-click="collegeListFn.downLoad()") 账号导入模板
                     tr

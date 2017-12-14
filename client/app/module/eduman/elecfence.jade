@@ -25,7 +25,7 @@
                     #datatable_col_reorder_filter1
                         form.form-inline
                             .form-group.col-md-4
-                                label.control-label 学院：
+                                label.control-label 院系：
                                 select.form-control(ng-model="evaFenceFn.params.collegeId" ui-select2)
                                     option(ng-repeat="college in evaFenceFn.collegeDropList" value="{{college.id}}" ng-selected="evaFenceFn.params.collegeId==college.id") {{college.name}}
                             .form-group.col-md-4
@@ -101,7 +101,7 @@
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 50px;') 序号
-                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 学院
+                                th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 院系
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 专业
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 班级
                                 th.sorting(data-class='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学号
@@ -174,7 +174,7 @@
                                                     .widget-body
                                                         .row(style="margin-bottom:15px;")
                                                             .col-sm-6
-                                                                span 学院：
+                                                                span 院系：
                                                                 span {{evaFenceFn.locusList.collegeName}}
                                                             .col-sm-6
                                                                 span 专业：
