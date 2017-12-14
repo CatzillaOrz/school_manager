@@ -22,7 +22,7 @@
                                 .form-group.col-md-4.no-padding
                                     label.control-label 院系：
                                     select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
-                                        option(value="") 全部
+                                        option(value="-1") 全部
                                         option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ng-selected="studentListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-md-4
                                     label.control-label 专业：
