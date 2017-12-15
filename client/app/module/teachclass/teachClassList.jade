@@ -27,7 +27,7 @@
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id2")  选课类型：
-                                    select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
+                                    select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption", ng-change="teachClassListFn.getTeachClassList()")
                                         option(value="") 全部
                                         option(value="10" ) 必修
                                         option(value="20" ) 选修
