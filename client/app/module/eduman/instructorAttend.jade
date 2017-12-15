@@ -25,7 +25,7 @@
                                     option(ng-repeat="college in insAttendFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
                             .form-group.col-md-4
                                 label 导员：
-                                input.form-control(type='search', placeholder='请输入导员名称或工号',  ng-model="insAttendFn.params.nj")
+                                input.form-control(type='search', placeholder='请输入导员名称或工号',  ng-model="insAttendFn.params.nj", my-enter="insAttendFn.getInsRollCallList()")
                             .form-group.col-md-4
                                 label 状态：
                                 select.form-control(ng-model="insAttendFn.params.status")

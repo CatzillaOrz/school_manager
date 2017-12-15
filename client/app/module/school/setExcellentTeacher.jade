@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="excellentTeacherFn.findParams.name")
+                                    input.form-control(type='search', placeholder='按教师名称查询', aria-controls='datatable_col_reorder' ng-model="excellentTeacherFn.findParams.name", my-enter="excellentTeacherFn.getExcellentTeacherList()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="excellentTeacherFn.getExcellentTeacherList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs

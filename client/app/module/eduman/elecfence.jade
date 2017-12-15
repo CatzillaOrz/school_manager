@@ -41,10 +41,10 @@
                     form.form-inline
                         .form-group.col-md-4
                             label.control-label 姓名：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.name")
+                            input.form-control(type="text" placeholder="请填写姓名" ng-model="evaFenceFn.params.name", my-enter="evaFenceFn.getElecFenceList()")
                         .form-group.col-md-4
                             label.control-label 学号：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.jobNumber")
+                            input.form-control(type="text" placeholder="请填写学号" ng-model="evaFenceFn.params.jobNumber", my-enter="evaFenceFn.getElecFenceList()")
                         .form-group.col-md-4
                             .ColVis
                                 button.btn.btn-primary(ng-click="evaFenceFn.getElecFenceList()")
