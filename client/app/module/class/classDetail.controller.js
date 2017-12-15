@@ -240,6 +240,10 @@ angular.module('dleduWebApp')
                         return value;
                     }
                 });
+                if(_this.transferStudentList.length == 0){
+                    messageService.openMsg("请先选择学生！");
+                    return;
+                }
                 _this.isTransfer=true;
             },
             updateStudentToClasses:function () {

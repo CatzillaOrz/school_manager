@@ -90,7 +90,7 @@ angular.module('dleduWebApp')
                         processResults: function (data, params) {
                             params.page = params.page || 1;
                             return {
-                                results: data.data,
+                                results: data.data ? data.data:[],
                                 pagination: {
                                     more: (params.page * 30) < data.total_count
                                 }
@@ -135,7 +135,7 @@ angular.module('dleduWebApp')
                         processResults: function (data, params) {
                             params.page = params.page || 1;
                             return {
-                                results: data.data,
+                                results: data.data ? data.data:[],
                                 pagination: {
                                     more: (params.page * 30) < data.total_count
                                 }
@@ -176,6 +176,9 @@ angular.module('dleduWebApp')
                     pageSize: 100
                 }
                 params.collegeId=that.params.collegeId;
+                if(params.collegeId == ""){
+                    params.collegeId = -1;
+                }
                 MajorService.getMajorDropList(params).$promise
                     .then(function (data) {
                         that.majorDropList=data.data;
@@ -368,6 +371,15 @@ angular.module('dleduWebApp')
                 params.collegeId = this.params.collegeId;
                 params.professionalId = this.params.professionalId;
                 params.classesId = this.params.classesId;
+                if(params.collegeId == -1){
+                    delete params.collegeId;
+                }
+                if(params.professionalId == -1){
+                    delete params.professionalId;
+                }
+                if(params.classesId == -1){
+                    delete params.classesId;
+                }
                 params.name = this.params.name;
                 params.managerId = AuthService.getUser().id;
                 params.pageNumber = 1,

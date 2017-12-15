@@ -115,13 +115,7 @@ angular.module('dleduWebApp')
                         that.complete = true;
                     })
                     .catch(function (error) {
-                        var re = /[^\u4e00-\u9fa5]/;
-                        if(re.test(error.data)){
-                            messageService.openMsg("更新失败");
-                        }else {
-                            messageService.openMsg(error.data);
-
-                        }
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"更新失败！"));
                     })
             },
             //通过id查询学年
@@ -160,7 +154,7 @@ angular.module('dleduWebApp')
             init:function () {
                 var that = this;
                 this.datePick.toggleMin();
-                that.handle = $state.current.ncyBreadcrumbLabel;
+                that.handle = $state.current.ncyBreadcrumb.label;
                 if ($state.params.id) {
                     that.params.id = $state.params.id;
                     var params={
