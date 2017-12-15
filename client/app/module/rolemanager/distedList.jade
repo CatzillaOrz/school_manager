@@ -18,7 +18,7 @@
                                 input.form-control(style="width:auto" type="text" placeholder="请输入教师姓名" ng-model="roleDisted.params.name")
                             .form-group.col-md-5
                                 label.control-label 角色权限：
-                                select.form-control(style="width:auto" ng-model="roleDisted.params.role" ui-select2="roleDisted.getResultOption()" )
+                                select.form-control(style="width:auto" ng-model="roleDisted.params.role" ui-select2="roleDisted.getResultOption()", ng-change="roleDisted.getDistedList()" )
                                     option(ng-repeat="record in roleDisted.roles" value="{{record.id}}" ) {{record.text}}
                             .form-group.col-md-2
                                 .ColVis
