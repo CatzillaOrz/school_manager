@@ -21,17 +21,17 @@
                             form.form-inline
                                 .form-group.col-md-4.no-padding
                                     label.control-label 院系：
-                                    select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()" )
+                                    select.select2.form-control(ng-model="studentListFn.params.collegeId" ui-select2="studentListFn.selectCollege2Options()", ng-change="studentListFn.getStudentList()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in studentListFn.collegeDropList" value="{{college.id}}" ng-selected="studentListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-md-4
                                     label.control-label 专业：
-                                    select.select2.form-control(ng-model="studentListFn.params.professionalId" ui-select2="studentListFn.select2MajorOptions()"  )
+                                    select.select2.form-control(ng-model="studentListFn.params.professionalId" ui-select2="studentListFn.select2MajorOptions()", ng-change="studentListFn.getStudentList()"  )
                                         option(value="-1" ng-selected="true") 全部
                                         option(ng-repeat="major in studentListFn.majorDropList" value="{{major.id}}" ng-selected="studentListFn.params.professionalId==major.id") {{major.name}}
                                 .form-group.col-md-4
                                     label.control-label 行政班级：
-                                    select.select2.form-control(ng-model="studentListFn.params.classesId" ui-select2="studentListFn.select2ClassOptions()")
+                                    select.select2.form-control(ng-model="studentListFn.params.classesId" ui-select2="studentListFn.select2ClassOptions()", ng-change="studentListFn.getStudentList()")
                                         option(value="-1" ng-selected="true") 全部
                                         option(ng-repeat="class in studentListFn.classDropList" value="{{class.id}}") {{class.name}}
 

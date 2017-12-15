@@ -21,12 +21,12 @@
                             form.form-inline
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 院系：
-                                    select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
+                                    select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()", ng-change="classListFn.getClassList()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 专业：
-                                    select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )
+                                    select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)", ng-change="classListFn.getClassList()"  )
                                         option(value="") 全部
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
