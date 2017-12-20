@@ -42,15 +42,13 @@
 
                                 .inline-block --
                                 .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                    input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="insAttendFn.params.endDate" validator="required")
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="insAttendFn.params.endDate" validator="required")
                                     span.add-on
                                         i.icon-calendar.glyphicon.glyphicon-calendar
                             .form-group.col-md-4
                                 .ColVis
                                     button.btn.btn-primary(ng-click="insAttendFn.getInsRollCallList()")
                                         span 查询
-                                    button.btn.btn-primary(ng-click="insAttendFn.exportCallList()")
-                                        span 导出报表
                     table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -58,13 +56,13 @@
                                 th 辅导员
                                 th 工号
                                 th 辅导员归属院系
-                                th 点名组名称
+                                th 被点名行政班
                                 th 行政班年级
+                                th 行政班院系
                                 th 点名发起时间
                                 th 总人数
+                                th 已提交人数
                                 th 未提交人数
-                                th 已到人数
-                                th 未到人数
                                 th 请假人数
                                 th 操作
                         tbody
@@ -73,17 +71,17 @@
                                 td {{rollCall.tname}}
                                 td {{rollCall.jobNumber}}
                                 td {{rollCall.tcollegeName}}
-                                td {{rollCall.groupName}}
+                                td {{rollCall.className}}
                                 td {{rollCall.grade}}
+                                td {{rollCall.scollegeName}}
                                 td {{rollCall.initiatingTime}}
                                 td {{rollCall.total}}
+                                td {{rollCall.submitted}}
                                 td {{rollCall.uncommitted}}
-                                td {{rollCall.haveTo}}
-                                td {{rollCall.nonArrival}}
                                 td {{rollCall.leave}}
                                 td
-                                    span(ng-click="insAttendFn.openMap(rollCall)" ng-if="rollCall.haveTo!=0") 查看地图
-                                    span(ng-if="rollCall.haveTo==0") -
+                                    span(ng-click="insAttendFn.openMap(rollCall)" ng-if="rollCall.submitted!=0") 查看地图
+                                    span(ng-if="rollCall.submitted==0") -
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
@@ -99,29 +97,29 @@
                                 ul.pagination-sm(uib-pagination, total-items='insAttendFn.page.totalElements', max-size='insAttendFn.page.pageSize' ng-model='insAttendFn.page.pageNumber',ng-change="insAttendFn.getInsRollCallList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 
                     #mapContainer(ng-show="insAttendFn.showMap")
-                        div.map-data-contain(ng-show="insAttendFn.showMap")
-                            .title 班级详情
-                            .filter(ng-init="state='all';isRead='all'")
-                                .form-inline
-                                    .form-group.col-sm-6
-                                        select.form-control(ng-model="state")
-                                            option(value="all") 全部
-                                            option(value="未提交") 未提交
-                                            option(value="已到") 已到
-                                    .form-group.col-sm-6
-                                        select.form-control(ng-model="isRead")
-                                            option(value="all") 全部
-                                            option(value="true") 已读
-                                            option(value="false") 未读
-                            .fixed-table-head
-                                table.table.table-striped.table-bordered.table-hover.no-footer
-                                    thead
-                                        tr(role='row')
-                                            th 姓名
-                                            th 状态
-                                            th 是否通知阅读
-                                    tbody
-                                        tr.cursor-pointer(ng-repeat="stu in insAttendFn.RollCallDetailsList" ng-click="insAttendFn.openInfoWindow(stu)" ng-show="(state=='all'||state==stu.status)&&(isRead=='all'|| isRead==stu.haveRead+'')")
-                                            td {{stu.studentName}}
-                                            td {{stu.status}}
-                                            td {{stu.haveRead ? "已读":"未读"}}
+                    div.map-data-contain(ng-show="insAttendFn.showMap")
+                        .title 班级详情
+                        .filter(ng-init="state='all';isRead='all'")
+                            .form-inline
+                                .form-group.col-sm-6
+                                    select.form-control(ng-model="state")
+                                        option(value="all") 全部
+                                        option 未提交
+                                        option 已提交
+                                .form-group.col-sm-6
+                                    select.form-control(ng-model="isRead")
+                                        option(value="all") 全部
+                                        option 已读
+                                        option 未读
+                        .fixed-table-head
+                            table.table.table-striped.table-bordered.table-hover.no-footer
+                                thead
+                                    tr(role='row')
+                                        th 姓名
+                                        th 状态
+                                        th 是否通知阅读
+                                tbody
+                                    tr.cursor-pointer(ng-repeat="stu in insAttendFn.RollCallDetailsList" ng-click="insAttendFn.openInfoWindow(stu)" ng-show="(state=='all'||state==stu.state)&&(isRead=='all'||isRead==stu.isRead)")
+                                        td {{stu.sname}}
+                                        td {{stu.state}}
+                                        td {{stu.isRead}}
