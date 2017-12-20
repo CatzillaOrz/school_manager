@@ -235,6 +235,13 @@ angular.module('dleduWebService')
                 var eduman = $resource('api/eduman/getClassRollCallDetails');
                 return eduman.get(params);
             },
+			exportRollCallInfo:function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/exportRollCallInfo",
+					params: params
+				});
+			},
 		}
 
 	});

@@ -815,7 +815,7 @@ var EduManService = {
     getInsRollCallList: function (params, access_token, callback) {
         RestClient.get({
             host:  'dd',
-            path: '/api/web/v1/instructor/rollcall',
+            path: '/api/web/v1/counsellor/listCounRollcall',
             params: params,
             access_token: access_token
         }).then(function (res) {
@@ -829,7 +829,7 @@ var EduManService = {
     getClassRollCallDetails: function (params, access_token, callback) {
         RestClient.get({
             host:  'dd',
-            path: '/api/web/v1/rollcall/classdetails',
+            path: '/api/web/v1/counsellor/rollcall/classdetails',
             params: params,
             access_token: access_token
         }).then(function (res) {

@@ -64,11 +64,19 @@ angular.module('dleduWebService')
 
 			//选择文件事件
 			selected: function($newFiles){
+				if($newFiles == null){
+					return;
+				}
 				if($newFiles && $newFiles[0]) {
-					var name = $newFiles[0].name;
+					var name = $newFiles[0].name, fileSize = $newFiles[0].size;
 					var suff = name.substring(name.lastIndexOf("."), name.length).toLowerCase();
 					if(suff != '.xls' && suff != '.xlsx'){
 						var result = messageService.openDialog("请选择excel文件！");
+						messageService.closeDialog(result.id);
+						return false;
+					}
+					if(fileSize / 1024 / 1024 > 1){
+						var result = messageService.openDialog("文件太大,请选择小于1M的文件！");
 						messageService.closeDialog(result.id);
 						return false;
 					}

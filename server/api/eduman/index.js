@@ -60,5 +60,6 @@ router.put('/updateAttend',auth.isSignedIn, controller.updateAttend);
 router.get('/getAttendStopLogs',auth.isSignedIn, controller.getAttendStopLogs);
 router.get('/getInsRollCallList',auth.isSignedIn, controller.getInsRollCallList);
 router.get('/getClassRollCallDetails',auth.isSignedIn, controller.getClassRollCallDetails);
+router.get('/exportRollCallInfo',auth.isSignedIn, controller.exportRollCallInfo);
 
 module.exports = router;
