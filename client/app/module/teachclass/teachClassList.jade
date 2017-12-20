@@ -21,30 +21,30 @@
                             form.form-inline.row
                                 .form-group.col-md-4.margin-top-5.no-padding
                                     label.control-label(for="ddd") 学期：
-                                    select#ddd.select2.form-control( ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()" )
+                                    select#ddd.select2.form-control( ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()", ng-change="teachClassListFn.getTeachClassList()" )
                                         option(value="") 全部
                                         optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassListFn.schoolYearDropList")
                                             option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id2")  选课类型：
-                                    select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption"  )
+                                    select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption", ng-change="teachClassListFn.getTeachClassList()")
                                         option(value="") 全部
                                         option(value="10" ) 必修
                                         option(value="20" ) 选修
                                 .form-group.col-md-4.margin-top-5.center
                                     label.control-label(for="id3") 课程名称：
-                                    input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
+                                    input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName", my-enter="teachClassListFn.getTeachClassList()")
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id4") 教学班：
-                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
+                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name", my-enter="teachClassListFn.getTeachClassList()")
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id5") 教师：
-                                    input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
+                                    input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName", my-enter="teachClassListFn.getTeachClassList()")
                         .col-sm-12.margin-top-10.margin-bottom-10.no-padding
                             button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.getTeachClassList()")
                                 span 查询
                             .speace-10
-                            button.btn.btn-primary.margin-top-5(ng-click="teachClassListFn.reset()")
+                            button.btn.btn-dafult.margin-top-5(ng-click="teachClassListFn.reset()")
                                 span 重置
                             .speace-10
                             button.btn.btn-primary.margin-top-5(ng-click='teachClassListFn.schedules()' ng-if="teachClassListFn.isUseAuth('batchadd')")
@@ -127,12 +127,12 @@
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="teachClassListFn.downLoad()") 账号导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="teachClassListFn.downLoad()") 班级导入模板
                     tr
                         td.first_td 导入功能说明
                         td
                             ul
-                                li 1.请先下载账号导入模板
+                                li 1.请先下载班级导入模板
                                 li 2.根据模板内容样式填写账号相关信息
                                 li 3.选择要导入的账号文件，点击导入
     script(type='text/ng-template',id='importResultDialog')

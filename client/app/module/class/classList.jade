@@ -21,28 +21,28 @@
                             form.form-inline
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 院系：
-                                    select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()" )
+                                    select.select2.form-control(ng-model="classListFn.params.collegeId" ui-select2="classListFn.selectCollege2Options()", ng-change="classListFn.getClassList()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in classListFn.collegeDropList" value="{{college.id}}" ng-selected="classListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 专业：
-                                    select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)"  )
+                                    select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)", ng-change="classListFn.getClassList()"  )
                                         option(value="") 全部
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear")
+                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear", my-enter="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name")
+                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name", my-enter="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5
                                     label 导员：
-                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="classListFn.params.masterName")
+                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="classListFn.params.masterName", my-enter="classListFn.getClassList()")
                         .col-sm-12.hidden-xs.margin-bottom-10.no-padding
                                 button.btn.btn-primary(ng-click="classListFn.getClassList()")
                                     span 查询
                                 .speace-10
-                                button.btn.btn-primary(ng-click="classListFn.reset()")
+                                button.btn.btn-default(ng-click="classListFn.reset()")
                                     span 重置
                                 .speace-10
                                 button.btn.btn-primary(ui-sref="classCreat")
@@ -111,12 +111,12 @@
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="classListFn.downLoad()") 账号导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="classListFn.downLoad()") 班级导入模板
                     tr
                         td.first_td 导入功能说明
                         td
                             ul
-                                li 1.请先下载账号导入模板
+                                li 1.请先下载班级导入模板
                                 li 2.根据模板内容样式填写账号相关信息
                                 li 3.选择要导入的账号文件，点击导入
     script(type='text/ng-template',id='importResultDialog')

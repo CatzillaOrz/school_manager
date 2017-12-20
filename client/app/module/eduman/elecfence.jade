@@ -35,16 +35,16 @@
                             .form-group.col-md-4
                                 label.control-label 班级：
                                 select.form-control(ng-model="evaFenceFn.params.classId" ui-select2 )
-                                    option(ng-repeat="class in evaFenceFn.classDropList" value="{{class.id}}" ng-selected="evaFenceFn.params.classId==class.id") {{class.name}}
+                                    option(ng-repeat="class in evaFenceFn.classDropList" value="{{class.id}}" ng-selected="evaFenceFn.params.classId==class.id", ng-change="evaFenceFn.getElecFenceList()") {{class.name}}
 
                 .col-md-12.padding-bottom-10.padding-top-10
                     form.form-inline
                         .form-group.col-md-4
                             label.control-label 姓名：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.name")
+                            input.form-control(type="text" placeholder="请填写姓名" ng-model="evaFenceFn.params.name", my-enter="evaFenceFn.getElecFenceList()")
                         .form-group.col-md-4
                             label.control-label 学号：
-                            input.form-control(type="text" placeholder="" ng-model="evaFenceFn.params.jobNumber")
+                            input.form-control(type="text" placeholder="请填写学号" ng-model="evaFenceFn.params.jobNumber", my-enter="evaFenceFn.getElecFenceList()")
                         .form-group.col-md-4
                             .ColVis
                                 button.btn.btn-primary(ng-click="evaFenceFn.getElecFenceList()")

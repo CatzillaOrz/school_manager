@@ -21,12 +21,12 @@
                             form.form-inline
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 院系：
-                                    select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()" )
+                                    select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()", ng-change="teacherListFn.getTeacherList()")
                                         option(value="") 全部
                                         option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ng-selected="teacherListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-md-5.margin-top-5
                                     label.control-label 教师：
-                                    input.form-control(type='search', placeholder='名称或工号查询',  ng-model="teacherListFn.params.name")
+                                    input.form-control(type='search', placeholder='名称或工号查询',  ng-model="teacherListFn.params.name", my-enter="teacherListFn.getTeacherList()")
                         .col-sm-3.hidden-xs.margin-bottom-10
                             .ColVis
                                 button.btn.btn-primary(ng-click="teacherListFn.getTeacherList()")
@@ -104,12 +104,12 @@
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="teacherListFn.downLoad()") 账号导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="teacherListFn.downLoad()") 教师导入模板
                     tr
                         td.first_td 导入功能说明
                         td
                             ul
-                                li 1.请先下载账号导入模板
+                                li 1.请先下载教师导入模板
                                 li 2.根据模板内容样式填写账号相关信息
                                 li 3.选择要导入的账号文件，点击导入
     script(type='text/ng-template',id='importResultDialog')

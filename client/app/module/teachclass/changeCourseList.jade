@@ -21,10 +21,10 @@
                             form.form-inline
                                 .form-group.col-sm-3.no-padding
                                     label.control-label  教师：
-                                    input.form-control(type="text" ng-model="changeCourseListFn.params.teacher" placeholder="请输教师名称或工号" )
+                                    input.form-control(type="text" ng-model="changeCourseListFn.params.teacher" placeholder="请输教师名称或工号", my-enter="changeCourseListFn.getTeacherChangeCourseList()")
                                 .form-group.col-sm-3
                                     label 操作类型：
-                                    select.select2.form-control(ng-model="changeCourseListFn.params.adjustType" )
+                                    select.select2.form-control(ng-model="changeCourseListFn.params.adjustType", ng-change="changeCourseListFn.getTeacherChangeCourseList()" )
                                         option(value="") 全部
                                         option(value="10") 增课
                                         option(value="20") 停课

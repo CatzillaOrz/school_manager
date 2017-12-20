@@ -21,15 +21,15 @@
                             form.form-inline
                                 .form-group.col-sm-3
                                     label.control-label 学期选择：
-                                        select.form-control(ng-model="courseListFn.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()" )
+                                        select.form-control(ng-model="courseListFn.params.semesterId" ui-select2="courseListFn.select2SemesterOptions()", ng-change="courseListFn.getCourseListIn()" )
                                             optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in courseListFn.schoolYearDropList")
                                                 option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{schoolYear.text+semester.text}}     
                                 .form-group.col-sm-3
                                     label.control-label 课程名称：
-                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.courseName")
+                                    input.form-control(type="text" placeholder="请填写课程名称" ng-model="courseListFn.params.courseName", my-enter="courseListFn.getCourseListIn()")
                                 .form-group.col-sm-3
                                     label.control-label 授课教师：
-                                    input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName")
+                                    input.form-control(type="text" placeholder="请填写授课教师名称" ng-model="courseListFn.params.teacherName", my-enter="courseListFn.getCourseListIn()")
                                 .form-group.col-sm-3
                                     .ColVis
                                         button.btn.btn-primary(ng-click="courseListFn.getCourseListIn()")

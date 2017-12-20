@@ -21,12 +21,12 @@
                             form.form-inline
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 院系：
-                                    select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()" )
+                                    select.select2.form-control(ng-model="teacherListFn.params.collegeId" ui-select2="teacherListFn.selectCollege2Options()", ng-change="teacherListFn.getTeacherList()" )
                                         option(value="") 全部
                                         option(ng-repeat="college in teacherListFn.collegeDropList" value="{{college.id}}" ng-selected="teacherListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-md-5.margin-top-5
                                     label.control-label 教师：
-                                    input.form-control(type='search', placeholder='名称或工号查询',  ng-model="teacherListFn.params.name")
+                                    input.form-control(type='search', placeholder='名称或工号查询',  ng-model="teacherListFn.params.name", my-enter="teacherListFn.getTeacherList()")
                         .col-sm-3.hidden-xs.margin-bottom-10
                             .ColVis
                                 button.btn.btn-primary(ng-click="teacherListFn.getTeacherList()")

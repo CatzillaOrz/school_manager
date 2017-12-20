@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按课程名称查询', aria-controls='datatable_col_reorder' ng-model="courseListFn.params.name")
+                                    input.form-control(type='search', placeholder='按课程名称查询', aria-controls='datatable_col_reorder' ng-model="courseListFn.params.name", my-enter="courseListFn.getCourseList()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="courseListFn.getCourseList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs
@@ -85,12 +85,12 @@
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="courseListFn.downLoad()") 账号导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="courseListFn.downLoad()") 课程导入模板
                     tr
                         td.first_td 导入功能说明
                         td
                             ul
-                                li 1.请先下载账号导入模板
+                                li 1.请先下载课程导入模板
                                 li 2.根据模板内容样式填写账号相关信息
                                 li 3.选择要导入的账号文件，点击导入
     script(type='text/ng-template',id='importResultDialog')
