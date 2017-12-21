@@ -125,8 +125,8 @@ var AccountService = {
   },
     getAccount: function (access_token, callback) {
         RestClient.get({
-             //host:'dd',
-            path: '/api/web/v1/users/userinfo',
+             host:'mobile-public',
+            path: '/api/v1/userinfo',
             access_token: access_token
         }).then(function (res) {
             if (res.status.code == 200) {

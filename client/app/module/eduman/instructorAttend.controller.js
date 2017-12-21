@@ -2,7 +2,8 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('instructorAttendCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService, ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService, ngDialog) {
+	.controller('instructorAttendCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService,
+												  ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService, ngDialog) {
 		//当天时间
 		var today = new Date().Format("yyyy-MM-dd");
 		$scope.insAttendFn = {

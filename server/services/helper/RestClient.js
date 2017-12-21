@@ -41,6 +41,8 @@ function request(options) {
         _host = Config.backend_api.api_gateway+"school-manager";
     }else  if (options.host && options.host == 'stu-practice'){
         _host = Config.backend_api.api_gateway+"student-practice";
+    } else  if (options.host && options.host == 'mobile-public'){
+        _host = Config.backend_api.api_gateway+"mobile-public";
     } else {
         _host = Config.backend_api.host
     }
