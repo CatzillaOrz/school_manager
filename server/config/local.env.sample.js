@@ -8,10 +8,10 @@
 module.exports = {
     DOMAIN        : 'http://localhost:9000',
     SESSION_SECRET: 'dleduweb-secret',
-    BACKEND_API   : 'http://dledudev.aizhixin.com/zhixin_api',
-    DIANDIAN_API: 'http://dddev.aizhixin.com/diandian_api',
-    IO_API: 'http://iodev.aizhixin.com',
-    API_GATEWAY:'http://gatewaytest.aizhixin.com',
+    BACKEND_API   : 'http://dledu.aizhixindev.com/zhixin_api',
+    DIANDIAN_API: 'http://dd.aizhixindev.com/diandian_api',
+    IO_API: 'http://io.aizhixindev.com',
+    API_GATEWAY:'http://gateway.aizhixintest.com',
     //redis
     SESSION_REDIS_HOST: '172.16.23.30',
     SESSION_REDIS_PORT  : 6379,

@@ -1,0 +1,63 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body(style="padding:13px 0 0 0")
+            form.form-horizontal(name="buildingForm")
+                .md-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 宿舍楼名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过50个字的评教名称" ng-model="handleFn.building.name" name="name" validator="required, maxlength=50")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 宿舍楼类型：
+                        .col-sm-7
+                            label.radio-inline
+                                input(type="radio" name="type"  ng-model="handleFn.building.floorType" value="10" )
+                                | 普通型
+                            label.radio-inline
+                                input(type="radio" name="type"  ng-model="handleFn.building.floorType" value="20" )
+                                | 套间型
+                    .form-group(ng-if="handleFn.building.floorType == 20")
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 总单元数：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写总楼单元数(只能是大于0的整数)" ng-model="handleFn.building.unitNum" name="unit" validator="required, integergt0")
+                    .form-group(ng-if="handleFn.building.floorType != ''")
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 总楼层数：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写总楼层数(只能是大于0的整数)" ng-model="handleFn.building.floorNum" name="floor" validator="required, integergt0")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 上传户型图：
+                        .col-sm-7
+                            .logo-setting.margin-bottom-10
+                                .btn-upload
+                                    input(type="file" ngf-select="handleFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='1MB')
+                            .span.txt-color-red 户型图能让学生更直观的了解宿舍情况。建议在户型图中标明宿舍的门窗床的位置、床位编号和上下铺的信息
+                            .logo-image-view(ng-if="handleFn.building.floorImage!=''")
+                                .logo-block
+                                    a(href="{{handleFn.building.floorImage}}" target="_blank")
+                                        img.logo(style="width:300px;height:150px" ng-src="{{handleFn.building.floorImage}}")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 备注：
+                        .col-sm-7
+                            textarea.form-control(rows='8' placeholder="请填写不超过200个字的备注信息" ng-model="handleFn.building.floorDesc " name="comment" validator="maxlength=200")
+                .form-actions.no-margin
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="buildingForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="dormbuildingman") 取消

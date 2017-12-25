@@ -21,4 +21,5 @@ module.exports = function(app){
   app.use('/api/rolemanger', require('./api/rolemanger'));//权限管理
   app.use('/api/geo', require('./api/geo'));
   app.use('/api/feedback', require('./api/feedback'));
+  app.use('/api/dormman', require('./api/dormman'));
 };
