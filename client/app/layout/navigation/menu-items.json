@@ -252,6 +252,27 @@
             "active": "geodetail",
             "icon": "bar-chart-o",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+        },
+        {
+            "title": "宿舍信息管理",
+            "sref": "dormbuildingman",
+            "icon": "navicon",
+            "active": "dormman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "宿舍楼管理",
+                    "sref": "dormbuildingman",
+                    "active": "dormbuildingman",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "宿舍管理",
+                    "sref": "dormbuildingedit",
+                    "active": "dormbuildingedit",
+                    "icon": "pencil-square-o"
+                }
+            ]
         }
     ]
 }
