@@ -1,0 +1,58 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body(style="padding:13px 0 0 0")
+            form.form-horizontal(name="dormForm")
+                .lg-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 宿舍楼：
+                        .col-sm-9
+                            .col-sm-4
+                                select.form-control(type='text', ng-model="handleFn.dorm.floorId" ng-change="handleFn.productFloorUnit()" ng-options="build.id as build.name for build in handleFn.builds")
+                            .col-sm-4(ng-if="handleFn.units.length > 0")
+                                label.col-sm-3.control-label
+                                    span.required *
+                                    | 单元：
+                                .col-sm-9
+                                    select.form-control(type='text', ng-model="handleFn.dorm.unitNo"  ng-options="unit.id as unit.name for unit in handleFn.units")
+                            .col-sm-4(ng-if="handleFn.floors.length > 0")
+                                label.col-sm-3.control-label
+                                    span.required *
+                                    | 楼层：
+                                .col-sm-9
+                                    select.form-control(type='text', ng-model="handleFn.dorm.floorNo"  ng-options="floor.id as floor.name for floor in handleFn.floors")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 宿舍号：
+                        .col-sm-9
+                            input.form-control(placeholder="请填写宿舍号" ng-model="handleFn.dorm.no" name="name" validator="required, maxlength=50")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 宿舍床位：
+                        .col-sm-9
+                            .form-group(ng-repeat="bed in handleFn.dorm.bedList")
+                                .col-sm-6
+                                    input.form-control(placeholder="请填写床位名称" type="text" name="{{'bed'+$index}}"  ng-model="bed.name")
+                                .col-sm-5
+                                    select.form-control(type='text', ng-model="bed.bedType"  ng-options="obj.bedType as obj.name for obj in handleFn.bedTypes")
+                                .col-sm-1
+                                    span 删除
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 备注：
+                        .col-sm-7
+                            textarea.form-control(rows='8' placeholder="请填写不超过200个字的备注信息" ng-model="handleFn.dorm.roomDesc " name="comment" validator="maxlength=200")
+                .form-actions.no-margin
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="handleFn.submit()" validation-submit="dormForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="dormman") 取消

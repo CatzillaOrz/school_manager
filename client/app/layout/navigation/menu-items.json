@@ -257,7 +257,7 @@
             "title": "宿舍信息管理",
             "sref": "dormbuildingman",
             "icon": "navicon",
-            "active": "dormman",
+            "active": "dormmansys",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
                 {
@@ -268,8 +268,8 @@
                 },
                 {
                     "title": "宿舍管理",
-                    "sref": "dormbuildingedit",
-                    "active": "dormbuildingedit",
+                    "sref": "dormman",
+                    "active": "dormman",
                     "icon": "pencil-square-o"
                 }
             ]

@@ -55,27 +55,106 @@ module.exports = {
             })
     },
 
-    exportPeople: function (req, res) {
-        DormManService.getPeopleDetailSync(req.query, req.user.access_token)
+    getDorms: function (req, res) {
+        DormManService.getDormsSync(req.query, req.user.access_token)
             .then(function (data) {
-                //res.json(data);
-                var datas = [
-                    ["学号", "姓名", "性别", "是否实践", "联系电话", "实习公司", "企业导师", "导师电话"]
-                ];
-                for (var index in data.data) {
-                    var item = data.data[index];
-                    datas.push([item.jobNum, item.studentName, item.studentSex, item.whetherPractice == 'join' ? '是' : '否',
-                        item.studentPhone, item.enterpriseName, item.mentorName, item.mentorPhone]);
-                }
-                var ws = XLSX.utils.aoa_to_sheet(datas);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "实践学生信息");
-                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+                res.json(data);
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
-    }
+    },
+
+    getDormInfo: function (req, res) {
+        DormManService.getDormInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    addDorm: function (req, res) {
+        DormManService.addDormSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    delDorm: function (req, res) {
+        DormManService.delDormSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    updateDorm: function (req, res) {
+        DormManService.updateDormSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    validationDorm: function (req, res) {
+        DormManService.validationDormSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getDormStus: function (req, res) {
+        DormManService.getDormStusSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getDistedMajors: function (req, res) {
+        DormManService.getDistedMajorsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    assignDorms: function (req, res) {
+        DormManService.assignDormsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    closeDorms: function (req, res) {
+        DormManService.closeDormsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
 };
 
 

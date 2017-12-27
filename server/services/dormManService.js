@@ -100,7 +100,189 @@ var DormManService = {
         }) .catch(function (e) {
             callback(e);
         });
-    }
+    },
+
+    //获取宿舍列表
+    getDorms: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/room/get/list',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //根据id查询宿舍信息
+    getDormInfo: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/room/get',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //新增宿舍
+    addDorm: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/web/v1/room/save',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //删除宿舍
+    delDorm: function (params, access_token, callback) {
+        params.accessToken = access_token;
+        RestClient.delete({
+            host: 'dd',
+            path: '/api/web/v1/room/del',
+            params: params,
+            access_token: access_token,
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //编辑宿舍
+    updateDorm: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/room/put',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取已经分配的专业
+    getDistedMajors: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/roomAssgin/getProfInfo',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取宿舍学生信息
+    getDormStus: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/room/getRoomStuInfo',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //校验宿舍是否重复
+    validationDorm: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/room/get/validation',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //批量关闭宿舍
+    closeDorms: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/roomAssgin/put',
+            access_token: access_token,
+            entity: params.roomIds
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //批量分配宿舍
+    assignDorms: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/web/v1/roomAssgin/save',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
 
 };
 

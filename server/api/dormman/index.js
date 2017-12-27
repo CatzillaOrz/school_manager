@@ -16,5 +16,16 @@ router.post('/addDormBuilding',auth.isSignedIn, controller.addDormBuilding);
 router.delete('/delDormBuilding',auth.isSignedIn, controller.delDormBuilding);
 router.put('/updateDormBuilding',auth.isSignedIn, controller.updateDormBuilding);
 
+router.get('/getDorms',auth.isSignedIn, controller.getDorms);
+router.get('/getDormInfo',auth.isSignedIn, controller.getDormInfo);
+router.post('/addDorm',auth.isSignedIn, controller.addDorm);
+router.delete('/delDorm',auth.isSignedIn, controller.delDorm);
+router.put('/updateDorm',auth.isSignedIn, controller.updateDorm);
+
+router.get('/validationDorm',auth.isSignedIn, controller.validationDorm);
+router.get('/getDistedMajors',auth.isSignedIn, controller.getDistedMajors);
+router.get('/getDormStus',auth.isSignedIn, controller.getDormStus);
+router.put('/closeDorms',auth.isSignedIn, controller.closeDorms);
+router.post('/assignDorms',auth.isSignedIn, controller.assignDorms);
 
 module.exports = router;
