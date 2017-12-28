@@ -17,14 +17,14 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-md-12.padding-bottom-10
+                        .col-md-12.padding-bottom-10(style="padding-left:10px!important;")
                             form.form-line
-                                .col-md-1
+                                .form-group.col-md-1
                                     label.control-label 宿舍楼：
-                                .col-md-10
+                                .form-group.col-md-10
                                     span.dorms-flow(ng-class="{'select-dorm': dormMan.isContain(building)}" ng-click="dormMan.checkBuild(building)" ng-repeat="building in dormMan.builds") {{building.name}}
                                         i.fa.fa-times.close-pic(aria-hidden="true" ng-if="dormMan.isContain(building)" ng-click="dormMan.removeSelectBuild(building, $event);")
-                                //.col-md-1
+                                //.form-group.col-md-1
                                     span 更多
                         .col-md-12.padding-bottom-10.padding-top-10(ng-if="dormMan.checkedBuilds.length==1")
                             form.form-line(ng-if="dormMan.checkedBuilds[0].floorType==20")
@@ -52,8 +52,11 @@
                                     select.form-control(type='text', ng-model="dormMan.params.open"  ng-options="obj.value as obj.name for obj in dormMan.isOpenArr")
                                 .form-group.col-md-4
                                     label.control-label 已分配专业：
-                                    select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.value as obj.name for obj in dormMan.distedMajor")
-
+                                    //select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName for obj in dormMan.distedMajor")
+                                    select#ddd.select2.form-control(ng-model="dormMan.params.profId")
+                                        optgroup(label="{{college.collegeName}}" ng-repeat="college in dormMan.distedMajor")
+                                            option(value="{{prof.profId}}" ng-repeat="prof in college.pl" selected="{{dormMan.params.profId==prof.profId?'selected':''}}") {
+                                    //select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor")
                         .col-md-12.padding-bottom-10.padding-top-10
                             .col-md-4
                                 #datatable_col_reorder_filter.dataTables_filter(style="float:left;width:auto;")
@@ -103,10 +106,10 @@
                                     a.handle(ng-click="dormMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
-                                    a.handle(ng-if="!record.open" ng-click="dormMan.closeDormPrompt(record)")
+                                    a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
                                         i.fa.fa-pencil-square-o
                                         span 关闭
-                                    //a.handle(ng-if="!record.open" ng-click="dormMan.openDorm(record)")
+                                    a.handle(ng-if="!record.open" ng-click="dormMan.openDorm(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开启
                                     a.handle(ng-if="record.open" ui-sref="dormbuildingedit({id: record.id})")
