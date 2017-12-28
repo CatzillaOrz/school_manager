@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
 				no: "",//宿舍名
 				full: null, //是否满员
 				open: null, //开发状态
-				profId: '', //已经分配专业
+				profId: null, //已经分配专业
 				floorIds: [], //所选宿舍
 				unitNo: [], //单元
 				floorNo: [], //楼层id
@@ -35,8 +35,8 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 
-			isFullArr: [{value: null, name: '请选择'},{value: 10, name: '是'},
-				{value: 20, name: '否'}],
+			isFullArr: [{value: null, name: '请选择'},{value: true, name: '是'},
+				{value: false, name: '否'}],
 
 			isOpenArr: [{value: null, name: '请选择'},{value: true, name: '开放'},
 				{value: false, name: '关闭'}],
@@ -70,11 +70,11 @@ angular.module('dleduWebApp')
 			 */
 			getDistedMajors: function(){
 				var that = this;
-				var params = {pageSize:9999999, pageNumber: 1};
-				DormManService.getDistedMajors(params).$promise
+				DormManService.getDistedMajors().$promise
 					.then(function (data) {
-						that.distedMajor = data.data;
-						that.distedMajor.splice(0, 0, {name: "请选择专业", id: 0});
+						that.distedMajor = data;
+						//that.distedMajor.splice(0, 0, {profName: "请选择专业", profId: null});
+						that.select2MajorOptions();
 					})
 					.catch(function (error) {
 
@@ -187,7 +187,9 @@ angular.module('dleduWebApp')
 
 			//分配宿舍
 			distDorm: function(){
+				var that = this;
 				var majors = this.majorLists, major, profId = this.dormAssign.profId;
+				var mess = this.dormAssign.roomIds.length >1 ? "批量开放宿舍成功!" : "开放宿舍成功!";
 				angular.forEach(majors, function(item){
 					if(item.id == profId){
 						major = item;
@@ -200,10 +202,13 @@ angular.module('dleduWebApp')
 				params.profName = major.name;
 				DormManService.assignDorms(params).$promise
 					.then(function (data) {
-						var mess = type == 'batch' ? "批量关闭宿舍成功!" : "关闭宿舍成功!";
-						messageService.openMsg(mess);
-						that.selDistObj = [];
-						that.getDorms();
+						if(data.result){
+							messageService.openMsg(mess);
+							that.selDistObj = [];
+							that.getDorms();
+						}else{
+							messageService.openMsg("开放宿舍失败！");
+						}
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error,"关闭宿舍异常！"));
@@ -460,9 +465,68 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			select2MajorOptions: function () {
+				var _this = this;
+				return {
+					placeholder: {
+						id: -1, // the value of the option
+						text: '按学期筛选'
+					},
+					allowClear: true,
+				}
+			},
+
+			//学期下拉列表分组数据格式化
+			select2GroupFormat: function (dataList) {
+				var result = [];
+
+				/*angular.forEach(dataList, function (data) {
+					var obj = {
+						text: data.name,
+						children: []
+					};
+					angular.forEach(data.semesterIdNameList, function (sememster) {
+						var objChild = {
+							id: sememster.id,
+							text: sememster.name
+						};
+						obj.children.push(objChild);
+					})
+					result.push(obj);
+				})*/
+				return result;
+			},
+
+			/*getCurrentSemester: function () {
+				var _this = this;
+				var params = {
+					orgId: AuthService.getUser().orgId
+				};
+				EduManService.getCurrentSemester(params).$promise
+					.then(function (data) {
+						var obj = {
+							text: data.yearName,
+							children: [
+								{
+									id:data.id,
+									text:data.name
+								}
+							]
+						};
+						_this.entity.semesterId = data.id;
+						_this.schoolYearDropList=[obj];
+
+
+					})
+					.catch(function (error) {
+
+					})
+			},*/
+
 			init: function () {
 				this.getDorms();
 				this.getBulids();
+				//this.getDistedMajors();
 				this.getMajors();
 			}
 		};
