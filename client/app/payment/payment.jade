@@ -1,0 +1,383 @@
+.college-list-container(ng-if="paymentFn.isPayment")
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 缴费单列表
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .col-xs-12.col-sm-6
+                            #datatable_col_reorder_filter.dataTables_filter
+                                label
+                                    input.form-control(type='search', placeholder='缴费单名称', aria-controls='datatable_col_reorder' ng-model="paymentFn.paymentName", my-enter="paymentFn.getPaymentList()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="paymentFn.getPaymentList()")
+                                        i.glyphicon.glyphicon-search
+                        .col-sm-6.col-xs-6.hidden-xs
+                            .ColVis
+                                button.btn.btn-primary(type='button' ng-click="paymentFn.initialization()")
+                                    span 导入缴费单
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th 序号
+                                th 缴费单名称
+                                th 执行状态
+                                th 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="payment in paymentFn.paymentList")
+                                td.sorting_1 {{$index+1 + ((paymentFn.page.pageNumber==0?paymentFn.page.pageNumber+1:paymentFn.page.pageNumber)-1)*10}}
+                                td {{payment.name}}
+                                td {{payment.publishState == 10?'待生效':'已生效'}}
+                                td
+                                    a.handle(ng-click="paymentFn.getPayment(payment)" ng-show="payment.publishState==10")
+                                        i.fa.fa-pencil-square-o
+                                        span 重新导入
+                                    a.handle(ng-click="paymentFn.deletePayment(payment)" ng-show="payment.publishState==10")
+                                        i.fa.fa-trash-o
+                                        span 删除
+                                    a.handle(ng-click="paymentFn.publishPayment(payment)" ng-show="payment.publishState==10")
+                                        i.fa.fa-trash-o
+                                        span 生效
+                                    a.handle(ng-click="paymentFn.getPersonCost(payment)" ng-show="payment.publishState==20")
+                                        i.fa.fa-trash-o
+                                        span 查看统计
+                                    a.handle(ng-click="paymentFn.deletePrompt(payment)" ng-show="payment.publishState==20")
+                                        i.fa.fa-trash-o
+                                        span 导出报表
+
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{((paymentFn.page.pageNumber==0?paymentFn.page.pageNumber+1:paymentFn.page.pageNumber)-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((paymentFn.page.pageNumber==0?paymentFn.page.pageNumber+1:paymentFn.page.pageNumber)-1)*10+paymentFn.collegeList.length}}
+                                |  条 总共
+                                span.text-primary {{paymentFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='paymentFn.page.totalElements', max-size='paymentFn.page.pageSize' ng-model='paymentFn.page.pageNumber',ng-change="paymentFn.findCollegeByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+.college-list-container(ng-if="!paymentFn.isPayment")
+    .jarviswidget.jarviswidget-color-blueDark.payment-detail
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{paymentFn.personCostData.name}}
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+            .col-sm-1.col-xs-6.hidden-xs(style="float:right;margin-right:20px;")
+                .ColVis
+                    button.btn.btn-primary(type='button' ng-click="paymentFn.goBackHomePage()")
+                        span 返回
+        // widget div
+        div.payment-detail-content(role='content')
+            .widget-body.no-padding
+                .edit-payment-content
+                    i.fa.fa-exclamation-triangle.edit-payment-icon
+                    span 修改额度后只会影响还未缴费的人员
+                .edit-payment-content(ng-show='!paymentFn.showPaymentStyle && !paymentFn.showPaymentTime')
+                    .payment-style-content
+                        span 支付方式:
+                        span(ng-class="paymentFn.personCostData.paymentType==10?'payment-name-all':'payment-name-staging'") {{paymentFn.personCostData.paymentString}}
+                        span.edit-payment-style(ng-click="paymentFn.showPaymentStyle=true") 修改
+                .edit-payment-content(ng-show='paymentFn.showPaymentStyle&& !paymentFn.showPaymentTime')
+                    .payment-style-content
+                        span.payment-style 缴费方式:
+                        .payment-style-icon
+                            i.fa.style-icon-margin(ng-class="paymentFn.personCostData.paymentType==10?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.personCostData.paymentType=10")
+                            span 全款缴费
+                        .payment-style-icon
+                            i.fa.style-icon-margin(ng-class="paymentFn.personCostData.paymentType==20?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.personCostData.paymentType=20")
+                            span 可以分期
+                    .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
+                        span.payment-style 最低支付限额设置:
+                        i.fa.fa-jpy.style-icon-margin
+                        input.payment-amount(style='text' ng-model="paymentFn.personCostData.smallAmount")
+                        span.style-icon-margin 元
+                    .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
+                        span.payment-style 额度限制频次:
+                        .payment-style-icon
+                            i.fa.style-icon-margin(ng-class="paymentFn.personCostData.installmentRate==10?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.personCostData.installmentRate=10")
+                            span 首次缴费
+                        .payment-style-icon
+                            i.fa.style-icon-margin(ng-class="paymentFn.personCostData.installmentRate==20?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.personCostData.installmentRate=20")
+                            span 每次缴费
+                    .payment-style-content()
+                        button.edit-button(ng-click="paymentFn.editPersonPayment()") 修改
+                .edit-payment-content(ng-show='!paymentFn.showPaymentStyle && !paymentFn.showPaymentTime')
+                    .payment-style-content
+                        span 截止日期:
+                        span.payment-time {{paymentFn.personCostData.lastDate}}
+                        span.edit-payment-style(ng-click="paymentFn.showPaymentTime=true") 修改
+                .edit-payment-content(ng-show='paymentFn.showPaymentTime&&!paymentFn.showPaymentStyle')
+                    .payment-style-content
+                        span 截止日期:
+                        .input-append.date.datepicker.datepicker-basic.no-padding.deadline.edit-person-time(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择截止日期' type='text' ng-model="paymentFn.personCostData.lastDate" validator="required")
+                            span.add-on
+                                i.icon-calendar.glyphicon.glyphicon-calendar
+                        span.edit-payment-style(ng-click="paymentFn.editPersonTime()") 确定
+    .jarviswidget.jarviswidget-color-blueDark.payment-detail
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 已收费详情
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div.payment-detail-content(role='content')
+            .widget-body.no-padding
+                .charges-details
+                    .charges-details-content.right
+                        span 费用名称：
+                        span 人数总计：
+                        span 未交费人数：
+                        span 欠费人数：
+                        span 已结清人数总计：
+                    .charges-details-content.left
+                        span {{paymentFn.personCal.name}}
+                        span {{paymentFn.personCal.totalPersons }}人
+                        span {{paymentFn.personCal.noPayPersons  }}人
+                        span {{paymentFn.personCal.owedPersons  }}人
+                        span {{paymentFn.personCal.completePersions  }}人
+                    .charges-details-content.right
+                        span
+                        span 应交金额总计：
+                        span 未交费金额总计：
+                        span 欠费已缴金额总计：
+                        span 已结清金额总计：
+                    .charges-details-content.left
+                        span
+                        span ￥{{paymentFn.personCal.totalShouldPay }}元
+                        span ￥{{paymentFn.personCal.noPayShouldPay  }}元
+                        span ￥{{paymentFn.personCal.owedHasPay  }}元
+                        span ￥{{paymentFn.personCal.completeHasPay  }}元
+    .jarviswidget.jarviswidget-color-blueDark.payment-detail
+        div.payment-detail-content(role='content')
+            .total-payment
+                span 实际交费金额总计：
+                span ￥{{paymentFn.personCal.owedHasPay+paymentFn.personCal.completeHasPay}}元
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.active.cursor-pointer(ng-click="paymentFn.switchOneTab('showByPerson')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  按人员查看
+                li.tabBlock-tab.cursor-pointer(ng-click="paymentFn.switchOneTab('showByPayment')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet 按支付明细查看
+        div(role='content')
+            .widget-body.no-padding
+                .tab-content
+                    .tabbable.tabs-below(ng-if="paymentFn.tabType=='showByPerson'")
+                        .tab-content
+                            .no-padding
+                                .dataTables_wrapper.form-inline.no-footer
+                                    .col-xs-12.col-sm-3
+                                        label 姓名/身份证号：
+                                            input.form-control(type='search', aria-controls='datatable_col_reorder' ng-model="paymentFn.searchPaymentName")
+                                    .col-xs-12.col-sm-2
+                                        label 缴费状态：
+                                            select.select2.form-control(ng-model="paymentFn.paymentStatus"  ng-options="payment.name for payment in paymentFn.paymentStatusList" )
+                                    .col-xs-12.col-sm-2
+                                        label 专业：
+                                            select.select2.form-control(ng-model="paymentFn.major"  ng-options="major.name for major in paymentFn.majorList" )
+                                    .col-sm-3.col-xs-6.hidden-xs
+                                        .ColVis
+                                            button.btn.btn-primary(type='button' ng-click="paymentFn.searchPersonCostList()")
+                                                span 搜索
+                                    .col-sm-2.col-xs-6.hidden-xs
+                                        .ColVis
+                                            button.btn.btn-primary(type='button' ng-click="paymentFn.openImpBatch()")
+                                                span 导出数据
+                                    table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th 序号
+                                                th 交费人
+                                                th 身份证号
+                                                th 专业
+                                                th 应缴金额
+                                                th 实交金额
+                                                th 欠费金额
+                                                th 状态
+                                                th 收费明细
+                                                th 支付明细
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="personCost in paymentFn.personCostList")
+                                                td.sorting_1 {{$index+1 + ((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*10}}
+                                                td {{personCost.name}}
+                                                td {{personCost.idNumber}}
+                                                td {{personCost.professionalName}}
+                                                td ￥{{personCost.shouldPay}}
+                                                td ￥{{personCost.hasPay}}
+                                                td ￥{{personCost.shouldPay-personCost.hasPay}}
+                                                td {{personCost.paymentState==10?'未交费':personCost.paymentState==20?'有欠费':'已结清'}}
+                                                td {{personCost.payDesc}}
+                                                td
+                                                    a.handle(ng-click="paymentFn.showPersonPayDetail(personCost.id)")
+                                                        i.fa.fa-pencil-square-o
+                                                        span 查看
+
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            .dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber*10:(paymentFn.personPage.pageNumber-1)*10+1}}
+                                                |  到
+                                                span.txt-color-darken {{((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*10+paymentFn.personCostList.length}}
+                                                |  条 总共
+                                                span.text-primary {{paymentFn.personPage.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            .dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.personPage.totalElements', max-size='paymentFn.personPage.pageSize' ng-model='paymentFn.personPage.pageNumber',ng-change="paymentFn.getPersonCostListByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    .tabbable.tabs-below(ng-if="paymentFn.tabType=='showByPayment'")
+                        .tab-content
+                            .no-padding
+                                .dataTables_wrapper.form-inline.no-footer
+                                    .col-xs-12.col-sm-4
+                                        label 付款单号/支付宝订单号/缴费人：
+                                            input.form-control(type='search', aria-controls='datatable_col_reorder' ng-model="paymentFn.orderParams.searchOrderName")
+                                    .col-xs-12.col-sm-4
+                                        .search-time
+                                            span.search-time-label 日期范围：
+                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="paymentFn.orderParams.startDate" validator="required")
+                                                span.add-on
+                                                    i.icon-calendar.glyphicon.glyphicon-calendar
+                                            span(style="margin:0 3px").search-time-label  至
+                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="paymentFn.orderParams.endDate" validator="required")
+                                                span.add-on
+                                                    i.icon-calendar.glyphicon.glyphicon-calendar
+                                    .col-sm-1.col-xs-6.hidden-xs
+                                        .ColVis
+                                            button.btn.btn-primary(type='button' ng-click="paymentFn.searchOrderCostList()")
+                                                span 搜索
+                                    .col-sm-1.col-xs-6.hidden-xs
+                                        .ColVis
+                                            button.btn.btn-primary(type='button' ng-click="paymentFn.openImpBatch()")
+                                                span 导出数据
+                                    table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                        thead
+                                            tr(role='row')
+                                                th 序号
+                                                th 付款单号
+                                                th 缴费人
+                                                th 身份证号
+                                                th 支付金额
+                                                th 支付时间
+                                                th 状态
+                                                th 支付宝订单号
+                                        tbody
+                                            tr.odd(role='row' ng-repeat="orderCost in paymentFn.orderCostList")
+                                                td.sorting_1 {{$index+1 + ((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*10}}
+                                                td {{orderCost.orderNo}}
+                                                td {{orderCost.name}}
+                                                td {{orderCost.idNumber}}
+                                                td {{orderCost.amount}}
+                                                td {{orderCost.payTime}}
+                                                td {{orderCost.orderState}}
+                                                td {{orderCost.aliOrderNo }}
+
+                                    .dt-toolbar-footer
+                                        .col-sm-6.col-xs-12.hidden-xs
+                                            .dataTables_info(role='status', aria-live='polite')
+                                                | 显示第
+                                                span.txt-color-darken {{paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber*10:(paymentFn.orderPage.pageNumber-1)*10+1}}
+                                                |  到
+                                                span.txt-color-darken {{((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*10+paymentFn.orderCostList.length}}
+                                                |  条 总共
+                                                span.text-primary {{paymentFn.orderPage.totalElements}}
+                                                |  条记录
+                                        .col-sm-6.col-xs-12
+                                            .dataTables_paginate.paging_simple_numbers
+                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.orderPage.totalElements', max-size='paymentFn.orderPage.pageSize' ng-model='paymentFn.orderPage.pageNumber',ng-change="paymentFn.getOrderCostListByPage()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+//-  添加学生弹出窗模版
+script(type='text/ng-template',id='importDialog')
+    .buld_wrap
+        .buld_head
+            i.fa.fa-file-excel-o
+            span.buld 导入缴费单
+        .propt_content
+            table
+                tr
+                    td.first_td 上传文件
+                    td
+                        .choseFile.left(ngf-select='paymentFn.selected($newFiles)' ng-model="paymentFn.exportParam.file" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                        input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="paymentFn.exportParam.file.name" )
+                        //.left.load_inner(ng-click='paymentFn.importantBatch(paymentFn.myFile)', type='button') 导入
+                tr
+                    td.first_td.downlaod-temp 模板下载
+                    td
+                        .load_inner_w(style="cursor:pointer" ng-click="paymentFn.downLoad()") 缴费单导入模板
+                tr
+                    td.first_td 缴费设置
+                    td
+                        .edit-payment-content
+                            .payment-style-content
+                                span.payment-style 缴费方式:
+                                .payment-style-icon
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType =='10'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.checkPaymentStyle(10)")
+                                    span 全款缴费
+                                .payment-style-icon
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType=='20'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.checkPaymentStyle(20)")
+                                    span 可以分期
+                            .payment-style-content(ng-show="paymentFn.exportParam.paymentType=='20'")
+                                span.payment-style 最低支付限额设置:
+                                i.fa.fa-jpy.style-icon-margin
+                                input.payment-amount(style='text' ng-model="paymentFn.exportParam.smallAmount")
+                                span.style-icon-margin 元
+                            .payment-style-content(ng-show="paymentFn.exportParam.paymentType=='20'")
+                                span.payment-style 额度限制频次:
+                                .payment-style-icon
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.installmentRate=='10'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.exportParam.installmentRate=10")
+                                    span 首次缴费
+                                .payment-style-icon
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.installmentRate=='20'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.exportParam.installmentRate=20")
+                                    span 每次缴费
+                            .payment-style-content
+                                span.payment-style 收费截止日期:
+                                .input-append.date.datepicker.datepicker-basic.no-padding.deadline(data-date='', data-date-format='yyyy-mm-dd' b-datepicker id="startDate")
+                                    input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择截止日期' type='text' ng-model="paymentFn.exportParam.lastDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                            .payment-style-content
+                                button.import-button(ng-click="paymentFn.importPayment()") 导入并保存
+                tr
+                    td.first_td 导入功能说明
+                    td
+                        ul
+                            li 1.导入的数据项中，费用名称、支付人姓名、支付人身份证号码、应付金额为必填项
+                            li 2.重复导入时，之前被导入的表单数据将被删除，按最新导入的数据为准
+script(type='text/ng-template',id='importResultDialog')
+    .repeatLoad
+        .repeat_header.payment-details-header
+            i.fa.fa-table
+            span.buld 支付明细
+        .payment-details-list
+            .details-content(ng-repeat="detail in paymentFn.personPayDetailList")
+                span 付款单号：{{detail.orderNo}}
+                span 付款日期：{{detail.payTime}}
+                span 付款金额：￥{{detail.amount}}
+                span 支付宝订单号：{{detail.aliOrderNo}}

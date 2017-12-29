@@ -273,6 +273,13 @@
                     "icon": "pencil-square-o"
                 }
             ]
+        },
+        {
+            "title": "在线缴费",
+            "sref": "payment",
+            "active": "payment",
+            "icon": "money",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADM"
         }
     ]
 }

@@ -1,0 +1,132 @@
+.payment-detail{
+  margin: 0 !important;
+}
+.payment-detail-content{
+  border-width: 1px !important;
+}
+.edit-payment-icon{
+  color:#f7ab20;
+  margin-right:5px;
+}
+.edit-payment-content{
+  padding-left: 25px;
+  margin: 10px 0;
+  .payment-style-content{
+    display: flex;
+    align-items: center;
+    margin:10px 0;
+    span{
+      display: block;
+    }
+    .payment-style-icon{
+      display: flex;
+      align-items: center;
+      margin: 0 15px;
+      .check-icon{
+        color: #29c192;
+      }
+    }
+  }
+  .edit-button{
+    width: 80px;
+    height: 30px;
+    font-size: 15px;
+    background: white;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    color: #19c26c;
+    margin-left: 150px;
+  }
+}
+.import-button{
+  width: 120px;
+  height: 30px;
+  font-size: 15px;
+  background: white;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  color: #19c26c;
+  margin-left: 120px;
+  text-align: center;
+  line-height: 27px;
+}
+.payment-name-all{
+  width: 200px;
+  text-align: center;
+  font-size: 20px;
+}
+.payment-name-staging{
+  width: 200px;
+  text-align: center;
+  font-size: 14px;
+}
+.payment-time{
+  width: 200px;
+  text-align: center;
+  font-size: 15px;
+}
+.edit-payment-style{
+  color: #29c192;
+}
+.payment-style{
+  width: 120px;
+  text-align: right;
+}
+.style-icon-margin{
+  margin:0 5px;
+}
+.fa-check-circle{
+  color: #29c192;
+}
+.charges-details{
+  display: flex;
+  padding-left: 200px;
+  .right{
+    text-align:right;
+  }
+  .left{
+      text-align:left;
+  }
+  .charges-details-content{
+    display: flex;
+    flex-direction: column;
+    span{
+      display: block;
+      width: 230px;
+      margin:5px;
+      height: 25px;
+    }
+  }
+}
+.total-payment{
+  padding-left: 800px;
+  margin: 0 0 10px 0;
+}
+.search-time{
+  display: flex;
+  align-items: center;
+  .search-time-label{
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+.payment-details-list{
+  .details-content{
+    padding:20px;
+    border-bottom: 1px solid #b3b3b3;
+    span{
+      display: block;
+      margin:5px;
+    }
+  }
+}
+.payment-details-header{
+  border-bottom: 1px solid #b3b3b3;
+}
+.deadline{
+  display: flex;
+  margin-left:5px;
+}
+.edit-person-time{
+  margin:0 10px
+}

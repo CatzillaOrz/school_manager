@@ -22,4 +22,5 @@ module.exports = function(app){
   app.use('/api/geo', require('./api/geo'));
   app.use('/api/feedback', require('./api/feedback'));
   app.use('/api/dormman', require('./api/dormman'));
+  app.use('/api/payment', require('./api/payment'));
 };
