@@ -275,6 +275,8 @@ angular.module('dleduWebApp')
 				params.collegeId = major.collegeId;
 				params.collegeName = major.collegeName;
 				params.profName = major.name;
+				if(!this.dormAssign.profId || !this.dormAssign.sexType)
+					return;
 				DormManService.assignDorms(params).$promise
 					.then(function (data) {
 						if(data.result){
@@ -534,6 +536,7 @@ angular.module('dleduWebApp')
 				MajorService.getMajorList(params).$promise
 					.then(function (data) {
 						that.majorLists = data.data;
+						that.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
 					})
 					.catch(function (error) {
 
