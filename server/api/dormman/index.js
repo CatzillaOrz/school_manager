@@ -27,5 +27,7 @@ router.get('/getDistedMajors',auth.isSignedIn, controller.getDistedMajors);
 router.get('/getDormStus',auth.isSignedIn, controller.getDormStus);
 router.put('/closeDorms',auth.isSignedIn, controller.closeDorms);
 router.post('/assignDorms',auth.isSignedIn, controller.assignDorms);
+router.post('/updateDistedInfo',auth.isSignedIn, controller.updateDistedInfo);
+router.get('/getDormDistedInfo',auth.isSignedIn, controller.getDormDistedInfo);
 
 module.exports = router;
