@@ -71,7 +71,6 @@
             //判断角色是否应当授予权限
             function isUseAuthority(auth){
                 if(typeof auth.role == 'undefined'){
-                    console.log(auth.title + "没有设置权限");
                     return true;
                 }
                 var user = AuthService.getUser();

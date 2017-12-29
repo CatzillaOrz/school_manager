@@ -18,11 +18,11 @@ angular.module('dleduWebApp')
 				var params = {};
 				params.pageNumber = this.page.pageNumber;
 				params.pageSize = this.page.pageSize;
+				params.roomId  = $state.params.id;
 				DormManService.getDormStus(params).$promise
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
-						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 						messageService.openMsg("查询异常！");
@@ -30,7 +30,7 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				this.getDormStus();
+				this.getDormStus($state.params.id);
 			}
 		};
 		$scope.dormStuInfo.init();

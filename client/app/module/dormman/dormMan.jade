@@ -26,21 +26,21 @@
                                         i.fa.fa-times.close-pic(aria-hidden="true" ng-if="dormMan.isContain(building)" ng-click="dormMan.removeSelectBuild(building, $event);")
                                 //.form-group.col-md-1
                                     span 更多
-                        .col-md-12.padding-bottom-10.padding-top-10(ng-if="dormMan.checkedBuilds.length==1")
-                            form.form-line(ng-if="dormMan.checkedBuilds[0].floorType==20")
+                        .col-md-12.padding-bottom-10.padding-top-10(ng-if="dormMan.checkedBuilds.length==1 && dormMan.checkedBuilds[0].floorType==20")
+                            form.form-line
                                 .col-md-1
                                     label.control-label 所在单元：
                                 .col-md-10
                                     span.dorms-flow(ng-class="{'select-dorm': dormMan.isFloorUnit(unit, 'unit')}" ng-click="dormMan.checkFloorUnit(unit, 'unit')" ng-repeat="unit in dormMan.currentBuildUnit") {{unit + " 单元"}}
                                         i.fa.fa-times.close-pic(aria-hidden="true" ng-if="dormMan.isFloorUnit(unit, 'unit')" ng-click="dormMan.removeFloorUnit(unit, 'unit', $event);")
-                        .col-md-12.padding-bottom-10.padding-top-10(ng-if="dormMan.checkedBuilds[0].floorType==10||(dormMan.checkedBuilds[0].floorType==20&&dormMan.checkedUnits.length<2)")
+                        .col-md-12.padding-bottom-10.padding-top-10(ng-if="dormMan.checkedBuilds.length==1")
                             form.form-line
                                 .col-md-1
                                     label.control-label 所在楼层：
                                 .col-md-10
                                     span.dorms-flow(ng-class="{'select-dorm': dormMan.isFloorUnit(floor, 'floor')}" ng-click="dormMan.checkFloorUnit(floor, 'floor')" ng-repeat="floor in dormMan.currentBuildFloors") {{floor + "楼"}}
                                         i.fa.fa-times.close-pic(aria-hidden="true" ng-if="dormMan.isFloorUnit(floor, 'floor')" ng-click="dormMan.removeFloorUnit(floor, 'floor', $event);")
-                                .col-md-1
+                                //.col-md-1
                                     span 更多
                         .col-md-12.padding-bottom-10.padding-top-10
                             form.form-line
@@ -52,10 +52,6 @@
                                     select.form-control(type='text', ng-model="dormMan.params.open"  ng-options="obj.value as obj.name for obj in dormMan.isOpenArr")
                                 .form-group.col-md-4
                                     label.control-label 已分配专业：
-                                    //select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName for obj in dormMan.distedMajor")
-                                    //select.select2.form-control(ng-model="dormMan.params.profId" ui-select2="dormMan.getDistedMajors()")
-                                        optgroup(label="{{college.collegeName}}" ng-repeat="college in dormMan.distedMajor")
-                                            option(value="{{prof.profId}}" ng-repeat="prof in college.children")
                                     select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor")
                         .col-md-12.padding-bottom-10.padding-top-10
                             .col-md-4
@@ -117,7 +113,7 @@
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorm(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开启
-                                    a.handle(ng-if="record.open" ui-sref="dormbuildingedit({id: record.id})")
+                                    a.handle(ng-if="record.open" ui-sref="dormstuinfo({id: record.roomId})")
                                         i.fa.fa-pencil-square-o
                                         span 学生明细
 

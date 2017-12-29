@@ -184,7 +184,7 @@ angular.module('dleduWebApp')
 			openDorm: function (entity) {
 				var selectedDorm;
 				if(entity){//单选
-					selectedDorm = entity;
+					selectedDorm = [entity];
 				}else{//多选
 					selectedDorm = this.selDistObj;
 				}
@@ -226,7 +226,7 @@ angular.module('dleduWebApp')
 					if(id == temp.id){
 						obj.collegeId = temp.collegeId;
 						obj.collegeName = temp.collegeName;
-						obj.proId = temp.id;
+						obj.profId = temp.id;
 						obj.profName = temp.name;
 						return obj;
 					}
@@ -239,8 +239,8 @@ angular.module('dleduWebApp')
 				var selectIds = this.editDormAssign.profId;//多选的专业id
 				//获取选择的id的选项
 				var selArr = [];
-				for(var i = 0, len = this.editDormAssign.profId.length; i < len; i++ ){
-					var id = this.editDormAssign.profId[i], obj = {};
+				for(var i = 0, len = selectIds.length; i < len; i++ ){
+					var id = selectIds[i], obj = {};
 					obj = this.getObjById(id);
 					selArr.push(obj);
 				}
