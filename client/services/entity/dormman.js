@@ -72,6 +72,14 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return dormman.update(params);
             },
+            getDormDistedInfo: function (params) {
+                var dormman = $resource('api/dormman/getDormDistedInfo');
+                return dormman.get(params);
+            },
+            updateDistedInfo: function (params) {
+                var dormman = $resource('api/dormman/updateDistedInfo');
+                return dormman.save(params);
+            },
         }
 
     });

@@ -155,6 +155,26 @@ module.exports = {
             })
     },
 
+    getDormDistedInfo: function (req, res) {
+        DormManService.getDormDistedInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    updateDistedInfo: function (req, res) {
+        DormManService.updateDistedInfoSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
 };
 
 

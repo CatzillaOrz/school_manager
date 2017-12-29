@@ -53,10 +53,10 @@
                                 .form-group.col-md-4
                                     label.control-label 已分配专业：
                                     //select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName for obj in dormMan.distedMajor")
-                                    select#ddd.select2.form-control(ng-model="dormMan.params.profId")
+                                    //select.select2.form-control(ng-model="dormMan.params.profId" ui-select2="dormMan.getDistedMajors()")
                                         optgroup(label="{{college.collegeName}}" ng-repeat="college in dormMan.distedMajor")
-                                            option(value="{{prof.profId}}" ng-repeat="prof in college.pl" selected="{{dormMan.params.profId==prof.profId?'selected':''}}") {
-                                    //select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor")
+                                            option(value="{{prof.profId}}" ng-repeat="prof in college.children")
+                                    select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor")
                         .col-md-12.padding-bottom-10.padding-top-10
                             .col-md-4
                                 #datatable_col_reorder_filter.dataTables_filter(style="float:left;width:auto;")
@@ -81,13 +81,14 @@
                                     input(style="width:auto!important" type="checkbox" ng-click="dormMan.checkAll()" ng-checked="dormMan.checkAllRecord" ng-model="dormMan.checkAllRecord")
                                     | 全选
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 宿舍楼栋
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 单元号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 楼层
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 宿舍号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 单元号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 楼层
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 宿舍号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 总床位数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 空床位数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 开放状态
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 200px;') 操作
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 是否分配
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 300px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in dormMan.records")
                                 td.sorting_1
@@ -99,6 +100,7 @@
                                 td {{record.beds}}
                                 td {{record.emBeds}}
                                 td {{record.open ? "开启" : "关闭"}}
+                                td {{record.assgin ? "已分配" : "未分配"}}
                                 td
                                     a.handle(ui-sref="dormedit({id: record.roomId})")
                                         i.fa.fa-pencil-square-o
@@ -109,13 +111,15 @@
                                     a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
                                         i.fa.fa-pencil-square-o
                                         span 关闭
+                                    a.handle(ng-if="record.assgin" ng-click="dormMan.openDistedDorm(record)")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑分配
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorm(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开启
                                     a.handle(ng-if="record.open" ui-sref="dormbuildingedit({id: record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 学生明细
-
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
@@ -162,4 +166,39 @@
                     .form-group
                         .col-sm-6
                             button.btn.btn-primary(ng-click="dormMan.distDorm()") 确定发布
+                            button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消
+    //-  编辑宿舍弹出框
+    script(type='text/ng-template',id='editDialog')
+        .container-fluid
+            .dialog-title
+                h2 分配编辑
+            .dialog-body
+                form.form-horizontal(role="form" name="form" novalidate)
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 分配给专业：
+                        .col-sm-6
+                            //select.select2.form-control(ui-select2="select2Options" ng-model="dormMan.editDormAssign.profId" )
+                                option(value="请选择专业") {{"请选择专业"}}
+                                option(ng-repeat="obj in dormMan.majorLists" value="obj.id" ) {{obj.name}}
+                            ui-select(ng-model="dormMan.editDormAssign.profId" multiple theme="bootstrap")
+                                ui-select-match.ui-select-match(placeholder="输入班级名称搜索...", allow-clear='true')
+                                    span(ng-bind="$select.selected.name")
+                                ui-select-choices.ui-select-choices(repeat="item.id as item in (dormMan.majorLists | filter: $select.search) track by $index")
+                                    span(ng-bind="item.name" title='{{item.name}}')
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 分配给性别：
+                        .col-sm-6
+                            label.radio-inline
+                                input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="10" )
+                                | 男
+                            label.radio-inline
+                                input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="20" )
+                                | 女
+                    .form-group
+                        .col-sm-6
+                            button.btn.btn-primary(ng-click="dormMan.updateDistedDorm()") 保存
                             button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消

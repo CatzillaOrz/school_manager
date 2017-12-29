@@ -50,6 +50,9 @@ angular.module('dleduWebApp')
 				sexType: 0
 			},
 
+			editDormAssign: {
+			},
+
 			/**
 			 * 获取宿舍楼
 			 */
@@ -72,9 +75,18 @@ angular.module('dleduWebApp')
 				var that = this;
 				DormManService.getDistedMajors().$promise
 					.then(function (data) {
-						that.distedMajor = data;
-						//that.distedMajor.splice(0, 0, {profName: "请选择专业", profId: null});
-						that.select2MajorOptions();
+						var result = [];
+						for(var i = 0, len = data.data.length; i < len; i++){
+							var temp = data.data[i];
+							for(var j = 0, subLen = temp.pl.length; j < subLen; j++){
+								var sub = temp.pl[j];
+								sub.collegeId = temp.collegeId;
+								sub.collegeName = temp.collegeName;
+								result.push(sub);
+							}
+						}
+						that.distedMajor = result;
+						that.distedMajor.splice(0, 0, {profName: "请选择专业", profId: null});
 					})
 					.catch(function (error) {
 
@@ -100,7 +112,7 @@ angular.module('dleduWebApp')
 						that.page = data.page;
 					})
 					.catch(function (error) {
-
+						messageService.openMsg("获取宿舍列表异常！");
 					})
 			},
 
@@ -184,6 +196,69 @@ angular.module('dleduWebApp')
 					scope: $scope
 				})
 			},
+
+			//编辑分配
+			openDistedDorm: function (entity) {
+				var that = this;
+				DormManService.getDormDistedInfo({roomId: entity.roomId}).$promise
+					.then(function (data) {
+						that.editDormAssign = data.data;
+						var ids = [];
+						for(var i = 0; i < data.data.radl.length; i++){
+							ids.push(data.data.radl[i].profId);
+						}
+						that.editDormAssign.profId = ids;
+					})
+					.catch(function (error) {
+
+					})
+				ngDialog.open({
+					template: 'editDialog',
+					width: 700,
+					scope: $scope
+				})
+			},
+
+			//通过选择的专业id，获取选择的对象
+			getObjById: function(id){
+				for(var i = 0, len = this.majorLists.length; i < len; i++ ){
+					var temp = this.majorLists[i], obj = {};
+					if(id == temp.id){
+						obj.collegeId = temp.collegeId;
+						obj.collegeName = temp.collegeName;
+						obj.proId = temp.id;
+						obj.profName = temp.name;
+						return obj;
+					}
+				}
+			},
+
+			//分配宿舍
+			updateDistedDorm: function(){
+				var that = this;
+				var selectIds = this.editDormAssign.profId;//多选的专业id
+				//获取选择的id的选项
+				var selArr = [];
+				for(var i = 0, len = this.editDormAssign.profId.length; i < len; i++ ){
+					var id = this.editDormAssign.profId[i], obj = {};
+					obj = this.getObjById(id);
+					selArr.push(obj);
+				}
+				this.editDormAssign.radl = selArr;
+				DormManService.updateDistedInfo(this.editDormAssign).$promise
+					.then(function (data) {
+						if(data.result){
+							messageService.openMsg("编辑宿舍成功！");
+							that.getDorms();
+						}else{
+							messageService.openMsg("编辑宿舍失败！");
+						}
+					})
+					.catch(function (error) {
+						messageService.openMsg(CommonService.exceptionPrompt(error,"编辑宿舍异常！"));
+					})
+			},
+
 
 			//分配宿舍
 			distDorm: function(){
@@ -465,70 +540,14 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			select2MajorOptions: function () {
-				var _this = this;
-				return {
-					placeholder: {
-						id: -1, // the value of the option
-						text: '按学期筛选'
-					},
-					allowClear: true,
-				}
-			},
-
-			//学期下拉列表分组数据格式化
-			select2GroupFormat: function (dataList) {
-				var result = [];
-
-				/*angular.forEach(dataList, function (data) {
-					var obj = {
-						text: data.name,
-						children: []
-					};
-					angular.forEach(data.semesterIdNameList, function (sememster) {
-						var objChild = {
-							id: sememster.id,
-							text: sememster.name
-						};
-						obj.children.push(objChild);
-					})
-					result.push(obj);
-				})*/
-				return result;
-			},
-
-			/*getCurrentSemester: function () {
-				var _this = this;
-				var params = {
-					orgId: AuthService.getUser().orgId
-				};
-				EduManService.getCurrentSemester(params).$promise
-					.then(function (data) {
-						var obj = {
-							text: data.yearName,
-							children: [
-								{
-									id:data.id,
-									text:data.name
-								}
-							]
-						};
-						_this.entity.semesterId = data.id;
-						_this.schoolYearDropList=[obj];
-
-
-					})
-					.catch(function (error) {
-
-					})
-			},*/
 
 			init: function () {
 				this.getDorms();
 				this.getBulids();
-				//this.getDistedMajors();
+				this.getDistedMajors();
 				this.getMajors();
-			}
+			},
+
 		};
 		$scope.dormMan.init();
 	});
