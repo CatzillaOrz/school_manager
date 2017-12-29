@@ -24,7 +24,8 @@ angular.module('dleduWebApp', [
     'ngUeditor',
     'angular-echarts',
     'angular-datepicker',
-    'frapontillo.bootstrap-switch'
+    'frapontillo.bootstrap-switch',
+    'ui.select'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');

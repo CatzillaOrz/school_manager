@@ -1,0 +1,22 @@
+.dorms-flow{
+    float:left;
+    line-height: 30px;
+    margin: 0px 20px 5px 0;
+    padding: 0 5px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+.select-dorm{
+    background: #54BF9B;
+    color: #fff;
+    .close-pic{
+        color: #000;
+        position: absolute;
+        right: -4px;
+        top: -5px;
+    }
+}
+.select2-dropdown{
+    z-index: 10001;
+}
