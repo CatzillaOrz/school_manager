@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('PaymentCtrl', function ($scope, AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService,
-                                         Upload, UploadService, ImpBatchService) {
+                                         Upload, UploadService, ImpBatchService, SchoolService) {
         $scope.paymentFn = {
             isPayment:true,
             paymentId:'',
@@ -91,7 +91,7 @@ angular.module('dleduWebApp')
             getPaymentList: function () {
                 var that = this;
                 var params = {
-                    orgId: 218,//AuthService.getUser().orgId,
+                    orgId: AuthService.getUser().orgId,//AuthService.getUser().orgId,
                     pageNumber: this.page.pageNumber,
                     pageSize: this.page.pageSize,
                     name:this.paymentName
@@ -175,23 +175,12 @@ angular.module('dleduWebApp')
 
             //下载模板
             downLoad: function(){
-                var host = this.getEnvHost();
-                window.location.href= host + '/v1/paymentsubject/newstudentcosttemplate';
-            },
-
-            getEnvHost: function(){
-                var hostname = window.location.hostname;
-                var host = 'http://gateway.aizhixintest.com/paycallback';
-                if(hostname.indexOf('school.aizhixindev.com') != -1){
-                    host = 'http://gateway.aizhixindev.com/zuul/paycallback';
-                }else if(hostname.indexOf('school.aizhixintest.com') != -1){
-                    host = 'http://gateway.aizhixintest.com/zuul/paycallback';
-                }else if(hostname.indexOf('school.dlztc.com') != -1){
-                    host = 'http://gateway.dlztc.com/zuul/zuul/paycallback';
-                }else if(hostname.indexOf('school.aizhixin.com') != -1){
-                    host = 'http://gateway.aizhixin.com/zuul/paycallback';
-                }
-                return host;
+                SchoolService.getApiUrl({type:"pay"}).$promise
+                    .then(function (data) {
+                        window.location.href= data.url + '/v1/paymentsubject/newstudentcosttemplate';
+                    })
+                    .catch(function (error) {
+                    })
             },
 
             //获取收费详情数据
@@ -440,7 +429,7 @@ angular.module('dleduWebApp')
             getProfessional:function(){
                 var _this = this;
                 var params = {
-                    orgId: 218,//AuthService.getUser().orgId,
+                    orgId: AuthService.getUser().orgId,//AuthService.getUser().orgId,
                 }
                 PaymentService.getProfessional(params).$promise
                     .then(function (data) {
@@ -475,7 +464,7 @@ angular.module('dleduWebApp')
                     paymentType  :this.exportParam.paymentType,
                     smallAmount  :this.exportParam.smallAmount,
                     userId   :AuthService.getUser().id,
-                    orgId: 218,
+                    orgId: AuthService.getUser().orgId,
                 };
                 if(this.uploadOrAddPayment ){
                     PaymentService.importPayment(params, this,this.getPaymentList);

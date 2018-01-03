@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash'),
-    SchoolService = require('../../services/schoolService');
+    SchoolService = require('../../services/schoolService'),
+    Config = require('../../config/environment');
 
 module.exports = {
     getLogoList: function (req, res) {
@@ -248,7 +249,19 @@ module.exports = {
             console.log(e);
             res.status(e.code).send(e.message);
         });
+    },
+
+    getApiUrl: function(req, res){
+        var url;
+        if(req.query.type == 'pay'){
+            url = Config.backend_api.api_gateway + "zuul/paycallback" ;
+        }
+        var data = {
+            url : url
+        };
+        res.json(data);
     }
+
 };
 
 

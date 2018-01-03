@@ -43,4 +43,5 @@ router.get('/getExcellentTeacherById', controller.getExcellentTeacherById);
 router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);
 
 router.get('/getSchoolOra', controller.getSchoolOra);
+router.get('/getApiUrl', controller.getApiUrl);
 module.exports = router;

@@ -317,7 +317,12 @@ angular.module('dleduWebApp')
 				}
 				if(!flag){
 					this.checkedBuilds.push(building);
+					this.getDorms();
 				}
+				this.currentBuildUnit = [];
+				this.currentBuildFloors = [];
+				this.checkedFloors = [];
+				this.checkedUnits = [];
 				if(this.checkedBuilds.length == 1){//只选择一栋楼时处理单元和楼层方便显示
 					var checkedBuild = this.checkedBuilds[0]
 					if(checkedBuild.floorType == 20){
@@ -342,6 +347,7 @@ angular.module('dleduWebApp')
 				}
 				if(!flag){
 					arr.push(value);
+					this.getDorms();
 				}
 				this.isFloorUnit(value, type);
 			},
@@ -387,12 +393,13 @@ angular.module('dleduWebApp')
 					var build = this.checkedBuilds[i];
 					if(building.id == build.id){
 						this.checkedBuilds.splice(i, 1);
+						this.getDorms();
 						break;
 					}
 				}
 				if(this.checkedBuilds.length == 1){//只选择一栋楼时处理单元和楼层方便显示
 					var checkedBuild = this.checkedBuilds[0]
-					if(checkedBuild.floorType == 10){
+					if(checkedBuild.floorType == 20){
 						this.currentBuildUnit = this.productArr(checkedBuild.unitNum);
 					}
 					this.currentBuildFloors = this.productArr(checkedBuild.floorNum);
@@ -409,6 +416,7 @@ angular.module('dleduWebApp')
 					var temp = arr[i];
 					if(value == temp){
 						arr.splice(i, 1);
+						this.getDorms();
 						break;
 					}
 				}
