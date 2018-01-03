@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('PaymentCtrl', function ($scope, AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService, Upload, UploadService, ImpBatchService) {
+    .controller('PaymentCtrl', function ($scope, AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService,
+                                         Upload, UploadService, ImpBatchService) {
         $scope.paymentFn = {
             isPayment:true,
             paymentId:'',
@@ -174,7 +175,23 @@ angular.module('dleduWebApp')
 
             //下载模板
             downLoad: function(){
-                window.location.href='http://172.16.40.45:8080/v1/paymentsubject/newstudentcosttemplate';
+                var host = this.getEnvHost();
+                window.location.href= host + '/v1/paymentsubject/newstudentcosttemplate';
+            },
+
+            getEnvHost: function(){
+                var hostname = window.location.hostname;
+                var host = 'http://gateway.aizhixintest.com/paycallback';
+                if(hostname.indexOf('school.aizhixindev.com') != -1){
+                    host = 'http://gateway.aizhixindev.com/zuul/paycallback';
+                }else if(hostname.indexOf('school.aizhixintest.com') != -1){
+                    host = 'http://gateway.aizhixintest.com/zuul/paycallback';
+                }else if(hostname.indexOf('school.dlztc.com') != -1){
+                    host = 'http://gateway.dlztc.com/zuul/zuul/paycallback';
+                }else if(hostname.indexOf('school.aizhixin.com') != -1){
+                    host = 'http://gateway.aizhixin.com/zuul/paycallback';
+                }
+                return host;
             },
 
             //获取收费详情数据

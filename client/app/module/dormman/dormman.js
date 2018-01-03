@@ -21,7 +21,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '宿舍楼信息'
+					label: '宿舍楼管理'
 				}
 			})
 			.state('dormbuildingedit', {
