@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按宿舍楼名查询', aria-controls='datatable_col_reorder' ng-model="dormBuildingMan.params.name", my-enter="dormBuildingMan.getEntTutorList()")
+                                    input.form-control(type='search', placeholder='按宿舍楼名查询', aria-controls='datatable_col_reorder' ng-model="dormBuildingMan.params.name", my-enter="dormBuildingMan.getDormBuildings()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="dormBuildingMan.getDormBuildings()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-6.col-xs-6.hidden-xs

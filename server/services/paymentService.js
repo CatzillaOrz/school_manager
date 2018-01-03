@@ -208,7 +208,7 @@ var paymentService = {
     },
     upload: function (options, callback) {
         var r = request.post({
-            uri: Config.backend_api.pay_host +  options.path,
+            uri: Config.backend_api.api_gateway + "paycallback" +  options.path,
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -222,7 +222,7 @@ var paymentService = {
     },
     uploadPayment: function (options, callback) {
         var r = request.put({
-            uri: Config.backend_api.pay_host +  options.path,
+            uri: Config.backend_api.api_gateway + "paycallback" +  options.path,
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -252,7 +252,6 @@ var paymentService = {
     },
     updatePayment: function (filePath,params,callback) {
         var that = this;
-        console.log('xxxxxxxxxxxxxxxxxxxxx...............'+params.id)
         this.uploadPayment({
             host: 'pay',
             path: '/v1/paymentsubject/update' +
