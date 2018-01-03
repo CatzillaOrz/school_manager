@@ -208,7 +208,7 @@ var paymentService = {
     },
     upload: function (options, callback) {
         var r = request.post({
-            uri: Config.backend_api.api_gateway + "paycallback" +  options.path,
+            uri: Config.backend_api.api_gateway + "zuul/paycallback" +  options.path,
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -222,7 +222,7 @@ var paymentService = {
     },
     uploadPayment: function (options, callback) {
         var r = request.put({
-            uri: Config.backend_api.api_gateway + "paycallback" +  options.path,
+            uri: Config.backend_api.api_gateway + "zuul/paycallback" +  options.path,
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -310,7 +310,7 @@ var paymentService = {
                 if(res.body == ''){
                     callback(null, JSON.parse('{"success":true}'));
                 }else{
-                    callback(null, JSON.parse(res.body));
+                    callback(null, res.body);
                 }
             } else {
                 callback(function(){

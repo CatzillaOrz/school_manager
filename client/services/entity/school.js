@@ -113,6 +113,10 @@ angular.module('dleduWebService')
                 var teacher = $resource('api/school/getExcellentTeacherById');
                 return teacher.get(params);
             },
+            getApiUrl:function (params) {
+                var teacher = $resource('api/school/getApiUrl');
+                return teacher.get(params);
+            },
         }
 
     });
