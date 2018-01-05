@@ -116,6 +116,11 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			queryDorm: function(){
+				this.selDistObj = [];
+				this.getDorms();
+			},
+
 			//删除
 			delDorm: function () {
 				var that = $scope.dormMan;
@@ -171,6 +176,10 @@ angular.module('dleduWebApp')
 
 			//批量关闭
 			batchClose: function(){
+				if(!this.selDistObj.length){
+					messageService.openMsg("请先选择宿舍!");
+					return;
+				}
 				var that = this;
 				var params = {};
 				params.roomIds = this.getIds(this.selDistObj, "roomId");
@@ -186,8 +195,13 @@ angular.module('dleduWebApp')
 				if(entity){//单选
 					selectedDorm = [entity];
 				}else{//多选
+					if(!this.selDistObj.length){
+						messageService.openMsg("请先选择宿舍!");
+						return;
+					}
 					selectedDorm = this.selDistObj;
 				}
+				this.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
 				var roomIds = this.getIds(selectedDorm, "roomId");
 				this.dormAssign.roomIds = roomIds;
 				ngDialog.open({
@@ -200,6 +214,7 @@ angular.module('dleduWebApp')
 			//编辑分配
 			openDistedDorm: function (entity) {
 				var that = this;
+				this.majorLists.splice(0, 1);
 				DormManService.getDormDistedInfo({roomId: entity.roomId}).$promise
 					.then(function (data) {
 						that.editDormAssign = data.data;
@@ -215,7 +230,7 @@ angular.module('dleduWebApp')
 				ngDialog.open({
 					template: 'editDialog',
 					width: 700,
-					scope: $scope
+					scope: $scope,
 				})
 			},
 
@@ -317,7 +332,7 @@ angular.module('dleduWebApp')
 				}
 				if(!flag){
 					this.checkedBuilds.push(building);
-					this.getDorms();
+					this.queryDorm();
 				}
 				this.currentBuildUnit = [];
 				this.currentBuildFloors = [];
@@ -347,7 +362,7 @@ angular.module('dleduWebApp')
 				}
 				if(!flag){
 					arr.push(value);
-					this.getDorms();
+					this.queryDorm();
 				}
 				this.isFloorUnit(value, type);
 			},
@@ -393,7 +408,7 @@ angular.module('dleduWebApp')
 					var build = this.checkedBuilds[i];
 					if(building.id == build.id){
 						this.checkedBuilds.splice(i, 1);
-						this.getDorms();
+						this.queryDorm();
 						break;
 					}
 				}
@@ -416,7 +431,7 @@ angular.module('dleduWebApp')
 					var temp = arr[i];
 					if(value == temp){
 						arr.splice(i, 1);
-						this.getDorms();
+						this.queryDorm();
 						break;
 					}
 				}
@@ -544,7 +559,6 @@ angular.module('dleduWebApp')
 				MajorService.getMajorList(params).$promise
 					.then(function (data) {
 						that.majorLists = data.data;
-						that.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
 					})
 					.catch(function (error) {
 

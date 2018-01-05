@@ -7,7 +7,7 @@ angular.module('dleduWebApp')
 		$scope.handleFn = {
 			title: '新建宿舍',
 			id: '',
-			//宿舍楼对象
+			isEdit: false,//宿舍楼对象
 			dorm: {
 				bedList: [
 				],
@@ -22,6 +22,9 @@ angular.module('dleduWebApp')
 			units: [], //单元
 			floors: [], //楼层
 			isEmpty: 0,
+			validateObj:{
+				isExistDormName: true, //校验宿舍名是否重复
+			},
 
 			bedTypes: [{bedType: 0, name: '请选择床位类型'},{bedType: 10, name: '上铺'},
 				{bedType: 20, name: '下铺'}],
@@ -97,8 +100,11 @@ angular.module('dleduWebApp')
 						return;
 					}
 				}
+				if(!this.validateObj.isExistDormName){
+					return;
+				}
 				this.dorm.floorNo == 0 ? this.dorm.floorNo = "" : this.dorm.floorNo;
-				this.dorm.unitNo == 0 ? this.dorm.unitNo = "" : that.this.unitNo ;
+				this.dorm.unitNo == 0 ? this.dorm.unitNo = "" : this.dorm.unitNo ;
 				var bedlists = [];
 				for(var i = 0; i < this.dorm.bedList.length; i++){
 					var bed = this.dorm.bedList[i];
@@ -204,6 +210,7 @@ angular.module('dleduWebApp')
 				}
 			},
 
+			//增加床位
 			addItem: function(){
 				this.dorm.bedList.push({
 					bedType: 0,//床铺类型 10上铺 20 下铺
@@ -211,8 +218,39 @@ angular.module('dleduWebApp')
 				});
 			},
 
+			//删除床位
 			deleteItem: function($index){
 				this.dorm.bedList.splice($index, 1);
+			},
+
+			/**
+			 * 是否存在该宿舍名
+			 * @param name
+			 */
+			isExistName: function(name){
+				var params = {no: name}, that = this;
+				if(name == ''){
+					return;
+				}
+				if(!this.dorm.floorId || !this.dorm.floorNo){
+					return;
+				}
+				if(this.building && this.building.floorType == 20){
+					if(!this.dorm.unitNo){
+						return;
+					}
+					params.unitNo = this.dorm.unitNo;
+				}
+				params.floorId = this.dorm.floorId;
+				params.floorNo = this.dorm.floorNo;
+
+				DormManService.validationDorm(params).$promise
+					.then(function (data) {
+						that.validateObj.isExistDormName = data.validation;
+					})
+					.catch(function (error) {
+
+					})
 			},
 
 			init: function () {
@@ -221,6 +259,7 @@ angular.module('dleduWebApp')
 				this.getBulids();
 				if(this.id){//存在id时是编辑否则新增
 					this.title = "编辑宿舍";
+					this.isEdit = true;
 				}else{
 					//新增时初始化床位信息
 					for(var i = 0 ; i < 6; i++){
@@ -244,6 +283,7 @@ angular.module('dleduWebApp')
 						$scope.handleFn.dorm.unitNo = 0;
 					}
 					$scope.handleFn.productFloorUnit();
+					$scope.handleFn.isExistName($scope.handleFn.dorm.no);
 				}
 			});
 		});
