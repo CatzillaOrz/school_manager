@@ -7,9 +7,13 @@
     position: relative;
     cursor: pointer;
 }
+
+.dorms-flow:hover{
+    color: #54BF9B;
+}
 .select-dorm{
     background: #54BF9B;
-    color: #fff;
+    color: #fff!important;
     .close-pic{
         color: #000;
         position: absolute;

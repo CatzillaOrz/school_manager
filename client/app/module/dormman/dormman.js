@@ -49,7 +49,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '宿舍信息'
+					label: '宿舍管理'
 				}
 			})
 			.state('dormedit', {
