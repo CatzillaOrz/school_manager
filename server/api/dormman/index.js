@@ -29,5 +29,6 @@ router.put('/closeDorms',auth.isSignedIn, controller.closeDorms);
 router.post('/assignDorms',auth.isSignedIn, controller.assignDorms);
 router.post('/updateDistedInfo',auth.isSignedIn, controller.updateDistedInfo);
 router.get('/getDormDistedInfo',auth.isSignedIn, controller.getDormDistedInfo);
+router.put('/openDorms',auth.isSignedIn, controller.openDorms);
 
 module.exports = router;

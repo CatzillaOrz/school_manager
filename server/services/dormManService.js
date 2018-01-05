@@ -318,6 +318,24 @@ var DormManService = {
             callback(e);
         });
     },
+
+    //批量开放宿舍
+    openDorms: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/roomAssgin/putOpen',
+            access_token: access_token,
+            entity: params.roomIds
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 

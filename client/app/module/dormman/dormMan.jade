@@ -66,8 +66,10 @@
                                         span 新建
                                     //button.btn.btn-primary()
                                         span 批量导入
-                                    button.btn.btn-primary(ng-click="dormMan.openDorm()")
+                                    button.btn.btn-primary(ng-click="dormMan.openDorms()")
                                         span 批量开放
+                                    button.btn.btn-primary(ng-click="dormMan.distedDorms()")
+                                        span 批量分配
                                     button.btn.btn-primary(ng-click="dormMan.batchClose()")
                                         span 批量关闭
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
@@ -101,7 +103,7 @@
                                     a.handle(ui-sref="dormedit({id: record.roomId})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="dormMan.deletePrompt(record)")
+                                    a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
                                     a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
@@ -110,7 +112,7 @@
                                     a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.openDistedDorm(record)")
                                         i.fa.fa-pencil-square-o
                                         span 编辑分配
-                                    a.handle(ng-if="!record.open" ng-click="dormMan.openDorm(record)")
+                                    a.handle(ng-if="!record.open" ng-click="dormMan.openDorms(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开放
                                     a.handle(ng-if="record.open" ui-sref="dormstuinfo({id: record.roomId})")
@@ -181,7 +183,7 @@
                             span.required *
                             | 分配给专业：
                         .col-sm-6
-                            ui-select(ng-model="dormMan.editDormAssign.profId" multiple theme="bootstrap" mod-Placeholder)
+                            ui-select(ng-model="dormMan.editDormAssign.profId" close-on-select="false" multiple theme="bootstrap" mod-Placeholder )
                                 ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
                                     //span(ng-bind="$select.selected.profName")
                                 ui-select-choices.ui-select-choices(repeat="item.id as item in (dormMan.majorLists | filter: $select.search) track by $index")

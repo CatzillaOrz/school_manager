@@ -175,6 +175,16 @@ module.exports = {
             })
     },
 
+    openDorms: function (req, res) {
+        DormManService.openDormsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
 };
 
 
