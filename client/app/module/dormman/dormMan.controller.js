@@ -230,7 +230,7 @@ angular.module('dleduWebApp')
 				ngDialog.open({
 					template: 'editDialog',
 					width: 700,
-					scope: $scope,
+					scope: $scope
 				})
 			},
 
@@ -575,4 +575,15 @@ angular.module('dleduWebApp')
 
 		};
 		$scope.dormMan.init();
-	});
+	})
+	.directive('modPlaceholder', function($window, $timeout){
+	return {
+		restrict: 'A',
+		scope: false,   // 默认值
+		link: function(scope, element, attrs) {
+			$timeout(function(){
+				$("input.ui-select-search").attr("placeholder", "点击选择专业");
+			},1000);
+		}
+	}
+});

@@ -181,7 +181,7 @@
                             span.required *
                             | 分配给专业：
                         .col-sm-6
-                            ui-select(ng-model="dormMan.editDormAssign.profId" multiple theme="bootstrap")
+                            ui-select(ng-model="dormMan.editDormAssign.profId" multiple theme="bootstrap" mod-Placeholder)
                                 ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
                                     //span(ng-bind="$select.selected.profName")
                                 ui-select-choices.ui-select-choices(repeat="item.id as item in (dormMan.majorLists | filter: $select.search) track by $index")
