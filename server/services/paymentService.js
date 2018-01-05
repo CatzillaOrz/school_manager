@@ -207,8 +207,9 @@ var paymentService = {
             });
     },
     upload: function (options, callback) {
+        console.log(encodeURI(Config.backend_api.api_gateway + "zuul/paycallback" +  options.path));
         var r = request.post({
-            uri: Config.backend_api.api_gateway + "zuul/paycallback" +  options.path,
+            uri: encodeURI(Config.backend_api.api_gateway + "paycallback" +  options.path),
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -221,8 +222,9 @@ var paymentService = {
         form.append(options.fileKey, fs.createReadStream(options.filePath));
     },
     uploadPayment: function (options, callback) {
+        console.log(encodeURI(Config.backend_api.api_gateway + "zuul/paycallback" +  options.path));
         var r = request.put({
-            uri: Config.backend_api.api_gateway + "zuul/paycallback" +  options.path,
+            uri: encodeURI(Config.backend_api.api_gateway + "zuul/paycallback" +  options.path),
         }, function (err, res, body) {
             if (err) {
                 console.log(err);
@@ -255,46 +257,11 @@ var paymentService = {
         this.uploadPayment({
             host: 'pay',
             path: '/v1/paymentsubject/update' +
-            '?paymentType=' +params.paymentType +
+            '?fileName=' +params.fileName +
             '&id=' +params.id +
-            '&smallAmount=' +params.smallAmount+
-            '&installmentRate=' +params.installmentRate+
-            '&lastDate=' +params.lastDate+
-            '&orgId=' +params.orgId+
-            '&userId=' +params.userId,
-            filePath: filePath,
-            fileKey: 'file'
-        }, function (err, res) {
-            that.deleteTempFile('./uploads/');
-            if (err) {
-                callback(err);
-                return;
-            }
-            if (res.statusCode === 200 || res.statusCode === 426) {
-                if(res.body == ''){
-                    callback(null, JSON.parse('{"success":true}'));
-                }else{
-                    callback(null, JSON.parse(res.body));
-                }
-            } else {
-                callback(function(){
-                    return {
-                        code: JSON.parse(res.body).code,
-                        message: JSON.parse(res.body).cause
-                    };
-                }());
-            }
-        })
-    },
-
-    importPayment: function (filePath,params,callback) {
-        var that = this;
-        this.upload({
-            host: 'pay',
-            path: '/v1/paymentsubject/add' +
-            '?paymentType=' +params.paymentType +
-            '&smallAmount=' +params.smallAmount+
-            '&installmentRate=' +params.installmentRate+
+            (params.paymentType ? '&paymentType=' +params.paymentType : "") +
+            (params.smallAmount ? '&smallAmount=' +params.smallAmount : "")+
+            (params.installmentRate ? '&installmentRate=' +params.installmentRate : "") +
             '&lastDate=' +params.lastDate+
             '&orgId=' +params.orgId+
             '&userId=' +params.userId,
@@ -313,6 +280,45 @@ var paymentService = {
                     callback(null, res.body);
                 }
             } else {
+                callback(function(){
+                    return {
+                        code: JSON.parse(res.body).code,
+                        message: JSON.parse(res.body).cause
+                    };
+                }());
+            }
+        })
+    },
+
+    importPayment: function (filePath,params,callback) {
+        var that = this;
+        this.upload({
+            host: 'pay',
+            path: '/v1/paymentsubject/add' +
+            '?fileName=' +params.fileName +
+            (params.paymentType ? '&paymentType=' +params.paymentType : "") +
+            (params.smallAmount ? '&smallAmount=' +params.smallAmount : "")+
+            (params.installmentRate ? '&installmentRate=' +params.installmentRate : "") +
+            '&lastDate=' +params.lastDate+
+            '&orgId=' +params.orgId+
+            '&userId=' +params.userId,
+            filePath: filePath,
+            fileKey: 'file'
+        }, function (err, res) {
+            that.deleteTempFile('./uploads/');
+            if (err) {
+                callback(err);
+                return;
+            }
+            console.log("**********" + res.statusCode);
+            if (res.statusCode === 200 || res.statusCode === 426) {
+                if(res.body == ''){
+                    callback(null, JSON.parse('{"success":true}'));
+                }else{
+                    callback(null, res.body);
+                }
+            } else {
+                console.log(res.body.cause);
                 callback(function(){
                     return {
                         code: JSON.parse(res.body).code,
