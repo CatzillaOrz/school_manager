@@ -189,8 +189,37 @@ angular.module('dleduWebApp')
 				});
 			},
 
-			//开启宿舍
-			openDorm: function (entity) {
+			//开放宿舍
+			openDorms: function (entity) {
+				var selectedDorm;
+				if(entity){//单选
+					selectedDorm = [entity];
+				}else{//多选
+					if(!this.selDistObj.length){
+						messageService.openMsg("请先选择宿舍!");
+						return;
+					}
+					selectedDorm = this.selDistObj;
+				}
+				var mess = this.selDistObj.length ? "批量开放宿舍成功!" : "开放宿舍成功!";
+				var params = {};
+				params.roomIds = this.getIds(this.selDistObj, "roomId");
+				messageService.getMsg("您确定要开放这些宿舍吗？", function(){
+					var that = $scope.dormMan;
+					DormManService.openDorms(params).$promise
+						.then(function (data) {
+							messageService.openMsg(mess);
+							that.selDistObj = [];
+							that.getDorms();
+						})
+						.catch(function (error) {
+							messageService.openMsg(CommonService.exceptionPrompt(error,"开放宿舍异常！"));
+						})
+				});
+			},
+
+			//批量分配
+			distedDorms: function (entity) {
 				var selectedDorm;
 				if(entity){//单选
 					selectedDorm = [entity];
@@ -279,7 +308,7 @@ angular.module('dleduWebApp')
 			distDorm: function(){
 				var that = this;
 				var majors = this.majorLists, major, profId = this.dormAssign.profId;
-				var mess = this.dormAssign.roomIds.length >1 ? "批量开放宿舍成功!" : "开放宿舍成功!";
+				var mess = this.dormAssign.roomIds.length >1 ? "批量分配宿舍成功!" : "分配宿舍成功!";
 				angular.forEach(majors, function(item){
 					if(item.id == profId){
 						major = item;
@@ -299,11 +328,11 @@ angular.module('dleduWebApp')
 							that.selDistObj = [];
 							that.getDorms();
 						}else{
-							messageService.openMsg("开放宿舍失败！");
+							messageService.openMsg("分配宿舍失败！");
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg(CommonService.exceptionPrompt(error,"关闭宿舍异常！"));
+						messageService.openMsg(CommonService.exceptionPrompt(error,"分配宿舍异常！"));
 					})
 			},
 
@@ -408,10 +437,14 @@ angular.module('dleduWebApp')
 					var build = this.checkedBuilds[i];
 					if(building.id == build.id){
 						this.checkedBuilds.splice(i, 1);
-						this.queryDorm();
 						break;
 					}
 				}
+				if(!this.checkedBuilds.length){
+					this.checkedFloors = [];
+					this.checkedUnits = [];
+				}
+				this.queryDorm();
 				if(this.checkedBuilds.length == 1){//只选择一栋楼时处理单元和楼层方便显示
 					var checkedBuild = this.checkedBuilds[0]
 					if(checkedBuild.floorType == 20){

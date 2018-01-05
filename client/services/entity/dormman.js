@@ -80,6 +80,11 @@ angular.module('dleduWebService')
                 var dormman = $resource('api/dormman/updateDistedInfo');
                 return dormman.save(params);
             },
+            openDorms: function (params) {
+                var dormman = $resource('api/dormman/openDorms','',{
+                    update: {method:'PUT'}});
+                return dormman.update(params);
+            },
         }
 
     });

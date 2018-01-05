@@ -228,6 +228,10 @@ angular.module('dleduWebApp')
 			 * @param name
 			 */
 			isExistName: function(name){
+				//编辑时不校验
+				if(this.isEdit){
+					return;
+				}
 				var params = {no: name}, that = this;
 				if(name == ''){
 					return;
