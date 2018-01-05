@@ -456,9 +456,11 @@ angular.module('dleduWebApp')
                     messageService.openDialog("请选择excel文件！");
                     return;
                 }
+                var fileName = this.exportParam.file.name, indexLast = fileName.lastIndexOf(".");
+                var name = fileName.substring(0, indexLast);
                 var params={
                     file:this.exportParam.file,
-                    name:this.exportParam.file.name,
+                    fileName:name,
                     installmentRate:this.exportParam.installmentRate,
                     lastDate :this.exportParam.lastDate,
                     paymentType  :this.exportParam.paymentType,
@@ -466,6 +468,7 @@ angular.module('dleduWebApp')
                     userId   :AuthService.getUser().id,
                     orgId: AuthService.getUser().orgId,
                 };
+                CommonService.delEmptyProperty(params);
                 if(this.uploadOrAddPayment ){
                     PaymentService.importPayment(params, this,this.getPaymentList);
                 }else{
