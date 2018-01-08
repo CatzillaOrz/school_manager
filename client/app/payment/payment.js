@@ -16,5 +16,21 @@ angular.module('dleduWebApp')
                 ncyBreadcrumb: {
                     label: '在线缴费'
                 }
-            })
+            }).state('paymentDetail', {
+            parent: 'payment',
+            url   : '/detail',
+            access: {requiredLogin: false},
+            params: {
+                payment: null
+            },
+            views : {
+                'content@base': {
+                    controller : 'PaymentDetailCtrl',
+                    templateUrl: 'app/payment/paymentDetail.html'
+                }
+            },
+            ncyBreadcrumb: {
+                label: '缴费单详情'
+            }
+        })
     });
