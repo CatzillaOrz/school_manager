@@ -100,7 +100,7 @@
                                 td {{record.open ? "开放" : "关闭"}}
                                 td {{record.assgin ? "已分配" : "未分配"}}
                                 td
-                                    a.handle(ui-sref="dormedit({id: record.roomId})")
+                                    a.handle(ui-sref="dormedit({id: record.roomId, assign: record.assgin})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.deletePrompt(record)")
