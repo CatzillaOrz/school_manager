@@ -118,6 +118,7 @@ angular.module('dleduWebApp')
 
 			queryDorm: function(){
 				this.selDistObj = [];
+				this.page.pageNumber = 1;
 				this.getDorms();
 			},
 
@@ -315,14 +316,15 @@ angular.module('dleduWebApp')
 				DormManService.updateDistedInfo(this.editDormAssign).$promise
 					.then(function (data) {
 						if(data.result){
-							messageService.openMsg("编辑宿舍成功！");
+							messageService.openMsg("编辑分配专业成功！");
 							that.getDorms();
+							that.getDistedMajors();
 						}else{
-							messageService.openMsg("编辑宿舍失败！");
+							messageService.openMsg("编辑分配专业失败！");
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg(CommonService.exceptionPrompt(error,"编辑宿舍异常！"));
+						messageService.openMsg(CommonService.exceptionPrompt(error,"编辑分配专业异常！"));
 					})
 			},
 
@@ -350,6 +352,7 @@ angular.module('dleduWebApp')
 							messageService.openMsg(mess);
 							that.selDistObj = [];
 							that.getDorms();
+							that.getDistedMajors();
 						}else{
 							messageService.openMsg("分配宿舍失败！");
 						}

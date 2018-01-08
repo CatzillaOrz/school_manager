@@ -17,6 +17,7 @@ angular.module('dleduWebApp')
 				roomDesc: "",//宿舍描述
 				unitNo: 0//单元号
 			},
+			cloneDorm: {},
 
 			builds: [], //宿舍楼
 			units: [], //单元
@@ -38,6 +39,7 @@ angular.module('dleduWebApp')
 						that.dorm = data.data;
 						that.dorm.floorNo != "" ? that.dorm.floorNo = (parseInt(that.dorm.floorNo)) : that.dorm.unitNo = 0;
 						that.dorm.unitNo != "" ? that.dorm.unitNo = (parseInt(that.dorm.unitNo)) : that.dorm.unitNo = 0;
+						that.cloneDorm = angular.copy(that.dorm);
 					})
 					.catch(function (error) {
 
@@ -230,7 +232,10 @@ angular.module('dleduWebApp')
 			isExistName: function(name){
 				//编辑时不校验
 				if(this.isEdit){
-					return;
+					if(this.cloneDorm.no == name){
+						this.validateObj.isExistDormName = true;
+						return;
+					}
 				}
 				var params = {no: name}, that = this;
 				if(name == ''){
@@ -263,6 +268,7 @@ angular.module('dleduWebApp')
 				this.getBulids();
 				if(this.id){//存在id时是编辑否则新增
 					this.title = "编辑宿舍";
+					this.assign = $state.params.assign =="true" ? true : false;
 					this.isEdit = true;
 				}else{
 					//新增时初始化床位信息

@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
 			})
 			.state('dormedit', {
 				parent: 'dormman',
-				url   : '/dormEdit/:id',
+				url   : '/dormEdit/:id/:assign',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
