@@ -14,7 +14,7 @@ angular.module('dleduWebApp')
 			checkedFloors: [],//选择的宿舍楼层数组
 			checkedUnits: [],//选择的宿舍单元数组
 			distedMajor: [], //已经分配的专业
-
+			majorLists: [], //专业
 			checkAllRecord: false, //是否全选
 			selDistObj: [], //选择的对象
 
@@ -203,7 +203,7 @@ angular.module('dleduWebApp')
 				}
 				var mess = this.selDistObj.length ? "批量开放宿舍成功!" : "开放宿舍成功!";
 				var params = {};
-				params.roomIds = this.getIds(this.selDistObj, "roomId");
+				params.roomIds = this.getIds(selectedDorm, "roomId");
 				messageService.getMsg("您确定要开放这些宿舍吗？", function(){
 					var that = $scope.dormMan;
 					DormManService.openDorms(params).$promise
@@ -242,25 +242,46 @@ angular.module('dleduWebApp')
 
 			//编辑分配
 			openDistedDorm: function (entity) {
-				var that = this;
-				this.majorLists.splice(0, 1);
-				DormManService.getDormDistedInfo({roomId: entity.roomId}).$promise
-					.then(function (data) {
-						that.editDormAssign = data.data;
-						var ids = [];
-						for(var i = 0; i < data.data.radl.length; i++){
-							ids.push(data.data.radl[i].profId);
-						}
-						that.editDormAssign.profId = ids;
-					})
-					.catch(function (error) {
-
-					})
 				ngDialog.open({
 					template: 'editDialog',
 					width: 700,
 					scope: $scope
 				})
+				var that = this;
+				if(this.majorLists.length){
+					var marjorFirst = this.majorLists[0];
+					if(marjorFirst.id == 0){
+						this.majorLists.splice(0, 1);
+					}
+				}
+				DormManService.getDormDistedInfo({roomId: entity.roomId}).$promise
+					.then(function (data) {
+						if(data.result){
+							that.editDormAssign = data.data;
+							data.data.roomId ? that.editDormAssign = data.data : that.editDormAssign.roomId = entity.roomId;
+							var ids = [];
+							for(var i = 0; i < data.data.radl.length; i++){
+								ids.push(data.data.radl[i].profId);
+							}
+							that.editDormAssign.profId = ids;
+						}else{
+							messageService.openMsg("获取已分配信息异常!");
+						}
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+
+			//通过选择的专业id，获取专业列表里面的对应专业
+			getMajorById: function(id){
+				for(var i = 0, len = this.majorLists.length; i < len; i++ ){
+					var major = this.majorLists[i];
+					if(id == major.id){
+						return major;
+					}
+				}
 			},
 
 			//通过选择的专业id，获取选择的对象
@@ -289,6 +310,8 @@ angular.module('dleduWebApp')
 					selArr.push(obj);
 				}
 				this.editDormAssign.radl = selArr;
+				if(!this.editDormAssign.profId.length || !this.editDormAssign.sexType)
+					return;
 				DormManService.updateDistedInfo(this.editDormAssign).$promise
 					.then(function (data) {
 						if(data.result){
@@ -608,6 +631,17 @@ angular.module('dleduWebApp')
 
 		};
 		$scope.dormMan.init();
+		$timeout(function () {
+			$scope.$watch('dormMan.editDormAssign.profId', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					if($scope.dormMan.editDormAssign.profId.length != 0){
+						$timeout(function(){
+							$("input.ui-select-search").attr("placeholder", "点击选择专业");
+						},1000);
+					}
+				}
+			});
+		});
 	})
 	.directive('modPlaceholder', function($window, $timeout){
 	return {

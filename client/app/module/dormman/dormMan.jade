@@ -182,23 +182,28 @@
                         label.col-sm-3.control-label
                             span.required *
                             | 分配给专业：
-                        .col-sm-6
-                            ui-select(ng-model="dormMan.editDormAssign.profId" close-on-select="false" multiple theme="bootstrap" mod-Placeholder )
-                                ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
-                                    //span(ng-bind="$select.selected.profName")
-                                ui-select-choices.ui-select-choices(repeat="item.id as item in (dormMan.majorLists | filter: $select.search) track by $index")
-                                    span(ng-bind="item.name" title='{{item.name}}')
+                        .col-sm-9
+                            .col-sm-8
+                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" class="form-control" mod-Placeholder)
+                                    ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
+                                    ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
+                                        span(ng-bind="item.name" title='{{item.name}}')
+                            .col-sm-4
+                                span.text-danger(ng-show="!dormMan.editDormAssign.profId.length") 请选择专业
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 分配给性别：
-                        .col-sm-6
-                            label.radio-inline
-                                input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="10" )
-                                | 男
-                            label.radio-inline
-                                input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="20" )
-                                | 女
+                        .col-sm-9
+                            .col-sm-8
+                                label.radio-inline
+                                    input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="10" )
+                                    | 男
+                                label.radio-inline
+                                    input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="20" )
+                                    | 女
+                            .col-sm-4
+                                span.text-danger(ng-show="!dormMan.editDormAssign.sexType") 请选择性别
                     .form-group
                         .col-sm-6
                             button.btn.btn-primary(ng-click="dormMan.updateDistedDorm()") 保存

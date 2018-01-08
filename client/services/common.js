@@ -147,8 +147,12 @@ angular.module('dleduWebService')
                 if (re.test(errorMessage)) {
                     return defualt
                 } else {
+                    if(error.data && error.data == ''){
+                        return defualt
+                    }else{
+                        return defualt
+                    }
                     return errorMessage;
-
                 }
             },
 

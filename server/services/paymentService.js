@@ -69,6 +69,7 @@ var paymentService = {
                 callback(ErrorCode.errorHandle(res));
             }
         }).catch(function (e) {
+            console.log(e);
             callback(e);
         });
     },
@@ -310,7 +311,6 @@ var paymentService = {
                 callback(err);
                 return;
             }
-            console.log("**********" + res.statusCode);
             if (res.statusCode === 200 || res.statusCode === 426) {
                 if(res.body == ''){
                     callback(null, JSON.parse('{"success":true}'));
