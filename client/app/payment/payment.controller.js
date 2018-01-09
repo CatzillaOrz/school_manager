@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('PaymentCtrl', function ($scope, AuthService,ngDialog,$state, PaymentService,CollegeService, messageService,CommonService,
+    .controller('PaymentCtrl', function ($scope, AuthService,ngDialog,$state,$rootScope, PaymentService,CollegeService, messageService,CommonService,
                                          Upload, UploadService, ImpBatchService, SchoolService) {
         $scope.paymentFn = {
             exportParam:{
@@ -158,7 +158,7 @@ angular.module('dleduWebApp')
                     messageService.openDialog("请选择截止日期！");
                     return;
                 }
-                if(this.exportParam.smallAmount == ''){
+                if(this.exportParam.smallAmount == ''&&this.exportParam.paymentType==20){
                     messageService.openDialog("请输入正确的最低支付额度！");
                     return;
                 }
@@ -187,4 +187,9 @@ angular.module('dleduWebApp')
             }
         };
         $scope.paymentFn.init();
+        $rootScope.$on("timeInterval",function(event,data) {
+            if (data.id == 'startDate'){
+                $('#startDate').datepicker('setStartDate', data.time);
+            }
+        });
     });

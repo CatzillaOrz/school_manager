@@ -34,7 +34,7 @@
                     .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
                         span.payment-style 最低支付限额设置:
                         i.fa.fa-jpy.style-icon-margin
-                        input.payment-amount(style='text' ng-model="paymentFn.personCostData.smallAmount" ng-keyup="paymentFn.inputKeyUpFun()")
+                        input.payment-amount(style='text' ng-model="paymentFn.personCostData.smallAmount" maxlength="6" ng-keyup="paymentFn.inputKeyUpFun()")
                         span.style-icon-margin 元
                     .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
                         span.payment-style 额度限制频次:
@@ -54,7 +54,7 @@
                 .edit-payment-content(ng-show='paymentFn.showPaymentTime&&!paymentFn.showPaymentStyle')
                     .payment-style-content
                         span 截止日期:
-                        .input-append.date.datepicker.datepicker-basic.no-padding.deadline.edit-person-time(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                        .input-append.date.datepicker.datepicker-basic.no-padding.deadline.edit-person-time(data-date='', data-date-format='yyyy-mm-dd' b-datepicker id="startDate")
                             input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择截止日期' type='text' ng-model="paymentFn.personCostData.lastDate" validator="required")
                             span.add-on
                                 i.icon-calendar.glyphicon.glyphicon-calendar
@@ -131,7 +131,7 @@
                                     .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.getPersonCostList()")
-                                                span 搜索
+                                                span 查询
                                     .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.exportPersonExcel()")

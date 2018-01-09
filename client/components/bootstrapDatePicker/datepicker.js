@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/3/29.
  */
 angular.module('dleduWebAppComponents')
-  .directive('bDatepicker', function () {
+  .directive('bDatepicker', function ($rootScope) {
     return {
       require: '?ngModel',
       restrict: 'A',
@@ -12,6 +12,7 @@ angular.module('dleduWebAppComponents')
           $(element).datepicker({
             weekStart: 1,
             autoclose: true,
+            minDate:+1,
             todayHighlight: true,
             zIndexOffset: 500000,
             language: 'zh-CN',
@@ -22,6 +23,9 @@ angular.module('dleduWebAppComponents')
             controller.$setViewValue($(element).find('input').val());
           })
         })
+            .on('click',function(){
+              $('#'+$(element).attr('id')).datepicker('setStartDate', new Date());
+            })
       }
     }
   });

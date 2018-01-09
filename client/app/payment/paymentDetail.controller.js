@@ -258,7 +258,7 @@ angular.module('dleduWebApp')
             //修改支付方式
             editPersonPayment:function(){
                 var _this = this;
-                if(this.personCostData.smallAmount == ''){
+                if(this.personCostData.smallAmount == ''&&this.personCostData.paymentType==20){
                     messageService.openDialog("请输入正确的最低支付额度！");
                     return;
                 }
