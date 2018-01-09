@@ -61,7 +61,7 @@ function request(options) {
         });
         options.access_token = undefined;
     }
-    console.log("[rest client] request headers:" + JSON.stringify(options.headers));
+   // console.log("[rest client] request headers:" + JSON.stringify(options.headers));
     return restClient(_.assign({
         method: 'GET'
     }, options)).then(function (res) {

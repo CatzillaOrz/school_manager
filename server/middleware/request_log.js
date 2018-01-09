@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
     }
 
     var t = new Date();
-    logger.access(util.format('\n\nStarted', t.toISOString(), req.method, req.url, req.ip));
+   logger.access(util.format('\n\nStarted', t.toISOString(), req.method, req.url, req.ip));
 
     res.on('finish', function () {
         var duration = '(' + ((new Date()) - t) + 'ms)';
