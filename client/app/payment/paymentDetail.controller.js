@@ -188,17 +188,8 @@ angular.module('dleduWebApp')
                             已结清金额总计:'￥'+that.personCal.completeHasPay,
                             实际交费金额总计:'￥'+that.personCal.owedHasPay+that.personCal.completeHasPay,
                         }];
-                        var opts = {
-                            headers:true,
-                            column: {style:{Font:{Bold:"1"}}},
-                            rows: {1:{style:{Font:{Color:"#FF0077"}}}},
-                            cells: {1:{1:{
-                                style: {Font:{Color:"#00FFFF"}}
-                            }}}
-                        };
                         var fileName = that.paymentParams.name+'-按人员';
-                        alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",?) FROM ?',[opts,personList,personCal])
-                        return;
+                        return alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",{headers:true}) FROM ?',[personList]);
                     })
                     .catch(function (error) {
                     })
