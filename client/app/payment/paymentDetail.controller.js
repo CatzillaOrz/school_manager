@@ -176,7 +176,7 @@ angular.module('dleduWebApp')
                             }
 
                         })
-                        var personCal = {
+                        var personCal =[{
                             费用名称:that.personCal.name,
                             人数总计:that.personCal.totalPersons,
                             未交费人数:that.personCal.noPayPersons,
@@ -187,9 +187,18 @@ angular.module('dleduWebApp')
                             欠费已缴金额总计:'￥'+that.personCal.owedHasPay,
                             已结清金额总计:'￥'+that.personCal.completeHasPay,
                             实际交费金额总计:'￥'+that.personCal.owedHasPay+that.personCal.completeHasPay,
+                        }];
+                        var opts = {
+                            headers:true,
+                            column: {style:{Font:{Bold:"1"}}},
+                            rows: {1:{style:{Font:{Color:"#FF0077"}}}},
+                            cells: {1:{1:{
+                                style: {Font:{Color:"#00FFFF"}}
+                            }}}
                         };
-                        var fileName = that.paymentParams.name+'-按明细';
-                        return alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",{headers:true}) FROM ?',[personList])
+                        var fileName = that.paymentParams.name+'-按人员';
+                        alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",?) FROM ?',[opts,personList,personCal])
+                        return;
                     })
                     .catch(function (error) {
                     })
@@ -218,7 +227,7 @@ angular.module('dleduWebApp')
                             }
 
                         })
-                        var fileName = that.paymentParams.name+'-按人员';
+                        var fileName = that.paymentParams.name+'-按明细';
                         return alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",{headers:true}) FROM ?',[personList])
                     })
                     .catch(function (error) {
@@ -228,6 +237,10 @@ angular.module('dleduWebApp')
             //修改截止日期
             editPersonTime:function(){
                 var that = this;
+                if(this.personCostData.lastDate == ''){
+                    messageService.openDialog("请选择截止日期！");
+                    return;
+                }
                 var params = {
                     id:that.personCostData.id,
                     lastDate:that.personCostData.lastDate,
@@ -235,7 +248,7 @@ angular.module('dleduWebApp')
                 }
                 PaymentService.updatelastdate(params).$promise
                     .then(function (data) {
-                        this.showPaymentTime =false;
+                        that.showPaymentTime =false;
                         that.getPersonCost(that.personCostData);
                     })
                     .catch(function (error) {
@@ -245,6 +258,10 @@ angular.module('dleduWebApp')
             //修改支付方式
             editPersonPayment:function(){
                 var _this = this;
+                if(this.personCostData.smallAmount == ''){
+                    messageService.openDialog("请输入正确的最低支付额度！");
+                    return;
+                }
                 var params={
                     id:this.personCostData.id,
                     paymentType:this.personCostData.paymentType,
@@ -316,6 +333,10 @@ angular.module('dleduWebApp')
             //返回按钮
             goBackHomePage:function(){
                 $state.go('payment');
+            },
+
+            inputKeyUpFun:function(){
+                this.personCostData.smallAmount = this.personCostData.smallAmount.replace(/\D/g,'')
             },
             init: function () {
                 if ($stateParams.payment) {

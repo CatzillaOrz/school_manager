@@ -80,7 +80,7 @@
 }
 .charges-details{
   display: flex;
-  padding-left: 200px;
+  padding: 0 15%;
   .right{
     text-align:right;
   }
@@ -90,16 +90,17 @@
   .charges-details-content{
     display: flex;
     flex-direction: column;
+    width: 25%;
     span{
       display: block;
-      width: 230px;
+      width: 100%;
       margin:5px;
       height: 25px;
     }
   }
 }
 .total-payment{
-  padding-left: 800px;
+  padding-left: 60%;
   margin: 0 0 10px 0;
 }
 .search-time{

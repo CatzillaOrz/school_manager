@@ -144,12 +144,22 @@ angular.module('dleduWebApp')
                 };
                 ImpBatchService.openImpBatch(params);
             },
-
+            inputKeyUpFun:function(){
+                this.exportParam.smallAmount = this.exportParam.smallAmount.replace(/\D/g,'')
+            },
             //导入或重新导入缴费单
             importPayment:function(){
                 var that = this;
                 if(this.exportParam.file == null){
                     messageService.openDialog("请选择excel文件！");
+                    return;
+                }
+                if(this.exportParam.lastDate == ''){
+                    messageService.openDialog("请选择截止日期！");
+                    return;
+                }
+                if(this.exportParam.smallAmount == ''){
+                    messageService.openDialog("请输入正确的最低支付额度！");
                     return;
                 }
                 var fileName = this.exportParam.file.name, indexLast = fileName.lastIndexOf(".");

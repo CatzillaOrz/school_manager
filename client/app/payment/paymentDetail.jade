@@ -34,7 +34,7 @@
                     .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
                         span.payment-style 最低支付限额设置:
                         i.fa.fa-jpy.style-icon-margin
-                        input.payment-amount(style='text' ng-model="paymentFn.personCostData.smallAmount")
+                        input.payment-amount(style='text' ng-model="paymentFn.personCostData.smallAmount" ng-keyup="paymentFn.inputKeyUpFun()")
                         span.style-icon-margin 元
                     .payment-style-content(ng-show='paymentFn.personCostData.paymentType==20')
                         span.payment-style 额度限制频次:
@@ -119,20 +119,20 @@
                         .tab-content
                             .no-padding
                                 .dataTables_wrapper.form-inline.no-footer
-                                    .col-xs-12.col-sm-3
+                                    .col-xs-12.col-sm-4
                                         label 姓名/身份证号：
                                             input.form-control(type='search', aria-controls='datatable_col_reorder' ng-model="paymentFn.searchPaymentName")
-                                    .col-xs-12.col-sm-2
+                                    .col-xs-12.col-sm-3
                                         label 缴费状态：
                                             select.select2.form-control(ng-model="paymentFn.paymentStatus"  ng-options="payment.name for payment in paymentFn.paymentStatusList" )
-                                    .col-xs-12.col-sm-2
+                                    .col-xs-12.col-sm-3
                                         label 专业：
                                             select.select2.form-control(ng-model="paymentFn.major"  ng-options="major.name for major in paymentFn.majorList" )
-                                    .col-sm-3.col-xs-6.hidden-xs
+                                    .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.getPersonCostList()")
                                                 span 搜索
-                                    .col-sm-2.col-xs-6.hidden-xs
+                                    .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.exportPersonExcel()")
                                                 span 导出数据
@@ -200,7 +200,7 @@
                                     .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.getOrderCostList()")
-                                                span 搜索
+                                                span 查询
                                     .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.exportOrderExcel()")

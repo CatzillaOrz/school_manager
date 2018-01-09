@@ -94,15 +94,15 @@ script(type='text/ng-template',id='importDialog')
                             .payment-style-content
                                 span.payment-style 缴费方式:
                                 .payment-style-icon
-                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType =='10'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.checkPaymentStyle(10)")
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType =='10'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.exportParam.paymentType= 10")
                                     span 全款缴费
                                 .payment-style-icon
-                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType=='20'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.checkPaymentStyle(20)")
+                                    i.fa.style-icon-margin(ng-class="paymentFn.exportParam.paymentType=='20'?'fa-check-circle':'fa-circle-o'" ng-click="paymentFn.exportParam.paymentType= 20")
                                     span 可以分期
                             .payment-style-content(ng-show="paymentFn.exportParam.paymentType=='20'")
                                 span.payment-style 最低支付限额设置:
                                 i.fa.fa-jpy.style-icon-margin
-                                input.payment-amount(style='text' ng-model="paymentFn.exportParam.smallAmount")
+                                input.payment-amount(style='text' ng-model="paymentFn.exportParam.smallAmount" ng-keyup="paymentFn.inputKeyUpFun()")
                                 span.style-icon-margin 元
                             .payment-style-content(ng-show="paymentFn.exportParam.paymentType=='20'")
                                 span.payment-style 额度限制频次:
