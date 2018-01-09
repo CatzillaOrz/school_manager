@@ -5,6 +5,7 @@ angular.module('dleduWebApp')
         $scope.logoFn = {
             imgFile: null,
             isSetLogo: false,
+            logoUrl:"",
             currentObjIndex: {},
             obj: {src: "", selection: [], thumbnail: true},
             jcropType:"block",
@@ -43,16 +44,17 @@ angular.module('dleduWebApp')
                     _cropParamsStr.push(key + '=' + actionParams[key]);
                 }
                 if (_this.imgFile) {
-                    ImageService.convertFileToImage(_this.imgFile, function (image) {
-                        var cutImage=null;
-                        if(_this.currentObjIndex==0|| _this.currentObjIndex==0){
-                            cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
-                        }else {
-                            cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
-                        }
-                        UploadService.blobUploadToQiNiu(cutImage)
+                    // ImageService.convertFileToImage(_this.imgFile, function (image) {
+                    //     var cutImage=null;
+                    //     if(_this.currentObjIndex==0|| _this.currentObjIndex==0){
+                    //         cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
+                    //     }else {
+                    //         cutImage = ImageService.getCutImage(image, actionParams, actionParams.width, actionParams.height);
+                    //     }
+                        UploadService.fileUploadToQiNiu(_this.imgFile)
                             .then(function (resp) {
                                 //resp.data.url 80*400  150*150
+                                _this.logoUrl=resp.data.url;
                                 var params;
                                 if(_this.logoList[_this.currentObjIndex]){
                                     //更新
@@ -76,7 +78,7 @@ angular.module('dleduWebApp')
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                 //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                             })
-                    });
+                    // });
                     //
 
                 } else {
@@ -120,6 +122,7 @@ angular.module('dleduWebApp')
             },
             setToggle: function (entity) {
                 var _this=this;
+                _this.logoUrl="";
                 _this.obj.src=null;
                 _this.imgFile=null;
                 if(entity==0){

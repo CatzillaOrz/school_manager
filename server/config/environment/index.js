@@ -36,7 +36,7 @@ var all = {
         em_host: process.env.EM_API ||  'http://emdev.aizhixin.com/em_api2',
         pt_host: process.env.PT_API ||  'http://ptdev.aizhixin.com/pt_api',
         hy_host: process.env.HY_API ||  'http://hy.aizhixindev.com/ew_api',
-        io_host: process.env.IO_API ||  'http://iodev.aizhixin.com',
+        io_host: process.env.IO_API ||  'http://io.aizhixintest.com/filestore',
         open_host: process.env.BACKEND_OPEN_API || 'http://127.0.0.1:8080/dledu',
         api_gateway:process.env.API_GATEWAY || 'http://172.16.23.120:3333',
         pay_host:process.env.PAY_API || 'http://dddev.aizhixin.com/diandian_api',

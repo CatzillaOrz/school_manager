@@ -28334,8 +28334,20 @@ html.hidden-menu-mobile-lock {
 .margin-bottom-10 {
   margin-bottom: 10px !important; }
 
+.margin-left-0 {
+  margin-right: 0px !important; }
+
+.margin-left-5 {
+  margin-right: 5px !important; }
+
+.margin-left-10 {
+  margin-right: 10px !important; }
+
 .margin-right-5 {
   margin-right: 5px !important; }
+
+.margin-right-10 {
+  margin-right: 10px !important; }
 
 .margin-top-0 {
   margin-top: 0 !important; }
@@ -29909,6 +29921,12 @@ body.menu-on-top.fixed-header.fixed-navigation.fixed-ribbon #ribbon {
   margin-left: 2px;
   border-radius: 3px;
   border: 1px solid #797979 !important; }
+
+.font-weight-800 {
+  font-weight: 800; }
+
+.font-weight-600 {
+  font-weight: 600; }
 
 .smart-style-1 a {
   transition: color 0.1s linear 0s, background-color 0.1s linear 0s !important; }
