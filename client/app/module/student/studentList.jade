@@ -46,6 +46,9 @@
                                         button.btn.btn-primary(ui-sref="studentCreat")
                                             span 新建
                                         .speace-10
+                                        button.btn.btn-primary(type='button' ui-sref="newstudent" ng-if="studentListFn.isUseAuth('newstu')")
+                                            span 新生导入
+                                        .speace-10
                                         button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()" ng-if="studentListFn.isUseAuth('imp')")
                                             span 批量导入
                                         .speace-10

@@ -1,0 +1,134 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 新生信息
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .col-md-12.no-padding.margin-bottom-10
+                            form.form-inline
+                                .form-group.col-md-4.no-padding
+                                    label.control-label 院系：
+                                    select.select2.form-control(ng-model="newStudentListFn.params.collegeId" ui-select2="newStudentListFn.selectCollege2Options()", ng-change="newStudentListFn.getStudentList()" )
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in newStudentListFn.collegeDropList" value="{{college.id}}" ng-selected="newStudentListFn.params.collegeId==college.id") {{college.name}}
+                                .form-group.col-md-4
+                                    label.control-label 专业：
+                                    select.select2.form-control(ng-model="newStudentListFn.params.professionalId" ui-select2="newStudentListFn.select2MajorOptions()", ng-change="newStudentListFn.getStudentList()"  )
+                                        option(value="-1" ng-selected="true") 全部
+                                        option(ng-repeat="major in newStudentListFn.majorDropList" value="{{major.id}}" ng-selected="newStudentListFn.params.professionalId==major.id") {{major.name}}
+                                .form-group.col-md-4
+                                    label.control-label 学生：
+                                        input.form-control(type='search', placeholder='输入名称或身份证号', ng-model="newStudentListFn.params.name", my-enter="newStudentListFn.getStudentList()")
+
+                                .form-group.col-md-12.margin-top-10
+                                    .ColVis
+                                        button.btn.btn-primary(ng-click="newStudentListFn.getStudentList()")
+                                            span 查询
+                                        .speace-10
+                                        button.btn.btn-primary(ng-click="newStudentListFn.openImpBatch()")
+                                            span 导入新生
+                                        .speace-10
+                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
+
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th 序号
+                                th 身份证号
+                                th 姓名
+                                th 性别
+                                th 院系
+                                th 专业
+                                th 生源地
+                                th 学生类别
+                                th 层级
+                        tbody
+                            tr.odd(role='row' ng-repeat="student in newStudentListFn.studentList")
+                                td {{$index+1 + ((newStudentListFn.page.pageNumber==0?newStudentListFn.page.pageNumber+1:newStudentListFn.page.pageNumber)-1)*10}}
+                                td {{student.idNumber}}
+                                td {{student.name}}
+                                td {{student.sex}}
+                                td {{student.collegeName}}
+                                td {{student.professionalName}}
+                                td {{student.studentSource}}
+                                td {{student.studentType}}
+                                td {{student.eduLevel}}
+
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{newStudentListFn.page.pageNumber==0?newStudentListFn.page.pageNumber*10:(newStudentListFn.page.pageNumber-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((newStudentListFn.page.pageNumber==0?newStudentListFn.page.pageNumber+1:newStudentListFn.page.pageNumber)-1)*10+newStudentListFn.studentList.length}}
+                                |  条 总共
+                                span.text-primary {{newStudentListFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='newStudentListFn.page.totalElements', items-per-page="newStudentListFn.page.pageSize" max-size='newStudentListFn.page.pageSize' ng-model='newStudentListFn.page.pageNumber',ng-change="newStudentListFn.getStudentList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+            // end widget content
+        // end widget div
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='newStudentListFn.selected($newFiles, $invalidFiles)' ng-model="newStudentListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="newStudentListFn.myFile.name" )
+                            .left.load_inner(ng-click='newStudentListFn.importantBatch(newStudentListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td.downlaod-temp 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="newStudentListFn.downLoad()") 新生导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载学生导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+                button.btn.btn-primary(style="margin-left:10px;" type='button' ng-click="newStudentListFn.openImpBatch('reset')")
+                    span 重新导入
+            .repeat_header
+                i.fa.fa-exclamation-triangle(style="color:#ff0000")
+                span.buld {{"失败原因：" + newStudentListFn.errorInfos.message}}
+            .repeat_content.content-scorll
+                table
+                    tr
+                        td 错误行号
+                        td 姓名
+                        td 身份证号
+                        td 专业名称
+                        td 错误信息
+                    tr(ng-repeat="info in newStudentListFn.errorInfos.studentExcelDomainList")
+                        td {{info.line}}
+                        td {{info.name}}
+                        td {{info.idNumber}}
+                        td {{info.professionalName}}
+                        td {{info.msg}}
