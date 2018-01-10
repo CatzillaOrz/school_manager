@@ -3,7 +3,7 @@
  * 编辑宿舍楼
  */
 angular.module('dleduWebApp')
-	.controller('DormBuildingEditCtrl', function ($scope, $state, messageService, DormManService, UploadService) {
+	.controller('DormBuildingEditCtrl', function ($scope, $state, messageService, DormManService, UploadService, CommonService) {
 		$scope.handleFn = {
 			title: '新建宿舍楼',
 			//宿舍楼对象
@@ -62,7 +62,7 @@ angular.module('dleduWebApp')
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg("新增异常!");
+						messageService.openMsg(CommonService.exceptionPrompt(error,"新增异常！"));
 					})
 			},
 
@@ -80,7 +80,7 @@ angular.module('dleduWebApp')
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg("修改异常!");
+						messageService.openMsg(CommonService.exceptionPrompt(error,"修改异常！"));
 					})
 			},
 

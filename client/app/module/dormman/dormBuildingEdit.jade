@@ -19,23 +19,23 @@
                             | 宿舍楼类型：
                         .col-sm-7
                             label.radio-inline
-                                input(type="radio" name="type"  ng-model="handleFn.building.floorType" value="10" )
+                                input(ng-disabled="handleFn.building.editor==false" type="radio" name="type"  ng-model="handleFn.building.floorType" value="10" )
                                 | 普通型
                             label.radio-inline
-                                input(type="radio" name="type"  ng-model="handleFn.building.floorType" value="20" )
+                                input(ng-disabled="handleFn.building.editor==false" type="radio" name="type"  ng-model="handleFn.building.floorType" value="20" )
                                 | 套间型
                     .form-group(ng-if="handleFn.building.floorType == 20")
                         label.col-sm-3.control-label
                             span.required *
                             | 总单元数：
                         .col-sm-7
-                            input.form-control(placeholder="请填写总楼单元数(只能是大于0的整数)" ng-model="handleFn.building.unitNum" name="unit" validator="required, integergt0")
+                            input.form-control(ng-disabled="handleFn.building.editor==false" placeholder="请填写总楼单元数(只能是大于0的整数)" ng-model="handleFn.building.unitNum" name="unit" validator="required, integergt0")
                     .form-group(ng-if="handleFn.building.floorType != ''")
                         label.col-sm-3.control-label
                             span.required *
                             | 总楼层数：
                         .col-sm-7
-                            input.form-control(placeholder="请填写总楼层数(只能是大于0的整数)" ng-model="handleFn.building.floorNum" name="floor" validator="required, integergt0")
+                            input.form-control(ng-disabled="handleFn.building.editor==false" placeholder="请填写总楼层数(只能是大于0的整数)" ng-model="handleFn.building.floorNum" name="floor" validator="required, integergt0")
                     .form-group
                         label.col-sm-3.control-label
                             span.required
