@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentRecord = entity;
-				messageService.getMsg("您确定要删除此条记录吗？", that.delDormBuilding);
+				messageService.getMsg("注意：删除楼栋，此楼栋下所有关联的宿舍、学生信息都会删除！您确定还要删除楼栋吗？", that.delDormBuilding);
 			},
 
 
