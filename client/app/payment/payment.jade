@@ -114,7 +114,7 @@ script(type='text/ng-template',id='importDialog')
                                     span 每次缴费
                             .payment-style-content
                                 span.payment-style 收费截止日期:
-                                .input-append.date.datepicker.datepicker-basic.no-padding.deadline(data-date='', data-date-format='yyyy-mm-dd' b-datepicker id="startDate")
+                                .input-append.date.datepicker.datepicker-basic.no-padding.deadline(data-date='', set-start-time="true" data-date-format='yyyy-mm-dd' b-datepicker id="startDate")
                                     input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择截止日期' type='text' ng-model="paymentFn.exportParam.lastDate" validator="required")
                                     span.add-on
                                         i.icon-calendar.glyphicon.glyphicon-calendar

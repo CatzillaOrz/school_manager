@@ -6,13 +6,15 @@ angular.module('dleduWebAppComponents')
     return {
       require: '?ngModel',
       restrict: 'A',
-      scope: true,
+      scope: {
+        setStartTime:'@'
+      },
       link: function(scope, element, attrs, ngModel) {
         $(function () {
           $(element).datepicker({
             weekStart: 1,
             autoclose: true,
-            minDate:+1,
+            startDate: attrs.setStartTime?"0d":null,
             todayHighlight: true,
             zIndexOffset: 500000,
             language: 'zh-CN',
@@ -21,11 +23,12 @@ angular.module('dleduWebAppComponents')
             //$(element).find('input').val();
             var controller = angular.element($(element).find('input')).controller('ngModel');
             controller.$setViewValue($(element).find('input').val());
+            $rootScope.$broadcast('timeInterval',{
+              time:$(element).find('input').val(),
+              id:$(element).attr('id')
+            });
           })
         })
-            .on('click',function(){
-              $('#'+$(element).attr('id')).datepicker('setStartDate', new Date());
-            })
       }
     }
   });

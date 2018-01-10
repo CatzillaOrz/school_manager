@@ -54,7 +54,7 @@
                 .edit-payment-content(ng-show='paymentFn.showPaymentTime&&!paymentFn.showPaymentStyle')
                     .payment-style-content
                         span 截止日期:
-                        .input-append.date.datepicker.datepicker-basic.no-padding.deadline.edit-person-time(data-date='', data-date-format='yyyy-mm-dd' b-datepicker id="startDate")
+                        .input-append.date.datepicker.datepicker-basic.no-padding.deadline.edit-person-time(data-date='', data-date-format='yyyy-mm-dd' set-start-time="true" b-datepicker id="startDate")
                             input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择截止日期' type='text' ng-model="paymentFn.personCostData.lastDate" validator="required")
                             span.add-on
                                 i.icon-calendar.glyphicon.glyphicon-calendar
@@ -188,12 +188,12 @@
                                     .col-xs-12.col-sm-4
                                         .search-time
                                             span.search-time-label 日期范围：
-                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd'  b-datepicker id="startTime")
                                                 input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="paymentFn.orderParams.startDate" validator="required")
                                                 span.add-on
                                                     i.icon-calendar.glyphicon.glyphicon-calendar
                                             span(style="margin:0 3px").search-time-label  至
-                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                            .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker id="endTime")
                                                 input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="paymentFn.orderParams.endDate" validator="required")
                                                 span.add-on
                                                     i.icon-calendar.glyphicon.glyphicon-calendar

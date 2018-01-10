@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('PaymentDetailCtrl', function ($scope,$stateParams,$state, AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService,
+    .controller('PaymentDetailCtrl', function ($scope,$stateParams,$state, $rootScope,AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService,
                                          Upload, UploadService, ImpBatchService) {
         $scope.paymentFn = {
             paymentParams:null,
@@ -334,6 +334,14 @@ angular.module('dleduWebApp')
                     this.paymentParams = $stateParams.payment;
                     this.paymentStatus = this.paymentStatusList[0];
                     this.getProfessional();
+                    $rootScope.$on("timeInterval",function(event,data) {
+                        if (data.id == 'startTime'){
+                            $('#endTime').datepicker('setStartDate', data.time);
+                        }
+                        if (data.id == 'endTime'){
+                            $('#startTime').datepicker('setEndDate', data.time);
+                        }
+                    });
                 }else{
                     $state.go('payment');
                 }

@@ -187,9 +187,4 @@ angular.module('dleduWebApp')
             }
         };
         $scope.paymentFn.init();
-        $rootScope.$on("timeInterval",function(event,data) {
-            if (data.id == 'startDate'){
-                $('#startDate').datepicker('setStartDate', data.time);
-            }
-        });
     });
