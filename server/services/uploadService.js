@@ -92,7 +92,6 @@ var UploadService = {
 				callback(err);
 				return;
 			}
-			console.log(res.statusCode +"----");
 			if (res.statusCode === 200 || res.statusCode === 426) {
 				if(res.body == ''){
 					callback(null, JSON.parse('{"success":true}'));

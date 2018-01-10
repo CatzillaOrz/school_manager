@@ -21,21 +21,21 @@
                             form.form-inline
                                 .form-group.col-md-4.no-padding
                                     label.control-label 院系：
-                                    select.select2.form-control(ng-model="newStudentListFn.params.collegeId" ui-select2="newStudentListFn.selectCollege2Options()", ng-change="newStudentListFn.getStudentList()" )
+                                    select.select2.form-control(ng-model="newStudentListFn.params.collegeId" ui-select2="newStudentListFn.selectCollege2Options()", ng-change="newStudentListFn.findStudentByPage()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in newStudentListFn.collegeDropList" value="{{college.id}}" ng-selected="newStudentListFn.params.collegeId==college.id") {{college.name}}
                                 .form-group.col-md-4
                                     label.control-label 专业：
-                                    select.select2.form-control(ng-model="newStudentListFn.params.professionalId" ui-select2="newStudentListFn.select2MajorOptions()", ng-change="newStudentListFn.getStudentList()"  )
+                                    select.select2.form-control(ng-model="newStudentListFn.params.professionalId" ui-select2="newStudentListFn.select2MajorOptions()", ng-change="newStudentListFn.findStudentByPage()"  )
                                         option(value="-1" ng-selected="true") 全部
                                         option(ng-repeat="major in newStudentListFn.majorDropList" value="{{major.id}}" ng-selected="newStudentListFn.params.professionalId==major.id") {{major.name}}
                                 .form-group.col-md-4
                                     label.control-label 学生：
-                                        input.form-control(type='search', placeholder='输入名称或身份证号', ng-model="newStudentListFn.params.name", my-enter="newStudentListFn.getStudentList()")
+                                        input.form-control(type='search', placeholder='输入名称或身份证号', ng-model="newStudentListFn.params.name", my-enter="newStudentListFn.findStudentByPage()")
 
                                 .form-group.col-md-12.margin-top-10
                                     .ColVis
-                                        button.btn.btn-primary(ng-click="newStudentListFn.getStudentList()")
+                                        button.btn.btn-primary(ng-click="newStudentListFn.findStudentByPage()")
                                             span 查询
                                         .speace-10
                                         button.btn.btn-primary(ng-click="newStudentListFn.openImpBatch()")
