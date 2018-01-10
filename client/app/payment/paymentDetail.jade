@@ -151,7 +151,7 @@
                                                 th 支付明细
                                         tbody
                                             tr.odd(role='row' ng-repeat="personCost in paymentFn.personCostList")
-                                                td.sorting_1 {{$index+1 + ((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*10}}
+                                                td.sorting_1 {{$index+1 + ((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*5}}
                                                 td {{personCost.name}}
                                                 td {{personCost.idNumber}}
                                                 td {{personCost.professionalName}}
@@ -169,15 +169,15 @@
                                         .col-sm-6.col-xs-12.hidden-xs
                                             .dataTables_info(role='status', aria-live='polite')
                                                 | 显示第
-                                                span.txt-color-darken {{paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber*10:(paymentFn.personPage.pageNumber-1)*10+1}}
+                                                span.txt-color-darken {{paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber*5:(paymentFn.personPage.pageNumber-1)*5+1}}
                                                 |  到
-                                                span.txt-color-darken {{((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*10+paymentFn.personCostList.length}}
+                                                span.txt-color-darken {{((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*5+paymentFn.personCostList.length}}
                                                 |  条 总共
                                                 span.text-primary {{paymentFn.personPage.totalElements}}
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.personPage.totalElements', max-size='paymentFn.personPage.pageSize' ng-model='paymentFn.personPage.pageNumber',ng-change="paymentFn.getPersonCostList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.personPage.totalElements', max-size='paymentFn.personPage.pageSize' items-per-page="paymentFn.personPage.pageSize" ng-model='paymentFn.personPage.pageNumber',ng-change="paymentFn.getPersonCostList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     .tabbable.tabs-below(ng-if="paymentFn.tabType=='showByPayment'")
                         .tab-content
                             .no-padding
@@ -218,7 +218,7 @@
                                                 th 支付宝订单号
                                         tbody
                                             tr.odd(role='row' ng-repeat="orderCost in paymentFn.orderCostList")
-                                                td.sorting_1 {{$index+1 + ((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*10}}
+                                                td.sorting_1 {{$index+1 + ((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*5}}
                                                 td {{orderCost.orderNo}}
                                                 td {{orderCost.name}}
                                                 td {{orderCost.idNumber}}
@@ -231,15 +231,15 @@
                                         .col-sm-6.col-xs-12.hidden-xs
                                             .dataTables_info(role='status', aria-live='polite')
                                                 | 显示第
-                                                span.txt-color-darken {{paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber*10:(paymentFn.orderPage.pageNumber-1)*10+1}}
+                                                span.txt-color-darken {{paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber*5:(paymentFn.orderPage.pageNumber-1)*5+1}}
                                                 |  到
-                                                span.txt-color-darken {{((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*10+paymentFn.orderCostList.length}}
+                                                span.txt-color-darken {{((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*5+paymentFn.orderCostList.length}}
                                                 |  条 总共
                                                 span.text-primary {{paymentFn.orderPage.totalElements}}
                                                 |  条记录
                                         .col-sm-6.col-xs-12
                                             .dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.orderPage.totalElements', max-size='paymentFn.orderPage.pageSize' ng-model='paymentFn.orderPage.pageNumber',ng-change="paymentFn.getOrderCostList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                ul.pagination-sm(uib-pagination, total-items='paymentFn.orderPage.totalElements', max-size='paymentFn.orderPage.pageSize' items-per-page="paymentFn.orderPage.pageSize" ng-model='paymentFn.orderPage.pageNumber',ng-change="paymentFn.getOrderCostList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
 script(type='text/ng-template',id='importResultDialog')
     .repeatLoad
         .repeat_header.payment-details-header

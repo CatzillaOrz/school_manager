@@ -52,7 +52,7 @@ angular.module('dleduWebApp')
                 totalElements: 0,
                 totalPages: 0,
                 pageNumber: 1,
-                pageSize: 3
+                pageSize: 5
             },
             orderPage:{
                 totalElements: 0,

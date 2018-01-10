@@ -68,7 +68,7 @@ angular.module('dleduWebService')
                     },function(res){
                         CommonService.addLoading(false, 'all');
                         if(res.data && res.data.message){
-                            messageService.openMsg("导入失败!错误信息："+res.data.message+'\n请检查导入数据或重新下载模板！');
+                            messageService.openMsg("导入失败！错误信息："+res.data.message+'\n请检查导入数据或重新下载模板！',5000);
                         }else{
                             messageService.openMsg("导入失败!");
                         }
@@ -91,7 +91,7 @@ angular.module('dleduWebService')
                     },function(res){
                         CommonService.addLoading(false, 'all');
                         if(res.data && res.data.message){
-                            messageService.openMsg(res.data.message);
+                            messageService.openMsg("导入失败！错误信息："+res.data.message+'\n请检查导入数据或重新下载模板！',5000);
                         }else{
                             messageService.openMsg("导入失败!");
                         }
