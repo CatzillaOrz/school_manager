@@ -35,9 +35,9 @@ angular.module('dleduWebService')
                     "url": "studentlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,exp,reset",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp,reset",
-                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,reset"
+                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,exp,reset,newstu",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp,reset,newstu",
+                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,reset,newstu"
                     }
                 },
                 {

@@ -253,8 +253,10 @@ module.exports = {
 
     getApiUrl: function(req, res){
         var url;
-        if(req.query.type == 'pay'){
+        if(req.query.type == 'pay'){ //支付
             url = Config.backend_api.api_gateway + "zuul/paycallback" ;
+        }else if(req.query.type == 'org'){
+            url = Config.backend_api.api_gateway + "zuul/org-manager";
         }
         var data = {
             url : url

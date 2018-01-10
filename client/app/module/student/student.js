@@ -57,5 +57,19 @@ angular.module('dleduWebApp')
                     label: '新建学生信息'
                 }
             })
+            .state('newstudent', {
+                parent: 'studentlist',
+                url   : '/newstudent',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'NewStudentCtrl',
+                        templateUrl: 'app/module/student/newStudentList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '新生导入'
+                }
+            })
 
     });

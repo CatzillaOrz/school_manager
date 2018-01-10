@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService) {
+	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService, SchoolService) {
 		return {
 			/**
 			 * 弹出批量导入弹出框
@@ -92,17 +92,24 @@ angular.module('dleduWebService')
 			 * 下载模板
 			 */
 			downLoad: function(type){
-				var host = this.getEnvHost();
-				var paths = {'college' : host + '/v1/college/template',
-					'major' : host + '/v1/professionnal/template',
-					'classes':host + '/v1/classes/template',
-					'student': host + '/v1/students/template',
-					'teacher': host + '/v1/teacher/template',
-					'compulsory': host + '/v1/teachingclass/template?templateType=must',
-					'optional': host + '/v1/teachingclass/template?templateType=option',
-					'course': host + '/v1/course/template',
-					'entTutor': host + '/v1/mentorstraining/template'};
-				window.location.href = paths[type];
+				//var host = this.getEnvHost();
+				SchoolService.getApiUrl({type:"org"}).$promise
+					.then(function (data) {
+						var host = data.url;
+						var paths = {'college' : host + '/v1/college/template',
+							'major' : host + '/v1/professionnal/template',
+							'classes':host + '/v1/classes/template',
+							'student': host + '/v1/students/template',
+							'teacher': host + '/v1/teacher/template',
+							'compulsory': host + '/v1/teachingclass/template?templateType=must',
+							'optional': host + '/v1/teachingclass/template?templateType=option',
+							'course': host + '/v1/course/template',
+							'entTutor': host + '/v1/mentorstraining/template',
+							'newStudent': host + '/v1/students/newstudenttemplate'};
+						window.location.href = paths[type];
+					})
+					.catch(function (error) {
+					})
 			},
 
 			//获取环境

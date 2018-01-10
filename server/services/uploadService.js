@@ -47,8 +47,12 @@ var UploadService = {
 	},
 
 	upload: function (options, callback) {
+		var uri = Config.backend_api.api_gateway;
+		if(options.host = 'gateway-org-io'){
+			uri = Config.backend_api.api_gateway + "org-manager" + options.path;
+		}
 		var r = request.post({
-			uri: Config.backend_api.api_gateway + "org-manager" + options.path,
+			uri: uri,
 			headers: {
 				'Authorization': "Bearer" + options.access_token
 			}
@@ -74,7 +78,8 @@ var UploadService = {
 		var that = this;
 		var paths = {'college' : '/v1/college/import', 'major' : '/v1/professionnal/import', 'classes':'/v1/classes/import',
 			'student': '/v1/students/import', 'teacher': '/v1/teacher/import', 'compulsory': '/v1/teachingclass/importmust',
-			'optional': '/v1/teachingclass/importoption', 'course': '/v1/course/import', 'entTutor': '/v1/mentorstraining/import'};
+			'optional': '/v1/teachingclass/importoption', 'course': '/v1/course/import', 'entTutor': '/v1/mentorstraining/import',
+			'newStudent': '/v1/students/importnew'};
 		this.upload({
 			host: 'gateway-org-io',
 			path: paths[params.uploadType] + '?userId=' + params.userId + '&orgId=' + params.orgId,
@@ -87,6 +92,7 @@ var UploadService = {
 				callback(err);
 				return;
 			}
+			console.log(res.statusCode +"----");
 			if (res.statusCode === 200 || res.statusCode === 426) {
 				if(res.body == ''){
 					callback(null, JSON.parse('{"success":true}'));
