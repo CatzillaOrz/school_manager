@@ -359,7 +359,7 @@ angular.module('dleduWebApp')
 					var validSel = [], ids = [];
 					for(var i = 0, len = this.selDistObj.length; i < len; i++){
 						var record = this.selDistObj[i];
-						if(record.emBeds){//非空宿舍
+						if(record.beds==record.emBeds){//空宿舍
 							validSel.push(record);
 							ids.push(record.roomId);
 						}
@@ -367,7 +367,7 @@ angular.module('dleduWebApp')
 					this.dormAssign.roomIds = ids;
 				}
 				if(!validSel.length){
-					messageService.openMsg("请选择有空床位的宿舍进行编辑分配！");
+					messageService.openMsg("请选择没有住人的宿舍进行编辑分配！");
 					return;
 				}
 				var mess = this.isBatchDist ? (validSel.length + "个宿舍批量分配成功!") : "分配宿舍成功!";

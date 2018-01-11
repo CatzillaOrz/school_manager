@@ -109,7 +109,7 @@
                                     a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
                                         i.fa.fa-window-close
                                         span 关闭
-                                    a.handle(ng-if="record.emBeds" ng-click="dormMan.openDistedDorm(record)")
+                                    a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.openDistedDorm(record)")
                                         i.fa.fa-pencil-square-o
                                         span 编辑分配
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorms(record)")
