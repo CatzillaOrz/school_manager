@@ -17,6 +17,7 @@ angular.module('dleduWebApp')
 			majorLists: [], //专业
 			checkAllRecord: false, //是否全选
 			selDistObj: [], //选择的对象
+			isBatchDist: false, //是否批量分配宿舍
 
 			//参数
 			params: {
@@ -131,7 +132,7 @@ angular.module('dleduWebApp')
 				DormManService.delDorm(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
-						that.getDorms();
+						that.queryDorm();
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));
@@ -168,7 +169,7 @@ angular.module('dleduWebApp')
 						var mess = type == 'batch' ? "批量关闭宿舍成功!" : "关闭宿舍成功!";
 						messageService.openMsg(mess);
 						that.selDistObj = [];
-						that.getDorms();
+						that.queryDorm();
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error,"关闭宿舍异常！"));
@@ -211,7 +212,7 @@ angular.module('dleduWebApp')
 						.then(function (data) {
 							messageService.openMsg(mess);
 							that.selDistObj = [];
-							that.getDorms();
+							that.queryDorm();
 						})
 						.catch(function (error) {
 							messageService.openMsg(CommonService.exceptionPrompt(error,"开放宿舍异常！"));
@@ -224,15 +225,23 @@ angular.module('dleduWebApp')
 				var selectedDorm;
 				if(entity){//单选
 					selectedDorm = [entity];
+					this.isBatchDist = false;
 				}else{//多选
 					if(!this.selDistObj.length){
 						messageService.openMsg("请先选择宿舍!");
 						return;
 					}
+					this.isBatchDist = true;
 					selectedDorm = this.selDistObj;
 				}
-				this.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
+				if(this.majorLists.length){
+					var marjorFirst = this.majorLists[0];
+					if(marjorFirst.name != '请选择专业' && marjorFirst.id != 0){
+						this.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
+					}
+				}
 				var roomIds = this.getIds(selectedDorm, "roomId");
+
 				this.dormAssign.roomIds = roomIds;
 				ngDialog.open({
 					template: 'publishDialog',
@@ -317,7 +326,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						if(data.result){
 							messageService.openMsg("编辑分配专业成功！");
-							that.getDorms();
+							that.queryDorm();
 							that.getDistedMajors();
 						}else{
 							messageService.openMsg("编辑分配专业失败！");
@@ -333,7 +342,6 @@ angular.module('dleduWebApp')
 			distDorm: function(){
 				var that = this;
 				var majors = this.majorLists, major, profId = this.dormAssign.profId;
-				var mess = this.dormAssign.roomIds.length >1 ? "批量分配宿舍成功!" : "分配宿舍成功!";
 				angular.forEach(majors, function(item){
 					if(item.id == profId){
 						major = item;
@@ -346,12 +354,29 @@ angular.module('dleduWebApp')
 				params.profName = major.name;
 				if(!this.dormAssign.profId || !this.dormAssign.sexType)
 					return;
+				//获取有效分配宿舍的数量
+				if(this.isBatchDist){
+					var validSel = [], ids = [];
+					for(var i = 0, len = this.selDistObj.length; i < len; i++){
+						var record = this.selDistObj[i];
+						if(record.emBeds){//非空宿舍
+							validSel.push(record);
+							ids.push(record.roomId);
+						}
+					}
+					this.dormAssign.roomIds = ids;
+				}
+				if(!validSel.length){
+					messageService.openMsg("请选择没有使用的宿舍批量分配！");
+					return;
+				}
+				var mess = this.isBatchDist ? (validSel.length + "个宿舍批量分配成功!") : "分配宿舍成功!";
 				DormManService.assignDorms(params).$promise
 					.then(function (data) {
 						if(data.result){
-							messageService.openMsg(mess);
+							messageService.openMsg(mess, 3000);
 							that.selDistObj = [];
-							that.getDorms();
+							that.queryDorm();
 							that.getDistedMajors();
 						}else{
 							messageService.openMsg("分配宿舍失败！");
