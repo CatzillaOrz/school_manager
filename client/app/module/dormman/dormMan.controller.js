@@ -367,7 +367,7 @@ angular.module('dleduWebApp')
 					this.dormAssign.roomIds = ids;
 				}
 				if(!validSel.length){
-					messageService.openMsg("请选择没有使用的宿舍批量分配！");
+					messageService.openMsg("请选择有空床位的宿舍进行编辑分配！");
 					return;
 				}
 				var mess = this.isBatchDist ? (validSel.length + "个宿舍批量分配成功!") : "分配宿舍成功!";
