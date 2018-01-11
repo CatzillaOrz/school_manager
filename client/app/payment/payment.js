@@ -30,7 +30,7 @@ angular.module('dleduWebApp')
                 }
             },
             ncyBreadcrumb: {
-                label: '缴费单详情'
+                label: '缴费科目详情'
             }
         })
     });

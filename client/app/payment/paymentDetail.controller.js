@@ -262,6 +262,7 @@ angular.module('dleduWebApp')
                 }
                 PaymentService.updatepaymenttype(params).$promise
                     .then(function (data) {
+
                         _this.getPersonCost(_this.personCostData);
                     })
                     .catch(function (error) {
@@ -277,7 +278,6 @@ angular.module('dleduWebApp')
                 }
             },
 
-            //编辑支付方式内容
             editPayment:function(){
                 this.showPaymentStyle = false;
                 this.paymentStyle = this.isFullParagraph?'全款支付':((this.isFirstPayment?'首次缴费':'每次缴费')+'最低限额￥'+this.paymentAmount+'元');
