@@ -40,9 +40,9 @@
                             tr.odd(role='row' ng-repeat="payment in paymentFn.paymentList")
                                 td.sorting_1 {{$index+1 + ((paymentFn.page.pageNumber==0?paymentFn.page.pageNumber+1:paymentFn.page.pageNumber)-1)*10}}
                                 td {{payment.name}}
-                                td {{payment.paymentType == 10?'全款支付':'分期支付'}}
+                                td {{payment.paymentType == 10?'全款支付':payment.paymentType == 20?'分期支付':''}}
                                 td {{payment.lastDate}}
-                                td {{payment.publishState == 10?'待生效':'已生效'}}
+                                td {{payment.publishState == 10?'待生效':payment.publishState == 20?'已生效':'已过期'}}
                                 td
                                     a.handle(ng-click="paymentFn.getPayment(payment)" ng-show="payment.publishState==10")
                                         i.fa.fa-upload
@@ -56,7 +56,7 @@
                                     a.handle(ng-click="paymentFn.publishPayment(payment)" ng-show="payment.publishState==10")
                                         i.fa.fa-trash-o
                                         span 生效
-                                    a.handle(ng-click="paymentFn.getPaymentDetail(payment)" ng-show="payment.publishState==20")
+                                    a.handle(ng-click="paymentFn.getPaymentDetail(payment)" ng-show="payment.publishState==20||payment.publishState==70")
                                         i.fa.fa-eye
                                         span 查看统计
                     .dt-toolbar-footer

@@ -21,7 +21,7 @@
                     .payment-style-content
                         span 支付方式:
                         span(ng-class="paymentFn.personCostData.paymentType==10?'payment-name-all':'payment-name-staging'") {{paymentFn.personCostData.paymentString}}
-                        span.edit-payment-style(ng-click="paymentFn.showPaymentStyle=true") 修改
+                        span.edit-payment-style(ng-click="paymentFn.showPaymentStyle=true" ng-show="paymentFn.personCostData.publishState != 70") 修改
                 .edit-payment-content(ng-show='paymentFn.showPaymentStyle&& !paymentFn.showPaymentTime')
                     .payment-style-content
                         span.payment-style 缴费方式:
@@ -50,7 +50,7 @@
                     .payment-style-content
                         span 截止日期:
                         span.payment-time {{paymentFn.personCostData.lastDate}}
-                        span.edit-payment-style(ng-click="paymentFn.showPaymentTime=true") 修改
+                        span.edit-payment-style(ng-click="paymentFn.showPaymentTime=true" ng-show="paymentFn.personCostData.publishState != 70") 修改
                 .edit-payment-content(ng-show='paymentFn.showPaymentTime&&!paymentFn.showPaymentStyle')
                     .payment-style-content
                         span 截止日期:
