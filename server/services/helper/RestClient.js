@@ -2,12 +2,10 @@
 
 var rest = require('rest'),
     mime = require('rest/interceptor/mime'),
-    timeout = require('rest/interceptor/timeout'),
     _ = require('lodash'),
     Config = require('../../config/environment');
 
-var restClient = rest.wrap(mime)
-    .wrap(timeout, { timeout: 2000});
+var restClient = rest.wrap(mime);
 var Headers = {
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip, deflate',
@@ -67,12 +65,6 @@ function request(options) {
     return restClient(_.assign({
         method: 'GET'
     }, options)).then(function (res) {
-        console.log("aa");
-        console.log('[rest client] response status code:' + res.status.code);
-        console.log('[rest client] response entity:' + JSON.stringify(res.entity));
-        return res;
-    }).then(function (res) {
-        console.log("10s");
         console.log('[rest client] response status code:' + res.status.code);
         console.log('[rest client] response entity:' + JSON.stringify(res.entity));
         return res;
