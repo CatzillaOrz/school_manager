@@ -76,25 +76,25 @@
                         span 人数总计：
                         span 未交费人数：
                         span 欠费人数：
-                        span 已结清人数总计：
+                        span.bottom-line 已结清人数总计：
                     .charges-details-content.left
                         span {{paymentFn.personCal.name}}
                         span {{paymentFn.personCal.totalPersons }}人
                         span {{paymentFn.personCal.noPayPersons  }}人
                         span {{paymentFn.personCal.owedPersons  }}人
-                        span {{paymentFn.personCal.completePersions  }}人
+                        span.bottom-line {{paymentFn.personCal.completePersions  }}人
                     .charges-details-content.right
                         span
                         span 应交金额总计：
                         span 未交费金额总计：
                         span 欠费已缴金额总计：
-                        span 已结清金额总计：
+                        span.bottom-line 已结清金额总计：
                     .charges-details-content.left
                         span
                         span ￥{{paymentFn.personCal.totalShouldPay }}元
-                        span ￥{{paymentFn.personCal.noPayShouldPay  }}元
+                        span ￥{{paymentFn.personCal.noPayShouldPay}}元
                         span ￥{{paymentFn.personCal.owedHasPay  }}元
-                        span ￥{{paymentFn.personCal.completeHasPay  }}元
+                        span.bottom-line ￥{{paymentFn.personCal.completeHasPay  }}元
     .jarviswidget.jarviswidget-color-blueDark.payment-detail
         div.payment-detail-content(role='content')
             .total-payment
