@@ -49,7 +49,7 @@ var UploadService = {
 	upload: function (options, callback) {
 		var uri = Config.backend_api.api_gateway;
 		if(options.host = 'gateway-org-io'){
-			uri = Config.backend_api.api_gateway + "org-manager" + options.path;
+			uri = Config.backend_api.api_gateway + "zuul/org-manager" + options.path;
 		}
 		var r = request.post({
 			uri: uri,
