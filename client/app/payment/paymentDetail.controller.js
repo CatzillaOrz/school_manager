@@ -155,9 +155,9 @@ angular.module('dleduWebApp')
                 var that = this;
                 var params={
                     paymentSubjectId:this.paymentParams.id,
-                    name:'',
-                    paymentState:'',
-                    professionalName:'',
+                    name:this.searchPaymentName,
+                    paymentState:this.paymentStatus.id==0?'':this.paymentStatus.id,
+                    professionalName:this.major.name=='全部'?'':this.major.name,
                     pageNumber:1,
                     pageSize:100000,
                 }
@@ -176,18 +176,6 @@ angular.module('dleduWebApp')
                             }
 
                         })
-                        var personCal =[{
-                            费用名称:that.personCal.name,
-                            人数总计:that.personCal.totalPersons,
-                            未交费人数:that.personCal.noPayPersons,
-                            欠费人数:that.personCal.owedPersons,
-                            已结清人数总计:that.personCal.completePersions,
-                            应交金额总计:'￥'+that.personCal.totalShouldPay,
-                            未交费金额总计:'￥'+that.personCal.noPayShouldPay,
-                            欠费已缴金额总计:'￥'+that.personCal.owedHasPay,
-                            已结清金额总计:'￥'+that.personCal.completeHasPay,
-                            实际交费金额总计:'￥'+that.personCal.owedHasPay+that.personCal.completeHasPay,
-                        }];
                         var fileName = that.paymentParams.name+'-按人员';
                         return alasql('SELECT * INTO XLSX("'+fileName +'.xlsx",{headers:true}) FROM ?',[personList]);
                     })
@@ -198,9 +186,9 @@ angular.module('dleduWebApp')
                 var that = this;
                 var params={
                     paymentSubjectId:this.paymentParams.id,
-                    name:'',
-                    start:'',
-                    lastDate:'',
+                    name:this.orderParams.searchOrderName,
+                    start:this.orderParams.startDate,
+                    lastDate:this.orderParams.endDate,
                     pageNumber:1,
                     pageSize:100000,
                 }
