@@ -94,5 +94,19 @@ angular.module('dleduWebApp')
                 label: '编辑课节'
             }
         })
+        .state('weeklist', {
+            parent: 'periodlist',
+            url   : '/period/weeklist/:id',
+            access: {requiredLogin: true},
+            views : {
+                'content@base': {
+                    controller : 'WeekListCtrl',
+                    templateUrl: 'app/module/schoolyear/weekList.html'
+                }
+            },
+            ncyBreadcrumb: {
+                label: '学周管理'
+            }
+        })
 
     });

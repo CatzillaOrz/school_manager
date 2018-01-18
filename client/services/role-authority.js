@@ -44,8 +44,8 @@ angular.module('dleduWebService')
                     "url": "periodlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,get,addtime",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,addtime",
+                        "ROLE_ORG_ADMIN": "add,update,del,get,addtime,addweek",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,addtime,addweek",
                         "ROLE_COLLEGE_ADMIN": "get"
                     }
                 },
