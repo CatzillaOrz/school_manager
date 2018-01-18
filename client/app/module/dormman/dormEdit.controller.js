@@ -137,7 +137,7 @@ angular.module('dleduWebApp')
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg("新增异常!");
+						messageService.openMsg(CommonService.exceptionPrompt(error,"新增异常!"));
 					})
 			},
 
@@ -155,7 +155,7 @@ angular.module('dleduWebApp')
 						}
 					})
 					.catch(function (error) {
-						messageService.openMsg("修改异常!");
+						messageService.openMsg(CommonService.exceptionPrompt(error,"修改异常!"));
 					})
 			},
 

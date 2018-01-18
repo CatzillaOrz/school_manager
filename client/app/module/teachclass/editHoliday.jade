@@ -46,8 +46,7 @@
                                         | 学期：
                                     .col-sm-7
                                         select#ddd.select2.form-control( ng-model="editHoliday.entity.semesterId" ui-select2="editHoliday.select2SemesterOptions()" )
-                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in editHoliday.schoolYearDropList")
-                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{editHoliday.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                            option(value="{{semester.id}}" ng-repeat="semester in editHoliday.schoolYearDropList" selected="{{editHoliday.params.semesterId==semester.id?'selected':''}}") {{semester.name}}
                             .form-actions
                                 .row
                                     .col-md-12

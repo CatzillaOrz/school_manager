@@ -17,8 +17,7 @@
                                 | 选择学期：
                             .col-sm-7
                                 select.form-control(ng-model="handleFn.params.semesterId" ui-select2="handleFn.select2SemesterOptions()" )
-                                    optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in handleFn.schoolYearDropList")
-                                        option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+                                    option(value="{{semester.id}}" ng-repeat="semester in handleFn.schoolYearDropList") {{semester.name}}
 
                         .form-group
                             label.col-sm-3.control-label

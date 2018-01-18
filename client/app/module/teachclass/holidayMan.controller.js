@@ -23,29 +23,25 @@ angular.module('dleduWebApp')
                 endDate: "",
                 startDate: "",
                 id: 0,
+                semesterId: 0,
                 name: "",
                 orgId: AuthService.getUser().orgId,
-                semesterId: 0,
                 userId: AuthService.getUser().id
             },
 
             select2SemesterOptions: function () {
                 var _this = this;
                 return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '按学期筛选'
-                    },
                     allowClear: true,
                     ajax: {
-                        url: "api/schoolyear/getSchoolYearDropList",
+                        url: "api/schoolyear/getSemesterList",
                         dataType: 'json',
                         //delay: 250,
                         data: function (query) {
                             var params = {
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
-                                pageSize: 100,
+                                pageSize: 10000,
 
 
                             }
@@ -54,9 +50,8 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.schoolYearDropList = _this.select2GroupFormat(data.data);
                             return {
-                                results: _this.schoolYearDropList,
+                                results: data.data,
                                 pagination: {
                                     more: (params.page * 30) < data.total_count
                                 }
@@ -64,28 +59,15 @@ angular.module('dleduWebApp')
                         },
                         cache: false
                     },
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            return 'Custom styled placeholder text';
+                        }
+                        _this.schoolYearDropList.push(data);
+                        return data.name;
+                    }
 
                 }
-            },
-
-            //学期下拉列表分组数据格式化
-            select2GroupFormat: function (dataList) {
-                var result = []
-                angular.forEach(dataList, function (data) {
-                    var obj = {
-                        text: data.name,
-                        children: []
-                    };
-                    angular.forEach(data.semesterIdNameList, function (sememster) {
-                        var objChild = {
-                            id: sememster.id,
-                            text: sememster.name
-                        };
-                        obj.children.push(objChild);
-                    })
-                    result.push(obj);
-                })
-                return result;
             },
 
             getCurrentSemester: function () {
@@ -95,19 +77,8 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getCurrentSemester(params).$promise
                     .then(function (data) {
-                        var obj = {
-                            text: data.yearName,
-                            children: [
-                                {
-                                    id:data.id,
-                                    text:data.name
-                                }
-                            ]
-                        };
                         _this.entity.semesterId = data.id;
-                        _this.schoolYearDropList=[obj];
-
-
+                        _this.schoolYearDropList=[data];
                     })
                     .catch(function (error) {
 
@@ -118,6 +89,10 @@ angular.module('dleduWebApp')
             addHoliday: function(){
                 var that = this;
                 var params = this.entity;
+                if(!this.entity.semesterId){
+                    messageService.openMsg("请选择学期!");
+                    return;
+                }
                 TeachClassService.addHoliday(params).$promise
                     .then(function (data) {
                         messageService.openMsg("新增节假日成功!");
