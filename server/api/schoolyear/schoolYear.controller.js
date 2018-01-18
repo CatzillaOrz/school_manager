@@ -104,15 +104,7 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
-    deleteTerm:function (req,res) {
-        SchoolYearService.deleteTermSync(req.query, req.user.access_token)
-            .then(function (data) {
-                res.json(data);
-            })
-            .catch(function (e) {
-                res.status(e.code).send(e.message);
-            })
-    },
+
     getPeriodById: function (req, res) {
         SchoolYearService.getPeriodByIdSync(req.query, req.user.access_token)
             .then(function (data) {
@@ -149,6 +141,34 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    addSemester:function (req,res) {
+        SchoolYearService.addSemesterSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateSemester:function (req,res) {
+        SchoolYearService.updateSemesterSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteTerm:function (req,res) {
+        SchoolYearService.deleteTermSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
     getCurrentWeek: function (req, res) {
         SchoolYearService.getCurrentWeekSync(req.query, req.user.access_token)
             .then(function (data) {
@@ -157,7 +177,35 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
-    }
+    },
+
+    getWeekList: function (req, res) {
+        SchoolYearService.getWeekListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addWeek:function (req,res) {
+        SchoolYearService.addWeekSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteWeek:function (req,res) {
+        SchoolYearService.deleteWeekSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
 };
 

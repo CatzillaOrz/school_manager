@@ -6,65 +6,27 @@
             h2 {{periodHandlerFn.prompt}}
         .widget-body
             form.form-horizontal(name="classForm")
-                fieldset
-                    legend
-                        .short-form.height-auto
-                            .form-group
-                                label.col-sm-3.control-label
-                                    span.required.font-14 *
-                                    span.font-14 学年名称：
-                                .col-sm-7
-                                    input.form-control(ng-disabled='periodHandlerFn.semesterList.length > 0 && periodHandlerFn.semesterList[0].id' placeholder="请填写不超过30个字学年名称" ng-model="periodHandlerFn.params.name" name="schoolName" validator="required, maxlength=30")
                 .md-form
-                    div(ng-repeat="semester in periodHandlerFn.semesterList")
-                        .form-group
-                            label.col-sm-3.control-label
-                                //span.required.font-14 *
-                                span 学期：
-                            .col-sm-7
-                                input.form-control(ng-disabled='semester.id' placeholder="请填写不超过30个字学期名称" ng-model="semester.name" name="{{'name'+$index}}" )
-                        .form-group
-                            label.col-sm-3.control-label
-                                //span.required.font-14 *
-                                span 学期编码：
-                            .col-sm-7
-                                input.form-control(ng-disabled='semester.id' placeholder="学期编码不能为空且不能重复！" ng-model="semester.code" name="{{'code'+$index}}" )
-                        .form-group
-                            label.col-sm-3.control-label 开始时间：
-                            .col-sm-7
-                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
-                                    input.form-control(size='16', ng-disabled='semester.id' name="{{'dateStart'+$index}}" placeholder='请选择开始日期' type='text' ng-model='semester.startDate' validator="required")
-                                    span.add-on
-                                        i.icon-calendar.glyphicon.glyphicon-calendar
-                        .form-group
-                            label.col-sm-3.control-label 结束时间：
-                            .col-sm-7
-                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd HH:mm:ss' b-datepicker)
-                                    input.form-control(size='16', ng-disabled='semester.id' name="{{'dateEnd'+$index}}" placeholder='请选择结束日期' type='text' ng-model='semester.endDate' validator="required")
-                                    span.add-on
-                                        i.icon-calendar.glyphicon.glyphicon-calendar
-                        //.form-group
-                        //
-                        //    .col-sm-offset-3
-                        //        .col-sm-5
-                        //            p.input-group
-                        //                input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"  ng-model='semester.startDate' placeholder="请选择开始时间")
-                        //                span.input-group-btn
-                        //                    button.btn.btn-default(type='button', ng-click='opened[$index][0]=!opened[$index][0]')
-                        //                        i.glyphicon.glyphicon-calendar
-                        //        .col-sm-1 至
-                        //        .col-sm-5
-                        //            p.input-group
-                        //                input.form-control(ng-disabled='semester.id' type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd 00:00:00' }"   ng-model='semester.endDate' placeholder="请选择结束时间")
-                        //                span.input-group-btn
-                        //                    button.btn.btn-default(type='button', ng-click='opened[$index][1]=!opened[$index][1]')
-                        //                        i.glyphicon.glyphicon-calendar
-
-                    div.text-center
-                        .btn.btn-primary(ng-click="periodHandlerFn.addOneSemester()")
-                            i.fa.fa-plus
-                            | 添加新时段
-
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required.font-14 *
+                            span 学期：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字学期名称" ng-model="periodHandlerFn.semester.name" name="{{'name'}}" validator="required")
+                    .form-group
+                        label.col-sm-3.control-label 开始时间：
+                        .col-sm-7
+                            .col-sm-12.input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                input.form-control(size='16',  name="{{'dateStart'}}" placeholder='请选择开始日期' type='text' ng-model='periodHandlerFn.semester.startDate' validator="required")
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
+                    .form-group
+                        label.col-sm-3.control-label 结束时间：
+                        .col-sm-7
+                            .col-sm-12.input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                input.form-control(ng-disabled="true" size='16',  name="{{'dateEnd'}}" placeholder='请选择结束日期' type='text' ng-model='periodHandlerFn.semester.endDate' validator="required")
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
 
                 .form-actions
                     .row
@@ -72,17 +34,3 @@
                             a.btn.btn-primary(ng-click="periodHandlerFn.submit()" validation-submit="classForm") 提交
                             .speace-10
                             a.btn.btn-default(ui-sref="periodlist({position:1})") 取消
-    .jarviswidget.jarviswidget-color-blueDark(ng-if='periodHandlerFn.complete')
-        header(role='heading')
-            span.widget-icon
-                i.fa.fa-table
-            h2 {{periodHandlerFn.title}}
-        .widget-body
-            .finish-prompt
-                h3.prompt {{periodHandlerFn.completeMSG}}
-                .icon
-                    i.fa.fa-check-circle
-            .form-actions
-                .row
-                    .col-md-12
-                        a.btn.btn-default(ui-sref="periodlist") 学期信息

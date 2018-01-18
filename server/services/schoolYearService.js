@@ -72,21 +72,7 @@ var SchoolYearService = {
             callback(e);
         });
     },
-    addSemesterWeek: function (params, access_token, callback) {
-        RestClient.post({
-            host: 'gateway-org',
-            path: '/v1/week/addsemesterweek',
-             params
-        }).then(function (res) {
-            if (res.status.code == 200) {
-                callback(null, res.entity);
-            } else {
-                callback(ErrorCode.errorHandle(res));
-            }
-        }) .catch(function (e) {
-            callback(e);
-        });
-    },
+
     addPeriod: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
@@ -163,21 +149,7 @@ var SchoolYearService = {
             callback(e);
         });
     },
-    deleteTerm: function (params, access_token, callback) {
-        RestClient.delete({
-            host: 'gateway-org',
-            path: '/v1/semester/delete/' + params.id,
-            params:{userId:params.userId}
-        }).then(function (res) {
-            if (res.status.code == 200) {
-                callback(null, res.entity);
-            } else {
-                callback(ErrorCode.errorHandle(res));
-            }
-        }) .catch(function (e) {
-            callback(e);
-        });
-    },
+
     getPeriodById: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
@@ -226,6 +198,22 @@ var SchoolYearService = {
             callback(e);
         });
     },
+    getCurrentWeek: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: 'api/phone/v1/week/get',
+            params:params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     getSemesterList: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
@@ -258,10 +246,57 @@ var SchoolYearService = {
             callback(e);
         });
     },
-    getCurrentWeek: function (params, access_token, callback) {
+
+    addSemester: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/semester/add',
+            entity:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    updateSemester: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: '/v1/semester/update',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    deleteTerm: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/semester/delete/' + params.id,
+            params:{userId:params.userId}
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    getWeekList: function (params, access_token, callback) {
         RestClient.get({
-            host: 'dd',
-            path: 'api/phone/v1/week/get',
+            host: 'gateway-org',
+            path: '/v1/week/list',
             params:params,
             access_token: access_token
         }).then(function (res) {
@@ -273,7 +308,37 @@ var SchoolYearService = {
         }) .catch(function (e) {
             callback(e);
         });
-    }
+    },
+    addWeek: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/week/addsemesterweek',
+            params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    deleteWeek: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/week/delete/' + params.id,
+            params:{userId: params.userId}
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 
