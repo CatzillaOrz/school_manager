@@ -38,7 +38,7 @@
                                 td {{record.profName}}
                                 td {{record.classesName}}
                                 td {{record.phone}}
-                                td {{record.bedName}}
+                                td {{record.bedName + (record.bedType==10?"(上铺)":"(下铺)")}}
 
                     //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs

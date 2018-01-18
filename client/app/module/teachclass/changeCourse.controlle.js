@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('ChangeCourseCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout,
-                                              Select2LoadOptionsService, TeachClassService, EduManService ) {
+                                              Select2LoadOptionsService, TeachClassService, EduManService, CommonService ) {
         $scope.changeCourse = {
             //列表
             records: [],
@@ -35,14 +35,14 @@ angular.module('dleduWebApp')
                     },
                     allowClear: true,
                     ajax: {
-                        url: "api/schoolyear/getSchoolYearDropList",
+                        url: "api/schoolyear/getSemesterList",
                         dataType: 'json',
                         //delay: 250,
                         data: function (query) {
                             var params = {
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
-                                pageSize: 100,
+                                pageSize: 10000,
 
 
                             }
@@ -51,9 +51,8 @@ angular.module('dleduWebApp')
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.schoolYearDropList = _this.select2GroupFormat(data.data);
                             return {
-                                results: _this.schoolYearDropList,
+                                results: data.data,
                                 pagination: {
                                     more: (params.page * 30) < data.total_count
                                 }
@@ -61,29 +60,17 @@ angular.module('dleduWebApp')
                         },
                         cache: false
                     },
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            return 'Custom styled placeholder text';
+                        }
+                        _this.schoolYearDropList.push(data);
+                        return data.name;
+                    }
 
                 }
             },
 
-            //学期下拉列表分组数据格式化
-            select2GroupFormat: function (dataList) {
-                var result = []
-                angular.forEach(dataList, function (data) {
-                    var obj = {
-                        text: data.name,
-                        children: []
-                    };
-                    angular.forEach(data.semesterIdNameList, function (sememster) {
-                        var objChild = {
-                            id: sememster.id,
-                            text: sememster.name
-                        };
-                        obj.children.push(objChild);
-                    })
-                    result.push(obj);
-                })
-                return result;
-            },
 
             getCurrentSemester: function () {
                 var _this = this;
@@ -92,17 +79,8 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getCurrentSemester(params).$promise
                     .then(function (data) {
-                        var obj = {
-                            text: data.yearName,
-                            children: [
-                                {
-                                    id:data.id,
-                                    text:data.name
-                                }
-                            ]
-                        };
                         _this.entity.semesterId = data.id;
-                        _this.schoolYearDropList=[obj];
+                        _this.schoolYearDropList=[data];
 
 
                     })
@@ -115,6 +93,10 @@ angular.module('dleduWebApp')
             addChangeCourse: function(){
                 var that = this;
                 var params = this.entity;
+                if(!this.entity.semesterId){
+                    messageService.openMsg("请选择学期!");
+                    return;
+                }
                 TeachClassService.addChangeCourse(params).$promise
                     .then(function (data) {
                         messageService.openMsg("新增成功!");

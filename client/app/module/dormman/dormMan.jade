@@ -103,7 +103,7 @@
                                     a.handle(ui-sref="dormedit({id: record.roomId, assign: record.assgin})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.deletePrompt(record)")
+                                    a.handle(ng-if="record.beds == record.emBeds" ng-click="dormMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
                                     a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
@@ -115,7 +115,7 @@
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorms(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开放
-                                    a.handle(ng-if="record.open" ui-sref="dormstuinfo({id: record.roomId})")
+                                    a.handle(ui-sref="dormstuinfo({id: record.roomId})")
                                         i.fa.fa-list
                                         span 学生明细
 

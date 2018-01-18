@@ -220,6 +220,17 @@ angular.module('dleduWebApp')
 				});
 			},
 
+			//判断是否包含已经分配宿舍
+			isAssign: function(objs){
+				for(var i = 0, len = objs.length; i < len; i++){
+					var assign = objs[i].assgin;
+					if(assign){
+						return true;
+					}
+				}
+				return false;
+			},
+
 			//批量分配
 			distedDorms: function (entity) {
 				var selectedDorm;
@@ -229,6 +240,11 @@ angular.module('dleduWebApp')
 				}else{//多选
 					if(!this.selDistObj.length){
 						messageService.openMsg("请先选择宿舍!");
+						return;
+					}
+					//判断选择的宿舍中是否包含已经分配的宿舍，若已经分配提示去掉已分配宿舍后进行批量分配
+					if(this.isAssign(this.selDistObj)){
+						messageService.openMsg("请选择未分配状态的宿舍!");
 						return;
 					}
 					this.isBatchDist = true;

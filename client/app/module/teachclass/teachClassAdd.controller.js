@@ -94,7 +94,7 @@ angular.module('dleduWebApp')
                         text: '按学期筛选'
                     },
                     ajax: {
-                        url: "api/schoolyear/getSchoolYearDropList",
+                        url: "api/schoolyear/getSemesterList",
                         dataType: 'json',
                         //delay: 250,
                         data: function (query) {
@@ -102,17 +102,14 @@ angular.module('dleduWebApp')
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
                                 pageSize: 100,
-
-
                             }
                             params.name = query.term;
                             return params;
                         },
                         processResults: function (data, params) {
                             params.page = params.page || 1;
-                            _this.schoolYearDropList=_this.select2GroupFormat(data.data)
                             return {
-                                results: _this.schoolYearDropList,
+                                results: data.data,
                                 pagination: {
                                     more: (params.page * 30) < data.total_count
                                 }
@@ -120,7 +117,13 @@ angular.module('dleduWebApp')
                         },
                         cache: false
                     },
-
+                    templateResult: function (data) {
+                        if (data.id === '') { // adjust for custom placeholder values
+                            return 'Custom styled placeholder text';
+                        }
+                        _this.schoolYearDropList.push(data);
+                        return data.name;
+                    }
                 }
             },
             //课程下拉搜索
@@ -238,19 +241,12 @@ angular.module('dleduWebApp')
             //学期下拉列表分组数据格式化
             select2GroupFormat: function (dataList) {
                 var result = []
-                angular.forEach(dataList, function (data) {
-                    var obj = {
-                        text: data.name,
-                        children: []
+                angular.forEach(dataList, function (sememster) {
+                    var objChild = {
+                        id: sememster.id,
+                        text: sememster.name
                     };
-                    angular.forEach(data.semesterIdNameList, function (sememster) {
-                        var objChild = {
-                            id: sememster.id,
-                            text: sememster.name
-                        };
-                        obj.children.push(objChild);
-                    })
-                    result.push(obj);
+                    result.push(objChild);
                 })
                 return result;
             },
@@ -400,7 +396,6 @@ angular.module('dleduWebApp')
                     params.studentIds=_this.getSelectStudentIdList();
                 }
                 params.teacherIds=_this.getSelectTeacherIdList();
-
                 TeachClassService.addTeachClass(params).$promise
                     .then(function (data) {
                        $state.go("teachclasslist");
