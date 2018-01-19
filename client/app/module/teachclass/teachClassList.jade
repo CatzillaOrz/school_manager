@@ -23,8 +23,7 @@
                                     label.control-label(for="ddd") 学期：
                                     select#ddd.select2.form-control( ng-model="teachClassListFn.params.semesterId" ui-select2="teachClassListFn.select2SemesterOptions()", ng-change="teachClassListFn.getTeachClassList()" )
                                         option(value="") 全部
-                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassListFn.schoolYearDropList")
-                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children") {{semester.text}}
+                                        option(value="{{semester.id}}" ng-repeat="semester in teachClassListFn.schoolYearDropList") {{semester.name}}
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id2")  选课类型：
                                     select#id2.form-control(ng-model="teachClassListFn.params.mustOrOption", ng-change="teachClassListFn.getTeachClassList()")
