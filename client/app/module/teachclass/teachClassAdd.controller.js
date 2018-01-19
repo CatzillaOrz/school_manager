@@ -472,12 +472,10 @@ angular.module('dleduWebApp')
 
             //学期选择变动显示变动处理
             $scope.$watch('handleFn.params.semesterId', function(newValue, oldValue) {
-               angular.forEach($scope.handleFn.schoolYearDropList,function (schoolYear) {
-                   angular.forEach(schoolYear.children,function (data) {
-                      if(data.id==newValue){
-                          $scope.handleFn.semesterName=data.text;
-                      }
-                   })
+               angular.forEach($scope.handleFn.schoolYearDropList,function (data) {
+                   if(data.id==newValue){
+                       $scope.handleFn.semesterName=data.name;
+                   }
                })
             });
             //选择课程变动
