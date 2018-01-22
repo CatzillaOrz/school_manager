@@ -18,6 +18,7 @@ angular.module('dleduWebApp')
 			checkAllRecord: false, //是否全选
 			selDistObj: [], //选择的对象
 			isBatchDist: false, //是否批量分配宿舍
+			showTip: false, //是否显示提示信息
 
 			//参数
 			params: {
@@ -262,7 +263,10 @@ angular.module('dleduWebApp')
 				ngDialog.open({
 					template: 'publishDialog',
 					width: 700,
-					scope: $scope
+					scope: $scope,
+					preCloseCallback: function(){
+						$scope.dormMan.showTip = false;
+					}
 				})
 			},
 
@@ -271,7 +275,10 @@ angular.module('dleduWebApp')
 				ngDialog.open({
 					template: 'editDialog',
 					width: 700,
-					scope: $scope
+					scope: $scope,
+					preCloseCallback: function(){
+						$scope.dormMan.showTip = false;
+					}
 				})
 				var that = this;
 				if(this.majorLists.length){
@@ -336,6 +343,7 @@ angular.module('dleduWebApp')
 					selArr.push(obj);
 				}
 				this.editDormAssign.radl = selArr;
+				this.showTip = true;
 				if(!this.editDormAssign.profId.length || !this.editDormAssign.sexType)
 					return;
 				DormManService.updateDistedInfo(this.editDormAssign).$promise
@@ -368,6 +376,7 @@ angular.module('dleduWebApp')
 				params.collegeId = major.collegeId;
 				params.collegeName = major.collegeName;
 				params.profName = major.name;
+				this.showTip = true;
 				if(!this.dormAssign.profId || !this.dormAssign.sexType)
 					return;
 				//获取有效分配宿舍的数量

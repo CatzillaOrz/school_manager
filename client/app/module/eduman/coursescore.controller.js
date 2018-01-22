@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('CourseScoreCtrl', function ($scope, AuthService, CourseService){
+	.controller('CourseScoreCtrl', function ($scope, AuthService, CourseService, $timeout, EduManService){
 		$scope.courseListFn={
             
             //课程评分列表
@@ -108,10 +108,31 @@ angular.module('dleduWebApp')
                     })
             },
 
+            getCurrentSemester: function () {
+                var _this = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId
+                };
+                EduManService.getCurrentSemester(params).$promise
+                    .then(function (data) {
+                        _this.params.semesterId = data.id;
+                        _this.schoolYearDropList=[data];
+
+
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
             init: function () {
                 var that=this;
+                $timeout(function () {
+                    that.getCurrentSemester();
+                },100)
                 that.getCourseListIn();
-                that.select2SemesterOptions();
+
+                //that.select2SemesterOptions();
             }
 		};
 		$scope.courseListFn.init();
