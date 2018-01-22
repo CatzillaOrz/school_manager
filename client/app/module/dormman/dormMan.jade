@@ -150,7 +150,7 @@
                         .col-sm-9
                             .col-sm-8
                                 select.form-control(ng-model="dormMan.dormAssign.profId" ng-options="obj.id as obj.name for obj in dormMan.majorLists")
-                            .col-sm-4
+                            .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.dormAssign.profId") 请选择专业
                     .form-group
                         label.col-sm-3.control-label
@@ -164,7 +164,7 @@
                                 label.radio-inline
                                     input(type="radio" name="type"  ng-model="dormMan.dormAssign.sexType" value="20" )
                                     | 女
-                            .col-sm-4
+                            .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.dormAssign.sexType") 请选择性别
 
                     .form-group
@@ -188,7 +188,7 @@
                                     ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
                                     ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
                                         span(ng-bind="item.name" title='{{item.name}}')
-                            .col-sm-4
+                            .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.editDormAssign.profId.length") 请选择专业
                     .form-group
                         label.col-sm-3.control-label
@@ -202,7 +202,7 @@
                                 label.radio-inline
                                     input(type="radio" name="type"  ng-model="dormMan.editDormAssign.sexType" value="20" )
                                     | 女
-                            .col-sm-4
+                            .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.editDormAssign.sexType") 请选择性别
                     .form-group
                         .col-sm-6
