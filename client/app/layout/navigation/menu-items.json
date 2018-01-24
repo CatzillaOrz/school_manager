@@ -5,7 +5,7 @@
             "sref": "home",
             "active": "home",
             "icon": "home",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN"
         },
         {
             "title": "学校信息管理",
@@ -258,7 +258,7 @@
             "sref": "dormbuildingman",
             "icon": "navicon",
             "active": "dormmansys",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN",
             "items":[
                 {
                     "title": "宿舍楼管理",
@@ -279,7 +279,7 @@
             "sref": "payment",
             "active": "payment",
             "icon": "money",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADM"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
         }
     ]
 }
