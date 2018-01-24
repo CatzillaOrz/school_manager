@@ -96,6 +96,14 @@
             span 6、
             span.txt-color-red 院级数据查看角色
             span 仅可以查看其所在院系的教务管理模块的数据，无修改编辑权限(考勤记录、评教问卷、课程评分、电子围栏、辅导员点名）
+        div.no-border
+            span 7、
+            span.txt-color-red 财务管理
+            span 仅可查看在线缴费功能
+        div.no-border.padding-bottom-10
+            span 8、
+            span.txt-color-red 宿舍管理
+            span 仅可查看宿舍管理功能
 
     script(type='text/ng-template',id='distDialog')
         .repeatLoad
@@ -106,10 +114,10 @@
                 label.radio-inline(ng-if="roleDist.isUseAuth('school_sup')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="0" )
                     | 校级超级管理员
-                label.radio-inline(ng-if="roleDist.isUseAuth('schoo_edu')")
+                label.radio-inline(ng-if="roleDist.isUseAuth('school_edu')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="1" )
                     | 校级教务管理
-                label.radio-inline(ng-if="roleDist.isUseAuth('schoo_data')")
+                label.radio-inline(ng-if="roleDist.isUseAuth('school_data')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="2" )
                     | 校级数据查看
                 label.radio-inline(ng-if="roleDist.isUseAuth('college_sup')" style="margin-left:0;")
@@ -118,9 +126,15 @@
                 label.radio-inline(ng-if="roleDist.isUseAuth('college_edu')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="4" )
                     | 院级教务管理
-                label.radio-inline(ng-if="roleDist.isUseAuth('college_data')")
+                label.radio-inline(ng-if="roleDist.isUseAuth('college_data')" )
                     input(type="radio" name="role" ng-model="roleDist.distType" value="5" )
                     | 院级数据查看
+                label.radio-inline(ng-if="roleDist.isUseAuth('finance_man')" style="margin-left:0;")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="6" )
+                    | 财务管理
+                label.radio-inline(ng-if="roleDist.isUseAuth('room_man')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="7" )
+                    | 宿舍管理
             .tip-role(style="padding-left:30px")
                 span.buld.txt-color-red(ng-if="roleDist.distType == 'school'") 请先选择权限
             .attend-dialog-footer

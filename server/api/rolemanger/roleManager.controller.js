@@ -16,7 +16,9 @@ module.exports = {
 
     distRole: function (req, res) {
         var roles = ['ROLE_ORG_MANAGER', 'ROLE_ORG_EDUCATIONALMANAGER', 'ROLE_ORG_DATAVIEW',
-            'ROLE_COLLEGE_ADMIN', 'ROLE_COLLEG_EDUCATIONALMANAGER', 'ROLE_COLLEG_DATAVIEW'];
+            'ROLE_COLLEGE_ADMIN', 'ROLE_COLLEG_EDUCATIONALMANAGER', 'ROLE_COLLEG_DATAVIEW', 'ROLE_FINANCE_ADMIN',
+            'ROLE_DORM_ADMIN'
+        ];
         var query = req.body;
         query.roleName = roles[query.roleName];
         RoleManService.distRoleSync(query, req.user.access_token)
