@@ -170,6 +170,29 @@ angular.module('dleduWebApp')
 				this.getStudentList();
 			},
 
+			//删除
+			deleteNewStudent: function () {
+				var _this = $scope.studentListFn;
+				var params = {
+					id: _this.currentStudent.id,
+					userId: AuthService.getUser().id,
+				}
+				StudentService.deleteNewStudent(params).$promise
+					.then(function (data) {
+						messageService.openMsg("学生删除成功！");
+						_this.getStudentList();
+					})
+					.catch(function (error) {
+						messageService.openMsg(CommonService.exceptionPrompt(error,"学生删除失败！"));
+					})
+			},
+			//删除提示
+			deletePrompt: function (entity) {
+				var that=this;
+				that.currentStudent = entity;
+				messageService.getMsg("您确定要删除此学生吗？", that.deleteStudent)
+			},
+
 			/**
 			 * 弹出批量导入弹出框
 			 */
