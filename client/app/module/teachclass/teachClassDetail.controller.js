@@ -142,6 +142,7 @@ angular.module('dleduWebApp')
                 TeachClassService.deleteTeachClassOneStudent(params).$promise
                     .then(function (data) {
                         messageService.openMsg("删除学生成功");
+                        _this.page.pageNumber = 1;
                         _this.getTeachClassStudentList();
 
                     })
@@ -167,6 +168,7 @@ angular.module('dleduWebApp')
                 TeachClassService.deleteTeachClassAllStudent(params).$promise
                     .then(function (data) {
                         messageService.openMsg("删除学生成功");
+                        _this.page.pageNumber = 1;
                         _this.getTeachClassStudentList();
 
                     })
