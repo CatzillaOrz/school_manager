@@ -28,7 +28,8 @@ angular.module('dleduWebApp')
                         text: '校级教务管理'}, {id: 'ROLE_ORG_DATAVIEW', text: '校级数据查看'},
                     {id: 'ROLE_COLLEGE_ADMIN', text: '院级超级管理员'}, {id: 'ROLE_COLLEG_EDUCATIONALMANAGER',
                         text: '院级教务管理'}, {id: 'ROLE_COLLEG_DATAVIEW', text: '院级数据查看'},
-                    {id: 'ROLE_FINANCE_ADMIN', text: '财务管理'},{id: ' ROLE_DORM_ADMIN', text: '宿舍管理'}
+                    {id: 'ROLE_FINANCE_ADMIN', text: '财务管理'},{id: ' ROLE_DORM_ADMIN', text: '宿舍管理'},
+                    {id: 'ROLE_ENROL_ADMIN', text: '招生管理'}
                 ];
                 //return {minimumResultsForSearch: -1};
             },

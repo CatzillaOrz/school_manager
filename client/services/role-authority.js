@@ -150,8 +150,8 @@ angular.module('dleduWebService')
                     "url": "distlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "authority, school_sup, college_sup, school_data, school_edu, college_data, college_edu, finance_man, room_man",
-                        "ROLE_ORG_MANAGER": "authority, college_sup, school_data, school_edu, college_data, college_edu, finance_man, room_man",
+                        "ROLE_ORG_ADMIN": "authority, school_sup, college_sup, school_data, school_edu, college_data, college_edu, finance_man, room_man, enrol_stu",
+                        "ROLE_ORG_MANAGER": "authority, college_sup, school_data, school_edu, college_data, college_edu, finance_man, room_man, enrol_stu",
                         "ROLE_COLLEGE_ADMIN": "authority, college_data, college_edu",
                         "ROLE_ORG_EDUCATIONALMANAGER": "",
                         "ROLE_ORG_DATAVIEW": "",

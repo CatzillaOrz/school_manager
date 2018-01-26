@@ -79,7 +79,7 @@
             "sref": "studentlist",
             "active": "student",
             "icon": "graduation-cap",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "学期管理",
