@@ -17,8 +17,7 @@
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 学期：
                                     select#ddd.select2.form-control( ng-model="teachClassTableFn.params.wParams.semesterId" ui-select2="teachClassTableFn.select2SemesterOptions()" )
-                                        optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachClassTableFn.schoolYearDropList")
-                                            option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachClassTableFn.params.wParams.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                        option(value="{{semester.id}}" ng-repeat="semester in teachClassTableFn.schoolYearDropList" selected="{{teachClassTableFn.params.wParams.semesterId==semester.id?'selected':''}}") {{semester.name}}
                                 .form-group.col-md-4.margin-top-5(ng-if='teachClassTableFn.params.tParams.weekId !== 0')
                                     label.control-label 学周：
                                     select.form-control(type='text', ng-model="teachClassTableFn.params.tParams.weekId"  ng-options="item.id as item.no for item in teachClassTableFn.weekDropList" data-ng-change='teachClassTableFn.getTeachingTable()')

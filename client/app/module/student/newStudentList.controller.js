@@ -172,12 +172,12 @@ angular.module('dleduWebApp')
 
 			//删除
 			deleteNewStudent: function () {
-				var _this = $scope.studentListFn;
+				var _this = $scope.newStudentListFn;
 				var params = {
 					id: _this.currentStudent.id,
 					userId: AuthService.getUser().id,
 				}
-				StudentService.deleteNewStudent(params).$promise
+				StudentService.deleteStudent(params).$promise
 					.then(function (data) {
 						messageService.openMsg("学生删除成功！");
 						_this.getStudentList();
@@ -190,7 +190,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that=this;
 				that.currentStudent = entity;
-				messageService.getMsg("您确定要删除此学生吗？", that.deleteStudent)
+				messageService.getMsg("您确定要删除此学生吗？", that.deleteNewStudent)
 			},
 
 			/**

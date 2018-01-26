@@ -19,10 +19,6 @@ angular.module('dleduWebService')
                 var student=$resource('api/student/deleteStudent');
                 return student.remove(params);
             },
-            deleteNewStudent:function (params) {
-                var student=$resource('api/student/deleteNewStudent');
-                return student.remove(params);
-            },
             updateStudent: function (params) {
                 var student = $resource('api/student/updateStudent','',{
                     update: {method:'PUT'}});
