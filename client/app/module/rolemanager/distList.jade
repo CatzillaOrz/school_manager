@@ -100,10 +100,14 @@
             span 7、
             span.txt-color-red 财务管理
             span 仅可查看在线缴费功能
-        div.no-border.padding-bottom-10
+        div.no-border
             span 8、
             span.txt-color-red 宿舍管理
             span 仅可查看宿舍管理功能
+        div.no-border.padding-bottom-10
+            span 9、
+            span.txt-color-red 招生管理
+            span 仅可查看学生管理功能
 
     script(type='text/ng-template',id='distDialog')
         .repeatLoad
@@ -135,6 +139,9 @@
                 label.radio-inline(ng-if="roleDist.isUseAuth('room_man')")
                     input(type="radio" name="role" ng-model="roleDist.distType" value="7" )
                     | 宿舍管理
+                label.radio-inline(ng-if="roleDist.isUseAuth('enrol_stu')")
+                    input(type="radio" name="role" ng-model="roleDist.distType" value="8" )
+                    | 招生管理
             .tip-role(style="padding-left:30px")
                 span.buld.txt-color-red(ng-if="roleDist.distType == 'school'") 请先选择权限
             .attend-dialog-footer

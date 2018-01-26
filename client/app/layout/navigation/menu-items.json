@@ -5,7 +5,7 @@
             "sref": "home",
             "active": "home",
             "icon": "home",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "学校信息管理",
@@ -79,7 +79,7 @@
             "sref": "studentlist",
             "active": "student",
             "icon": "graduation-cap",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "学期管理",
