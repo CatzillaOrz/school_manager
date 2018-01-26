@@ -29,6 +29,7 @@
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 班级
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 手机号
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 所在床位
+                                //th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 150px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in dormStuInfo.records")
                                 td.sorting_1 {{$index+1}}
@@ -39,17 +40,34 @@
                                 td {{record.classesName}}
                                 td {{record.phone}}
                                 td {{record.bedName + (record.bedType==10?"(上铺)":"(下铺)")}}
+                                //td
+                                    a.handle(ng-click="dormMan.openBed(record)")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle(ng-click="dormMan.deletePrompt(record)")
+                                        i.fa.fa-trash-o
+                                        span 删除
 
-                    //.dt-toolbar-footer
-                        .col-sm-6.col-xs-12.hidden-xs
-                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                | 显示第
-                                span.txt-color-darken {{dormStuInfo.page.totalElements==0?0:(((dormStuInfo.page.pageNumber)-1)*dormStuInfo.page.pageSize+1)}}
-                                |  到
-                                span.txt-color-darken {{((dormStuInfo.page.pageNumber==0?dormStuInfo.page.pageNumber+1:dormStuInfo.page.pageNumber)-1)*dormStuInfo.page.pageSize+dormStuInfo.records.length}}
-                                |  条 总共
-                                span.text-primary {{dormStuInfo.page.totalElements}}
-                                |  条记录
-                        .col-sm-6.col-xs-12
-                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='dormStuInfo.page.totalElements', max-size='dormStuInfo.page.pageSize' ng-model='dormStuInfo.page.pageNumber',ng-change="dormStuInfo.getDormBuildings()" boundary-link-numbers='true' items-per-page="dormStuInfo.page.pageSize" rotate='false' previous-text="<" next-text=">")
+    //-  分配床位
+    script(type='text/ng-template',id='distBedDialog')
+        .container-fluid
+            .dialog-title
+                h2 分配编辑
+            .dialog-body
+                form.form-horizontal(role="form" name="form" novalidate)
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 分配给专业：
+                        .col-sm-9
+                            .col-sm-8
+                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" class="form-control" mod-Placeholder)
+                                    ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
+                                    ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
+                                        span(ng-bind="item.name" title='{{item.name}}')
+                            .col-sm-4(ng-show="dormMan.showTip")
+                                span.text-danger(ng-show="!dormMan.editDormAssign.profId.length") 请选择专业
+                    .form-group
+                        .col-sm-6
+                            button.btn.btn-primary(ng-click="dormMan.updateDistedDorm()") 保存
+                            button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消

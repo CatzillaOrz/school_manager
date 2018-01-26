@@ -27,23 +27,22 @@ angular.module('dleduWebApp')
 					},
 					allowClear: true,
 					ajax: {
-						url: "api/schoolyear/getSchoolYearDropList",
+						url: "api/schoolyear/getSemesterList",
 						dataType: 'json',
 						//delay: 250,
 						data: function (query) {
 							var params = {
 								orgId: AuthService.getUser().orgId,
 								pageNumber: 1,
-								pageSize: 100,
+								pageSize: 10000,
 							}
 							params.name = query.term;
 							return params;
 						},
 						processResults: function (data, params) {
 							params.page = params.page || 1;
-							_this.schoolYearDropList = _this.select2GroupFormat(data.data);
 							return {
-								results: _this.schoolYearDropList,
+								results: data.data,
 								pagination: {
 									more: (params.page * 30) < data.total_count
 								}
@@ -51,6 +50,13 @@ angular.module('dleduWebApp')
 						},
 						cache: false
 					},
+					templateResult: function (data) {
+						if (data.id === '') { // adjust for custom placeholder values
+							return 'Custom styled placeholder text';
+						}
+						_this.schoolYearDropList.push(data);
+						return data.name;
+					}
 
 				}
 			},
@@ -80,18 +86,9 @@ angular.module('dleduWebApp')
 				};
 				EduManService.getCurrentSemester(_params).$promise
 					.then(function (data) {
-						var obj = {
-							text: data.yearName,
-							children: [{
-								id: data.id,
-								text: data.name
-							}]
-						};
 						that.params.wParams.semesterId = data.id;
-						that.schoolYearDropList = [obj];
+						that.schoolYearDropList = [data];
 						that.getWeekList();
-
-
 					})
 					.catch(function (error) {
 

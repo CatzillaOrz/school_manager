@@ -13,7 +13,6 @@ var router = express.Router();
 router.get('/getStudentList',auth.isSignedIn, controller.getStudentList);
 router.post('/addStudent',auth.isSignedIn, controller.addStudent);
 router.delete('/deleteStudent',auth.isSignedIn, controller.deleteStudent);
-router.delete('/deleteNewStudent',auth.isSignedIn, controller.deleteNewStudent);
 router.put('/updateStudent',auth.isSignedIn, controller.updateStudent);
 router.get('/getStudentById',auth.isSignedIn, controller.getStudentById);
 router.get('/getSimpleStudents',auth.isSignedIn, controller.getSimpleStudents);

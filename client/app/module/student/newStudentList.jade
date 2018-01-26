@@ -55,7 +55,7 @@
                                 th 生源地
                                 th 学生类别
                                 th 层级
-                                //th 操作
+                                th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="student in newStudentListFn.studentList")
                                 td {{$index+1 + ((newStudentListFn.page.pageNumber==0?newStudentListFn.page.pageNumber+1:newStudentListFn.page.pageNumber)-1)*10}}
@@ -67,7 +67,7 @@
                                 td {{student.studentSource}}
                                 td {{student.studentType}}
                                 td {{student.eduLevel}}
-                                //td
+                                td
                                     a.handle(ng-click="newStudentListFn.deletePrompt(student)")
                                         i.fa.fa-trash-o
                                         span 删除
