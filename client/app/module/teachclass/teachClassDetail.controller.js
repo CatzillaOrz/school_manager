@@ -97,6 +97,7 @@ angular.module('dleduWebApp')
                 };
                 TeachClassService.getTeachClassStudentList(params).$promise
                     .then(function (data) {
+                        _this.selectAll = false;
                         _this.teachClassStudentList = data.data;
                         _this.page=data.page;
                         //_this.page.totalElements=data.page.totalElements;
