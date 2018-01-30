@@ -30,5 +30,8 @@ router.post('/assignDorms',auth.isSignedIn, controller.assignDorms);
 router.post('/updateDistedInfo',auth.isSignedIn, controller.updateDistedInfo);
 router.get('/getDormDistedInfo',auth.isSignedIn, controller.getDormDistedInfo);
 router.put('/openDorms',auth.isSignedIn, controller.openDorms);
+router.post('/distedBed',auth.isSignedIn, controller.distedBed);
+router.get('/getStusByMajor',auth.isSignedIn, controller.getStusByMajor);
+router.delete('/delBedStu',auth.isSignedIn, controller.delBedStu);
 
 module.exports = router;

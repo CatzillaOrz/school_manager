@@ -29,45 +29,43 @@
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 班级
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 手机号
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 所在床位
-                                //th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 150px;') 操作
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 150px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in dormStuInfo.records")
                                 td.sorting_1 {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.stuNo}}
-                                td {{record.collegeName}}
-                                td {{record.profName}}
-                                td {{record.classesName}}
-                                td {{record.phone}}
+                                td {{record.stuName?record.stuName:"--"}}
+                                td {{record.stuNo?record.stuNo:"--"}}
+                                td {{record.collegeName?record.collegeName:"--"}}
+                                td {{record.profName?record.profName:"--"}}
+                                td {{record.classesName?record.classesName:"--"}}
+                                td {{record.phone?record.phone:"--"}}
                                 td {{record.bedName + (record.bedType==10?"(上铺)":"(下铺)")}}
-                                //td
-                                    a.handle(ng-click="dormMan.openBed(record)")
+                                td
+                                    a.handle(ng-if="!record.stuId" ng-click="dormStuInfo.openBed(record)")
                                         i.fa.fa-pencil-square-o
-                                        span 编辑
-                                    a.handle(ng-click="dormMan.deletePrompt(record)")
+                                        span 分配床位
+                                    a.handle(ng-if="record.stuId" ng-click="dormStuInfo.deletePrompt(record)")
                                         i.fa.fa-trash-o
-                                        span 删除
+                                        span 移出宿舍
 
     //-  分配床位
     script(type='text/ng-template',id='distBedDialog')
         .container-fluid
             .dialog-title
-                h2 分配编辑
+                h2 分配床位
             .dialog-body
                 form.form-horizontal(role="form" name="form" novalidate)
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 分配给专业：
+                            | 分配给学生：
                         .col-sm-9
                             .col-sm-8
-                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" class="form-control" mod-Placeholder)
-                                    ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
-                                    ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
-                                        span(ng-bind="item.name" title='{{item.name}}')
-                            .col-sm-4(ng-show="dormMan.showTip")
-                                span.text-danger(ng-show="!dormMan.editDormAssign.profId.length") 请选择专业
+                                ui-select(ng-model="dormStuInfo.stuId" remove-selected="false" theme="bootstrap" )
+                                    ui-select-match.ui-select-match(placeholder="请选择学生") {{$select.selected.name}}
+                                    ui-select-choices.ui-select-choices(repeat="item.stuId as item in dormStuInfo.students | filter: $select.search")
+                                        span(ng-bind="item.name+'(' + item.stuId +')'" title='{{item.name}}')
                     .form-group
                         .col-sm-6
-                            button.btn.btn-primary(ng-click="dormMan.updateDistedDorm()") 保存
+                            button.btn.btn-primary(ng-disabled="!dormStuInfo.stuId" ng-click="dormStuInfo.distBed()") 确认分配
                             button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消
