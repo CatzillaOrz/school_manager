@@ -185,6 +185,35 @@ module.exports = {
             })
     },
 
+    distedBed: function (req, res) {
+        DormManService.distedBedSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getStusByMajor: function (req, res) {
+        DormManService.getStusByMajorSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    delBedStu: function (req, res) {
+        DormManService.delBedStuSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

@@ -336,6 +336,62 @@ var DormManService = {
             callback(e);
         });
     },
+
+    //分配床位
+    distedBed: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/web/v1/room/assginStuId',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取分配专业学生列表
+    getStusByMajor: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/room/getNewStuIdInfo',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //删除床位学生信息
+    delBedStu: function (params, access_token, callback) {
+        params.accessToken = access_token;
+        RestClient.delete({
+            host: 'dd',
+            path: '/api/web/v1/room/deleteStuIdInfo',
+            params: params,
+            access_token: access_token,
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+
 };
 
 
