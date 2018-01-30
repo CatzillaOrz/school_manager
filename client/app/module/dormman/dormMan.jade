@@ -64,12 +64,10 @@
                                 .ColVis
                                     button.btn.btn-primary(ui-sref="dormedit")
                                         span 新建
-                                    //button.btn.btn-primary()
-                                        span 批量导入
+                                    button.btn.btn-primary(ng-click="dormMan.distedDorms()")
+                                        span 批量分配专业
                                     button.btn.btn-primary(ng-click="dormMan.openDorms()")
                                         span 批量开放
-                                    button.btn.btn-primary(ng-click="dormMan.distedDorms()")
-                                        span 批量分配
                                     button.btn.btn-primary(ng-click="dormMan.batchClose()")
                                         span 批量关闭
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
@@ -97,7 +95,7 @@
                                 td {{record.no}}
                                 td {{record.beds}}
                                 td {{record.emBeds}}
-                                td {{record.open ? "开放" : "关闭"}}
+                                td {{record.open ? "已开放" : "已关闭"}}
                                 td {{record.assgin ? "已分配" : "未分配"}}
                                 td
                                     a.handle(ui-sref="dormedit({id: record.roomId, assign: record.assgin})")
@@ -111,7 +109,7 @@
                                         span 关闭
                                     a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.openDistedDorm(record)")
                                         i.fa.fa-pencil-square-o
-                                        span 编辑分配
+                                        span 分配专业
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorms(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开放
