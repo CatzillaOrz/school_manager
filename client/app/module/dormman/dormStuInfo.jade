@@ -65,6 +65,8 @@
                                     ui-select-match.ui-select-match(placeholder="请选择学生") {{$select.selected.name}}
                                     ui-select-choices.ui-select-choices(repeat="item.stuId as item in dormStuInfo.students | filter: $select.search")
                                         span(ng-bind="item.name+' ' + item.idNumber +' ' + item.profName" title="{{item.name+' ' + item.idNumber +' ' + item.profName}}")
+                                    ui-select-no-choice &nbsp;&nbsp;无搜索结果
+
                     .form-group
                         .col-sm-6
                             button.btn.btn-primary(ng-disabled="!dormStuInfo.stuId" ng-click="dormStuInfo.distBed()") 确认分配
