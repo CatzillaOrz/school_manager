@@ -119,6 +119,21 @@ angular.module('dleduWebApp')
                     })
             },
 
+            stopPublishPayment:function(payment){
+                var that = this;
+                var params = {
+                    userId   :AuthService.getUser().id,
+                    id:payment.id
+                };
+                PaymentService.stopPublishPayment(params).$promise
+                    .then(function (data) {
+                        that.getPaymentList();
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
             //获取收费详情数据
             getPaymentDetail:function(payment){
                 $state.go('paymentDetail',{payment:payment});

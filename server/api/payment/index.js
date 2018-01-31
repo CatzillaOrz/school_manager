@@ -20,4 +20,6 @@ router.get('/getOrderCostList', auth.isSignedIn,controller.getOrderCostList);
 router.get('/getPersonPayDetail', auth.isSignedIn,controller.getPersonPayDetail);
 router.post('/importPayment',auth.isSignedIn, upload.single('file'), controller.importPayment);
 router.post('/updatePayment',auth.isSignedIn, upload.single('file'), controller.updatePayment);
+router.post('/addPersonalCost',auth.isSignedIn, upload.single('file'), controller.addPersonalCost);
+router.put('/stopPublishPayment',auth.isSignedIn, controller.stopPublishPayment);
 module.exports = router;

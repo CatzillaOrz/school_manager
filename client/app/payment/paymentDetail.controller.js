@@ -68,6 +68,9 @@ angular.module('dleduWebApp')
                 40:'支付失败'
 
             },
+            exportParam:{
+                file:null,
+            },
 
             //获取收费详情数据
             getPersonCost:function(){
@@ -128,6 +131,41 @@ angular.module('dleduWebApp')
                 }
 
             },
+            openImpBatch:function(){
+                var params = {
+                    template: 'addPersonalCostDialog',
+                    width: 600,
+                    scope: $scope,
+                };
+                ImpBatchService.openImpBatch(params);
+            },
+
+            selected: function($newFiles){
+                ImpBatchService.selected($newFiles);
+            },
+
+            downLoad: function(){
+                SchoolService.getApiUrl({type:"pay"}).$promise
+                    .then(function (data) {
+                        window.location.href= data.url + '/v1/paymentsubject/newstudentcosttemplate';
+                    })
+                    .catch(function (error) {
+                    })
+            },
+            addPersonalCost:function(){
+                var that = this;
+                if(this.exportParam.file == null){
+                    messageService.openDialog("请选择excel文件！");
+                    return;
+                }
+                var params={
+                    file:this.exportParam.file,
+                    userId   :AuthService.getUser().id,
+                    paymentSubjectId: this.paymentParams.id,
+                };
+                CommonService.delEmptyProperty(params);
+                PaymentService.addPersonalCost(params, this,this.getProfessional);
+            },
 
             //获取按支付明细查看缴费信息列表
             getOrderCostList:function(){
@@ -172,7 +210,8 @@ angular.module('dleduWebApp')
                                 '实交金额':item.hasPay,
                                 '欠费金额':item.shouldPay-item.hasPay,
                                 '状态':item.paymentState==10?'未交费':item.paymentState==20?'有欠费':'已结清',
-                                '收费明细':item.payDesc
+                                '收费明细':item.payDesc,
+                                '学生状态':item.personalState==10?'正常':'自愿放弃',
                             }
 
                         })
@@ -199,10 +238,12 @@ angular.module('dleduWebApp')
                                 '付款单号':item.orderNo,
                                 '交费人':item.name,
                                 '身份证号':item.idNumber,
+                                '专业':item.professionalName,
                                 '支付金额':item.amount,
                                 '支付时间':item.payTime,
                                 '状态':that.orderState[item.orderState],
-                                '支付宝订单号':item.aliOrderNo
+                                '支付宝订单号':item.aliOrderNo,
+                                '学生状态':item.personalState==10?'正常':'自愿放弃',
                             }
 
                         })
@@ -272,11 +313,12 @@ angular.module('dleduWebApp')
             },
 
             //按人员查看缴费详情弹出框
-            showPersonPayDetail:function(id){
+            showPersonPayDetail:function(personCost){
                 var that = this;
-                PaymentService.getPersonPayDetail({personCostId:id}).success(function (res) {
+                PaymentService.getPersonPayDetail({personCostId:personCost.id}).success(function (res) {
                     if(res){
                         that.personPayDetailList = res;
+                        that.personPayDetail = personCost;
                         var params = {
                             template: 'importResultDialog',
                             width: 600,

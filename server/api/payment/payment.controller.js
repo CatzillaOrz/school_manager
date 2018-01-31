@@ -126,6 +126,22 @@ module.exports = {
                 })
         });
     },
+    addPersonalCost: function (req, res) {
+        var filePath = req.file.path + path.extname(req.file.originalname);
+        fs.rename(req.file.path, filePath, function (err) {
+            if (err) {
+                res.status(500).send(err);
+                return;
+            }
+            paymentService.addPersonalCostSync(filePath, req.body)
+                .then(function (json) {
+                    res.json(json);
+                })
+                .catch(function (e) {
+                    res.status(500).json(e);
+                })
+        });
+    },
     updatePayment: function (req, res) {
         var filePath = req.file.path + path.extname(req.file.originalname);
         fs.rename(req.file.path, filePath, function (err) {
@@ -142,6 +158,15 @@ module.exports = {
                 })
         });
 
+    },
+    stopPublishPayment:function (req,res) {
+        paymentService.stopPublishPaymentSync(req.body)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
     },
 };
 

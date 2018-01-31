@@ -91,15 +91,15 @@
                         span.bottom-line 已结清金额总计：
                     .charges-details-content.left
                         span
-                        span ￥{{paymentFn.personCal.totalShouldPay }}元
-                        span ￥{{paymentFn.personCal.noPayShouldPay}}元
-                        span ￥{{paymentFn.personCal.owedHasPay  }}元
-                        span.bottom-line ￥{{paymentFn.personCal.completeHasPay  }}元
+                        span ￥{{paymentFn.personCal.totalShouldPay }}
+                        span ￥{{paymentFn.personCal.noPayShouldPay}}
+                        span ￥{{paymentFn.personCal.owedHasPay  }}
+                        span.bottom-line ￥{{paymentFn.personCal.completeHasPay  }}
     .jarviswidget.jarviswidget-color-blueDark.payment-detail
         div.payment-detail-content(role='content')
             .total-payment
                 span 实际交费金额总计：
-                span ￥{{paymentFn.personCal.owedHasPay+paymentFn.personCal.completeHasPay}}元
+                span ￥{{paymentFn.personCal.owedHasPay+paymentFn.personCal.completeHasPay}}
     #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
@@ -119,7 +119,7 @@
                         .tab-content
                             .no-padding
                                 .dataTables_wrapper.form-inline.no-footer
-                                    .col-xs-12.col-sm-4
+                                    .col-xs-12.col-sm-3
                                         label 姓名/身份证号：
                                             input.form-control(type='search', aria-controls='datatable_col_reorder' ng-model="paymentFn.searchPaymentName")
                                     .col-xs-12.col-sm-3
@@ -128,6 +128,10 @@
                                     .col-xs-12.col-sm-3
                                         label 专业：
                                             select.select2.form-control(ng-model="paymentFn.major"  ng-options="major.name for major in paymentFn.majorList" )
+                                    .col-sm-1.col-xs-6.hidden-xs
+                                        .ColVis
+                                            button.btn.btn-primary(type='button' ng-click="paymentFn.openImpBatch()")
+                                                span 新增名单
                                     .col-sm-1.col-xs-6.hidden-xs
                                         .ColVis
                                             button.btn.btn-primary(type='button' ng-click="paymentFn.getPersonCostList()")
@@ -148,7 +152,8 @@
                                                 th 欠费金额
                                                 th 状态
                                                 th 收费明细
-                                                th 支付明细
+                                                th 学生状态
+                                                th 操作
                                         tbody
                                             tr.odd(role='row' ng-repeat="personCost in paymentFn.personCostList")
                                                 td.sorting_1 {{$index+1 + ((paymentFn.personPage.pageNumber==0?paymentFn.personPage.pageNumber+1:paymentFn.personPage.pageNumber)-1)*5}}
@@ -160,8 +165,9 @@
                                                 td ￥{{personCost.shouldPay-personCost.hasPay}}
                                                 td {{personCost.paymentState==10?'未交费':personCost.paymentState==20?'有欠费':'已结清'}}
                                                 td {{personCost.payDesc}}
+                                                td {{personCost.personalState==10?'正常':'自愿放弃'}}
                                                 td
-                                                    a.handle(ng-click="paymentFn.showPersonPayDetail(personCost.id)")
+                                                    a.handle(ng-click="paymentFn.showPersonPayDetail(personCost)")
                                                         i.fa.fa-pencil-square-o
                                                         span 查看
 
@@ -212,20 +218,24 @@
                                                 th 付款单号
                                                 th 缴费人
                                                 th 身份证号
+                                                th 专业
                                                 th 支付金额
                                                 th 支付时间
                                                 th 状态
                                                 th 支付宝订单号
+                                                th 学生状态
                                         tbody
                                             tr.odd(role='row' ng-repeat="orderCost in paymentFn.orderCostList")
                                                 td.sorting_1 {{$index+1 + ((paymentFn.orderPage.pageNumber==0?paymentFn.orderPage.pageNumber+1:paymentFn.orderPage.pageNumber)-1)*5}}
                                                 td {{orderCost.orderNo}}
                                                 td {{orderCost.name}}
                                                 td {{orderCost.idNumber}}
+                                                td {{orderCost.professionalName }}
                                                 td {{orderCost.amount}}
                                                 td {{orderCost.payTime}}
                                                 td {{orderCost.orderState}}
                                                 td {{orderCost.aliOrderNo }}
+                                                td {{orderCost.personalState==10?'正常':'自愿放弃'}}
 
                                     .dt-toolbar-footer
                                         .col-sm-6.col-xs-12.hidden-xs
@@ -244,10 +254,41 @@ script(type='text/ng-template',id='importResultDialog')
     .repeatLoad
         .repeat_header.payment-details-header
             i.fa.fa-table
-            span.buld 支付明细
+            span.buld 支付明细(缴费人：{{paymentFn.personPayDetail.name}}&nbsp;&nbsp; 身份证号码：{{paymentFn.personPayDetail.idNumber}})
         .payment-details-list
             .details-content(ng-repeat="detail in paymentFn.personPayDetailList")
                 span 付款单号：{{detail.orderNo}}
                 span 付款日期：{{detail.payTime}}
                 span 付款金额：￥{{detail.amount}}
                 span 支付宝订单号：{{detail.aliOrderNo}}
+
+//-  添加缴费人员弹出窗模版
+script(type='text/ng-template',id='addPersonalCostDialog')
+    .buld_wrap
+        .buld_head
+            i.fa.fa-file-excel-o
+            span.buld 新增缴费人员
+        .propt_content
+            table
+                tr
+                    td.first_td 上传文件
+                    td
+                        .choseFile.left(ngf-select='paymentFn.selected($newFiles)' ng-model="paymentFn.exportParam.file" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                        input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="paymentFn.exportParam.file.name" )
+                        //.left.load_inner(ng-click='paymentFn.importantBatch(paymentFn.myFile)', type='button') 导入
+                tr
+                    td.first_td.downlaod-temp 模板下载
+                    td
+                        .load_inner_w(style="cursor:pointer" ng-click="paymentFn.downLoad()") 缴费单导入模板
+                tr
+                    td.first_td 缴费设置
+                    td
+                        .edit-payment-content
+                            .payment-style-content
+                                button.import-button(ng-click="paymentFn.addPersonalCost()") 导入并保存
+                tr
+                    td.first_td 导入功能说明
+                    td
+                        ul
+                            li 1.导入的数据项中，费用名称、支付人姓名、支付人身份证号码、应付金额为必填项
+

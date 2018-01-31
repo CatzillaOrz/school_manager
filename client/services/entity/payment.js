@@ -51,6 +51,11 @@ angular.module('dleduWebService')
                     params:params
                 });
             },
+            stopPublishPayment:function(params){
+                var payment = $resource('api/payment/stopPublishPayment','',{
+                    update: {method:'PUT'}});
+                return payment.update(params);
+            },
             //获取环境
             importPayment: function(params,scopeObj,callback){
                 CommonService.addLoading(true, 'all');
@@ -68,7 +73,30 @@ angular.module('dleduWebService')
                     },function(res){
                         CommonService.addLoading(false, 'all');
                         if(res.data && res.data.message){
-                            messageService.openMsg("导入失败！错误信息："+res.data.message+'\n请检查导入数据或重新下载模板！',5000);
+                            messageService.openMsg("导入失败！请检查导入数据或重新下载模板！",5000);
+                        }else{
+                            messageService.openMsg("导入失败!");
+                        }
+                    })
+                }
+            },
+            addPersonalCost: function(params,scopeObj,callback){
+                CommonService.addLoading(true, 'all');
+                if (params.file) {
+                    Upload.upload({
+                        url: '/api/payment/addPersonalCost',
+                        method: 'POST',
+                        data: params
+                    }).then(function(res){
+                        CommonService.addLoading(false, 'all');
+                        if(res.status === 200){
+                            messageService.openMsg("导入成功！");
+                            callback.call(scopeObj);
+                        }
+                    },function(res){
+                        CommonService.addLoading(false, 'all');
+                        if(res.data && res.data.message){
+                            messageService.openMsg("导入失败！请检查导入数据或重新下载模板！",5000);
                         }else{
                             messageService.openMsg("导入失败!");
                         }
@@ -91,7 +119,7 @@ angular.module('dleduWebService')
                     },function(res){
                         CommonService.addLoading(false, 'all');
                         if(res.data && res.data.message){
-                            messageService.openMsg("导入失败！错误信息："+res.data.message+'\n请检查导入数据或重新下载模板！',5000);
+                            messageService.openMsg("导入失败！请检查导入数据或重新下载模板！",5000);
                         }else{
                             messageService.openMsg("导入失败!");
                         }

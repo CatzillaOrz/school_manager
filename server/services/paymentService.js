@@ -328,6 +328,53 @@ var paymentService = {
             }
         })
     },
+    addPersonalCost: function (filePath,params,callback) {
+        var that = this;
+        this.upload({
+            host: 'pay',
+            path: '/v1/paymentsubject/addpersonalcost' +
+            '?paymentSubjectId=' +params.paymentSubjectId+
+            '&userId=' +params.userId,
+            filePath: filePath,
+            fileKey: 'file'
+        }, function (err, res) {
+            that.deleteTempFile('./uploads/');
+            if (err) {
+                callback(err);
+                return;
+            }
+            if (res.statusCode === 200 || res.statusCode === 426) {
+                if(res.body == ''){
+                    callback(null, JSON.parse('{"success":true}'));
+                }else{
+                    callback(null, res.body);
+                }
+            } else {
+                console.log(res.body.cause);
+                callback(function(){
+                    return {
+                        code: JSON.parse(res.body).code,
+                        message: JSON.parse(res.body).cause
+                    };
+                }());
+            }
+        })
+    },
+    stopPublishPayment: function (params, callback) {
+        RestClient.put({
+            host: 'pay',
+            path: '/v1/paymentsubject/cansel/'+params.id,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 Promise.promisifyAll(paymentService, {suffix: "Sync"});

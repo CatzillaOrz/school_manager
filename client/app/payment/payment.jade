@@ -42,23 +42,28 @@
                                 td {{payment.name}}
                                 td {{payment.paymentType == 10?'全款支付':payment.paymentType == 20?'分期支付':''}}
                                 td {{payment.lastDate}}
-                                td {{payment.publishState == 10?'待生效':payment.publishState == 20?'已生效':'已过期'}}
+                                td {{payment.publishState == 10?'待下发':payment.publishState == 20?'已下发':payment.publishState == 30?'已中止':'已过期'}}
                                 td
+                                    a.handle(ng-click="paymentFn.getPaymentDetail(payment)" ng-show="payment.publishState==20||payment.publishState==70||payment.publishState==30")
+                                        i.fa.fa-eye
+                                        span 查看统计
                                     a.handle(ng-click="paymentFn.getPayment(payment)" ng-show="payment.publishState==10")
                                         i.fa.fa-upload
                                         span 重新导入
-                                    a.handle(ng-click="paymentFn.deletePayment(payment)" ng-show="payment.publishState==10")
-                                        i.fa.fa-trash-o
-                                        span 删除
+
                                     a.handle(ng-click="paymentFn.getPaymentDetail(payment)" ng-show="payment.publishState==10")
                                         i.fa.fa-eye
                                         span 预览
                                     a.handle(ng-click="paymentFn.publishPayment(payment)" ng-show="payment.publishState==10")
                                         i.fa.fa-trash-o
-                                        span 生效
-                                    a.handle(ng-click="paymentFn.getPaymentDetail(payment)" ng-show="payment.publishState==20||payment.publishState==70")
-                                        i.fa.fa-eye
-                                        span 查看统计
+                                        span 下发
+                                    a.handle(ng-click="paymentFn.deletePayment(payment)" ng-show="payment.publishState==10")
+                                        i.fa.fa-trash-o
+                                        span 删除
+                                    a.handle(ng-click="paymentFn.stopPublishPayment(payment)" ng-show="payment.publishState==20")
+                                        i.fa.fa-trash-o
+                                        span 中止
+
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
