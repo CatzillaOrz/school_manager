@@ -239,13 +239,6 @@
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         },
         {
-            "title": "问题反馈",
-            "sref": "feedbackhome",
-            "active": "feedbackhome",
-            "icon": "bar-chart-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
-        },
-        {
             "title": "实时监控分析",
             "sref": "geodetail",
             "target":"_blank",
