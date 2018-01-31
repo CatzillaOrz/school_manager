@@ -40,8 +40,8 @@ angular.module('dleduWebApp')
 			isFullArr: [{value: null, name: '请选择'},{value: true, name: '是'},
 				{value: false, name: '否'}],
 
-			isOpenArr: [{value: null, name: '请选择'},{value: true, name: '开放'},
-				{value: false, name: '关闭'}],
+			isOpenArr: [{value: null, name: '请选择'},{value: true, name: '已开放'},
+				{value: false, name: '已关闭'}],
 
 			dormAssign:{
 				collegeId: 0,
