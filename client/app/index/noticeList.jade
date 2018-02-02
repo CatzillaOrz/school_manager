@@ -3,7 +3,7 @@
         ul.new-notice-content
             li.new-notice-list(ng-repeat="notice in noticeListFn.noticeList" ui-sref="noticedetail({id:notice.id})")
                 .new-notice-image
-                    img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default420x156.png'}}")
+                    img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'https://s.aizhixin.com/notice-default420x156.png'}}")
                 .new-notice-content
                     .date
                         span.day {{ noticeListFn.formatDate(notice.publishDate,'dd') }}

@@ -10,12 +10,12 @@
             ul.swiper-wrapper
                 li.swiper-slide(ng-repeat="course in indexFn.boutiqueCourseList")
                     a.course-card(href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
-                        .course-image(style="background:url({{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1498583024217.jpg'}});background-size:cover;")
+                        .course-image(style="background:url({{course.inUrl || 'https://s1.aizhixin.com/1498583024217.jpg'}});background-size:cover;")
                         .course-detail
                             .name {{course.courseName}}
                             .teacher
                                 .avater
-                                    img(ng-src="{{course.courseAuthors[0].photo || 'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" )
+                                    img(ng-src="{{course.courseAuthors[0].photo || 'https://s.aizhixin.com/avatar-man.png'}}" )
                                 .name(ng-show="course.courseAuthors[0].name") {{course.courseAuthors[0].position}} | {{course.courseAuthors[0].name}}
 
             // Add Pagination
@@ -34,7 +34,7 @@
             ul.notice-content
                 li.notice-list(ng-repeat="notice in indexFn.noticeList" ui-sref="noticedetail({id:notice.id})" ng-init="indexFn.activeFirstNotice=0" ng-mouseenter="indexFn.activeFirstNotice=$index" ng-class="{'active':$index==indexFn.activeFirstNotice}")
                     .new-pic
-                        img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'http://oli56k5b0.bkt.clouddn.com/notice-default.png'}}")
+                        img(ng-src="{{indexFn.getHtmlFirstImg(notice.content) || 'https://s.aizhixin.com/notice-default.png'}}")
                     .current-context
                         .date
                             span.day {{ indexFn.formatDate(notice.publishDate,'dd') }}
@@ -51,7 +51,7 @@
             .more(ui-sref="hotmajorlist") 更多
             .major-content
                 .major-list(ng-repeat="major in indexFn.hotMajorList" ui-sref="hotmajordetail({id:major.id})" class="{{'major'+$index}}" )
-                    img(ng-src="{{major.inUrl || 'http://oli56k5b0.bkt.clouddn.com/major-defulat.png'}}")
+                    img(ng-src="{{major.inUrl || 'https://s.aizhixin.com/major-defulat.png'}}")
                     .shade
                     .name {{major.specialtyName}}
 .teacher-container(ng-if="indexFn.excellentTeacherList.length>0")
@@ -65,11 +65,11 @@
                 .teacher-list(ng-repeat="teacher in indexFn.excellentTeacherList" class="{{'teacher'+$index}}" ui-sref="excellentteacherdetail({id:teacher.id})")
                     .teacher-image
                         img.img(ng-src="{{ teacher.inUrl}}" ng-if="teacher.inUrl")
-                        img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='男'")
-                        img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
+                        img.img(ng-src="{{'https://s.aizhixin.com/avatar-man.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='男'")
+                        img.img(ng-src="{{'https://s.aizhixin.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
                     .content
                         .name {{teacher.teacherName}}
                         .detail
                           | {{indexFn.cutHtml(teacher.introduction,20)}}
                         button.btn-detail 了解详情
-                        // http://oli56k5b0.bkt.clouddn.com/avatar-woman.png
+                        // https://s.aizhixin.com/avatar-woman.png

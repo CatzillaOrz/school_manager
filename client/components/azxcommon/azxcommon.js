@@ -25,7 +25,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }
                 user.userName = user.userName || user.name || user.shortName;
                 // user.name = user.name || user.userName || user.shortName;
-                user.avatar = user.avatar || 'http://oli56k5b0.bkt.clouddn.com/default_profile.jpg';
+                user.avatar = user.avatar || 'https://s.aizhixin.com/default_profile.jpg';
                 angular.forEach(user.roleNames, function (role) {
                     if (role == 'ROLE_STUDENT') {
                         if (!user.role) {
@@ -704,19 +704,19 @@ angular.module("azx.common", ['ui.bootstrap'])
                 } else {
                     $http({
                         method: 'GET',
-                        url: 'http://oli56k5b0.bkt.clouddn.com/api/navigation.json'
+                        url: 'https://s.aizhixin.com/api/navigation.json'
                     }).success(function (res) {
                         $scope.navigation = res;
                     });
                 }
 
-                /*$http.get('http://oli56k5b0.bkt.clouddn.com/api/navigation.json').then(function (res) {
+                /*$http.get('https://s.aizhixin.com/api/navigation.json').then(function (res) {
                  $scope.navigation = res.data;
                  });
                  */
                 /*$http({
                  method:  'GET' ,
-                 url:  'http://oli56k5b0.bkt.clouddn.com/api/navigation.json' ,
+                 url:  'https://s.aizhixin.com/api/navigation.json' ,
                  headers: {
                  'Content-Type' :  'text/html,application/xhtml+xml,application/xml',
                  'X-Requested-With':null
@@ -724,7 +724,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                  }).success(function (data) {
                  //console.log(data);
                  });*/
-                /*$http.get('http://oli56k5b0.bkt.clouddn.com/api/navigation.json' + new Date().getTime()).then(function (res) {
+                /*$http.get('https://s.aizhixin.com/api/navigation.json' + new Date().getTime()).then(function (res) {
                  $scope.navigation = res.data;
                  });*/
                 $rootScope.$watch('user', function () {
@@ -768,7 +768,7 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<div class="school-header">' +
             '<div class="border-top"></div>' +
             ' <div class="school-nav-bar">' +
-            '<div class="logo"><img id="logo" ng-src="{{indexFn.schoolLogo.logoUrl || \'http://oli56k5b0.bkt.clouddn.com/logo.jpg\' }}" class="logo"/></div>' +
+            '<div class="logo"><img id="logo" ng-src="{{indexFn.schoolLogo.logoUrl || \'https://s.aizhixin.com/logo.jpg\' }}" class="logo"/></div>' +
             '<ul ng-if="indexFn.user" class="account">' +
             '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
             '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
@@ -1010,8 +1010,8 @@ angular.module("azx.common", ['ui.bootstrap'])
                 $scope.footerFn = {
                     connector: null,
                     mouseenter: 'mouseenter',
-                    qrWeixin: $sce.trustAsHtml('<div class="barcode"><img src="http://oli56k5b0.bkt.clouddn.com/QRcode_weixin.jpg"/></div>'),
-                    qrQQ: $sce.trustAsHtml('<div class="barcode"><img src="http://oli56k5b0.bkt.clouddn.com/QRcode_qq.png"/></div>'),
+                    qrWeixin: $sce.trustAsHtml('<div class="barcode"><img src="https://s.aizhixin.com/QRcode_weixin.jpg"/></div>'),
+                    qrQQ: $sce.trustAsHtml('<div class="barcode"><img src="https://s.aizhixin.com/QRcode_qq.png"/></div>'),
                     linksTop: [
                         {
                             "name": "世纪鼎利",

@@ -7,8 +7,8 @@
             //        | 教师详情>>
             .teacher-image
                 img.img(ng-src="{{ teacher.inUrl}}" ng-if="teacher.inUrl")
-                img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-man.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='男'")
-                img.img(ng-src="{{'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
+                img.img(ng-src="{{'https://s.aizhixin.com/avatar-man.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='男'")
+                img.img(ng-src="{{'https://s.aizhixin.com/avatar-woman.png'}}" ng-if="!teacher.inUrl&&teacher.sex=='女'")
             .teacher-name
                 span.name {{teacher.teacherName}}
                 span.position(ng-if="teacher.position")    | {{teacher.position}}
