@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
 				date: '',
 			},
 
-			directUrl:'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png',
+			directUrl:'https://s1.aizhixin.com/97a1683c-7566-4469-9438-63f5a06f12c6.png',
 			isShowQueryDialog: false,
 			mapObjs: {
 				markersOribit: [],
@@ -305,10 +305,10 @@ angular.module('dleduWebApp')
 			showListOribit: function(){
 				if(!this.isShowQueryDialog){
 					this.isShowQueryDialog = true;
-					this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/675e01b3-d38a-49ed-8929-df724d05bb81.png';
+					this.directUrl = 'https://s1.aizhixin.com/675e01b3-d38a-49ed-8929-df724d05bb81.png';
 				}else{
 					this.isShowQueryDialog = false;
-					this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
+					this.directUrl = 'https://s1.aizhixin.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
 				}
 			},
 
@@ -329,7 +329,7 @@ angular.module('dleduWebApp')
 				};
 				//初始化点击展开按钮
 				this.isShowQueryDialog = false;
-				this.directUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
+				this.directUrl = 'https://s1.aizhixin.com/97a1683c-7566-4469-9438-63f5a06f12c6.png';
 				ngDialog.open(params);
 			},
 

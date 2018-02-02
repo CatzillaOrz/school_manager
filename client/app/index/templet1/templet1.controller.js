@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('templet1Ctrl', function ($scope, $rootScope, AuthService, CollegeService, $state, messageService, $timeout, SchoolService, CommonService, $location) {
         $timeout(function () {
-            $("#logo").attr('src', "http://oli56k5b0.bkt.clouddn.com/school/templet1-logo1.png");
+            $("#logo").attr('src', "https://s.aizhixin.com/school/templet1-logo1.png");
         });
         var lFollowX = 0;
         var lFollowY = 0;

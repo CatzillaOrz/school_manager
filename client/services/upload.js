@@ -5,7 +5,7 @@
 
 angular.module('dleduWebService')
   .factory('UploadService', function ($http, $q,$resource, Upload) {
-    var qiniuBaseLinkUrl = 'http://7xpscc.com1.z0.glb.clouddn.com/';
+    var qiniuBaseLinkUrl = 'https://s1.aizhixin.com/';
     var qiniuUploadUrl = 'http://upload.qiniu.com/';
     var polyvUploadUrl=" http://v.polyv.net/uc/services/rest?method=uploadfile"
     return {
