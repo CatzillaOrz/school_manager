@@ -37,7 +37,9 @@ angular.module('dleduWebApp')
             },
             toIndex:function () {
                 //$window.location.href
-                window.open( 'http://' +$window.location.host, "_blank")
+                var domain=AuthService.getCurrentEnvDomain()[5];
+                var url=AuthService.getUser().orgCode+"."+domain;
+                window.open( '//' +url, "_blank")
             }
         };
         $scope.layoutFn.getLogoList();
