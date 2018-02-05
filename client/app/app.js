@@ -133,7 +133,7 @@ angular.module('dleduWebApp', [
             //入口路由配置
             $urlRouterProvider
                 .otherwise('/apprenticeship');
-       git
+
         }else{
 
             //入口路由配置
