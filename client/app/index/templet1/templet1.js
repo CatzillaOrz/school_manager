@@ -3,8 +3,8 @@
 angular.module('dleduWebApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('templet1', {
-                url   : '/templet1',
+            .state('index', {
+                url   : '/index',
                 access: {requiredLogin: false},
                 views : {
                     root: {

@@ -7,14 +7,28 @@
                 .logo-block
                     img.logo(ng-src="{{logoFn.logoList[0].logoUrl}}")
                 .logo-block-introduce
-                   .logo-introduce 学校徽章logo，用于系统的学校个性化展示。
+                   .logo-introduce 学校蓝色徽章logo，用于系统的学校个性化展示。
             .logo-image-view(ng-click='logoFn.setToggle(1)')
                 .title
                     | 第二张
                 .logo-long-block
                     img.logo(ng-src="{{logoFn.logoList[1].logoUrl}}")
                 .logo-long-block-introduce
-                    .logo-introduce 徽章文字logo，主要用于学校个性化展示。
+                    .logo-introduce 学校蓝色徽章文字logo，主要用于学校个性化展示。
+            .logo-image-view(ng-click='logoFn.setToggle(2)')
+                .title
+                    | 第三张
+                .logo-block
+                    img.logo(ng-src="{{logoFn.logoList[2].logoUrl}}")
+                .logo-block-introduce
+                   .logo-introduce 学校白色徽章logo，用于系统的学校个性化展示。
+            .logo-image-view(ng-click='logoFn.setToggle(3)')
+                .title
+                    | 第四张
+                .logo-long-block
+                    img.logo(ng-src="{{logoFn.logoList[3].logoUrl}}")
+                .logo-long-block-introduce
+                    .logo-introduce 学校白色徽章文字logo，主要用于学校个性化展示。
 
         .container(ng-if="logoFn.isSetLogo")
             .logo-setting

@@ -2,9 +2,6 @@
 
 angular.module('dleduWebApp')
     .controller('templet1Ctrl', function ($scope, $rootScope, AuthService, CollegeService, $state, messageService, $timeout, SchoolService, CommonService, $location) {
-        $timeout(function () {
-            $("#logo").attr('src', "https://s.aizhixin.com/school/templet1-logo1.png");
-        });
         var lFollowX = 0;
         var lFollowY = 0;
         var x = 0;
@@ -45,6 +42,48 @@ angular.module('dleduWebApp')
         });
         moveBackground()
         $scope.template1Fn={
-            product:CommonService.product
+            product:CommonService.product,
+            //logo
+            schoolInfo:{},
+            params:{orgId:215},
+            badgeWhiteLogo:null,
+            badgeAndFontWhiteLogo:null,
+            getLogoList:function () {
+                var _this=this;
+                var params={
+                    orgId:_this.params.orgId
+                };
+                SchoolService.getLogoList(params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        angular.forEach(data.data,function (temp) {
+                            if(temp.logoSort==3){
+                                _this.badgeWhiteLogo=temp;
+                            }
+                            if(temp.logoSort==4){
+                                _this.badgeAndFontWhiteLogo=temp;
+                            }
+                        })
+                        $("#logo").attr('src', _this.badgeAndFontWhiteLogo.logoUrl);
+                        $("#badge").attr('src', _this.badgeWhiteLogo.logoUrl);
+                        $(".logo").css("display","inline-block")
+                        $("#badge").css("display","inline-block")
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            init:function () {
+                var _this=this;
+                _this.schoolInfo=  CommonService.getSchool();
+                console.log(_this.schoolInfo);
+                if(_this.schoolInfo){
+                    _this.params.orgId=_this.schoolInfo.id;
+                    _this.getLogoList();
+                }else {
+                    //CommonService.msgDialog("您输入的地址有误!", 2);
+                }
+            }
         }
+        $scope.template1Fn.init();
     });

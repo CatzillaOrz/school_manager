@@ -77,6 +77,7 @@ angular.module('dleduWebService')
                    // if (domain != "localhost"&&!isIp) {
                         var params = {
                             domainname: code
+                            //domainname: "sjdr"
                         };
                         SchoolService.getSchoolByDomain(params).$promise
                             .then(function (data) {
