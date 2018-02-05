@@ -111,6 +111,7 @@
             margin: 0px auto;
             .logo {
               height: 40px;
+              display: none;
             }
             .account {
 
@@ -176,7 +177,7 @@
 
                   }
                   .keyline {
-
+                    background: #fff;
                   }
                 }
                 .active {
@@ -208,6 +209,7 @@
           img {
             width: 150px;
             height: 130px;
+            display: none;
           }
         }
 
