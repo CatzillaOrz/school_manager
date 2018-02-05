@@ -133,9 +133,7 @@ angular.module('dleduWebApp', [
             //入口路由配置
             $urlRouterProvider
                 .otherwise('/apprenticeship');
-        }else if(domain=='gllg'||domain=='glut'){
-            $urlRouterProvider
-                .otherwise('/templet1');
+
         }else{
 
             //入口路由配置
