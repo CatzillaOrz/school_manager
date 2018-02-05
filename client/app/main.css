@@ -4178,6 +4178,8 @@ a:focus {
             .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .logo {
               height: 40px;
               display: none; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .account li:hover {
+              color: #fff; }
             .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .btn-login {
               color: #fff;
               border: 1px solid #fff;
@@ -4216,6 +4218,11 @@ a:focus {
         text-align: center;
         animation-duration: 1s;
         animation-delay: 1.1s; }
+        .templet1-container .shade .context .context2 .title {
+          color: #fff;
+          font-size: 36px;
+          font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+          letter-spacing: 2px; }
         .templet1-container .shade .context .context2 img {
           width: 560px;
           height: 40px; }
@@ -4332,6 +4339,8 @@ a:focus {
             .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .logo {
               height: 40px;
               display: none; }
+            .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .account li:hover {
+              color: #fff; }
             .templet1-container .shade .header .azx-school-header .school-header .school-nav-bar .btn-login {
               color: #fff;
               border: 1px solid #fff;
@@ -4370,6 +4379,11 @@ a:focus {
         text-align: center;
         animation-duration: 1s;
         animation-delay: 1.1s; }
+        .templet1-container .shade .context .context2 .title {
+          color: #fff;
+          font-size: 36px;
+          font-family: "PingFangSC-Regular", "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+          letter-spacing: 2px; }
         .templet1-container .shade .context .context2 img {
           width: 560px;
           height: 40px; }
