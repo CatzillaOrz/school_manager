@@ -40,7 +40,7 @@ angular.module('dleduWebApp', [
                 divParent = '.show-container-part';
                 imgSub = 'show-loading-imgsub';
             }
-            var html = '<div class="show-curtain"><img class="' + imgSub + '" src="http://oli56k5b0.bkt.clouddn.com/loading.gif"></div>';
+            var html = '<div class="show-curtain"><img class="' + imgSub + '" src="https://s.aizhixin.com/loading.gif"></div>';
             $('body').append('<div class="show-container"></div>');
             if (status) {
                 if ($(divParent + ' .show-curtain').length === 0) {

@@ -6,7 +6,7 @@
         .more.cursor-pointer(ui-sref="boutique") 更多>>
     .boutique-course-content
         a.course-card(ng-repeat="course in indexFn.boutiqueCourseList"  href="{{indexFn.emHost}}{{course.courseId}}" target="_blank")
-            img.course-image(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495700370783'}}")
+            img.course-image(ng-src="{{course.inUrl || 'https://s1.aizhixin.com/1495700370783'}}")
             .course-name
                 | {{course.courseName}}
             .course-teacher
@@ -19,14 +19,14 @@
                 .title 优秀教师
                 .more.cursor-pointer(ui-sref="excellentteacherlist") 更多>>
             .teacher-card-container
-                //{"id":1,"userId":null,"orgId":null,"teacherId":6,"introduction":"分隔符","inUrl":"http://7xpscc.com1.z0.glb.clouddn.com/1494986499287","templateShow":2,"teacherName":"驱蚊器","phone":"","jobNumber":"12345","sex":"男","email":""}
+                //{"id":1,"userId":null,"orgId":null,"teacherId":6,"introduction":"分隔符","inUrl":"https://s1.aizhixin.com/1494986499287","templateShow":2,"teacherName":"驱蚊器","phone":"","jobNumber":"12345","sex":"男","email":""}
                 .teacher-card(ng-repeat="teacher in indexFn.excellentTeacherList" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
                     .shade(ng-show="a")
                     .detail-button(ng-show="a")
                         a.btn-detail(ui-sref="excellentteacherdetail({id:teacher.id})")
                             | 教师详情>>
                     .teacher-image
-                        img.img(ng-src="{{ teacher.inUrl || 'http://oli56k5b0.bkt.clouddn.com/avatar-200%E2%9C%96200.jpg'}}")
+                        img.img(ng-src="{{ teacher.inUrl || 'https://s.aizhixin.com/avatar-200%E2%9C%96200.jpg'}}")
                     .teacher-name
                         | {{teacher.teacherName}}
                     .teacher-detail

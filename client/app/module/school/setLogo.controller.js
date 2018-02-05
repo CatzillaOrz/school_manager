@@ -16,16 +16,16 @@ angular.module('dleduWebApp')
             },
             logoList: [
                 {
-                    logo: "http://7xpscc.com1.z0.glb.clouddn.com/2010082184033657.JPG"
+                    logo: "https://s1.aizhixin.com/2010082184033657.JPG"
                 },
                 {
-                    logo:"http://7xpscc.com1.z0.glb.clouddn.com/2010082184033657.JPG"
+                    logo:"https://s1.aizhixin.com/2010082184033657.JPG"
                 },
                 {
-                    logo:"http://7xpscc.com1.z0.glb.clouddn.com/2010082184033657.JPG"
+                    logo:"https://s1.aizhixin.com/2010082184033657.JPG"
                 },
                 {
-                    logo:"http://7xpscc.com1.z0.glb.clouddn.com/2010082184033657.JPG"
+                    logo:"https://s1.aizhixin.com/2010082184033657.JPG"
                 }
             ],
             uploadImage: function ($event) {

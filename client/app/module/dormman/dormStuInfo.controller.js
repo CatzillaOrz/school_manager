@@ -109,7 +109,7 @@ angular.module('dleduWebApp')
 							messageService.openMsg("分配床位成功！");
 							that.getDormStus();
 							that.getStusByMajor();
-							that.stuId = 0;
+							that.stuId = null;
 						}else{
 							messageService.openMsg("分配床位失败！");
 						}

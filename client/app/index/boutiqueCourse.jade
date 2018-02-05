@@ -3,7 +3,7 @@
         ul.major-content
             li.major-list(ng-repeat="course in boutiqueFn.boutiqueCourseList" )
                 a.major-image(href="{{boutiqueFn.emHost}}{{course.courseId}}" target="_blank" ng-init="a=false" ng-mouseenter="a=true" ng-mouseleave="a=false")
-                    img(ng-src="{{course.inUrl || 'http://7xpscc.com1.z0.glb.clouddn.com/1495700370783'}}")
+                    img(ng-src="{{course.inUrl || 'https://s1.aizhixin.com/1495700370783'}}")
                     .shade(ng-show="a")
                         .tipes
                             i.fa.fa-play-circle-o
@@ -13,7 +13,7 @@
                         | {{course.courseName}}
                     .teacher(ng-if="course.courseAuthors[0]")
                        .avater
-                           img(ng-src="{{course.courseAuthors[0].photo ||'http://oli56k5b0.bkt.clouddn.com/avatar-woman.png'}}")
+                           img(ng-src="{{course.courseAuthors[0].photo ||'https://s.aizhixin.com/avatar-woman.png'}}")
                        .name
                            | {{course.courseAuthors[0].name}} | {{course.courseAuthors[0].position}}
                     .introduce
