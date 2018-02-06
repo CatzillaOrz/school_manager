@@ -80,6 +80,9 @@ angular.module('dleduWebApp')
                 var params = {
                     domainname: code
                 };
+                if(AuthService.getUser()){
+                    params.domainname=AuthService.getUser().orgDomainName;
+                }
                 SchoolService.getSchoolByDomain(params).$promise
                     .then(function (data) {
                         _this.schoolInfo=data;

@@ -14,7 +14,7 @@ angular.module('dleduWebService')
             });
         };
     })
-    .factory('CommonService', function ($window, ngDialog, $http, localStorageService, SchoolService, $location, $state) {
+    .factory('CommonService', function ($window, ngDialog,AuthService, $http, localStorageService, SchoolService, $location, $state) {
         return {
             product: {
                 name: '知新网综合平台',
@@ -79,6 +79,9 @@ angular.module('dleduWebService')
                            domainname: code
                            // domainname: "sjdr"
                         };
+                    if(AuthService.getUser()){
+                        params.domainname=AuthService.getUser().orgDomainName;
+                    }
                         SchoolService.getSchoolByDomain(params).$promise
                             .then(function (data) {
                                 school = data;
