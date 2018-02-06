@@ -81,7 +81,11 @@ angular.module('dleduWebApp')
                     _this.params.orgId=_this.schoolInfo.id;
                     _this.getLogoList();
                 }else {
-                    //CommonService.msgDialog("您输入的地址有误!", 2);
+
+                    $timeout(function () {
+                        _this.params.orgId=_this.schoolInfo.id;
+                        _this.getLogoList();
+                    },200);
                 }
             }
         }
