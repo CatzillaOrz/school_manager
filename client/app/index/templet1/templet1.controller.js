@@ -82,6 +82,7 @@ angular.module('dleduWebApp')
                 };
                 SchoolService.getSchoolByDomain(params).$promise
                     .then(function (data) {
+                        _this.schoolInfo=data;
                         _this.params.orgId=data.id;
                         _this.getLogoList();
                     })
