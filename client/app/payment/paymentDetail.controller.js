@@ -2,7 +2,7 @@
 
 angular.module('dleduWebApp')
     .controller('PaymentDetailCtrl', function ($scope,$stateParams,$state, $rootScope,AuthService,ngDialog, PaymentService,CollegeService, messageService,CommonService,
-                                         Upload, UploadService, ImpBatchService) {
+                                         Upload, UploadService, ImpBatchService,SchoolService) {
         $scope.paymentFn = {
             paymentParams:null,
             tabType:"showByPerson",
