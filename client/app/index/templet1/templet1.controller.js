@@ -73,6 +73,22 @@ angular.module('dleduWebApp')
 
                     })
             },
+            getSchoolInfo:function () {
+                var _this=this;
+                var domain = $location.host();
+                var code = domain.split('.')[0];
+                var params = {
+                    domainname: code
+                };
+                SchoolService.getSchoolByDomain(params).$promise
+                    .then(function (data) {
+                        _this.params.orgId=data.id;
+                        _this.getLogoList();
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
             init:function () {
                 var _this=this;
                 _this.schoolInfo=  CommonService.getSchool();
@@ -81,11 +97,7 @@ angular.module('dleduWebApp')
                     _this.params.orgId=_this.schoolInfo.id;
                     _this.getLogoList();
                 }else {
-
-                    $timeout(function () {
-                        _this.params.orgId=_this.schoolInfo.id;
-                        _this.getLogoList();
-                    },200);
+                    _this.getSchoolInfo();
                 }
             }
         }
