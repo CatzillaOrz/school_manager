@@ -119,7 +119,7 @@
                                         tr(role='row')
                                             th 姓名
                                             th 状态
-                                            th 是否通知阅读
+                                            th 通知是否阅读
                                     tbody
                                         tr.cursor-pointer(ng-repeat="stu in insAttendFn.RollCallDetailsList" ng-click="insAttendFn.openInfoWindow(stu)" ng-show="(state=='all'||state==stu.status)&&(isRead=='all'|| isRead==stu.haveRead+'')")
                                             td {{stu.studentName}}
