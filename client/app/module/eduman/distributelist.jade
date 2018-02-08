@@ -336,7 +336,7 @@
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
                                                 td {{record.classType==10 ? '教学班':'行政班'}}
-                                                td {{record.code}}
+                                                td {{record.code=='null' ? '--':record.code}}
                                                 td {{record.name}}
                                                 td {{record.teacherName}}
                                                 td {{record.assginDate | date:'yyyy-MM-dd'}}
