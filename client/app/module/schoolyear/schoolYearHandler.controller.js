@@ -10,6 +10,7 @@ angular.module('dleduWebApp')
 			semester: {
 				id: "",
 				name: "",
+				code: "",
 				startDate: "",
 				endDate: "",
 				orgId: AuthService.getUser().orgId,

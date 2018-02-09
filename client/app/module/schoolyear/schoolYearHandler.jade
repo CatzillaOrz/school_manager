@@ -14,6 +14,12 @@
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过30个字学期名称" ng-model="periodHandlerFn.semester.name" name="{{'name'}}" validator="required")
                     .form-group
+                        label.col-sm-3.control-label
+                            span.required.font-14 *
+                            span 学期编码：
+                        .col-sm-7
+                            input.form-control(ng-disabled='periodHandlerFn.semester.id' placeholder="学期编码不能为空且不能重复！" ng-model="periodHandlerFn.semester.code" name="code" validator="required")
+                    .form-group
                         label.col-sm-3.control-label 开始时间：
                         .col-sm-7
                             .col-sm-12.input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
