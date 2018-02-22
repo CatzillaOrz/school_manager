@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService, SchoolService) {
+	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService, SchoolService, AuthService) {
 		return {
 			/**
 			 * 弹出批量导入弹出框
