@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('dleduWebService')
-	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService, SchoolService) {
+	.factory('ImpBatchService', function ($http, $q, $resource, ngDialog, Upload, messageService, CommonService, SchoolService, AuthService) {
 		return {
 			/**
 			 * 弹出批量导入弹出框
@@ -114,15 +114,15 @@ angular.module('dleduWebService')
 
 			//获取环境
 			getEnvHost: function(){
-				var hostname = window.location.hostname;
-				var host = 'http://gateway.aizhixindev.com/zuul/org-manager';
-				if(hostname.indexOf('school.aizhixindev.com') != -1){
+				var env = AuthService.getCurrentEvn();
+				var host = 'http://gateway.aizhixin.com/zuul/org-manager';
+				if(env == "DEV"){
 					host = 'http://gateway.aizhixindev.com/zuul/org-manager';
-				}else if(hostname.indexOf('school.aizhixintest.com') != -1){
+				}else if(env == "TEST"){
 					host = 'http://gateway.aizhixintest.com/zuul/org-manager';
-				}else if(hostname.indexOf('school.dlztc.com') != -1){
+				}else if(env == "PDE"){
 					host = 'http://gateway.dlztc.com/zuul/org-manager';
-				}else if(hostname.indexOf('school.aizhixin.com') != -1){
+				}else if(env == "SDE"){
 					host = 'http://gateway.aizhixin.com/zuul/org-manager';
 				}
 				return host;
