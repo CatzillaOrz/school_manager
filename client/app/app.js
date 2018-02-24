@@ -58,7 +58,8 @@ angular.module('dleduWebApp', [
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
                     AuthService.clearUser();
-                     _location.$$path != '/login' && (AuthService.navigation(0, '/login'));
+                     //_location.$$path != '/login' && (AuthService.navigation(0, '/login'));
+                    _location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
                 } else if (response.status === 404) {
                     // _window.location.href = '/404';
                 } else if (response.status >= 500) {
@@ -162,7 +163,8 @@ angular.module('dleduWebApp', [
        // 站内页面的访问权限验证
         $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
             if (toState.access.requiredLogin && !AuthService.authorize()) {
-                $window.location.href = '/login';
+                //$window.location.href = '/login';
+                AuthService.toLogin();
             }
         });
     });
