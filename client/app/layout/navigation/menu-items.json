@@ -49,7 +49,7 @@
         {
             "title": "学校机构和人员",
             "sref": "college.list",
-            "icon": "university",
+            "icon": "object-group",
             "active": "organization",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN",
             "items":[
@@ -248,15 +248,7 @@
             ]
         },
         {
-            "title": "实时监控分析",
-            "sref": "geodetail",
-            "target":"_blank",
-            "active": "geodetail",
-            "icon": "bar-chart-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
-        },
-        {
-            "title": "宿舍信息管理",
+            "title": "迎新管理",
             "sref": "dormbuildingman",
             "icon": "navicon",
             "active": "dormmansys",
@@ -284,6 +276,14 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
                 }
             ]
+        },
+        {
+            "title": "实时监控分析",
+            "sref": "geodetail",
+            "target":"_blank",
+            "active": "geodetail",
+            "icon": "bar-chart-o",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         }
     ]
 }
