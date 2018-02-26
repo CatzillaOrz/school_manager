@@ -39,7 +39,11 @@ angular.module('dleduWebApp')
             selectCollege2Options: function () {
                 var _this = this;
                 return {
-
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
                     ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
                         orgId: AuthService.getUser().orgId,
                         pageNumber: 1,
@@ -55,12 +59,7 @@ angular.module('dleduWebApp')
                         }
                         _this.collegeDropList.push(data);
                         return data.name;
-                    },
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true
+                    }
                 }
             },
             //专业下拉列表配置
@@ -421,7 +420,7 @@ angular.module('dleduWebApp')
         $timeout(function () {
             $scope.$watch('studentListFn.params.collegeId', function(newValue, oldValue) {
                 if(!newValue){
-                    $scope.studentListFn.params.majorId=null;
+                    $scope.studentListFn.params.majorId="-1";
                 }
                 if (newValue!=oldValue){
                     $scope.studentListFn.majorDropList=[];
@@ -429,7 +428,7 @@ angular.module('dleduWebApp')
             });
             $scope.$watch('studentListFn.params.professionalId', function(newValue, oldValue) {
                 if(!newValue){
-                    $scope.studentListFn.params.classesId=null;
+                    $scope.studentListFn.params.classesId="-1";
                 }
                 if (newValue!=oldValue){
                     $scope.studentListFn.classDropList=[];
