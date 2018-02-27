@@ -47,40 +47,50 @@
             ]
         },
         {
-            "title": "院系管理",
+            "title": "学校机构和人员",
             "sref": "college.list",
-            "active": "college",
-            "icon": "building-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+            "icon": "object-group",
+            "active": "organization",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN",
+            "items":[
+                {
+                    "title": "院系管理",
+                    "sref": "college.list",
+                    "active": "college",
+                    "icon": "building-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "专业管理",
+                    "sref": "majorlist",
+                    "active": "major",
+                    "icon": "bookmark-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "班级管理",
+                    "sref": "classlist",
+                    "active": "class",
+                    "icon": "users",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "教师管理",
+                    "sref": "teacherlist",
+                    "active": "teacher",
+                    "icon": "id-card-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "学生管理",
+                    "sref": "studentlist",
+                    "active": "student",
+                    "icon": "graduation-cap",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
+                }
+            ]
         },
-        {
-            "title": "专业管理",
-            "sref": "majorlist",
-            "active": "major",
-            "icon": "bookmark-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-        },
-        {
-            "title": "班级管理",
-            "sref": "classlist",
-            "active": "class",
-            "icon": "users",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-        },
-        {
-            "title": "教师管理",
-            "sref": "teacherlist",
-            "active": "teacher",
-            "icon": "id-card-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-        },
-        {
-            "title": "学生管理",
-            "sref": "studentlist",
-            "active": "student",
-            "icon": "graduation-cap",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
-        },
+
         {
             "title": "学期管理",
             "sref": "periodlist",
@@ -207,6 +217,12 @@
                     "sref": "practicemanstats",
                     "active": "practicemanstats",
                     "icon": "pencil-square-o"
+                },
+                {
+                    "title": "通知管理",
+                    "sref": "newslist",
+                    "active": "news",
+                    "icon": "commenting"
                 }
             ]
         },
@@ -232,11 +248,34 @@
             ]
         },
         {
-            "title": "通知管理",
-            "sref": "newslist",
-            "active": "news",
-            "icon": "commenting",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+            "title": "迎新管理",
+            "sref": "dormbuildingman",
+            "icon": "navicon",
+            "active": "dormmansys",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN,ROLE_FINANCE_ADMIN",
+            "items":[
+                {
+                    "title": "宿舍楼管理",
+                    "sref": "dormbuildingman",
+                    "active": "dormbuildingman",
+                    "icon": "pencil-square-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
+                },
+                {
+                    "title": "宿舍管理",
+                    "sref": "dormman",
+                    "active": "dormman",
+                    "icon": "pencil-square-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
+                },
+                {
+                    "title": "在线缴费",
+                    "sref": "payment",
+                    "active": "payment",
+                    "icon": "money",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
+                }
+            ]
         },
         {
             "title": "实时监控分析",
@@ -245,34 +284,6 @@
             "active": "geodetail",
             "icon": "bar-chart-o",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
-        },
-        {
-            "title": "宿舍信息管理",
-            "sref": "dormbuildingman",
-            "icon": "navicon",
-            "active": "dormmansys",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN",
-            "items":[
-                {
-                    "title": "宿舍楼管理",
-                    "sref": "dormbuildingman",
-                    "active": "dormbuildingman",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "宿舍管理",
-                    "sref": "dormman",
-                    "active": "dormman",
-                    "icon": "pencil-square-o"
-                }
-            ]
-        },
-        {
-            "title": "在线缴费",
-            "sref": "payment",
-            "active": "payment",
-            "icon": "money",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
         }
     ]
 }
