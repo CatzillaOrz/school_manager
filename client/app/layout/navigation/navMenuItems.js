@@ -38,8 +38,13 @@
                     var ul = $('<ul />');
                     li.append(ul);
                     li.attr('data-menu-collapse', '');
+                    var flag = false;
                     _.forEach(item.items, function(child) {
                         if(isUseAuthority(child)){
+                            if(!flag){//修改子菜单第一个选择的地址为父菜单的链接地址
+                                a.attr('ui-sref', child.sref);
+                                flag = true;
+                            }
                             createItem(child, ul, level+1);
                         }
                     })
