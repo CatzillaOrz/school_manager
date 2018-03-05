@@ -390,6 +390,15 @@ angular.module('dleduWebApp')
                 var _this=this;
                 var params=_this.params;
                 if(params.classesIds.length!=0){
+                    //清空无效id
+                    var classesIds = [];
+                    for(var i = 0, len = params.classesIds.length; i < len; i++){
+                        var classId = params.classesIds[i];
+                        if(classId.indexOf(".") == -1){
+                            classesIds.push(classId);
+                        }
+                    }
+                    params.classesIds = classesIds;
                     params.classOrStudents=10;
                 }else {
                     params.classOrStudents=20;
