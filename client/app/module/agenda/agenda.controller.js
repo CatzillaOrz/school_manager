@@ -303,7 +303,7 @@ angular.module('dleduWebApp')
                 var _this = this;
                 var params = {
                     semesterId: semesterId,
-                    pageSize:40,
+                    pageSize:1000,
                 };
                 SchoolYearService.getTeachWeekList(params).$promise
                     .then(function (data) {
