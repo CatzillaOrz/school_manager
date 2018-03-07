@@ -318,5 +318,19 @@ angular.module('dleduWebApp')
                     label: '导员考勤'
                 }
             })
+            .state('teachingData', {
+                parent: 'base',
+                url   : '/teachingData',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'teachingDataCtrl',
+                        templateUrl: 'app/module/eduman/teachingData.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '教学数据'
+                }
+            })
 		//
 	});

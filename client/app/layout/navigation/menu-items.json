@@ -184,6 +184,12 @@
                     "sref": "instructor",
                     "active": "instructor",
                     "icon": "barcode"
+                },
+                {
+                    "title": "教学数据",
+                    "sref": "teachingData",
+                    "active": "teachingData",
+                    "icon": "address-book"
                 }
             ]
         },

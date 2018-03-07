@@ -840,6 +840,62 @@ var EduManService = {
             }
         })
     },
+    getTeachClassDataList: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'em',
+            path: '/api/web/v2/educational/teachingclassstatistics',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    getCollageDataList: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'em',
+            path: '/api/web/v2/educational/departmentstatistics',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    collageDataExport: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'em',
+            path: '/api/web/v2/educational/departmentstatisticsexport',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
+    teachClassDataExport: function (params, access_token, callback) {
+        RestClient.get({
+            host:  'em',
+            path: '/api/web/v2/educational/teachingclassstatisticsexport',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+    },
 };
 
 

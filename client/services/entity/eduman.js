@@ -242,6 +242,34 @@ angular.module('dleduWebService')
 					params: params
 				});
 			},
+            getTeachClassDataList:function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/getTeachClassDataList",
+					params: params
+				});
+			},
+            getCollageDataList:function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/getCollageDataList",
+					params: params
+				});
+			},
+            collageDataExport:function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/collageDataExport",
+					params: params
+				});
+			},
+            teachClassDataExport:function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/teachClassDataExport",
+					params: params
+				});
+			},
 		}
 
 	});
