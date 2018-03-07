@@ -496,6 +496,42 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getTeachClassDataList: function (req, res) {
+        EduManService.getTeachClassDataListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getCollageDataList: function (req, res) {
+        EduManService.getCollageDataListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    collageDataExport: function (req, res) {
+        EduManService.collageDataExportSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    teachClassDataExport: function (req, res) {
+        EduManService.teachClassDataExportSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

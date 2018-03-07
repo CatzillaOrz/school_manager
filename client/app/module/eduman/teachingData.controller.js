@@ -4,7 +4,7 @@
 angular.module('dleduWebApp')
     .controller('teachingDataCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService,
                                             ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService,
-                                            ngDialog, RoleAuthService) {
+                                            ngDialog, RoleAuthService,SchoolYearService) {
 
         //控制按钮权限
         $scope.isUseAuth = function(type){
@@ -25,148 +25,110 @@ angular.module('dleduWebApp')
                 pageNumber: 0,
                 pageSize: 10
             },
-
+            page2: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 0,
+                pageSize: 10
+            },
+            collageDataList:[],
+            teachClassDataList:[],
             switchOneTab: function (index) {
                 console.log(index);
                 var _this = this;
                 if (index == 1) {
                     _this.tab=1;
+                    _this.getCollageDataList();
                 } else if (index == 2) {
                     _this.tab=2;
+                    _this.getTeachClassDataList();
                 }
             },
-            select2SemesterOptions: function () {
-                var _this = this;
-                return {
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '按学期筛选'
-                    },
-                    allowClear: true,
-                    ajax: {
-                        url: "api/schoolyear/getSchoolYearDropList",
-                        dataType: 'json',
-                        //delay: 250,
-                        data: function (query) {
-                            var params = {
-                                orgId: AuthService.getUser().orgId,
-                                pageNumber: 1,
-                                pageSize: 100,
-
-
-                            }
-                            params.name = query.term;
-                            return params;
-                        },
-                        processResults: function (data, params) {
-                            params.page = params.page || 1;
-                            _this.schoolYearDropList = _this.select2GroupFormat(data.data);
-                            console.log(_this.schoolYearDropList);
-                            return {
-                                results: _this.schoolYearDropList,
-                                pagination: {
-                                    more: (params.page * 30) < data.total_count
-                                }
-                            };
-                        },
-                        cache: false
-                    },
-
-                }
-            },
-            //select2动态关键字查询列表配置
-            selectCollege2Options: function () {
-                var _this = this;
-                return {
-
-                    ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
-                        orgId: AuthService.getUser().orgId,
-                        pageNumber: 1,
-                        pageSize: 100,
-                        managerId: AuthService.getUser().id
-                    }, "name"),
-
-                    templateResult: function (data) {
-
-                        if (data.id === '') { // adjust for custom placeholder values
-                            _this.collegeDropList = [];
-                            return '按班级筛选';
-                        }
-                        _this.collegeDropList.push(data);
-                        return data.name;
-                    },
-                    placeholder: {
-                        id: -1, // the value of the option
-                        text: '全部'
-                    },
-                    allowClear: true
-                }
-            },
-            //学期下拉列表分组数据格式化
-            select2GroupFormat: function (dataList) {
-                var result = []
-                angular.forEach(dataList, function (data) {
-                    var obj = {
-                        text: data.name,
-                        children: []
-                    };
-                    angular.forEach(data.semesterIdNameList, function (sememster) {
-                        var objChild = {
-                            id: sememster.id,
-                            text: sememster.name
-                        };
-                        obj.children.push(objChild);
-                    })
-                    result.push(obj);
-                })
-                return result;
-            },
-            getCurrentSemester: function () {
-                var _this = this;
+            //学期列表查询
+            getSemesterList: function () {
+                console.log('123123123123123');
+                var that = this;
                 var params = {
-                    orgId: AuthService.getUser().orgId
+                    orgId: AuthService.getUser().orgId,
+                    pageSize:100,
+                    pageNumber:1
                 };
-                EduManService.getCurrentSemester(params).$promise
+                SchoolYearService.getSemesterList(params).$promise
                     .then(function (data) {
-                        var obj = {
-                            text: data.yearName,
-                            children: [
-                                {
-                                    id: data.id,
-                                    text: data.name
-                                }
-                            ]
-                        };
-                        _this.semesterId = data.id;
-                        _this.getTeachClassAttendList();
-                        _this.schoolYearDropList = [obj];
-
-
+                        that.semesterList = data.data;
                     })
                     .catch(function (error) {
 
                     })
             },
-            //按教学班查询考勤列表
-            getTeachClassAttendList: function () {
+            //按学院查询
+            getCollageDataList: function () {
                 var _this = this;
                 var params = {
+                    // orgId: AuthService.getUser().orgId,
+                    orgId: 218,
+                    semesterId:'',
+                    pageNumber:_this.page.pageNumber,
+                    pageSize:_this.page.pageSize
                 };
-                EduManService.getTeachClassAttendList(params).$promise
+                EduManService.getCollageDataList(params)
                     .then(function (data) {
-                        _this.teachClassAttendList = data.data;
+                        _this.collageDataList = data.data.data;
+                        console.log(_this.collageDataList);
                         _this.page = data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
+            //学院数据导出
+            collageDataExport: function () {
+                var _this = this;
+                var params = {
+                    orgId:218,
+                    semesterId:''
+                };
+                EduManService.collageDataExport(params)
+                    .then(function (data) {
+                        if (data.message) {
+                            location.href = data.message;
+                        } else {
+                            messageService.openMsg("生成导出文件失败！");
+                        }
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg("生成导出文件失败！");
+                    })
+
+            },
+            //按教学班查询
+            getTeachClassDataList: function () {
+                var _this = this;
+                var params = {
+                    // orgId: AuthService.getUser().orgId,
+                    orgId: 218,
+                    semesterId:'',
+                    collegeId:'',
+                    courseName:'',
+                    teacherName:'',
+                    pageNumber:_this.page2.pageNumber,
+                    pageSize:_this.page2.pageSize
+                };
+                EduManService.getTeachClassDataList(params)
+                    .then(function (data) {
+                        _this.teachClassDataList = data.data.data;
+                        _this.page2 = data.page;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
             //教学班导出
-            teachClassAttendExport: function () {
+            teachClassDataExport: function () {
                 var _this = this;
                 var params = {
                 };
-                EduManService.teachClassAttendExport(params).$promise
+                EduManService.teachClassDataExport(params)
                     .then(function (data) {
                         if (data.message) {
                             location.href = data.message;
@@ -182,26 +144,10 @@ angular.module('dleduWebApp')
             //初始化
             init: function () {
                 var _this = this;
-
-                $timeout(function () {
-                    _this.getCurrentSemester();
-                }, 100);
-                if ($state.params.position == 2) {
-                    $("#myTab  a:last").tab("show");
-                }
-
-
+                _this.getSemesterList();
+                // _this.getCollageDataList();
+                _this.getTeachClassDataList();
             },
         };
-        $timeout(function () {
-            /*$scope.$watch('teachDataFn.params.collegeId', function (newValue, oldValue) {
-                if (!newValue) {
-                    $scope.teachDataFn.params.majorId = null;
-                }
-                if (newValue != oldValue) {
-                    $scope.teachDataFn.majorDropList = [];
-                }
-            });*/
-        });
         $scope.teachDataFn.init();
     });

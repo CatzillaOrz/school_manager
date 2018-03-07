@@ -28,20 +28,20 @@
                                                 form.form-inline
                                                     .form-group.col-sm-4
                                                         label.control-label 学期：
-                                                        select#ddd.select2.form-control( ng-model="teachDataFn.params.semesterId" ui-select2="teachDataFn.select2SemesterOptions()" )
-                                                                    optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachDataFn.schoolYearDropList")
-                                                                        option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachDataFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                                        select#ddd.select2.form-control( ng-model="teachDataFn.semesterList")
+                                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachDataFn.schoolYearDropList")
+                                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachDataFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
 
                                             .col-sm-2.col-xs-6.hidden-xs
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="teachDataFn.getTeachingclassAttendByTeacher()")
                                                         span 查询
-                                                    button.btn.btn-primary(ng-click="teachDataFn.exportTeachingclassByTeacher()")
+                                                    button.btn.btn-primary(ng-click="teachDataFn.collageDataExport()")
                                                         span 导出
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
-                                                    th 序号
+                                                    //th 序号
                                                     th 院系
                                                     th 教师使用开卷人数
                                                     th 学生使用开卷人数
@@ -49,16 +49,16 @@
                                                     th 学生访问次数
 
                                             tbody
-                                                tr.odd(role='row' ng-repeat="attend in teachDataFn.attendList")
-                                                    td.sorting_1 {{$index+1 + ((teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber+1:teachDataFn.page.pageNumber)-1)*10}}
-                                                    td {{attend.collegeName}}
-                                                    td {{attend.teacherJob}}
-                                                    td {{attend.teacherName}}
-                                                    td {{attend.total}}
-                                                    td {{attend.normal}}
+                                                tr.odd(role='row' ng-repeat="list in teachDataFn.collageDataList")
+                                                    //td.sorting_1 {{$index+1 + ((teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber+1:teachDataFn.page.pageNumber)-1)*10}}
+                                                    td {{list.collegeName}}
+                                                    td {{list.teacherUseNumber}}
+                                                    td {{list.stuUseNumber}}
+                                                    td {{list.teacherAccessTimes}}
+                                                    td {{list.stuAccessTimes}}
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
-                                                .dataTables_info(role='status', aria-live='polite')
+                                                //.dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
                                                     span.txt-color-darken {{teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber*10:(teachDataFn.page.pageNumber-1)*10+1}}
                                                     |  到
@@ -98,12 +98,12 @@
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="teachDataFn.getAttendanceByPeriod()")
                                                         span 查询
-                                                    button.btn.btn-primary(ng-click="teachDataFn.exportClassAttendanceByPeriod()")
+                                                    button.btn.btn-primary(ng-click="teachDataFn.teachClassDataExport()")
                                                         span 导出
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
-                                                    th 序号
+                                                    //th 序号
                                                     th 院系
                                                     th 选课编号
                                                     th 课程名称
@@ -117,30 +117,30 @@
                                                     th 发布作业
                                                     th 发布考试
                                             tbody
-                                                tr.odd(role='row' ng-repeat="attend in teachDataFn.attendList")
-                                                    td.sorting_1 {{$index+1 + ((teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber+1:teachDataFn.page.pageNumber)-1)*10}}
-                                                    td {{attend.teachingClassesCode}}
-                                                    td {{attend.courseName}}
-                                                    td {{attend.teacherName}}
-                                                    td {{attend.classRoom}}
-                                                    td {{attend.teachDate}}
-                                                    td {{attend.dayOfWeek}}
-                                                    td {{attend.period}}
-                                                    td {{attend.total}}
-                                                    td {{attend.normal}}
-                                                    td {{attend.later}}
-                                                    td {{attend.askForLeave}}
-                                                    td {{attend.truancy}}
+                                                tr.odd(role='row' ng-repeat="list in teachDataFn.teachClassDataList")
+                                                    //td.sorting_1 {{$index+1 + ((teachDataFn.page2.pageNumber==0?teachDataFn.page2.pageNumber+1:teachDataFn.page2.pageNumber)-1)*10}}
+                                                    td {{list.collegeName}}
+                                                    td {{list.emCourseId}}
+                                                    td {{list.emCourseName}}
+                                                    td {{list.teacherName}}
+                                                    td {{list.stuNumber}}
+                                                    td {{list.teacherVisitsTimes}}
+                                                    td {{list.stuVisitsTimes}}
+                                                    td {{list.chapterNumber}}
+                                                    td {{list.attendanceRate}}
+                                                    td {{list.creatTaskNumber}}
+                                                    td {{list.releaseTaskNumber}}
+                                                    td {{list.examinationTimes}}
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
-                                                .dataTables_info(role='status', aria-live='polite')
+                                                //.dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
-                                                    span.txt-color-darken {{teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber*10:(teachDataFn.page.pageNumber-1)*10+1}}
+                                                    span.txt-color-darken {{teachDataFn.page2.pageNumber==0?teachDataFn.page2.pageNumber*10:(teachDataFn.page2.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((teachDataFn.page.pageNumber==0?teachDataFn.page.pageNumber+1:teachDataFn.page.pageNumber)-1)*10+teachDataFn.attendList.length}}
+                                                    span.txt-color-darken {{((teachDataFn.page2.pageNumber==0?teachDataFn.page2.pageNumber+1:teachDataFn.page2.pageNumber)-1)*10+teachDataFn.attendList.length}}
                                                     |  条 总共
-                                                    span.text-primary {{teachDataFn.page.totalElements}}
+                                                    span.text-primary {{teachDataFn.page2.totalElements}}
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page.totalElements', max-size='teachDataFn.page.pageSize' ng-model='teachDataFn.page.pageNumber',ng-change="teachDataFn.getAttendanceByPeriod()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page2.totalElements', max-size='teachDataFn.page2.pageSize' ng-model='teachDataFn.page2.pageNumber',ng-change="teachDataFn.getAttendanceByPeriod()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

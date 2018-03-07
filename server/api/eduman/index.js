@@ -61,5 +61,9 @@ router.get('/getAttendStopLogs',auth.isSignedIn, controller.getAttendStopLogs);
 router.get('/getInsRollCallList',auth.isSignedIn, controller.getInsRollCallList);
 router.get('/getClassRollCallDetails',auth.isSignedIn, controller.getClassRollCallDetails);
 router.get('/exportRollCallInfo',auth.isSignedIn, controller.exportRollCallInfo);
+router.get('/getTeachClassDataList',auth.isSignedIn, controller.getTeachClassDataList);
+router.get('/getCollageDataList',auth.isSignedIn, controller.getCollageDataList);
+router.get('/collageDataExport',auth.isSignedIn, controller.collageDataExport);
+router.get('/teachClassDataExport',auth.isSignedIn, controller.teachClassDataExport);
 
 module.exports = router;
