@@ -588,6 +588,23 @@ var TeachClassService = {
             callback(e);
         });
     },
+	//获取教师的课程表
+	getAllCourseSchedulesByTea: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'gateway-org',
+			path: '/v1/schooltimetable/semster/teacherschedule',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+			if (res.status.code == 200) {
+				callback(null, {data :res.entity});
+			} else {
+				callback(ErrorCode.errorHandle(res));
+			}
+		}) .catch(function (e) {
+			callback(e);
+		});
+	},
 };
 
 
