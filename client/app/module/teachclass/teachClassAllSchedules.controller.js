@@ -153,7 +153,7 @@ angular.module('dleduWebApp')
 
 			//获取课程列表中连续课程节最多的课程
 			getMaxPeriodNum: function(details){
-				var periodNum = 0;
+				var periodNum = 1;
 				if(details){
 					for(var m = 0, len = details.length; m < len; m++) {
 						var item = details[m];
@@ -170,7 +170,7 @@ angular.module('dleduWebApp')
 				var weekStartEnd = course.startWeekNo+"到"+course.endWeekNo+"周、",
 					periodStartEnd = course.periodNum > 1 ? ("第" + course.periodNo + "节到" + "" + (course.periodNo + course.periodNum - 1) + "节、")
 						:  "第" + course.periodNo + "节、",
-					singleOrDouble = course.singleOrDouble  ==10 ? "单周上课":"双周上课";
+					singleOrDouble = course.singleOrDouble  == 10 ? "每周上课": course.singleOrDouble  == 20 ? "单周上课" :"双周上课";
 				return course.startWeekNo ? (weekStartEnd + periodStartEnd +singleOrDouble) : "";
 			},
 
