@@ -1,0 +1,63 @@
+.college-list-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 批量导入数据
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+            .widget-body.no-padding
+                .col-sm-12.button-imp
+                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch()")
+                        i.fa.fa-file(aria-hidden='true') &nbsp;
+                        span  批量导入基础数据
+                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch()")
+                        i.fa.fa-file(aria-hidden='true') &nbsp;
+                        span  批量导入课程教学班
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='importDialog')
+        .buld_wrap
+            .buld_head
+                i.fa.fa-file-excel-o
+                span.buld 批量导入
+            .propt_content
+                table
+                    tr
+                        td.first_td 上传文件
+                        td
+                            .choseFile.left(ngf-select='collegeListFn.selected($newFiles)' ng-model="collegeListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="collegeListFn.myFile.name" )
+                            .left.load_inner(ng-click='collegeListFn.importantBatch(collegeListFn.myFile)', type='button') 导入
+                    tr
+                        td.first_td.downlaod-temp 模板下载
+                        td
+                            .load_inner_w(style="cursor:pointer" ng-click="collegeListFn.downLoad()") 院系导入模板
+                    tr
+                        td.first_td 导入功能说明
+                        td
+                            ul
+                                li 1.请先下载院系导入模板
+                                li 2.根据模板内容样式填写账号相关信息
+                                li 3.选择要导入的账号文件，点击导入
+    script(type='text/ng-template',id='importResultDialog')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 导入错误提示
+            .repeat_content.content-scorll
+                table
+                    tr
+                        td 错误行号
+                        td 院系编码
+                        td 院系名称
+                        td 错误信息
+                    tr(ng-repeat="info in collegeListFn.errorInfos")
+                        td {{info.line}}
+                        td {{info.code}}
+                        td {{info.name}}
+                        td {{info.msg}}
