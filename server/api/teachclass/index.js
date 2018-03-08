@@ -33,6 +33,7 @@ router.delete('/delCourseSchedule', auth.isSignedIn, controller.delCourseSchedul
 router.put('/getCourseSchedules', auth.isSignedIn, controller.getCourseSchedules);
 router.post('/saveCourseSchedules', auth.isSignedIn, controller.saveCourseSchedules);
 router.get('/getCourseSchedulesByTeacher', auth.isSignedIn, controller.getCourseSchedulesByTeacher);
+router.get('/getAllCourseSchedulesByTea', auth.isSignedIn, controller.getAllCourseSchedulesByTea);
 router.get('/getImpMustResult', auth.isSignedIn, controller.getImpMustResult);
 router.get('/getImpOptionResult', auth.isSignedIn, controller.getImpOptionResult);
 

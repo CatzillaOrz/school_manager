@@ -56,7 +56,10 @@
                                 td
                                     a.handle(ui-sref="teachclasstable({tId:teacher.id})")
                                         i.fa.fa-pencil-square-o
-                                        span 查看课表
+                                        span 查看周课表
+                                    a.handle(ui-sref="teachclasscoursescan({id:teacher.id})")
+                                        i.fa.fa-pencil-square-o
+                                        span 查看总课表
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')

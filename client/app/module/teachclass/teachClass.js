@@ -157,6 +157,20 @@ angular.module('dleduWebApp')
                     label: '课表信息'
                 }
             })
+			.state('teachclasscoursescan', {
+				parent: 'base',
+				url: '/teachclasscoursescan/:id',
+				access: {requiredLogin: true},
+				views: {
+					'content@base': {
+						controller: 'TeachClassAllSchedulesCtrl',
+						templateUrl: 'app/module/teachclass/teachClassAllSchedules.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师总课表'
+				}
+			})
 			.state('holidayman', {
 				parent: 'base',
 				url: '/holidayman',
