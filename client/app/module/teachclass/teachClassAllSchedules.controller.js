@@ -85,6 +85,7 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//规整划数据变成可以循环的格式
 			scanData: function (entity) {
 				var tr = [];
 				entity = _.sortBy(entity, 'dayOfWeek');
@@ -109,8 +110,60 @@ angular.module('dleduWebApp')
 				return tr;
 			},
 
+			//计算数据的最大连续节
+			calcPeriod:function(coursePlan){
+				for(var i = 0, len = coursePlan.length; i < len; i++){
+					var weekPlan = coursePlan[i].courseList;//每节课的一周的课表
+					for(var j = 0, subLen = weekPlan.length; j < subLen; j++){
+						var itemWeekPlan = weekPlan[j];
+						var period = itemWeekPlan.details;//每节课对应的星期几的课表
+						if(period){//当前时间必须有课
+							for(var m = 0, periodLen = period.length; m < periodLen; m++) {
+								var item = period[m]; //具体的课节课程
+
+								if (item.periodNum > 1) {
+									//记录当前星期几
+									var currentIndex = i;
+									//修改连续值对应的后面课节
+									for (var k = 0; k < item.periodNum - 1; k++) {
+										currentIndex++;
+										//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
+										var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
+
+										if(coursePlanNext != 1 || coursePlanNext != 0){//当前存在课程
+											var periodObj = this.getMaxPeriod(coursePlanNext);
+											var periodNumber = item.lastNum ? item.lastNum : item.periodNum;
+											if((itemWeekPlan.periodNo + periodNumber) < (periodObj.periodNo + periodObj.periodNum)){
+												item.lastNum = periodObj.periodNo + periodObj.periodNum - itemWeekPlan.periodNo;
+												this.calcPeriod(coursePlan);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+
+			//获取课程列表中连续课程节最多的课程
+			getMaxPeriod: function(coursePlanNext){
+				var period = {periodNum: 1, periodNo: 1}, details = coursePlanNext.details;
+				if(details){
+					for(var m = 0, len = details.length; m < len; m++) {
+						var item = details[m];
+						if (item.periodNum > period.periodNum) {
+							period.periodNum = item.periodNum;
+						}
+					}
+				}
+				period.periodNo = coursePlanNext.periodNo;
+				return period;
+			},
+
 			//处理连续节后的课节
 			excPeriod: function(coursePlan){
+				this.calcPeriod(coursePlan);
 				for(var i = 0, len = coursePlan.length; i < len; i++){
 					var weekPlan = coursePlan[i].courseList;
 					for(var j = 0, subLen = weekPlan.length; j < subLen; j++){
@@ -119,11 +172,12 @@ angular.module('dleduWebApp')
 							for(var m = 0, periodLen = period.length; m < periodLen; m++) {
 								var item = period[m];
 								item.periodNo =  weekPlan[j].periodNo;
-								if (item.periodNum > 1) {
+								var periodNumItem = item.lastNum ? item.lastNum : item.periodNum;
+								if (periodNumItem > 1) {
 									//item.periodNum = 3;
 									//修改后面连续的值
 									var currentIndex = i;
-									for (var k = 0; k < item.periodNum - 1; k++) {
+									for (var k = 0; k < periodNumItem - 1; k++) {
 										currentIndex++;
 										//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
 										var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
@@ -157,8 +211,9 @@ angular.module('dleduWebApp')
 				if(details){
 					for(var m = 0, len = details.length; m < len; m++) {
 						var item = details[m];
-						if (item.periodNum > periodNum) {
-							periodNum = item.periodNum;
+						var periodNumber = item.lastNum ? item.lastNum : item.periodNum;
+						if (periodNumber > periodNum) {
+							periodNum = periodNumber;
 						}
 					}
 				}
