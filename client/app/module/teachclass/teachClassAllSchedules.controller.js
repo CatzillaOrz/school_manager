@@ -118,25 +118,28 @@ angular.module('dleduWebApp')
 						var itemWeekPlan = weekPlan[j];
 						var period = itemWeekPlan.details;//每节课对应的星期几的课表
 						if(period){//当前时间必须有课
+							var maxNum = 1, item;
 							for(var m = 0, periodLen = period.length; m < periodLen; m++) {
-								var item = period[m]; //具体的课节课程
-
-								if (item.periodNum > 1) {
-									//记录当前星期几
-									var currentIndex = i;
-									//修改连续值对应的后面课节
-									for (var k = 0; k < item.periodNum - 1; k++) {
-										currentIndex++;
-										//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
-										var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
-
-										if(coursePlanNext != 1 || coursePlanNext != 0){//当前存在课程
-											var periodObj = this.getMaxPeriod(coursePlanNext);
-											var periodNumber = item.lastNum ? item.lastNum : item.periodNum;
-											if((itemWeekPlan.periodNo + periodNumber) < (periodObj.periodNo + periodObj.periodNum)){
-												item.lastNum = periodObj.periodNo + periodObj.periodNum - itemWeekPlan.periodNo;
-												this.calcPeriod(coursePlan);
-											}
+								item = period[m]; //具体的课节课程
+								if (item.periodNum > maxNum) {
+									maxNum = item.periodNum;
+								}
+							}
+							if (item && item.periodNum > 1) {
+								//记录当前星期几
+								var currentIndex = i;
+								//修改连续值对应的后面课节
+								for (var k = 0; k < item.periodNum - 1; k++) {
+									currentIndex++;
+									//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
+									var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
+									if(coursePlanNext != 1 || coursePlanNext != 0){//当前存在课程
+										var periodObj = this.getMaxPeriod(coursePlanNext);
+										var periodNumber = item.lastNum ? item.lastNum : item.periodNum;
+										//循环判断当前课程的下一节课程连续节拼接后是否大于第一个连续节拼接后的连续值
+										if((itemWeekPlan.periodNo + periodNumber) < (periodObj.periodNo + periodObj.periodNum)){
+											item.lastNum = periodObj.periodNo + periodObj.periodNum - itemWeekPlan.periodNo;
+											this.calcPeriod(coursePlan);//寻改值后，重寻计算
 										}
 									}
 								}
@@ -163,39 +166,42 @@ angular.module('dleduWebApp')
 
 			//处理连续节后的课节
 			excPeriod: function(coursePlan){
-				this.calcPeriod(coursePlan);
+				this.calcPeriod(coursePlan);//提前处理课程节出现交叉的课程节，将它们拼接后扩大连续节范围
 				for(var i = 0, len = coursePlan.length; i < len; i++){
 					var weekPlan = coursePlan[i].courseList;
 					for(var j = 0, subLen = weekPlan.length; j < subLen; j++){
 						var period = weekPlan[j].details;//从当前节开始的课程列表
 						if(period){
+							var maxNum = 1;
 							for(var m = 0, periodLen = period.length; m < periodLen; m++) {
 								var item = period[m];
-								item.periodNo =  weekPlan[j].periodNo;
+								item.periodNo = weekPlan[j].periodNo;
 								var periodNumItem = item.lastNum ? item.lastNum : item.periodNum;
-								if (periodNumItem > 1) {
-									//item.periodNum = 3;
-									//修改后面连续的值
-									var currentIndex = i;
-									for (var k = 0; k < periodNumItem - 1; k++) {
-										currentIndex++;
-										//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
-										var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
+								if(periodNumItem > maxNum){
+									maxNum = periodNumItem;
+								}
+							}
 
-										if(coursePlanNext == 1){
-											coursePlan[currentIndex].courseList[j] = 0;
-										}else{//将包含的课程拼接到连续节的对象里面
-											//循环处理课表里面包含的数据
-											if(coursePlanNext){//下一个值为单节课时直接添加
-												for(var n = 0, planLen = coursePlanNext.details.length; n < planLen; n++){
-													var detail = coursePlanNext.details[n];
-													detail.periodNo = coursePlanNext.periodNo;
-													//循环处理
-													period.push(detail);
+							if (maxNum > 1) {
+								//修改后面连续的值
+								var currentIndex = i;
+								for (var k = 0; k < maxNum - 1; k++) {
+									currentIndex++;
 
-												}
-												coursePlan[currentIndex].courseList[j] = 0;
+									//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
+									var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
+									if(coursePlanNext == 1){
+										coursePlan[currentIndex].courseList[j] = 0;
+									}else{//将包含的课程拼接到连续节的对象里面
+										//循环将下面包含的连续节里面的课程全部添加到第一节里面
+										if(coursePlanNext){//非0课节
+											for(var n = 0, planLen = coursePlanNext.details.length; n < planLen; n++){
+												var detail = coursePlanNext.details[n];
+												detail.periodNo = coursePlanNext.periodNo;
+												//循环处理
+												period.push(detail);
 											}
+											coursePlan[currentIndex].courseList[j] = 0;
 										}
 									}
 								}
