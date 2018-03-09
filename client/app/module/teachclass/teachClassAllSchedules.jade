@@ -38,6 +38,6 @@
                                 td.sorting_1 第{{$index+1}}节课
                                 td.expand(ng-repeat="list in table.courseList  track by $index" rowspan="{{teachClassTableFn.getMaxPeriodNum(list.details)}}" style="vertical-align: middle;" ng-if="list")
                                     div(ng-repeat="item in list.details")
-                                        span.responsiveExpander {{item.courseName || ''}}
+                                        span.responsiveExpander {{item.courseName + "(" +item.teachingClassName+")"|| ''}}
                                         p
                                             small {{teachClassTableFn.formatCourseInfo(list,item)}}

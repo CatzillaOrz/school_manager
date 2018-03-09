@@ -600,6 +600,7 @@ var TeachClassService = {
 				callback(null, {data :res.entity});
 			} else {
 				callback(ErrorCode.errorHandle(res));
+
 			}
 		}) .catch(function (e) {
 			callback(e);
