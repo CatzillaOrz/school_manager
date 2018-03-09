@@ -127,9 +127,9 @@ angular.module('dleduWebApp')
 							}
 							if (item && item.periodNum > 1) {
 								//记录当前星期几
-								var currentIndex = i;
+								var currentIndex = i, number = item.lastNum ? item.lastNum : item.periodNum;
 								//修改连续值对应的后面课节
-								for (var k = 0; k < item.periodNum - 1; k++) {
+								for (var k = 0; k < number - 1; k++) {
 									currentIndex++;
 									//判断连续的课程节里面的课程是否有排课。如果有排课并且是单节的课程
 									var coursePlanNext = angular.copy(coursePlan[currentIndex].courseList[j]);
