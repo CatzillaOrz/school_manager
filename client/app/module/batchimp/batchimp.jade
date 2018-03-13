@@ -13,10 +13,10 @@
             .jarviswidget-editbox
             .widget-body.no-padding
                 .col-sm-12.button-imp
-                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch()")
+                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch('normal')")
                         i.fa.fa-file(aria-hidden='true') &nbsp;
                         span  批量导入基础数据
-                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch()")
+                    button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch('timetable')")
                         i.fa.fa-file(aria-hidden='true') &nbsp;
                         span  批量导入课程教学班
     //-  添加学生弹出窗模版
@@ -30,13 +30,13 @@
                     tr
                         td.first_td 上传文件
                         td
-                            .choseFile.left(ngf-select='collegeListFn.selected($newFiles)' ng-model="collegeListFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
-                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="collegeListFn.myFile.name" )
-                            .left.load_inner(ng-click='collegeListFn.importantBatch(collegeListFn.myFile)', type='button') 导入
+                            .choseFile.left(ngf-select='batchImpFn.selected($newFiles)' ng-model="batchImpFn.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
+                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="batchImpFn.myFile.name" )
+                            .left.load_inner(ng-click='batchImpFn.importantBatch(batchImpFn.myFile)', type='button') 导入
                     tr
                         td.first_td.downlaod-temp 模板下载
                         td
-                            .load_inner_w(style="cursor:pointer" ng-click="collegeListFn.downLoad()") 院系导入模板
+                            .load_inner_w(style="cursor:pointer" ng-click="batchImpFn.downLoad()") {{batchImpFn.templateName}}
                     tr
                         td.first_td 导入功能说明
                         td
@@ -49,15 +49,112 @@
             .repeat_header
                 i.fa.fa-exclamation-triangle
                 span.buld 导入错误提示
-            .repeat_content.content-scorll
-                table
-                    tr
-                        td 错误行号
-                        td 院系编码
-                        td 院系名称
-                        td 错误信息
-                    tr(ng-repeat="info in collegeListFn.errorInfos")
-                        td {{info.line}}
-                        td {{info.code}}
-                        td {{info.name}}
-                        td {{info.msg}}
+                button.btn.btn-primary(style="margin-left:10px;" type='button' ng-click="batchImpFn.openImpBatch(batchImpFn.impType ,'reset')")
+                    span 重新导入
+        .repeat_header(style="padding:10px 0;")
+            i.fa.fa-exclamation-triangle(style="color:#ff0000")
+            span.buld {{"失败原因：" + batchImpFn.errorInfos.message}}
+        ul#myTab.nav.nav-tabs
+            li.active(ng-show='batchImpFn.impType=="timetable"')
+                a(href='#teachingClass', data-toggle='tab') 教学任务
+            li(ng-show='batchImpFn.impType=="timetable"')
+                a(href='#student', data-toggle='tab') 学生
+            li(ng-show='batchImpFn.impType=="timetable"')
+                a(href='#course', data-toggle='tab') 课程表
+            li.active(ng-show='batchImpFn.impType=="normal"')
+                a(href='#headteacher', data-toggle='tab') 班主任
+            li(ng-show='batchImpFn.impType=="normal"')
+                a(href='#teacher', data-toggle='tab') 教师
+            li(ng-show='batchImpFn.impType=="normal"')
+                a(href='#studentNormal', data-toggle='tab') 学生
+        #myTabContent.tab-content
+            #teachingClass.tab-pane.fade.in.active(ng-show='batchImpFn.impType=="timetable"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教学班名称
+                                    td 课程代码
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.courseScheduleExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.msg}}
+            #student.tab-pane.fade(ng-show='batchImpFn.impType=="timetable"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 学号
+                                    td 学生姓名
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.studentExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.studentCode}}
+                                    td {{info.studentName}}
+                                    td {{info.msg}}
+            #course.tab-pane.fade(ng-show='batchImpFn.impType=="timetable"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 选课课号
+                                    td 上课地点
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.courseScheduleExcelDomainList")
+                                    td {{info.line}}
+                                    td {{info.teachingClassCode}}
+                                    td {{info.teachingClassName}}
+                                    td {{info.msg}}
+            #headteacher.tab-pane.fade.in.active(ng-show='batchImpFn.impType=="normal"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教师姓名
+                                    td 工号
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.classTeacherDomainList")
+                                    td {{info.line}}
+                                    td {{info.name}}
+                                    td {{info.jobNum}}
+                                    td {{info.msg}}
+            #teacher.tab-pane.fade(ng-show='batchImpFn.impType=="normal"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 教师工号
+                                    td 教师姓名
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teacherDomainList")
+                                    td {{info.line}}
+                                    td {{info.jobNum}}
+                                    td {{info.name}}
+                                    td {{info.msg}}
+            #studentNormal.tab-pane.fade(ng-show='batchImpFn.impType=="normal"')
+                p
+                    .repeatLoad
+                        .repeat_content.content-scorll
+                            table
+                                tr
+                                    td 错误行号
+                                    td 学号
+                                    td 学生姓名
+                                    td 错误信息
+                                tr(ng-repeat="info in batchImpFn.errorInfos.studentDomainList")
+                                    td {{info.line}}
+                                    td {{info.jobNum}}
+                                    td {{info.name}}
+                                    td {{info.msg}}

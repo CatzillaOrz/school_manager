@@ -41,7 +41,9 @@ angular.module('dleduWebService')
 								if(scopeObj.errorInfos[0].id){
 									ngDialog.close();
 									messageService.openMsg("导入成功！");
-									callback.call(scopeObj);
+									if(callback){
+										callback.call(scopeObj);
+									}
 								}else{
 									ngDialog.close();
 									ngDialog.open(openParams);
@@ -105,7 +107,9 @@ angular.module('dleduWebService')
 							'optional': host + '/v1/teachingclass/template?templateType=option',
 							'course': host + '/v1/course/template',
 							'entTutor': host + '/v1/mentorstraining/template',
-							'newStudent': host + '/v1/students/newstudenttemplate'};
+							'newStudent': host + '/v1/students/newstudenttemplate',
+							'normal': host + '/v1/import/basetemplate',
+							'timetable': host + '/v1/import/coursetemplate'};
 						window.location.href = paths[type];
 					})
 					.catch(function (error) {
