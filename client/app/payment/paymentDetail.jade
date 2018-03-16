@@ -189,7 +189,7 @@
                             .no-padding
                                 .dataTables_wrapper.form-inline.no-footer
                                     .col-xs-12.col-sm-4
-                                        label 付款单号/支付宝订单号/缴费人：
+                                        label 订单号/缴费人：
                                             input.form-control(type='search', aria-controls='datatable_col_reorder' ng-model="paymentFn.orderParams.searchOrderName")
                                     .col-xs-12.col-sm-4
                                         .search-time
@@ -215,14 +215,12 @@
                                         thead
                                             tr(role='row')
                                                 th 序号
-                                                th 付款单号
+                                                th 订单号
                                                 th 缴费人
                                                 th 身份证号
                                                 th 专业
                                                 th 支付金额
                                                 th 支付时间
-                                                th 状态
-                                                th 支付宝订单号
                                                 th 学生状态
                                         tbody
                                             tr.odd(role='row' ng-repeat="orderCost in paymentFn.orderCostList")
@@ -233,8 +231,6 @@
                                                 td {{orderCost.professionalName }}
                                                 td {{orderCost.amount}}
                                                 td {{orderCost.payTime}}
-                                                td {{orderCost.orderState}}
-                                                td {{orderCost.aliOrderNo }}
                                                 td {{orderCost.personalState==10?'正常':'自愿放弃'}}
 
                                     .dt-toolbar-footer
@@ -257,10 +253,10 @@ script(type='text/ng-template',id='importResultDialog')
             span.buld 支付明细(缴费人：{{paymentFn.personPayDetail.name}}&nbsp;&nbsp; 身份证号码：{{paymentFn.personPayDetail.idNumber}})
         .payment-details-list
             .details-content(ng-repeat="detail in paymentFn.personPayDetailList")
-                span 付款单号：{{detail.orderNo}}
+                span 订单号：{{detail.orderNo}}
                 span 付款日期：{{detail.payTime}}
                 span 付款金额：￥{{detail.amount}}
-                span 支付宝订单号：{{detail.aliOrderNo}}
+                //span 支付宝订单号：{{detail.aliOrderNo}}
 
 //-  添加缴费人员弹出窗模版
 script(type='text/ng-template',id='addPersonalCostDialog')

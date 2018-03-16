@@ -174,7 +174,7 @@ angular.module('dleduWebApp')
                     paymentSubjectId:this.paymentParams.id,
                     name:this.orderParams.searchOrderName,
                     start:this.orderParams.startDate,
-                    lastDate:this.orderParams.endDate,
+                    end:this.orderParams.endDate,
                     pageNumber:this.orderPage.pageNumber,
                     pageSize:this.orderPage.pageSize,
                 }

@@ -55,7 +55,8 @@ angular.module('dleduWebApp')
                             return 'Custom styled placeholder text';
                         }
 
-                        return data.name;
+                        var showName = data.code && data.code!='' ? (data.name + "(" + data.code + ")") : data.name;
+                        return showName;
                     }}
             },
             //学期下拉搜素

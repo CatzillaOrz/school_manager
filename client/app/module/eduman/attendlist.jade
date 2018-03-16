@@ -251,7 +251,7 @@
                                                     td {{attend.teachingClassesCode}}
                                                     td {{attend.courseName}}
                                                     td {{attend.teacherName}}
-                                                    td {{attend.className}}
+                                                    td(title="{{attend.className}}") {{attend.className.length > 8 ? (attend.className.substring(0, 8) + '...'):attend.className}}
                                                     td {{attend.classRoom}}
                                                     td {{attend.teachDate}}
                                                     td {{attend.dayOfWeek}}
