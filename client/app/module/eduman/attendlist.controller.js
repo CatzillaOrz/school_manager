@@ -459,6 +459,7 @@ angular.module('dleduWebApp')
                         messageService.openMsg("生成导出文件失败！");
                     })
             },
+
             //分页参数
             page: {
                 totalElements: 0,
@@ -466,6 +467,27 @@ angular.module('dleduWebApp')
                 pageNumber: 0,
                 pageSize: 10
             },
+
+            convertTitle: function(value){
+                var result = '';
+                if(value && value!=''){
+                    var arr = [], count = 40;
+                    var len = Math.ceil(value.length / count);
+                    for(var i = 0; i < len; i++){
+                        if(value.length >= count){
+                            var strCut = value.substring(0, count);
+                            arr.push(strCut);
+                            value = value.substring(count);
+                        }else{
+                            value = value;
+                            arr.push(value);
+                        }
+                    }
+                    result = arr.join("\r\n");
+                }
+                return result;
+            },
+
             init: function () {
                 this.getAttendanceByPeriod();
             }
