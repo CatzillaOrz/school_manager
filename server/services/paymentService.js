@@ -170,7 +170,7 @@ var paymentService = {
     getOrderCostList: function (params,callback) {
         RestClient.get({
                 host:'pay',
-                path: '/v1/order/list',
+                path: '/v1/orderitem/list',
                 params:params
             })
             .then(function (res) {
@@ -190,7 +190,7 @@ var paymentService = {
     getPersonPayDetail: function (params,callback) {
         RestClient.get({
                 host:'pay',
-                path: '/v1/order/simplelist',
+                path: '/v1/orderitem/simplelist',
                 params:params
             })
             .then(function (res) {

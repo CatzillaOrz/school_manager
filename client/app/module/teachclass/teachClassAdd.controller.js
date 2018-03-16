@@ -161,7 +161,8 @@ angular.module('dleduWebApp')
                         return 'Custom styled placeholder text';
                     }
                     that.courseDropList.push(data);
-                    return data.name;
+                    var showName = data.code && data.code!='' ? (data.name + "(" + data.code + ")") : data.name;
+                    return showName;
                 }}
             },
             //学院下拉搜素
