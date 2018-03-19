@@ -213,6 +213,12 @@
                     "icon": "pencil-square-o"
                 },
                 {
+                    "title": "实践课程任务管理",
+                    "sref": "trainClassList",
+                    "active": "trainClassList",
+                    "icon": "pencil-square-o"
+                },
+                {
                     "title": "实践统计",
                     "sref": "practicemanstats",
                     "active": "practicemanstats",

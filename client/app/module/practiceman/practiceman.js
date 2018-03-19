@@ -130,4 +130,18 @@ angular.module('dleduWebApp')
                     label: '创建实践小组'
                 }
             })
+            .state('trainClassList', {
+                parent: 'base',
+                url   : '/trainClassList',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TrainClassListCtrl',
+                        templateUrl: 'app/module/practiceman/trainClassList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践课程任务'
+                }
+            })
 	});
