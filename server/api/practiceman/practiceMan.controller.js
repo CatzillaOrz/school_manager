@@ -14,6 +14,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getEnterpriseList: function (req, res) {
+        PracticeManService.getEnterpriseListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
     getEntTutorInfo: function (req, res) {
         PracticeManService.getEntTutorInfoSync(req.query, req.user.access_token)

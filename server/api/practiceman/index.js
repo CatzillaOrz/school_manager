@@ -11,6 +11,7 @@ var router = express.Router();
 
 
 router.get('/getEntTutorList',auth.isSignedIn, controller.getEntTutorList);
+router.get('/getEnterpriseList',auth.isSignedIn, controller.getEnterpriseList);
 router.get('/getEntTutorInfo',auth.isSignedIn, controller.getEntTutorInfo);
 router.post('/addEntTutor',auth.isSignedIn, controller.addEntTutor);
 router.post('/addPracticeGroup',auth.isSignedIn, controller.addPracticeGroup);

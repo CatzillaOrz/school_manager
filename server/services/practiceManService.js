@@ -28,6 +28,23 @@ var PracticeManService = {
                 callback(e);
             });
     },
+    // 查询企业列表
+    getEnterpriseList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/enterprise/list',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
 
     //根据id查询企业导师信息
     getEntTutorInfo: function (params, access_token, callback) {

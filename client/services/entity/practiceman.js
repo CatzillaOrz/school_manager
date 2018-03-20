@@ -11,6 +11,10 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getEntTutorList');
                 return practiceman.get(params);
             },
+            getEnterpriseList: function (params) {
+                var practiceman = $resource('api/practiceman/getEnterpriseList');
+                return practiceman.get(params);
+            },
             getEntTutorInfo: function (params) {
                 var practiceman = $resource('api/practiceman/getEntTutorInfo');
                 return practiceman.get(params);

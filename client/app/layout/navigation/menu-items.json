@@ -189,11 +189,17 @@
         },
         {
             "title": "实践信息管理",
-            "sref": "enttutorman",
+            "sref": "enterpriseList",
             "icon": "navicon",
-            "active": "practiceman",
+            "active": "enterpriseList",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
+                {
+                    "title": "企业管理",
+                    "sref": "enterpriseList",
+                    "active": "enterpriseList",
+                    "icon": "pencil-square-o"
+                },
                 {
                     "title": "企业导师管理",
                     "sref": "enttutorman",
