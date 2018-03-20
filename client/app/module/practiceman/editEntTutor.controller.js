@@ -70,12 +70,14 @@ angular.module('dleduWebApp')
 			isEditOrAdd: 'add', //true是编辑 false是新增
 			//企业导师信息
 			record: null,
+			records: [],
 			prompt: '填写以下信息以建立企业导师',
 			title: '企业导师信息创建',
 			id: $state.params.id,
 			params: {
 				name: '',// 姓名
 				enterpriseName: '', //企业名称
+				enterpriseId: '', //企业名称
 				position: '', //职务
 				department: '', //部门
 				mailbox: '', //邮箱
@@ -134,17 +136,40 @@ angular.module('dleduWebApp')
 				}
 			},
 
+
 			//提交
 			submit: function(){
 				this.save();
 			},
 
 			init: function () {
-				if($state.params.id && $state.params.id != ''){
-					this.isEditOrAdd = 'edit';
-					this.title = "企业导师信息修改";
-					this.getEntTutorInfo($state.params.id);
-				}
+				var that = this;
+				var params = {
+					pageNumber: 1,
+					pageSize: 10000,
+					name: ''
+				};
+				PracticeManService.getEnterpriseList(params).$promise
+					.then(function (data) {
+						that.records = data.data.data;
+						if(!!$state.params.id){
+							that.isEditOrAdd = 'edit';
+							that.title = "企业导师信息修改";
+							that.getEntTutorInfo($state.params.id);
+						}
+					})
+					.catch(function (error) {
+
+					})
+			},
+			computeSelected: function(){
+				var that = this;
+				angular.forEach(that.records, function(c){ 
+					if(c.id == that.params.enterpriseId){
+						that.params.enterpriseName = c.name;
+						return
+					}
+				})
 			}
 		};
 		$scope.handleFn.init();

@@ -23,7 +23,8 @@
                             span.required *
                             |企业名称：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过30个字企业名称" ng-model="handleFn.params.enterpriseName" name="enterpriseName" validator="required, maxlength=30" )
+                            select.form-control(placeholder="请填选择企业" ng-model="handleFn.params.enterpriseId", ng-change='handleFn.computeSelected()')
+                                option(value='{{ep.id}}', ng-repeat='ep in handleFn.records', ng-selected='ep.id == handleFn.params.enterpriseId') {{ep.name}}
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
