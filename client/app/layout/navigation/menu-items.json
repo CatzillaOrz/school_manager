@@ -203,7 +203,7 @@
                 {
                     "title": "企业导师管理",
                     "sref": "enttutorman",
-                    "active": "enttutorman",
+                    "active": "enterpriseList",
                     "icon": "pencil-square-o"
                 },
                 {
