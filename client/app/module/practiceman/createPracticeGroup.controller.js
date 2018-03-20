@@ -178,7 +178,28 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//获取导师
+			// 获取企业导师列表
+			getEntTutorList: function () {
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 1,
+					pageSize: 10000,
+					name: that.searchParams.name
+				};
+				CommonService.delEmptyProperty(params);
+				PracticeManService.getEntTutorList(params).$promise
+					.then(function (data) {
+						that.teacherList = data.data;
+						// that.page = data.page;
+						// that.page.pageNumber++;
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+			//获取学校老师
 			getTutor: function () {
 				var _this = this;
 				var params = _this.searchParams;
@@ -434,11 +455,13 @@ angular.module('dleduWebApp')
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;
 						that.params.endDate = that.practiceGroupInfo.endDate;
-						that.getSimpleTeachers();
+						// that.getSimpleTeachers();
+						that.getEntTutorList();
 						that.getSimpleStudents();
 					})
 					.catch(function (error) {
-						that.getSimpleTeachers();
+						// that.getSimpleTeachers();
+						that.getEntTutorList();
 						that.getSimpleStudents();
 					})
 			},
@@ -461,11 +484,11 @@ angular.module('dleduWebApp')
 		$timeout(function () {
 			//$scope.handleFn.init();
 			//学院变动自动查询老师
-			$scope.$watch('handleFn.searchParams.collegeId', function(newValue, oldValue) {
-				if (newValue!=oldValue){
-					$scope.handleFn.getSimpleTeachers();
-				}
-			});
+			// $scope.$watch('handleFn.searchParams.collegeId', function(newValue, oldValue) {
+			// 	if (newValue!=oldValue){
+			// 		$scope.handleFn.getSimpleTeachers();
+			// 	}
+			// });
 			//班级变动 自动查询学生
 			$scope.$watch('handleFn.searchStudentParams.classesId', function(newValue, oldValue) {
 				if (newValue!=oldValue){
