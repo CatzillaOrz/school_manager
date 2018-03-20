@@ -63,6 +63,38 @@ var PracticeManService = {
         });
     },
 
+    //新增企业
+    saveEnterprise: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/enterprise/save',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //edit企业
+    updateEnterprise: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: '/v1/enterprise/update',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     //新增企业导师
     addEntTutor: function (params, access_token, callback) {
         RestClient.post({
@@ -80,6 +112,22 @@ var PracticeManService = {
         });
     },
 
+    //删除企业
+    delEnterprise: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/enterprise/delete?id=' + params.id,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     //删除企业导师
     delEntTutor: function (params, access_token, callback) {
         params.accessToken = access_token;

@@ -41,22 +41,21 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in enterpriseList.records")
                                 td.sorting_1 {{$index+1 + ((enterpriseList.page.pageNumber==0?enterpriseList.page.pageNumber+1:enterpriseList.page.pageNumber)-1)*enterpriseList.page.pageSize}}
-                                td {{record.enterpriseName}}
-                                td {{record.department}}
-                                td {{record.position}}
-                                td {{record.phone}}
+                                td {{record.name}}
+                                td {{record.province}}{{record.city}}{{record.address}}
+                                td {{record.telephone}}
                                 td {{record.mailbox}}
                                 td
-                                    a.handle(ui-sref="enterpriseEdit({id: record.id})")
+                                    a.handle(ng-click='enterpriseList.enterpriseCache(record)', ui-sref="enterpriseEdit({id: record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="enterpriseList.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
-                                    a.handle(ui-sref="createpracticegroup({id: record.id, tutorId: record.accountId})")
+                                    //- a.handle(ui-sref="createpracticegroup({id: record.id, tutorId: record.accountId})")
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ng-click="enterpriseList.resetPasswordPrompt(record)")
+                                    //- a.handle(ng-click="enterpriseList.resetPasswordPrompt(record)")
                                         i.fa.fa-repeat
                                         span 重置密码
 

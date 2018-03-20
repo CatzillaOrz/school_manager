@@ -66,7 +66,7 @@ angular.module('dleduWebApp')
 				return false;
 			}
 		}
-		$scope.handleFn = {
+		$scope.enterpriseEditFn = {
 			isEditOrAdd: 'add', //true是编辑 false是新增
 			//企业导师信息
 			record: null,
@@ -75,15 +75,11 @@ angular.module('dleduWebApp')
 			id: $state.params.id,
 			params: {
 				name: '',// 姓名
-				enterpriseName: '', //企业名称
-				position: '', //职务
-				department: '', //部门
 				mailbox: '', //邮箱
-				phone: '', //邮箱
-				companyAddress: '', //地址公司
+				telephone: '', //邮箱
+				address: '', //地址公司
 				province: '',
-				city: '',
-				district: ''
+				city: ''
 			},
 
 			// 查询导师信息
@@ -104,13 +100,13 @@ angular.module('dleduWebApp')
 
 			//保存导师
 			save: function(){
-				this.params.orgId = AuthService.getUser().orgId;
+				// this.params.orgId = AuthService.getUser().orgId;
 				if(this.isEditOrAdd == 'edit'){
-					PracticeManService.updateEntTutor(this.params).$promise
+					PracticeManService.updateEnterprise(this.params).$promise
 						.then(function (data) {
 							if(data.success){
 								messageService.openMsg("修改成功!");
-								$state.go("enttutorman");
+								$state.go("enterpriseList");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -119,11 +115,11 @@ angular.module('dleduWebApp')
 
 						})
 				}else{
-					PracticeManService.addEntTutor(this.params).$promise
+					PracticeManService.saveEnterprise(this.params).$promise
 						.then(function (data) {
 							if(data.success){
 								messageService.openMsg("新增成功!");
-								$state.go("enttutorman");
+								$state.go("enterpriseList");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -143,9 +139,10 @@ angular.module('dleduWebApp')
 				if($state.params.id && $state.params.id != ''){
 					this.isEditOrAdd = 'edit';
 					this.title = "企业导师信息修改";
-					this.getEntTutorInfo($state.params.id);
+					this.params = PracticeManService.defineProperty().get();
+					// this.getEntTutorInfo($state.params.id);
 				}
 			}
 		};
-		$scope.handleFn.init();
+		$scope.enterpriseEditFn.init();
 	});

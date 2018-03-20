@@ -33,7 +33,7 @@ angular.module('dleduWebApp')
 				PracticeManService.getEnterpriseList(params).$promise
 					.then(function (data) {
 						that.records = data.data.data;
-						console.log(that.records);
+						// console.log(that.records);
 						that.page = data.data.page;
 						that.page.pageNumber++;
 					})
@@ -41,18 +41,19 @@ angular.module('dleduWebApp')
 
 					})
 			},
-
+			enterpriseCache: function(entity){
+				PracticeManService.defineProperty(entity).set();
+			},
 			//删除企业
-			delEntTutor: function () {
+			delEnterprise: function () {
 				var that = $scope.enterpriseList;
 				var params = {
-					orgId: AuthService.getUser().orgId,
 					id: that.currentRecord.id
 				};
-				PracticeManService.delEntTutor(params).$promise
+				PracticeManService.delEnterprise(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
-						that.getEntTutorList();
+						that.getEnterpriseList();
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));
@@ -63,7 +64,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentRecord = entity;
-				messageService.getMsg("您确定要删除此条记录吗？", that.delEntTutor)
+				messageService.getMsg("您确定要删除此条记录吗？", that.delEnterprise)
 			},
 
 			//重置密码

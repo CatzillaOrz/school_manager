@@ -63,6 +63,24 @@ module.exports = {
             })
     },
 
+    saveEnterprise: function (req, res) {
+        PracticeManService.saveEnterpriseSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateEnterprise: function (req, res) {
+        PracticeManService.updateEnterpriseSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     addPracticeGroup: function (req, res) {
         PracticeManService.addPracticeGroupSync(req.body, req.user.access_token)
             .then(function (data) {
@@ -254,6 +272,15 @@ module.exports = {
     },
     deleteWeekTask: function (req, res) {
         PracticeManService.deleteWeekTaskSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delEnterprise: function (req, res) {
+        PracticeManService.delEnterpriseSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
