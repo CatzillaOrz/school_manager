@@ -43,7 +43,7 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//删除企业导师
+			//删除小组
 			delPracticeGroup: function () {
 				var that = $scope.practiceGroupMan;
 				var params = {
@@ -64,7 +64,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentRecord = entity;
-				messageService.getMsg("您确定要删除此条记录吗？", that.delEntTutor)
+				messageService.getMsg("您确定要删除此条记录吗？", that.delPracticeGroup)
 			},
 
 			init: function () {
