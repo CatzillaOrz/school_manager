@@ -4,7 +4,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('TrainClassListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
-												  PracticeManService) {
+		PracticeManService) {
 		$scope.practiceGroupMan = {
 			weekTaskList: [],
 			page: {
@@ -39,7 +39,7 @@ angular.module('dleduWebApp')
 					})
 			},
 
-            deleteWeekTask: function (entity) {
+			deleteWeekTask: function (entity) {
 				var that = $scope.practiceGroupMan;
 				var params = {
 					id: entity.id
@@ -50,7 +50,7 @@ angular.module('dleduWebApp')
 						that.getPracticeGroupList();
 					})
 					.catch(function (error) {
-						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));
+						messageService.openMsg(CommonService.exceptionPrompt(error, "删除失败！"));
 					})
 			},
 

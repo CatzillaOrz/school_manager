@@ -1,101 +1,115 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('TrainClassEditCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout) {
+	.controller('TrainClassEditCtrl', function ($scope, $state, PracticeManService, AuthService, messageService, $timeout) {
 		$scope.handleFn = {
-			//提示title
-			title: "新建课程",
-			//提示信息
-			prompt: "填写以下信息以建立新的课程",
-			//操作类型
-			handle: "create",
-			//提交参数
-			params: {
-				id: 0,
-				orgId: AuthService.getUser().orgId,
-				name: "",
-				userId: AuthService.getUser().id,
-				courseDesc: "",
-                courseProp: "",
-                credit: "",
-                code:""
-			},
-			//操作完成标识
-			complete: false,
-			/**
-			 *新增课程
-			 */
-			addCourse: function () {
-				var that = this;
-				var params = that.params;
-				CourseService.addCourse(params).$promise
-					.then(function (data) {
-						that.complete = true;
-					})
-					.catch(function (error) {
-						var re = /[^\u4e00-\u9fa5]/;
-						if (re.test(error.data)) {
-							messageService.openMsg(error.data);
-						} else {
-							messageService.openMsg("添加失败");
-						}
-					})
-			},
-			//获取课程信息通过id
-			getCourseById: function () {
-				var that = this;
-				var params = {
-					id: that.params.id
-				}
-				CourseService.getCourseById(params).$promise
-					.then(function (data) {
-						that.params = data
-					})
-					.catch(function (error) {
-					})
-			},
-			//更新课程
-			updateCourse: function () {
-				var that = this;
-				var params = that.params;
-				params.orgId = AuthService.getUser().orgId;
-				params.userId = AuthService.getUser().id;
-				CourseService.updateCourse(params).$promise
-					.then(function (data) {
-						that.complete = true;
-					})
-					.catch(function (error) {
-						var re = /[^\u4e00-\u9fa5]/;
-						if (re.test(error.data)) {
-							messageService.openMsg(error.data);
-						} else {
+			isEditOrAdd: 'add', //true是编辑 false是新增
+            //企业导师信息
+            record: null,
+            prompt: '填写以下信息以建立周任务',
+            title: '周任务信息创建',
+            id: $state.params.id,
+            groupList:{},
+            params: {
+                beginDate: '',
+                endDate: '',
+                id: '',
+                orgId: AuthService.getUser().orgId,
+                practiceTeamList: [
+                ],
+                remark: '',
+                weekNo: '',
+                taskTitle: ''
+            },
 
-							messageService.openMsg("更新失败");
-						}
-					})
-			},
-			//表单提交
-			submit: function () {
-				var that = this;
-				if (that.handle == "编辑课程信息") {
-					that.updateCourse();
-				} else {
-					that.addCourse();
-				}
-			},
-			//页面初始化
-			init: function () {
-				var that = this;
-				that.params.id = $state.params.id;
-				that.handle = $state.current.ncyBreadcrumbLabel;
-				if (that.handle == "编辑课程信息") {
-					that.getCourseById();
-				}
-				that.title = that.handle;
-				// that.prompt = $state.current.data.prompt;
-				// that.completeMSG = $state.current.data.completeMSG;
+            // 查询导师信息
+            getGrouplistByOrgId: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId
+                };
+                PracticeManService.getGrouplistByOrgId(params).$promise
+                    .then(function (data) {
+                        console.log(data);
 
-			}
+                        that.groupList = {};
+                        angular.forEach(data,function(item,index){
+                            that.groupList[item.id] = item;
+                        });
+                        if($state.params.id){
+                            angular.forEach(that.params.practiceTeamList,function(item){
+                                if(that.groupList[item]){
+                                    that.groupList[item].select = true;
+                                }
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            // 查询周任务信息
+            getWeekTaskDetail: function () {
+                var that = this;
+                var params = {
+                    id: $state.params.id
+                };
+                PracticeManService.getWeekTaskDetail(params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.params = data.data;
+                        that.getGrouplistByOrgId();
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+            //保存周任务
+            save: function(){
+                if($state.params.id){
+
+                    PracticeManService.putWeekTask(this.params).$promise
+                        .then(function (data) {
+                            messageService.openMsg("修改成功!");
+                            $state.go("trainClassList");
+                        })
+                        .catch(function (error) {
+                            messageService.openMsg("修改失败! "+error.data);
+                        })
+                }else{
+                    PracticeManService.addWeekTask(this.params).$promise
+                        .then(function (data) {
+                            messageService.openMsg("创建成功!");
+                            $state.go("trainClassList");
+                        })
+                        .catch(function (error) {
+                            console.log(error.data);
+                            messageService.openMsg("创建失败! "+error.data);
+                        })
+                }
+            },
+
+            //提交
+            submit: function(){
+                var _this =this;
+                _this.params.practiceTeamList =[];
+                angular.forEach(_this.groupList,function(item){
+                    if(item.select){
+                        _this.params.practiceTeamList.push(item.id);
+                    }
+                });
+                this.save();
+            },
+
+
+            init: function () {
+                if($state.params.id){
+					this.getWeekTaskDetail();
+					this.title = '实践任务编辑'
+                }
+            }
 		};
 		$timeout(function () {
 			$scope.handleFn.init();
