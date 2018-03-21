@@ -11,10 +11,14 @@ var router = express.Router();
 
 
 router.get('/getEntTutorList',auth.isSignedIn, controller.getEntTutorList);
+router.get('/getEnterpriseList',auth.isSignedIn, controller.getEnterpriseList);
 router.get('/getEntTutorInfo',auth.isSignedIn, controller.getEntTutorInfo);
+router.post('/saveEnterprise',auth.isSignedIn, controller.saveEnterprise);
+router.post('/updateEnterprise',auth.isSignedIn, controller.updateEnterprise);
 router.post('/addEntTutor',auth.isSignedIn, controller.addEntTutor);
 router.post('/addPracticeGroup',auth.isSignedIn, controller.addPracticeGroup);
 router.delete('/delEntTutor',auth.isSignedIn, controller.delEntTutor);
+router.delete('/delEnterprise',auth.isSignedIn, controller.delEnterprise);
 router.put('/updateEntTutor',auth.isSignedIn, controller.updateEntTutor);
 router.get('/getPracticeGroupList',auth.isSignedIn, controller.getPracticeGroupList);
 router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupInfo);

@@ -7,8 +7,33 @@ angular.module('dleduWebService')
     .factory('PracticeManService', function ($http, $q,$resource) {
 
         return {
+            defineProperty: function (entity) {
+                var that = this;
+                return {
+                    bar: {},
+                    get: function () {
+                        return that.bar;
+                    },
+                    set: function () {
+                        entity && (that.bar = entity);
+                        !entity && (that.bar = {});
+                    }
+                }
+            },
             getEntTutorList: function (params) {
                 var practiceman = $resource('api/practiceman/getEntTutorList');
+                return practiceman.get(params);
+            },
+            saveEnterprise: function (params) {
+                var practiceman = $resource('api/practiceman/saveEnterprise');
+                return practiceman.save(params);
+            },
+            updateEnterprise: function (params) {
+                var practiceman = $resource('api/practiceman/updateEnterprise');
+                return practiceman.save(params);
+            },
+            getEnterpriseList: function (params) {
+                var practiceman = $resource('api/practiceman/getEnterpriseList');
                 return practiceman.get(params);
             },
             getEntTutorInfo: function (params) {
@@ -21,6 +46,10 @@ angular.module('dleduWebService')
             },
             delEntTutor:function (params) {
                 var practiceman = $resource('api/practiceman/delEntTutor');
+                return practiceman.remove(params);
+            },
+            delEnterprise:function (params) {
+                var practiceman = $resource('api/practiceman/delEnterprise');
                 return practiceman.remove(params);
             },
             updateEntTutor: function (params) {

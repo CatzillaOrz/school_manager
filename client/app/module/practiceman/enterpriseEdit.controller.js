@@ -3,7 +3,7 @@
  * 新增、编辑企业导师
  */
 angular.module('dleduWebApp')
-	.controller('EidtEntTutorCtrl', function ($scope, $state, AuthService, EduManService, messageService, $filter,
+	.controller('enterpriseEditCtrl', function ($scope, $state, AuthService, EduManService, messageService, $filter,
 											  PracticeManService) {
 			$scope.division = {"北京市": ["东城区", "西城区", "崇文区", "宣武区", "朝阳区", "丰台区", "石景山区", "海淀区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云县", "延庆县"],
 				"上海市": ["黄浦区", "卢湾区", "徐汇区", "长宁区", "静安区", "普陀区", "闸北区", "虹口区", "杨浦区", "闵行区", "宝山区", "嘉定区", "浦东新区", "金山区", "松江区", "青浦区", "南汇区", "奉贤区", "崇明县"],
@@ -66,26 +66,20 @@ angular.module('dleduWebApp')
 				return false;
 			}
 		}
-		$scope.handleFn = {
+		$scope.enterpriseEditFn = {
 			isEditOrAdd: 'add', //true是编辑 false是新增
 			//企业导师信息
 			record: null,
-			records: [],
 			prompt: '填写以下信息以建立企业导师',
 			title: '企业导师信息创建',
 			id: $state.params.id,
 			params: {
 				name: '',// 姓名
-				enterpriseName: '', //企业名称
-				enterpriseId: '', //企业名称
-				position: '', //职务
-				department: '', //部门
 				mailbox: '', //邮箱
-				phone: '', //邮箱
-				companyAddress: '', //地址公司
+				telephone: '', //邮箱
+				address: '', //地址公司
 				province: '',
-				city: '',
-				district: ''
+				city: ''
 			},
 
 			// 查询导师信息
@@ -106,13 +100,13 @@ angular.module('dleduWebApp')
 
 			//保存导师
 			save: function(){
-				this.params.orgId = AuthService.getUser().orgId;
+				// this.params.orgId = AuthService.getUser().orgId;
 				if(this.isEditOrAdd == 'edit'){
-					PracticeManService.updateEntTutor(this.params).$promise
+					PracticeManService.updateEnterprise(this.params).$promise
 						.then(function (data) {
 							if(data.success){
 								messageService.openMsg("修改成功!");
-								$state.go("enttutorman");
+								$state.go("enterpriseList");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -121,11 +115,11 @@ angular.module('dleduWebApp')
 
 						})
 				}else{
-					PracticeManService.addEntTutor(this.params).$promise
+					PracticeManService.saveEnterprise(this.params).$promise
 						.then(function (data) {
 							if(data.success){
 								messageService.openMsg("新增成功!");
-								$state.go("enttutorman");
+								$state.go("enterpriseList");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -136,41 +130,19 @@ angular.module('dleduWebApp')
 				}
 			},
 
-
 			//提交
 			submit: function(){
 				this.save();
 			},
 
 			init: function () {
-				var that = this;
-				var params = {
-					pageNumber: 1,
-					pageSize: 10000,
-					name: ''
-				};
-				PracticeManService.getEnterpriseList(params).$promise
-					.then(function (data) {
-						that.records = data.data.data;
-						if(!!$state.params.id){
-							that.isEditOrAdd = 'edit';
-							that.title = "企业导师信息修改";
-							that.getEntTutorInfo($state.params.id);
-						}
-					})
-					.catch(function (error) {
-
-					})
-			},
-			computeSelected: function(){
-				var that = this;
-				angular.forEach(that.records, function(c){ 
-					if(c.id == that.params.enterpriseId){
-						that.params.enterpriseName = c.name;
-						return
-					}
-				})
+				if($state.params.id && $state.params.id != ''){
+					this.isEditOrAdd = 'edit';
+					this.title = "企业导师信息修改";
+					this.params = PracticeManService.defineProperty().get();
+					// this.getEntTutorInfo($state.params.id);
+				}
 			}
 		};
-		$scope.handleFn.init();
+		$scope.enterpriseEditFn.init();
 	});
