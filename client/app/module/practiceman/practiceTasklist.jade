@@ -28,28 +28,28 @@
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.btn.btn-primary(ui-sref="createpracticetask")
-                                    span 新建周任务
+                                    span 新建任务
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 实践周
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 任务标题
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 时间
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 备注
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 任务名称
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 所属课程
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 学时
+                                //- th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 备注
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="weektask in practiceGroupMan.weekTaskList")
                                 td.sorting_1 {{$index+1+(practiceGroupMan.page.pageNumber==1 ? 0 : (practiceGroupMan.page.pageNumber-1)*10)}}
-                                td {{weektask.weekNo}}
-                                td {{weektask.taskTitle}}
-                                td {{weektask.beginDate}} - {{weektask.endDate}}
-                                td {{weektask.remark}}
+                                td {{weektask.taskName}}
+                                td {{weektask.weekTaskName}}
+                                td {{weektask.classHour}}
+                                //- td {{weektask.description}}
                                 td
                                     a.handle(ui-sref="createpracticetask({id: weektask.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="practiceGroupMan.deleteWeekTask(weektask)")
+                                    a.handle(ng-click="practiceGroupMan.deletePrompt(weektask)")
                                         i.fa.fa-trash-o
                                         span 删除
 

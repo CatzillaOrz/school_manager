@@ -13,7 +13,7 @@ angular.module('dleduWebApp')
 				pageNumber: 1,
 				pageSize: 10
 			},
-
+			currentEntity: null,
 			//查询条件
 			queryOption: {
 				name: '',
@@ -26,10 +26,10 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					name: that.queryOption.name
+					taskName: that.queryOption.name
 				};
 				CommonService.delEmptyProperty(params);
-				PracticeManService.getWeekTaskList(params).$promise
+				PracticeManService.getTaskList(params).$promise
 					.then(function (data) {
 						that.weekTaskList = data.data;
 						that.page = data.page;
@@ -39,12 +39,12 @@ angular.module('dleduWebApp')
 					})
 			},
 
-            deleteWeekTask: function (entity) {
+            deleteWeekTask: function () {
 				var that = $scope.practiceGroupMan;
 				var params = {
-					id: entity.id
+					id: that.currentEntity.id
 				};
-				PracticeManService.deleteWeekTask(params).$promise
+				PracticeManService.deleteTask(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
 						that.getPracticeGroupList();
@@ -57,7 +57,8 @@ angular.module('dleduWebApp')
 			//删除提示
 			deletePrompt: function (entity) {
 				var that = this;
-				messageService.getMsg("您确定要删除此条记录吗？", that.deleteWeekTask(entity))
+				that.currentEntity = entity;
+				messageService.getMsg("您确定要删除此条记录吗？", that.deleteWeekTask)
 			},
 
 			init: function () {

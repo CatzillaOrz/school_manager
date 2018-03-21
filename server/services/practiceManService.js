@@ -380,12 +380,46 @@ var PracticeManService = {
             callback(e);
         });
     },
+    //获取任务列表
+    getTaskList: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/page',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //修改实践周任务
     putWeekTask: function (params, access_token, callback) {
         RestClient.put({
             host: 'stu-practice',
             path: '/v1/weektask/edit',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //修改任务
+    updateTask: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'stu-practice',
+            path: '/v1/practicetask/edit',
             entity: params,
             access_token: access_token
         }).then(function (res) {
@@ -416,6 +450,22 @@ var PracticeManService = {
             callback(e);
         });
     },
+    getTaskDetail: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'stu-practice',
+            path: '/v1/practicetask/detail',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //删除实践周任务
     deleteWeekTask: function (params, access_token, callback) {
@@ -434,12 +484,45 @@ var PracticeManService = {
             callback(e);
         });
     },
+    deleteTask: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'stu-practice',
+            path: '/v1/practicetask/delete?id=' + params.id,
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //添加实践周任务
     addWeekTask: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',
             path: '/v1/weektask/add',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //新建任务
+    addTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/add',
             entity: params,
             access_token: access_token
         }).then(function (res) {

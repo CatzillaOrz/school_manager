@@ -253,7 +253,16 @@ module.exports = {
             })
     },
     getWeekTaskList: function (req, res) {
-        PracticeManService.getWeekTaskListSync(req.body, req.user.access_token)
+        PracticeManService.getWeekTaskListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getTaskList: function (req, res) {
+        PracticeManService.getTaskListSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -270,6 +279,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    updateTask: function (req, res) {
+        PracticeManService.updateTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getWeekTaskDetail: function (req, res) {
         PracticeManService.getWeekTaskDetailSync(req.query, req.user.access_token)
             .then(function (data) {
@@ -279,8 +297,26 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getTaskDetail: function (req, res) {
+        PracticeManService.getTaskDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     deleteWeekTask: function (req, res) {
         PracticeManService.deleteWeekTaskSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteTask: function (req, res) {
+        PracticeManService.deleteTaskSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
@@ -299,6 +335,15 @@ module.exports = {
     },
     addWeekTask: function (req, res) {
         PracticeManService.addWeekTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTask: function (req, res) {
+        PracticeManService.addTaskSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

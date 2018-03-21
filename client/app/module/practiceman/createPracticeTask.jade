@@ -12,10 +12,11 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 实践周：
-                        .col-sm-8
-                            input.form-control(placeholder="请输入实践周，例如第一周" ng-model="handleFn.params.weekNo" name="name" maxlength="30" validator="required, maxlength=30")
-                    .form-group
+                            | 所属课程：
+                        .col-sm-7
+                            select.form-control(placeholder="请填选择课程" ng-model="handleFn.params.weekTaskId", ng-change='handleFn.computeSelected()')
+                                option(value='{{ep.id}}', ng-repeat='ep in handleFn.weekTaskList', ng-selected='ep.id == handleFn.params.weekTaskId') {{ep.taskTitle}}
+                    //.form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 任务完成时间段：
@@ -44,11 +45,16 @@
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
-                            | 任务标题：
+                            | 任务名称：
                         .col-sm-8
-                            input.form-control(placeholder="请输入任务标题" ng-model="handleFn.params.taskTitle" name="taskTitle" maxlength="30" validator="required, maxlength=30" )
-
+                            input.form-control(placeholder="请输入任务标题" ng-model="handleFn.params.taskName" name="taskTitle" maxlength="30" validator="required, maxlength=30" )
                     .form-group
+                        label.col-sm-3.control-label
+                            span
+                            |任务内容：
+                        .col-sm-9
+                            textarea.form-control(rows='8' placeholder="请填写不超过300个字课程描述" ng-model="handleFn.params.description" name="courseDesc"  validator="maxlength=300")
+                    //.form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 分配实践小组：
@@ -60,9 +66,9 @@
 
                     .form-group
                         label.col-sm-3.control-label
-                            | 备注：
+                            | 学时：
                         .col-sm-8
-                            input.form-control(placeholder="" ng-model="handleFn.params.remark" name="remark" maxlength="30" validator="maxlength=30" )
+                            input.form-control(placeholder="" ng-model="handleFn.params.classHour" name="remark" maxlength="30" validator="maxlength=30" )
 
                 .form-actions
                     .row
