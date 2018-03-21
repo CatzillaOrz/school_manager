@@ -140,6 +140,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    delPracticeGroupByGId: function (req, res) {
+        PracticeManService.delPracticeGroupByGIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getPeopleStats: function (req, res) {
         PracticeManService.getPeopleStatsSync(req.body, req.user.access_token)
             .then(function (data) {

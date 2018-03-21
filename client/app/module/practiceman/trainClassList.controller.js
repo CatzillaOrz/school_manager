@@ -4,12 +4,9 @@
  */
 angular.module('dleduWebApp')
 	.controller('TrainClassListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
-												  PracticeManService) {
+		PracticeManService) {
 		$scope.practiceGroupMan = {
-			//问卷列表
-			records: [],
-			//当前操作的class
-			currentRecord: {},
+			weekTaskList: [],
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -32,43 +29,39 @@ angular.module('dleduWebApp')
 					name: that.queryOption.name
 				};
 				CommonService.delEmptyProperty(params);
-				PracticeManService.getPracticeGroupList(params).$promise
+				PracticeManService.getWeekTaskList(params).$promise
 					.then(function (data) {
-						that.records = data.data;
+						that.weekTaskList = data.data;
 						that.page = data.page;
-						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
 					})
 			},
 
-			//删除企业导师
-			delPracticeGroup: function () {
+			deleteWeekTask: function (entity) {
 				var that = $scope.practiceGroupMan;
 				var params = {
-					orgId: AuthService.getUser().orgId,
-					id: that.currentRecord.id
+					id: entity.id
 				};
-				PracticeManService.delPracticeGroup(params).$promise
+				PracticeManService.deleteWeekTask(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
 						that.getPracticeGroupList();
 					})
 					.catch(function (error) {
-						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));
+						messageService.openMsg(CommonService.exceptionPrompt(error, "删除失败！"));
 					})
 			},
 
 			//删除提示
 			deletePrompt: function (entity) {
 				var that = this;
-				that.currentRecord = entity;
-				messageService.getMsg("您确定要删除此条记录吗？", that.delEntTutor)
+				messageService.getMsg("您确定要删除此条记录吗？", that.deleteWeekTask(entity))
 			},
 
 			init: function () {
-				// this.getPracticeGroupList();
+				this.getPracticeGroupList();
 			}
 		};
 		$scope.practiceGroupMan.init();

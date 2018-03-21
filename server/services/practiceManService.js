@@ -256,12 +256,29 @@ var PracticeManService = {
         });
     },
 
-    //删除实践小组
+    //删除企业导师
     delPracticeGroup: function (params, access_token, callback) {
         params.accessToken = access_token;
         RestClient.delete({
             host: 'gateway-org',
             path: '/v1/mentorstraining/delete',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //删除实践小组
+    delPracticeGroupByGId: function (params, access_token, callback) {
+        params.accessToken = access_token;
+        RestClient.delete({
+            host: 'gateway-org',
+            path: 'v1/trainingmanage/deletegroup?id=' + params.id,
             params: params
         }).then(function (res) {
             if (res.status.code == 200) {

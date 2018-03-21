@@ -50,7 +50,7 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					id: that.currentRecord.id
 				};
-				PracticeManService.delPracticeGroup(params).$promise
+				PracticeManService.delPracticeGroupByGId(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
 						that.getPracticeGroupList();

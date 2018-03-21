@@ -141,7 +141,21 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '实践课程任务'
+                    label: '实践课程任务列表'
+                }
+            })
+            .state('trainClassEdit', {
+                parent: 'base',
+                url   : '/trainClassEdit/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TrainClassEditCtrl',
+                        templateUrl: 'app/module/practiceman/trainClassEdit.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践课程编辑'
                 }
             })
             .state('enterpriseList', {

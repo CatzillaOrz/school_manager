@@ -454,7 +454,7 @@ angular.module('dleduWebApp')
 						that.practiceGroupInfo = data;
 						if(that.practiceGroupInfo){
 							that.isEidt = true;
-							that.title = '编辑实践小组'
+							that.title = '编辑实践小组';
 						}
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;
