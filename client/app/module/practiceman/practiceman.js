@@ -123,11 +123,11 @@ angular.module('dleduWebApp')
                     }
                 },
                 data:{
-                    prompt:'填写以下信息以修改院系',
-                    completeMSG:'恭喜你，编辑院系成功！'
+                    prompt:'填写以下信息以编辑院系',
+                    completeMSG:'恭喜你，编辑成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '创建实践小组'
+                    label: '编辑实践任务'
                 }
             })
             .state('trainClassList', {

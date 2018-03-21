@@ -123,8 +123,17 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getWeekTaskList');
                 return practiceman.get(params);
             },
+            getTaskList: function (params) {
+                var practiceman = $resource('api/practiceman/getTaskList');
+                return practiceman.get(params);
+            },
             putWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/putWeekTask','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            updateTask: function (params) {
+                var practiceman = $resource('api/practiceman/updateTask','',{
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
@@ -132,12 +141,24 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getWeekTaskDetail');
                 return practiceman.get(params);
             },
+            getTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getTaskDetail');
+                return practiceman.get(params);
+            },
             deleteWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/deleteWeekTask');
                 return practiceman.remove(params);
             },
+            deleteTask: function (params) {
+                var practiceman = $resource('api/practiceman/deleteTask');
+                return practiceman.remove(params);
+            },
             addWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/addWeekTask');
+                return practiceman.save(params);
+            },
+            addTask: function (params) {
+                var practiceman = $resource('api/practiceman/addTask');
                 return practiceman.save(params);
             },
             getGrouplistByOrgId: function (params) {

@@ -34,10 +34,15 @@ router.get('/exportPeople',auth.isSignedIn, controller.exportPeople);
 router.get('/exportPeopleStats',auth.isSignedIn, controller.exportPeopleStats);
 router.get('/exportTaskStats',auth.isSignedIn, controller.exportTaskStats);
 router.get('/getWeekTaskList',auth.isSignedIn, controller.getWeekTaskList);
+router.get('/getTaskList',auth.isSignedIn, controller.getTaskList);
 router.put('/putWeekTask',auth.isSignedIn, controller.putWeekTask);
+router.put('/updateTask',auth.isSignedIn, controller.updateTask);
 router.get('/getWeekTaskDetail',auth.isSignedIn, controller.getWeekTaskDetail);
+router.get('/getTaskDetail',auth.isSignedIn, controller.getTaskDetail);
 router.delete('/deleteWeekTask',auth.isSignedIn, controller.deleteWeekTask);
+router.delete('/deleteTask',auth.isSignedIn, controller.deleteTask);
 router.post('/addWeekTask',auth.isSignedIn, controller.addWeekTask);
+router.post('/addTask',auth.isSignedIn, controller.addTask);
 router.get('/getGrouplistByOrgId',auth.isSignedIn, controller.getGrouplistByOrgId);
 
 module.exports = router;
