@@ -1,0 +1,62 @@
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='!handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            form.form-horizontal(name="courseForm")
+                fieldset
+                    legend {{handleFn.prompt}}
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 课程名称：
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="handleFn.params.name" name="name" validator="required, maxlength=30")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 课程编号：
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="请填写课程编号" ng-model="handleFn.params.code" name="code" validator="required, maxlength=30")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 课程性质：
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="请填写不超过30个字课程性质" ng-model="handleFn.params.courseProp" name="courseProp" validator="maxlength=30")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 学分：
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="请填写学分" ng-model="handleFn.params.credit" name="credit" validator="number, maxlength=2")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span
+                            |课程描述：
+                        .col-sm-9
+                            textarea.form-control(rows='8' placeholder="请填写不超过300个字课程描述" ng-model="handleFn.params.courseDesc" name="courseDesc"  validator="maxlength=300")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="courseForm") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="courselist") 取消
+
+    .jarviswidget.jarviswidget-color-blueDark(ng-if='handleFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{handleFn.title}}
+        .widget-body
+            .finish-prompt
+                h3.prompt {{handleFn.completeMSG}}
+                .icon
+                    i.fa.fa-check-circle
+            .form-actions
+                .row
+                    .col-md-12
+                        a.btn.btn-default(ui-sref="courselist") 返回课程信息

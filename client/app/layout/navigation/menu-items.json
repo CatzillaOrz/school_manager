@@ -213,28 +213,16 @@
                     "icon": "pencil-square-o"
                 },
                 {
-                    "title": "实践任务",
-                    "sref": "practicetasklist",
-                    "active": "practicetasklist",
-                    "icon": "pencil-square-o"
-                },
-                {
                     "title": "实践课程任务管理",
                     "sref": "trainClassList",
                     "active": "trainClassList",
                     "icon": "pencil-square-o"
                 },
                 {
-                    "title": "实践统计",
-                    "sref": "practicemanstats",
-                    "active": "practicemanstats",
+                    "title": "实践任务详情",
+                    "sref": "practicetasklist",
+                    "active": "practicetasklist",
                     "icon": "pencil-square-o"
-                },
-                {
-                    "title": "通知管理",
-                    "sref": "newslist",
-                    "active": "news",
-                    "icon": "commenting"
                 }
             ]
         },
