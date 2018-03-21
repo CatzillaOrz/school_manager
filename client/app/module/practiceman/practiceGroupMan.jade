@@ -35,7 +35,7 @@
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组名称
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 导师姓名
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 本校教师
+                                //- th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 本校教师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组人数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 开始日期
                                     th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 结束日期
@@ -45,7 +45,7 @@
                                 td.sorting_1 {{$index+1 + ((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*10}}
                                 td {{record.groupName}}
                                 td {{record.corporateMentorsName}}
-                                td {{record.teacherName}}
+                                //- td {{record.teacherName}}
                                 td {{record.studentCount}}
                                 td {{record.startDate}}
                                 td {{record.endDate}}
@@ -53,7 +53,7 @@
                                     a.handle(ui-sref="createpracticegroup({id: record.corporateMentorsId})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    //a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
+                                    a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
 

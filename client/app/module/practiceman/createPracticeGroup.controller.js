@@ -26,7 +26,7 @@ angular.module('dleduWebApp')
 			isAddTea: false,
 			//添加步骤
 			steps: [
-				{title: '选择教师'},
+				{title: '选择导师'},
 				{title: '选择学生'},
 				{title: '创建实践小组'}
 			],
@@ -166,8 +166,8 @@ angular.module('dleduWebApp')
 				TeacherService.getSimpleTeachers(params).$promise
 					.then(function (data) {
 						_this.teacherList = data.data;
-						if(_this.practiceGroupInfo && _this.practiceGroupInfo.teacherId && !_this.isAddTea){
-							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.teacherId, name:
+						if(_this.practiceGroupInfo && _this.practiceGroupInfo.corporateMentorsId && !_this.isAddTea){
+							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.corporateMentorsId, name:
 							_this.practiceGroupInfo.teacherName, jobNumber: _this.practiceGroupInfo.teacherJobNumer,
 								collegeName: _this.practiceGroupInfo.collegeName});
 							_this.isAddTea = true;
@@ -180,19 +180,23 @@ angular.module('dleduWebApp')
 
 			// 获取企业导师列表
 			getEntTutorList: function () {
-				var that = this;
+				var _this = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: 1,
 					pageSize: 10000,
-					name: that.searchParams.name
+					name: _this.searchParams.name
 				};
 				CommonService.delEmptyProperty(params);
 				PracticeManService.getEntTutorList(params).$promise
 					.then(function (data) {
-						that.teacherList = data.data;
-						// that.page = data.page;
-						// that.page.pageNumber++;
+						_this.teacherList = data.data;
+						if(_this.practiceGroupInfo && !_this.isAddTea){
+							_this.selectTeacherList = _.filter(_this.teacherList, function(value){
+								return value.id === _this.practiceGroupInfo.id
+							})
+							_this.isAddTea = true;
+						}
 					})
 					.catch(function (error) {
 
@@ -356,8 +360,8 @@ angular.module('dleduWebApp')
 				params.studentIds = _this.getSelectStudentIdList();
 				params.teacherIds = _this.getSelectTeacherIdList();
 				var entity = {};
-				entity.corporateMentorsId = this.id;
-				entity.teacherId = params.teacherIds[0];
+				// entity.corporateMentorsId = this.id;
+				entity.corporateMentorsId = params.teacherIds[0];
 				entity.groupName = params.name;
 				entity.studentIds = params.studentIds;
 				entity.startDate = params.startDate;
@@ -448,10 +452,10 @@ angular.module('dleduWebApp')
 				PracticeManService.getPracticeGroupInfo({orgId: AuthService.getUser().orgId, id: id}).$promise
 					.then(function (data) {
 						that.practiceGroupInfo = data;
-						if(that.practiceGroupInfo && that.practiceGroupInfo.teacherId){
+						if(that.practiceGroupInfo){
 							that.isEidt = true;
+							that.title = '编辑实践小组'
 						}
-
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;
 						that.params.endDate = that.practiceGroupInfo.endDate;
