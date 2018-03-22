@@ -896,6 +896,131 @@ var EduManService = {
             }
         })
     },
+    //查询督导列表
+    getTeachingSupervisorList: function (params, access_token, callback) {
+        var url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+        if(params.type == 'info'){
+            url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+        }else if(params.type == 'superInfo'){
+            url = '/api/phone/v1/feedback/steering/getFeelbackList';
+        }
+        RestClient.get({
+            host: 'dd',
+            path: url,
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //查询信息详情
+    getTeachingSupervisorInfo: function (params, access_token, callback) {
+        var url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+        if(params.type == 'info'){
+            url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+        }else if(params.type == 'superInfo'){
+            url = '/api/phone/v1/feedback/steering/getFeelbackList';
+        }
+        RestClient.get({
+            host: 'dd',
+            path: url,
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //查询模板信息
+    getTeachingSupervisorTem: function (params, access_token, callback) {
+        var url = params.tempType ? '/api/phone/v1/feedback/templet/getTeachingTemplet'
+            : '/api/phone/v1/feedback/templet/getSteeringTemlet';
+        RestClient.get({
+            host: 'dd',
+            path: url,
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //新增模板
+    addTeachingSupervisor: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/phone/v1/feedback/templet/saveSteeringTemplet',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //新增模板学生
+    addTeachingTemplateStu: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/phone/v1/feedback/templet/saveTeachingTemplet',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //编辑模板
+    updateTeachingSupervisor: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
 };
 
 

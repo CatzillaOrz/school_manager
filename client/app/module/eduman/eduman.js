@@ -332,5 +332,46 @@ angular.module('dleduWebApp')
                     label: '教学数据'
                 }
             })
-		//
+			.state('teachingSupervisor', {
+				parent: 'base',
+				url   : '/teachingsupervisor',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'teachingSupervisorCtrl',
+						templateUrl: 'app/module/eduman/teachingSupervisor.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教学督导'
+				}
+			})
+			.state('teachingSuperInfo', {
+				parent: 'teachingSupervisor',
+				url   : '/teachingsuperinfo/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'teachingSuperInfoCtrl',
+						templateUrl: 'app/module/eduman/teachingSuperInfo.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '反馈详情'
+				}
+			})
+			.state('teachingSuperTemplate', {
+				parent: 'teachingSupervisor',
+				url   : '/teachingsupertemplate/:type',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'teachingSuperTemplateCtrl',
+						templateUrl: 'app/module/eduman/teachingSuperTemplate.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '反馈模板'
+				}
+			})
 	});

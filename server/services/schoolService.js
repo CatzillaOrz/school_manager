@@ -20,7 +20,6 @@ var SchoolService = {
                 callback(null, res.entity);
             } else {
                 callback(ErrorCode.errorHandle(res));
-
             }
         })
             .catch(function (e) {

@@ -1,0 +1,177 @@
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.active.cursor-pointer(ng-click="teachingSuperFn.switchTab('info')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  信息员反馈
+                li.tabBlock-tab.cursor-pointer(ng-click="teachingSuperFn.switchTab('superInfo')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 督导反馈
+                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="teachingSuperFn.switchTab('template')")
+                    a(data-toggle='tab', aria-expanded='false')
+                        i.fa.fa-lg.fa-pencil
+                        span.hidden-mobile.hidden-tablet
+                            | 模板设置
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                .tab-content
+                    #hr1.tab-pane.active
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-10
+                                                form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label.control-label  学生：
+                                                        input.form-control(type="text" ng-model="teachingSuperFn.params.stuName" placeholder="姓名/学号", my-enter="teachingSuperFn.query()" )
+                                                form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label.control-label  教师：
+                                                        input.form-control(type="text" ng-model="teachingSuperFn.params.teacherName" placeholder="姓名", my-enter="teachingSuperFn.query()" )
+                                                form.form-inline
+                                                    .form-group.col-sm-3
+                                                        label.control-label  课程：
+                                                        input.form-control(type="text" ng-model="teachingSuperFn.params.courseName" placeholder="名称", my-enter="teachingSuperFn.query()" )
+
+                                            .col-sm-2.col-xs-6.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="teachingSuperFn.query()")
+                                                        span 查询
+                                                    button.btn.btn-primary(ng-click="teachingSuperFn.exportTeachingclassByTeacher()")
+                                                        span 导出
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 选课编号
+                                                    th 教学班名称
+                                                    th 课程名称
+                                                    th 授课教师
+                                                    th 反馈时间
+                                                    th 学生姓名
+                                                    th 学生学号
+                                                    th 反馈详情
+
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in teachingSuperFn.records")
+                                                    td.sorting_1 {{$index+1 + ((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10}}
+                                                    td {{record.teachingClassCode}}
+                                                    td {{record.teachingClassName}}
+                                                    td {{record.courseName}}
+                                                    td {{record.teachingClassTeacher}}
+                                                    td {{record.createDate}}
+                                                    td {{record.userName}}
+                                                    td {{record.jobNum}}
+                                                    td
+                                                        a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'info'})")
+                                                            span 设置
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber*10:(teachingSuperFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.recordList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{teachingSuperFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='teachingSuperFn.page.totalElements', max-size='teachingSuperFn.page.pageSize' ng-model='teachingSuperFn.page.pageNumber',ng-change="teachingSuperFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr2.tab-pane
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-9.padding-bottom-10
+                                            form.form-inline
+                                                .form-group.col-sm-3
+                                                    label.control-label  督导：
+                                                    input.form-control(type="text" ng-model="teachingSuperFn.params.supName" placeholder="姓名", my-enter="teachingSuperFn.query()" )
+                                                .form-group.col-sm-3
+                                                    label.control-label  教师：
+                                                    input.form-control(type="text" ng-model="teachingSuperFn.params.teacherName" placeholder="姓名", my-enter="teachingSuperFn.query()" )
+                                                .form-group.col-sm-3
+                                                    label.control-label  课程：
+                                                    input.form-control(type="text" ng-model="teachingSuperFn.params.courseName" placeholder="课程", my-enter="teachingSuperFn.query()" )
+
+                                        .col-sm-3.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="teachingSuperFn.query()")
+                                                    span 查询
+                                                button.btn.btn-primary(ng-click="teachingSuperFn.exportClassrecordanceGroupByCollege()")
+                                                    span 导出
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 选课编号
+                                                    th 教学班名称
+                                                    th 课程名称
+                                                    th 授课教师
+                                                    th 教师教学得分
+                                                    th 班级学风得分
+                                                    th 反馈时间
+                                                    th 督导姓名
+                                                    th 反馈详情
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in teachingSuperFn.records")
+                                                    td.sorting_1 {{$index+1 + ((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10}}
+                                                    td {{record.teachingClassCode}}
+                                                    td {{record.teachingClassName}}
+                                                    td {{record.courseName}}
+                                                    td {{record.teachingClassTeacher}}
+                                                    td {{record.teachingScore}}
+                                                    td {{record.studyStyleScore}}
+                                                    td {{record.createDate}}
+                                                    td {{record.userName}}
+                                                    td {{record.jobNum}}
+                                                    td
+                                                        a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'superInfo'})")
+                                                            span 设置
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber*10:(teachingSuperFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.recordList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{teachingSuperFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='teachingSuperFn.page.totalElements', max-size='teachingSuperFn.page.pageSize' ng-model='teachingSuperFn.page.pageNumber',ng-change="teachingSuperFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr3.tab-pane
+                        .college-handle-container
+                            .jarviswidget-color-blueDark
+                                .widget-body
+                                    table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='70%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
+                                        tbody
+                                            tr.odd(role='row')
+                                                td {{"信息员反馈模板"}}
+                                                td
+                                                    a.handle(ui-sref="teachingSuperTemplate({type:0})")
+                                                        span 设置
+                                            tr.odd(role='row')
+                                                td {{"督导专家反馈模板"}}
+                                                td
+                                                    a.handle(ui-sref="teachingSuperTemplate({type:1})")
+                                                        span 设置

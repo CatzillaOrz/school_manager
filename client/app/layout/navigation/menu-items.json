@@ -184,6 +184,12 @@
                     "sref": "instructor",
                     "active": "instructor",
                     "icon": "barcode"
+                },
+                {
+                    "title": "教学督导",
+                    "sref": "teachingSupervisor",
+                    "active": "teachingSupervisor",
+                    "icon": "comments-o"
                 }
             ]
         },
