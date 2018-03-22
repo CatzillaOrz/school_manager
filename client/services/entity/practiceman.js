@@ -40,6 +40,10 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getEntTutorInfo');
                 return practiceman.get(params);
             },
+            getStudentTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getStudentTaskDetail');
+                return practiceman.get(params);
+            },
             addEntTutor: function (params) {
                 var practiceman = $resource('api/practiceman/addEntTutor');
                 return practiceman.save(params);
@@ -67,6 +71,14 @@ angular.module('dleduWebService')
             },
             addPracticeGroup: function (params) {
                 var practiceman = $resource('api/practiceman/addPracticeGroup');
+                return practiceman.save(params);
+            },
+            getMissionList: function (params) {
+                var practiceman = $resource('api/practiceman/getMissionList');
+                return practiceman.save(params);
+            },
+            getMissionDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getMissionDetail');
                 return practiceman.save(params);
             },
             addPracticeTask: function (params) {
@@ -160,6 +172,10 @@ angular.module('dleduWebService')
             },
             deleteTask: function (params) {
                 var practiceman = $resource('api/practiceman/deleteTask');
+                return practiceman.remove(params);
+            },
+            deleteTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/deleteTaskDetail');
                 return practiceman.remove(params);
             },
             addWeekTask: function (params) {

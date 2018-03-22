@@ -315,12 +315,8 @@ angular.module('dleduWebApp')
 				var entity = {};
 				entity.weekTaskIdList = params.teacherIds;
 				entity.practiceTeamIdList = params.studentIds;
-				entity.startDate = params.startDate;
+				entity.beginDate = params.startDate;
 				entity.endDate = params.endDate;
-				// entity.orgId = AuthService.getUser().orgId;
-				// if(entity.weekTaskIdList.length === 0 && entity.practiceTaskIdList === 0){
-				// 	return;
-				// }
 				if(this.isEidt){
 					entity.id = this.practiceGroupInfo.trainingGroupId;
 					PracticeManService.updatePracticeTask(entity).$promise

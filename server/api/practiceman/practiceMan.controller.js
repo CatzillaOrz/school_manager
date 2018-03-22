@@ -342,6 +342,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    deleteTaskDetail: function (req, res) {
+        PracticeManService.deleteTaskDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     delEnterprise: function (req, res) {
         PracticeManService.delEnterpriseSync(req.query, req.user.access_token)
             .then(function (data) {
@@ -369,8 +378,35 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getMissionList: function (req, res) {
+        PracticeManService.getMissionListSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getMissionDetail: function (req, res) {
+        PracticeManService.getMissionDetailSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getGrouplistByOrgId: function (req, res) {
         PracticeManService.getGrouplistByOrgIdSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getStudentTaskDetail: function (req, res) {
+        PracticeManService.getStudentTaskDetailSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

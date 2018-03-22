@@ -220,8 +220,8 @@
                 },
                 {
                     "title": "实践任务详情",
-                    "sref": "practicetasklist",
-                    "active": "practicetasklist",
+                    "sref": "missionList",
+                    "active": "missionList",
                     "icon": "pencil-square-o"
                 }
             ]
