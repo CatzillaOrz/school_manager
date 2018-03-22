@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			// 获取评教问卷已分配列表
+			// 实践小组列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {

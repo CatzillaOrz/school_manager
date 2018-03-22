@@ -158,6 +158,24 @@ angular.module('dleduWebApp')
                     label: '实践课程编辑'
                 }
             })
+            .state('missionManagement', {
+                parent: 'base',
+                url   : '/missionManagement/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'MissionManagementCtrl',
+                        templateUrl: 'app/module/practiceman/missionManagement.html'
+                    }
+				},
+				data:{
+					prompt:'请按以下步骤完成任务分配',
+					completeMSG:'恭喜你，分配任务成功！'
+				},
+                ncyBreadcrumb: {
+                    label: '任务分配'
+                }
+            })
             .state('enterpriseList', {
                 parent: 'base',
                 url   : '/enterpriseList',

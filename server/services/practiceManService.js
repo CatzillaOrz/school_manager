@@ -198,12 +198,44 @@ var PracticeManService = {
             callback(e);
         });
     },
+    addPracticeTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/assign',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //编辑实践小组
     updatePracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
             path: '/v1/trainingmanage/updategroup',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    updatePracticeTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/edit',
             access_token: access_token,
             entity: params
         }).then(function (res) {
