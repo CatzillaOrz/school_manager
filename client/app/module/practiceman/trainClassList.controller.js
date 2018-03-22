@@ -3,10 +3,10 @@
  * 实践小组管理
  */
 angular.module('dleduWebApp')
-	.controller('PracticeTasklistCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
-												  PracticeManService) {
+	.controller('TrainClassListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
+		PracticeManService) {
 		$scope.practiceGroupMan = {
-            weekTaskList: [],
+			weekTaskList: [],
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -19,7 +19,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			// 获取评教问卷已分配列表
+			// 获取课程列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {
@@ -29,7 +29,7 @@ angular.module('dleduWebApp')
 					taskName: that.queryOption.name
 				};
 				CommonService.delEmptyProperty(params);
-				PracticeManService.getTaskList(params).$promise
+				PracticeManService.getWeekTaskList(params).$promise
 					.then(function (data) {
 						that.weekTaskList = data.data;
 						that.page = data.page;
@@ -39,21 +39,20 @@ angular.module('dleduWebApp')
 					})
 			},
 
-            deleteWeekTask: function () {
+			deleteWeekTask: function () {
 				var that = $scope.practiceGroupMan;
 				var params = {
 					id: that.currentEntity.id
 				};
-				PracticeManService.deleteTask(params).$promise
+				PracticeManService.deleteWeekTask(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
 						that.getPracticeGroupList();
 					})
 					.catch(function (error) {
-						messageService.openMsg(CommonService.exceptionPrompt(error,"删除失败！"));
+						messageService.openMsg(CommonService.exceptionPrompt(error, "删除失败！"));
 					})
 			},
-
 			//删除提示
 			deletePrompt: function (entity) {
 				var that = this;

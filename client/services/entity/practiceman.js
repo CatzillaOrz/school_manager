@@ -7,8 +7,33 @@ angular.module('dleduWebService')
     .factory('PracticeManService', function ($http, $q,$resource) {
 
         return {
+            defineProperty: function (entity) {
+                var that = this;
+                return {
+                    bar: {},
+                    get: function () {
+                        return that.bar;
+                    },
+                    set: function () {
+                        entity && (that.bar = entity);
+                        !entity && (that.bar = {});
+                    }
+                }
+            },
             getEntTutorList: function (params) {
                 var practiceman = $resource('api/practiceman/getEntTutorList');
+                return practiceman.get(params);
+            },
+            saveEnterprise: function (params) {
+                var practiceman = $resource('api/practiceman/saveEnterprise');
+                return practiceman.save(params);
+            },
+            updateEnterprise: function (params) {
+                var practiceman = $resource('api/practiceman/updateEnterprise');
+                return practiceman.save(params);
+            },
+            getEnterpriseList: function (params) {
+                var practiceman = $resource('api/practiceman/getEnterpriseList');
                 return practiceman.get(params);
             },
             getEntTutorInfo: function (params) {
@@ -21,6 +46,10 @@ angular.module('dleduWebService')
             },
             delEntTutor:function (params) {
                 var practiceman = $resource('api/practiceman/delEntTutor');
+                return practiceman.remove(params);
+            },
+            delEnterprise:function (params) {
+                var practiceman = $resource('api/practiceman/delEnterprise');
                 return practiceman.remove(params);
             },
             updateEntTutor: function (params) {
@@ -40,13 +69,26 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/addPracticeGroup');
                 return practiceman.save(params);
             },
+            addPracticeTask: function (params) {
+                var practiceman = $resource('api/practiceman/addPracticeTask');
+                return practiceman.save(params);
+            },
             updatePracticeGroup: function (params) {
                 var practiceman = $resource('api/practiceman/updatePracticeGroup','',{
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
+            updatePracticeTask: function (params) {
+                var practiceman = $resource('api/practiceman/updatePracticeTask','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
             delPracticeGroup:function (params) {
                 var practiceman = $resource('api/practiceman/delPracticeGroup');
+                return practiceman.remove(params);
+            },
+            delPracticeGroupByGId:function (params) {
+                var practiceman = $resource('api/practiceman/delPracticeGroupByGId');
                 return practiceman.remove(params);
             },
             isExistInGroup:function (params) {
@@ -90,8 +132,17 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getWeekTaskList');
                 return practiceman.get(params);
             },
+            getTaskList: function (params) {
+                var practiceman = $resource('api/practiceman/getTaskList');
+                return practiceman.get(params);
+            },
             putWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/putWeekTask','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            updateTask: function (params) {
+                var practiceman = $resource('api/practiceman/updateTask','',{
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
@@ -99,12 +150,24 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getWeekTaskDetail');
                 return practiceman.get(params);
             },
+            getTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getTaskDetail');
+                return practiceman.get(params);
+            },
             deleteWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/deleteWeekTask');
                 return practiceman.remove(params);
             },
+            deleteTask: function (params) {
+                var practiceman = $resource('api/practiceman/deleteTask');
+                return practiceman.remove(params);
+            },
             addWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/addWeekTask');
+                return practiceman.save(params);
+            },
+            addTask: function (params) {
+                var practiceman = $resource('api/practiceman/addTask');
                 return practiceman.save(params);
             },
             getGrouplistByOrgId: function (params) {

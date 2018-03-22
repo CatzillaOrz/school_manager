@@ -3,7 +3,7 @@
  * 创建实践小组
  */
 angular.module('dleduWebApp')
-	.controller('CreatePracticeGroupCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
+	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
 													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
 		$scope.handleFn = {
 			//企业导师记录id
@@ -26,9 +26,9 @@ angular.module('dleduWebApp')
 			isAddTea: false,
 			//添加步骤
 			steps: [
-				{title: '选择导师'},
-				{title: '选择学生'},
-				{title: '创建实践小组'}
+				{title: '选择课程任务'},
+				{title: '选择实践小组'},
+				{title: '发布任务'}
 			],
 			//当前步骤
 			step: 1,
@@ -38,13 +38,8 @@ angular.module('dleduWebApp')
 				startDate: '',
 				endDate: '',
 				studentIds: [],
-				studentsCount: 0,
 				teacherIds: [],
-				teacherNames: "",
-				code: "",
 				userId: AuthService.getUser().id,
-				id: 0,
-				name: ""
 			},
 			page: {
 				totalElements: 0,
@@ -178,28 +173,18 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			// 获取企业导师列表
+			// 获取实践课程任务list
 			getEntTutorList: function () {
-				var _this = this;
+				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: 1,
 					pageSize: 10000,
-					name: _this.searchParams.name
+					taskName: that.searchParams.name
 				};
-				CommonService.delEmptyProperty(params);
-				PracticeManService.getEntTutorList(params).$promise
+				PracticeManService.getWeekTaskList(params).$promise
 					.then(function (data) {
-						_this.teacherList = data.data;
-						if(_this.practiceGroupInfo && !_this.isAddTea){
-							_this.selectTeacherList = _.filter(_this.teacherList, function(value){
-								return value.id === _this.practiceGroupInfo.id
-							})
-							_this.isAddTea = true;
-						}
-					})
-					.catch(function (error) {
-
+						that.teacherList = data.data;
 					})
 			},
 
@@ -218,26 +203,22 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//获取学生
+			//获取小组list
 			getSimpleStudents: function () {
-				var _this = this;
-				var params = _this.searchStudentParams;
-				params.pageSize = 100;
-				params.userId = AuthService.getUser().id;
-				StudentService.getSimpleStudents(params).$promise
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 1,
+					pageSize: 10000,
+					name: that.searchStudentParams.name
+				};
+				CommonService.delEmptyProperty(params);
+				PracticeManService.getPracticeGroupList(params).$promise
 					.then(function (data) {
-						_this.studentList = data.data;
-						if(_this.practiceGroupInfo && !_this.isAddStu){
-							angular.forEach(_this.practiceGroupInfo.studentDTOList, function(item){
-								_this.selectStudentList.splice(0, 0, item);
-								_this.isAddStu = true;
-							});
-						}
-					})
-					.catch(function (error) {
-
+						that.studentList = data.data;
 					})
 			},
+
 			//下一步
 			nextStep: function () {
 				this.step = this.step + 1;
@@ -245,40 +226,24 @@ angular.module('dleduWebApp')
 			//上一步
 			preStep: function () {
 				var _this = this;
-				if (_this.step3Tooggle != "select") {
-					_this.step3Tooggle = "select";
+				// if (_this.step3Tooggle != "select") {
+				// 	_this.step3Tooggle = "select";
 
-					return;
-				}
+				// 	return;
+				// }
 				this.step = this.step - 1;
 			},
 			//选择的老师
 			selectTeacher: function (entity) {
 				var that = this;
-				if(this.selectTeacherList.length >= 1){
-					messageService.openMsg("只能选择一个本校教师！");
-					return;
+				var temp = _.filter(that.selectTeacherList, function (value) {
+					if (entity.id == value.id) {
+						return value;
+					}
+				});
+				if (temp.length == 0) {
+					that.selectTeacherList.splice(0, 0, entity);
 				}
-				PracticeManService.isExistInGroup({type: 'teacher', orgId: AuthService.getUser().orgId, teacherId: entity.id}).$promise
-					.then(function (data) {
-						if(data.success){
-							var _this = that;
-							var temp = _.filter(_this.selectTeacherList, function (value) {
-								if (entity.id == value.id) {
-									return value;
-								}
-							});
-							if (temp.length == 0) {
-								_this.selectTeacherList.splice(0, 0, entity);
-							}
-						}else{
-							messageService.openMsg("该教师已经在其他小组，不能选择！");
-						}
-
-					})
-					.catch(function (error) {
-
-					})
 			},
 			//移除老师
 			removeSelectedTeacher: function (entity) {
@@ -292,26 +257,14 @@ angular.module('dleduWebApp')
 			//选择学生
 			selectStudent: function (entity) {
 				var that = this;
-				PracticeManService.isExistInGroup({type: 'student', orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
-					.then(function (data) {
-						if(data.success){
-							var _this = that;
-							var temp = _.filter(_this.selectStudentList, function (value) {
-								if (entity.id == value.id) {
-									return value;
-								}
-							});
-							if (temp.length == 0) {
-								_this.selectStudentList.splice(0, 0, entity);
-							}
-						}else{
-							messageService.openMsg("该学生已经在其他小组，不能选择！");
-						}
-
-					})
-					.catch(function (error) {
-
-					})
+				var temp = _.filter(that.selectStudentList, function (value) {
+					if (entity.id == value.id) {
+						return value;
+					}
+				});
+				if (temp.length == 0) {
+					that.selectStudentList.splice(0, 0, entity);
+				}
 			},
 			//移除学生
 			removeSelectedStudent: function (entity) {
@@ -360,27 +313,25 @@ angular.module('dleduWebApp')
 				params.studentIds = _this.getSelectStudentIdList();
 				params.teacherIds = _this.getSelectTeacherIdList();
 				var entity = {};
-				// entity.corporateMentorsId = this.id;
-				entity.corporateMentorsId = params.teacherIds[0];
-				entity.groupName = params.name;
-				entity.studentIds = params.studentIds;
+				entity.weekTaskIdList = params.teacherIds;
+				entity.practiceTeamIdList = params.studentIds;
 				entity.startDate = params.startDate;
 				entity.endDate = params.endDate;
-				entity.orgId = AuthService.getUser().orgId;
-				if(this.validateDate(entity.startDate, entity.endDate)){
-					return;
-				}
+				// entity.orgId = AuthService.getUser().orgId;
+				// if(entity.weekTaskIdList.length === 0 && entity.practiceTaskIdList === 0){
+				// 	return;
+				// }
 				if(this.isEidt){
 					entity.id = this.practiceGroupInfo.trainingGroupId;
-					PracticeManService.updatePracticeGroup(entity).$promise
+					PracticeManService.updatePracticeTask(entity).$promise
 						.then(function (data) {
-							messageService.openMsg("编辑实践小组成功！");
-							$state.go("practicegroupman");
+							messageService.openMsg("编辑实践分配成功！");
+							$state.go("trainClassList");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
 							if (re.test(error.data)) {
-								messageService.openMsg("编辑实践小组失败！");
+								messageService.openMsg("编辑实践分配失败！");
 
 							} else {
 								messageService.openMsg(error.data);
@@ -388,15 +339,15 @@ angular.module('dleduWebApp')
 							}
 						})
 				}else{
-					PracticeManService.addPracticeGroup(entity).$promise
+					PracticeManService.addPracticeTask(entity).$promise
 						.then(function (data) {
-							messageService.openMsg("创建实践小组成功！");
-							$state.go("practicegroupman");
+							messageService.openMsg("分配实践任务成功！");
+							$state.go("trainClassList");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
 							if (re.test(error.data)) {
-								messageService.openMsg("创建实践小组失败！");
+								messageService.openMsg("分配实践任务失败！");
 
 							} else {
 								messageService.openMsg(error.data);
@@ -472,20 +423,16 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				var that = this;
-				this.id = $state.params.id;
-				this.getPracticeGroupInfo(this.id);
-				this.tutorId = $state.params.tutorId;
-				that.handle = $state.current.ncyBreadcrumbLabel;
-				that.title = that.handle;
+				that.getEntTutorList();
+				that.getSimpleStudents();
+				that.title = $state.current.ncyBreadcrumb.label;
 				that.prompt = $state.current.data.prompt;
 				that.completeMSG = $state.current.data.completeMSG;
-				//that.getSimpleTeachers();
-				//that.getSimpleStudents();
 			}
 		};
 		$scope.handleFn.init();
 
-		$timeout(function () {
+		// $timeout(function () {
 			//$scope.handleFn.init();
 			//学院变动自动查询老师
 			// $scope.$watch('handleFn.searchParams.collegeId', function(newValue, oldValue) {
@@ -494,10 +441,10 @@ angular.module('dleduWebApp')
 			// 	}
 			// });
 			//班级变动 自动查询学生
-			$scope.$watch('handleFn.searchStudentParams.classesId', function(newValue, oldValue) {
-				if (newValue!=oldValue){
-					$scope.handleFn.getSimpleStudents();
-				}
-			});
-		})
+			// $scope.$watch('handleFn.searchStudentParams.classesId', function(newValue, oldValue) {
+			// 	if (newValue!=oldValue){
+			// 		$scope.handleFn.getSimpleStudents();
+			// 	}
+			// });
+		// })
 	});

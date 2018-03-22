@@ -1,0 +1,65 @@
+//
+   Created by Administrator on 2017/6/21.
+
+.college-handle-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark(ng-if='!enterpriseEditFn.complete')
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{enterpriseEditFn.title}}
+        .widget-body
+            form.form-horizontal(name="enterpriseFrom")
+                fieldset
+                    legend {{enterpriseEditFn.prompt}}
+                .short-form
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            |企业名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过30个字企业名称" ng-model="enterpriseEditFn.params.name" name="enterpriseName" validator="required, maxlength=30" )
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 省：
+                        .col-sm-7
+                            select.form-control(name="province" validator="required", ng-model='enterpriseEditFn.params.province', ng-options='key as key for (key,value) in division', ng-change="enterpriseEditFn.params.city='';enterpriseEditFn.params.district='';")
+                                option(value='') 省
+                    .form-group(ng-if="isShowCity(enterpriseEditFn.params.province)")
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 市：
+                        .col-sm-7
+                            select.form-control(name="city" validator="required" ng-model='enterpriseEditFn.params.city', ng-options='key as key for (key,value) in division[enterpriseEditFn.params.province]', ng-change="enterpriseEditFn.params.district='';")
+                                option(value='') 市
+                    .form-group(ng-if="isShowDist(enterpriseEditFn.params.province)")
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 区：
+                        .col-sm-7
+                            select.form-control(name="district" validator="required" ng-model='enterpriseEditFn.params.city', ng-options='value as value for value in division[enterpriseEditFn.params.province]')
+                                option(value='') 区
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 公司地址：
+                        .col-sm-7
+                            input.form-control(placeholder="请填公司地址" name="address" ng-model="enterpriseEditFn.params.address" validator="required,maxlength=50")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 手机号码：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写手机号码" name="phone" ng-model="enterpriseEditFn.params.telephone" validator="required,phone")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 邮箱：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写邮箱" name="email" ng-model="enterpriseEditFn.params.mailbox" validator="required,email,maxlength=60")
+                .form-actions
+                    .row
+                        .col-md-12
+                            a.btn.btn-primary(ng-click="enterpriseEditFn.submit()" validation-submit="enterpriseFrom") 提交
+                            .speace-10
+                            a.btn.btn-default(ui-sref="enterpriseList") 取消

@@ -194,12 +194,18 @@
             ]
         },
         {
-            "title": "实践信息管理",
-            "sref": "enttutorman",
+            "title": "实践管理",
+            "sref": "enterpriseList",
             "icon": "navicon",
-            "active": "practiceman",
+            "active": "enterpriseList",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
+                {
+                    "title": "企业管理",
+                    "sref": "enterpriseList",
+                    "active": "enterpriseList",
+                    "icon": "pencil-square-o"
+                },
                 {
                     "title": "企业导师管理",
                     "sref": "enttutorman",
@@ -213,22 +219,16 @@
                     "icon": "pencil-square-o"
                 },
                 {
-                    "title": "实践任务",
+                    "title": "实践课程任务管理",
+                    "sref": "trainClassList",
+                    "active": "trainClassList",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践任务详情",
                     "sref": "practicetasklist",
                     "active": "practicetasklist",
                     "icon": "pencil-square-o"
-                },
-                {
-                    "title": "实践统计",
-                    "sref": "practicemanstats",
-                    "active": "practicemanstats",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "通知管理",
-                    "sref": "newslist",
-                    "active": "news",
-                    "icon": "commenting"
                 }
             ]
         },

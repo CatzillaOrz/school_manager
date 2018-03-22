@@ -123,11 +123,85 @@ angular.module('dleduWebApp')
                     }
                 },
                 data:{
-                    prompt:'填写以下信息以修改院系',
-                    completeMSG:'恭喜你，编辑院系成功！'
+                    prompt:'填写以下信息以编辑院系',
+                    completeMSG:'恭喜你，编辑成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '创建实践小组'
+                    label: '编辑实践任务'
+                }
+            })
+            .state('trainClassList', {
+                parent: 'base',
+                url   : '/trainClassList',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TrainClassListCtrl',
+                        templateUrl: 'app/module/practiceman/trainClassList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践课程任务列表'
+                }
+            })
+            .state('trainClassEdit', {
+                parent: 'base',
+                url   : '/trainClassEdit/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TrainClassEditCtrl',
+                        templateUrl: 'app/module/practiceman/trainClassEdit.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践课程编辑'
+                }
+            })
+            .state('missionManagement', {
+                parent: 'base',
+                url   : '/missionManagement/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'MissionManagementCtrl',
+                        templateUrl: 'app/module/practiceman/missionManagement.html'
+                    }
+				},
+				data:{
+					prompt:'请按以下步骤完成任务分配',
+					completeMSG:'恭喜你，分配任务成功！'
+				},
+                ncyBreadcrumb: {
+                    label: '任务分配'
+                }
+            })
+            .state('enterpriseList', {
+                parent: 'base',
+                url   : '/enterpriseList',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'enterpriseListCtrl',
+                        templateUrl: 'app/module/practiceman/enterpriseList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践企业管理'
+                }
+            })
+            .state('enterpriseEdit', {
+                parent: 'base',
+                url   : '/enterpriseEdit/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'enterpriseEditCtrl',
+                        templateUrl: 'app/module/practiceman/enterpriseEdit.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践企业管理'
                 }
             })
 	});

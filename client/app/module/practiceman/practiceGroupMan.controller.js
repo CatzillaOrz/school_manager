@@ -22,7 +22,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			// 获取评教问卷已分配列表
+			// 实践小组列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {
@@ -43,14 +43,14 @@ angular.module('dleduWebApp')
 					})
 			},
 
-			//删除企业导师
+			//删除小组
 			delPracticeGroup: function () {
 				var that = $scope.practiceGroupMan;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					id: that.currentRecord.id
 				};
-				PracticeManService.delPracticeGroup(params).$promise
+				PracticeManService.delPracticeGroupByGId(params).$promise
 					.then(function (data) {
 						messageService.openMsg("删除成功！");
 						that.getPracticeGroupList();
@@ -64,7 +64,7 @@ angular.module('dleduWebApp')
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentRecord = entity;
-				messageService.getMsg("您确定要删除此条记录吗？", that.delEntTutor)
+				messageService.getMsg("您确定要删除此条记录吗？", that.delPracticeGroup)
 			},
 
 			init: function () {

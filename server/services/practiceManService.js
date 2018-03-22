@@ -28,6 +28,23 @@ var PracticeManService = {
                 callback(e);
             });
     },
+    // 查询企业列表
+    getEnterpriseList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/enterprise/list',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
 
     //根据id查询企业导师信息
     getEntTutorInfo: function (params, access_token, callback) {
@@ -46,6 +63,38 @@ var PracticeManService = {
         });
     },
 
+    //新增企业
+    saveEnterprise: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'gateway-org',
+            path: '/v1/enterprise/save',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //edit企业
+    updateEnterprise: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: '/v1/enterprise/update',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     //新增企业导师
     addEntTutor: function (params, access_token, callback) {
         RestClient.post({
@@ -63,6 +112,22 @@ var PracticeManService = {
         });
     },
 
+    //删除企业
+    delEnterprise: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'gateway-org',
+            path: '/v1/enterprise/delete?id=' + params.id,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     //删除企业导师
     delEntTutor: function (params, access_token, callback) {
         params.accessToken = access_token;
@@ -133,12 +198,44 @@ var PracticeManService = {
             callback(e);
         });
     },
+    addPracticeTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/assign',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //编辑实践小组
     updatePracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
             path: '/v1/trainingmanage/updategroup',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    updatePracticeTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/edit',
             access_token: access_token,
             entity: params
         }).then(function (res) {
@@ -191,12 +288,29 @@ var PracticeManService = {
         });
     },
 
-    //删除实践小组
+    //删除企业导师
     delPracticeGroup: function (params, access_token, callback) {
         params.accessToken = access_token;
         RestClient.delete({
             host: 'gateway-org',
             path: '/v1/mentorstraining/delete',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //删除实践小组
+    delPracticeGroupByGId: function (params, access_token, callback) {
+        params.accessToken = access_token;
+        RestClient.delete({
+            host: 'gateway-org',
+            path: 'v1/trainingmanage/deletegroup?id=' + params.id,
             params: params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -298,12 +412,46 @@ var PracticeManService = {
             callback(e);
         });
     },
+    //获取任务列表
+    getTaskList: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/page',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //修改实践周任务
     putWeekTask: function (params, access_token, callback) {
         RestClient.put({
             host: 'stu-practice',
             path: '/v1/weektask/edit',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //修改任务
+    updateTask: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'stu-practice',
+            path: '/v1/practicetask/edit',
             entity: params,
             access_token: access_token
         }).then(function (res) {
@@ -334,6 +482,22 @@ var PracticeManService = {
             callback(e);
         });
     },
+    getTaskDetail: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'stu-practice',
+            path: '/v1/practicetask/detail',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //删除实践周任务
     deleteWeekTask: function (params, access_token, callback) {
@@ -352,12 +516,45 @@ var PracticeManService = {
             callback(e);
         });
     },
+    deleteTask: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'stu-practice',
+            path: '/v1/practicetask/delete?id=' + params.id,
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //添加实践周任务
     addWeekTask: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',
             path: '/v1/weektask/add',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //新建任务
+    addTask: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/add',
             entity: params,
             access_token: access_token
         }).then(function (res) {
