@@ -69,8 +69,17 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/addPracticeGroup');
                 return practiceman.save(params);
             },
+            addPracticeTask: function (params) {
+                var practiceman = $resource('api/practiceman/addPracticeTask');
+                return practiceman.save(params);
+            },
             updatePracticeGroup: function (params) {
                 var practiceman = $resource('api/practiceman/updatePracticeGroup','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            updatePracticeTask: function (params) {
+                var practiceman = $resource('api/practiceman/updatePracticeTask','',{
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },

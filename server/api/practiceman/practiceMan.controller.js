@@ -90,9 +90,27 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    addPracticeTask: function (req, res) {
+        PracticeManService.addPracticeTaskSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
     updatePracticeGroup: function (req, res) {
         PracticeManService.updatePracticeGroupSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updatePracticeTask: function (req, res) {
+        PracticeManService.updatePracticeTaskSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
