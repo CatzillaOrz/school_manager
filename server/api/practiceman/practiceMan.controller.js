@@ -343,7 +343,7 @@ module.exports = {
             })
     },
     deleteTaskDetail: function (req, res) {
-        PracticeManService.deleteTaskDetailSync(req.query, req.user.access_token)
+        PracticeManService.deleteTaskDetailSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })

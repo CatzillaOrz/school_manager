@@ -46,7 +46,7 @@ router.get('/getWeekTaskDetail',auth.isSignedIn, controller.getWeekTaskDetail);
 router.get('/getTaskDetail',auth.isSignedIn, controller.getTaskDetail);
 router.delete('/deleteWeekTask',auth.isSignedIn, controller.deleteWeekTask);
 router.delete('/deleteTask',auth.isSignedIn, controller.deleteTask);
-router.delete('/deleteTaskDetail',auth.isSignedIn, controller.deleteTaskDetail);
+router.post('/deleteTaskDetail',auth.isSignedIn, controller.deleteTaskDetail);
 router.post('/addWeekTask',auth.isSignedIn, controller.addWeekTask);
 router.post('/addTask',auth.isSignedIn, controller.addTask);
 router.get('/getGrouplistByOrgId',auth.isSignedIn, controller.getGrouplistByOrgId);

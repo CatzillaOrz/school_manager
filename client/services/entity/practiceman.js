@@ -176,7 +176,7 @@ angular.module('dleduWebService')
             },
             deleteTaskDetail: function (params) {
                 var practiceman = $resource('api/practiceman/deleteTaskDetail');
-                return practiceman.remove(params);
+                return practiceman.save(params);
             },
             addWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/addWeekTask');
