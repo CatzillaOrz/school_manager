@@ -19,7 +19,7 @@ angular.module('dleduWebApp')
 				name: '',
 			},
 
-			params: {},
+			param: {},
 			showCases: false,
 
 			// 获取课程列表
@@ -66,6 +66,7 @@ angular.module('dleduWebApp')
 			cacheParam: function(entity){
 				var that = this;
 				that.param = entity;
+				that.param.endDate = entity.deadLine
 				// console.log(that.param);
 				var params = {
                     template: 'modifyDeadline',
@@ -83,8 +84,6 @@ angular.module('dleduWebApp')
 			submit: function(){
 				var that = this;
 				ngDialog.close();
-				console.log(that.param);
-
 				  PracticeManService.editTaskTime(that.param).$promise
 					.then(function (data) {
 						that.getPracticeGroupList();
