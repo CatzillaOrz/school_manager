@@ -95,6 +95,11 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
+            editTaskTime: function (params) {
+                var practiceman = $resource('api/practiceman/editTaskTime','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
             delPracticeGroup:function (params) {
                 var practiceman = $resource('api/practiceman/delPracticeGroup');
                 return practiceman.remove(params);

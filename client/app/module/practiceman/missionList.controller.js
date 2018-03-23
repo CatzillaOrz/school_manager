@@ -3,7 +3,7 @@
  * 实践小组管理
  */
 angular.module('dleduWebApp')
-	.controller('MissionListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
+	.controller('MissionListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService, ImpBatchService, $timeout, ngDialog,
 		PracticeManService) {
 		$scope.practiceGroupMan = {
 			weekTaskList: [],
@@ -18,6 +18,9 @@ angular.module('dleduWebApp')
 			queryOption: {
 				name: '',
 			},
+
+			params: {},
+			showCases: false,
 
 			// 获取课程列表
 			getPracticeGroupList: function () {
@@ -58,6 +61,35 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.currentEntity = entity;
 				messageService.getMsg("您确定要删除此条记录吗？", that.deleteWeekTask)
+			},
+
+			cacheParam: function(entity){
+				var that = this;
+				that.param = entity;
+				// console.log(that.param);
+				var params = {
+                    template: 'modifyDeadline',
+                    width: 600,
+                    scope: $scope
+                };
+				ImpBatchService.openImpBatch(params);
+				$timeout(function(){
+					that.showCases = true;
+				}, 300)
+				// this.submit()
+			},
+			
+			//修改时间
+			submit: function(){
+				var that = this;
+				ngDialog.close();
+				console.log(that.param);
+
+				  PracticeManService.editTaskTime(that.param).$promise
+					.then(function (data) {
+						that.getPracticeGroupList();
+					})
+
 			},
 
 			init: function () {

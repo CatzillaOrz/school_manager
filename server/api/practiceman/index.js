@@ -28,6 +28,7 @@ router.get('/getPracticeGroupList',auth.isSignedIn, controller.getPracticeGroupL
 router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupInfo);
 router.put('/updatePracticeGroup',auth.isSignedIn, controller.updatePracticeGroup);
 router.put('/updatePracticeTask',auth.isSignedIn, controller.updatePracticeTask);
+router.put('/editTaskTime',auth.isSignedIn, controller.editTaskTime);
 router.delete('/delPracticeGroup',auth.isSignedIn, controller.delPracticeGroup);
 router.delete('/delPracticeGroupByGId',auth.isSignedIn, controller.delPracticeGroupByGId);
 router.get('/isExistInGroup',auth.isSignedIn, controller.isExistInGroup);
