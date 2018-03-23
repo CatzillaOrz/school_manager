@@ -214,6 +214,38 @@ var PracticeManService = {
             callback(e);
         });
     },
+    getMissionList: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/pageforschool',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    getMissionDetail: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/practicetask/stutaskpage',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, {data: res.entity});
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //编辑实践小组
     updatePracticeGroup: function (params, access_token, callback) {
@@ -255,6 +287,22 @@ var PracticeManService = {
         RestClient.get({
             host: 'gateway-org',
             path: '/v1/mentorstraining/queryinfo/'+ params.id,
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    getStudentTaskDetail: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'stu-practice',
+            path: '/v1/practicetask/stutaskdetail',
             access_token: access_token,
             params: params
         }).then(function (res) {
@@ -520,6 +568,22 @@ var PracticeManService = {
         RestClient.delete({
             host: 'stu-practice',
             path: '/v1/practicetask/delete?id=' + params.id,
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    deleteTaskDetail: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'stu-practice',
+            path: '/v1/task/delete?id=' + params.id,
             entity: params,
             access_token: access_token
         }).then(function (res) {
