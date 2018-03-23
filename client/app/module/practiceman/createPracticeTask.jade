@@ -13,8 +13,8 @@
                         label.col-sm-3.control-label
                             span.required *
                             | 所属课程：
-                        .col-sm-7
-                            select.form-control(placeholder="请填选择课程" ng-model="handleFn.params.weekTaskId", ng-change='handleFn.computeSelected()')
+                        .col-sm-8
+                            select.form-control(placeholder="请填选择课程" ng-model="handleFn.params.weekTaskId")
                                 option(value='{{ep.id}}', ng-repeat='ep in handleFn.weekTaskList', ng-selected='ep.id == handleFn.params.weekTaskId') {{ep.taskTitle}}
                     //.form-group
                         label.col-sm-3.control-label
@@ -54,15 +54,23 @@
                             |任务内容：
                         .col-sm-9
                             textarea.form-control(rows='8' placeholder="请填写不超过300个字课程描述" ng-model="handleFn.params.description" name="courseDesc"  validator="maxlength=300")
-                    //.form-group
+                    .form-group
                         label.col-sm-3.control-label
-                            span.required *
-                            | 分配实践小组：
+                            span
+                            | 图片：
                         .col-sm-8
-                            ul.select-box
-                                li.select-item(ng-repeat='(id,group) in handleFn.groupList')
-                                    label.item-label {{group.gropName}}
-                                        input(type='checkbox' ng-model='group.select')
+                            .container
+                                .logo-setting
+                                    .btn-upload
+                                        input(type="file"  ngf-select="handleFn.selectFile($file)"  data-ngf-pattern='"image/jpg,image/jpeg,image/png"'  data-ngf-accept='"image/jpg,image/jpeg,image/png"'  data-ngf-max-size='10MB')
+                    .form-group
+                        label.col-sm-3.control-label
+                            span
+                            | &nbsp;
+                        .col-sm-8
+                            ul(style='list-style: none; display: inline-flex;')
+                                li.select-item(ng-repeat='file in handleFn.params.fileList')
+                                    img(ng-src="{{file.srcUrl}}", alt="", style='width: 100px; height: 100px;')
 
                     .form-group
                         label.col-sm-3.control-label
