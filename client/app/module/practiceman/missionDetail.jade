@@ -48,7 +48,7 @@
                                 td {{record.studentTaskStatus == 'uncommit' ? '未提交' : '完成'}}
                                 td {{record.reviewScore || '-'}}
                                 td
-                                    a.handle(ui-sref="studentTaskDetail({id: record.id})")
+                                    a.handle(ui-sref="studentTaskDetail({id: record.id, mId:record.mentorTaskId})")
                                         i.fa.fa-pencil-square-o
                                         span 查看
                                     //a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
