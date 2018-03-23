@@ -923,11 +923,11 @@ var EduManService = {
 
     //查询信息详情
     getTeachingSupervisorInfo: function (params, access_token, callback) {
-        var url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+        var url = '/api/phone/v1/feedback/teaching/getFeelback';
         if(params.type == 'info'){
-            url = '/api/phone/v1/feedback/teaching/getFeelbackList';
+            url = '/api/phone/v1/feedback/teaching/getFeelback';
         }else if(params.type == 'superInfo'){
-            url = '/api/phone/v1/feedback/steering/getFeelbackList';
+            url = '/api/phone/v1/feedback/steering/getFeelback';
         }
         RestClient.get({
             host: 'dd',
@@ -948,7 +948,7 @@ var EduManService = {
 
     //查询模板信息
     getTeachingSupervisorTem: function (params, access_token, callback) {
-        var url = params.tempType ? '/api/phone/v1/feedback/templet/getTeachingTemplet'
+        var url = params.tempType=='0' ? '/api/phone/v1/feedback/templet/getTeachingTemplet'
             : '/api/phone/v1/feedback/templet/getSteeringTemlet';
         RestClient.get({
             host: 'dd',

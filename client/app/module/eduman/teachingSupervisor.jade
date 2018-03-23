@@ -78,14 +78,14 @@
                                                     td {{record.jobNum}}
                                                     td
                                                         a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'info'})")
-                                                            span 设置
+                                                            span 查看
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
                                                     | 显示第
                                                     span.txt-color-darken {{teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber*10:(teachingSuperFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.recordList.length}}
+                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.records.length}}
                                                     |  条 总共
                                                     span.text-primary {{teachingSuperFn.page.totalElements}}
                                                     |  条记录
@@ -140,10 +140,9 @@
                                                     td {{record.studyStyleScore}}
                                                     td {{record.createDate}}
                                                     td {{record.userName}}
-                                                    td {{record.jobNum}}
                                                     td
                                                         a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'superInfo'})")
-                                                            span 设置
+                                                            span 查看
 
 
                                         .dt-toolbar-footer

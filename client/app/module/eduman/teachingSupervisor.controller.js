@@ -35,6 +35,9 @@ angular.module('dleduWebApp')
 			 */
 			switchTab: function(type){
 				this.tab = type;
+				if(type == 'template'){
+					return;
+				}
 				this.query();
 			},
 
@@ -45,7 +48,7 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					teacherName: that.params.pageSize,
+					teacherName: that.params.teacherName,
 					courseName: that.params.courseName,
 					supName: that.params.supName,
 					stuName: that.params.stuName,

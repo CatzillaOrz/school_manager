@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
 				};
 				EduManService.getTeachingSupervisorInfo(params).$promise
 					.then(function (data) {
-						that.record = data.data;
+						that.record = data;
 					})
 					.catch(function (error) {
 
@@ -36,4 +36,6 @@ angular.module('dleduWebApp')
 				this.getTeachingSupervisorInfo();
 			}
 		};
+
+		$scope.teachingSuperInfoFn.init();
 	});

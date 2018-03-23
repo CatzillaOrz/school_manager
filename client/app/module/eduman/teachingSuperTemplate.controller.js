@@ -6,8 +6,6 @@ angular.module('dleduWebApp')
 	.controller('teachingSuperTemplateCtrl', function ($scope, $state, AuthService, EduManService, RoleAuthService,
 	                                                   ngDialog, messageService) {
 		$scope.teachingSuperTemplateFn = {
-			//保存查询出来的模板对象
-			record: null,
 			//type 区分跳转过来的链接
 			type: -1,
 
@@ -52,18 +50,21 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					tempType: this.type ? 1 : 0 //区分查询模板类型 1 督导 0学生
+					tempType: this.type == 1 ? 1 : 0 //区分查询模板类型 1 督导 0学生
 				};
 				EduManService.getTeachingSupervisorTem(params).$promise
 					.then(function (data) {
-						that.record = data;
 						if(that.type == 1){ //督导
-							if(!that.record.teacherQuesList && !that.record.styleQuesList){
+							if(!data.teacherQuesList && !data.styleQuesList){
 								that.initData();
+							}else{
+								that.params = data;
 							}
 						}else{
-							if(!that.record.quesList){
+							if(!data.quesList){
 								that.initData();
+							}else{
+								that.params = data;
 							}
 						}
 					})
@@ -141,13 +142,13 @@ angular.module('dleduWebApp')
 					}
 				}
 
-				if($state.params.id){
-					var cloneParams = angular.copy(params);
-					EduManService.updateEvaQues(cloneParams).$promise
+				var cloneParams = angular.copy(params);
+				if(this.type == 0){
+					EduManService.addTeachingTemplateStu(cloneParams).$promise
 						.then(function (data) {
-							if(data.trueMSG){
-								messageService.openMsg("修改成功!");
-								$state.go("teachingsupervisor");
+							if(data.success){
+								messageService.openMsg("新增成功!");
+								$state.go("teachingSupervisor");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -156,12 +157,11 @@ angular.module('dleduWebApp')
 
 						})
 				}else{
-					var cloneParams = angular.copy(params);
-					EduManService.addEvaQues(cloneParams).$promise
+					EduManService.addTeachingSupervisor(cloneParams).$promise
 						.then(function (data) {
-							if(data.trueMSG){
+							if(data.success){
 								messageService.openMsg("新增成功!");
-								$state.go("teachingsupervisor");
+								$state.go("teachingSupervisor");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -170,6 +170,7 @@ angular.module('dleduWebApp')
 
 						})
 				}
+
 			},
 
 			//保存文件

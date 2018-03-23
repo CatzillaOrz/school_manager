@@ -348,7 +348,7 @@ angular.module('dleduWebApp')
 			})
 			.state('teachingSuperInfo', {
 				parent: 'teachingSupervisor',
-				url   : '/teachingsuperinfo/:id',
+				url   : '/teachingsuperinfo/:id/:type',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

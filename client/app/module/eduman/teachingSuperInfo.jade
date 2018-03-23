@@ -40,38 +40,42 @@
             // widget div
             .widget-body.no-padding(style="position: initial!important")
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
-                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==30'  width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 反馈
-                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.record")
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
                                 td {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.classesName}}
-                    table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                td
+                                    span {{que.content}}
+                                    span(ng-repeat="item in que.optionList") {{item.option+"、"+item.content+";"}}
+                                td {{record.answer}}
+                    table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==10' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
-                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.records")
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
                                 td {{$index+1}}
                                 td {{record.stuName}}
                                 td {{record.classesName}}
                                 td {{record.classesName}}
-                    table#datatable_col_reorder2.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                    table#datatable_col_reorder2.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==20'  width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 选择内容
-                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.records")
-                                td {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.classesName}}
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
+                                td {{$index + 1}}
+                                td
+                                    span {{que.content}}
+                                    span(ng-repeat="item in que.optionList") {{item.option+"、"+item.content+";"}}
+                                td {{que.answer}}
         div(role='content' ng-if='teachingSuperInfoFn.type=="superInfo"')
             .jarviswidget-editbox
             // widget div
@@ -84,11 +88,11 @@
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 评价内容
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
-                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.records")
-                                td {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.classesName}}
-                                td {{record.classesName}}
+                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.record.teacherQuesList")
+                                td {{record.subject}}
+                                td {{record.content}}
+                                td {{record.score}}
+                                td {{record.answer}}
                     table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -96,9 +100,9 @@
                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 评价内容
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
-                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.records")
-                                td {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.classesName}}
-                                td {{record.classesName}}
+                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.record.styleQuesList")
+                                td {{record.subject}}
+                                td {{record.content}}
+                                td {{record.score}}
+                                td {{record.answer}}
 
