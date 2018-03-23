@@ -3,7 +3,7 @@
  * 创建实践小组
  */
 angular.module('dleduWebApp')
-	.controller('CreatePracticeTaskCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService) {
+    .controller('CreatePracticeTaskCtrl', function ($scope, $state, $timeout, AuthService, UploadService, messageService, PracticeManService) {
 
         $scope.handleFn = {
             isEditOrAdd: 'add', //true是编辑 false是新增
@@ -12,18 +12,19 @@ angular.module('dleduWebApp')
             prompt: '填写以下信息以建立周任务',
             title: '周任务信息创建',
             id: $state.params.id,
-            groupList:{},
+            groupList: {},
             params: {
                 beginDate: '',
                 endDate: '',
                 id: '',
                 orgId: AuthService.getUser().orgId,
-                practiceTeamList: [
-                ],
+                practiceTeamList: [],
                 remark: '',
                 weekNo: '',
-                taskTitle: ''
+                taskTitle: '',
+                fileList: []
             },
+            fileList: [],
 
             // 查询导师信息
             getGrouplistByOrgId: function () {
@@ -36,12 +37,12 @@ angular.module('dleduWebApp')
                         console.log(data);
 
                         that.groupList = {};
-                        angular.forEach(data,function(item,index){
+                        angular.forEach(data, function (item, index) {
                             that.groupList[item.id] = item;
                         });
-                        if($state.params.id){
-                            angular.forEach(that.params.practiceTeamList,function(item){
-                                if(that.groupList[item]){
+                        if ($state.params.id) {
+                            angular.forEach(that.params.practiceTeamList, function (item) {
+                                if (that.groupList[item]) {
                                     that.groupList[item].select = true;
                                 }
                             })
@@ -53,22 +54,22 @@ angular.module('dleduWebApp')
             },
 
             // 获取课程列表
-			getPracticeGroupList: function () {
-				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					pageNumber: 1,
-					pageSize: 10000
-				};
-				PracticeManService.getWeekTaskList(params).$promise
-					.then(function (data) {
-						that.weekTaskList = data.data;
-						that.page = data.page;
-					})
-					.catch(function (error) {
+            getPracticeGroupList: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 1,
+                    pageSize: 10000
+                };
+                PracticeManService.getWeekTaskList(params).$promise
+                    .then(function (data) {
+                        that.weekTaskList = data.data;
+                        that.page = data.page;
+                    })
+                    .catch(function (error) {
 
-					})
-			},
+                    })
+            },
 
             // 查询周任务信息
             getWeekTaskDetail: function () {
@@ -89,8 +90,8 @@ angular.module('dleduWebApp')
             },
 
             //保存周任务
-            save: function(){
-                if($state.params.id){
+            save: function () {
+                if ($state.params.id) {
 
                     PracticeManService.updateTask(this.params).$promise
                         .then(function (data) {
@@ -98,9 +99,9 @@ angular.module('dleduWebApp')
                             $state.go("practicetasklist");
                         })
                         .catch(function (error) {
-                            messageService.openMsg("修改失败! "+error.data);
+                            messageService.openMsg("修改失败! " + error.data);
                         })
-                }else{
+                } else {
                     PracticeManService.addTask(this.params).$promise
                         .then(function (data) {
                             messageService.openMsg("创建成功!");
@@ -108,35 +109,48 @@ angular.module('dleduWebApp')
                         })
                         .catch(function (error) {
                             console.log(error.data);
-                            messageService.openMsg("创建失败! "+error.data);
+                            messageService.openMsg("创建失败! " + error.data);
                         })
                 }
             },
 
             //提交
-            submit: function(){
-                var _this =this;
-                _this.params.practiceTeamList =[];
-                angular.forEach(_this.groupList,function(item){
-                    if(item.select){
+            submit: function () {
+                var _this = this;
+                _this.params.practiceTeamList = [];
+
+                angular.forEach(_this.groupList, function (item) {
+                    if (item.select) {
                         _this.params.practiceTeamList.push(item.id);
                     }
                 });
                 this.save();
             },
 
-            computeSelected: function(){
-
+            selectFile: function (file) {
+                var that = this;
+                UploadService.fileUploadToQiNiu(file)
+                    .then(function (resp) {
+                        that.params.fileList.push({
+                            fileName: resp.data.key,
+                            srcUrl: resp.data.url
+                        });
+                    }, function (resp) {
+                        CommonService.msgDialog('上传失败！！', 2);
+                    }, function (evt) {
+                        // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    })
             },
             init: function () {
-                if($state.params.id){
+                if ($state.params.id) {
                     this.getWeekTaskDetail();
                     this.prompt = '填写以下信息以编任务';
                     this.title = '任务信息编辑';
-                }else{
+                } else {
                     this.getPracticeGroupList();
                 }
             }
         };
         $scope.handleFn.init();
-	});
+    });
