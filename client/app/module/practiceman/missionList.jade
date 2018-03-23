@@ -56,7 +56,7 @@
                                     a.handle(ng-click="practiceGroupMan.deletePrompt(weektask)")
                                         i.fa.fa-trash-o
                                         span 删除
-                                    a.handle()
+                                    a.handle(ng-click='practiceGroupMan.cacheParam(weektask)')
                                         i.fa.fa-pencil-square-o
                                         span 编辑时间
 
@@ -73,3 +73,30 @@
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                 ul.pagination-sm(uib-pagination, total-items='practiceGroupMan.page.totalElements', max-size='practiceGroupMan.page.pageSize' ng-model='practiceGroupMan.page.pageNumber',ng-change="practiceGroupMan.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+
+script(type='text/ng-template',id='modifyDeadline')
+        .repeatLoad
+            .repeat_header
+                i.fa.fa-exclamation-triangle
+                span.buld 修改实践任务时间
+            form.repeat_content.content-scorll.row(ng-if='practiceGroupMan.showCases', name='dateTime')
+                .form-group
+                    label.col-sm-3.control-label.margin-top-10
+                        span.required *
+                        | 开始日期：
+                    .col-sm-7.margin-top-10
+                        .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="practiceGroupMan.params.beginDate" validator="required")
+                            span.add-on
+                                i.icon-calendar.glyphicon.glyphicon-calendar
+                .form-group
+                    label.col-sm-3.control-label.margin-top-10
+                        span.required *
+                        | 结束日期：
+                    .col-sm-7.margin-top-10
+                        .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="practiceGroupMan.params.deadLine" validator="required")
+                            span.add-on
+                                i.icon-calendar.glyphicon.glyphicon-calendar
+                .col-sm-12.text-center.margin-top-10
+                    a.btn.btn-primary(type='submit'  ng-click="practiceGroupMan.submit()", validation-submit="dateTime") 提交

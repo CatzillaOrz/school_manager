@@ -280,6 +280,22 @@ var PracticeManService = {
             callback(e);
         });
     },
+    editTaskTime: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'stu-practice',
+            path: '/v1/practicetask/edittasktime',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
 
     //查询实训小组信息
