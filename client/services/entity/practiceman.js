@@ -40,6 +40,10 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/getEntTutorInfo');
                 return practiceman.get(params);
             },
+            getStudentTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getStudentTaskDetail');
+                return practiceman.get(params);
+            },
             addEntTutor: function (params) {
                 var practiceman = $resource('api/practiceman/addEntTutor');
                 return practiceman.save(params);
@@ -69,6 +73,14 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/addPracticeGroup');
                 return practiceman.save(params);
             },
+            getMissionList: function (params) {
+                var practiceman = $resource('api/practiceman/getMissionList');
+                return practiceman.save(params);
+            },
+            getMissionDetail: function (params) {
+                var practiceman = $resource('api/practiceman/getMissionDetail');
+                return practiceman.save(params);
+            },
             addPracticeTask: function (params) {
                 var practiceman = $resource('api/practiceman/addPracticeTask');
                 return practiceman.save(params);
@@ -80,6 +92,11 @@ angular.module('dleduWebService')
             },
             updatePracticeTask: function (params) {
                 var practiceman = $resource('api/practiceman/updatePracticeTask','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
+            editTaskTime: function (params) {
+                var practiceman = $resource('api/practiceman/editTaskTime','',{
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
@@ -161,6 +178,10 @@ angular.module('dleduWebService')
             deleteTask: function (params) {
                 var practiceman = $resource('api/practiceman/deleteTask');
                 return practiceman.remove(params);
+            },
+            deleteTaskDetail: function (params) {
+                var practiceman = $resource('api/practiceman/deleteTaskDetail');
+                return practiceman.save(params);
             },
             addWeekTask: function (params) {
                 var practiceman = $resource('api/practiceman/addWeekTask');

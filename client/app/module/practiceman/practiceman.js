@@ -176,6 +176,20 @@ angular.module('dleduWebApp')
                     label: '任务分配'
                 }
             })
+            .state('missionList', {
+                parent: 'base',
+                url   : '/missionList',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'MissionListCtrl',
+                        templateUrl: 'app/module/practiceman/missionList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践任务详情'
+                }
+            })
             .state('enterpriseList', {
                 parent: 'base',
                 url   : '/enterpriseList',
@@ -188,6 +202,34 @@ angular.module('dleduWebApp')
                 },
                 ncyBreadcrumb: {
                     label: '实践企业管理'
+                }
+            })
+            .state('missionDetail', {
+                parent: 'base',
+                url   : '/missionDetail/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'MissionDetailCtrl',
+                        templateUrl: 'app/module/practiceman/missionDetail.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践任务详情'
+                }
+            })
+            .state('studentTaskDetail', {
+                parent: 'base',
+                url   : '/studentTaskDetail/:id/:mId',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'StudentTaskDetailCtrl',
+                        templateUrl: 'app/module/practiceman/studentTaskDetail.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '实践任务详情'
                 }
             })
             .state('enterpriseEdit', {
