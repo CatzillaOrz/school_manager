@@ -51,7 +51,7 @@
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="teachingSuperFn.query()")
                                                         span 查询
-                                                    button.btn.btn-primary(ng-click="teachingSuperFn.exportTeachingclassByTeacher()")
+                                                    //button.btn.btn-primary(ng-click="teachingSuperFn.exportTeachingclassByTeacher()")
                                                         span 导出
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
@@ -73,7 +73,7 @@
                                                     td {{record.teachingClassName}}
                                                     td {{record.courseName}}
                                                     td {{record.teachingClassTeacher}}
-                                                    td {{record.createDate}}
+                                                    td {{record.createDate |date: 'yyyy-MM-dd HH:mm:ss'}}
                                                     td {{record.userName}}
                                                     td {{record.jobNum}}
                                                     td
@@ -138,7 +138,7 @@
                                                     td {{record.teachingClassTeacher}}
                                                     td {{record.teachingScore}}
                                                     td {{record.studyStyleScore}}
-                                                    td {{record.createDate}}
+                                                    td {{record.createDate|date: 'yyyy-MM-dd HH:mm:ss'}}
                                                     td {{record.userName}}
                                                     td
                                                         a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'superInfo'})")
@@ -151,7 +151,7 @@
                                                     | 显示第
                                                     span.txt-color-darken {{teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber*10:(teachingSuperFn.page.pageNumber-1)*10+1}}
                                                     |  到
-                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.recordList.length}}
+                                                    span.txt-color-darken {{((teachingSuperFn.page.pageNumber==0?teachingSuperFn.page.pageNumber+1:teachingSuperFn.page.pageNumber)-1)*10+teachingSuperFn.records.length}}
                                                     |  条 总共
                                                     span.text-primary {{teachingSuperFn.page.totalElements}}
                                                     |  条记录

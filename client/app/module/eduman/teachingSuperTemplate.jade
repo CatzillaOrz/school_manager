@@ -67,7 +67,7 @@
                                                         span.margin-right-10 {{teachingSuperTemplateFn.convertToLetter($index+1)}}
                                                     .col-sm-10.padding-10
                                                         textarea.form-control.margin-right-10(ng-model="quesOption.content" name="{{'optioncontent0'+outerIndex +$index}}" validator="required, maxlength=200")
-                                                        input(type="hidden" ng-model="quesOption.choice" ng-value="quesOption.choice=teachingSuperTemplateFn.convertToLetter($index+1)")
+                                                        input(type="hidden" ng-model="quesOption.option" ng-value="quesOption.option=teachingSuperTemplateFn.convertToLetter($index+1)")
                                                     .col-sm-1.padding-10
                                                         a.handle(ng-click="teachingSuperTemplateFn.delQuesOption(outerIndex)")
                                                             i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
@@ -108,17 +108,17 @@
                                                 .form-group.no-margin
                                                     label 题目
                                                 .form-group.no-margin
-                                                    textarea.form-control(ng-model="record.content" name="{{'textareateaching'+ $index}}" validator="required, maxlength=200")
+                                                    textarea.form-control(ng-model="record.content" name="{{'teachingcontent'+ $index}}" validator="required, maxlength=200")
                                             .ques-item.no-margin
                                                 .form-group.no-margin
                                                     label 评教项目
                                                 .form-group.no-margin
-                                                    textarea.form-control(ng-model="record.subject" name="{{'subject'+ $index}}" validator="required, maxlength=200")
+                                                    textarea.form-control(ng-model="record.subject" name="{{'teachingsubject'+ $index}}" validator="required, maxlength=200")
                                             .row.no-margin
                                                 .form-group
                                                     .row.no-margin.padding-10 分值（仅限整数）
                                                     .col-sm-6.no-margin
-                                                        input.form-control(type="text" ng-model="record.score" name="{{'scoreaateaching'+ $index}}" validator="required, integergt0")
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'teachingscore'+ $index}}" validator="required, integergt0")
                                         td
                                             a.handle(ng-click="teachingSuperTemplateFn.delQues($index, 'teaching')")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
@@ -150,17 +150,17 @@
                                                 .form-group.no-margin
                                                     label 题目
                                                 .form-group.no-margin
-                                                    textarea.form-control(ng-model="record.content" name="{{'textareaclassing'+ $index}}" validator="required, maxlength=200")
+                                                    textarea.form-control(ng-model="record.content" name="{{'stylecontent'+ $index}}" validator="required, maxlength=200")
                                             .ques-item.no-margin
                                                 .form-group.no-margin
                                                     label 评教项目
                                                 .form-group.no-margin
-                                                    textarea.form-control(ng-model="record.subject" name="{{'subject'+ $index}}" validator="required, maxlength=200")
+                                                    textarea.form-control(ng-model="record.subject" name="{{'stylesubject'+ $index}}" validator="required, maxlength=200")
                                             .row.no-margin
                                                 .form-group
                                                     .row.no-margin.padding-10 分值（仅限整数）
                                                     .col-sm-6.no-margin
-                                                        input.form-control(type="text" ng-model="record.score" name="{{'scoreaaclassing'+ $index}}" validator="required, integergt0")
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'stylescore'+ $index}}" validator="required, integergt0")
                                         td
                                             a.handle(ng-click="teachingSuperTemplateFn.delQues($index, 'classing')")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")

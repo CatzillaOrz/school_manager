@@ -65,7 +65,7 @@ angular.module('dleduWebApp')
 			},
 			//根据名称查询
 			query: function () {
-				this.page.pageSize = 1;
+				this.page.pageNumber = 1;
 				this.getFeedbackList();
 			},
 

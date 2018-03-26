@@ -7,7 +7,7 @@
             span.widget-icon
                 i.fa.fa-table
             h2 反馈详情
-        div(role='content')
+        div(role='content' style="border-bottom-width:1px;")
             .widget-body(style="min-height:auto!important")
                 .row
                     .col-sm-12
@@ -28,7 +28,7 @@
                 .row.padding-top-15
                     .col-sm-12
                         span 反馈时间：
-                        span {{teachingSuperInfoFn.record.createDate }}
+                        span {{teachingSuperInfoFn.record.createDate | date: 'yyyy-MM-dd HH:mm:ss'}}
                 .row.padding-top-15
                     .col-sm-12
                         span 反馈人：
@@ -48,10 +48,8 @@
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 反馈
                             tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
                                 td {{$index+1}}
-                                td
-                                    span {{que.content}}
-                                    span(ng-repeat="item in que.optionList") {{item.option+"、"+item.content+";"}}
-                                td {{record.answer}}
+                                td {{que.content}}
+                                td {{que.answer}}
                     table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==10' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -61,9 +59,9 @@
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
                             tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
                                 td {{$index+1}}
-                                td {{record.stuName}}
-                                td {{record.classesName}}
-                                td {{record.classesName}}
+                                td {{que.content}}
+                                td {{que.score}}
+                                td(style="color:red;") {{que.answer}}
                     table#datatable_col_reorder2.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==20'  width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -73,7 +71,7 @@
                             tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
                                 td {{$index + 1}}
                                 td
-                                    span {{que.content}}
+                                    span {{que.content+"："}}
                                     span(ng-repeat="item in que.optionList") {{item.option+"、"+item.content+";"}}
                                 td {{que.answer}}
         div(role='content' ng-if='teachingSuperInfoFn.type=="superInfo"')
@@ -81,6 +79,10 @@
             // widget div
             .widget-body.no-padding(style="position: initial!important")
                 #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
+                    .row
+                        .col-sm-12
+                            span {{'教师教学评价：'}}
+                            span {{teachingSuperInfoFn.record.teachingScore+"分"}}
                     table#datatable_col_reorder5.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -93,6 +95,10 @@
                                 td {{record.content}}
                                 td {{record.score}}
                                 td {{record.answer}}
+                    .row
+                        .col-sm-12
+                            span {{'班级学风评价：'}}
+                            span {{teachingSuperInfoFn.record.studyStyleScore+"分"}}
                     table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
