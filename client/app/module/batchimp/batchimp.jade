@@ -75,13 +75,13 @@
                             table
                                 tr
                                     td 错误行号
-                                    td 教学班名称
                                     td 课程代码
+                                    td 课程名称
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.courseScheduleExcelDomainList")
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassDomainList")
                                     td {{info.line}}
-                                    td {{info.teachingClassCode}}
-                                    td {{info.teachingClassName}}
+                                    td {{info.courseId}}
+                                    td {{info.courseName}}
                                     td {{info.msg}}
             #student.tab-pane.fade(ng-show='batchImpFn.impType=="timetable"')
                 p
@@ -93,10 +93,10 @@
                                     td 学号
                                     td 学生姓名
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.studentExcelDomainList")
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassStudentDomainList")
                                     td {{info.line}}
-                                    td {{info.studentCode}}
-                                    td {{info.studentName}}
+                                    td {{info.jobNum }}
+                                    td {{info.name}}
                                     td {{info.msg}}
             #course.tab-pane.fade(ng-show='batchImpFn.impType=="timetable"')
                 p
@@ -105,10 +105,10 @@
                             table
                                 tr
                                     td 错误行号
-                                    td 选课课号
-                                    td 上课地点
+                                    td 教学班编码
+                                    td 教学班名称
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.courseScheduleExcelDomainList")
+                                tr(ng-repeat="info in batchImpFn.errorInfos.classScheduleDomainList")
                                     td {{info.line}}
                                     td {{info.teachingClassCode}}
                                     td {{info.teachingClassName}}

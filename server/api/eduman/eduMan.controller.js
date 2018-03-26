@@ -532,6 +532,85 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    getTeachingSupervisorList: function (req, res) {
+        EduManService.getTeachingSupervisorListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getTeachingSupervisorInfo: function (req, res) {
+        EduManService.getTeachingSupervisorInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    getTeachingSupervisorTem: function (req, res) {
+        EduManService.getTeachingSupervisorTemSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+    updateTeachingSupervisor: function (req, res) {
+        EduManService.updateTeachingSupervisorSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTeachingSupervisor: function (req, res) {
+        EduManService.addTeachingSupervisorSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addTeachingTemplateStu: function (req, res) {
+        EduManService.addTeachingTemplateStuSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportFeedInfo: function (req, res) {
+        EduManService.exportFeedInfoSync(req.query, req.user.access_token)
+            .then(function (data) {
+                /*var datas = [
+                    ["辅导员", "工号", "辅导员归属院系", "点名组名称", "行政班年级", "点名发起时间", "总人数",
+                        "未提交人数", "已到人数", "未到人数", "请假人数"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    datas.push([item.tname, item.jobNumber, item.tcollegeName, item.groupName, item.grade, item.initiatingTime,
+                        item.total, item.uncommitted, item.haveTo, item.nonArrival, item.leave]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(datas);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "导员点名信息报表");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));*/
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

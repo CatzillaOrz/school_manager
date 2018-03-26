@@ -98,12 +98,8 @@ angular.module('dleduWebApp')
              */
             downLoad: function(){
                 ImpBatchService.downLoad(this.impType);
-            },
-
-            init: function () {
-
             }
+
         };
 
-            $scope.batchImpFn.init();
     });

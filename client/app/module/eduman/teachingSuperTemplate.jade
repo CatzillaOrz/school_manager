@@ -1,0 +1,174 @@
+//
+    Created by Administrator on 2017/6/21.
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading' ng-if="teachingSuperTemplateFn.type == 0")
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{'信息员反馈模板设置'}}
+        .widget-body(style="padding:13px 0 0 0" ng-if="teachingSuperTemplateFn.type == 0")
+            form.form-horizontal(name="infoForm")
+                .md-form(style="min-height:auto;margin:0")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required
+                            | 反馈题目类型：
+                        .col-sm-7
+                            label.radio-inline
+                                input(type="radio" name="type" value="10" ng-checked="teachingSuperTemplateFn.params.quesType" ng-model="teachingSuperTemplateFn.params.quesType" ng-click="teachingSuperTemplateFn.monitorOptionChange()")
+                                | 打分型
+                            label.radio-inline
+                                input(type="radio" name="type" value="20" ng-checked="teachingSuperTemplateFn.params.quesType" ng-model="teachingSuperTemplateFn.params.quesType" ng-click="teachingSuperTemplateFn.monitorOptionChange()")
+                                | 选项型
+                            label.radio-inline
+                                input(type="radio" name="type" value="30" ng-checked="teachingSuperTemplateFn.params.quesType" ng-model="teachingSuperTemplateFn.params.quesType" ng-click="teachingSuperTemplateFn.monitorOptionChange()")
+                                | 简答型
+                .panel.panel-default.no-border
+                    .jarviswidget.jarviswidget-color-blueDark
+                        header(role='heading')
+                            span.widget-icon
+                                i.fa.fa-table
+                            h2 {{'反馈题目'}}
+                .widget-body(style='border:0;')
+                    .dataTables_wrapper(role='grid')
+                        #datatable_col_reorder_wrapper.dataTables_wrapper.no-footer
+                            table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 180px;') 题目信息
+                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 50px;')
+                                            i.fa.fa-plus-circle(style="font-size:16px;" title="新增" ng-click="teachingSuperTemplateFn.addQues('stu')")
+                                tbody
+                                    tr.odd(role='row' ng-repeat="record in teachingSuperTemplateFn.params.quesList" ng-init="outerIndex = $index")
+                                        td.sorting_1
+                                            span {{$index+1}}
+                                            //input(type="hidden" ng-model="record.no" ng-value="record.no=outerIndex+1")
+                                        td
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 题目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.content" name="{{'textarea'+ $index}}" validator="required, maxlength=200")
+                                            .row.no-margin(ng-if='teachingSuperTemplateFn.params.quesType == 10')
+                                                .form-group
+                                                    .row.no-margin.padding-10 分值（仅限整数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'scoreaa'+ $index}}" validator="required, integergt0" ng-change="teachingSuperTemplateFn.calcAllTotal(teachingSuperTemplateFn.params.quesList)")
+                                            .row.no-margin(ng-if='teachingSuperTemplateFn.params.quesType == 20')
+                                                .form-group.no-margin
+                                                    .col-sm-1.padding-10
+                                                        label 选项
+                                                    .col-sm-10.padding-10
+                                                    .col-sm-1.padding-10
+                                                        i.fa.fa-plus-circle(style="font-size:16px;margin-right:10px;" title="新增" ng-click="teachingSuperTemplateFn.addQuesOption(outerIndex)")
+                                                .form-group.no-margin(ng-repeat="quesOption in record.optionList")
+                                                    .col-sm-1.padding-10
+                                                        span.margin-right-10 {{teachingSuperTemplateFn.convertToLetter($index+1)}}
+                                                    .col-sm-10.padding-10
+                                                        textarea.form-control.margin-right-10(ng-model="quesOption.content" name="{{'optioncontent0'+outerIndex +$index}}" validator="required, maxlength=200")
+                                                        input(type="hidden" ng-model="quesOption.option" ng-value="quesOption.option=teachingSuperTemplateFn.convertToLetter($index+1)")
+                                                    .col-sm-1.padding-10
+                                                        a.handle(ng-click="teachingSuperTemplateFn.delQuesOption(outerIndex)")
+                                                            i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                        td
+                                            a.handle(ng-click="teachingSuperTemplateFn.delQues($index)")
+                                                i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                    //tr(role='row' ng-if="teachingSuperTemplateFn.params.quesType=='10'")
+                                        td(colspan="3" )
+                                            .row.margin-left-10.padding-5 {{'总分:' + teachingSuperTemplateFn.params.totalScore}}
+                .form-actions(style="border-top:none;margin:0")
+                    .row
+                        .col-md-12(style="text-align:left")
+                            a.btn.btn-primary(ng-click="teachingSuperTemplateFn.submit()" validation-submit="infoForm") 保存模板
+        .widget-body(style="padding:13px 0 0 0" ng-if="teachingSuperTemplateFn.type == 1")
+            form.form-horizontal(name="evaquesForm")
+                .panel.panel-default.no-border
+                    .jarviswidget.jarviswidget-color-blueDark
+                        header(role='heading')
+                            span.widget-icon
+                                i.fa.fa-table
+                            h2 {{'教师教学评价'}}
+                .widget-body(style='border:0;')
+                    .dataTables_wrapper(role='grid')
+                        #datatable_col_reorder_wrapper0.dataTables_wrapper.no-footer
+                            table#datatable_col_reorder0.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 180px;') 题目信息
+                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 50px;')
+                                            i.fa.fa-plus-circle(style="font-size:16px;" title="新增" ng-click="teachingSuperTemplateFn.addQues('teaching')")
+                                tbody
+                                    tr.odd(role='row' ng-repeat="record in teachingSuperTemplateFn.params.teacherQuesList" ng-init="outerIndex = $index")
+                                        td.sorting_1
+                                            span {{$index+1}}
+                                        td
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 题目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.content" name="{{'teachingcontent'+ $index}}" validator="required, maxlength=200")
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 评教项目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.subject" name="{{'teachingsubject'+ $index}}" validator="required, maxlength=200")
+                                            .row.no-margin
+                                                .form-group
+                                                    .row.no-margin.padding-10 分值（仅限整数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'teachingscore'+ $index}}" validator="required, integergt0")
+                                        td
+                                            a.handle(ng-click="teachingSuperTemplateFn.delQues($index, 'teaching')")
+                                                i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                    //tr(role='row' )
+                                        td(colspan="3" )
+                                            .row.margin-left-10.padding-5 {{'总分:' + teachingSuperTemplateFn.params.totalScore}}
+                .panel.panel-default.no-border
+                    .jarviswidget.jarviswidget-color-blueDark
+                        header(role='heading')
+                            span.widget-icon
+                                i.fa.fa-table
+                            h2 {{'班级学风评价'}}
+                .widget-body(style='border:0;')
+                    .dataTables_wrapper(role='grid')
+                        #datatable_col_reorder_wrapper10.dataTables_wrapper.no-footer
+                            table#datatable_col_reorder10.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 180px;') 题目信息
+                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 50px;')
+                                            i.fa.fa-plus-circle(style="font-size:16px;" title="新增" ng-click="teachingSuperTemplateFn.addQues('classing')")
+                                tbody
+                                    tr.odd(role='row'  ng-repeat="record in teachingSuperTemplateFn.params.styleQuesList" ng-init="outerIndex = $index")
+                                        td.sorting_1
+                                            span {{$index+1}}
+                                        td
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 题目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.content" name="{{'stylecontent'+ $index}}" validator="required, maxlength=200")
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 评教项目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.subject" name="{{'stylesubject'+ $index}}" validator="required, maxlength=200")
+                                            .row.no-margin
+                                                .form-group
+                                                    .row.no-margin.padding-10 分值（仅限整数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.score" name="{{'stylescore'+ $index}}" validator="required, integergt0")
+                                        td
+                                            a.handle(ng-click="teachingSuperTemplateFn.delQues($index, 'classing')")
+                                                i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                                tr.odd(role='row' ng-repeat="record in teachingSuperTemplateFn.params.optionList" ng-init="outerIndex = $index")
+                                    //tr(role='row')
+                                        td(colspan="3" )
+                                            .row.margin-left-10.padding-5 {{'问卷总分:' + teachingSuperTemplateFn.params.totalScore}}
+                .form-actions(style="border-top:none;margin:0")
+                    .row
+                        .col-md-12(style="text-align:left")
+                            a.btn.btn-primary(ng-click="teachingSuperTemplateFn.submit()" validation-submit="evaquesForm") 保存模板
