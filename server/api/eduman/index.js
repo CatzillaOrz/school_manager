@@ -66,4 +66,12 @@ router.get('/getCollageDataList',auth.isSignedIn, controller.getCollageDataList)
 router.get('/collageDataExport',auth.isSignedIn, controller.collageDataExport);
 router.get('/teachClassDataExport',auth.isSignedIn, controller.teachClassDataExport);
 
+//教学督导
+router.get('/getTeachingSupervisorList',auth.isSignedIn, controller.getTeachingSupervisorList);
+router.get('/getTeachingSupervisorInfo',auth.isSignedIn, controller.getTeachingSupervisorInfo);
+router.get('/getTeachingSupervisorTem',auth.isSignedIn, controller.getTeachingSupervisorTem);
+router.put('/updateTeachingSupervisor',auth.isSignedIn, controller.updateTeachingSupervisor);
+router.post('/addTeachingSupervisor',auth.isSignedIn, controller.addTeachingSupervisor);
+router.post('/addTeachingTemplateStu',auth.isSignedIn, controller.addTeachingTemplateStu);
+
 module.exports = router;

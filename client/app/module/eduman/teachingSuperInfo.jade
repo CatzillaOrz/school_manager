@@ -1,0 +1,114 @@
+//
+    Created by Administrator on 2017/6/21.
+.college-list-container
+    #wid-id-1.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 反馈详情
+        div(role='content' style="border-bottom-width:1px;")
+            .widget-body(style="min-height:auto!important")
+                .row
+                    .col-sm-12
+                        span 课程名称：
+                        span {{teachingSuperInfoFn.record.courseName }}
+                .row.padding-top-15
+                    .col-sm-12
+                        span 教学班名称：
+                        span {{teachingSuperInfoFn.record.teachingClassName }}
+                .row.padding-top-15
+                    .col-sm-12
+                        span 选课编号：
+                        span {{teachingSuperInfoFn.record.teachingClassCode}}
+                .row.padding-top-15
+                    .col-sm-12
+                        span 任课教师：
+                        span {{teachingSuperInfoFn.record.teachingClassTeacher }}
+                .row.padding-top-15
+                    .col-sm-12
+                        span 反馈时间：
+                        span {{teachingSuperInfoFn.record.createDate | date: 'yyyy-MM-dd HH:mm:ss'}}
+                .row.padding-top-15
+                    .col-sm-12
+                        span 反馈人：
+                        span {{teachingSuperInfoFn.record.userName }}
+
+
+        div(role='content' ng-if='teachingSuperInfoFn.type=="info"')
+            .jarviswidget-editbox
+            // widget div
+            .widget-body.no-padding(style="position: initial!important")
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==30'  width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 反馈
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
+                                td {{$index+1}}
+                                td {{que.content}}
+                                td {{que.answer}}
+                    table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==10' width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
+                                td {{$index+1}}
+                                td {{que.content}}
+                                td {{que.score}}
+                                td(style="color:red;") {{que.answer}}
+                    table#datatable_col_reorder2.table.table-striped.table-bordered.table-hover.dataTable.no-footer(ng-show='teachingSuperInfoFn.record.quesType==20'  width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 题目
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 选择内容
+                            tr.odd(role='row' ng-repeat="que in teachingSuperInfoFn.record.quesList")
+                                td {{$index + 1}}
+                                td
+                                    span {{que.content+"："}}
+                                    span(ng-repeat="item in que.optionList") {{item.option+"、"+item.content+";"}}
+                                td {{que.answer}}
+        div(role='content' ng-if='teachingSuperInfoFn.type=="superInfo"')
+            .jarviswidget-editbox
+            // widget div
+            .widget-body.no-padding(style="position: initial!important")
+                #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
+                    .row
+                        .col-sm-12
+                            span {{'教师教学评价：'}}
+                            span {{teachingSuperInfoFn.record.teachingScore+"分"}}
+                    table#datatable_col_reorder5.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 评分项目
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 评价内容
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
+                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.record.teacherQuesList")
+                                td {{record.subject}}
+                                td {{record.content}}
+                                td {{record.score}}
+                                td {{record.answer}}
+                    .row
+                        .col-sm-12
+                            span {{'班级学风评价：'}}
+                            span {{teachingSuperInfoFn.record.studyStyleScore+"分"}}
+                    table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 评分项目
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 300px;') 评价内容
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 满分
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 150px;') 得分
+                            tr.odd(role='row' ng-repeat="record in teachingSuperInfoFn.record.styleQuesList")
+                                td {{record.subject}}
+                                td {{record.content}}
+                                td {{record.score}}
+                                td {{record.answer}}
+

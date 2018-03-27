@@ -270,6 +270,48 @@ angular.module('dleduWebService')
 					params: params
 				});
 			},
+
+			//查询督导信息列表
+			getTeachingSupervisorList: function (params) {
+				var eduman = $resource('api/eduman/getTeachingSupervisorList');
+				return eduman.get(params);
+			},
+
+			//查询督导信息详情
+			getTeachingSupervisorInfo: function (params) {
+				var eduman = $resource('api/eduman/getTeachingSupervisorInfo');
+				return eduman.get(params);
+			},
+
+			//查询模板详情
+			getTeachingSupervisorTem: function (params) {
+				var eduman = $resource('api/eduman/getTeachingSupervisorTem');
+				return eduman.get(params);
+			},
+
+			//创建督导模板
+			addTeachingSupervisor:function (params) {
+				var eduman = $resource('api/eduman/addTeachingSupervisor');
+				return eduman.save(params);
+			},
+
+			//创建督导模板
+			addTeachingTemplateStu:function (params) {
+				var eduman = $resource('api/eduman/addTeachingTemplateStu');
+				return eduman.save(params);
+			},
+
+			//更新督导模板
+			updateTeachingSupervisor: function (params) {
+				var eduman = $resource('api/eduman/updateTeachingSupervisor','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+
+			exportFeedInfo: function (params) {
+				var eduman = $resource('api/eduman/exportFeedInfo');
+				return eduman.get(params);
+			},
 		}
 
 	});
