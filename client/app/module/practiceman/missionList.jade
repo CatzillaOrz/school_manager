@@ -86,7 +86,7 @@ script(type='text/ng-template',id='modifyDeadline')
                         | 开始日期：
                     .col-sm-7.margin-top-10
                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="practiceGroupMan.params.beginDate" validator="required")
+                            input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="practiceGroupMan.param.beginDate" validator="required")
                             span.add-on
                                 i.icon-calendar.glyphicon.glyphicon-calendar
                 .form-group
@@ -95,7 +95,7 @@ script(type='text/ng-template',id='modifyDeadline')
                         | 结束日期：
                     .col-sm-7.margin-top-10
                         .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="practiceGroupMan.params.deadLine" validator="required")
+                            input.form-control(size='16', ng-disabled='true' name="dateEnd" placeholder='请选择结束日期' type='text' ng-model="practiceGroupMan.param.endDate" validator="required")
                             span.add-on
                                 i.icon-calendar.glyphicon.glyphicon-calendar
                 .col-sm-12.text-center.margin-top-10
