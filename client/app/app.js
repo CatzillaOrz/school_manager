@@ -59,7 +59,8 @@ angular.module('dleduWebApp', [
                     var AuthService = $injector.get('AuthService');
                     AuthService.clearUser();
                      //_location.$$path != '/login' && (AuthService.navigation(0, '/login'));
-                    _location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
+                    //_location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
+                    AuthService.signOut();
                 } else if (response.status === 404) {
                     // _window.location.href = '/404';
                 } else if (response.status >= 500) {
