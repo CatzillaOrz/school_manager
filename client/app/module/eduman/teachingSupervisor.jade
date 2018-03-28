@@ -3,17 +3,17 @@
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
             ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
-                li.tabBlock-tab.active.cursor-pointer(ng-click="teachingSuperFn.switchTab('info')" role="navigation")
-                    a(data-toggle='tab',  aria-expanded='true')
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': teachingSuperFn.tab=='info'}" ng-click="teachingSuperFn.switchTab('info')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{teachingSuperFn.tab=="info"}}')
                         i.fa.fa-lg.fa-calendar
                         span.hidden-mobile.hidden-tablet  信息员反馈
-                li.tabBlock-tab.cursor-pointer(ng-click="teachingSuperFn.switchTab('superInfo')" role="navigation")
-                    a(data-toggle='tab',  aria-expanded='false')
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': teachingSuperFn.tab=='superInfo'}" ng-click="teachingSuperFn.switchTab('superInfo')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{teachingSuperFn.tab=="superInfo"}}')
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 督导反馈
-                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="teachingSuperFn.switchTab('template')")
-                    a(data-toggle='tab', aria-expanded='false')
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': teachingSuperFn.tab=='template'}" role="navigation" ng-click="teachingSuperFn.switchTab('template')")
+                    a(data-toggle='tab', aria-expanded='{{teachingSuperFn.tab=="template"}}')
                         i.fa.fa-lg.fa-pencil
                         span.hidden-mobile.hidden-tablet
                             | 模板设置

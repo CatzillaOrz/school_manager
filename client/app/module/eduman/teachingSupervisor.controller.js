@@ -3,7 +3,57 @@
  * 教学督导
  */
 angular.module('dleduWebApp')
-	.controller('teachingSupervisorCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog) {
+	.controller('teachingSupervisorCtrl', function ($scope, $timeout, $state, AuthService, EduManService, RoleAuthService, ngDialog) {
+		var TabBlock = {
+			s: {
+				animLen: 200
+			},
+
+			init: function () {
+				TabBlock.bindUIActions();
+				TabBlock.hideInactive();
+			},
+
+			bindUIActions: function () {
+				$('.tabBlock-tabs').on('click', '.tabBlock-tab', function () {
+					TabBlock.switchTowTab($(this));
+				});
+			},
+
+			hideInactive: function () {
+				var $tabBlocks = $('.tabBlock');
+
+				$tabBlocks.each(function (i) {
+					var
+						$tabBlock = $($tabBlocks[i]),
+						$panes = $tabBlock.find('.tab-pane'),
+						$activeTab = $tabBlock.find('.tabBlock-tab.active');
+
+					$panes.hide();
+					$($panes[$activeTab.index()]).show();
+				});
+			},
+
+			switchTowTab: function ($tab) {
+				var $context = $tab.closest('.tabBlock');
+
+				if (!$tab.hasClass('active')) {
+					$tab.siblings().removeClass('active');
+					$tab.addClass('active');
+
+					TabBlock.showPane($tab.index(), $context);
+				}
+			},
+
+			showPane: function (i, $context) {
+				var $panes = $context.find('.tab-pane');
+
+				// Normally I'd frown at using jQuery over CSS animations, but we can't transition between unspecified variable heights, right? If you know a better way, I'd love a read it in the comments or on Twitter @johndjameson
+				$panes.slideUp(TabBlock.s.animLen);
+				$($panes[i]).slideDown(TabBlock.s.animLen);
+			}
+		};
+
 		$scope.teachingSuperFn={
 			//信息员反馈列表
 			records: [],
@@ -108,61 +158,16 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.getFeedbackList();
+				var type = $state.params.tab;
+				if(type){
+					this.tab = type;
+				}
+				$timeout(function(){
+					TabBlock.init();
+				});
+
 			}
 		};
 		$scope.teachingSuperFn.init();
 
-		var TabBlock = {
-			s: {
-				animLen: 200
-			},
-
-			init: function () {
-				TabBlock.bindUIActions();
-				TabBlock.hideInactive();
-			},
-
-			bindUIActions: function () {
-				$('.tabBlock-tabs').on('click', '.tabBlock-tab', function () {
-					TabBlock.switchTowTab($(this));
-				});
-			},
-
-			hideInactive: function () {
-				var $tabBlocks = $('.tabBlock');
-
-				$tabBlocks.each(function (i) {
-					var
-						$tabBlock = $($tabBlocks[i]),
-						$panes = $tabBlock.find('.tab-pane'),
-						$activeTab = $tabBlock.find('.tabBlock-tab.active');
-
-					$panes.hide();
-					$($panes[$activeTab.index()]).show();
-				});
-			},
-
-			switchTowTab: function ($tab) {
-				var $context = $tab.closest('.tabBlock');
-
-				if (!$tab.hasClass('active')) {
-					$tab.siblings().removeClass('active');
-					$tab.addClass('active');
-
-					TabBlock.showPane($tab.index(), $context);
-				}
-			},
-
-			showPane: function (i, $context) {
-				var $panes = $context.find('.tab-pane');
-
-				// Normally I'd frown at using jQuery over CSS animations, but we can't transition between unspecified variable heights, right? If you know a better way, I'd love a read it in the comments or on Twitter @johndjameson
-				$panes.slideUp(TabBlock.s.animLen);
-				$($panes[i]).slideDown(TabBlock.s.animLen);
-			}
-		};
-
-		$(function () {
-			TabBlock.init();
-		});
 	});
