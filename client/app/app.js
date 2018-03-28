@@ -57,7 +57,7 @@ angular.module('dleduWebApp', [
                 loading(false,'all')
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
-                    AuthService.clearUser();
+                    //AuthService.clearUser();
                      //_location.$$path != '/login' && (AuthService.navigation(0, '/login'));
                     //_location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
                     AuthService.signOut();
