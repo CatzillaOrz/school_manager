@@ -334,7 +334,7 @@ angular.module('dleduWebApp')
             })
 			.state('teachingSupervisor', {
 				parent: 'base',
-				url   : '/teachingsupervisor',
+				url   : '/teachingsupervisor/:tab',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

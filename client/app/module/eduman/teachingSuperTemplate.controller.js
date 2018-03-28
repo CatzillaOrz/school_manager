@@ -161,7 +161,7 @@ angular.module('dleduWebApp')
 						.then(function (data) {
 							if(data.success){
 								messageService.openMsg("新增成功!");
-								$state.go("teachingSupervisor");
+								$state.go("teachingSupervisor",{tab:'template'});
 							}else{
 								messageService.openMsg(data.message);
 							}

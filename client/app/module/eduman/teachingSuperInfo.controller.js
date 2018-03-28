@@ -3,7 +3,7 @@
  * 教学督导查看详情
  */
 angular.module('dleduWebApp')
-	.controller('teachingSuperInfoCtrl', function ($scope, $state, AuthService, EduManService, RoleAuthService) {
+	.controller('teachingSuperInfoCtrl', function ($scope, $state, $rootScope, AuthService, EduManService, RoleAuthService) {
 		$scope.teachingSuperInfoFn = {
 			id: 0,
 			type: '',
@@ -38,4 +38,8 @@ angular.module('dleduWebApp')
 		};
 
 		$scope.teachingSuperInfoFn.init();
+
+		$rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+			toParams.tab = fromParams.type;
+		});
 	});
