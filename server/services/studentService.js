@@ -79,7 +79,7 @@ var StudentService = {
         RestClient.put({
             host: 'gateway-org',
             path: '/v1/students/resume',
-            entity: params
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);

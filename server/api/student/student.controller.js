@@ -51,7 +51,7 @@ module.exports = {
             })
     },
     resumeStudent:function (req,res) {
-        StudentService.removeStudentSync(req.body, req.user.access_token)
+        StudentService.resumeStudentSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
