@@ -21,6 +21,9 @@ router.get('/getImpResult',auth.isSignedIn, controller.getImpResult);
 router.get('/getNewImpResult',auth.isSignedIn, controller.getNewImpResult);
 router.get('/exportData',auth.isSignedIn, controller.exportData);
 router.get('/getNewStudent',auth.isSignedIn, controller.getNewStudent);
+router.get('/getRemoveStudents',auth.isSignedIn, controller.getRemoveStudents);
+router.put('/removeStudent',auth.isSignedIn, controller.removeStudent);
+router.put('/resumeStudent',auth.isSignedIn, controller.resumeStudent);
 
 
 module.exports = router;

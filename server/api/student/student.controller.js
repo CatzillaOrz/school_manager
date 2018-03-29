@@ -41,6 +41,33 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    removeStudent:function (req,res) {
+        StudentService.removeStudentSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    resumeStudent:function (req,res) {
+        StudentService.removeStudentSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getRemoveStudents: function (req, res) {
+        StudentService.getRemoveStudentsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getStudentById: function (req, res) {
         StudentService.getStudentByIdSync(req.query, req.user.access_token)
             .then(function (data) {
