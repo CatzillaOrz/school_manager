@@ -49,6 +49,9 @@
                                         button.btn.btn-primary(type='button' ui-sref="newstudent" ng-if="studentListFn.isUseAuth('newstu')")
                                             span 新生导入
                                         .speace-10
+                                        button.btn.btn-primary(type='button' ui-sref="backstudent" ng-if="studentListFn.isUseAuth('changestu')")
+                                            span 学籍异动名单
+                                        .speace-10
                                         button.btn.btn-primary(type='button' ng-click="studentListFn.openImpBatch()" ng-if="studentListFn.isUseAuth('imp')")
                                             span 批量导入
                                         .speace-10
@@ -95,6 +98,9 @@
                                     a.handle(ng-click="studentListFn.unlockPrompt(student)")
                                         i.fa.fa-unlock-alt
                                         span 解绑手机
+                                    a.handle(ng-click="studentListFn.removeStudent(student)")
+                                        i.fa.fa-trash-o
+                                        span 学籍异动
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
@@ -161,3 +167,19 @@
                         td {{info.code}}
                         td {{info.classesName}}
                         td {{info.msg}}
+
+    script(type='text/ng-template',id='changeStuDialog')
+        .container-fluid
+            .dialog-title
+                h2 学籍异动
+            .dialog-body
+                form.form-horizontal(role="form" name="form" novalidate)
+                    .form-group
+                        label.col-sm-3.control-label 异动原因：
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="请填写不超过20个长度的原因" ng-model="studentListFn.changeObj.cause" name="cause"  validator="required, maxlength=20")
+
+                    .form-group
+                        .col-sm-6
+                            button.btn.btn-primary(ng-click="studentListFn.submit()" validation-submit="form") 确定
+                            button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消

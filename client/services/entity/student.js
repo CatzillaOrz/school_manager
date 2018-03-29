@@ -53,6 +53,20 @@ angular.module('dleduWebService')
                 var student = $resource('api/student/exportData');
                 return student.get(params);
             },
+            removeStudent: function (params) {
+                var student = $resource('api/student/removeStudent','',{
+                    update: {method:'PUT'}});
+                return student.update(params);
+            },
+            resumeStudent: function (params) {
+                var student = $resource('api/student/resumeStudent','',{
+                    update: {method:'PUT'}});
+                return student.update(params);
+            },
+            getRemoveStudents: function (params) {
+                var student = $resource('api/student/getRemoveStudents');
+                return student.get(params);
+            },
 
         }
     });

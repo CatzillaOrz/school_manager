@@ -71,5 +71,19 @@ angular.module('dleduWebApp')
                     label: '新生导入'
                 }
             })
+            .state('backstudent', {
+                parent: 'studentlist',
+                url   : '/backstudent',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'BackStudentCtrl',
+                        templateUrl: 'app/module/student/backList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '学籍异动'
+                }
+            })
 
     });

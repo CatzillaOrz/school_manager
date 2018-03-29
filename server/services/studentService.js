@@ -58,11 +58,44 @@ var StudentService = {
             callback(e);
         });
     },
-    updateStudent: function (params, access_token, callback) {
+    //移除学生
+    removeStudent: function (params, access_token, callback) {
         RestClient.put({
             host: 'gateway-org',
-            path: '/v1/students/update',
+            path: '/v1/students/back',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    //恢复学生
+    resumeStudent: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: '/v1/students/resume',
             entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
+    getRemoveStudents: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/students/backlist',
+            access_token: access_token,
+            params: params
         }).then(function (res) {
             if (res.status.code == 200) {
                 callback(null, res.entity);

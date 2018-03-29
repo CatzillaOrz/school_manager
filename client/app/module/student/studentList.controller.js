@@ -17,6 +17,14 @@ angular.module('dleduWebApp')
             majorDropList: [],
             //班级下拉列表
             classDropList: [],
+
+            //学籍异动操作对象
+            changeObj: {
+                userIdList: [],
+                cause: '',
+                userId: 0,
+            },
+
             page: {
                 totalElements: 0,
                 totalPages: 0,
@@ -234,6 +242,32 @@ angular.module('dleduWebApp')
 
                     })
             },
+
+            //移除学生
+            removeStudent:function (stu) {
+                this.currentStudent = stu;
+                ngDialog.open({
+                    template: 'changeStuDialog',
+                    width: 700,
+                    scope: $scope
+                })
+            },
+
+            submit: function(){
+                var that = this;
+                var params = this.changeObj;
+                params.userIdList = [this.currentStudent.id];
+                params.userId = AuthService.getUser().id;
+                StudentService.removeStudent(params).$promise
+                    .then(function (data) {
+                        messageService.openMsg("学籍异动操作成功！");
+                        that.getStudentList();
+                    })
+                    .catch(function (error) {
+                        messageService.openMsg(CommonService.exceptionPrompt(error, "学籍异动操作失败！"));
+                    })
+            },
+
             //删除
             deleteStudent: function () {
                 var _this = $scope.studentListFn;
