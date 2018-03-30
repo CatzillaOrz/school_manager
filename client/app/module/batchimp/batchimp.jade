@@ -80,7 +80,7 @@
                                     td 错误信息
                                 tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassDomainList")
                                     td {{info.line}}
-                                    td {{info.courseId}}
+                                    td {{info.courseCode}}
                                     td {{info.courseName}}
                                     td {{info.msg}}
             #student.tab-pane.fade(ng-show='batchImpFn.impType=="timetable"')
