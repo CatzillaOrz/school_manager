@@ -296,6 +296,13 @@
             "active": "geodetail",
             "icon": "bar-chart-o",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+        },
+        {
+            "title": "批量导入数据",
+            "sref": "batch.imp",
+            "active": "geodetail",
+            "icon": "file",
+            "role": "ROLE_ORG_ADMIN"
         }
     ]
 }
