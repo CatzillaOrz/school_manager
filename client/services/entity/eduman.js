@@ -308,9 +308,20 @@ angular.module('dleduWebService')
 				return eduman.update(params);
 			},
 
-			exportFeedInfo: function (params) {
-				var eduman = $resource('api/eduman/exportFeedInfo');
-				return eduman.get(params);
+			exportTea: function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/exportTea",
+					params: params
+				});
+			},
+
+			exportStu: function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/eduman/exportStu",
+					params: params
+				});
 			},
 		}
 
