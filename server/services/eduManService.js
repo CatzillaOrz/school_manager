@@ -1021,6 +1021,44 @@ var EduManService = {
         });
     },
 
+    //导出督导excel
+    exportTea: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/phone/v1/feedback/steering/exportFeelbackList',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //导出学生excel
+    exportStu: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/phone/v1/feedback/teaching/exportFeelbackList',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
 };
 
 

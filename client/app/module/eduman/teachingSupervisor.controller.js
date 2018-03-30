@@ -120,41 +120,52 @@ angular.module('dleduWebApp')
 			},
 
 			//导出
-			exportData: function(){
+			exportTea: function(type){
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					pageNumber: 1,
-					pageSize: 900000,
-					teacherName: that.params.pageSize,
-					feedbackName: that.params.feedbackName,
+					teacherName: that.params.teacherName,
 					courseName: that.params.courseName,
+					supName: that.params.supName,
 				};
-				EduManService.exportFeedInfo(params).success(function(data) {
-					that.saveAs(data, '反馈列表');
-				}).catch(function (e) {
+				params.pageNumber = type == 'part' ? that.page.pageNumber : 1;
+				params.pageSize = type == 'part' ? that.page.pageSize : 999999999;
 
+				EduManService.exportTea(params).success(function(data) {
+					if(data.success){
+						window.location.href = data.message+'?attname=督导反馈.xlsx';
+					}else{
+						messageService.openMsg("导出失败！");
+					}
+				}).catch(function (e) {
+					messageService.openMsg(CommonService.exceptionPrompt(error, "导出失败！"));
 				});
 			},
 
-			s2ab: function(s) {
-				var buf = new ArrayBuffer(s.length);
-				var view = new Uint8Array(buf);
-				for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-				return buf;
-			},
-			saveAs: function(data, fileName) {
+			//导出
+			exportStu: function(type){
 				var that = this;
-				var blob = new Blob([that.s2ab(data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-				var windowUrl = (window.URL || window.webkitURL)
-				var downloadUrl = windowUrl.createObjectURL(blob);
-				var anchor = document.createElement("a");
-				anchor.href = downloadUrl;
-				anchor.download = fileName + '.xlsx';
-				document.body.appendChild(anchor);
-				anchor.click();
-				windowUrl.revokeObjectURL(blob);
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					teacherName: that.params.teacherName,
+					courseName: that.params.courseName,
+					stuName: that.params.stuName,
+				};
+				params.pageNumber = type == 'part' ? that.page.pageNumber : 1;
+				params.pageSize = type == 'part' ? that.page.pageSize : 999999999;
+
+				EduManService.exportStu(params).success(function(data) {
+					if(data.success){
+						window.location.href = data.message+'?attname=信息员反馈.xlsx';
+					}else{
+						messageService.openMsg("导出失败！");
+					}
+				}).catch(function (e) {
+					messageService.openMsg(CommonService.exceptionPrompt(error, "导出失败！"));
+				});
 			},
+
+
 
 			init: function () {
 				this.getFeedbackList();

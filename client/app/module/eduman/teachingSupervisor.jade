@@ -51,8 +51,10 @@
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="teachingSuperFn.query()")
                                                         span 查询
-                                                    //button.btn.btn-primary(ng-click="teachingSuperFn.exportTeachingclassByTeacher()")
-                                                        span 导出
+                                                    button.btn.btn-primary(ng-click="teachingSuperFn.exportStu('part')")
+                                                        span 导出当页
+                                                    button.btn.btn-primary(ng-click="teachingSuperFn.exportStu('all')")
+                                                        span 导出全部
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
@@ -114,8 +116,10 @@
                                             .ColVis
                                                 button.btn.btn-primary(ng-click="teachingSuperFn.query()")
                                                     span 查询
-                                                button.btn.btn-primary(ng-click="teachingSuperFn.exportClassrecordanceGroupByCollege()")
-                                                    span 导出
+                                                button.btn.btn-primary(ng-click="teachingSuperFn.exportTea('part')")
+                                                    span 导出当页
+                                                button.btn.btn-primary(ng-click="teachingSuperFn.exportTea('all')")
+                                                    span 导出全部
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')

@@ -73,5 +73,7 @@ router.get('/getTeachingSupervisorTem',auth.isSignedIn, controller.getTeachingSu
 router.put('/updateTeachingSupervisor',auth.isSignedIn, controller.updateTeachingSupervisor);
 router.post('/addTeachingSupervisor',auth.isSignedIn, controller.addTeachingSupervisor);
 router.post('/addTeachingTemplateStu',auth.isSignedIn, controller.addTeachingTemplateStu);
+router.get('/exportTea',auth.isSignedIn, controller.exportTea);
+router.get('/exportStu',auth.isSignedIn, controller.exportStu);
 
 module.exports = router;

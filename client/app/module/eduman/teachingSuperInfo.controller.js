@@ -39,7 +39,7 @@ angular.module('dleduWebApp')
 
 		$scope.teachingSuperInfoFn.init();
 
-		$rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
 			toParams.tab = fromParams.type;
 		});
 	});
