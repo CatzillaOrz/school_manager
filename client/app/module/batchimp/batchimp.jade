@@ -78,8 +78,7 @@
                                     td 课程代码
                                     td 课程名称
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassDomainList" ng-if="info.msg!=''")
                                     td {{info.courseCode}}
                                     td {{info.courseName}}
                                     td {{info.msg}}
@@ -93,8 +92,7 @@
                                     td 学号
                                     td 学生姓名
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassStudentDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teachingClassStudentDomainList" ng-if="info.msg!=''")
                                     td {{info.jobNum }}
                                     td {{info.name}}
                                     td {{info.msg}}
@@ -108,8 +106,7 @@
                                     td 教学班编码
                                     td 教学班名称
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.classScheduleDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.classScheduleDomainList" ng-if="info.msg!=''")
                                     td {{info.teachingClassCode}}
                                     td {{info.teachingClassName}}
                                     td {{info.msg}}
@@ -123,8 +120,7 @@
                                     td 教师姓名
                                     td 工号
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.classTeacherDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.classTeacherDomainList" ng-if="info.msg!=''")
                                     td {{info.name}}
                                     td {{info.jobNum}}
                                     td {{info.msg}}
@@ -138,8 +134,7 @@
                                     td 教师工号
                                     td 教师姓名
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.teacherDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.teacherDomainList" ng-if="info.msg!=''")
                                     td {{info.jobNum}}
                                     td {{info.name}}
                                     td {{info.msg}}
@@ -153,8 +148,7 @@
                                     td 学号
                                     td 学生姓名
                                     td 错误信息
-                                tr(ng-repeat="info in batchImpFn.errorInfos.studentDomainList")
-                                    td {{info.line}}
+                                tr(ng-repeat="info in batchImpFn.errorInfos.studentDomainList" ng-if="info.msg!=''")
                                     td {{info.jobNum}}
                                     td {{info.name}}
                                     td {{info.msg}}
