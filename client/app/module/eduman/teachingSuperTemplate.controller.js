@@ -56,13 +56,13 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						if(that.type == 1){ //督导
 							if(!data.teacherQuesList && !data.styleQuesList){
-								that.initData();
+								//that.initData();
 							}else{
 								that.params = data;
 							}
 						}else{
 							if(!data.quesList){
-								that.initData();
+								//that.initData();
 							}else{
 								that.params = data;
 							}
@@ -120,12 +120,12 @@ angular.module('dleduWebApp')
 			//保存题目
 			saveQues: function(){
 				var params = this.params;
-				if(this.type == 0){
+				if(this.type == 0){//信息员反馈端
 					if(params.quesList.length == 0){
 						messageService.openMsg("请添加题目!");
 						return;
 					}
-				}else{
+				}else{//督导反馈
 					if(params.styleQuesList.length == 0 && params.teacherQuesList.length == 0){
 						messageService.openMsg("请添加题目!");
 						return;
