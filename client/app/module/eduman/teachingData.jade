@@ -28,13 +28,11 @@
                                                 form.form-inline
                                                     .form-group.col-sm-4
                                                         label.control-label 学期：
-                                                        select#ddd.select2.form-control( ng-model="teachDataFn.semesterList")
-                                                            optgroup(label="{{schoolYear.text}}" ng-repeat="schoolYear in teachDataFn.schoolYearDropList")
-                                                                option(value="{{semester.id}}" ng-repeat="semester in schoolYear.children" selected="{{teachDataFn.params.semesterId==semester.id?'selected':''}}") {{schoolYear.text+semester.text}}
+                                                        select(ng-model="teachDataFn.selectedSemester" ng-options='item as item.name for item in teachDataFn.semesterList track by item.id')
 
                                             .col-sm-2.col-xs-6.hidden-xs
                                                 .ColVis
-                                                    button.btn.btn-primary(ng-click="teachDataFn.getTeachingclassAttendByTeacher()")
+                                                    button.btn.btn-primary(ng-click="teachDataFn.getCollageDataList()")
                                                         span 查询
                                                     button.btn.btn-primary(ng-click="teachDataFn.collageDataExport()")
                                                         span 导出
@@ -78,25 +76,23 @@
                                             .col-xs-10
                                                 .form-group.col-sm-3
                                                     label.control-label  学期：
-                                                    input.form-control(type="text" ng-model="teachDataFn.params.teacherName" placeholder="请输入教师名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
-
-                                                .form-group.col-sm-3
+                                                    select(ng-model="teachDataFn.selectedSemester" ng-options='item as item.name for item in teachDataFn.semesterList track by item.id')
+                                                //.form-group.col-sm-3
                                                     label.control-label 院系：
                                                         select.select2.form-control(ng-model="teachDataFn.params.collegeId" ui-select2="teachDataFn.selectCollege2Options()" )
                                                             option(value="") 全部
                                                             option(ng-repeat="college in teachDataFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-
                                                 .form-group.col-sm-3
                                                     label.control-label  课程：
-                                                    input.form-control(type="text" ng-model="teachDataFn.params.teacherName" placeholder="请输入教师名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
+                                                    input.form-control(type="text" ng-model="teachDataFn.courseName" placeholder="请输入课程名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
 
                                                 .form-group.col-sm-3
                                                     label.control-label  教师：
-                                                    input.form-control(type="text" ng-model="teachDataFn.params.teacherName" placeholder="请输入教师名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
+                                                    input.form-control(type="text" ng-model="teachDataFn.teacherName" placeholder="请输入教师名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
 
                                             .col-sm-2.col-xs-6.hidden-xs
                                                 .ColVis
-                                                    button.btn.btn-primary(ng-click="teachDataFn.getAttendanceByPeriod()")
+                                                    button.btn.btn-primary(ng-click="teachDataFn.getTeachClassDataList()")
                                                         span 查询
                                                     button.btn.btn-primary(ng-click="teachDataFn.teachClassDataExport()")
                                                         span 导出

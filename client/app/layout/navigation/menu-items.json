@@ -190,6 +190,12 @@
                     "sref": "teachingSupervisor",
                     "active": "teachingSupervisor",
                     "icon": "comments-o"
+                },
+                {
+                    "title": "教学数据",
+                    "sref": "teachingData",
+                    "active": "teachingData",
+                    "icon": "comments-o"
                 }
             ]
         },
