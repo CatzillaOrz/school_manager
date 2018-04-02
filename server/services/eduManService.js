@@ -871,7 +871,7 @@ var EduManService = {
     collageDataExport: function (params, access_token, callback) {
         RestClient.get({
             host:  'em',
-            path: '/api/web/v2/educational/departmentstatisticsexport',
+            path: 'api/web/v2/educational/departmentstatisticsexport',
             params: params,
             access_token: access_token
         }).then(function (res) {

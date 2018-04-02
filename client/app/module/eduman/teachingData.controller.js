@@ -14,7 +14,10 @@ angular.module('dleduWebApp')
         $scope.teachDataFn = {
             //学年下拉数据列表
             semesterDropList: [],
+            selectedSemester:{},
             semesterId:null,
+            courseName:'',
+            teacherName:'',
             //学院下拉列表
             collegeDropList: [],
             tab:1,
@@ -46,7 +49,6 @@ angular.module('dleduWebApp')
             },
             //学期列表查询
             getSemesterList: function () {
-                console.log('123123123123123');
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
@@ -56,6 +58,7 @@ angular.module('dleduWebApp')
                 SchoolYearService.getSemesterList(params).$promise
                     .then(function (data) {
                         that.semesterList = data.data;
+                        that.selectedSemester = that.semesterList[0];
                     })
                     .catch(function (error) {
 
@@ -65,9 +68,9 @@ angular.module('dleduWebApp')
             getCollageDataList: function () {
                 var _this = this;
                 var params = {
-                    // orgId: AuthService.getUser().orgId,
-                    orgId: 218,
-                    semesterId:'',
+                    orgId: AuthService.getUser().orgId,
+                    // orgId: 218,
+                    semesterId:_this.selectedSemester.id,
                     pageNumber:_this.page.pageNumber,
                     pageSize:_this.page.pageSize
                 };
@@ -75,7 +78,7 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         _this.collageDataList = data.data.data;
                         console.log(_this.collageDataList);
-                        _this.page = data.page;
+                        _this.page = data.data.page;
                     })
                     .catch(function (error) {
 
@@ -105,19 +108,20 @@ angular.module('dleduWebApp')
             getTeachClassDataList: function () {
                 var _this = this;
                 var params = {
-                    // orgId: AuthService.getUser().orgId,
-                    orgId: 218,
-                    semesterId:'',
+                    orgId: AuthService.getUser().orgId,
+                    // orgId: 218,
+                    semesterId:_this.selectedSemester.id,
                     collegeId:'',
-                    courseName:'',
-                    teacherName:'',
-                    pageNumber:_this.page2.pageNumber,
+                    courseName:_this.courseName,
+                    teacherName:_this.teacherName,
+                    pageNumber:_this.page2.pageNumber || 0,
                     pageSize:_this.page2.pageSize
                 };
                 EduManService.getTeachClassDataList(params)
                     .then(function (data) {
                         _this.teachClassDataList = data.data.data;
-                        _this.page2 = data.page;
+                        console.log(data.data.page);
+                        _this.page2 = data.data.page;
                     })
                     .catch(function (error) {
 
@@ -146,7 +150,7 @@ angular.module('dleduWebApp')
                 var _this = this;
                 _this.getSemesterList();
                 // _this.getCollageDataList();
-                _this.getTeachClassDataList();
+                _this.getCollageDataList();
             },
         };
         $scope.teachDataFn.init();
