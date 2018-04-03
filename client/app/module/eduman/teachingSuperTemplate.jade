@@ -6,6 +6,7 @@
             span.widget-icon
                 i.fa.fa-table
             h2 {{'信息员反馈模板设置'}}
+            .btn.btn-default(style="float: right;margin-right: 15px;margin-top: 3px;" ui-sref='teachingSupervisor({tab:"template"})') 返回
         .widget-body(style="padding:13px 0 0 0" ng-if="teachingSuperTemplateFn.type == 0")
             form.form-horizontal(name="infoForm")
                 .md-form(style="min-height:auto;margin:0")
@@ -89,6 +90,7 @@
                             span.widget-icon
                                 i.fa.fa-table
                             h2 {{'教师教学评价'}}
+                            .btn.btn-default(style="float: right;margin-right: 15px;margin-top: 3px;" ui-sref='teachingSupervisor({tab:"template"})') 返回
                 .widget-body(style='border:0;')
                     .dataTables_wrapper(role='grid')
                         #datatable_col_reorder_wrapper0.dataTables_wrapper.no-footer
