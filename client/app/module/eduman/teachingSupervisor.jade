@@ -33,7 +33,7 @@
                                 .no-padding
                                     .dataTables_wrapper.form-inline.no-footer
                                         .dt-toolbar.padding-bottom-10
-                                            .col-xs-10
+                                            .col-xs-8
                                                 form.form-inline
                                                     .form-group.col-sm-3
                                                         label.control-label  学生：
@@ -47,7 +47,7 @@
                                                         label.control-label  课程：
                                                         input.form-control(type="text" ng-model="teachingSuperFn.params.courseName" placeholder="名称", my-enter="teachingSuperFn.query()" )
 
-                                            .col-sm-2.col-xs-6.hidden-xs
+                                            .col-xs-4.hidden-xs
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="teachingSuperFn.query()")
                                                         span 查询
@@ -100,7 +100,7 @@
                             .tab-content
                                 .no-padding
                                     .dataTables_wrapper.form-inline.no-footer
-                                        .col-xs-9.padding-bottom-10
+                                        .col-xs-8.padding-bottom-10
                                             form.form-inline
                                                 .form-group.col-sm-3
                                                     label.control-label  督导：
@@ -112,7 +112,7 @@
                                                     label.control-label  课程：
                                                     input.form-control(type="text" ng-model="teachingSuperFn.params.courseName" placeholder="课程", my-enter="teachingSuperFn.query()" )
 
-                                        .col-sm-3.hidden-xs
+                                        .col-xs-4.hidden-xs
                                             .ColVis
                                                 button.btn.btn-primary(ng-click="teachingSuperFn.query()")
                                                     span 查询

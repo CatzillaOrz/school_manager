@@ -138,7 +138,7 @@ angular.module('dleduWebApp')
                         var params={
                             orgId: AuthService.getUser().orgId,
                             pageNumber: 1,
-                            pageSize: 100000,
+                            pageSize: 30,
 
                         }
                         params.name=query.term;

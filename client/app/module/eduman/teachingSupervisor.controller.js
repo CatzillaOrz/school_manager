@@ -168,11 +168,11 @@ angular.module('dleduWebApp')
 
 
 			init: function () {
-				this.getFeedbackList();
 				var type = $state.params.tab;
 				if(type){
 					this.tab = type;
 				}
+				this.getFeedbackList();
 				$timeout(function(){
 					TabBlock.init();
 				});
