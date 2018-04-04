@@ -96,7 +96,7 @@ angular.module('dleduWebApp')
                     PracticeManService.updateTask(this.params).$promise
                         .then(function (data) {
                             messageService.openMsg("修改成功!");
-                            $state.go("practicetasklist");
+                            $state.go("practicetasklist({id: $state.params.id})");
                         })
                         .catch(function (error) {
                             messageService.openMsg("修改失败! " + error.data);
@@ -105,7 +105,7 @@ angular.module('dleduWebApp')
                     PracticeManService.addTask(this.params).$promise
                         .then(function (data) {
                             messageService.openMsg("创建成功!");
-                            $state.go("practicetasklist");
+                            $state.go("practicetasklist({id: $state.params.id})");
                         })
                         .catch(function (error) {
                             console.log(error.data);

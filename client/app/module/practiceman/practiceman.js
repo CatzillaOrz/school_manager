@@ -100,7 +100,7 @@ angular.module('dleduWebApp')
 			})
             .state('practicetasklist', {
                 parent: 'base',
-                url   : '/practiceTasklist',
+                url   : '/practiceTasklist/:id',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
