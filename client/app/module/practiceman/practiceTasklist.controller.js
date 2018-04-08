@@ -20,12 +20,12 @@ angular.module('dleduWebApp')
 			},
 			wid: $state.params.wid,
 
-			// 获取评教问卷已分配列表
+			// 获取列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
-					weekTaskId: that.id,
+					weekTaskId: that.wid,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
 					taskName: that.queryOption.name

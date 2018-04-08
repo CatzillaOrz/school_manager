@@ -160,7 +160,7 @@ angular.module('dleduWebApp')
             })
             .state('missionManagement', {
                 parent: 'base',
-                url   : '/missionManagement/:id',
+                url   : '/missionManagement/:status/:wid',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
