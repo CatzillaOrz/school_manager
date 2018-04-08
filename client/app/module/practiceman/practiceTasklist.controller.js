@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
 			queryOption: {
 				name: '',
 			},
-			id: $state.params.id,
+			wid: $state.params.wid,
 
 			// 获取评教问卷已分配列表
 			getPracticeGroupList: function () {

@@ -12,6 +12,7 @@ angular.module('dleduWebApp')
             prompt: '填写以下信息以建立周任务',
             title: '周任务信息创建',
             id: $state.params.id,
+            wid: $state.params.wid,
             groupList: {},
             params: {
                 beginDate: '',
@@ -25,7 +26,8 @@ angular.module('dleduWebApp')
                 fileList: []
             },
             fileList: [],
-
+            id: $state.params.id,
+            wid: $state.params.wid,
             // 查询导师信息
             getGrouplistByOrgId: function () {
                 var that = this;
@@ -96,7 +98,7 @@ angular.module('dleduWebApp')
                     PracticeManService.updateTask(this.params).$promise
                         .then(function (data) {
                             messageService.openMsg("修改成功!");
-                            $state.go("practicetasklist({id: $state.params.id})");
+                            $state.go("practicetasklist",{wid: $state.params.wid});
                         })
                         .catch(function (error) {
                             messageService.openMsg("修改失败! " + error.data);
@@ -105,7 +107,7 @@ angular.module('dleduWebApp')
                     PracticeManService.addTask(this.params).$promise
                         .then(function (data) {
                             messageService.openMsg("创建成功!");
-                            $state.go("practicetasklist({id: $state.params.id})");
+                            $state.go("practicetasklist",{wid:$state.params.wid});
                         })
                         .catch(function (error) {
                             console.log(error.data);
