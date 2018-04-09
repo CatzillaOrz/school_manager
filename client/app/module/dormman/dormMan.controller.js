@@ -7,6 +7,7 @@ angular.module('dleduWebApp')
 										 ngDialog, MajorService, AuthService ) {
 		$scope.dormMan = {
 			currentRecord: null,
+			selectedRecord: null, //当前已经选择宿舍的记录
 			builds: [],//宿舍楼数组
 			checkedBuilds: [], //选择的宿舍楼
 			currentBuildFloors: [], //保存当前楼层
@@ -21,7 +22,7 @@ angular.module('dleduWebApp')
 			showTip: false, //是否显示提示信息
 			tableIndex:1,
 
-			//参数
+			//宿舍统计参数
 			params: {
 				no: "",//宿舍名
 				full: null, //是否满员
@@ -31,6 +32,14 @@ angular.module('dleduWebApp')
 				unitNo: [], //单元
 				floorNo: [], //楼层id
 			},
+
+			//已选学生参数
+			statisticParams: {
+				name: '',
+				professionalId: 0,
+				gender: '请选择'
+			},
+
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -43,6 +52,8 @@ angular.module('dleduWebApp')
 
 			isOpenArr: [{value: null, name: '请选择'},{value: true, name: '已开放'},
 				{value: false, name: '已关闭'}],
+
+			sexs: [{name: '请选择'},{name: '男'}, {name: '女'}],
 
 			dormAssign:{
 				collegeId: 0,
@@ -58,22 +69,79 @@ angular.module('dleduWebApp')
 			//页签切换
 			switchOneTab:function(index){
 				this.tableIndex = index;
-				if(this.tableIndex == 2){
-					this.queryStudent();
-					var that = this;
-					var params = {pageSize:9999999, pageNumber: 1};
-					DormManService.queryStudent(params).$promise
-						.then(function (data) {
-							that.builds = data.data;
-						})
-						.catch(function (error) {
-
-						})
+				if(this.tableIndex == 1){
+					this.queryDorm();
+				}else if(this.tableIndex == 2){
+					this.querySelStudent();
+				}else if(this.tableIndex == 3){
+					this.querySelDormByMajor();
 				}
 			},
-			queryStudent:function(){
 
+			//查询已经选择的学生
+			querySelStudent:function(){
+				this.page.pageNumber = 1;
+				if(this.majorLists.length){
+					var marjorFirst = this.majorLists[0];
+					if(marjorFirst.name != '请选择专业' && marjorFirst.id != 0){
+						this.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
+					}
+				}
+				this.getStusSelected();
 			},
+
+			/**
+			 * 获取宿舍楼
+			 */
+			getStusSelected: function(){
+				var that = this;
+				var params = angular.copy(this.statisticParams);
+				params.orgId = AuthService.getUser().orgId;
+				params.pageNumber = this.page.pageNumber;
+				params.pageSize = this.page.pageSize;
+				if(params.gender == '请选择'){
+					delete params.gender;
+				}
+				if(params.professionalId == 0){
+					delete params.professionalId;
+				}
+				DormManService.getStusSelected(params).$promise
+					.then(function (data) {
+						that.selectedRecords = data.data.data;
+						that.page = data.data.page;
+						that.page.pageNumber++;
+					})
+					.catch(function (error) {
+
+					})
+			},
+
+			//查询专业选宿舍统计
+			querySelDormByMajor: function(){
+				this.statisticsSelDorm();
+			},
+
+			/**
+			 * 获取宿舍楼
+			 */
+			statisticsSelDorm: function(){
+				var that = this;
+				var params = angular.copy(this.statisticParams);
+				params.orgId = AuthService.getUser().orgId;
+				delete params.name;
+				delete params.gender;
+				if(params.professionalId == 0){
+					delete params.professionalId;
+				}
+				DormManService.statisticsSelDorm(params).$promise
+					.then(function (data) {
+						that.statisticRecords = data.data;
+					})
+					.catch(function (error) {
+
+					})
+			},
+
 			/**
 			 * 获取宿舍楼
 			 */
@@ -324,6 +392,30 @@ angular.module('dleduWebApp')
 
 					})
 			},
+
+			//移除床位
+			delBed: function () {
+				var that = $scope.dormMan;
+				var params = {
+					bedId: that.selectedRecord.bedId
+				};
+				DormManService.delBedStu(params).$promise
+					.then(function (data) {
+						messageService.openMsg("移出宿舍成功！");
+						that.querySelStudent();
+					})
+					.catch(function (error) {
+						messageService.openMsg(CommonService.exceptionPrompt(error,"移出宿舍失败！"));
+					})
+			},
+
+			//移除宿舍
+			deleteBedPrompt: function (entity) {
+				var that = this;
+				that.selectedRecord = entity;
+				messageService.getMsg("您确定要把该学生移出宿舍吗？", that.delBed);
+			},
+
 
 
 			//通过选择的专业id，获取专业列表里面的对应专业

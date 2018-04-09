@@ -97,6 +97,16 @@ angular.module('dleduWebService')
                 var dormman = $resource('api/dormman/delBedStu');
                 return dormman.remove(params);
             },
+
+            getStusSelected: function (params) {
+                var dormman = $resource('api/dormman/getStusSelected');
+                return dormman.get(params);
+            },
+
+            statisticsSelDorm: function (params) {
+                var dormman = $resource('api/dormman/statisticsSelDorm');
+                return dormman.get(params);
+            },
         }
 
     });
