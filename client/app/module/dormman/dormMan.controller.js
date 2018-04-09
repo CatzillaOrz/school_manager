@@ -19,6 +19,7 @@ angular.module('dleduWebApp')
 			selDistObj: [], //选择的对象
 			isBatchDist: false, //是否批量分配宿舍
 			showTip: false, //是否显示提示信息
+			tableIndex:1,
 
 			//参数
 			params: {
@@ -54,7 +55,25 @@ angular.module('dleduWebApp')
 
 			editDormAssign: {
 			},
+			//页签切换
+			switchOneTab:function(index){
+				this.tableIndex = index;
+				if(this.tableIndex == 2){
+					this.queryStudent();
+					var that = this;
+					var params = {pageSize:9999999, pageNumber: 1};
+					DormManService.queryStudent(params).$promise
+						.then(function (data) {
+							that.builds = data.data;
+						})
+						.catch(function (error) {
 
+						})
+				}
+			},
+			queryStudent:function(){
+
+			},
 			/**
 			 * 获取宿舍楼
 			 */

@@ -2,11 +2,21 @@
     .jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
-            span.widget-icon
-                i.fa.fa-table
-            h2 宿舍信息
-            span.jarviswidget-loader
-                i.fa.fa-refresh.fa-spin
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.active.cursor-pointer(ng-click="dormMan.switchOneTab(1)")
+                    a(data-toggle='tab',  aria-expanded='true')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  宿舍信息
+                li.tabBlock-tab.cursor-pointer(ng-click="dormMan.switchOneTab(2)" )
+                    a(data-toggle='tab',  aria-expanded='false')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 已选学生
+                li.tabBlock-tab.cursor-pointer(ng-click="dormMan.switchOneTab(3)" )
+                    a(data-toggle='tab', aria-expanded='false')
+                        i.fa.fa-lg.fa-pencil
+                        span.hidden-mobile.hidden-tablet
+                            | 已选统计
         // widget div
         div(role='content')
             // widget edit box
@@ -15,7 +25,7 @@
             // end widget edit box
             // widget content
             .widget-body.no-padding
-                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer(ng-if="dormMan.tableIndex == 1")
                     .dt-toolbar
                         .col-md-12.padding-bottom-10(style="padding-left:10px!important;")
                             form.form-line
@@ -130,6 +140,98 @@
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                 ul.pagination-sm(uib-pagination, total-items='dormMan.page.totalElements', max-size='dormMan.page.pageSize' ng-model='dormMan.page.pageNumber',ng-change="dormMan.getDorms()" boundary-link-numbers='true' items-per-page="dormMan.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer(ng-if="dormMan.tableIndex == 2")
+                    .dt-toolbar
+                        .col-md-12.padding-bottom-10.padding-top-10
+                            form.form-line
+                                .form-group.col-md-3
+                                    label.control-label 姓名：
+                                    select.form-control(type='text', ng-model="dormMan.params.full"  ng-options="obj.value as obj.name for obj in dormMan.isFullArr" ng-change="dormMan.queryDorm()")
+                                .form-group.col-md-3
+                                    label.control-label 性别：
+                                    select.form-control(type='text', ng-model="dormMan.params.open"  ng-options="obj.value as obj.name for obj in dormMan.isOpenArr" ng-change="dormMan.queryDorm()")
+                                .form-group.col-md-3
+                                    label.control-label 专业：
+                                    select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor" ng-change="dormMan.queryDorm()")
+                                .col-md-3
+                                    .ColVis
+                                        button.btn.btn-primary(ng-click="dormMan.batchClose()")
+                                            span 查询
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 姓名
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 性别
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 专业
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 宿舍号
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 铺位
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 选择时间
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 联系方式
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 300px;') 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="record in dormMan.records")
+                                td {{record.floorName}}
+                                td {{record.unitNo?(record.unitNo + "单元") : '--'}}
+                                td {{record.floorNo?(record.floorNo + "层") : '--'}}
+                                td {{record.no}}
+                                td {{record.beds}}
+                                td {{record.emBeds}}
+                                td {{record.open ? "已开放" : "已关闭"}}
+                                td
+                                    a.handle(ui-sref="dormedit({id: record.roomId, assign: record.assgin})")
+                                        i.fa.fa-pencil-square-o
+                                        span 移除宿舍
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{dormMan.page.totalElements==0?0:(((dormMan.page.pageNumber)-1)*dormMan.page.pageSize+1)}}
+                                |  到
+                                span.txt-color-darken {{((dormMan.page.pageNumber==0?dormMan.page.pageNumber+1:dormMan.page.pageNumber)-1)*dormMan.page.pageSize+dormMan.records.length}}
+                                |  条 总共
+                                span.text-primary {{dormMan.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='dormMan.page.totalElements', max-size='dormMan.page.pageSize' ng-model='dormMan.page.pageNumber',ng-change="dormMan.getDorms()" boundary-link-numbers='true' items-per-page="dormMan.page.pageSize" rotate='false' previous-text="<" next-text=">")
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer(ng-if="dormMan.tableIndex == 3")
+                    .dt-toolbar
+                        .col-md-12.padding-bottom-10.padding-top-10
+                            form.form-line
+                                .form-group.col-md-4
+                                    label.control-label 专业：
+                                    select.form-control(type='text', ng-model="dormMan.params.full"  ng-options="obj.value as obj.name for obj in dormMan.isFullArr" ng-change="dormMan.queryDorm()")
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 专业
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 分配床铺数
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 已选数
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 已选占比
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 是否增加宿舍
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 专业总人数
+                        tbody
+                            tr.odd(role='row' ng-repeat="record in dormMan.records")
+                                td {{record.floorName}}
+                                td {{record.unitNo?(record.unitNo + "单元") : '--'}}
+                                td {{record.floorNo?(record.floorNo + "层") : '--'}}
+                                td {{record.no}}
+                                td {{record.beds}}
+                                td {{record.emBeds}}
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{dormMan.page.totalElements==0?0:(((dormMan.page.pageNumber)-1)*dormMan.page.pageSize+1)}}
+                                |  到
+                                span.txt-color-darken {{((dormMan.page.pageNumber==0?dormMan.page.pageNumber+1:dormMan.page.pageNumber)-1)*dormMan.page.pageSize+dormMan.records.length}}
+                                |  条 总共
+                                span.text-primary {{dormMan.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='dormMan.page.totalElements', max-size='dormMan.page.pageSize' ng-model='dormMan.page.pageNumber',ng-change="dormMan.getDorms()" boundary-link-numbers='true' items-per-page="dormMan.page.pageSize" rotate='false' previous-text="<" next-text=">")
+
     //-  开启宿舍弹出框
     script(type='text/ng-template',id='publishDialog')
         .container-fluid
