@@ -100,7 +100,7 @@ angular.module('dleduWebApp')
 			})
             .state('practicetasklist', {
                 parent: 'base',
-                url   : '/practiceTasklist',
+                url   : '/practiceTasklist/:wid',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
@@ -114,7 +114,7 @@ angular.module('dleduWebApp')
             })
             .state('createpracticetask', {
                 parent: 'base',
-                url   : '/createPracticeTask/:id',
+                url   : '/createPracticeTask/:id/:wid',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
@@ -146,7 +146,7 @@ angular.module('dleduWebApp')
             })
             .state('trainClassEdit', {
                 parent: 'base',
-                url   : '/trainClassEdit/:id',
+                url   : '/trainClassEdit',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
@@ -160,7 +160,7 @@ angular.module('dleduWebApp')
             })
             .state('missionManagement', {
                 parent: 'base',
-                url   : '/missionManagement/:id',
+                url   : '/missionManagement/:status/:wid',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

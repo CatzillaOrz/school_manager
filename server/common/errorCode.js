@@ -31,7 +31,7 @@ var ErrorCode = {
         });
     },
     errorHandle:function(res){
-        const statusCode = res.status.code;
+        const statusCode = res.status.code || 500;
         return {
             code: statusCode || 500,
             message: res.entity.cause

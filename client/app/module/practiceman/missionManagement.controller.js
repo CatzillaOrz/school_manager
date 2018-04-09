@@ -8,6 +8,10 @@ angular.module('dleduWebApp')
 		$scope.handleFn = {
 			//企业导师记录id
 			id: '',
+			// status {1: 按课程分配, 2: 按任务分配}
+			status: $state.params.status,
+			// wid 周任务
+			wid: $state.params.wid,
 			//导师账号id
 			tutorId: '',
 			//实践小组信息
@@ -187,6 +191,25 @@ angular.module('dleduWebApp')
 						that.teacherList = data.data;
 					})
 			},
+			// 获取任务list
+			getTaskList: function () {
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 1,
+					pageSize: 10000,
+					weekTaskId: that.wid,
+					taskName: that.searchParams.name
+				};
+				PracticeManService.getTaskList(params).$promise
+					.then(function (data) {
+						that.teacherList = data.data;
+						// that.page = data.page;
+					})
+					.catch(function (error) {
+
+					})
+			},
 
 			//获取学校老师
 			getTutor: function () {
@@ -314,15 +337,25 @@ angular.module('dleduWebApp')
 				params.teacherIds = _this.getSelectTeacherIdList();
 				var entity = {};
 				entity.weekTaskIdList = params.teacherIds;
+				entity.practiceTaskIdList = params.teacherIds;
 				entity.practiceTeamIdList = params.studentIds;
 				entity.beginDate = params.startDate;
 				entity.endDate = params.endDate;
+				if(_this.status == '1'){
+					entity.practiceTaskIdList = null;
+				}else{
+					entity.weekTaskIdList = null;
+				}
 				if(this.isEidt){
 					entity.id = this.practiceGroupInfo.trainingGroupId;
 					PracticeManService.updatePracticeTask(entity).$promise
 						.then(function (data) {
 							messageService.openMsg("编辑实践分配成功！");
-							$state.go("trainClassList");
+							if(_this.status == '1'){
+								$state.go("trainClassList");
+							}else{
+								$state.go("practicetasklist", {wid: _this.wid});
+							}
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
@@ -419,7 +452,11 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				var that = this;
-				that.getEntTutorList();
+				if(that.status == '1'){
+					that.getEntTutorList();
+				}else{
+					that.getTaskList();
+				}
 				that.getSimpleStudents();
 				that.title = $state.current.ncyBreadcrumb.label;
 				that.prompt = $state.current.data.prompt;

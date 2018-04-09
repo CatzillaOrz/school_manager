@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
 			queryOption: {
 				name: '',
 			},
-
+			id: $state.params.id,
 			// 获取课程列表
 			getPracticeGroupList: function () {
 				var that = this;
