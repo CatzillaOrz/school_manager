@@ -67,9 +67,15 @@ angular.module('dleduWebApp')
 			/**
 			 * 获取分配专业学生列表
 			 */
-			getStusByMajor: function () {
+			getStusByMajor: function (name) {
 				var that = this;
 				var params = {roomId: that.roomId};
+				params.pageNumber = 1;
+				params.pageSize = 100;
+				if(name == ''){
+					return;
+				}
+				params.name = name;
 				DormManService.getStusByMajor(params).$promise
 					.then(function (data) {
 						if(data.result){
@@ -83,16 +89,24 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			//点击前清空上次搜索结果
+			clearResults: function(){
+				this.students = [];
+			},
+
 			/**
 			 * 打开弹出框
 			 */
 			openBed: function(record){
 				this.currentRecord = record;
+				this.students = [];
+				var that = this;
 				ngDialog.open({
 					template: 'distBedDialog',
 					width: 700,
 					scope: $scope,
 					preCloseCallback: function(){
+						that.stuId = null;
 					}
 				})
 			},
@@ -108,7 +122,7 @@ angular.module('dleduWebApp')
 						if(data.result){
 							messageService.openMsg("分配床位成功！");
 							that.getDormStus();
-							that.getStusByMajor();
+							//that.getStusByMajor();
 							that.stuId = null;
 						}else{
 							messageService.openMsg("分配床位失败！");
@@ -147,7 +161,7 @@ angular.module('dleduWebApp')
 			init: function () {
 				this.roomId = $state.params.id;
 				this.getDormStus(this.roomId);
-				this.getStusByMajor();
+				//this.getStusByMajor();
 			}
 		};
 		$scope.dormStuInfo.init();
