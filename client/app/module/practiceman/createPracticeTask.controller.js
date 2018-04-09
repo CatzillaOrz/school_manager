@@ -26,8 +26,6 @@ angular.module('dleduWebApp')
                 fileList: []
             },
             fileList: [],
-            id: $state.params.id,
-            wid: $state.params.wid,
             // 查询导师信息
             getGrouplistByOrgId: function () {
                 var that = this;
