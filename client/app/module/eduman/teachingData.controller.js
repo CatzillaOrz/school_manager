@@ -4,7 +4,7 @@
 angular.module('dleduWebApp')
     .controller('teachingDataCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService,
                                             ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService,
-                                            ngDialog, RoleAuthService,SchoolYearService) {
+                                            ngDialog, RoleAuthService,SchoolYearService, SchoolService) {
 
         //控制按钮权限
         $scope.isUseAuth = function(type){
@@ -88,16 +88,19 @@ angular.module('dleduWebApp')
             collageDataExport: function () {
                 var _this = this;
                 var params = {
-                    orgId:218,
-                    semesterId:''
+                    orgId:AuthService.getUser().orgId,
+                    semesterId:_this.selectedSemester.id
                 };
+
                 EduManService.collageDataExport(params)
                     .then(function (data) {
-                        if (data.message) {
-                            location.href = data.message;
-                        } else {
-                            messageService.openMsg("生成导出文件失败！");
-                        }
+                        SchoolService.getApiUrl({type:"em"}).$promise
+                            .then(function (data) {
+                                window.location.href = data.url + '/api/web/v2/educational/departmentstatisticsexport?orgId='+ params.orgId
+                                    + (params.semesterId ? "&semesterId=" + params.semesterId : '');
+                            })
+                            .catch(function (error) {
+                        })
                     })
                     .catch(function (error) {
                         messageService.openMsg("生成导出文件失败！");
@@ -131,14 +134,24 @@ angular.module('dleduWebApp')
             teachClassDataExport: function () {
                 var _this = this;
                 var params = {
+                    orgId: AuthService.getUser().orgId,
+                    semesterId:_this.selectedSemester.id,
+                    collegeId:'',
+                    courseName:_this.courseName,
+                    teacherName:_this.teacherName,
                 };
                 EduManService.teachClassDataExport(params)
                     .then(function (data) {
-                        if (data.message) {
-                            location.href = data.message;
-                        } else {
-                            messageService.openMsg("生成导出文件失败！");
-                        }
+                        SchoolService.getApiUrl({type:"em"}).$promise
+                            .then(function (data) {
+                                window.location.href = data.url + '/api/web/v2/educational/teachingclassstatisticsexport?orgId='+ params.orgId
+                                    + (params.semesterId ? "&semesterId=" + params.semesterId : '')
+                                    + (params.collegeId ? "&collegeId=" + params.collegeId : '')
+                                    + (params.courseName ? "&courseName=" + params.courseName : '')
+                                    + (params.teacherName ? "&semesterId=" + params.teacherName : '');
+                            })
+                            .catch(function (error) {
+                            })
                     })
                     .catch(function (error) {
                         messageService.openMsg("生成导出文件失败！");
