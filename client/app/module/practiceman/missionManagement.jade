@@ -191,8 +191,8 @@
                                         th.sorting 任务数
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
-                                        td {{teacher.taskTitle}}
-                                        td {{teacher.taskNum}}
+                                        td {{teacher.taskName}}
+                                        td {{teacher.weekTaskName}}
                     .row(ng-if="handleFn.params.classOrStudents==20")
                         .col-sm-3 实践小组信息：
                         .col-sm-7
