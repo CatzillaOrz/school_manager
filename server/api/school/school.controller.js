@@ -257,6 +257,8 @@ module.exports = {
             url = Config.backend_api.api_gateway + "zuul/paycallback" ;
         }else if(req.query.type == 'org'){
             url = Config.backend_api.api_gateway + "zuul/org-manager";
+        }else if(req.query.type == 'em'){
+            url = Config.backend_api.em_host;
         }
         var data = {
             url : url
