@@ -72,8 +72,10 @@ angular.module('dleduWebApp')
 				if(this.tableIndex == 1){
 					this.queryDorm();
 				}else if(this.tableIndex == 2){
+					this.statisticParams.professionalId = 0;
 					this.querySelStudent();
 				}else if(this.tableIndex == 3){
+					this.statisticParams.professionalId = 0;
 					this.querySelDormByMajor();
 				}
 			},
