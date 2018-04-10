@@ -49,7 +49,7 @@
                                 td {{weektask.classHour}}
                                 td {{weektask.taskNum}}
                                 td
-                                    a.handle(ui-sref="trainClassEdit")
+                                    a.handle(ui-sref="trainClassEdit({id: weektask.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="practiceGroupMan.deletePrompt(weektask)")
