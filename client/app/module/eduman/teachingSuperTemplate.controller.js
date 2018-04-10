@@ -102,6 +102,15 @@ angular.module('dleduWebApp')
 					item = this.params.quesList;
 				}
 				item.splice($index, 1);
+				var temp = angular.copy(item);
+				item = [];
+				if(type == 'classing'){
+					this.params.styleQuesList = temp;
+				}else if(type == 'teaching'){
+					this.params.teacherQuesList = temp;
+				}else {
+					this.params.quesList = temp;
+				}
 			},
 
 			//增加题目选项
@@ -115,6 +124,9 @@ angular.module('dleduWebApp')
 			delQuesOption: function($parentIndex, $childeIndex){
 				var parent = this.params.quesList[$parentIndex];
 				parent.optionList.splice($childeIndex, 1);
+				var temp = angular.copy(parent.optionList);
+				parent.optionList = [];
+				parent.optionList = temp;
 			},
 
 			//保存题目

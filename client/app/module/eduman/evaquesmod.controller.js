@@ -54,6 +54,9 @@ angular.module('dleduWebApp')
 			//点击删除
 			delQues: function($index){
 				this.quesLists.splice($index, 1);
+				var temp = angular.copy(this.quesLists);
+				this.quesLists = [];
+				this.quesLists = temp;
 			},
 
 			//增加题目选项
@@ -67,6 +70,9 @@ angular.module('dleduWebApp')
 			delQuesOption: function($parentIndex, $childeIndex){
 				var parent = this.quesLists[$parentIndex];
 				parent.questionChioce.splice($childeIndex, 1);
+				var temp = angular.copy(parent.questionChioce);
+				parent.questionChioce = [];
+				parent.questionChioce = temp;
 			},
 
 			//保存题目
