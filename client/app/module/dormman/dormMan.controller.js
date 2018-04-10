@@ -73,6 +73,7 @@ angular.module('dleduWebApp')
 					this.queryDorm();
 				}else if(this.tableIndex == 2){
 					this.statisticParams.professionalId = 0;
+					this.statisticParams.gender = '请选择';
 					this.querySelStudent();
 				}else if(this.tableIndex == 3){
 					this.statisticParams.professionalId = 0;
