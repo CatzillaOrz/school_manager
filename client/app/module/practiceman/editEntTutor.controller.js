@@ -74,6 +74,7 @@ angular.module('dleduWebApp')
 			prompt: '填写以下信息以建立企业导师',
 			title: '企业导师信息创建',
 			id: $state.params.id,
+			isEdit: !!$state.params.id,
 			params: {
 				name: '',// 姓名
 				enterpriseName: '', //企业名称

@@ -37,14 +37,26 @@
                             | 职务：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过20个字职务名称" ng-model="handleFn.params.position" name="post" validator="required, maxlength=20" )
-                    .form-group
+                    .form-group(ng-if='handleFn.isEdit')
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 省：
+                        .col-sm-7
+                            input.form-control(ng-model="handleFn.params.province", disabled)
+                    .form-group(ng-if='handleFn.isEdit')
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 市：
+                        .col-sm-7
+                            input.form-control(ng-model="handleFn.params.city", disabled)
+                    .form-group(ng-if='!handleFn.isEdit')
                         label.col-sm-3.control-label
                             span.required *
                             | 省：
                         .col-sm-7
                             select.form-control(name="province" validator="required", ng-model='handleFn.params.province', ng-options='key as key for (key,value) in division', ng-change="handleFn.params.city='';handleFn.params.district='';")
                                 option(value='') 省
-                    .form-group(ng-if="isShowCity(handleFn.params.province)")
+                    .form-group(ng-if='!handleFn.isEdit')
                         label.col-sm-3.control-label
                             span.required *
                             | 市：
