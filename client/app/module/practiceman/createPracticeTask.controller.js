@@ -74,7 +74,7 @@ angular.module('dleduWebApp')
             delImage: function(file){
                 var that = this;
                 that.params.fileList = _.filter(that.params.fileList, function(c){
-                    c.id !== file.id;
+                    return c.id !== file.id;
                 });
             },
 
