@@ -70,6 +70,13 @@ angular.module('dleduWebApp')
 
                     })
             },
+            // 删除图片
+            delImage: function(file){
+                var that = this;
+                that.params.fileList = _.filter(that.params.fileList, function(c){
+                    c.id !== file.id;
+                });
+            },
 
             // 查询周任务信息
             getWeekTaskDetail: function () {
