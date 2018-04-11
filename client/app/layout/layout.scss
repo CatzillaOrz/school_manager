@@ -68,6 +68,15 @@ $speace-size: 5 10 15 20 30;
   text-align: center;
   padding: 0.3em 2em; /* Adjust to suit */
 }
+.del-icon{
+  width: 18px;
+  height: 18px;
+  position: relative;
+  top: -47px;
+  right: 1px;
+  color: red;
+  cursor: pointer;
+}
 
 .ribbon:before {
   content: "";

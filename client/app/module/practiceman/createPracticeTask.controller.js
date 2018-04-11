@@ -9,8 +9,8 @@ angular.module('dleduWebApp')
             isEditOrAdd: 'add', //true是编辑 false是新增
             //企业导师信息
             record: null,
-            prompt: '填写以下信息以建立周任务',
-            title: '周任务信息创建',
+            prompt: '填写以下信息以建立实践课程',
+            title: '实践课程任务创建',
             id: $state.params.id,
             wid: $state.params.wid,
             groupList: {},
@@ -69,6 +69,13 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
 
                     })
+            },
+            // 删除图片
+            delImage: function(file){
+                var that = this;
+                that.params.fileList = _.filter(that.params.fileList, function(c){
+                    c.id !== file.id;
+                });
             },
 
             // 查询周任务信息

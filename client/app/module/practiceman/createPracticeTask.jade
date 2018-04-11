@@ -71,6 +71,7 @@
                             ul(style='list-style: none; display: inline-flex;')
                                 li.select-item(ng-repeat='file in handleFn.params.fileList')
                                     img(ng-src="{{file.srcUrl}}", alt="", style='width: 100px; height: 100px;')
+                                    span.del-icon(ng-click='handleFn.delImage(file)') x
 
                     .form-group
                         label.col-sm-3.control-label
