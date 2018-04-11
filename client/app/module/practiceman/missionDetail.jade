@@ -42,10 +42,10 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in practiceGroupMan.records")
                                 td.sorting_1 {{$index+1 + ((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize}}
-                                td {{record.studentId}}
+                                td {{record.jobNum}}
                                 td {{record.studentName}}
                                 td {{record.groupName}}
-                                td {{record.studentTaskStatus == 'uncommit' ? '未提交' : '完成'}}
+                                td {{practiceGroupMan.taskStatus(record.studentTaskStatus)}}
                                 td {{record.reviewScore || '-'}}
                                 td
                                     a.handle(ui-sref="studentTaskDetail({id: record.id, mId:record.mentorTaskId})")

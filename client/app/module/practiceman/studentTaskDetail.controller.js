@@ -29,6 +29,21 @@ angular.module('dleduWebApp')
 
 					})
 			},
+			taskStatus: function(stuTaskStatus) {
+				if (stuTaskStatus == "uncommit") {
+				  return "未提交";
+				} else if (stuTaskStatus == "checkPending") {
+				  return "待审核";
+				} else if (stuTaskStatus == "notPass") {
+				  return "未通过";
+				} else if (stuTaskStatus == "backTo") {
+				  return "已打回";
+				} else if (stuTaskStatus == "pass") {
+				  return "已通过";
+				} else {
+				  return "状态出错";
+				}
+			  },
 
 
 			init: function () {
