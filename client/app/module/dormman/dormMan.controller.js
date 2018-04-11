@@ -121,6 +121,12 @@ angular.module('dleduWebApp')
 
 			//查询专业选宿舍统计
 			querySelDormByMajor: function(){
+				if(this.majorLists.length){
+					var marjorFirst = this.majorLists[0];
+					if(marjorFirst.name != '请选择专业' && marjorFirst.id != 0){
+						this.majorLists.splice(0, 0, {name: "请选择专业", id: 0});
+					}
+				}
 				this.statisticsSelDorm();
 			},
 

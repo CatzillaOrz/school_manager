@@ -16,6 +16,7 @@ angular.module('dleduWebApp')
 				questions: [], //问题
 				quantification: false, //是否量化
 				choiceQuestion: false, //选项型
+				choiceType: 'score', //选择类型用来和之前题目类型转换 score 打分题，choice选择题
 				qcomment: false, //是否评论
 			},
 
@@ -98,6 +99,14 @@ angular.module('dleduWebApp')
 					}
 				}
 
+				//转换题目类型保持和之前类型一致
+				if(this.params.choiceType == 'score'){
+					this.params.quantification = true;
+					this.params.choiceQuestion = false;
+				}else if(this.params.choiceType == 'choice'){
+					this.params.choiceQuestion = true;
+					this.params.quantification = false;
+				}
 				if($state.params.id){
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
@@ -137,6 +146,12 @@ angular.module('dleduWebApp')
 			 * 置换里面的是否多选值
 			 */
 			convertRadio: function(params){
+				//转换题目类型
+				if(this.params.quantification == true){
+					this.params.choiceType = 'score';
+				}else if(this.params.choiceQuestion = true){
+					this.params.choiceType == 'choice'
+				}
 				var questions = params.questions;
 				for(var i = 0, len = questions.length; i < len; i++){
 					var temp = questions[i];

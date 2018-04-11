@@ -168,12 +168,6 @@
                     "icon": "signal"
                 },
                 {
-                    "title": "评教问卷",
-                    "sref": "evaquestion",
-                    "active": "evaquestion",
-                    "icon": "question-circle"
-                },
-                {
                     "title": "电子围栏",
                     "sref": "elecfence",
                     "active": "elecfence",
@@ -186,15 +180,30 @@
                     "icon": "barcode"
                 },
                 {
-                    "title": "教学督导",
-                    "sref": "teachingSupervisor",
-                    "active": "teachingSupervisor",
-                    "icon": "comments-o"
-                },
-                {
                     "title": "教学数据",
                     "sref": "teachingData",
                     "active": "teachingData",
+                    "icon": "comments-o"
+                }
+            ]
+        },
+        {
+            "title": "教学质量评价",
+            "sref": "attendlist",
+            "icon": "navicon",
+            "active": "eduman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
+            "items":[
+                {
+                    "title": "学生评教",
+                    "sref": "evaquestion",
+                    "active": "evaquestion",
+                    "icon": "question-circle"
+                },
+                {
+                    "title": "教学主动反馈",
+                    "sref": "teachingSupervisor",
+                    "active": "teachingSupervisor",
                     "icon": "comments-o"
                 }
             ]

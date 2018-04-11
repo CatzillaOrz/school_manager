@@ -58,6 +58,21 @@ var StudentService = {
             callback(e);
         });
     },
+    updateStudent: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: '/v1/students/update',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
     //移除学生
     removeStudent: function (params, access_token, callback) {
         RestClient.put({
