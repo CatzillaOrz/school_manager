@@ -70,12 +70,18 @@
                         .col-sm-7
                             select.form-control(name="district" validator="required" ng-model='handleFn.params.city', ng-options='value as value for value in division[handleFn.params.province]')
                                 option(value='') 区
-                    .form-group
+                    .form-group(ng-if='handleFn.isEdit')
                         label.col-sm-3.control-label
                             span.required *
                             | 公司地址：
                         .col-sm-7
-                            input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50" disabled='!handleFn.isEdit')
+                            input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50" disabled)
+                    .form-group(ng-if='!handleFn.isEdit')
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 公司地址：
+                        .col-sm-7
+                            input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
