@@ -146,7 +146,7 @@ angular.module('dleduWebApp')
             })
             .state('trainClassEdit', {
                 parent: 'base',
-                url   : '/trainClassEdit',
+                url   : '/trainClassEdit/:id',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
