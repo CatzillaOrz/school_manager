@@ -45,7 +45,7 @@
                                 td {{record.jobNum}}
                                 td {{record.studentName}}
                                 td {{record.groupName}}
-                                td {{practiceGroupMan.taskStatus(record.studentTaskStatus)}}
+                                td {{practiceGroupMan.taskStatus(record)}}
                                 td {{record.reviewScore || '-'}}
                                 td
                                     a.handle(ui-sref="studentTaskDetail({id: record.id, mId:record.mentorTaskId})")
