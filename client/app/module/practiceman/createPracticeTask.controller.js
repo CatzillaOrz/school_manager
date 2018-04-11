@@ -10,7 +10,7 @@ angular.module('dleduWebApp')
             //企业导师信息
             record: null,
             prompt: '填写以下信息以建立实践课程',
-            title: '周任务信息创建',
+            title: '实践课程任务创建',
             id: $state.params.id,
             wid: $state.params.wid,
             groupList: {},
