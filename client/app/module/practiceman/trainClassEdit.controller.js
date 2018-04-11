@@ -6,7 +6,7 @@ angular.module('dleduWebApp')
 			isEditOrAdd: 'add', //true是编辑 false是新增
             //企业导师信息
             record: null,
-            prompt: '填写以下信息以建立周任务',
+            prompt: '填写以下信息以建立实践课程',
             title: '实践课程编辑',
             id: $state.params.id,
             groupList:{},
