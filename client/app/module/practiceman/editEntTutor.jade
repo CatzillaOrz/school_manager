@@ -75,7 +75,7 @@
                             span.required *
                             | 公司地址：
                         .col-sm-7
-                            input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50" disabled='handleFn.isEdit')
+                            input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50" disabled='!handleFn.isEdit')
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
