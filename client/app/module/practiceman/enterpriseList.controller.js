@@ -28,7 +28,8 @@ angular.module('dleduWebApp')
 				var params = {
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					name: that.queryOption.name
+					name: that.queryOption.name,
+					orgId: AuthService.getUser().orgId
 				};
 				PracticeManService.getEnterpriseList(params).$promise
 					.then(function (data) {
