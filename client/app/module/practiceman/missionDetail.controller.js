@@ -61,7 +61,22 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.getPracticeGroupList();
-			}
+			},
+			taskStatus: function(task) {
+				if (task.studentTaskStatus == "uncommit") {
+				  return "未提交";
+				} else if (task.studentTaskStatus == "checkPending") {
+				  return "待审核";
+				} else if (task.studentTaskStatus == "notPass") {
+				  return "未通过";
+				} else if (task.studentTaskStatus == "backTo") {
+				  return "已打回";
+				} else if (task.studentTaskStatus == "pass") {
+				  return "已通过";
+				} else {
+				  return "状态出错";
+				}
+			  }
 		};
 		$scope.practiceGroupMan.init();
 	});

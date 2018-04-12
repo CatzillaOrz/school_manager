@@ -100,7 +100,7 @@ angular.module('dleduWebApp')
 
 			//保存导师
 			save: function(){
-				// this.params.orgId = AuthService.getUser().orgId;
+				this.params.orgId = AuthService.getUser().orgId;
 				if(this.isEditOrAdd == 'edit'){
 					PracticeManService.updateEnterprise(this.params).$promise
 						.then(function (data) {
