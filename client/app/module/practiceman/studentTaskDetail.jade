@@ -76,7 +76,12 @@
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.taskScore}}
                             tr.odd
                                 td.sorting_1.col-sm-3 评语：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.taskAdvice}}
+                                td.sorting_1.col-sm-9 
+                                    div {{stdFn.stDetail.taskAdvice}}
+                                    .col-sm-8
+                                        ul(style='list-style:none;display:inline-flex;')
+                                            li(ng-repeat='pic in stdFn.stDetail.reviewFileList')
+                                                img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
