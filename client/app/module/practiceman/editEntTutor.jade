@@ -18,13 +18,19 @@
                             | 姓名：
                         .col-sm-7
                             input.form-control(placeholder="请填写不超过10个字学生姓名" ng-model="handleFn.params.name" name="name" validator="required, maxlength=10")
-                    .form-group
+                    .form-group(ng-if='!handleFn.isEdit')
                         label.col-sm-3.control-label
                             span.required *
                             |企业名称：
                         .col-sm-7
                             select.form-control(placeholder="请填选择企业" ng-model="handleFn.params.enterpriseId", ng-change='handleFn.computeSelected()')
                                 option(value='{{ep.id}}', ng-repeat='ep in handleFn.records', ng-selected='ep.id == handleFn.params.enterpriseId') {{ep.name}}
+                    .form-group(ng-if='handleFn.isEdit')
+                        label.col-sm-3.control-label
+                            span.required *
+                            |企业名称：
+                        .col-sm-7
+                            input.form-control(ng-model="handleFn.params.enterpriseName" name="department" validator="required, maxlength=30" disabled)
                     .form-group
                         label.col-sm-3.control-label
                             span.required *

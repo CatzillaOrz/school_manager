@@ -146,9 +146,11 @@ angular.module('dleduWebApp')
 			init: function () {
 				var that = this;
 				var params = {
+					orgId: AuthService.getUser().orgId,
 					pageNumber: 1,
 					pageSize: 10000,
 					name: ''
+
 				};
 				PracticeManService.getEnterpriseList(params).$promise
 					.then(function (data) {
