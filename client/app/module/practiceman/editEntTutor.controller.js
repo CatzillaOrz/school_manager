@@ -170,10 +170,11 @@ angular.module('dleduWebApp')
 				angular.forEach(that.records, function(c){ 
 					if(c.id == that.params.enterpriseId){
 						that.params.enterpriseName = c.name;
+						that.params.companyAddress = c.address;
 						return
 					}
 				})
-			}
+			},
 		};
 		$scope.handleFn.init();
 	});
