@@ -76,4 +76,9 @@ router.post('/addTeachingTemplateStu',auth.isSignedIn, controller.addTeachingTem
 router.get('/exportTea',auth.isSignedIn, controller.exportTea);
 router.get('/exportStu',auth.isSignedIn, controller.exportStu);
 
+router.post('/distTeaching',auth.isSignedIn, controller.distTeaching);
+router.get('/getDistedTeaching',auth.isSignedIn, controller.getDistedTeaching);
+router.post('/delTeaching',auth.isSignedIn, controller.delTeaching);
+router.get('/getDistTeaching',auth.isSignedIn, controller.getDistTeaching);
+
 module.exports = router;

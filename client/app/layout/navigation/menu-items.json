@@ -183,6 +183,12 @@
                     "icon": "question-circle"
                 },
                 {
+                    "title": "教师评学",
+                    "sref": "evaquestiontea",
+                    "active": "evaquestiontea",
+                    "icon": "question-circle"
+                },
+                {
                     "title": "教学主动反馈",
                     "sref": "teachingSupervisor",
                     "active": "teachingSupervisor",

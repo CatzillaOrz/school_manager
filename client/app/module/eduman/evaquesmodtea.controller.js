@@ -1,9 +1,9 @@
 /**
  * Created by Administrator on 2017/6/23.
- * 评教问卷新增，修改页面
+ * 教师评学新增，修改页面
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuesModCtrl', function ($scope, $state, $timeout, AuthService, EduManService, messageService,
+	.controller('EvaQuesModTeaCtrl', function ($scope, $state, $timeout, AuthService, EduManService, messageService,
 	                                        $filter, ngDialog) {
 		$scope.evaQuesModFn={
 			isEditOrAdd: false, //true是编辑 false是新增
@@ -31,7 +31,10 @@ angular.module('dleduWebApp')
 
 			quesLists: [],//临时保存题目
 
-			// 获取评教问卷信息
+			/**
+			 * 获取评教问卷信息
+			 * type 点击导入时
+ 			 */
 			getEvaQuesInfo: function (id, type) {
 				var that = this;
 				var params = {
@@ -42,14 +45,14 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						if(!that.isEditOrAdd){ //新增
 							that.record = data;
-						}else{
+						}else{ //编辑时
 							that.params = data;
 							that.params.endDate = that.params.endDate.substring(0, 10);
 							that.convertRadio(that.params);
 							that.quesLists = that.params.questions;
 						}
 
-						if(type){
+						if(type){ //导入时
 							that.record.name = that.params.name;
 							that.record.endDate = that.params.endDate;
 							that.params = that.record;
@@ -129,7 +132,7 @@ angular.module('dleduWebApp')
 						.then(function (data) {
 							if(data.trueMSG){
 								messageService.openMsg("修改成功!");
-								$state.go("evaquestion");
+								$state.go("evaquestiontea");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -141,11 +144,12 @@ angular.module('dleduWebApp')
 					var cloneParams = angular.copy(params);
 					cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
 					this.convertRadio(cloneParams);
+					cloneParams.quesType = 20; //20教师评学
 					EduManService.addEvaQues(cloneParams).$promise
 						.then(function (data) {
 							if(data.trueMSG){
 								messageService.openMsg("新增成功!");
-								$state.go("evaquestion");
+								$state.go("evaquestiontea");
 							}else{
 								messageService.openMsg(data.message);
 							}
@@ -296,7 +300,8 @@ angular.module('dleduWebApp')
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
-					pageSize: that.page.pageSize
+					pageSize: that.page.pageSize,
+					type: 20
 				};
 				EduManService.getEvaQuesList(params).$promise
 					.then(function (data) {

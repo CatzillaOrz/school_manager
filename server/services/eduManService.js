@@ -1059,6 +1059,80 @@ var EduManService = {
             });
     },
 
+    //获取教师评学已经分配列表
+    getDistedTeaching: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/getAssignUser',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
+    //分配教师评学问卷
+    distTeaching: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/assignUser',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //删除教师评学已经分配问卷
+    delTeaching: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/delAssignUser',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
+    //获取教师评学分配列表
+    getDistTeaching: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/getUser',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+
 };
 
 
