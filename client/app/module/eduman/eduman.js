@@ -96,7 +96,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '评教问卷'
+					label: '学生评教'
 				}
 			})
 			.state('evaquesshow', {
@@ -110,7 +110,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '评教问卷详情'
+					label: '学生评教详情'
 				}
 			})
 			.state('distributelist', {
@@ -124,7 +124,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '评教问卷分配页面'
+					label: '学生评教分配页面'
 				}
 			})
 			.state('evaquestatic', {
@@ -138,7 +138,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '评教统计'
+					label: '学生评教统计'
 				}
 			})
 			.state('evaquesadd', {
@@ -152,7 +152,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '新增评教问卷'
+					label: '新增学生评教问卷'
 				}
 			})
 			.state('evaquesedit', {
@@ -166,7 +166,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '编辑评教问卷'
+					label: '编辑学生评教问卷'
 				}
 			})
 			.state('elecfence', {
@@ -372,6 +372,92 @@ angular.module('dleduWebApp')
 				},
 				ncyBreadcrumb: {
 					label: '反馈模板'
+				}
+			})
+
+
+			.state('evaquestiontea', {
+				parent: 'base',
+				url   : '/evaquestiontea',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuestionTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquestiontea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学'
+				}
+			})
+			.state('evaquesshowtea', {
+				parent: 'evaquestiontea',
+				url   : '/evaquesshowtea/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesShowTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquesshowtea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学详情'
+				}
+			})
+			.state('teadistributelist', {
+				parent: 'evaquestiontea',
+				url   : '/teadistributelist/:quesId/:id/:type',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'TeaDistributeListCtrl',
+						templateUrl: 'app/module/eduman/teadistributelist.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学分配页面'
+				}
+			})
+			.state('evaquestatictea', {
+				parent: 'evaquestiontea',
+				url   : '/evaquestatictea/:type/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquestatictea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学统计'
+				}
+			})
+			.state('evaquesaddtea', {
+				parent: 'evaquestiontea',
+				url   : '/evaquesaddtea',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesModTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquesmodtea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '新增教师评学问卷'
+				}
+			})
+			.state('evaquesteaedit', {
+				parent: 'evaquestiontea',
+				url   : '/evaquesteaedit/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesModTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquesmodtea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '编辑教师评学问卷'
 				}
 			})
 	});
