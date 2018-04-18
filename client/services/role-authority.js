@@ -103,6 +103,19 @@ angular.module('dleduWebService')
                     }
                 },
                 {
+                    "url": "evaquestiontea",
+                    "roles":
+                    {
+                        "ROLE_ORG_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_MANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEGE_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_ORG_DATAVIEW": "show,static",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEG_DATAVIEW": "show,static"
+                    }
+                },
+                {
                     "url": "distributelist",
                     "roles":
                     {

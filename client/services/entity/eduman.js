@@ -323,6 +323,33 @@ angular.module('dleduWebService')
 					params: params
 				});
 			},
+
+			//教师评学分配接口
+			distTeaching:function (params) {
+				var eduman = $resource('api/eduman/distTeaching');
+				return eduman.save(params);
+			},
+			//教师评学已经分配接口
+			getDistedTeaching: function (params) {
+				var eduman = $resource('api/eduman/getDistedTeaching');
+				return eduman.get(params);
+			},
+			//教师评学分配接口
+			delTeaching:function (params) {
+				var eduman = $resource('api/eduman/delTeaching');
+				return eduman.save(params);
+				/*return $http({
+					method: 'POST',
+					url: "api/eduman/delTeaching",
+					data: params
+				});*/
+			},
+			//教师评学已经分配接口
+			getDistTeaching: function (params) {
+				var eduman = $resource('api/eduman/getDistTeaching');
+				return eduman.get(params);
+			},
+
 		}
 
 	});

@@ -64,6 +64,9 @@
                                     label.control-label 已分配专业：
                                     select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor" ng-change="dormMan.queryDorm()")
                         .col-md-12.padding-bottom-10.padding-top-10
+                            //.form-group.col-md-4
+                                label.control-label 是否分配：
+                                select.form-control(type='text', ng-model="dormMan.params.open"  ng-options="obj.value as obj.name for obj in dormMan.isOpenArr" ng-change="dormMan.queryDorm()")
                             .col-md-4
                                 #datatable_col_reorder_filter.dataTables_filter(style="float:left;width:auto;")
                                     label
