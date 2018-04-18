@@ -203,11 +203,10 @@ angular.module('dleduWebApp')
 					return;
 				}
 				if(type == 'batch'){
-					tip = "当前选中记录"+ that.selDistObj.length + "您确定要分配问卷吗？";
+					tip = "当前选中记录"+ that.selDistObj.length + "，您确定要分配问卷吗？";
 					messageService.getMsg(tip, that.distSelQues);
 				}else{
-					tip = this.queryOption.collegeId ? "您确定要给学校所有教师分配问卷吗？"
-						: "您确定要给当前学院所有教师分配问卷吗？";
+					tip = "您确定要给当前条件查询的所有教师分配问卷吗？";
 					messageService.getMsg(tip, that.distAllQues);
 				}
 			},
