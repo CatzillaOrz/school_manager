@@ -105,9 +105,9 @@
                                     table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
                                             tr(role='row')
-                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 80px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选&nbsp;
+                                                    | 当页全选&nbsp;
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.invertCheckAll()" ng-checked="distributeListFn.invertCheckRecord" ng-model="distributeListFn.invertCheckRecord")
                                                     | 反选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
@@ -145,7 +145,7 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 当页全选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级编号
                                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 班级名称
@@ -179,7 +179,7 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 当页全选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 专业名称
                                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 120px;') 所属院系
@@ -211,7 +211,7 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 当页全选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 院系名称
                                         tbody
@@ -241,31 +241,16 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 当页全选
                                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 学校名称
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{record.orgName}}
-
-                                    //.dt-toolbar-footer
-                                        .col-sm-6.col-xs-12.hidden-xs
-                                            #datatable_col_reorder_info4.dataTables_info(role='status', aria-live='polite')
-                                                | 显示第
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
-                                                |  到
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
-                                                |  条 总共
-                                                span.text-primary {{distributeListFn.page.totalElements}}
-                                                |  条记录
-                                        .col-sm-6.col-xs-12
-                                            #datatable_col_reorder_paginate4.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
-
-
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary(ng-click="distributeListFn.distQuestionaire()") 分配问卷
+                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配问卷
+                                button.btn.btn-primary.margin-left-10(ng-if="distributeListFn.queryOption.queryType!='按学校'" ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
 
                 #hr2.tab-pane
                     #wid-id-5.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
@@ -322,7 +307,7 @@
                                             tr(role='row')
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
                                                     input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选
+                                                    | 当页全选
                                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 班级类型
                                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 班级编号

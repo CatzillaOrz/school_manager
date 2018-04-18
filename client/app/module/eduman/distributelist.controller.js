@@ -195,19 +195,142 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.currentRecord = entity;
 				that.delType = delType;
-				if(that.delType != 'single' && (that.records.length == 0 || that.selDistObj.length == 0)){
+				if(that.delType == 'batch' && (that.records.length == 0 || that.selDistObj.length == 0)){
 					messageService.openMsg("请先选择删除对象！");
 					return;
 				}
-				messageService.getMsg("您确定要删除问卷分配吗？", that.cancleDist);
+				var tip = "您确定要删除问卷分配吗？";
+				if(that.delType == 'all'){
+					tip = "您确定要删除当前条件下的所有的问卷分配吗？"
+				}
+				messageService.getMsg(tip, that.cancleDist);
+			},
+
+			/**
+			 * 分配问卷时的提示
+			 * @param entity
+			 * @param type //分配类型 batch、all分配所有
+			 */
+			distQuesPrompt: function (type) {
+				var that = this, tip;
+				if(type == 'batch' && (that.records.length == 0 || that.selDistObj.length == 0)){
+					messageService.openMsg("请先选择分配对象！");
+					return;
+				}
+				if(type == 'batch'){
+					tip = "当前选中记录"+ that.selDistObj.length + "，您确定要分配问卷吗？";
+					messageService.getMsg(tip, that.distQuestionaire);
+				}else{
+					tip = "您确定要给当前条件查询的所有结果分配问卷吗？";
+					messageService.getMsg(tip, that.distAllQues);
+				}
+			},
+
+			/**
+			 * 分配当前条件下的所有问卷. 通过查询该条件下后台对应的所有数据
+			 */
+			distAllQues: function () {
+				var that = $scope.distributeListFn, postParams = {questionnaireId: that.quesId};
+				if(that.queryOption.queryType=='按教学班'){
+					var params = {
+						orgId: AuthService.getUser().orgId,
+						pageNumber: 1,
+						pageSize: that.page.totalElements,
+						quId: that.quesId,
+						managerId: AuthService.getUser().id,
+					};
+					EduManService.getEvaQuesUnDist(params).$promise
+						.then(function (data) {
+							//分配前。把之前选中元素反选
+							postParams.assignType = 10;
+							postParams.teachingClasses = data.data;
+							if (postParams.teachingClasses.length == 0) {
+								messageService.openMsg("当前条件没有查询结果！");
+								return;
+							}
+							that.distQuesByApi(postParams);
+						})
+						.catch(function (error) {
+
+						})
+				}else if(that.queryOption.queryType=='按行政班'){
+					var params = {
+						orgId: AuthService.getUser().orgId,
+						pageNumber: that.page.pageNumber,
+						pageSize: that.page.totalElements,
+						managerId: AuthService.getUser().id
+					};
+					params.name = that.queryOption.className;
+					params.collegeId = that.queryOption.collegeId;
+					params.professionalId = that.queryOption.professionalId;
+					params.masterName = that.queryOption.classHeader;
+					ClassService.getClassList(params).$promise
+						.then(function (data) {
+							//分配前。把之前选中元素反选
+							postParams.assignType = 20;
+							postParams.classesIds = that.getIdsByProperty(data.data, 'id');
+							if (postParams.classesIds.length == 0) {
+								messageService.openMsg("当前条件没有查询结果！");
+								return;
+							}
+							that.distQuesByApi(postParams);
+						})
+						.catch(function (error) {
+
+						})
+				}else if(that.queryOption.queryType=='按专业'){
+					var params = {
+						orgId: AuthService.getUser().orgId,
+						managerId: AuthService.getUser().id,
+						collegeId: that.queryOption.collegeId,
+						pageNumber: that.page.pageNumber,
+						pageSize: that.page.totalElements
+					};
+					params.name = that.queryOption.majorName;
+					MajorService.getMajorList(params).$promise
+						.then(function (data) {
+							//分配前。把之前选中元素反选
+							postParams.assignType = 30;
+							postParams.profIds = that.getIdsByProperty(data.data, 'id');
+							if (postParams.profIds.length == 0) {
+								messageService.openMsg("当前条件没有查询结果！");
+								return;
+							}
+							that.distQuesByApi(postParams);
+						})
+						.catch(function (error) {
+
+						})
+				}else if(that.queryOption.queryType=='按院系'){
+					var params = {
+						orgId: AuthService.getUser().orgId,
+						pageNumber: that.page.pageNumber,
+						pageSize: that.page.totalElements
+					};
+					params.name = that.queryOption.collegeName;
+					CollegeService.getCollegeList(params).$promise
+						.then(function (data) {
+							//分配前。把之前选中元素反选
+							postParams.assignType = 40;
+							postParams.collegeIds = that.getIdsByProperty(data.data, 'id');
+							if (postParams.collegeIds.length == 0) {
+								messageService.openMsg("当前条件没有查询结果！");
+								return;
+							}
+							that.distQuesByApi(postParams);
+						})
+						.catch(function (error) {
+
+						})
+				}
+
 			},
 
 
 			//分配问卷
 			distQuestionaire: function () {
-				var that = this;
-				if(this.invertCheckRecord){
-					//var params = this.contructDistParams();
+				var that = $scope.distributeListFn;
+				if(that.invertCheckRecord){
 					var params = {
 						orgId: AuthService.getUser().orgId,
 						pageNumber: 1,
@@ -225,38 +348,37 @@ angular.module('dleduWebApp')
 								messageService.openMsg("请选择分配记录！");
 								return;
 							}
-							EduManService.distQuestionaire(params).$promise
-								.then(function (data) {
-									messageService.openMsg("分配成功！");
-									that.selDistObj = [];
-									that.page.pageNumber = 1;
-									that.invertCheckRecord = false;
-									that.findByOption('uncomplete');
-								})
-								.catch(function (error) {
-									messageService.openMsg("分配失败！");
-								})
+							that.distQuesByApi(params);
 						})
 						.catch(function (error) {
 
 						})
 				}else{
-					if (this.selDistObj.length == 0) {
+					if (that.selDistObj.length == 0) {
 						messageService.openMsg("请选择分配记录！");
 						return;
 					}
-					var params = this.contructDistParams();
-					EduManService.distQuestionaire(params).$promise
-						.then(function (data) {
-							messageService.openMsg("分配成功！");
-							that.selDistObj = [];
-							that.page.pageNumber = 1;
-							that.findByOption('uncomplete');
-						})
-						.catch(function (error) {
-							messageService.openMsg("分配失败！");
-						})
+					var params = that.contructDistParams();
+					that.distQuesByApi(params);
 				}
+			},
+
+			/**
+			 * 调用后台分配问卷方法
+			 */
+			distQuesByApi: function(params){
+				var that = this;
+				EduManService.distQuestionaire(params).$promise
+					.then(function (data) {
+						messageService.openMsg("分配成功！");
+						that.selDistObj = [];
+						that.page.pageNumber = 1;
+						that.invertCheckRecord = false;
+						that.findByOption('uncomplete');
+					})
+					.catch(function (error) {
+						messageService.openMsg("分配失败！");
+					})
 			},
 
 			/**
@@ -264,14 +386,19 @@ angular.module('dleduWebApp')
 			 * @param records
 			 */
 			addCheckProperty: function (records) {
-				for (var i = 0, recordLen = records.length; i < recordLen; i++) {
-					var record = records[i];
-					record.check = false;
+				if(records != null){
+					for (var i = 0, recordLen = records.length; i < recordLen; i++) {
+						var record = records[i];
+						record.check = false;
+					}
 				}
 			},
 
 			//还原之前选中的分配课程，在选择分配列表中的显示出来
 			showSelDistList: function (records) {
+				if(records == null){
+					return;
+				}
 				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
 				for (var k = 0, lenRecord = records.length; k < lenRecord; k++) {
 					var record = records[k], selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
@@ -356,6 +483,18 @@ angular.module('dleduWebApp')
 					postParams.teachingClasses = this.selDistObj;
 				}
 				return postParams;
+			},
+
+			/**
+			 * 根据对象属性获取值
+			 */
+			getIdsByProperty: function(objs, property){
+				var propertyValues = [];
+				for (var k = 0, length = objs.length; k < length; k++) {
+					var temp = objs[k];
+					propertyValues.push(temp[property]);
+				}
+				return propertyValues;
 			},
 
 			/**
