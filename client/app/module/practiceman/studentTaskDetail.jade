@@ -48,7 +48,12 @@
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.taskName}}
                             tr.odd
                                 td.sorting_1.col-sm-3 任务内容：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.description}}
+                                td.sorting_1.col-sm-9 
+                                    div {{stdFn.stDetail.description}}
+                                    .col-sm-8
+                                        ul(style='list-style:none;display:inline-flex;')
+                                            li(ng-repeat='pic in stdFn.stDetail.taskFileList')
+                                                img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
                             tr.odd
                                 td.sorting_1.col-sm-3 学时：
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.classHour}}
@@ -57,10 +62,18 @@
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
                             tr.odd
                                 td.sorting_1.col-sm-3 任务完成详情：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.resultDescription}}
+                                td.sorting_1.col-sm-9 
+                                    span {{stdFn.stDetail.resultDescription}}
+                                    .col-sm-8
+                                        ul(style='list-style:none;display:inline-flex;')
+                                            li(ng-repeat='pic in stdFn.stDetail.stuFileList')
+                                                img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
                             tr.odd
                                 td.sorting_1.col-sm-3 完成状态：
                                 td.sorting_1.col-sm-9 {{stdFn.taskStatus(stdFn.stDetail.stuTaskStatus)}}
+                            tr.odd
+                                td.sorting_1.col-sm-3 评分：
+                                td.sorting_1.col-sm-9 {{stdFn.stDetail.taskScore}}
                             tr.odd
                                 td.sorting_1.col-sm-3 评语：
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.taskAdvice}}
