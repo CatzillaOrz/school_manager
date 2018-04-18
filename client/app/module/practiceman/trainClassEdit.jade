@@ -32,7 +32,7 @@
                             span.required
                             | 总学时：
                         .col-sm-7
-                            input.form-control(type="text" placeholder="请填写学时" ng-model="handleFn.params.classHour" name="credit" validator="number, maxlength=2")
+                            input.form-control(type="text" placeholder="请填写学时" ng-model="handleFn.params.classHour" name="credit" maxlength="4" validator="number, maxlength=4")
                 .form-actions
                     .row
                         .col-md-12
