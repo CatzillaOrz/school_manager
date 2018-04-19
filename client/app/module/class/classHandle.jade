@@ -42,13 +42,21 @@
                             span.required
                             | 入学时间：
                         .col-sm-7
-                            input.form-control(type="text" name="inSchool"  pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.inSchoolDate' placeholder="请选择入学时间" )
+                            .input-append.date.datepicker.datepicker-basic.no-padding(data-date="" data-date-format='yyyy-mm-dd' b-datepicker )
+                                input.form-control(type="text" size='16', ng-disabled='true' name="inSchool" placeholder='请选择入学时间' ng-model="handleFn.params.inSchoolDate" )
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
+                            //input.form-control(type="text" name="inSchool"  pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.inSchoolDate' placeholder="请选择入学时间" )
                     .form-group
                         label.col-sm-3.control-label
                             span.required
                             | 毕业时间：
                         .col-sm-7
-                            input.form-control(type="text" name="outSchool" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.outSchoolDate' placeholder="请选择毕业时间" )
+                            .input-append.date.datepicker.datepicker-basic.no-padding(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                input.form-control(type="text"  size='16', ng-disabled='true' name="outSchool" placeholder='请选择毕业时间' ng-model="handleFn.params.outSchoolDate" )
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
+                            //input.form-control(type="text" name="outSchool" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }"  ng-model='handleFn.params.outSchoolDate' placeholder="请选择毕业时间" )
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
