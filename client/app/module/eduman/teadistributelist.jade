@@ -136,7 +136,7 @@
                                         #datatable_col_reorder_filter1
                                             form.form-inline
                                                 .form-group.col-md-4.padding-10
-                                                    label.control-label 筛选：
+                                                    label.control-label 授课教师：
                                                     select.form-control(type='text', ng-model="distributeListFn.distedParams.type"  ng-options="obj.id as obj.name for obj in distributeListFn.teacherTypes" ng-change="distributeListFn.findByOption('complete')")
                                                 .form-group.col-md-4.padding-10
                                                     label.control-label 教师：
@@ -180,8 +180,8 @@
                                                 td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
                                                 td {{record.userName}}
                                                 td {{record.jobNum}}
-                                                td {{record.name}}
                                                 td {{record.collegeName}}
+                                                td {{record.teacherType==20?"授课教师": "--"}}
                                                 td {{record.createdDate}}
 
                                     .dt-toolbar-footer
