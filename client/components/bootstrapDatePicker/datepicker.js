@@ -15,7 +15,8 @@ angular.module('dleduWebAppComponents')
           $(element).datepicker({
             weekStart: 1,
             autoclose: true,
-            startDate: attrs.setStartTime?"0d":null,
+            startDate: attrs.setStartTime?"0d":new Date(1818,01,01),
+            endDate: new Date(2218,12,30),
             todayHighlight: true,
             zIndexOffset: 500000,
             language: 'zh-CN',

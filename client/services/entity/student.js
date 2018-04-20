@@ -67,6 +67,9 @@ angular.module('dleduWebService')
                 var student = $resource('api/student/getRemoveStudents');
                 return student.get(params);
             },
-
+            deleteStuBatch:function (params) {
+                var student=$resource('api/student/deleteStuBatch');
+                return student.remove(params);
+            },
         }
     });

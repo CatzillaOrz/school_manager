@@ -24,6 +24,6 @@ router.get('/getNewStudent',auth.isSignedIn, controller.getNewStudent);
 router.get('/getRemoveStudents',auth.isSignedIn, controller.getRemoveStudents);
 router.put('/removeStudent',auth.isSignedIn, controller.removeStudent);
 router.put('/resumeStudent',auth.isSignedIn, controller.resumeStudent);
-
+router.delete('/deleteStuBatch',auth.isSignedIn, controller.deleteStuBatch);
 
 module.exports = router;

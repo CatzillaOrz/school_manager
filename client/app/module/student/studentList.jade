@@ -57,11 +57,17 @@
                                         .speace-10
                                         button.btn.btn-primary(type='button' ng-click="studentListFn.exportData()" ng-if="studentListFn.isUseAuth('exp')")
                                             span 导出学生
+                                        .speace-10
+                                        button.btn.btn-primary(type='button' ng-click="studentListFn.batchDel()" ng-if="studentListFn.isUseAuth('batchDel')")
+                                            span 批量删除
                         .col-sm-12.hidden-xs.margin-bottom-10.no-padding
 
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
+                                th
+                                    input(style="width:auto!important" type="checkbox" ng-click="studentListFn.checkAll(studentListFn.studentList)" ng-checked="studentListFn.checkAllRecord" ng-model="studentListFn.checkAllRecord")
+                                    | 全选当页
                                 th 序号
                                 th 学号
                                 th 姓名
@@ -74,6 +80,8 @@
                                 th 操作
                         tbody
                             tr.odd(role='row' ng-repeat="student in studentListFn.studentList")
+                                td
+                                    input(type="checkbox"  ng-click="studentListFn.selSingleRecord(studentListFn.studentList, $index)" ng-checked="student.check" ng-model="student.check")
                                 td.sorting_1 {{$index+1 + ((studentListFn.page.pageNumber==0?studentListFn.page.pageNumber+1:studentListFn.page.pageNumber)-1)*10}}
                                 td.expand
                                     span.responsiveExpander
