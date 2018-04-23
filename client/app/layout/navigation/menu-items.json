@@ -242,6 +242,21 @@
             ]
         },
         {
+            "title": "实践统计报表",
+            "sref": "teachingSummary",
+            "icon": "navicon",
+            "active": "teachingSummary",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "实践教学汇总",
+                    "sref": "teachingSummary",
+                    "active": "teachingSummary",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
             "title": "权限管理",
             "sref": "distlist",
             "icon": "navicon",
