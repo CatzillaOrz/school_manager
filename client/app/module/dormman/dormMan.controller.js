@@ -27,6 +27,7 @@ angular.module('dleduWebApp')
 				no: "",//宿舍名
 				full: null, //是否满员
 				open: null, //开发状态
+				isAssignment: null, //是否分配
 				profId: null, //已经分配专业
 				floorIds: [], //所选宿舍
 				unitNo: [], //单元
@@ -52,6 +53,10 @@ angular.module('dleduWebApp')
 
 			isOpenArr: [{value: null, name: '请选择'},{value: true, name: '已开放'},
 				{value: false, name: '已关闭'}],
+
+			//是否分配
+			isAssignments: [{value: null, name: '请选择'},{value: true, name: '已分配'},
+				{value: false, name: '未分配'}],
 
 			sexs: [{name: '请选择'},{name: '男'}, {name: '女'}],
 
