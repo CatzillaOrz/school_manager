@@ -35,9 +35,9 @@ angular.module('dleduWebService')
                     "url": "studentlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,exp,reset,newstu,changestu",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp,reset,newstu",
-                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,reset,newstu"
+                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,exp,reset,newstu,changestu,batchDel",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp,reset,newstu,batchDel",
+                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,reset,newstu,batchDel"
                     }
                 },
                 {
@@ -91,6 +91,19 @@ angular.module('dleduWebService')
                 },
                 {
                     "url": "evaquestion",
+                    "roles":
+                    {
+                        "ROLE_ORG_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_MANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEGE_ADMIN": "dist,show,add,edit,static",
+                        "ROLE_ORG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_ORG_DATAVIEW": "show,static",
+                        "ROLE_COLLEG_EDUCATIONALMANAGER": "dist,show,add,edit,static",
+                        "ROLE_COLLEG_DATAVIEW": "show,static"
+                    }
+                },
+                {
+                    "url": "evaquestiontea",
                     "roles":
                     {
                         "ROLE_ORG_ADMIN": "dist,show,add,edit,static",

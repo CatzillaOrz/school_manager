@@ -11,6 +11,7 @@ angular.module('dleduWebAppComponents')
       },
       link: function(scope, element, attrs, ngModel) {
         $(function () {
+          var tempDate = '';
           $(element).datepicker({
             weekStart: 1,
             autoclose: true,
@@ -18,9 +19,10 @@ angular.module('dleduWebAppComponents')
             todayHighlight: true,
             zIndexOffset: 500000,
             language: 'zh-CN',
-            format:'yyyy-mm-dd'
+            format:'yyyy-mm-dd',
+            clearBtn: true
           }).on('changeDate', function (e) {
-            //$(element).find('input').val();
+            tempDate = $(element).find('input').val();
             var controller = angular.element($(element).find('input')).controller('ngModel');
             controller.$setViewValue($(element).find('input').val());
             $rootScope.$broadcast('timeInterval',{
@@ -28,6 +30,14 @@ angular.module('dleduWebAppComponents')
               id:$(element).attr('id')
             });
           })
+            .on('show', function(){
+              tempDate = $(element).find('input').val();
+            })
+            .on('hide', function(){
+              $(element).find('input').val(tempDate);
+              var controller = angular.element($(element).find('input')).controller('ngModel');
+              controller.$setViewValue($(element).find('input').val());
+            });
         })
       }
     }

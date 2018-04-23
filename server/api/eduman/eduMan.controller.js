@@ -609,6 +609,46 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    distTeaching: function (req, res) {
+        EduManService.distTeachingSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getDistedTeaching: function (req, res) {
+        EduManService.getDistedTeachingSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delTeaching: function (req, res) {
+        console.log("***********");
+        console.log(req.body);
+        EduManService.delTeachingSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getDistTeaching: function (req, res) {
+        EduManService.getDistTeachingSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
 };
 
 

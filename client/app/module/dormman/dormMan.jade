@@ -64,13 +64,16 @@
                                     label.control-label 已分配专业：
                                     select.form-control(type='text', ng-model="dormMan.params.profId"  ng-options="obj.profId as obj.profName group by obj.collegeName for obj in dormMan.distedMajor" ng-change="dormMan.queryDorm()")
                         .col-md-12.padding-bottom-10.padding-top-10
+                            .form-group.col-md-4
+                                label.control-label 是否分配：
+                                select.form-control(type='text', ng-model="dormMan.params.isAssignment"  ng-options="obj.value as obj.name for obj in dormMan.isAssignments" ng-change="dormMan.queryDorm()")
                             .col-md-4
                                 #datatable_col_reorder_filter.dataTables_filter(style="float:left;width:auto;")
                                     label
                                         input.form-control(type='search', placeholder='按宿舍号查询', aria-controls='datatable_col_reorder' ng-model="dormMan.params.no", my-enter="dormMan.queryDorm()")
                                         span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="dormMan.queryDorm();")
                                             i.glyphicon.glyphicon-search
-                            .col-md-8
+                            .col-md-4
                                 .ColVis
                                     button.btn.btn-primary(ui-sref="dormedit")
                                         span 新建

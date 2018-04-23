@@ -13,25 +13,25 @@
                             | 宿舍楼：
                         .col-sm-9
                             .col-sm-4(style="padding-left:0!important")
-                                select.form-control(type='text', ng-disabled="handleFn.isEdit && handleFn.assign" ng-model="handleFn.dorm.floorId"  ng-options="build.id as build.name for build in handleFn.builds")
+                                select.form-control(type='text',  ng-model="handleFn.dorm.floorId"  ng-options="build.id as build.name for build in handleFn.builds")
                             .col-sm-4(ng-show="handleFn.units.length > 0")
                                 label.col-sm-5.control-label
                                     span.required *
                                     | 单元：
                                 .col-sm-7
-                                    select.form-control(type='text',ng-disabled="handleFn.isEdit && handleFn.assign" ng-model="handleFn.dorm.unitNo" ng-change="handleFn.isExistName(handleFn.dorm.no)" ng-options="unit.id as unit.name for unit in handleFn.units")
+                                    select.form-control(type='text', ng-model="handleFn.dorm.unitNo" ng-change="handleFn.isExistName(handleFn.dorm.no)" ng-options="unit.id as unit.name for unit in handleFn.units")
                             .col-sm-4(ng-show="handleFn.floors.length > 0")
                                 label.col-sm-5.control-label
                                     span.required *
                                     | 楼层：
                                 .col-sm-7
-                                    select.form-control(type='text',ng-disabled="handleFn.isEdit && handleFn.assign" ng-model="handleFn.dorm.floorNo"  ng-change="handleFn.isExistName(handleFn.dorm.no)" ng-options="floor.id as floor.name for floor in handleFn.floors")
+                                    select.form-control(type='text', ng-model="handleFn.dorm.floorNo"  ng-change="handleFn.isExistName(handleFn.dorm.no)" ng-options="floor.id as floor.name for floor in handleFn.floors")
                     .form-group
                         label.col-sm-3.control-label
                             span.required *
                             | 宿舍号：
                         .col-sm-7
-                            input.form-control(placeholder="请填写宿舍号" ng-model="handleFn.dorm.no" ng-disabled="handleFn.isEdit && handleFn.assign" name="name" ng-change="handleFn.isExistName(handleFn.dorm.no)" validator="required, maxlength=50")
+                            input.form-control(placeholder="请填写宿舍号" ng-model="handleFn.dorm.no"  name="name" ng-change="handleFn.isExistName(handleFn.dorm.no)" validator="required, maxlength=50")
                         .col-sm-2
                             label.col-sm-12.control-label(style="text-align: left;")
                                 span.text-danger(ng-show="handleFn.validateObj.isExistDormName==false") 宿舍号重复
@@ -42,9 +42,9 @@
                         .col-sm-7
                             .form-group(ng-repeat="bed in handleFn.dorm.bedList")
                                 .col-sm-6
-                                    input.form-control(ng-disabled="bed.live" placeholder="请填写床位名称" type="text" name="{{'bed'+$index}}"  ng-model="bed.name")
+                                    input.form-control(placeholder="请填写床位名称" type="text" name="{{'bed'+$index}}"  ng-model="bed.name")
                                 .col-sm-5
-                                    select.form-control(ng-disabled="bed.live" type='text', ng-model="bed.bedType"  ng-options="obj.bedType as obj.name for obj in handleFn.bedTypes")
+                                    select.form-control(type='text', ng-model="bed.bedType"  ng-options="obj.bedType as obj.name for obj in handleFn.bedTypes")
                                 .col-sm-1(ng-if="!bed.live")
                                     span(ng-click="handleFn.deleteItem($index)") 删除
                             .form-group
@@ -56,7 +56,7 @@
                             span.required
                             | 备注：
                         .col-sm-7
-                            textarea.form-control(rows='8' ng-disabled="handleFn.isEdit && handleFn.assign" placeholder="请填写不超过200个字的备注信息" ng-model="handleFn.dorm.roomDesc " name="comment" validator="maxlength=200")
+                            textarea.form-control(rows='8'  placeholder="请填写不超过200个字的备注信息" ng-model="handleFn.dorm.roomDesc " name="comment" validator="maxlength=200")
                 .form-actions.no-margin
                     .row
                         .col-md-12
