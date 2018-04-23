@@ -68,11 +68,10 @@
                         thead
                             tr(role='row')
                                     th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                    th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 学生姓名
+                                    th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 教师姓名
                                     th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 班级名称
                                     th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 所属专业
                                     th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 所属院系
-                                    th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 60px;') 班主任
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 td {{$index+1 + ((evaQueStaticFn.page.pageNumber==0?evaQueStaticFn.page.pageNumber+1:evaQueStaticFn.page.pageNumber)-1)*evaQueStaticFn.page.pageSize}}
@@ -80,7 +79,6 @@
                                 td {{record.classesName}}
                                 td {{record.profName}}
                                 td {{record.collegeName}}
-                                td {{record.teacherName}}
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
@@ -112,8 +110,7 @@
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 班级类型
-                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 学生姓名
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 60px;') 教师姓名
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Zip: activate to sort column ascending', style='width: 80px;') 班级名称
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 所属专业
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 所属院系
@@ -121,7 +118,6 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 td {{$index+1 + ((evaQueStaticFn.page.pageNumber==0?evaQueStaticFn.page.pageNumber+1:evaQueStaticFn.page.pageNumber)-1)*evaQueStaticFn.page.pageSize}}
-                                td {{record.classType==10?'教学班':'行政班'}}
                                 td {{record.stuName}}
                                 td {{record.classType==10?record.teachingClassName:record.classesName}}
                                 td {{record.profName}}
