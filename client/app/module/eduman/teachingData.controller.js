@@ -4,7 +4,7 @@
 angular.module('dleduWebApp')
     .controller('teachingDataCtrl', function ($scope, $state, AuthService, Select2LoadOptionsService, CollegeService,
                                             ClassService, EduManService, tempStorageService, MajorService, $timeout, messageService,
-                                            ngDialog, RoleAuthService,SchoolYearService, SchoolService) {
+                                            ngDialog, RoleAuthService,SchoolYearService, SchoolService, CommonService) {
 
         //控制按钮权限
         $scope.isUseAuth = function(type){
@@ -120,6 +120,7 @@ angular.module('dleduWebApp')
                     pageNumber:_this.page2.pageNumber || 0,
                     pageSize:_this.page2.pageSize
                 };
+                CommonService.delEmptyProperty(params);
                 EduManService.getTeachClassDataList(params)
                     .then(function (data) {
                         _this.teachClassDataList = data.data.data;
@@ -140,6 +141,7 @@ angular.module('dleduWebApp')
                     courseName:_this.courseName,
                     teacherName:_this.teacherName,
                 };
+                CommonService.delEmptyProperty(params);
                 EduManService.teachClassDataExport(params)
                     .then(function (data) {
                         SchoolService.getApiUrl({type:"em"}).$promise
