@@ -4,14 +4,14 @@
  */
 angular.module('dleduWebApp')
 	.controller('DormManCtrl', function ($scope, $state, $timeout, DormManService, CommonService, messageService,
-										 ngDialog, MajorService, AuthService ) {
+										 ngDialog, MajorService, AuthService, tempStorageService) {
 		$scope.dormMan = {
 			currentRecord: null,
 			selectedRecord: null, //当前已经选择宿舍的记录
 			builds: [],//宿舍楼数组
-			checkedBuilds: [], //选择的宿舍楼
 			currentBuildFloors: [], //保存当前楼层
 			currentBuildUnit: [], //保存当前单元数
+			checkedBuilds: [], //选择的宿舍楼
 			checkedFloors: [],//选择的宿舍楼层数组
 			checkedUnits: [],//选择的宿舍单元数组
 			distedMajor: [], //已经分配的专业
@@ -801,13 +801,13 @@ angular.module('dleduWebApp')
 
 
 			init: function () {
-				this.getDorms();
+				//this.getDorms();
 				this.getBulids();
 				this.getDistedMajors();
 				this.getMajors();
 			},
-
 		};
+
 		$scope.dormMan.init();
 		$timeout(function () {
 			$scope.$watch('dormMan.editDormAssign.profId', function (newValue, oldValue) {
@@ -819,6 +819,44 @@ angular.module('dleduWebApp')
 					}
 				}
 			});
+		});
+
+		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+			if(toState.name == "dormstuinfo" && fromState.name == "dormman"){
+				var params = {params:$scope.dormMan.params};
+				params.checkedBuilds = $scope.dormMan.checkedBuilds;
+				params.checkedFloors = $scope.dormMan.checkedFloors;
+				params.checkedUnits = $scope.dormMan.checkedUnits;
+
+				params.builds = $scope.dormMan.builds;
+				params.currentBuildFloors = $scope.dormMan.currentBuildFloors;
+				params.currentBuildUnit = $scope.dormMan.currentBuildUnit;
+				var key = fromState.name + toState.name;
+				tempStorageService.setObject(key, params);
+			}
+		});
+		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+			if(fromState.name == "dormstuinfo" && toState.name == "dormman"){
+				var key = toState.name + fromState.name;
+				var params = tempStorageService.getObject(key);
+				if(params){
+					tempStorageService.removeObject(key);
+					$scope.dormMan.checkedBuilds = params.checkedBuilds;
+					$scope.dormMan.checkedFloors = params.checkedFloors;
+					$scope.dormMan.checkedUnits = params.checkedUnits;
+
+					$scope.dormMan.builds = params.builds;
+					$scope.dormMan.currentBuildFloors = params.currentBuildFloors;
+					$scope.dormMan.currentBuildUnit = params.currentBuildUnit;
+					$scope.dormMan.params = params.params;
+				}
+				$scope.dormMan.getDorms();
+			}else{
+				if(toState.name == "dormman"){
+					tempStorageService.removeObject("dormman" + "dormstuinfo");
+					$scope.dormMan.getDorms();
+				}
+			}
 		});
 	})
 	.directive('modPlaceholder', function($window, $timeout){
