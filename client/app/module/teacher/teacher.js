@@ -45,7 +45,7 @@ angular.module('dleduWebApp')
             })
             .state('teacherListSimplify', {
                 parent: 'base',
-                url   : '/teacherListSimplify',
+                url   : '/teacherListSimplify/:collegeId/:name',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {

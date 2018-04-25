@@ -131,7 +131,7 @@ angular.module('dleduWebApp')
             })
 			.state('teachclasstable', {
 				parent: 'base',
-				url: '/teachclasstable/:tId',
+				url: '/teachclasstable/:tId/:collegeId/:name',
 				access: {requiredLogin: true},
 				views: {
 					'content@base': {
@@ -159,7 +159,7 @@ angular.module('dleduWebApp')
             })
 			.state('teachclasscoursescan', {
 				parent: 'base',
-				url: '/teachclasscoursescan/:id',
+				url: '/teachclasscoursescan/:id/:collegeId/:name',
 				access: {requiredLogin: true},
 				views: {
 					'content@base': {

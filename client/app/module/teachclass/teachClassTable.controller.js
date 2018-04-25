@@ -4,6 +4,8 @@ angular.module('dleduWebApp')
 	.controller('TeachClassTableCtrl', function ($scope, $state, TeachClassService, AuthService, messageService, CommonService,
 		Upload, UploadService, ImpBatchService, ngDialog, SchoolYearService, EduManService, RoleAuthService) {
 		var tId = $state.params.tId;
+		$scope.collegeId = $state.params.collegeId;
+		$scope.name = $state.params.name;
 		$scope.teachClassTableFn = {
 			teachingTable: [],
 			weekDropList: [],
