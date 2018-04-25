@@ -244,6 +244,7 @@ angular.module('dleduWebApp')
 
             init: function () {
                 this.params.collegeId=$state.params.collegeId;
+                this.params.name=$state.params.name;
                 this.getCollegeDropList();
                 this.getTeacherList();
             }

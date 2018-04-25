@@ -5,7 +5,8 @@
 
 angular.module('dleduWebApp')
 	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
-												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService) {
+												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService, tempStorageService,
+												SchoolYearService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -57,7 +58,7 @@ angular.module('dleduWebApp')
                             var params = {
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
-                                pageSize: 10000,
+                                pageSize: 100,
                             }
                             params.name = query.term;
                             return params;
@@ -83,6 +84,22 @@ angular.module('dleduWebApp')
 
                 }
             },
+
+			getTermList: function () {
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 0,
+					pageSize: 1000
+				}
+				SchoolYearService.getSemesterList(params).$promise
+					.then(function (data) {
+						that.schoolYearDropList =data.data;
+					})
+					.catch(function (error) {
+					})
+			},
+
             //学期下拉列表分组数据格式化
             select2GroupFormat: function (dataList) {
                 var result = []
@@ -347,8 +364,34 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
+				this.getTermList();
 				this.getTeachClassList();
 			}
 		};
-		$scope.teachClassListFn.init();
+
+		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek")){
+				var params = $scope.teachClassListFn.params;
+				var key = fromState.name + toState.name;
+				tempStorageService.setObject(key, params);
+			}
+		});
+		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+			if(toState.name == "teachclasslist" && (fromState.name == "teachClassDetail" || fromState.name == "agendaWeek")){
+				var key = toState.name + fromState.name;
+				var params = tempStorageService.getObject(key);
+				if(params){
+					$scope.teachClassListFn.params = params;
+					tempStorageService.removeObject(key);
+				}
+				$scope.teachClassListFn.init();
+			}else{
+				//其他情况清空保存的值
+				if(toState.name == "teachclasslist"){
+					tempStorageService.removeObject("teachclasslist" + "teachClassDetail");
+					tempStorageService.removeObject("teachclasslist" + "agendaWeek");
+					$scope.teachClassListFn.init();
+				}
+			}
+		});
 	});
