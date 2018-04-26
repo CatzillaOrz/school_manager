@@ -31,6 +31,7 @@ router.delete('/deleteTerm',auth.isSignedIn, controller.deleteTerm);
 
 router.get('/getCurrentWeek',auth.isSignedIn, controller.getCurrentWeek);
 router.get('/getWeekList',auth.isSignedIn, controller.getWeekList);
+router.get('/getCurrentPeriod',auth.isSignedIn, controller.getCurrentPeriod);
 router.post('/addWeek',auth.isSignedIn, controller.addWeek);
 router.delete('/deleteWeek',auth.isSignedIn, controller.deleteWeek);
 

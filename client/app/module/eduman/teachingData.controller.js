@@ -15,6 +15,7 @@ angular.module('dleduWebApp')
             //学年下拉数据列表
             semesterDropList: [],
             selectedSemester:{},
+            currentSemester:{},
             semesterId:null,
             courseName:'',
             teacherName:'',
@@ -59,6 +60,20 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         that.semesterList = data.data;
                         that.selectedSemester = that.semesterList[0];
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            getCurrentPeriod: function () {
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                };
+                SchoolYearService.getCurrentPeriod(params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.selectedSemester = data;
                     })
                     .catch(function (error) {
 
@@ -164,6 +179,7 @@ angular.module('dleduWebApp')
             init: function () {
                 var _this = this;
                 _this.getSemesterList();
+                _this.getCurrentPeriod();
                 // _this.getCollageDataList();
                 _this.getCollageDataList();
             },

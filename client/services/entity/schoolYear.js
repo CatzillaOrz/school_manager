@@ -105,6 +105,10 @@ angular.module('dleduWebService')
 				return schoolyear.remove(params);
 			},
 
+            getCurrentPeriod: function (params) {
+                var currentPeriod = $resource('api/schoolyear/getCurrentPeriod');
+                return currentPeriod.get(params);
+            },
 		}
 
 	});
