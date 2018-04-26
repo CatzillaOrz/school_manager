@@ -4,7 +4,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 实践教学汇总
+            h2 学生参与明细表
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -20,7 +20,7 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按班级名称查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
+                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
@@ -52,26 +52,23 @@
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 所属专业
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学生总数
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 已参与学生
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 未参与学生
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 未激活学生
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 周日志提交总数
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 报告提交总数
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 激活状态
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
-                                td.sorting_1 1
+                                td.sorting_1 {{$index+1}}
+                                td 蔡庚{{$index+1}}
+                                td 1390291{{$index}}
                                 td 法语
-                                td 外语专业
-                                td 1{{$index}}
-                                td {{$index}}9
-                                td {{$index}}
-                                td {{$index}}
-                                td {{$index}}2
-                                td {{$index}}
-                                   
+                                td 201{{$index}}级
+                                td 商务英语{{$index+1}}
+                                td 外语学院{{$index+1}}
+                                td 激活
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')

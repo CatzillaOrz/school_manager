@@ -253,6 +253,30 @@
                     "sref": "teachingSummary",
                     "active": "teachingSummary",
                     "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生参与明细表",
+                    "sref": "studentAttending",
+                    "active": "studentAttending",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生激活明细表",
+                    "sref": "studentAttending",
+                    "active": "studentAttending",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生参与过程明细",
+                    "sref": "stuProcess",
+                    "active": "stuProcess",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生周日志明细",
+                    "sref": "stuJournal",
+                    "active": "stuJournal",
+                    "icon": "pencil-square-o"
                 }
             ]
         },
