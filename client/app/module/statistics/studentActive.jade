@@ -1,0 +1,84 @@
+.college-list-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 学生参与明细表
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                        .col-xs-3
+                            #datatable_col_reorder_filter.dataTables_filter
+                                label
+                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
+                                        i.glyphicon.glyphicon-search
+                        .col-sm-9
+                            .ColVis
+                                button.btn.btn-primary
+                                    span 导出
+                        .col-xs-12.margin-bottom-10.no-padding
+                            form.form-inline
+                                .form-group.col-sm-3.margin-top-5.no-padding
+                                    label 院系：
+                                    select.select.form-control(ng-model="summaryFn.params.collegeId" ui-select2="summaryFn.selectCollege2Options()", ng-change="summaryFn.getClassList()" )
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in summaryFn.collegeDropList" value="{{college.id}}" ng-selected="summaryFn.params.collegeId==college.id") {{college.name}}
+                                .form-group.col-sm-3.margin-top-5
+                                    label 专业：
+                                    select.select2.form-control(ng-model="summaryFn.params.professionalId" ui-select2="summaryFn.select2MajorOptions(summaryFn.collegeId)", ng-change="summaryFn.getClassList()"  )
+                                        option(value="") 全部
+                                        option(ng-repeat="major in summaryFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                //- .form-group.col-sm-4.margin-top-5
+                                    label 年级：
+                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
+                                .form-group.col-sm-3.margin-top-5.no-padding
+                                    label 班级：
+                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
+                                //- .form-group.col-sm-4.margin-top-5
+                                    label 导员：
+                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 激活状态
+                        tbody
+                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                                td.sorting_1 {{$index+1}}
+                                td 蔡庚{{$index+1}}
+                                td 1390291{{$index}}
+                                td 法语
+                                td 201{{$index}}级
+                                td 商务英语{{$index+1}}
+                                td 外语学院{{$index+1}}
+                                td 激活
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(((summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+1)}}
+                                |  到
+                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.weekTaskList.length}}
+                                |  条 总共
+                                span.text-primary {{summaryFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

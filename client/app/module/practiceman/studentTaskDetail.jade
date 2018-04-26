@@ -55,6 +55,9 @@
                                             li(ng-repeat='pic in stdFn.stDetail.taskFileList')
                                                 img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
                             tr.odd
+                                td.sorting_1.col-sm-3 补充内容：
+                                td.sorting_1.col-sm-9 {{stdFn.stDetail.describe}}
+                            tr.odd
                                 td.sorting_1.col-sm-3 学时：
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.classHour}}
                             tr.odd
