@@ -7,11 +7,9 @@ header#header
         span
             a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
                 i.fa.fa-sign-out
-    .head-navigation
+    //.head-navigation
         ul
             li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav', ng-click='layoutFn.redirectTo(nav)') {{nav.name}}
-            //- li(ng-class="{'active': layoutFn.currentLink == 'enterpriseList'}", ui-sref='enterpriseList') 实践教学
-            //- li 统计报表
     .pull-right
         ul.account(ng-if=' layoutFn.user')
             li.user-menu(uib-dropdown='uib-dropdown' uib-dropdown-toggle='uib-dropdown-toggle')
