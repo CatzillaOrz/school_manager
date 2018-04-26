@@ -61,25 +61,14 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校内指导老师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习单位
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校外指导老师
-                                th(colspan='3')
-                                    table
-                                        tr
-                                            th
-                                        tr
-                                            th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 成绩（20%）
-                                            
-                                th
+                                th(tabindex='0', aria-controls='datatable_col_reorder' style="border-right: none;") 成绩（20%）
+                                th(style="border:none;")
                                      table
                                         tr
                                             th( rowspan='1', colspan='1') 指导老师鉴定
                                         tr
-                                            th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 遵守实习单位制度和纪律（20%）
-                                th
-                                     table
-                                        tr
-                                            th
-                                        tr
-                                            th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 提交日记、周记（20%）
+                                            th(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 遵守实习单位制度和纪律（20%）
+                                th(tabindex='0', aria-controls='datatable_col_reorder') 提交日记、周记（20%）
                                 
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
@@ -93,7 +82,7 @@
                                 td 导师{{$index}}
                                 td 杭州品胜珠宝鉴定
                                 td 教师{{$index}}
-                                td(colspan='3') 1{{$index+1}}
+                                td 1{{$index+1}}
                                 td {{$index+1}}
                                 td {{$index+1}}
                                 
