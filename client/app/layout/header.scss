@@ -95,4 +95,22 @@
       }
     }
   }
+
+  .head-navigation{
+    display: inline-block;
+    margin-left: 100px;
+    font-size: 14px;
+    line-height: 50px;
+    ul{
+      list-style: none;
+      li{
+        display: inline-block;
+        margin-right: 50px;
+        cursor: pointer;
+      }
+      .active{
+        color: #29c192;
+      }
+    }
+  }
 }

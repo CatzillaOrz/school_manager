@@ -8,7 +8,18 @@ angular.module('dleduWebApp')
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
+           
+            currentLink: $state.current.name,
+            nav:[
+                {name: '首页', url: 'home', selected: true},
+                {name: '实践教学', url: 'enterpriseList', selected: false},
+                {name: '统计报表', url: 'teachingSummary', selected: false},
+            ],
             user: $rootScope.user,
+            redirectTo : function(entity){
+                this.nav.forEach(c => c.selected = false);
+                entity.selected = true;
+            },
             signOut: function () {
                 AuthService.signOut();
             },
@@ -43,6 +54,7 @@ angular.module('dleduWebApp')
             }
         };
         $scope.layoutFn.getLogoList();
+        $scope.layoutFn.nav.forEach(c => c.selected = c.url == $scope.layoutFn.currentLink)
         $rootScope.$watch('user', function () {
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;

@@ -23,7 +23,9 @@ angular.module('dleduWebApp')
                 remark: '',
                 weekNo: '',
                 taskTitle: '',
-                fileList: []
+                fileList: [],
+                describe: '',
+                description: ''
             },
             fileList: [],
             // 查询导师信息
