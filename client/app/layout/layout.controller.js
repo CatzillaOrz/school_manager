@@ -54,7 +54,7 @@ angular.module('dleduWebApp')
             }
         };
         $scope.layoutFn.getLogoList();
-        $scope.layoutFn.nav.forEach(c => c.selected = c.url == $scope.layoutFn.currentLink)
+        // $scope.layoutFn.nav.forEach(c => c.selected = c.url == $scope.layoutFn.currentLink)
         $rootScope.$watch('user', function () {
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
