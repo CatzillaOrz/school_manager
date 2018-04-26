@@ -26,13 +26,13 @@ angular.module('dleduWebApp')
             page: {
                 totalElements: 0,
                 totalPages: 0,
-                pageNumber: 0,
+                pageNumber: 1,
                 pageSize: 10
             },
             page2: {
                 totalElements: 0,
                 totalPages: 0,
-                pageNumber: 0,
+                pageNumber: 1,
                 pageSize: 10
             },
             collageDataList:[],
@@ -132,10 +132,11 @@ angular.module('dleduWebApp')
                     collegeId:'',
                     courseName:_this.courseName,
                     teacherName:_this.teacherName,
-                    pageNumber:_this.page2.pageNumber || 0,
+                    pageNumber:_this.page2.pageNumber || 1,
                     pageSize:_this.page2.pageSize
                 };
                 CommonService.delEmptyProperty(params);
+                console.log(_this.page2.pageSize);
                 EduManService.getTeachClassDataList(params)
                     .then(function (data) {
                         _this.teachClassDataList = data.data.data;
