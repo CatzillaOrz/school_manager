@@ -286,6 +286,42 @@
                     "sref": "stuJournal",
                     "active": "stuJournal",
                     "icon": "pencil-square-o"
+                },
+                {
+                    "title": "教师指导过程明细",
+                    "sref": "impartProcess",
+                    "active": "impartProcess",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "签到统计汇总",
+                    "sref": "stuRoutineCount",
+                    "active": "stuRoutineCount",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践企业统计表",
+                    "sref": "enterpriseDetail",
+                    "active": "enterpriseDetail",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践任务明细",
+                    "sref": "taskDetail",
+                    "active": "taskDetail",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生实践报告成绩",
+                    "sref": "stuReport",
+                    "active": "stuReport",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "学生实习成绩汇总",
+                    "sref": "stuScore",
+                    "active": "stuScore",
+                    "icon": "pencil-square-o"
                 }
             ]
         },
