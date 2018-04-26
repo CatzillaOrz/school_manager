@@ -17,8 +17,8 @@ angular.module('dleduWebApp')
             ],
             user: $rootScope.user,
             redirectTo : function(entity){
-                this.nav.forEach(c => c.selected = false);
-                entity.selected = true;
+                // this.nav.forEach(c => c.selected = false);
+                // entity.selected = true;
             },
             signOut: function () {
                 AuthService.signOut();
