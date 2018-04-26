@@ -66,7 +66,7 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page.totalElements', max-size='teachDataFn.page.pageSize' ng-model='teachDataFn.page.pageNumber',ng-change="teachDataFn.getTeachingclassAttendByTeacher()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page.totalElements', max-size='teachDataFn.page.pageSize' ng-model='teachDataFn.page.pageNumber',ng-change="teachDataFn.getCollageDataList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     #hr2.tab-pane(ng-show='teachDataFn.tab == 2')
                         .tabbable.tabs-below
                             .tab-content
@@ -139,4 +139,4 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page2.totalElements', max-size='teachDataFn.page2.pageSize' ng-model='teachDataFn.page2.pageNumber',ng-change="teachDataFn.getAttendanceByPeriod()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='teachDataFn.page2.totalElements', max-size='teachDataFn.page2.pageSize' ng-model='teachDataFn.page2.pageNumber',ng-change="teachDataFn.getTeachClassDataList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
