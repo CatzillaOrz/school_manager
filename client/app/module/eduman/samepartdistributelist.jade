@@ -179,7 +179,7 @@
                                                     td {{record.createdDate}}
                                                     td(ng-if="distributeListFn.isSetWeight")
                                                         .form-group
-                                                            input.form-control(type="text" name="{{'weight'+ $index}}" ng-model="record.weight" validator="required, integergt0")
+                                                            input.form-control(type="text" name="{{'weight'+ $index}}" ng-model="record.weight" validator="required, integer1to100")
                                                             span %
 
                                         //.dt-toolbar-footer
