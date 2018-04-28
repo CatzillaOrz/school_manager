@@ -141,6 +141,7 @@
                             span.jarviswidget-loader
                                 i.fa.fa-refresh.fa-spin
                             .ope-button.margin-right-10(style="float:right")
+                                span.txt-color-red(ng-if="distributeListFn.isSetWeight") (注意：权重相加不能超过100%)
                                 input(type="checkbox"  bs-switch ng-model="distributeListFn.isSetWeight" switch-on-color="success" switch-off-color="danger" ng-true-value="true" ng-false-value="false")
                                 span 设置权重
                         // widget div
@@ -178,7 +179,7 @@
                                                     td {{record.createdDate}}
                                                     td(ng-if="distributeListFn.isSetWeight")
                                                         .form-group
-                                                            input.form-control(type="text" name="{{'weight'+ $index}}" ng-model="record.weight" validator="integergt0")
+                                                            input.form-control(type="text" name="{{'weight'+ $index}}" ng-model="record.weight" validator="required, integergt0")
                                                             span %
 
                                         //.dt-toolbar-footer

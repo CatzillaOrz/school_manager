@@ -62,6 +62,7 @@ angular.module('dleduWebApp')
 					this.selDistObj = [];
 					this.getEvaQuesUnDist();
 				} else {
+					this.isSetWeight = false;
 					this.getEvaQuesDist();
 				}
 			},
@@ -260,9 +261,6 @@ angular.module('dleduWebApp')
 			addCheckProperty: function (records) {
 				for (var i = 0, recordLen = records.length; i < recordLen; i++) {
 					var record = records[i];
-					if(record.weight == null){
-						record.weight = '100';
-					}
 					record.check = false;
 				}
 			},
@@ -418,14 +416,16 @@ angular.module('dleduWebApp')
 				var that = this;
 				var params = [];
 				//组装分配的数据
-				var weights = [];
+				var weights = [], allWeight = 0;
 				for(var i = 0, len = this.records.length; i < len; i++){
 					var temp = this.records[i];
 					var weight = {id: temp.id, weight: temp.weight};
-					if(temp.weight == null || temp.weight == ''){
-						weight.weight = '100';
-					}
 					weights.push(weight);
+					allWeight += parseInt(temp.weight);
+				}
+				if(allWeight > 100){
+					messageService.openMsg("权重总值不能超过100！");
+					return;
 				}
 				params = weights;
 				EduManService.saveWeight(params).$promise

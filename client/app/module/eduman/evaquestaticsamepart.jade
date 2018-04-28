@@ -11,8 +11,6 @@
                 span 导出Excel报表
             button.btn.btn-primary.set-elecfence(ng-click="evaQueStaticFn.showUncompelteStu('uncomplete')")
                 span 未提交人名单
-            button.btn.btn-primary.set-elecfence(ng-click="evaQueStaticFn.showUncompelteStu('look')")
-                span 查看评语
         div(role='content')
             .widget-body(style="min-height:auto!important")
                 .row
@@ -23,15 +21,8 @@
                         span 截止时间：
                         span {{evaQueStaticFn.staticInfo.endDate | date:'yyyy-MM-dd'}}
                     .col-sm-3
-                    .col-sm-3
-                .row.padding-top-15
-                    .col-sm-3
                         span 问卷总分：
                         span {{evaQueStaticFn.staticInfo.questionnaireTotalScore}}
-                    .col-sm-3
-                        span 平均分：
-                        span {{!evaQueStaticFn.staticInfo.avgScore?0:evaQueStaticFn.staticInfo.avgScore}}
-                    .col-sm-3
                     .col-sm-3
                 .row.padding-top-15
                     .col-sm-2
