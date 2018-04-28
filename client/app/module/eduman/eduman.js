@@ -460,4 +460,75 @@ angular.module('dleduWebApp')
 					label: '编辑教师评学问卷'
 				}
 			})
+
+			.state('evaquesamepart', {
+				parent: 'base',
+				url   : '/evaquesamepart',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquesamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师/督导同行评教'
+				}
+			})
+			.state('evaquesaddsamepart', {
+				parent: 'evaquesamepart',
+				url   : '/evaquesaddsamepart',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesModSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquesmodsamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '新增教师/督导同行问卷'
+				}
+			})
+			.state('evaqueseditsamepart', {
+				parent: 'evaquesamepart',
+				url   : '/evaqueseditsamepart/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuesModSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquesmodsamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '编辑教师/督导同行问卷'
+				}
+			})
+			.state('samepartdistriblist', {
+				parent: 'evaquesamepart',
+				url   : '/samepartdistriblist/:quesId/:id/:type',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'SamePartDistribListCtrl',
+						templateUrl: 'app/module/eduman/samepartdistributelist.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '同行评教分配页面'
+				}
+			})
+			.state('evaquestaticsamepart', {
+				parent: 'evaquesamepart',
+				url   : '/evaquestaticsamepart/:type/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquestaticsamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '同行评教统计'
+				}
+			})
 	});
