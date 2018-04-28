@@ -189,6 +189,12 @@
                     "icon": "question-circle"
                 },
                 {
+                    "title": "教师/督导同行评教",
+                    "sref": "evaquesamepart",
+                    "active": "evaquesamepart",
+                    "icon": "question-circle"
+                },
+                {
                     "title": "教学主动反馈",
                     "sref": "teachingSupervisor",
                     "active": "teachingSupervisor",

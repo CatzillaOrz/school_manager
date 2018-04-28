@@ -338,18 +338,21 @@ angular.module('dleduWebService')
 			delTeaching:function (params) {
 				var eduman = $resource('api/eduman/delTeaching');
 				return eduman.save(params);
-				/*return $http({
-					method: 'POST',
-					url: "api/eduman/delTeaching",
-					data: params
-				});*/
 			},
 			//教师评学已经分配接口
 			getDistTeaching: function (params) {
 				var eduman = $resource('api/eduman/getDistTeaching');
 				return eduman.get(params);
 			},
-
+			getSamePartList: function (params) {
+				var dormman = $resource('api/eduman/getSamePartList');
+				return dormman.get(params);
+			},
+			//保存权重
+			saveWeight:function (params) {
+				var eduman = $resource('api/eduman/saveWeight');
+				return eduman.save(params);
+			},
 		}
 
 	});

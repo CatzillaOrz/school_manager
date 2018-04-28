@@ -44,18 +44,9 @@
                                     .col-xs-12
                                         #datatable_col_reorder_filter
                                             form.form-inline
-                                                .form-group.col-md-4.padding-10
-                                                    label.control-label 院&nbsp;&nbsp;系：
-                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()"  ng-change="distributeListFn.findByOption('uncomplete')")
-                                                        option(value="-1") 全部
-                                                        option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" ng-selected="distributeListFn.queryOption.collegeId==college.id") {{college.name}}
-                                                .form-group.col-md-4.padding-10
-                                                    label.control-label 授课教师：
-                                                    select.form-control(type='text', ng-model="distributeListFn.queryOption.type"  ng-options="obj.id as obj.name for obj in distributeListFn.isTeachings"
-                                                    ng-change="distributeListFn.findByOption('uncomplete')")
-                                                .form-group.col-md-4.padding-10
-                                                    label.control-label 教师：
-                                                    input.form-control(type="text" placeholder="教师姓名/工号" ng-model="distributeListFn.queryOption.teacherName" my-enter="distributeListFn.findByOption('uncomplete')")
+                                                .form-group.col-md-8.padding-10
+                                                    label.control-label 教师姓名：
+                                                    input.form-control(type="text" placeholder="姓名/学号" ng-model="distributeListFn.queryOption.teacherName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10
                                                     button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
                                                         span 查询
@@ -86,7 +77,7 @@
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 100px;') 姓名
                                                 th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 工号
                                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 150px;') 院系
-                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 状态
+                                                //th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 状态
                                         tbody
                                             tr.odd(role='row' ng-repeat="record in distributeListFn.records")
                                                 td
@@ -95,7 +86,7 @@
                                                 td {{record.name}}
                                                 td {{record.jobNum}}
                                                 td {{record.collegeName}}
-                                                td {{record.teacherType==20?"授课教师": "--"}}
+                                                //td {{record.teacherType==20?"授课教师": "--"}}
 
                                     .dt-toolbar-footer
                                         .col-sm-6.col-xs-12.hidden-xs
@@ -112,7 +103,7 @@
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选问卷
-                                button.btn.btn-primary.margin-left-10(ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
+                                //button.btn.btn-primary.margin-left-10(ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
 
                 #hr2.tab-pane
                     #wid-id-5.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
@@ -135,10 +126,7 @@
                                     .col-xs-10
                                         #datatable_col_reorder_filter1
                                             form.form-inline
-                                                .form-group.col-md-4.padding-10
-                                                    label.control-label 授课教师：
-                                                    select.form-control(type='text', ng-model="distributeListFn.distedParams.type"  ng-options="obj.id as obj.name for obj in distributeListFn.teacherTypes" ng-change="distributeListFn.findByOption('complete')")
-                                                .form-group.col-md-4.padding-10
+                                                .form-group.col-md-8.padding-10
                                                     label.control-label 教师：
                                                     input.form-control(type="text" placeholder="输入教师名称/工号" ng-model="distributeListFn.distedParams.teacherName" my-enter="distributeListFn.findByOption('complete')")
                                                 .form-group.col-md-4.padding-10
@@ -152,6 +140,9 @@
                             h2 已分配问卷
                             span.jarviswidget-loader
                                 i.fa.fa-refresh.fa-spin
+                            .ope-button.margin-right-10(style="float:right")
+                                input(type="checkbox"  bs-switch ng-model="distributeListFn.isSetWeight" switch-on-color="success" switch-off-color="danger" ng-true-value="true" ng-false-value="false")
+                                span 设置权重
                         // widget div
                         div(role='content')
                             // widget edit box
@@ -159,44 +150,51 @@
                                 // This area used as dropdown edit box
                             // end widget edit box
                             // widget content
-                            .widget-body.no-padding
-                                #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
-                                    table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
-                                        thead
-                                            tr(role='row')
-                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
-                                                    input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
-                                                    | 全选当页
-                                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 教师姓名
-                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 工号
-                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 院系
-                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 状态
-                                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 分配时间
-                                        tbody
-                                            tr.odd(role='row' ng-repeat="record in distributeListFn.records")
-                                                td
-                                                    input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
-                                                td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
-                                                td {{record.userName}}
-                                                td {{record.jobNum}}
-                                                td {{record.collegeName}}
-                                                td {{record.teacherType==20?"授课教师": "--"}}
-                                                td {{record.createdDate}}
+                            form.form-horizontal(name="evaquesForm")
+                                .widget-body.no-padding
+                                    #datatable_col_reorder_wrapper1.dataTables_wrapper.form-inline.no-footer
+                                        table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                                        input(style="width:auto!important" type="checkbox" ng-click="distributeListFn.checkAll()" ng-checked="distributeListFn.checkAllRecord" ng-model="distributeListFn.checkAllRecord")
+                                                        | 全选当页
+                                                    th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                                    th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 教师姓名
+                                                    th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 工号
+                                                    th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 院系
+                                                    th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 状态
+                                                    th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 分配时间
+                                                    th(ng-if="distributeListFn.isSetWeight" data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 50px;') 权重占比
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in distributeListFn.records")
+                                                    td
+                                                        input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
+                                                    td {{$index+1 }}
+                                                    td {{record.userName}}
+                                                    td {{record.jobNum}}
+                                                    td {{record.collegeName}}
+                                                    td {{record.teacherType==20?"授课教师": "--"}}
+                                                    td {{record.createdDate}}
+                                                    td(ng-if="distributeListFn.isSetWeight")
+                                                        .form-group
+                                                            input.form-control(type="text" name="{{'weight'+ $index}}" ng-model="record.weight" validator="integergt0")
+                                                            span %
 
-                                    .dt-toolbar-footer
-                                        .col-sm-6.col-xs-12.hidden-xs
-                                            #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
-                                                | 显示第
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
-                                                |  到
-                                                span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
-                                                |  条 总共
-                                                span.text-primary {{distributeListFn.page.totalElements}}
-                                                |  条记录
-                                        .col-sm-6.col-xs-12
-                                            #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
-                                                ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesDist()" boundary-link-numbers='true' rotate='false' items-per-page="distributeListFn.page.pageSize"  previous-text="<" next-text=">")
-                            .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary.margin-right-10(ng-click="distributeListFn.deletePrompt(record, 'batch')") 删除已选班级的分配
-                                button.btn.btn-primary(ng-click="distributeListFn.deletePrompt(record, 'all')") 删除所有分配
+                                        //.dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                #datatable_col_reorder_info1.dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize+distributeListFn.records.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{distributeListFn.page.totalElements}}
+                                                    |  条记录
+                                            //.col-sm-6.col-xs-12
+                                                #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesDist()" boundary-link-numbers='true' rotate='false' items-per-page="distributeListFn.page.pageSize"  previous-text="<" next-text=">")
+                                .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
+                                    button.btn.btn-primary.margin-right-10(ng-click="distributeListFn.deletePrompt(record, 'batch')") 删除分配
+                                    button.btn.btn-primary(ng-if="distributeListFn.isSetWeight" ng-click="distributeListFn.submit()" validation-submit="evaquesForm") 保存
+                                    //button.btn.btn-primary(ng-click="distributeListFn.deletePrompt(record, 'all')") 删除所有分配
