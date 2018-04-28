@@ -15,14 +15,21 @@
             .widget-body(style="min-height:auto!important")
                 .row
                     .col-sm-3
-                        span 问卷名称：
+                        span 被评人：
                         span {{evaQueStaticFn.staticInfo.questionnaireName}}
                     .col-sm-3
                         span 截止时间：
                         span {{evaQueStaticFn.staticInfo.endDate | date:'yyyy-MM-dd'}}
                     .col-sm-3
+                    .col-sm-3
+                .row.padding-top-15
+                    .col-sm-3
                         span 问卷总分：
                         span {{evaQueStaticFn.staticInfo.questionnaireTotalScore}}
+                    .col-sm-3
+                        span 总评分：
+                        span {{(!evaQueStaticFn.staticInfo.avgScore?0:evaQueStaticFn.staticInfo.avgScore) * evaQueStaticFn.staticInfo.commitNum}}
+                    .col-sm-3
                     .col-sm-3
                 .row.padding-top-15
                     .col-sm-2
