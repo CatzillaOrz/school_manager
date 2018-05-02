@@ -134,7 +134,7 @@ angular.module('dleduWebApp')
 				EduManService.exportQuesResult(params).$promise
 					.then(function(data){
 						if(data && data.result){
-							$window.location.href = data.data;
+							$window.location.href = data.data + "?attname="+ that.staticInfo.questionnaireName + '.xls';
 						}else{
 							messageService.openMsg("导出报表失败！");
 						}
