@@ -45,7 +45,7 @@
                                 td {{record.isEnd==''?'--':record.isEnd}}
                                 td {{record.totalQuestions}}
                                 td {{record.totalScore}}
-                                td {{record.teachingNum}}
+                                td {{!record.allocationNum?0:record.allocationNum}}
                                 td
                                     a.handle(ng-if="evaQuesListFn.isUseAuth('dist')" ui-sref="samepartdistriblist({id:0,quesId:record.id,type:record.isEnd!='已截至'?'unend':'end'})" )
                                         i.fa.fa-pencil-square-o
