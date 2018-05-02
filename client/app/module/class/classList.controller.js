@@ -12,6 +12,7 @@ angular.module('dleduWebApp')
             errorInfos: [], //返回的错误信息
             collegeDropList:[],
             majorDropList:[],
+            grades: [],//年级
             page: {
                 totalElements: 0,
                 totalPages: 0,
@@ -33,6 +34,21 @@ angular.module('dleduWebApp')
             //控制按钮权限
             isUseAuth: function(type){
                 return RoleAuthService.isUseAuthority(type);
+            },
+
+            //初始化年级
+            initGrades: function(){
+                var year = new Date().getFullYear();
+                var grades = [];
+                //前面加4年
+                for(var i = 0; i < 4; i++ ){
+                    grades.splice(0, 0, {value:(year - i - 1) + "", name: (year - i - 1)});
+                }
+                //后面加5年
+                for(var j = 0; j < 6; j++ ){
+                    grades.push({value:year + j + "", name: year + j + ""});
+                }
+                return grades;
             },
             //select2动态关键字查询列表配置
             selectCollege2Options: function () {
@@ -239,7 +255,8 @@ angular.module('dleduWebApp')
                _this.params.professionalId=$state.params.professionalId;
                _this.getCollegeDropList();
                _this.getClassList();
-
+               _this.grades = _this.initGrades();
+                _this.grades.splice(0, 0, {value:"", name: "请选择"});
             }
         };
         $scope.classListFn.init();

@@ -31,7 +31,7 @@
                                         option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear", my-enter="classListFn.getClassList()")
+                                    select.form-control(type='text', ng-model="classListFn.params.teachingYear"  ng-options="obj.value as obj.name for obj in classListFn.grades" ng-change="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 班级：
                                     input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name", my-enter="classListFn.getClassList()")
