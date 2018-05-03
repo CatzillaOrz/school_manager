@@ -96,6 +96,7 @@
                         // widget div
                         div(role='content' ng-if="distributeListFn.queryOption.queryType=='按教学班' && distributeListFn.assignResult.result==10")
                             .row.margin-top-10.margin-bottom-10(style="text-align: center;font-size:20px") 分配正在执行，请稍等！！！
+                                img(style="width: 30px;height: 30px;" src="https://s.aizhixin.com/loading.gif")
 
                         div(role='content' ng-if="distributeListFn.queryOption.queryType!='按教学班' || (distributeListFn.queryOption.queryType=='按教学班' && distributeListFn.assignResult.result==20)")
                             // widget edit box
