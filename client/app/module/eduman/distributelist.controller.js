@@ -89,6 +89,7 @@ angular.module('dleduWebApp')
 						this.getEvaQuesUnDist();
 					}
 				} else {
+					$interval.cancel(this.intervalResult); //结束定时器
 					this.queryOption.queryType = '班级类型';
 					this.getEvaQuesDist();
 				}
