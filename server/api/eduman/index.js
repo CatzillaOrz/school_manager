@@ -82,5 +82,6 @@ router.post('/delTeaching',auth.isSignedIn, controller.delTeaching);
 router.get('/getDistTeaching',auth.isSignedIn, controller.getDistTeaching);
 router.get('/getSamePartList',auth.isSignedIn, controller.getSamePartList);
 router.post('/saveWeight',auth.isSignedIn, controller.saveWeight);
+router.get('/getAssignResult',auth.isSignedIn, controller.getAssignResult);
 
 module.exports = router;

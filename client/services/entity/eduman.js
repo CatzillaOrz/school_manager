@@ -353,6 +353,10 @@ angular.module('dleduWebService')
 				var eduman = $resource('api/eduman/saveWeight');
 				return eduman.save(params);
 			},
+			getAssignResult: function (params) {
+				var dormman = $resource('api/eduman/getAssignResult');
+				return dormman.get(params);
+			},
 		}
 
 	});

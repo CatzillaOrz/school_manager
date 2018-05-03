@@ -1167,6 +1167,24 @@ var EduManService = {
             callback(e);
         });
     },
+
+    //获取分配问卷的结果
+    getAssignResult: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v2/getAssignResult',
+            params: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 };
 
 
