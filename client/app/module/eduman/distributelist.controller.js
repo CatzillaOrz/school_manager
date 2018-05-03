@@ -112,6 +112,9 @@ angular.module('dleduWebApp')
 				EduManService.getAssignResult(params).$promise
 					.then(function (data) {
 						that.assignResult = data;
+						if(!data.result){
+							that.assignResult.result = '20';
+						}
 						if(that.assignResult.result == '20'){ //分配执行完成
 							$interval.cancel(that.intervalResult); //结束定时器
 							that.findByOption('uncomplete'); //调用接口

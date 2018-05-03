@@ -82,7 +82,7 @@
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按院系'")
                                                     label.control-label 院系名称：
                                                     input.form-control(type="text" placeholder="请填写院系名称" ng-model="distributeListFn.queryOption.collegeName")
-                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班' && distributeListFn.assignResult.result==20")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType!='按教学班' || (distributeListFn.queryOption.queryType=='按教学班' && distributeListFn.assignResult.result==20)")
                                                     button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
                                                         span 查询
                     #wid-id-3.jarviswidget.jarviswidget-color-blueDark
