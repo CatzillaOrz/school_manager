@@ -264,7 +264,25 @@ module.exports = {
             url : url
         };
         res.json(data);
-    }
+    },
+    getApplyList: function (req, res) {
+        SchoolService.getApplyListSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    handleApply: function (req, res) {
+        SchoolService.handleApplySync(req.body)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
 };
 

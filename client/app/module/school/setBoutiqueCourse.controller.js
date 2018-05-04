@@ -281,4 +281,4 @@ angular.module('dleduWebApp')
             }
         };
         $scope.boutiqueCourseFn.init();
-    })
+    });

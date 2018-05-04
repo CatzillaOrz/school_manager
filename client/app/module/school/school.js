@@ -77,4 +77,18 @@ angular.module('dleduWebApp')
                     label: '设置精品课程'
                 }
             })
+            .state('boutiquecourseapply', {
+                parent: 'base',
+                url   : '/boutiquecourseapply',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'BoutiqueCourseApplyCtrl',
+                        templateUrl: 'app/module/school/boutiqueCourseApply.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '精品课程申请处理'
+                }
+            })
     });

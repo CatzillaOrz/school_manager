@@ -44,4 +44,8 @@ router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);
 
 router.get('/getSchoolOra', controller.getSchoolOra);
 router.get('/getApiUrl', controller.getApiUrl);
+router.get('/getApplyList', controller.getApplyList);
+router.put('/handleApply', controller.handleApply);
+
+
 module.exports = router;
