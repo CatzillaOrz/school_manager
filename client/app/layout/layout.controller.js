@@ -17,8 +17,10 @@ angular.module('dleduWebApp')
             ],
             user: $rootScope.user,
             redirectTo : function(entity){
-                // this.nav.forEach(c => c.selected = false);
-                // entity.selected = true;
+                this.nav.forEach(function(c){
+                    c.selected = false
+                });
+                entity.selected = true;
             },
             signOut: function () {
                 AuthService.signOut();
@@ -54,7 +56,9 @@ angular.module('dleduWebApp')
             }
         };
         $scope.layoutFn.getLogoList();
-        // $scope.layoutFn.nav.forEach(c => c.selected = c.url == $scope.layoutFn.currentLink)
+        $scope.layoutFn.nav.forEach(function(c){
+            c.selected = c.url == $scope.layoutFn.currentLink
+        })
         $rootScope.$watch('user', function () {
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;

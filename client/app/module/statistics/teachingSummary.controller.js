@@ -19,7 +19,7 @@ angular.module('dleduWebApp')
                 teachingYear:""
 			},
             majorDropList: [],
-            someArr: ['temp1','temp2','temp3','temp4','temp5','temp6','temp7','temp8','temp9','temp10'],
+            someArr: ['菜庚','陈薇薇','龚丽娜','赵建民','胡慧敏','顾小敏','陶丽','张佳薇','林星','潘婷'],
 			//select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
