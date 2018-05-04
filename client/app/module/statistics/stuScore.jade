@@ -52,12 +52,11 @@
                         thead
                             tr
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校内指导老师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习单位
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校外指导老师
@@ -71,22 +70,21 @@
                                 th(tabindex='0', aria-controls='datatable_col_reorder') 提交日记、周记（20%）
                                 
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
-                                td {{rp}}
-                                td 1390291{{$index}}
-                                td 法语
-                                td 201{{$index}}级
-                                td 商务英语{{$index+1}}
                                 td 外语学院{{$index+1}}
-                                td 导师{{$index}}
+                                td 商务英语{{$index+1}}
+                                td 商务英语{{$index+1}}班
+                                td 1390291{{$index}}
+                                td {{rp}}
+                                td 李老师
                                 td 杭州品胜珠宝鉴定
-                                td 教师{{$index}}
+                                td 吴老师
                                 td 1{{$index+1}}
                                 td {{$index+1}}
                                 td {{$index+1}}
                                 
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第

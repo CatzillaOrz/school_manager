@@ -7,10 +7,11 @@ angular.module('dleduWebApp')
 		PracticeManService) {
 		$scope.summaryFn = {
 			page:{
-				totalElements: 10,
+				totalElements: 0,
 				pageNumber: 2,
 				pageSize: 10,
-			},
+            },
+            weekTaskList: [1,1,1,1,1,1,1,1,1,1],
 			params: {
                 name:"",
                 collegeId:"",
