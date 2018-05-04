@@ -10,7 +10,8 @@ angular.module('dleduWebApp')
 				totalElements: 10,
 				pageNumber: 2,
 				pageSize: 10,
-			},
+            },
+            weekTaskList: [1,1,1,1,1,1,1,1,1,1],
 			params: {
                 name:"",
                 collegeId:"",
