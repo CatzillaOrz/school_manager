@@ -25,6 +25,12 @@
                     "sref": "setboutiquecourse",
                     "active": "setboutiquecourse",
                     "icon": "magic"
+                },
+                {
+                    "title": "精品课程申请处理",
+                    "sref": "boutiquecourseapply",
+                    "active": "boutiquecourseapply",
+                    "icon": "magic"
                 }
             ]
         },

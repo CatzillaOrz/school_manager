@@ -385,6 +385,38 @@ var SchoolService = {
                 callback(e);
             });
     },
+    getApplyList: function (params, callback) {
+        RestClient.get({
+            host: 'gateway-school',
+            path: '/v1/schoolcourse/apply/list',
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    handleApply: function (params, callback) {
+        RestClient.put({
+            host: 'gateway-school',
+            path: '/v1/schoolcourse/apply/put',
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
 };
 
 

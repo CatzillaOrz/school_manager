@@ -117,6 +117,16 @@ angular.module('dleduWebService')
                 var teacher = $resource('api/school/getApiUrl');
                 return teacher.get(params);
             },
+            getApplyList:function (params) {
+                var boutiqueCourse = $resource('api/school/getApplyList');
+                return boutiqueCourse.get(params);
+            },
+            handleApply: function (params) {
+                var boutiqueCourse = $resource('api/school/handleApply', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
         }
 
     });
