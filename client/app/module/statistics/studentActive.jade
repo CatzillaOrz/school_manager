@@ -4,7 +4,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 学生参与明细表
+            h2 学生激活明细表
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -62,7 +62,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
-                                td 蔡庚{{$index+1}}
+                                td {{rp}}
                                 td 1390291{{$index}}
                                 td 法语
                                 td 201{{$index}}级

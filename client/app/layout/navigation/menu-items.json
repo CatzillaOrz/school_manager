@@ -257,6 +257,81 @@
             ]
         },
         {
+            "title": "实践统计报表",	
+            "sref": "teachingSummary",	
+            "icon": "navicon",	
+            "active": "teachingSummary",	
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",	
+            "items":[	
+                {	
+                    "title": "实践教学汇总",	
+                    "sref": "teachingSummary",	
+                    "active": "teachingSummary",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生参与明细表",	
+                    "sref": "studentAttending",	
+                    "active": "studentAttending",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生激活明细表",	
+                    "sref": "studentActive",	
+                    "active": "studentActive",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生参与过程明细",	
+                    "sref": "stuProcess",	
+                    "active": "stuProcess",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生周日志明细",	
+                    "sref": "stuJournal",	
+                    "active": "stuJournal",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "教师指导过程明细",	
+                    "sref": "impartProcess",	
+                    "active": "impartProcess",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "签到统计汇总",	
+                    "sref": "stuRoutineCount",	
+                    "active": "stuRoutineCount",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "实践企业统计表",	
+                    "sref": "enterpriseDetail",	
+                    "active": "enterpriseDetail",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "实践任务明细",	
+                    "sref": "taskDetail",	
+                    "active": "taskDetail",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生实践报告成绩",	
+                    "sref": "stuReport",	
+                    "active": "stuReport",	
+                    "icon": "pencil-square-o"	
+                },	
+                {	
+                    "title": "学生实习成绩汇总",	
+                    "sref": "stuScore",	
+                    "active": "stuScore",	
+                    "icon": "pencil-square-o"	
+                }	
+            ]	
+        },
+        {
             "title": "权限管理",
             "sref": "distlist",
             "icon": "navicon",
