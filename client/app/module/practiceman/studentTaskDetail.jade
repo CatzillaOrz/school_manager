@@ -65,8 +65,8 @@
                                 td.sorting_1.col-sm-9 {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
                             tr.odd
                                 td.sorting_1.col-sm-3 任务完成详情：
-                                td.sorting_1.col-sm-9 
-                                    span {{stdFn.stDetail.resultDescription}}
+                                td.sorting_1.col-sm-1
+                                    div {{stdFn.stDetail.resultDescription}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
                                             li(ng-repeat='pic in stdFn.stDetail.stuFileList')
