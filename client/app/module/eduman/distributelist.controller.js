@@ -32,10 +32,6 @@ angular.module('dleduWebApp')
 			invertCheckRecord: false,
 			//删除标识
 			delType: 'single',
-			//保存分配进度
-			assignResult: null,
-			//定时器返回的计数器，用于结束定时器
-			intervalResult: 0,
 
 			//查询类型
 			queryTypes: [{value: 10, name: '按教学班'},
@@ -83,47 +79,11 @@ angular.module('dleduWebApp')
 					//切换后清空选择分配列表
 					this.selDistObj = [];
 					this.checkAllRecord = false;
-					if(this.queryOption.queryType=='按教学班'){ //仅仅对是教学班时执行
-						this.exeInterval();
-					}else{
-						this.getEvaQuesUnDist();
-					}
+					this.getEvaQuesUnDist();
 				} else {
-					$interval.cancel(this.intervalResult); //结束定时器
 					this.queryOption.queryType = '班级类型';
 					this.getEvaQuesDist();
 				}
-			},
-
-			//执行定时操作，每次进入页面的时候先调用判断当前分配是否完成，分配结果执行完成后也调用该接口
-			exeInterval: function(){
-				var that = this;
-				this.intervalResult =$interval(function(){
-					that.getAssignResult();
-				}, 1000);
-			},
-
-			//获取分配结果
-			getAssignResult: function(){
-				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					quesId	: this.quesId
-				};
-				EduManService.getAssignResult(params).$promise
-					.then(function (data) {
-						that.assignResult = data;
-						if(!data.result){
-							that.assignResult.result = '20';
-						}
-						if(that.assignResult.result == '20'){ //分配执行完成
-							$interval.cancel(that.intervalResult); //结束定时器
-							that.findByOption('uncomplete'); //调用接口
-						}
-					})
-					.catch(function (error) {
-
-					})
 			},
 
 			// 获取评教问卷已分配列表
@@ -296,7 +256,7 @@ angular.module('dleduWebApp')
 				}else if(that.queryOption.queryType=='按行政班'){
 					var params = {
 						orgId: AuthService.getUser().orgId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements,
 						managerId: AuthService.getUser().id
 					};
@@ -323,7 +283,7 @@ angular.module('dleduWebApp')
 						orgId: AuthService.getUser().orgId,
 						managerId: AuthService.getUser().id,
 						collegeId: that.queryOption.collegeId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements
 					};
 					params.name = that.queryOption.majorName;
@@ -344,7 +304,7 @@ angular.module('dleduWebApp')
 				}else if(that.queryOption.queryType=='按院系'){
 					var params = {
 						orgId: AuthService.getUser().orgId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements
 					};
 					params.name = that.queryOption.collegeName;
@@ -414,12 +374,7 @@ angular.module('dleduWebApp')
 						that.selDistObj = [];
 						that.page.pageNumber = 1;
 						that.invertCheckRecord = false;
-						//定时器定时调用
-						if(that.queryOption.queryType=='按教学班'){ //仅对教学班时加处理
-							that.exeInterval();
-						}else{
-							that.findByOption('uncomplete');
-						}
+						that.findByOption('uncomplete');
 					})
 					.catch(function (error) {
 						messageService.openMsg("分配失败！");
