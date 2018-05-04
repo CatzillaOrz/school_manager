@@ -60,16 +60,16 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 激活状态
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
                                 td {{rp}}
                                 td 1390291{{$index}}
                                 td 法语
                                 td 201{{$index}}级
-                                td 商务英语{{$index+1}}
-                                td 外语学院{{$index+1}}
+                                td 商务英语
+                                td 外语学院
                                 td 激活
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第

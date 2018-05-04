@@ -65,7 +65,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 批阅时间
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 批阅内容
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
                                 td 外语学院{{$index+1}}
                                 td 商务英语{{$index+1}}
@@ -79,7 +79,7 @@
                                 td 1{{$index+1}}
                                 td 2018-4-{{$index+1}}
                                 td 已评价
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第

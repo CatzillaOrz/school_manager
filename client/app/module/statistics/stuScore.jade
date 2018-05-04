@@ -70,7 +70,7 @@
                                 th(tabindex='0', aria-controls='datatable_col_reorder') 提交日记、周记（20%）
                                 
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
                                 td 外语学院{{$index+1}}
                                 td 商务英语{{$index+1}}
@@ -84,7 +84,7 @@
                                 td {{$index+1}}
                                 td {{$index+1}}
                                 
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第

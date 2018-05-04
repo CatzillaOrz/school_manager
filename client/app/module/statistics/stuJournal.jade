@@ -63,7 +63,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 提交时间
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 回复数
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
                                 td.sorting_1 {{$index+1}}
                                 td 外语学院{{$index+1}}
                                 td 英语
@@ -75,7 +75,7 @@
                                 td 实习日志报告...
                                 td 2017-9-20
                                 td {{$index+1}}
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第

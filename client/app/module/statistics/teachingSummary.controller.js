@@ -7,7 +7,7 @@ angular.module('dleduWebApp')
 		PracticeManService) {
 		$scope.summaryFn = {
 			page:{
-				totalElements: 10,
+				totalElements: 0,
 				pageNumber: 2,
 				pageSize: 10,
             },
