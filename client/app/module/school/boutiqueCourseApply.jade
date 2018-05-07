@@ -39,10 +39,9 @@
                                         i.fa.fa-trash-o
                                         span 拒绝
                                     a.handle(ng-if="course.state!=10")
-                                        i.fa.fa-trash-o
                                         span 处理结果：
                                         span(ng-if="course.state==20")  通过
-                                        span(ng-if="course.state==20")  拒绝
+                                        span(ng-if="course.state==30")  拒绝
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
