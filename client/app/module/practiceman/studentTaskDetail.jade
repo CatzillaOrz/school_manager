@@ -105,6 +105,8 @@
                             .ColVis
                                 button.btn.btn-primary(ui-sref="missionDetail({id: stdFn.mId})")
                                     span 返回
+                                button.btn.btn-primary(ng-click="stdFn.exportPDF()")
+                                    span 打印
 
     //-  添加学生弹出窗模版
     script(type='text/ng-template',id='importDialog')
