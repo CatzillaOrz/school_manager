@@ -30,8 +30,8 @@ angular.module('dleduWebApp')
 				};
 				PracticeManService.getMissionDetail(params).$promise
 					.then(function (data) {
-						that.records = data.data;
-						// that.page = data.page;
+						that.records = data.data.data;
+						that.page = data.data.page;
 					})
 					.catch(function (error) {
 
