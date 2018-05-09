@@ -15,13 +15,15 @@ angular.module('dleduWebApp')
                 var _this = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: _this.page.pageNumber+1,
+                    pageNumber: _this.page.pageNumber,
                     pageSize: 10
                 };
                 SchoolService.getApplyList(params).$promise
                     .then(function (data) {
                         _this.page = data.pageDomain;
+                        _this.page.pageNumber+1;
                         _this.applyList = data.dataList;
+
                     })
                     .catch(function (error) {
 
