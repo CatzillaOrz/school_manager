@@ -21,7 +21,7 @@ angular.module('dleduWebApp')
                 SchoolService.getApplyList(params).$promise
                     .then(function (data) {
                         _this.page = data.pageDomain;
-                        _this.page.pageNumber+1;
+                        _this.page.pageNumber=_this.page.pageNumber+1;
                         _this.applyList = data.dataList;
 
                     })
