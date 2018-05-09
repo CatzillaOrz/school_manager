@@ -8,14 +8,14 @@ angular.module('dleduWebApp')
             page: {
                 totalElements: 0,
                 totalPages: 0,
-                pageNumber: 1,
+                pageNumber: 0,
                 pageSize: 10
             },
             getApplyList: function () {
                 var _this = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: 1,
+                    pageNumber: _this.page.pageNumber,
                     pageSize: 10
                 };
                 SchoolService.getApplyList(params).$promise
