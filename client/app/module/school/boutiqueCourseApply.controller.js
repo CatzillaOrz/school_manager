@@ -15,7 +15,7 @@ angular.module('dleduWebApp')
                 var _this = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber: _this.page.pageNumber,
+                    pageNumber: _this.page.pageNumber+1,
                     pageSize: 10
                 };
                 SchoolService.getApplyList(params).$promise
