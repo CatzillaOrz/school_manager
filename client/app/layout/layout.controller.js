@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
+    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
@@ -17,10 +17,14 @@ angular.module('dleduWebApp')
             ],
             user: $rootScope.user,
             redirectTo : function(entity){
+                var that = this;
                 this.nav.forEach(function(c){
                     c.selected = false
                 });
                 entity.selected = true;
+                $timeout(function(){
+                    that.lcReload();
+                }, 200);
             },
             signOut: function () {
                 AuthService.signOut();
@@ -63,6 +67,7 @@ angular.module('dleduWebApp')
             // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
         }, true);
+        console.log($scope.layoutFn.currentLink);
     })
 
     .directive('smartInclude', function () {
