@@ -43,7 +43,11 @@ angular.module('dleduWebApp')
 				} else {
 				  return "状态出错";
 				}
-			  },
+				},
+				
+				exportPDF: function(){
+					window.print();
+				},
 
 
 			init: function () {
