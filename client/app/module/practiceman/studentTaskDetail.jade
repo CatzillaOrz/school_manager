@@ -45,7 +45,7 @@
                                 td.no-border.col-sm-10(style="max-width: 600px;") {{stdFn.stDetail.taskName}}
                             tr.table-no-border
                                 td.col-sm-2.no-border 任务内容：
-                                td.no-border.col-sm-10(style="min-height: 100px;")
+                                td.no-border.col-sm-10
                                     div(style="max-width: 600px;") {{stdFn.stDetail.description}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
@@ -59,11 +59,11 @@
                                 td.no-border.col-sm-10 {{stdFn.stDetail.classHour}}
                             tr.table-no-border
                                 td.col-sm-2.no-border 时间：
-                                td.no-border.col-sm-10(style="height: 100px;") {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
+                                td.no-border.col-sm-10(style="height: 40px;") {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
                             tr.table-no-border
-                                td.col-sm-2 任务完成详情：
+                                td.col-sm-2(style="padding-top: 30px;") 任务完成详情：
                                 td.col-sm-10
-                                    div(style="max-width: 600px;") {{stdFn.stDetail.resultDescription}}
+                                    div(style="max-width: 600px;margin-top: 23px;") {{stdFn.stDetail.resultDescription}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
                                             li(ng-repeat='pic in stdFn.stDetail.stuFileList')
