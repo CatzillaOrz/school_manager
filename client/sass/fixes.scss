@@ -89,3 +89,10 @@ a[ng-click]:hover {
         }
     }
 }
+
+.table-no-border{
+  border: none;
+  .no-border{
+    border: none;
+  }
+}
