@@ -48,7 +48,7 @@
                                 td {{practiceGroupMan.taskStatus(record)}}
                                 td {{record.reviewScore || '-'}}
                                 td
-                                    a.handle(ui-sref="studentTaskDetail({id: record.id, mId:record.mentorTaskId})")
+                                    a.handle(ui-sref="studentTaskDetail({id: record.id, mId:record.mentorTaskId, jobNum: record.jobNum, studentName: record.studentName})")
                                         i.fa.fa-pencil-square-o
                                         span 查看
                                     //a.handle(ng-click="practiceGroupMan.deletePrompt(record)")

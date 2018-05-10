@@ -14,6 +14,8 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 			mId: $state.params.mId,
+			jobNum: $state.params.jobNum,
+			studentName: $state.params.studentName,
 
 			// 获取详情
 			getStd: function () {
