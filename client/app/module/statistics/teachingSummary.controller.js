@@ -3,25 +3,55 @@
  * 实践小组管理
  */
 angular.module('dleduWebApp')
-	.controller('TeachingSummaryCtrl', function ($scope, $state, AuthService, EduManService, messageService, CollegeService, CommonService, Select2LoadOptionsService, ClassService,
-		PracticeManService) {
-		$scope.summaryFn = {
-			page:{
-				totalElements: 0,
-				pageNumber: 2,
-				pageSize: 10,
+    .controller('TeachingSummaryCtrl', function ($scope, $state, AuthService, messageService, CollegeService, CommonService, Select2LoadOptionsService, ClassService,
+        StatisticsService) {
+
+
+
+        $scope.summaryFn = {
+            portalUrl: $state.current.name,
+            portalGun: {
+                    teachingSummary: '$scope.summaryFn.teachingSummary',
+                    studentAttending: '$scope.summaryFn.studentAttending',
+                    studentActive: '$scope.summaryFn.studentActive',
+                    stuProcess: '$scope.summaryFn.stuProcess',
+                    stuJournal: '$scope.summaryFn.stuJournal',
+                    impartProcess: '$scope.summaryFn.impartProcess',
+                    stuRoutineCount: '$scope.summaryFn.stuRoutineCount',
+                    enterpriseDetail: '$scope.summaryFn.enterpriseDetail',
+                    taskDetail: '$scope.summaryFn.taskDetail',
+                    stuReport: '$scope.summaryFn.stuReport',
+                    stuScore: '$scope.summaryFn.stuScore'
             },
-            weekTaskList: [1,1,1,1,1,1,1,1,1,1],
-			params: {
-                name:"",
-                collegeId:"",
-                professionalId:"",
-                masterName:"",
-                teachingYear:""
-			},
+            user: AuthService.getUser(),
+            page: {
+                totalElements: 0,
+                pageNumber: 2,
+                pageSize: 10,
+            },
+            weekTaskList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            params: {
+                keyWords: '',
+                stuName: "",
+                collegeId: 'this.user.collegeId',
+                professionalId: "",
+                classId: "",
+                masterName: "",
+                teachingYear: ""
+            },
+            summeryList: [],
             majorDropList: [],
-            someArr: ['菜庚','陈薇薇','龚丽娜','赵建民','胡慧敏','顾小敏','陶丽','张佳薇','林星','潘婷'],
-			//select2动态关键字查询列表配置
+            someArr: ['菜庚', '陈薇薇', '龚丽娜', '赵建民', '胡慧敏', '顾小敏', '陶丽', '张佳薇', '林星', '潘婷'],
+            stuProcess: function () {
+                console.log(200);
+                var that = this;
+                StatisticsService.getStuProcess(this.params).$promise
+                    .then(function(data){
+                        console.log(data);
+                        that.summeryList = data.data;
+                    })
+            },
+            //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
                 return {
@@ -103,39 +133,40 @@ angular.module('dleduWebApp')
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {
-                        that.collegeDropList =data.data;
+                        that.collegeDropList = data.data;
                     })
-                    .catch(function (error) {
-                    })
+                    .catch(function (error) {})
             },
             // 获取班级列表
             getClassList: function () {
                 var that = this;
                 var params = {
                     orgId: AuthService.getUser().orgId,
-                    pageNumber:1,
+                    pageNumber: 1,
                     pageSize: that.page.pageSize,
                     managerId: AuthService.getUser().id
                 };
-                params.name=that.params.name;
-                params.collegeId=that.params.collegeId;
-                params.professionalId=that.params.professionalId;
-                params.masterName=that.params.masterName;
-                params.teachingYear=that.params.teachingYear;
+                params.name = that.params.name;
+                params.collegeId = that.params.collegeId;
+                params.professionalId = that.params.professionalId;
+                params.masterName = that.params.masterName;
+                params.teachingYear = that.params.teachingYear;
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;
-                        that.page=data.page;
+                        that.page = data.page;
                     })
                     .catch(function (error) {
 
                     })
             },
-			getPracticeGroupList: function(){},
-			init: function(){
-				this.getCollegeDropList();
-			}
-		}
-		console.log('Hello Teacher');
-		$scope.summaryFn.init();
-	});
+            getPracticeGroupList: function () {},
+            init: function () {
+                this.getCollegeDropList();
+            }
+        }
+        console.log('Hello Teacher', AuthService.getUser());
+        var wakeUpFn = eval($scope.summaryFn.portalGun[$scope.summaryFn.portalUrl]);
+        (typeof wakeUpFn == 'function') && wakeUpFn();
+        $scope.summaryFn.init();
+    });

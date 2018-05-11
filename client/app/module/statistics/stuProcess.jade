@@ -66,7 +66,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实践评价
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习报告
                         tbody
-                            //teachingSummary.controller.jstr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            teachingSummary.controller.jstr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1}}
                                 td {{rp}}
                                 td 1390291{{$index}}
@@ -81,7 +81,7 @@
                                 td 不需要
                                 td 已评价
                                 td 未评价
-                    //.dt-toolbar-footer
+                    .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
