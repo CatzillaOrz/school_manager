@@ -26,7 +26,7 @@ angular.module('dleduWebApp')
             user: AuthService.getUser(),
             page: {
                 totalElements: 0,
-                pageNumber: 2,
+                pageNumber: 1,
                 pageSize: 10,
             },
             weekTaskList: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -44,11 +44,12 @@ angular.module('dleduWebApp')
             someArr: ['菜庚', '陈薇薇', '龚丽娜', '赵建民', '胡慧敏', '顾小敏', '陶丽', '张佳薇', '林星', '潘婷'],
             stuProcess: function () {
                 console.log(200);
-                var that = this;
+                var that = $scope.summaryFn;
                 StatisticsService.getStuProcess(this.params).$promise
                     .then(function(data){
                         console.log(data);
                         that.summeryList = data.data;
+                        that.page = data.page;
                     })
             },
             //select2动态关键字查询列表配置
@@ -154,7 +155,7 @@ angular.module('dleduWebApp')
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;
-                        that.page = data.page;
+                        // that.page = data.page;
                     })
                     .catch(function (error) {
 
