@@ -24,7 +24,7 @@ angular.module('dleduWebApp')
                 entity.selected = true;
                 $timeout(function(){
                     that.lcReload();
-                }, 800);
+                }, 500);
             },
             signOut: function () {
                 AuthService.signOut();

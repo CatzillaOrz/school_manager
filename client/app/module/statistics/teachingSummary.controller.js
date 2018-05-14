@@ -9,19 +9,19 @@ angular.module('dleduWebApp')
 
 
         $scope.summaryFn = {
-            portalUrl: $state.current.name,
-            portalGun: {
-                    teachingSummary: '$scope.summaryFn.teachingSummary',
-                    studentAttending: '$scope.summaryFn.studentAttending',
-                    studentActive: '$scope.summaryFn.studentActive',
-                    stuProcess: '$scope.summaryFn.stuProcess',
-                    stuJournal: '$scope.summaryFn.stuJournal',
-                    impartProcess: '$scope.summaryFn.impartProcess',
-                    stuRoutineCount: '$scope.summaryFn.stuRoutineCount',
-                    enterpriseDetail: '$scope.summaryFn.enterpriseDetail',
-                    taskDetail: '$scope.summaryFn.taskDetail',
-                    stuReport: '$scope.summaryFn.stuReport',
-                    stuScore: '$scope.summaryFn.stuScore'
+            portalUrl: $state.current.name,     // 当前路由
+            portalGun: {    // 匹配当前路由入口方法 - 传送门
+                teachingSummary: '$scope.summaryFn.teachingSummary',
+                studentAttending: '$scope.summaryFn.studentAttending',
+                studentActive: '$scope.summaryFn.studentActive',
+                stuProcess: '$scope.summaryFn.stuProcess',
+                stuJournal: '$scope.summaryFn.stuJournal',
+                impartProcess: '$scope.summaryFn.impartProcess',
+                stuRoutineCount: '$scope.summaryFn.stuRoutineCount',
+                enterpriseDetail: '$scope.summaryFn.enterpriseDetail',
+                taskDetail: '$scope.summaryFn.taskDetail',
+                stuReport: '$scope.summaryFn.stuReport',
+                stuScore: '$scope.summaryFn.stuScore'
             },
             user: AuthService.getUser(),
             page: {
@@ -33,8 +33,8 @@ angular.module('dleduWebApp')
             params: {
                 keyWords: '',
                 stuName: "",
-                collegeId: 'this.user.collegeId',
-                professionalId: "",
+                collegeId: null,
+                professionalId: null,
                 classId: "",
                 masterName: "",
                 teachingYear: ""
@@ -43,10 +43,9 @@ angular.module('dleduWebApp')
             majorDropList: [],
             someArr: ['菜庚', '陈薇薇', '龚丽娜', '赵建民', '胡慧敏', '顾小敏', '陶丽', '张佳薇', '林星', '潘婷'],
             stuProcess: function () {
-                console.log(200);
                 var that = $scope.summaryFn;
-                StatisticsService.getStuProcess(this.params).$promise
-                    .then(function(data){
+                StatisticsService.getStuProcess(that.params).$promise
+                    .then(function (data) {
                         console.log(data);
                         that.summeryList = data.data;
                         that.page = data.page;
@@ -75,6 +74,33 @@ angular.module('dleduWebApp')
                             return '按班级筛选';
                         }
                         _this.collegeDropList.push(data);
+                        return data.name;
+                    },
+                }
+            },
+            //select2动态关键字查询列表配置
+            selectClass2Options: function () {
+                var _this = this;
+                return {
+                    placeholder: {
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+                    allowClear: true,
+                    ajax: Select2LoadOptionsService.getLoadOptions("api/class/getClassList", {
+                        orgId: AuthService.getUser().orgId,
+                        pageNumber: 1,
+                        pageSize: 1000,
+                        managerId: AuthService.getUser().id
+                    }, "name"),
+
+                    templateResult: function (data) {
+
+                        if (data.id === '') { // adjust for custom placeholder values
+                            _this.classList = [];
+                            return '按班级筛选';
+                        }
+                        _this.classList.push(data);
                         return data.name;
                     },
                 }
@@ -156,6 +182,7 @@ angular.module('dleduWebApp')
                     .then(function (data) {
                         that.classList = data.data;
                         // that.page = data.page;
+                        that.portalTrigger();
                     })
                     .catch(function (error) {
 
@@ -164,10 +191,17 @@ angular.module('dleduWebApp')
             getPracticeGroupList: function () {},
             init: function () {
                 this.getCollegeDropList();
+                this.portalTrigger();
+            },
+            /**
+             * 执行 - 扣动传送门板机
+             */
+            portalTrigger: function () {
+                var wakeUpFn = eval($scope.summaryFn.portalGun[$scope.summaryFn.portalUrl]);
+                (typeof wakeUpFn == 'function') && wakeUpFn();
             }
         }
-        console.log('Hello Teacher', AuthService.getUser());
-        var wakeUpFn = eval($scope.summaryFn.portalGun[$scope.summaryFn.portalUrl]);
-        (typeof wakeUpFn == 'function') && wakeUpFn();
+        console.log('Hello Teacher');
+
         $scope.summaryFn.init();
     });

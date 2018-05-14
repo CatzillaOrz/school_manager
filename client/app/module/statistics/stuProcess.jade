@@ -20,8 +20,8 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
+                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords" my-enter="summaryFn.portalTrigger()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
@@ -44,7 +44,9 @@
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
+                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.select2ClassOptions()", ng-change="summaryFn.portalTrigger()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
                                 //- .form-group.col-sm-4.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
