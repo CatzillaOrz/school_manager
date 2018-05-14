@@ -33,8 +33,8 @@ angular.module('dleduWebApp')
             params: {
                 keyWords: '',
                 stuName: "",
-                collegeId: null,
-                professionalId: null,
+                collegeId: '',
+                professionalId: '',
                 classId: "",
                 masterName: "",
                 teachingYear: ""
@@ -79,7 +79,7 @@ angular.module('dleduWebApp')
                 }
             },
             //select2动态关键字查询列表配置
-            selectClass2Options: function () {
+            selectClassOptions: function () {
                 var _this = this;
                 return {
                     placeholder: {
@@ -113,7 +113,7 @@ angular.module('dleduWebApp')
                         id: -1, // the value of the option
                         text: '全部'
                     },
-                    allowClear: false,
+                    allowClear: true,
                     ajax: {
                         url: "api/major/getMajorDropList",
                         dataType: 'json',

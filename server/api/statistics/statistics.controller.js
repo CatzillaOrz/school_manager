@@ -5,7 +5,7 @@ StatisticsService = require('../../services/StatisticsService');
 
 module.exports = {
     getStuProcess: function (req, res) {
-        StatisticsService.getStuProcessSync(req.query, req.user.access_token)
+        StatisticsService.getStuProcessSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
             })
