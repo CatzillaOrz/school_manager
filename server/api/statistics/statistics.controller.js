@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-StatisticsService = require('../../services/StatisticsService');
+StatisticsService = require('../../services/statisticsService');
 
 module.exports = {
     getStuProcess: function (req, res) {
