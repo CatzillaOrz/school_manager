@@ -27,6 +27,22 @@ var StatisticsService = {
         }) .catch(function (e) {
                 callback(e);
             });
+    },
+    getStuJournal: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/summaryreplypage',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
     }
 };
 

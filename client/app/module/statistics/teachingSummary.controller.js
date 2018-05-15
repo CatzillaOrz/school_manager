@@ -42,9 +42,24 @@ angular.module('dleduWebApp')
             summeryList: [],
             majorDropList: [],
             someArr: ['菜庚', '陈薇薇', '龚丽娜', '赵建民', '胡慧敏', '顾小敏', '陶丽', '张佳薇', '林星', '潘婷'],
+            setPagination: function(){
+                this.params.pageNumber = this.page.pageNumber;
+                this.params.pageSize = this.page.pageSize;
+            },
             stuProcess: function () {
                 var that = $scope.summaryFn;
+                that.setPagination();
                 StatisticsService.getStuProcess(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            stuJournal: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getStuJournal(that.params).$promise
                     .then(function (data) {
                         console.log(data);
                         that.summeryList = data.data;

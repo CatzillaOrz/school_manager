@@ -12,6 +12,15 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
+    },
+    getStuJournal: function (req, res) {
+        StatisticsService.getStuJournalSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
     }
 };
 

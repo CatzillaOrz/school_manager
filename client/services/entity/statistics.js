@@ -7,6 +7,10 @@ angular.module('dleduWebService')
             getStuProcess: function (params) {
                 var statistics = $resource('api/statistics/getStuProcess');
                 return statistics.save(params);
+            },
+            getStuJournal: function (params) {
+                var statistics = $resource('api/statistics/getStuJournal');
+                return statistics.save(params);
             }
         }
 
