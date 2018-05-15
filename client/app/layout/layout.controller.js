@@ -22,9 +22,7 @@ angular.module('dleduWebApp')
                     c.selected = false
                 });
                 entity.selected = true;
-                $timeout(function(){
-                    that.lcReload();
-                }, 500);
+                this.currentLink = entity.url;
             },
             signOut: function () {
                 AuthService.signOut();
