@@ -25,7 +25,7 @@
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
-                                button.btn.btn-primary
+                                button.btn.btn-primary(ng-click="summaryFn.exportStuProcess()")
                                     span 导出
                         .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
@@ -60,7 +60,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 参与计划
+                                //- th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 参与计划
                                 //- th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 指导老师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 日志（篇）
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 周志（篇）
@@ -74,7 +74,7 @@
                                 td {{rp.grade}}
                                 td {{rp.professionalName}}
                                 td {{rp.collegeName}}
-                                td {{rp.collegeName}}
+                                //- td {{rp.collegeName}}
                                 //- td {{rp.mentorName}}
                                 td {{rp.dailyNum}}
                                 td {{rp.weeklyNum}}
