@@ -84,16 +84,16 @@
                             input.form-control(placeholder="请填公司地址" name="address" ng-model="handleFn.params.companyAddress" validator="required,maxlength=50")
                     .form-group
                         label.col-sm-3.control-label
-                            span.required *
+                            span
                             | 邮箱：
                         .col-sm-7
-                            input.form-control(placeholder="请填写邮箱" name="email" ng-model="handleFn.params.mailbox" validator="required,email,maxlength=60")
+                            input.form-control(placeholder="请填写邮箱" name="email" ng-model="handleFn.params.mailbox" validator="email,maxlength=60")
                     .form-group
                         label.col-sm-3.control-label
-                            span.required *
+                            span
                             | 手机号码：
                         .col-sm-7
-                            input.form-control(placeholder="请填写手机号码" name="phone" ng-model="handleFn.params.phone" validator="required,phone")
+                            input.form-control(placeholder="请填写手机号码" name="phone" ng-model="handleFn.params.phone" validator="phone")
                 .form-actions
                     .row
                         .col-md-12
