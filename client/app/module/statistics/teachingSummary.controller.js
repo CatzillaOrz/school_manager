@@ -66,6 +66,16 @@ angular.module('dleduWebApp')
                         that.page = data.page;
                     })
             },
+            enterpriseDetail: function(){
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getEnterpriseDetail(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
             //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
@@ -214,7 +224,61 @@ angular.module('dleduWebApp')
             portalTrigger: function () {
                 var wakeUpFn = eval($scope.summaryFn.portalGun[$scope.summaryFn.portalUrl]);
                 (typeof wakeUpFn == 'function') && wakeUpFn();
-            }
+            },
+            /**************************
+             * excel另存为
+             */
+            s2ab: function (s) {
+				var buf = new ArrayBuffer(s.length);
+				var view = new Uint8Array(buf);
+				for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+				return buf;
+			},
+			saveAs: function (data, fileName) {
+				var that = this;
+				var blob = new Blob([that.s2ab(data)], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+				var windowUrl = (window.URL || window.webkitURL)
+				var downloadUrl = windowUrl.createObjectURL(blob);
+				var anchor = document.createElement("a");
+				anchor.href = downloadUrl;
+				anchor.download = fileName + '.xlsx';
+				document.body.appendChild(anchor);
+				anchor.click();
+				windowUrl.revokeObjectURL(blob);
+			},
+            /****************************
+             * 导出报表
+            */
+           exportStuJournal: function(){
+               var that = this;
+               var _params = this.params;
+               _params.pageNumber = 1;
+               _params.pageSize = 10000;
+               StatisticsService.exportStuJournal(_params)
+                    .success(function(data){
+                        that.saveAs(data, '学生周日志统计报表');
+                    })
+           },
+           exportStuProcess: function(){
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStuProcess(_params)
+                    .success(function(data){
+                        that.saveAs(data, '学生参与过程明细表');
+                    })
+           },
+           exportEnterpriseDetail: function(){
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportEnterpriseDetail(_params)
+                    .success(function(data){
+                        that.saveAs(data, '实践企业统计表');
+                    })
+           }
         }
         console.log('Hello Teacher');
 

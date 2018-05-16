@@ -12,5 +12,9 @@ var router = express.Router();
 
 router.post('/getStuProcess',auth.isSignedIn, controller.getStuProcess);
 router.post('/getStuJournal',auth.isSignedIn, controller.getStuJournal);
+router.post('/getEnterpriseDetail',auth.isSignedIn, controller.getEnterpriseDetail);
+router.get('/exportStuProcess',auth.isSignedIn, controller.exportStuProcess);
+router.get('/exportStuJournal',auth.isSignedIn, controller.exportStuJournal);
+router.get('/exportEnterpriseDetail',auth.isSignedIn, controller.exportEnterpriseDetail);
 
 module.exports = router;

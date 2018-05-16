@@ -11,11 +11,26 @@ var Promise = require('bluebird'),
 
 var StatisticsService = {
 
-    //查询企业导师列表
     getStuProcess: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',
             path: '/v1/taskstatistics/summarydetailpage',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
+    getEnterpriseDetail: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/enterprisecountpage',
             entity: params,
             access_token: access_token
         }).then(function (res) {
