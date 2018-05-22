@@ -357,6 +357,14 @@ angular.module('dleduWebService')
 				var dormman = $resource('api/eduman/getAssignResult');
 				return dormman.get(params);
 			},
+			getExportQuesResult: function (params) {
+				var dormman = $resource('api/eduman/getExportQuesResult');
+				return dormman.get(params);
+			},
+			exportQuesStatResult: function (params) {
+				var dormman = $resource('api/eduman/exportQuesStatResult');
+				return dormman.get(params);
+			},
 		}
 
 	});

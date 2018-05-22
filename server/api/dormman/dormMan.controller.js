@@ -234,6 +234,28 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    exportSelectedStu: function (req, res) {
+        DormManService.getStusSelectedSync(req.query, req.user.access_token)
+            .then(function (data) {
+                var datas = [
+                    ["姓名", "性别", "专业", "宿舍号", "铺位", "选择时间", "电话"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    datas.push([item.stuName, item.gender, item.profName, item.roomNo,
+                        item.bedName, item.createdDate, item.phone]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(datas);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "已选学生名单");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
 };
 
 

@@ -2,7 +2,8 @@
  * Created by Administrator on 2017/6/23.
  */
 angular.module('dleduWebApp')
-	.controller('EvaQueStaticCtrl', function ($scope, $state, $window, $filter, ngDialog, AuthService, EduManService, messageService) {
+	.controller('EvaQueStaticCtrl', function ($scope, $state, $window, $filter, $interval, ngDialog, AuthService,
+	                                          EduManService, messageService) {
 		$scope.evaQueStaticFn = {
 			//是否显示未提交人数
 			isShowUnCompelteStu: 'close', //默认未提交人数
@@ -14,6 +15,9 @@ angular.module('dleduWebApp')
 			id: 0, //判断链接从哪块过来。0从问卷列表过来，1从已分配页面过来
 			type: '', //判断统计所有问卷信息还是针对某个问卷
 			requestEnd: true, //判断请求是否结束
+			assignResult: {result: '20'}, //保存导出时返回的结果
+			//定时器返回的计数器，用于结束定时器
+			intervalResult: 0,
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -143,12 +147,74 @@ angular.module('dleduWebApp')
 					});
 			},
 
+			//导出问卷各种统计结果
+			exportQuesStatResult: function(){
+				var that = $scope.evaQueStaticFn;
+				$interval.cancel(that.intervalResult);
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					quId: that.id
+				};
+				EduManService.exportQuesStatResult(params).$promise
+					.then(function(data){
+						if(data && data.result == '10'){
+							that.exeInterval();
+						}else if(data && data.result == '30'){
+							messageService.openMsg("问卷信息不存在！");
+						}
+					})
+					.catch(function(e){
+						messageService.openMsg("导出统计报表异常！");
+					});
+			},
+			//执行定时操作，每次进入页面的时候先调用判断当前分配是否完成，分配结果执行完成后也调用该接口
+			exeInterval: function(){
+				var that = this;
+				that.getExportQuesResult();
+				this.intervalResult = $interval(function(){
+					that.getExportQuesResult();
+				}, 3000);
+			},
+
+			//获取分配结果
+			getExportQuesResult: function(){
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					quId: that.id
+				};
+				EduManService.getExportQuesResult(params).$promise
+					.then(function (data) {
+						that.assignResult = data;
+						if(!data.result){
+							that.assignResult.result = '20';
+						}
+						if(that.assignResult.result == '20'){ //分配执行完成
+							$interval.cancel(that.intervalResult); //结束定时器
+
+						}
+						if(that.assignResult.result == '30'){
+							$interval.cancel(that.intervalResult); //结束定时器
+							messageService.openMsg("导出统计报表错误！");
+						}
+					})
+					.catch(function (error) {
+
+					})
+			},
+
 			init: function () {
 				this.id = $state.params.id; //问卷id;
 				this.type = $state.params.type;
 				this.getEvaQuesStaticInfo();
+				//每次请求前检测上次执行是否结束
+				this.exeInterval();
 				//this.getEvaQuesUncompleteStu();
 			}
 		};
 		$scope.evaQueStaticFn.init();
+		$scope.$on("$destroy", function() { //路由切换时结束定时器
+			$interval.cancel($scope.evaQueStaticFn.intervalResult);
+
+		})
 	});
