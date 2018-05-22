@@ -191,7 +191,7 @@ angular.module('dleduWebApp')
 						}
 						if(that.assignResult.result == '20'){ //分配执行完成
 							$interval.cancel(that.intervalResult); //结束定时器
-
+							$window.location.href = that.assignResult.data + "?attname="+ that.staticInfo.questionnaireName + '.xls';
 						}
 						if(that.assignResult.result == '30'){
 							$interval.cancel(that.intervalResult); //结束定时器
@@ -208,7 +208,7 @@ angular.module('dleduWebApp')
 				this.type = $state.params.type;
 				this.getEvaQuesStaticInfo();
 				//每次请求前检测上次执行是否结束
-				this.exeInterval();
+				//this.exeInterval();
 				//this.getEvaQuesUncompleteStu();
 			}
 		};
