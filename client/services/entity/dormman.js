@@ -107,6 +107,13 @@ angular.module('dleduWebService')
                 var dormman = $resource('api/dormman/statisticsSelDorm');
                 return dormman.get(params);
             },
+            exportSelectedStu: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/dormman/exportSelectedStu",
+                    params: params
+                });
+            },
         }
 
     });
