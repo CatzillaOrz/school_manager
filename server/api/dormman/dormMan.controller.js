@@ -241,8 +241,9 @@ module.exports = {
                 var datas = [
                     ["姓名", "性别", "专业", "宿舍号", "铺位", "选择时间", "电话"]
                 ];
-                for (var index in data.data) {
-                    var item = data.data[index];
+                var values = data.data.data;
+                for (var index in values) {
+                    var item = values[index];
                     datas.push([item.stuName, item.gender, item.profName, item.roomNo,
                         item.bedName, item.createdDate, item.phone]);
                 }
