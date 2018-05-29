@@ -76,6 +76,16 @@ angular.module('dleduWebApp')
                         that.page = data.page;
                     })
             },
+            studentActive: function(){
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getStudentActive(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
             //select2动态关键字查询列表配置
             selectCollege2Options: function () {
                 var _this = this;
