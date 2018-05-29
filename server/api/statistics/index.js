@@ -10,6 +10,8 @@ var auth = require('../../middleware/auth');
 var router = express.Router();
 
 
+router.post('/studentAttending',auth.isSignedIn, controller.studentAttending);
+router.post('/teachingSummary',auth.isSignedIn, controller.teachingSummary);
 router.post('/getStudentActive',auth.isSignedIn, controller.getStudentActive);
 router.post('/getStuProcess',auth.isSignedIn, controller.getStuProcess);
 router.post('/getStuJournal',auth.isSignedIn, controller.getStuJournal);
