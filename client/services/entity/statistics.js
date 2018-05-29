@@ -4,6 +4,18 @@ angular.module('dleduWebService')
     .factory('StatisticsService', function ($http, $q, $resource) {
 
         return {
+            studentAttending: function (params) {
+                var statistics = $resource('api/statistics/studentAttending');
+                return statistics.save(params);
+            },
+            teachingSummary: function (params) {
+                var statistics = $resource('api/statistics/teachingSummary');
+                return statistics.save(params);
+            },
+            getStudentActive: function (params) {
+                var statistics = $resource('api/statistics/getStudentActive');
+                return statistics.save(params);
+            },
             getStuProcess: function (params) {
                 var statistics = $resource('api/statistics/getStuProcess');
                 return statistics.save(params);

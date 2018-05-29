@@ -46,6 +46,26 @@ angular.module('dleduWebApp')
                 this.params.pageNumber = this.page.pageNumber;
                 this.params.pageSize = this.page.pageSize;
             },
+            studentAttending: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.studentAttending(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            teachingSummary: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.teachingSummary(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
             stuProcess: function () {
                 var that = $scope.summaryFn;
                 that.setPagination();
@@ -70,6 +90,16 @@ angular.module('dleduWebApp')
                 var that = $scope.summaryFn;
                 that.setPagination();
                 StatisticsService.getEnterpriseDetail(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            studentActive: function(){
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getStudentActive(that.params).$promise
                     .then(function (data) {
                         console.log(data);
                         that.summeryList = data.data;

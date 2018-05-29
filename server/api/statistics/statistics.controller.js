@@ -5,6 +5,33 @@ StatisticsService = require('../../services/statisticsService');
 var XLSX = require('xlsx');
 
 module.exports = {
+    studentAttending: function (req, res) {
+        StatisticsService.studentAttendingSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    teachingSummary: function (req, res) {
+        StatisticsService.teachingSummarySync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getStudentActive: function (req, res) {
+        StatisticsService.getStudentActiveSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getEnterpriseDetail: function (req, res) {
         StatisticsService.getEnterpriseDetailSync(req.body, req.user.access_token)
             .then(function (data) {

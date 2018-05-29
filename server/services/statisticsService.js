@@ -11,6 +11,54 @@ var Promise = require('bluebird'),
 
 var StatisticsService = {
 
+    studentAttending: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/joindetail',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
+    teachingSummary: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/totalcount',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
+    getStudentActive: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/activedetail',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
     getStuProcess: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',
