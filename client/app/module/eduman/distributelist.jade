@@ -2,13 +2,13 @@
    Created by Administrator on 2017/6/21.
 #wid-id-7.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
     header(role='heading')
-        ul#myTab.nav.nav-tabs.pull-left.in
-            li.active(ng-click="distributeListFn.switchType('uncomplete')" ng-if="distributeListFn.isEnd =='unend'")
-                a(data-toggle='tab', href='#hr1', aria-expanded='true')
+        ul.nav.nav-tabs.pull-left.in
+            li(ng-click="distributeListFn.switchType('uncomplete')" ng-if="distributeListFn.isEnd =='unend'" ng-class="{'active':distributeListFn.tabType=='uncomplete', 'mouse-hands':distributeListFn.tabType!='uncomplete'}")
+                a
                     i.fa.fa-list
                     span.hidden-mobile.hidden-tablet  选择分配
-            li(ng-click="distributeListFn.switchType('complete')")
-                a#comp(data-toggle='tab', href='#hr2', aria-expanded='false')
+            li(ng-click="distributeListFn.switchType('complete')" ng-class="{'active':distributeListFn.tabType=='complete', 'mouse-hands':distributeListFn.tabType!='complete'}")
+                a
                     i.fa.fa-list-alt
                     span.hidden-mobile.hidden-tablet
                         |  已分配
@@ -29,7 +29,7 @@
         // widget content
         .widget-body
             .tab-content
-                #hr1.tab-pane.active(ng-if="distributeListFn.isEnd =='unend'")
+                .tab-pane.active(ng-if="distributeListFn.isEnd =='unend'&&distributeListFn.tabType=='uncomplete'")
                     #wid-id-2.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
@@ -252,7 +252,7 @@
                                 button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配问卷
                                 button.btn.btn-primary.margin-left-10(ng-if="distributeListFn.queryOption.queryType!='按学校'" ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
 
-                #hr2.tab-pane
+                .tab-pane.active(ng-if="distributeListFn.tabType == 'complete'" )
                     #wid-id-5.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
                         header(role='heading')
                             .jarviswidget-ctrls(role='menu')
@@ -329,7 +329,7 @@
                                                     a.handle(ng-if="distributeListFn.isUseAuth('cancleDist')" ng-click="distributeListFn.deletePrompt(record, 'single')")
                                                         i.fa.fa-pencil-square-o
                                                         span 删除&nbsp;&nbsp;
-                                                    a.handle(ui-sref="evaquestatic({type:1,id:record.id})")
+                                                    a.handle(ui-sref="evaquestatic({type:1,id:record.id,queId:distributeListFn.quesId,end:distributeListFn.isEnd})")
                                                         i.fa.fa-line-chart
                                                         span 查看该班统计
 
