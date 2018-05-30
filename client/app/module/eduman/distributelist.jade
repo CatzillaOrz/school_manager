@@ -2,13 +2,13 @@
    Created by Administrator on 2017/6/21.
 #wid-id-7.jarviswidget(data-widget-editbutton='false', data-widget-fullscreenbutton='false', data-widget-custombutton='false', data-widget-sortable='false', role='widget')
     header(role='heading')
-        ul.nav.nav-tabs.pull-left.in
-            li(ng-click="distributeListFn.switchType('uncomplete')" ng-if="distributeListFn.isEnd =='unend'" ng-class="{'active':distributeListFn.tabType=='uncomplete', 'mouse-hands':distributeListFn.tabType!='uncomplete'}")
-                a
+        ul#myTab.nav.nav-tabs.pull-left.in
+            li(ng-click="distributeListFn.switchType('uncomplete')" ng-if="distributeListFn.isEnd =='unend'" ng-class="{'active':distributeListFn.tabType=='uncomplete'}")
+                a(data-toggle='tab', href='#hr1', aria-expanded='true')
                     i.fa.fa-list
                     span.hidden-mobile.hidden-tablet  选择分配
-            li(ng-click="distributeListFn.switchType('complete')" ng-class="{'active':distributeListFn.tabType=='complete', 'mouse-hands':distributeListFn.tabType!='complete'}")
-                a
+            li(ng-click="distributeListFn.switchType('complete')" ng-class="{'active':distributeListFn.tabType=='complete'}")
+                a#comp(data-toggle='tab', href='#hr2', aria-expanded='false')
                     i.fa.fa-list-alt
                     span.hidden-mobile.hidden-tablet
                         |  已分配

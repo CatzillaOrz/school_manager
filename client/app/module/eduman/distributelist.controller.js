@@ -855,10 +855,11 @@ angular.module('dleduWebApp')
 				this.isEnd = isEnd;
 				this.id = $state.params.id;
 				if(isEnd == "end"){
-					//$("#comp").tab("show");
+					$("#comp").tab("show");
 					this.switchType('complete');
 				}else{
 					if (this.id == 1) { // id = 1 已经分配列表 0 未分配列表
+						$("#myTab  a:last").tab("show");
 						this.switchType('complete');
 					} else {
 						this.getCollegeDropList();
