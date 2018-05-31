@@ -67,7 +67,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 月志（篇）
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
-                                td.sorting_1 {{$index+1}}
+                                td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
                                 td {{rp.studentName}}
                                 td {{rp.jobNum}}
                                 td {{rp.className}}
@@ -83,9 +83,9 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(((summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+1)}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?summaryFn.page.pageNumber*10:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.weekTaskList.length}}
+                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共
                                 span.text-primary {{summaryFn.page.totalElements}}
                                 |  条记录
