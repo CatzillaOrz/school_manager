@@ -11,6 +11,22 @@ var Promise = require('bluebird'),
 
 var StatisticsService = {
 
+    stuReport: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/report',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
     studentAttending: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',

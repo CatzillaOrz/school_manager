@@ -62,7 +62,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 回复数
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
-                                td.sorting_1 {{$index+1}}
+                                td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
                                 td {{rp.collegeName}}
                                 td {{rp.professionalName}}
                                 td {{rp.className}}

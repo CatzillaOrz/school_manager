@@ -46,6 +46,16 @@ angular.module('dleduWebApp')
                 this.params.pageNumber = this.page.pageNumber;
                 this.params.pageSize = this.page.pageSize;
             },
+            stuReport: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.stuReport(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
             studentAttending: function () {
                 var that = $scope.summaryFn;
                 that.setPagination();
@@ -308,7 +318,22 @@ angular.module('dleduWebApp')
                     .success(function(data){
                         that.saveAs(data, '实践企业统计表');
                     })
-           }
+           },
+           taskStatus: function(stuTaskStatus) {
+            if (stuTaskStatus == "uncommit") {
+              return "未提交";
+            } else if (stuTaskStatus == "checkPending") {
+              return "待审核";
+            } else if (stuTaskStatus == "notPass") {
+              return "未通过";
+            } else if (stuTaskStatus == "backTo") {
+              return "已打回";
+            } else if (stuTaskStatus == "finish") {
+              return "已通过";
+            } else {
+              return "状态出错";
+            }
+            }
         }
         console.log('Hello Teacher');
 
