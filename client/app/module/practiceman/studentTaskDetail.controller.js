@@ -40,7 +40,7 @@ angular.module('dleduWebApp')
 				  return "未通过";
 				} else if (stuTaskStatus == "backTo") {
 				  return "已打回";
-				} else if (stuTaskStatus == "pass") {
+				} else if (stuTaskStatus == "finish") {
 				  return "已通过";
 				} else {
 				  return "状态出错";

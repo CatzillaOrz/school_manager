@@ -5,6 +5,15 @@ StatisticsService = require('../../services/statisticsService');
 var XLSX = require('xlsx');
 
 module.exports = {
+    stuReport: function (req, res) {
+        StatisticsService.stuReportSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     studentAttending: function (req, res) {
         StatisticsService.studentAttendingSync(req.body, req.user.access_token)
             .then(function (data) {
