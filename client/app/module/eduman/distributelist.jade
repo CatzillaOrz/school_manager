@@ -56,32 +56,32 @@
                                                     ng-change='distributeListFn.monitorType(distributeListFn.queryOption.queryType)')
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
                                                     label.control-label 课程名称：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName")
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'||distributeListFn.queryOption.queryType=='按专业'")
                                                     label.control-label 院&nbsp;&nbsp;系：
-                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()" )
+                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.collegeId" ui-select2="distributeListFn.selectCollege2Options()"  ng-change="distributeListFn.findByOption('uncomplete')")
                                                         option(value="-1") 全部
                                                         option(ng-repeat="college in distributeListFn.collegeDropList" value="{{college.id}}" ng-selected="distributeListFn.queryOption.collegeId==college.id") {{college.name}}
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'||distributeListFn.queryOption.queryType=='按行政班'")
                                                     label.control-label 专&nbsp;&nbsp;业：
-                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.professionalId" ui-select2="distributeListFn.select2MajorOptions(classListFn.collegeId)"  )
+                                                    select.select2.form-control(ng-model="distributeListFn.queryOption.professionalId" ui-select2="distributeListFn.select2MajorOptions(classListFn.collegeId)"  ng-change="distributeListFn.findByOption('uncomplete')")
                                                         option(value="") 全部
                                                         option(ng-repeat="major in distributeListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
                                                     label.control-label 班级名称：
-                                                    input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className")
+                                                    input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
                                                     label.control-label 班&nbsp;主&nbsp;任：
-                                                    input.form-control(type="text" placeholder="请填写输入班主任姓名" ng-model="distributeListFn.queryOption.classHeader")
+                                                    input.form-control(type="text" placeholder="请填写输入班主任姓名" ng-model="distributeListFn.queryOption.classHeader" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
                                                     label.control-label 授课教师：
-                                                    input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName")
+                                                    input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按专业'")
                                                     label.control-label 专业名称：
-                                                    input.form-control(type="text" placeholder="请填写输入专业名称" ng-model="distributeListFn.queryOption.majorName")
+                                                    input.form-control(type="text" placeholder="请填写输入专业名称" ng-model="distributeListFn.queryOption.majorName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按院系'")
                                                     label.control-label 院系名称：
-                                                    input.form-control(type="text" placeholder="请填写院系名称" ng-model="distributeListFn.queryOption.collegeName")
+                                                    input.form-control(type="text" placeholder="请填写院系名称" ng-model="distributeListFn.queryOption.collegeName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10
                                                     button.btn.btn-primary(ng-click="distributeListFn.findByOption('uncomplete')")
                                                         span 查询
@@ -275,13 +275,13 @@
                                             form.form-inline
                                                 .form-group.col-md-4.padding-10
                                                     label.control-label
-                                                    select.form-control(type='text', ng-model="distributeListFn.queryOption.queryType"  ng-options="obj.name as obj.name for obj in distributeListFn.assignedQueTypes")
+                                                    select.form-control(type='text', ng-model="distributeListFn.queryOption.queryType"  ng-options="obj.name as obj.name for obj in distributeListFn.assignedQueTypes" ng-change="distributeListFn.findByOption('complete')")
                                                 .form-group.col-md-4.padding-10
                                                     label.control-label 班级名称：
-                                                    input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className")
+                                                    input.form-control(type="text" placeholder="请填写输入班级名称" ng-model="distributeListFn.queryOption.className" my-enter="distributeListFn.findByOption('complete')")
                                                 .form-group.col-md-4.padding-10
                                                     label.control-label 授课教师/班主任：
-                                                    input.form-control(type="text" placeholder="请填写输入授课教师/班主任姓名" ng-model="distributeListFn.queryOption.classHeader")
+                                                    input.form-control(type="text" placeholder="请填写输入授课教师/班主任姓名" ng-model="distributeListFn.queryOption.classHeader" my-enter="distributeListFn.findByOption('complete')")
                                                 .form-group.col-md-4.padding-10
                                                     button.btn.btn-primary(ng-click="distributeListFn.findByOption('complete')")
                                                         span 查询
