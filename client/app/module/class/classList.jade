@@ -27,8 +27,8 @@
                                 .form-group.col-sm-4.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)", ng-change="classListFn.getClassList()"  )
-                                        option(value="") 全部
-                                        option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                        option(value="-1") 全部
+                                        option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ng-selected="classListFn.params.professionalId==major.id" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 年级：
                                     select.form-control(type='text', ng-model="classListFn.params.teachingYear"  ng-options="obj.value as obj.name for obj in classListFn.grades" ng-change="classListFn.getClassList()")
