@@ -9,8 +9,8 @@ angular.module('dleduWebApp')
 
 
         $scope.summaryFn = {
-            portalUrl: $state.current.name,     // 当前路由
-            portalGun: {    // 匹配当前路由入口方法 - 传送门
+            portalUrl: $state.current.name, // 当前路由
+            portalGun: { // 匹配当前路由入口方法 - 传送门
                 teachingSummary: '$scope.summaryFn.teachingSummary',
                 studentAttending: '$scope.summaryFn.studentAttending',
                 studentActive: '$scope.summaryFn.studentActive',
@@ -42,7 +42,7 @@ angular.module('dleduWebApp')
             summeryList: [],
             majorDropList: [],
             someArr: ['菜庚', '陈薇薇', '龚丽娜', '赵建民', '胡慧敏', '顾小敏', '陶丽', '张佳薇', '林星', '潘婷'],
-            setPagination: function(){
+            setPagination: function () {
                 this.params.pageNumber = this.page.pageNumber;
                 this.params.pageSize = this.page.pageSize;
             },
@@ -96,7 +96,7 @@ angular.module('dleduWebApp')
                         that.page = data.page;
                     })
             },
-            enterpriseDetail: function(){
+            enterpriseDetail: function () {
                 var that = $scope.summaryFn;
                 that.setPagination();
                 StatisticsService.getEnterpriseDetail(that.params).$promise
@@ -106,7 +106,7 @@ angular.module('dleduWebApp')
                         that.page = data.page;
                     })
             },
-            studentActive: function(){
+            studentActive: function () {
                 var that = $scope.summaryFn;
                 that.setPagination();
                 StatisticsService.getStudentActive(that.params).$promise
@@ -269,70 +269,112 @@ angular.module('dleduWebApp')
              * excel另存为
              */
             s2ab: function (s) {
-				var buf = new ArrayBuffer(s.length);
-				var view = new Uint8Array(buf);
-				for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-				return buf;
-			},
-			saveAs: function (data, fileName) {
-				var that = this;
-				var blob = new Blob([that.s2ab(data)], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
-				var windowUrl = (window.URL || window.webkitURL)
-				var downloadUrl = windowUrl.createObjectURL(blob);
-				var anchor = document.createElement("a");
-				anchor.href = downloadUrl;
-				anchor.download = fileName + '.xlsx';
-				document.body.appendChild(anchor);
-				anchor.click();
-				windowUrl.revokeObjectURL(blob);
-			},
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            },
+            saveAs: function (data, fileName) {
+                var that = this;
+                var blob = new Blob([that.s2ab(data)], {
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                })
+                var windowUrl = (window.URL || window.webkitURL)
+                var downloadUrl = windowUrl.createObjectURL(blob);
+                var anchor = document.createElement("a");
+                anchor.href = downloadUrl;
+                anchor.download = fileName + '.xlsx';
+                document.body.appendChild(anchor);
+                anchor.click();
+                windowUrl.revokeObjectURL(blob);
+            },
             /****************************
              * 导出报表
-            */
-           exportStuJournal: function(){
-               var that = this;
-               var _params = this.params;
-               _params.pageNumber = 1;
-               _params.pageSize = 10000;
-               StatisticsService.exportStuJournal(_params)
-                    .success(function(data){
+             */
+            exportStuJournal: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStuJournal(_params)
+                    .success(function (data) {
                         that.saveAs(data, '学生周日志统计报表');
                     })
-           },
-           exportStuProcess: function(){
+            },
+            exportStuProcess: function () {
                 var that = this;
                 var _params = this.params;
                 _params.pageNumber = 1;
                 _params.pageSize = 10000;
                 StatisticsService.exportStuProcess(_params)
-                    .success(function(data){
+                    .success(function (data) {
                         that.saveAs(data, '学生参与过程明细表');
                     })
-           },
-           exportEnterpriseDetail: function(){
+            },
+            exportEnterpriseDetail: function () {
                 var that = this;
                 var _params = this.params;
                 _params.pageNumber = 1;
                 _params.pageSize = 10000;
                 StatisticsService.exportEnterpriseDetail(_params)
-                    .success(function(data){
+                    .success(function (data) {
                         that.saveAs(data, '实践企业统计表');
                     })
-           },
-           taskStatus: function(stuTaskStatus) {
-            if (stuTaskStatus == "uncommit") {
-              return "未提交";
-            } else if (stuTaskStatus == "checkPending") {
-              return "待审核";
-            } else if (stuTaskStatus == "notPass") {
-              return "未通过";
-            } else if (stuTaskStatus == "backTo") {
-              return "已打回";
-            } else if (stuTaskStatus == "finish") {
-              return "已通过";
-            } else {
-              return "状态出错";
-            }
+            },
+            exportStudentActive: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStudentActive(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '学生激活明细表');
+                    })
+            },
+            exportStudentAttending: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStudentAttending(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '学生参与过程明细');
+                    })
+            },
+            exportStuReport: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStuReport(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '学生实习报告成绩');
+                    })
+            },
+            exportTeachingSummary: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportTeachingSummary(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '实践教学汇总');
+                    })
+            },
+            taskStatus: function (stuTaskStatus) {
+                if (stuTaskStatus == "uncommit") {
+                    return "未提交";
+                } else if (stuTaskStatus == "checkPending") {
+                    return "待审核";
+                } else if (stuTaskStatus == "notPass") {
+                    return "未通过";
+                } else if (stuTaskStatus == "backTo") {
+                    return "已打回";
+                } else if (stuTaskStatus == "finish") {
+                    return "已通过";
+                } else {
+                    return "状态出错";
+                }
             }
         }
         console.log('Hello Teacher');

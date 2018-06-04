@@ -52,6 +52,34 @@ angular.module('dleduWebService')
 					url: "api/statistics/exportStuProcess",
 					params: params
 				});
+            },
+            exportStudentActive: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportStudentActive",
+					params: params
+				});
+            },
+            exportStudentAttending: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportStudentAttending",
+					params: params
+				});
+            },
+            exportStuReport: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportStuReport",
+					params: params
+				});
+            },
+            exportTeachingSummary: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportTeachingSummary",
+					params: params
+				});
             }
         }
 

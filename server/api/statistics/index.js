@@ -20,5 +20,9 @@ router.post('/getEnterpriseDetail',auth.isSignedIn, controller.getEnterpriseDeta
 router.get('/exportStuProcess',auth.isSignedIn, controller.exportStuProcess);
 router.get('/exportStuJournal',auth.isSignedIn, controller.exportStuJournal);
 router.get('/exportEnterpriseDetail',auth.isSignedIn, controller.exportEnterpriseDetail);
+router.get('/exportStudentActive',auth.isSignedIn, controller.exportStudentActive);
+router.get('/exportStudentAttending',auth.isSignedIn, controller.exportStudentAttending);
+router.get('/exportStuReport',auth.isSignedIn, controller.exportStuReport);
+router.get('/exportTeachingSummary',auth.isSignedIn, controller.exportTeachingSummary);
 
 module.exports = router;
