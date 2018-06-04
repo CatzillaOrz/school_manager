@@ -15,9 +15,9 @@ angular.module('dleduWebApp')
 			//是否是编辑
 			isEidt: false,
 			//提示title
-			title: "新建实践小组",
+			title: "新建实践计划",
 			//提示
-			prompt: "填写以下信息以建立实践小组",
+			prompt: "填写以下信息以建立实践计划",
 			//操作标识
 			handle: "create",
 			//是否添加了已经分配的学生
@@ -26,8 +26,8 @@ angular.module('dleduWebApp')
 			isAddTea: false,
 			//添加步骤
 			steps: [
-				{title: '选择导师'},
 				{title: '选择学生'},
+				{title: '选择导师'},
 				{title: '创建实践小组'}
 			],
 			//当前步骤
