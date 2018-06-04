@@ -26,8 +26,9 @@
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="practiceGroupMan.getPracticeGroupList()")
                                         i.glyphicon.glyphicon-search
                         .col-xs-12.col-sm-6
-                            select(ng-model="practiceGroupMan.queryOption.status" ng-change='practiceGroupMan.getPracticeGroupList()')
-                                option(value="all") 全部
+                            span 进行状态：
+                            select.form-control(ng-model="practiceGroupMan.queryOption.status" ng-change='practiceGroupMan.getPracticeGroupList()')
+                                option(value="all" selected) 全部
                                 option(value="notOver") 未结束
                                 option(value="end") 已结束
                         .col-sm-6.col-xs-6.hidden-xs
@@ -55,7 +56,7 @@
                                 td {{record.studentCount}}
                                 td {{record.startDate}}
                                 td {{record.endDate}}
-                                td {{record.status || '进行中'}}
+                                td {{record.status == 'end' ? '已结束' : '进行中'}}
                                 td
                                     a.handle(ui-sref="createpracticegroup({id: record.corporateMentorsId})")
                                         i.fa.fa-pencil-square-o
