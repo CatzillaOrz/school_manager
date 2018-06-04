@@ -143,7 +143,7 @@ module.exports = {
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "学生周日志明细表");
+                XLSX.utils.book_append_sheet(wb, ws, "学生激活明细表");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
@@ -164,7 +164,7 @@ module.exports = {
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "学生周日志明细表");
+                XLSX.utils.book_append_sheet(wb, ws, "学生参与过程明细表");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
@@ -185,7 +185,7 @@ module.exports = {
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "学生周日志明细表");
+                XLSX.utils.book_append_sheet(wb, ws, "学生实践报告明细表");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
@@ -204,7 +204,7 @@ module.exports = {
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "学生周日志明细表");
+                XLSX.utils.book_append_sheet(wb, ws, "实践教学汇总");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {
