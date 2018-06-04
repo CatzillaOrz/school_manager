@@ -18,24 +18,24 @@
                     "sref": "enttutorman",
                     "active": "enttutorman",
                     "icon": "pencil-square-o"
-                },
-                {
-                    "title": "实践小组管理",
-                    "sref": "practicegroupman",
-                    "active": "practicegroupman",
-                    "icon": "pencil-square-o"
                 }
             ]
         },
         {
-            "title": "实践课程管理",
+            "title": "实践过程管理",
             "sref": "trainClassList",
             "icon": "navicon",
             "active": "trainClassList",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
             "items":[
                 {
-                    "title": "实践课程任务管理",
+                    "title": "实践计划",
+                    "sref": "practicegroupman",
+                    "active": "practicegroupman",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践课程",
                     "sref": "trainClassList",
                     "active": "trainClassList",
                     "icon": "pencil-square-o"
