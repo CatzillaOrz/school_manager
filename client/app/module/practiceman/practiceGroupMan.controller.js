@@ -20,6 +20,7 @@ angular.module('dleduWebApp')
 			//查询条件
 			queryOption: {
 				name: '',
+				status: ''
 			},
 
 			// 实践小组列表
@@ -29,7 +30,8 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					name: that.queryOption.name
+					name: that.queryOption.name,
+					status: that.queryOption.status
 				};
 				CommonService.delEmptyProperty(params);
 				PracticeManService.getPracticeGroupList(params).$promise
