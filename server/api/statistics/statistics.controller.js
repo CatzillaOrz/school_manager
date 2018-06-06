@@ -151,7 +151,7 @@ module.exports = {
             })
     },
     exportStudentAttending: function (req, res) {
-        StatisticsService.getStudentAttendingSync(req.query, req.user.access_token)
+        StatisticsService.studentAttendingSync(req.query, req.user.access_token)
             .then(function (data) {
                 var thead = [
                     ["姓名", "学号", "班级", "年级", "专业", "学院",
@@ -172,7 +172,7 @@ module.exports = {
             })
     },
     exportStuReport: function (req, res) {
-        StatisticsService.getStuReportSync(req.query, req.user.access_token)
+        StatisticsService.stuReportSync(req.query, req.user.access_token)
             .then(function (data) {
                 var thead = [
                     ["学院", "专业", "班级", "年级", "学号", "姓名",
@@ -193,7 +193,7 @@ module.exports = {
             })
     },
     exportTeachingSummary: function (req, res) {
-        StatisticsService.getTeachingSummarySync(req.query, req.user.access_token)
+        StatisticsService.teachingSummarySync(req.query, req.user.access_token)
             .then(function (data) {
                 var thead = [
                     ["班级", "所属专业", "学生总数", "未激活学生", "已参与学生", "未参与学生", "日志提交总数", "报告提交总数"]
