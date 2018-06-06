@@ -113,12 +113,12 @@ module.exports = {
             .then(function (data) {
                 var thead = [
                     ["学院", "专业", "班级", "年级", "学号", "姓名",
-                    "周日志标题", "提交时间", "回复数"]
+                    "指导老师", "周日志标题", "提交时间", "回复数"]
                 ];
                 for (var index in data.data) {
                     var item = data.data[index];
                     thead.push([item.collegeName, item.professionalName, item.className, item.grade, item.jobNum, item.studentName,
-                        item.summaryTitle, item.createdDate, item.replyNum]);
+                        item.counselorName, item.summaryTitle, item.createdDate, item.replyNum]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
@@ -155,12 +155,12 @@ module.exports = {
             .then(function (data) {
                 var thead = [
                     ["姓名", "学号", "班级", "年级", "专业", "学院",
-                    "激活状态", "指导老师", "岗位/单位"]
+                     "指导老师", "岗位/单位"]
                 ];
                 for (var index in data.data) {
                     var item = data.data[index];
                     thead.push([item.studentName, item.jobNum, item.className, item.grade, item.professionalName,  item.collegeName, 
-                        item.active ? '已激活' : '未激活', item.join ? '已参与' : '未参与', item.mentorName, item.enterpriseName]);
+                        item.join ? '是' : '否', item.counselorName, item.enterpriseName]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
@@ -181,7 +181,7 @@ module.exports = {
                 for (var index in data.data) {
                     var item = data.data[index];
                     thead.push([item.collegeName, item.professionalName, item.className, item.grade, item.jobNum, item.studentName, 
-                        item.mentorName, item.commit ? '已提交' : '未提交', reportTaskStatus(item.status), item.reportTitle, item.reviewTime, item.advice]);
+                        item.counselorName, item.commit ? '已提交' : '未提交', item.commit ? reportTaskStatus(item.status) : '', item.reportTitle, item.reviewTime, item.advice]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
