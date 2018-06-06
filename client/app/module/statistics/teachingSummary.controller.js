@@ -37,6 +37,7 @@ angular.module('dleduWebApp')
                 professionalId: '',
                 classId: "",
                 masterName: "",
+                enterpriseName: '',
                 teachingYear: ""
             },
             summeryList: [],

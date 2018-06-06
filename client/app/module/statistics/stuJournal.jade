@@ -57,6 +57,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 指导老师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 周日志标题
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 提交时间
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 回复数
@@ -69,6 +70,7 @@
                                 td {{rp.grade}}
                                 td {{rp.jobNum}}
                                 td {{rp.studentName}}
+                                td {{rp.counselorName}}
                                 td {{rp.summaryTitle}}
                                 td {{rp.createdDate}}
                                 td {{rp.replyNum}}
@@ -76,7 +78,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?summaryFn.page.pageNumber*10:(summaryFn.page.pageNumber-1)*10+1}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共

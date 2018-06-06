@@ -20,7 +20,7 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按企业名称查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords" my-enter="summaryFn.portalTrigger()")
+                                    input.form-control(type='search', placeholder='按企业名称查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.enterpriseName" my-enter="summaryFn.portalTrigger()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
@@ -50,7 +50,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?summaryFn.page.pageNumber*10:(summaryFn.page.pageNumber-1)*10+1}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共

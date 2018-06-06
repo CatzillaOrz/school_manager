@@ -44,7 +44,9 @@
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
+                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
                                 //- .form-group.col-sm-4.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
@@ -88,7 +90,7 @@
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?summaryFn.page.pageNumber*10:(summaryFn.page.pageNumber-1)*10+1}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共
