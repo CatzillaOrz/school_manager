@@ -869,7 +869,7 @@ angular.module('dleduWebApp')
 
 			}
 		};
-		//$scope.distributeListFn.init();
+		$scope.distributeListFn.init();
 		$timeout(function () {
 			$scope.$watch('distributeListFn.queryOption.collegeId', function (newValue, oldValue) {
 				if (newValue == -1) {
@@ -887,33 +887,4 @@ angular.module('dleduWebApp')
 			$interval.cancel($scope.distributeListFn.intervalResult);
 
 		})
-
-		//页面路由变时的处理
-		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
-			if(toState.name == "evaquestatic" && fromState.name == "distributelist"){
-				var params = {params:$scope.distributeListFn.queryOption};
-				params.quesId = $state.params.quesId;
-				params.isEnd = $state.params.type;
-				params.id = $state.params.id;
-				var key = fromState.name + toState.name;
-				tempStorageService.setObject(key, params);
-			}
-		});
-		//页面路由变化成功时的处理
-		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-			if(fromState.name == "evaquestatic" && toState.name == "distributelist"){
-				var key = toState.name + fromState.name;
-				var params = tempStorageService.getObject(key);
-				if(params){
-					tempStorageService.removeObject(key);
-					$scope.distributeListFn.queryOption = params.params;
-				}
-				$scope.distributeListFn.init();
-			}else{
-				if(toState.name == "distributelist"){
-					tempStorageService.removeObject("distributelist" + "evaquestatic");
-					$scope.distributeListFn.init();
-				}
-			}
-		});
 	});

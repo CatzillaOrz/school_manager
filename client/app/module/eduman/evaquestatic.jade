@@ -7,8 +7,6 @@
             span.widget-icon
                 i.fa.fa-table
             h2 问卷统计
-            button.btn.btn-default.set-elecfence(ng-if="evaQueStaticFn.queId" ui-sref="distributelist({quesId:evaQueStaticFn.queId,id:evaQueStaticFn.type,type:evaQueStaticFn.end})")
-                span 返回
             button.btn.btn-primary.set-elecfence(ng-disabled="evaQueStaticFn.assignResult.result=='10'" ng-click="evaQueStaticFn.exportQuesStatResult()")
                 span 导出统计报表
             button.btn.btn-primary.set-elecfence(ng-click="evaQueStaticFn.confirmExcel()")
