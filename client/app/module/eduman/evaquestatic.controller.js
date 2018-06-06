@@ -206,8 +206,6 @@ angular.module('dleduWebApp')
 			init: function () {
 				this.id = $state.params.id; //问卷id;
 				this.type = $state.params.type;
-				this.queId = $state.params.queId;
-				this.end = $state.params.end;
 				this.getEvaQuesStaticInfo();
 				//每次请求前检测上次执行是否结束
 				//this.exeInterval();

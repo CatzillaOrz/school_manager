@@ -129,7 +129,7 @@ angular.module('dleduWebApp')
 			})
 			.state('evaquestatic', {
 				parent: 'evaquestion',
-				url   : '/evaquestatic/:type/:id/:queId/:end',
+				url   : '/evaquestatic/:type/:id',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
@@ -420,7 +420,7 @@ angular.module('dleduWebApp')
 			})
 			.state('evaquestatictea', {
 				parent: 'evaquestiontea',
-				url   : '/evaquestatictea/:type/:id/:queId/:end',
+				url   : '/evaquestatictea/:type/:id',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
