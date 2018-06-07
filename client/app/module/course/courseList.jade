@@ -31,14 +31,14 @@
                                     span 批量导入
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
-                            tr(role='row')
-                                th 序号
-                                th 课程名称
-                                th 课程编号
-                                th 课程性质
-                                th 学分
-                                th 课程描述
-                                th 操作
+                            tr(role='row' )
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 80px;') 序号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 课程名称
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 150px;') 课程编号
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 课程性质
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 学分
+                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 280px;') 课程描述
+                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 80px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="course in courseListFn.courseList")
                                 td.sorting_1 {{$index+1 + ((courseListFn.page.pageNumber==0?courseListFn.page.pageNumber+1:courseListFn.page.pageNumber)-1)*10}}
