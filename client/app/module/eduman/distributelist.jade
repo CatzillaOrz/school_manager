@@ -249,7 +249,7 @@
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{record.orgName}}
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配问卷
+                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选问卷
                                 button.btn.btn-primary.margin-left-10(ng-if="distributeListFn.queryOption.queryType!='按学校'" ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
 
                 .tab-pane.active(ng-if="distributeListFn.tabType == 'complete'" )
