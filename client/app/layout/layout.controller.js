@@ -9,20 +9,42 @@ angular.module('dleduWebApp')
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
            
-            currentLink: $state.current.name,
+            currentLink: SchoolService.defineProperty().get() || 'home',
             nav:[
                 {name: '首页', url: 'home', selected: true},
-                {name: '实践教学', url: 'enterpriseList', selected: false},
+                {name: '实践教学', url: 'workbench', selected: false},
                 {name: '统计报表', url: 'teachingSummary', selected: false},
             ],
+            schoolStatistics: {},
+            tab: true,
+			stepOne: [
+				{title: '导入院系信息', url:'college.list', tab: 0},
+				{title: '导入专业信息', url: 'majorlist', tab: 0},
+				{title: '导入班级信息', url: 'classlist', tab: 0},
+				{title: '导入辅导员信息', url: 'teacherlist', tab: 0},
+				{title: '导入企业信息', url: 'enterpriseList', tab: 1},
+				{title: '导入企业导师信息', url: 'enttutorman', tab: 1}
+            ],
+            stepTwo: [
+                {title: '导入基础数据', url: '', tab: 1},
+                {title: '创建实践计划', url: 'practicegroupman', tab: 1},
+                {title: '关联企业导师', url: 'practicegroupman', tab: 1},
+                {title: '数据汇总统计', url: 'teachingSummary', tab: 2},
+
+            ],
             user: $rootScope.user,
-            redirectTo : function(entity){
+            redirectTo : function(entity, step){
                 var that = this;
                 this.nav.forEach(function(c){
                     c.selected = false
                 });
                 entity.selected = true;
-                this.currentLink = entity.url;
+                SchoolService.defineProperty(entity.url).set();
+                that.currentLink = entity.url;
+                step && $state.go(step.url,{},{relative: $state.$current, reload: true});
+            },
+            redirectStep: function(){
+                
             },
             signOut: function () {
                 AuthService.signOut();
@@ -55,9 +77,23 @@ angular.module('dleduWebApp')
                 var domain=AuthService.getCurrentEnvDomain()[5];
                 var url=AuthService.getUser().orgCode+"."+domain;
                 window.open( '//' +url, "_blank")
-            }
+            },
+            getSchoolStatistics:function () {
+                var _this=this;
+                var params={
+                    orgId:AuthService.getUser().orgId
+                };
+                SchoolService.getSchoolStatistics(params).$promise
+                    .then(function (data) {
+                        _this.schoolStatistics = data;
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
         };
         $scope.layoutFn.getLogoList();
+        ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
         $scope.layoutFn.nav.forEach(function(c){
             c.selected = c.url == $scope.layoutFn.currentLink
         })
