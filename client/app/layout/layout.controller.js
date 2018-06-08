@@ -28,7 +28,7 @@ angular.module('dleduWebApp')
             stepTwo: [
                 {title: '导入基础数据', url: '', tab: 1},
                 {title: '创建实践计划', url: 'practicegroupman', tab: 1},
-                {title: '关联企业导师', url: 'trainClassList', tab: 1},
+                {title: '关联企业导师', url: 'practicegroupman', tab: 1},
                 {title: '数据汇总统计', url: 'teachingSummary', tab: 2},
 
             ],

@@ -49,7 +49,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '实践小组管理'
+					label: '实践计划管理'
 				}
 			})
 			.state('createpracticegroup', {
@@ -173,7 +173,7 @@ angular.module('dleduWebApp')
 					completeMSG:'恭喜你，分配任务成功！'
 				},
                 ncyBreadcrumb: {
-                    label: '任务分配'
+                    label: '实践课程分配'
                 }
             })
             .state('missionList', {
