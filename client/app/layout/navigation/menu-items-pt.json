@@ -1,6 +1,21 @@
 {
     "items": [
         {
+            "title": "实践工作台",
+            "sref": "workbench",
+            "icon": "navicon",
+            "active": "workbench",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "我的工作台",
+                    "sref": "workbench",
+                    "active": "workbench",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
             "title": "实践管理",
             "sref": "enterpriseList",
             "icon": "navicon",

@@ -401,6 +401,22 @@ var SchoolService = {
                 callback(e);
             });
     },
+    getSchoolStatistics: function (params, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/trainingmanage/groupstatistics?orgId=' + params.orgId,
+            params:params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
     handleApply: function (params, callback) {
         RestClient.put({
             host: 'gateway-school',

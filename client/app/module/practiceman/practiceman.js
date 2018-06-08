@@ -246,4 +246,18 @@ angular.module('dleduWebApp')
                     label: '实践企业管理'
                 }
             })
+            .state('workbench', {
+                parent: 'base',
+                url   : '/workbench',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'LayoutCtrl',
+                        templateUrl: 'app/module/practiceman/workbench.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '我的工作台'
+                }
+            })
 	});
