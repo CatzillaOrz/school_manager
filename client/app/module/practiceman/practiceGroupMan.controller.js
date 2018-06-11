@@ -20,7 +20,7 @@ angular.module('dleduWebApp')
 			//查询条件
 			queryOption: {
 				name: '',
-				status: ''
+				status: 'all'
 			},
 
 			// 实践小组列表
