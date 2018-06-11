@@ -21,15 +21,27 @@
                     "icon": "cog"
                 },
                 {
+                    "title": "设置轮播图与简介",
+                    "sref": "setplayview",
+                    "active": "setplayview",
+                    "icon": "cogs"
+                },
+                {
+                    "title": "设置热门专业",
+                    "sref": "sethotmajor",
+                    "active": "sethotmajor",
+                    "icon": "wrench"
+                },
+                {
+                    "title": "设置优秀老师",
+                    "sref": "setexcellentteacher",
+                    "active": "setexcellentteacher",
+                    "icon": "gavel"
+                },
+                {
                     "title": "设置精品课程",
                     "sref": "setboutiquecourse",
                     "active": "setboutiquecourse",
-                    "icon": "magic"
-                },
-                {
-                    "title": "精品课程申请处理",
-                    "sref": "boutiquecourseapply",
-                    "active": "boutiquecourseapply",
                     "icon": "magic"
                 }
             ]

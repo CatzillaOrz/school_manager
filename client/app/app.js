@@ -142,7 +142,7 @@ angular.module('dleduWebApp', [
         //
         // }
         $urlRouterProvider
-            .otherwise('/index');
+            .otherwise('/index1');
         $stateProvider
             .state('base', {
                 abstract: true,
