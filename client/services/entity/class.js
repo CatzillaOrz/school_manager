@@ -40,6 +40,10 @@ angular.module('dleduWebService')
                 var classesList = $resource('api/class/getClassTeacherList');
                 return classesList.get(params);
             },
+            getInstructorList: function (params) {
+                var classesList = $resource('api/class/getInstructorList');
+                return classesList.get(params);
+            },
             deleteClassTeacher:function (params) {
                 var classes=$resource('api/class/deleteClassTeacher');
                 return classes.remove(params);

@@ -21,6 +21,20 @@ angular.module('dleduWebApp')
                     label: '班级管理'
                 }
             })
+            .state('instructorList', {
+                parent: 'base',
+                url   : '/class/instructorList',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'InstructorListCtrl',
+                        templateUrl: 'app/module/class/instructorList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '辅导员管理'
+                }
+            })
             .state('classEdit', {
                 parent: 'class',
                 url   : '/classedit/:id',

@@ -18,6 +18,7 @@ router.get('/getClassById',auth.isSignedIn, controller.getClassById);
 router.get('/geClassDropList',auth.isSignedIn, controller.geClassDropList);
 router.post('/saveClassTeacher',auth.isSignedIn, controller.saveClassTeacher);
 router.get('/getClassTeacherList',auth.isSignedIn, controller.getClassTeacherList);
+router.get('/getInstructorList',auth.isSignedIn, controller.getInstructorList);
 router.delete('/deleteClassTeacher',auth.isSignedIn, controller.deleteClassTeacher);
 router.get('/getClassDropListOrg',auth.isSignedIn, controller.getClassDropListOrg);
 

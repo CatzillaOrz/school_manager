@@ -1,0 +1,46 @@
+.college-list-container
+    .jarviswidget.jarviswidget-color-blueDark(ng-if="!instructorListFn.isTransfer")
+        div(role='content')
+            .widget-body
+                fieldset
+                    span.title-class-detail 辅导员
+                    button.btn.btn-primary.btn-class-detail.pull-right(ui-sref="classlist")
+                        i.fa.fa-plus
+                        span 新建
+                table#dt_basic.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
+                    thead
+                        tr(role='row')
+                            th
+                                i.fa.fa-fw.fa-user.text-muted.hidden-md.hidden-sm.hidden-xs
+                                |  姓名
+                            th
+
+                                |  工号
+                            th 性别
+                            th 班级名称
+                            th 院系名称
+                            th 专业名称
+                            th 年级
+                            th 学制
+                            th 操作
+                    tbody
+                        tr.odd(role='row' ng-repeat="teacher in instructorListFn.classTeacherList")
+                            td {{teacher.name}}
+                            td {{teacher.jobNumber}}
+                            td {{teacher.sex}}
+                            td {{teacher.classesName}}
+                            td {{teacher.collegeName}}
+                            td {{teacher.professionalName}}
+                            td {{teacher.teachingYear}}
+                            td {{teacher.schoolingLength}}
+                            td
+                                a.handle(ng-click="instructorListFn.deletePrompt(teacher)")
+                                    i.fa.fa-trash-o
+                                    span 解除班主任
+                .dt-toolbar-footer
+                    .col-sm-6.col-xs-12.hidden-xs
+                        .dataTables_info(role='status', aria-live='polite')
+                            |共 {{instructorListFn.classTeacherList.length}} 条数据
+                    .col-sm-6.col-xs-12
+                        #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                        ul.pagination-sm(uib-pagination, total-items='instructorListFn.page.totalElements', max-size='instructorListFn.page.pageSize' ng-model='instructorListFn.page.pageNumber',ng-change="instructorListFn.getClassTeacherList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
