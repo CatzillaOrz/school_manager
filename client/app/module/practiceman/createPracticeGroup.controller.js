@@ -222,10 +222,11 @@ angular.module('dleduWebApp')
 			getSimpleStudents: function () {
 				var _this = this;
 				var params = _this.searchStudentParams;
-				params.pageSize = 100;
+				params.pageSize = 10000;
 				params.userId = AuthService.getUser().id;
+				$timeout(function(){CommonService.curtainLayoutFn(true, 'all')},3000)
 				StudentService.getSimpleStudents(params).$promise
-					.then(function (data) {
+				.then(function (data) {
 						_this.studentList = data.data;
 						if(_this.practiceGroupInfo && !_this.isAddStu){
 							angular.forEach(_this.practiceGroupInfo.studentDTOList, function(item){
@@ -233,10 +234,21 @@ angular.module('dleduWebApp')
 								_this.isAddStu = true;
 							});
 						}
+						$timeout(function(){
+							CommonService.curtainLayoutFn(false, 'all');
+						},8000)
 					})
 					.catch(function (error) {
-
+						CommonService.curtainLayoutFn(false, 'all');
 					})
+			},
+			selectAllStu: function(){
+				CommonService.curtainLayoutFn(true, 'all');
+				this.selectStudentList = this.studentList;
+				$timeout(function(){
+					CommonService.curtainLayoutFn(false, 'all');
+				},2000)
+				
 			},
 			//下一步
 			nextStep: function () {
@@ -291,11 +303,10 @@ angular.module('dleduWebApp')
 			},
 			//选择学生
 			selectStudent: function (entity) {
-				var that = this;
+				var _this = this;
 				PracticeManService.isExistInGroup({type: 'student', orgId: AuthService.getUser().orgId, userId: entity.id}).$promise
 					.then(function (data) {
 						if(data.success){
-							var _this = that;
 							var temp = _.filter(_this.selectStudentList, function (value) {
 								if (entity.id == value.id) {
 									return value;
@@ -307,7 +318,6 @@ angular.module('dleduWebApp')
 						}else{
 							messageService.openMsg("该学生已经在其他小组，不能选择！");
 						}
-
 					})
 					.catch(function (error) {
 

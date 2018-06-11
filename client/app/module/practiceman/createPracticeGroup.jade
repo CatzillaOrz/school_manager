@@ -97,9 +97,9 @@
                                             a.handle(ng-click="handleFn.selectStudent(student)")
                                                 i.fa.fa-arrow-circle-right
                                                 span 选中
-                        .row
-                            .col-sm-4
-                                a(ng-click='handleFn.selectStudentList = handleFn.studentList') 全选
+                            .row(style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectAllStu()') 全选
                     .col-sm-1
                     .col-sm-5
                         fieldset
@@ -122,9 +122,9 @@
                                             a.handle(ng-click="handleFn.removeSelectedStudent(student)")
                                                 i.fa.fa-times
                                                 span 撤销
-                    .row(ng-if='handleFn.selectStudentList.length>0')
-                        .col-sm-2
-                            a(ng-click='handleFn.selectStudentList =[]' style="margin-left: 85px;") 清空全部
+                            .row(ng-if='handleFn.selectStudentList.length>0' style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectStudentList =[]') 清空全部
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
