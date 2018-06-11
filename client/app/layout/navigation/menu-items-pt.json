@@ -1,0 +1,73 @@
+{
+    "items": [
+        {
+            "title": "实践工作台",
+            "sref": "workbench",
+            "icon": "navicon",
+            "active": "workbench",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "我的工作台",
+                    "sref": "workbench",
+                    "active": "workbench",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
+            "title": "实践管理",
+            "sref": "enterpriseList",
+            "icon": "navicon",
+            "active": "enterpriseList",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "企业管理",
+                    "sref": "enterpriseList",
+                    "active": "enterpriseList",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "企业导师管理",
+                    "sref": "enttutorman",
+                    "active": "enttutorman",
+                    "icon": "pencil-square-o"
+                }
+            ]
+        },
+        {
+            "title": "实践过程管理",
+            "sref": "trainClassList",
+            "icon": "navicon",
+            "active": "trainClassList",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "items":[
+                {
+                    "title": "实践计划",
+                    "sref": "practicegroupman",
+                    "active": "practicegroupman",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践课程",
+                    "sref": "trainClassList",
+                    "active": "trainClassList",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "实践任务详情",
+                    "sref": "missionList",
+                    "active": "missionList",
+                    "icon": "pencil-square-o"
+                },
+                {
+                    "title": "通知管理",
+                    "sref": "newslist",
+                    "active": "news",
+                    "icon": "commenting"
+                }
+            ]
+        }
+    ]
+}

@@ -14,6 +14,8 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 			mId: $state.params.mId,
+			jobNum: $state.params.jobNum,
+			studentName: $state.params.studentName,
 
 			// 获取详情
 			getStd: function () {
@@ -38,12 +40,16 @@ angular.module('dleduWebApp')
 				  return "未通过";
 				} else if (stuTaskStatus == "backTo") {
 				  return "已打回";
-				} else if (stuTaskStatus == "pass") {
+				} else if (stuTaskStatus == "finish") {
 				  return "已通过";
 				} else {
 				  return "状态出错";
 				}
-			  },
+				},
+				
+				exportPDF: function(){
+					window.print();
+				},
 
 
 			init: function () {

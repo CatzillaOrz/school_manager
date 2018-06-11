@@ -36,11 +36,11 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 小组名称
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学时
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 任务创建人
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实践
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 时间
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 操作
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
-                                td.sorting_1 {{$index+1}}
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                                td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
                                 td 岗位实践-服务于沟通
                                 td 完成港务客户咨询服务
                                 td 3{{$index}}
@@ -54,11 +54,11 @@
                                     a.handle(href="#")
                                         i.fa.fa-trash-square-o
                                         span 删除
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(((summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+1)}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
                                 span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.weekTaskList.length}}
                                 |  条 总共

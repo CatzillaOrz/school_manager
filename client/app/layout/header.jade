@@ -1,4 +1,4 @@
-header#header
+header#header.hidden-print
     #logo-group.cursor-pointer(ng-click="layoutFn.toIndex()")
         span#logo
             img(ng-src='{{layoutFn.user.orgLogo || "https://s.aizhixin.com/defaultimg/logo.png"}}', alt='{{layoutFn.user.orgName}}')
@@ -7,10 +7,10 @@ header#header
         span
             a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
                 i.fa.fa-sign-out
-    //.head-navigation
+    .head-navigation.hidden-print
         ul
             li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav', ng-click='layoutFn.redirectTo(nav)') {{nav.name}}
-    .pull-right
+    .pull-right.hidden-print
         ul.account(ng-if=' layoutFn.user')
             li.user-menu(uib-dropdown='uib-dropdown' uib-dropdown-toggle='uib-dropdown-toggle')
                 span.user-avatar

@@ -46,6 +46,7 @@ router.get('/getSchoolOra', controller.getSchoolOra);
 router.get('/getApiUrl', controller.getApiUrl);
 router.get('/getApplyList', controller.getApplyList);
 router.put('/handleApply', controller.handleApply);
+router.get('/getSchoolStatistics', controller.getSchoolStatistics);
 
 
 module.exports = router;

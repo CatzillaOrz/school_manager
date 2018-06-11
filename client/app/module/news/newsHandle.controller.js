@@ -11,7 +11,8 @@ angular.module('dleduWebApp')
                  autoHeightEnabled: false,
                  autoFloatEnabled: false,
                  initialFrameWidth: '100%',
-                 initialFrameHeight: '500px'
+                 initialFrameHeight: '500px',
+                 maximumWords: '3000'
              },
              params:{
                  content: "",
@@ -58,7 +59,7 @@ angular.module('dleduWebApp')
                  if(!content){
                      CommonService.msgDialog("内容不能为空！",2);
                      return;
-                 }else if(content.length>1000){
+                 }else if(content.length>3000){
                      CommonService.msgDialog("内容不能超过最大长度！",2);
                      return;
                  }

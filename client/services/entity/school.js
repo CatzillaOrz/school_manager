@@ -8,6 +8,19 @@ angular.module('dleduWebService')
     .factory('SchoolService', function ($http, $q,$resource) {
 
         return {
+            defineProperty: function (entity) {
+                var that = this;
+                return {
+                    bar: {},
+                    get: function () {
+                        return that.bar;
+                    },
+                    set: function () {
+                        entity && (that.bar = entity);
+                        !entity && (that.bar = void 0);
+                    }
+                }
+            },
             addLogo: function (params) {
                 var schoolLogo = $resource('api/school/addLogo');
                 return schoolLogo.save(params);
@@ -119,6 +132,10 @@ angular.module('dleduWebService')
             },
             getApplyList:function (params) {
                 var boutiqueCourse = $resource('api/school/getApplyList');
+                return boutiqueCourse.get(params);
+            },
+            getSchoolStatistics:function (params) {
+                var boutiqueCourse = $resource('api/school/getSchoolStatistics');
                 return boutiqueCourse.get(params);
             },
             handleApply: function (params) {

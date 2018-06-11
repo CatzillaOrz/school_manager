@@ -6,7 +6,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 实践小组列表
+            h2 实践计划列表
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -25,6 +25,12 @@
                                     input.form-control(type='search', placeholder='按小组名称查询', aria-controls='datatable_col_reorder' ng-model="practiceGroupMan.queryOption.name", my-enter="practiceGroupMan.getPracticeGroupList()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="practiceGroupMan.getPracticeGroupList()")
                                         i.glyphicon.glyphicon-search
+                        .col-xs-12.col-sm-6
+                            span 进行状态：
+                            select.form-control(ng-model="practiceGroupMan.queryOption.status" ng-change='practiceGroupMan.getPracticeGroupList()')
+                                option(value="all") 全部
+                                option(value="notOver") 未结束
+                                option(value="end") 已结束
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.btn.btn-primary(ui-sref="createpracticegroup")
@@ -33,22 +39,24 @@
                         thead
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组名称
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 导师姓名
-                                //- th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 本校教师
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 小组人数
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 实践计划名称
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 指导教师（辅导员）
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 企业导师
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 学生人数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 开始日期
                                     th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 结束日期
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 状态
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in practiceGroupMan.records")
                                 td.sorting_1 {{$index+1 + ((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*10}}
                                 td {{record.groupName}}
+                                td {{record.teacherName}}
                                 td {{record.corporateMentorsName}}
-                                //- td {{record.teacherName}}
                                 td {{record.studentCount}}
                                 td {{record.startDate}}
                                 td {{record.endDate}}
+                                td {{record.status == 'end' ? '已结束' : '进行中'}}
                                 td
                                     a.handle(ui-sref="createpracticegroup({id: record.corporateMentorsId})")
                                         i.fa.fa-pencil-square-o

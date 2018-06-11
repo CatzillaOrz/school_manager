@@ -2,7 +2,8 @@
 
 angular.module('dleduWebApp')
     .controller('ClassListCtrl', function ($scope, $state, $window, ClassService,AuthService,messageService,CommonService,
-                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout, RoleAuthService,CollegeService) {
+                                           Upload, ngDialog, ImpBatchService,Select2LoadOptionsService,$timeout,
+                                           RoleAuthService,CollegeService, tempStorageService, MajorService) {
         $scope.classListFn={
             //班级列表
             classList: [],
@@ -137,6 +138,29 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                     })
             },
+            //专业下拉列表查询
+            getMajorDropList:function () {
+                var that=this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: 100
+                }
+                params.collegeId=that.params.collegeId;
+                if(params.collegeId == ""){
+                    params.collegeId = -1;
+                }
+                MajorService.getMajorDropList(params).$promise
+                    .then(function (data) {
+                        that.majorDropList=data.data;
+                        if(!that.isInit&& $state.current.name=="studentEdit"){
+                            that.getMajorById(that.majorId);
+                        }
+
+                    })
+                    .catch(function (error) {
+                    })
+            },
             // 获取班级列表
             getClassList: function () {
                 var that = this;
@@ -249,17 +273,20 @@ angular.module('dleduWebApp')
                 ImpBatchService.downLoad('classes');
             },
 
-            init: function () {
+            init: function (type) {
                 var _this=this;
-               _this.params.collegeId=$state.params.collegeId;
-               _this.params.professionalId=$state.params.professionalId;
-               _this.getCollegeDropList();
-               _this.getClassList();
-               _this.grades = _this.initGrades();
+                if(!type){
+                    _this.params.collegeId=$state.params.collegeId;
+                    _this.params.professionalId=$state.params.professionalId;
+                }
+                _this.getCollegeDropList();
+                _this.getMajorDropList();
+                _this.getClassList();
+                _this.grades = _this.initGrades();
                 _this.grades.splice(0, 0, {value:"", name: "请选择"});
             }
         };
-        $scope.classListFn.init();
+        //$scope.classListFn.init();
         $timeout(function () {
             $scope.$watch('classListFn.params.collegeId', function(newValue, oldValue) {
                 if(newValue==-1){
@@ -272,5 +299,29 @@ angular.module('dleduWebApp')
                     $scope.classListFn.majorDropList=[];
                 }
             });
+        });
+
+        $scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+            if(toState.name == "classDetail" && fromState.name == "classlist"){
+                var params = {params: $scope.classListFn.params};
+                var key = fromState.name + toState.name;
+                tempStorageService.setObject(key, params);
+            }
+        });
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+            if(fromState.name == "classDetail" && toState.name == "classlist"){
+                var key = toState.name + fromState.name;
+                var params = tempStorageService.getObject(key);
+                if(params){
+                    tempStorageService.removeObject(key);
+                    $scope.classListFn.params = params.params;
+                }
+                $scope.classListFn.init("backdetail");
+            }else{
+                if(toState.name == "classlist"){
+                    tempStorageService.removeObject("classlist" + "classDetail");
+                    $scope.classListFn.init();
+                }
+            }
         });
     });

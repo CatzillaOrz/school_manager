@@ -6,7 +6,7 @@
             h2 {{handleFn.title}}
         .widget-body
             step-line.step-line.margin-bottom-10(on-step="handleFn.step" steps="handleFn.steps")
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
                 .col-sm-5
                     fieldset
                         legend
@@ -60,7 +60,10 @@
                                     a.handle(ng-click="handleFn.removeSelectedTeacher(teacher)")
                                         i.fa.fa-times
                                         span 撤销
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
+                .row(ng-if='handleFn.selectTeacherList.length===0')
+                    .col-sm-5
+                        span(style="margin-left: 85px;color:red;") * 企业导师可不选择，但如果不选，不能进行实践任务操作
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
                 div
                     .col-sm-5
                         fieldset
@@ -94,28 +97,34 @@
                                             a.handle(ng-click="handleFn.selectStudent(student)")
                                                 i.fa.fa-arrow-circle-right
                                                 span 选中
+                            .row(style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectAllStu()') 全选
                     .col-sm-1
                     .col-sm-5
                         fieldset
                             legend
                                 span 已选择的学生
-
-                        table.table.table-striped.table-bordered.table-hover.dataTable
-                            thead
-                                tr(role='row')
-                                    th.sorting_asc 学号
-                                    th.expand.sorting 姓名
-                                    th.sorting 班级
-                                    th.sorting 操作
-                            tbody
-                                tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
-                                    td {{student.jobNumber}}
-                                    td {{student.name}}
-                                    td {{student.classesName}}
-                                    td
-                                        a.handle(ng-click="handleFn.removeSelectedStudent(student)")
-                                            i.fa.fa-times
-                                            span 撤销
+                        .row(style="cursor:default;min-height:74px;max-height:470px;overflow-y:scroll;")
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 学号
+                                        th.expand.sorting 姓名
+                                        th.sorting 班级
+                                        th.sorting 操作
+                                tbody
+                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
+                                        td {{student.jobNumber}}
+                                        td {{student.name}}
+                                        td {{student.classesName}}
+                                        td
+                                            a.handle(ng-click="handleFn.removeSelectedStudent(student)")
+                                                i.fa.fa-times
+                                                span 撤销
+                            .row(ng-if='handleFn.selectStudentList.length>0' style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectStudentList =[]') 清空全部
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
@@ -166,17 +175,18 @@
                     .row(ng-if="handleFn.params.classOrStudents==20")
                         .col-sm-3 学生信息：
                         .col-sm-7
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 学号
-                                        th.expand.sorting 姓名
-                                        th.sorting 班级
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
-                                        td {{student.jobNumber}}
-                                        td {{student.name}}
-                                        td {{student.classesName}}
+                            .row(style="cursor:default;min-height:74px;max-height:470px;overflow-y:scroll;")
+                                table.table.table-striped.table-bordered.table-hover.dataTable
+                                    thead
+                                        tr(role='row')
+                                            th.sorting_asc 学号
+                                            th.expand.sorting 姓名
+                                            th.sorting 班级
+                                    tbody
+                                        tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
+                                            td {{student.jobNumber}}
+                                            td {{student.name}}
+                                            td {{student.classesName}}
 
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
                         a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
@@ -185,7 +195,7 @@
                     .col-md-12
                         a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
                         .speace-10
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectTeacherList.length==0") 下一步
+                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectStudentList.length==0") 下一步
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
 
 

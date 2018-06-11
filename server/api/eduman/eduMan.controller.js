@@ -665,6 +665,33 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getAssignResult: function (req, res) {
+        EduManService.getAssignResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getExportQuesResult: function (req, res) {
+        EduManService.getExportQuesResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportQuesStatResult: function (req, res) {
+        EduManService.exportQuesStatResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 
