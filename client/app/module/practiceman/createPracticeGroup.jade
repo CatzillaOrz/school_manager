@@ -71,7 +71,8 @@
                                 span 选择学生
                         .row
                             .col-lg-6
-                                select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()"  )
+                                 select.select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()")
+                                    option(value="") 全部
                                     option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}" ) {{class.name}}
                             .col-lg-6
                                 .input-group

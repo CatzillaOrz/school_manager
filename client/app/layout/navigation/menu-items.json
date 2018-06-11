@@ -70,6 +70,13 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
+                    "title": "辅导员管理",
+                    "sref": "instructorList",
+                    "active": "instructorList",
+                    "icon": "id-card-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
                     "title": "学生管理",
                     "sref": "studentlist",
                     "active": "student",

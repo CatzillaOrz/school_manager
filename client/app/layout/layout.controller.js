@@ -21,7 +21,7 @@ angular.module('dleduWebApp')
 				{title: '导入院系信息', url:'college.list', tab: 0},
 				{title: '导入专业信息', url: 'majorlist', tab: 0},
 				{title: '导入班级信息', url: 'classlist', tab: 0},
-				{title: '导入辅导员信息', url: 'teacherlist', tab: 0},
+				{title: '导入辅导员信息', url: 'instructorList', tab: 0},
 				{title: '导入企业信息', url: 'enterpriseList', tab: 1},
 				{title: '导入企业导师信息', url: 'enttutorman', tab: 1}
             ],
