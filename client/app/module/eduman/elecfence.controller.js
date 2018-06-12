@@ -3,7 +3,8 @@
  */
 angular.module('dleduWebApp')
 	.controller('ElecFenceCtrl', function ($scope, $state, $timeout, AuthService, EduManService, Select2LoadOptionsService,
-										   MajorService, CollegeService, ClassService, messageService, CommonService, RoleAuthService, ngDialog) {
+										   MajorService, CollegeService, ClassService, messageService, CommonService, RoleAuthService,
+										   ngDialog, tempStorageService) {
 		$scope.isShow = false;
 		$scope.evaFenceFn = {
 			//结果中离线的人数，
@@ -169,10 +170,6 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.majorDropList = data.data;
 						that.majorDropList.splice(0, 0, {id: null, name : "--请选择--"});
-						if (!that.isInit && $state.current.name == "studentEdit") {
-							that.getMajorById(that.majorId);
-						}
-
 					})
 					.catch(function (error) {
 					})
@@ -208,11 +205,6 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.classDropList = data.data;
 						that.classDropList.splice(0, 0, {id: null, name : "--请选择--"});
-						if (!that.isInit && $state.current.name == "studentEdit") {
-							that.getClassById(that.classesId);
-							that.isInit = true;
-						}
-
 					})
 					.catch(function (error) {
 					})
@@ -524,23 +516,30 @@ angular.module('dleduWebApp')
 				this.getElecFenceList();
 			}
 		};
-		$scope.evaFenceFn.init();
+		//$scope.evaFenceFn.init();
 
 		$timeout(function () {
 			$scope.$watch('evaFenceFn.params.collegeId', function (newValue, oldValue) {
-				if (newValue != oldValue) {
+				/*if (newValue != oldValue) {
 					if(newValue && newValue != ''){
 						$scope.evaFenceFn.getMajorDropList();
 					}
+				}*/
+				if(newValue && newValue != ''){
+					$scope.evaFenceFn.getMajorDropList();
+					$scope.evaFenceFn.classDropList = [];
 				}
 			});
 		})
 		$timeout(function () {
 			$scope.$watch('evaFenceFn.params.professionalId', function (newValue, oldValue) {
-				if (newValue != oldValue) {
+				/*if (newValue != oldValue) {
 					if(newValue && newValue != '') {
 						$scope.evaFenceFn.getClassDropList();
 					}
+				}*/
+				if(newValue && newValue != '') {
+					$scope.evaFenceFn.getClassDropList();
 				}
 			});
 		})
@@ -587,6 +586,32 @@ angular.module('dleduWebApp')
 					$scope.evaFenceFn.getElecFenceList();
 				}
 			});
+		});
+
+		//页面路由变时的处理
+		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+			if(toState.name == "elecfencehistory" && fromState.name == "elecfence"){
+				var params = {params: $scope.evaFenceFn.params};
+				var key = fromState.name + toState.name;
+				tempStorageService.setObject(key, params);
+			}
+		});
+		//页面路由变化成功时的处理
+		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+			if(fromState.name == "elecfencehistory" && toState.name == "elecfence"){
+				var key = toState.name + fromState.name;
+				var params = tempStorageService.getObject(key);
+				if(params){
+					tempStorageService.removeObject(key);
+					$scope.evaFenceFn.params = params.params;
+				}
+				$scope.evaFenceFn.init();
+			}else{
+				if(toState.name == "elecfence"){
+					tempStorageService.removeObject("elecfence" + "elecfencehistory");
+					$scope.evaFenceFn.init();
+				}
+			}
 		});
 	})
 	.directive('scrollTop', function($window){

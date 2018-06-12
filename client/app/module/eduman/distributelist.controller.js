@@ -4,7 +4,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('DistributeListCtrl', function ($scope, $state, $timeout, $interval, AuthService, EduManService, messageService,
-												Select2LoadOptionsService, CollegeService, RoleAuthService, MajorService, ClassService) {
+												Select2LoadOptionsService, CollegeService, RoleAuthService, MajorService, ClassService, tempStorageService) {
 		$scope.distributeListFn = {
 			//问卷id
 			quesId: 0,
@@ -81,7 +81,9 @@ angular.module('dleduWebApp')
 					this.checkAllRecord = false;
 					this.getEvaQuesUnDist();
 				} else {
-					this.queryOption.queryType = '班级类型';
+					if(this.queryOption.queryType == '按教学班') {
+						this.queryOption.queryType = '班级类型';
+					}
 					this.getEvaQuesDist();
 				}
 			},
@@ -851,11 +853,12 @@ angular.module('dleduWebApp')
 				this.quesId = $state.params.quesId;
 				var isEnd = $state.params.type; //判断是否结束
 				this.isEnd = isEnd;
+				this.id = $state.params.id;
 				if(isEnd == "end"){
 					$("#comp").tab("show");
 					this.switchType('complete');
 				}else{
-					if ($state.params.id == 1) { // id = 1 已经分配列表 0 未分配列表
+					if (this.id == 1) { // id = 1 已经分配列表 0 未分配列表
 						$("#myTab  a:last").tab("show");
 						this.switchType('complete');
 					} else {
