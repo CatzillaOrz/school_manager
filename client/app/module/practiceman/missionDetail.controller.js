@@ -71,7 +71,7 @@ angular.module('dleduWebApp')
 				  return "未通过";
 				} else if (task.studentTaskStatus == "backTo") {
 				  return "已打回";
-				} else if (task.studentTaskStatus == "pass") {
+				} else if (task.studentTaskStatus == "finish") {
 				  return "已通过";
 				} else {
 				  return "状态出错";
