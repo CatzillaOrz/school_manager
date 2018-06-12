@@ -31,7 +31,7 @@ angular.module('dleduWebApp')
 			//添加步骤
 			steps: [
 				{title: '选择课程任务'},
-				{title: '选择实践小组'},
+				{title: '选择实践计划'},
 				{title: '发布任务'}
 			],
 			//当前步骤
@@ -236,9 +236,9 @@ angular.module('dleduWebApp')
 					name: that.searchStudentParams.name
 				};
 				CommonService.delEmptyProperty(params);
-				PracticeManService.getPracticeGroupList(params).$promise
+				PracticeManService.getGrouplistByOrgId(params).$promise
 					.then(function (data) {
-						that.studentList = data.data;
+						that.studentList = data;
 					})
 			},
 
