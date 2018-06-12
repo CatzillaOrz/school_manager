@@ -17,7 +17,7 @@
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                         .col-lg-6
                             .input-group
-                                input.form-control(type='text', placeholder='按姓名搜索' ng-model="handleFn.searchParams.name"  my-enter="summaryFn.getEntTutorList()")
+                                input.form-control(type='text', placeholder='按姓名搜索' ng-model="handleFn.searchParams.name"  my-enter="handleFn.getEntTutorList()")
                                 span.input-group-btn
                                     button.btn.btn-default(type='button' ng-click="handleFn.getEntTutorList()")
                                         i.fa.fa-search
