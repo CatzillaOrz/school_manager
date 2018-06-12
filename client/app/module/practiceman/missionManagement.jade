@@ -96,7 +96,7 @@
                     .col-sm-5
                         fieldset
                             legend
-                                span 选择实践小组
+                                span 选择实践计划
                         .row
                             .col-lg-6
                                 //select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()"  )
@@ -119,8 +119,8 @@
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="student in handleFn.studentList")
                                         td {{$index + 1}}
-                                        td {{student.groupName}}
-                                        td {{student.corporateMentorsName}}
+                                        td {{student.gropName}}
+                                        td {{student.corporateMentorsInfoName}}
                                         td
                                             a.handle(ng-click="handleFn.selectStudent(student)")
                                                 i.fa.fa-arrow-circle-right
@@ -129,7 +129,7 @@
                     .col-sm-5
                         fieldset
                             legend
-                                span 已选择的实践小组
+                                span 已选择的实践计划
 
                         table.table.table-striped.table-bordered.table-hover.dataTable
                             thead
@@ -141,8 +141,8 @@
                             tbody
                                 tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
                                     td {{$index + 1}}
-                                    td {{student.groupName}}
-                                    td {{student.corporateMentorsName}}
+                                    td {{student.gropName}}
+                                    td {{student.corporateMentorsInfoName}}
                                     td
                                         a.handle(ng-click="handleFn.removeSelectedStudent(student)")
                                             i.fa.fa-times
@@ -187,27 +187,27 @@
                                 thead
                                     tr(role='row')
                                         //- th.sorting_asc 序号
-                                        th.expand.sorting 课程名称
-                                        th.sorting 任务数
+                                        th.expand.sorting {{handleFn.status == '1'  ?  '课程名称' : '任务名称'}}
+                                        th.sorting {{handleFn.status == '1'  ? '任务数' : '所属课程'}}
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
-                                        td {{teacher.taskName}}
-                                        td {{teacher.weekTaskName}}
+                                        td {{handleFn.status == '1' ? teacher.taskTitle : teacher.taskName}}
+                                        td {{handleFn.status == '1' ? teacher.taskNum : teacher.weekTaskName}}
                     .row(ng-if="handleFn.params.classOrStudents==20")
-                        .col-sm-3 实践小组信息：
+                        .col-sm-3 实践计划信息：
                         .col-sm-7
                             table.table.table-striped.table-bordered.table-hover.dataTable
                                 thead
                                     tr(role='row')
                                         th.sorting_asc 序号
-                                        th.expand.sorting 小组名称
+                                        th.expand.sorting 计划名称
                                         th.sorting 导师姓名
                                         th.sorting 小组人数
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
                                         td {{$index + 1}}
-                                        td {{student.groupName}}
-                                        td {{student.corporateMentorsName}}
+                                        td {{student.gropName}}
+                                        td {{student.corporateMentorsInfoName}}
                                         td {{student.studentCount}}
 
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
