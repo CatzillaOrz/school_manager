@@ -66,7 +66,7 @@ angular.module('dleduWebApp')
 			searchStudentParams: {
 				orgId: AuthService.getUser().orgId,
 				name: "",
-				classesId: ""
+				classesId: ''
 			},
 			//教师列表
 			teacherList: [],
@@ -86,10 +86,10 @@ angular.module('dleduWebApp')
 				var _this = this;
 				return {
 					placeholder: {
-						id: '-1', // the value of the option
-						text: '按班级筛选'
-					},
-					allowClear: true,
+                        id: -1, // the value of the option
+                        text: '全部'
+                    },
+					allowClear: false,
 					ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList", {
 						orgId: AuthService.getUser().orgId,
 						pageNumber: 1,
@@ -113,10 +113,15 @@ angular.module('dleduWebApp')
 			select2ClassOptions: function () {
 				var that = this;
 				return {
+					placeholder: {
+                        id: -1, 
+                        text: '全部'
+                    },
+                    allowClear: true,
 					ajax: {
 						url: "api/class/getClassDropListOrg",
 						dataType: 'json',
-						//delay: 250,
+						delay: 250,
 						data: function (query) {
 							var params = {
 								orgId: AuthService.getUser().orgId,
@@ -137,11 +142,6 @@ angular.module('dleduWebApp')
 							};
 						},
 						cache: true
-					},
-					allowClear: true,
-					placeholder: {
-						id: '-1', // the value of the option
-						text: '按班级筛选'
 					},
 					templateResult: function (data) {
 						if (data.id === '') { // adjust for custom placeholder values
@@ -244,11 +244,28 @@ angular.module('dleduWebApp')
 			},
 			selectAllStu: function(){
 				CommonService.curtainLayoutFn(true, 'all');
-				this.selectStudentList = this.studentList;
-				$timeout(function(){
-					CommonService.curtainLayoutFn(false, 'all');
-				},2000)
-				
+				(this.studentList.length > 0) && (this.checkAllStu());
+			},
+			idFilterUtil: function(entity){
+				return entity.map(function(c){return c.id});
+			},
+			checkAllStu: function(){
+				var that = this;
+				PracticeManService.checkAllStu(this.idFilterUtil(this.studentList)).$promise
+					.then(function(data){
+						var resIds = that.idFilterUtil(data.data);
+						that.selectStudentList = that.studentList.filter(function(c){
+							if(resIds.indexOf(c.id) === -1){return c}
+						})
+						$timeout(function(){
+							CommonService.curtainLayoutFn(false, 'all');
+						},2000)
+					})
+					.catch(function(){
+						$timeout(function(){
+							CommonService.curtainLayoutFn(false, 'all');
+						},2000)
+					})
 			},
 			//下一步
 			nextStep: function () {
@@ -259,7 +276,6 @@ angular.module('dleduWebApp')
 				var _this = this;
 				if (_this.step3Tooggle != "select") {
 					_this.step3Tooggle = "select";
-
 					return;
 				}
 				this.step = this.step - 1;
