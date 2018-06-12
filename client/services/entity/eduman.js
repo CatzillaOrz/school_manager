@@ -243,11 +243,7 @@ angular.module('dleduWebService')
 				});
 			},
             getTeachClassDataList:function (params) {
-				return $http({
-					method: 'GET',
-					url: "api/eduman/getTeachClassDataList",
-					params: params
-				});
+
 			},
             getCollageDataList:function (params) {
 				return $http({
