@@ -43,6 +43,7 @@ router.get('/getWeekTaskList',auth.isSignedIn, controller.getWeekTaskList);
 router.get('/getTaskList',auth.isSignedIn, controller.getTaskList);
 router.put('/putWeekTask',auth.isSignedIn, controller.putWeekTask);
 router.put('/updateTask',auth.isSignedIn, controller.updateTask);
+router.put('/checkAllStu',auth.isSignedIn, controller.checkAllStu);
 router.get('/getWeekTaskDetail',auth.isSignedIn, controller.getWeekTaskDetail);
 router.get('/getTaskDetail',auth.isSignedIn, controller.getTaskDetail);
 router.delete('/deleteWeekTask',auth.isSignedIn, controller.deleteWeekTask);

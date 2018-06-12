@@ -100,6 +100,11 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return practiceman.update(params);
             },
+            checkAllStu: function (params) {
+                var practiceman = $resource('api/practiceman/checkAllStu','',{
+                    update: {method:'PUT'}});
+                return practiceman.update(params);
+            },
             delPracticeGroup:function (params) {
                 var practiceman = $resource('api/practiceman/delPracticeGroup');
                 return practiceman.remove(params);
