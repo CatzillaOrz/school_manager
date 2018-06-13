@@ -115,7 +115,7 @@ angular.module('dleduWebApp')
 				return {
 					placeholder: {
                         id: -1, 
-                        text: '全部'
+                        text: '请选择班级'
                     },
                     allowClear: true,
 					ajax: {
@@ -167,8 +167,8 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						_this.teacherList = data.data;
 						if(_this.practiceGroupInfo && _this.practiceGroupInfo.corporateMentorsId && !_this.isAddTea){
-							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.corporateMentorsId, name:
-							_this.practiceGroupInfo.teacherName, jobNumber: _this.practiceGroupInfo.teacherJobNumer,
+							_this.selectTeacherList.splice(0, 0, {id: _this.practiceGroupInfo.loginName, name:
+							_this.practiceGroupInfo.name, jobNumber: _this.practiceGroupInfo.enterpriseName,
 								collegeName: _this.practiceGroupInfo.collegeName});
 							_this.isAddTea = true;
 						}
@@ -193,7 +193,7 @@ angular.module('dleduWebApp')
 						_this.teacherList = data.data;
 						if(_this.practiceGroupInfo && !_this.isAddTea){
 							_this.selectTeacherList = _.filter(_this.teacherList, function(value){
-								return value.id === _this.practiceGroupInfo.id
+								return value.loginName === _this.practiceGroupInfo.loginName
 							})
 							_this.isAddTea = true;
 						}
@@ -228,15 +228,9 @@ angular.module('dleduWebApp')
 				StudentService.getSimpleStudents(params).$promise
 				.then(function (data) {
 						_this.studentList = data.data;
-						if(_this.practiceGroupInfo && !_this.isAddStu){
-							angular.forEach(_this.practiceGroupInfo.studentDTOList, function(item){
-								_this.selectStudentList.splice(0, 0, item);
-								_this.isAddStu = true;
-							});
-						}
 						$timeout(function(){
 							CommonService.curtainLayoutFn(false, 'all');
-						},8000)
+						},3000)
 					})
 					.catch(function (error) {
 						CommonService.curtainLayoutFn(false, 'all');
@@ -487,12 +481,18 @@ angular.module('dleduWebApp')
 						that.params.endDate = that.practiceGroupInfo.endDate;
 						// that.getSimpleTeachers();
 						that.getEntTutorList();
-						that.getSimpleStudents();
+						// that.getSimpleStudents();
+						if(that.practiceGroupInfo && !that.isAddStu){
+							angular.forEach(that.practiceGroupInfo.studentDTOList, function(item){
+								that.selectStudentList.splice(0, 0, item);
+								that.isAddStu = true;
+							});
+						}
 					})
 					.catch(function (error) {
 						// that.getSimpleTeachers();
 						that.getEntTutorList();
-						that.getSimpleStudents();
+						// that.getSimpleStudents();
 					})
 			},
 
@@ -521,7 +521,7 @@ angular.module('dleduWebApp')
 			// });
 			//班级变动 自动查询学生
 			$scope.$watch('handleFn.searchStudentParams.classesId', function(newValue, oldValue) {
-				if (newValue!=oldValue){
+				if (newValue!=oldValue && !!newValue){
 					$scope.handleFn.getSimpleStudents();
 				}
 			});

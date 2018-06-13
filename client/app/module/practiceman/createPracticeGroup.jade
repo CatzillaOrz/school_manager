@@ -72,7 +72,7 @@
                         .row
                             .col-lg-6
                                  select.select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()")
-                                    option(value="") 全部
+                                    option(value="") 请选择班级
                                     option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}" ) {{class.name}}
                             .col-lg-6
                                 .input-group
@@ -100,7 +100,7 @@
                                                 span 选中
                             .row(style="position: absolute;bottom: -25px;")
                                 .col-sm-12
-                                    a(ng-click='handleFn.selectAllStu()') 全选
+                                    a(ng-click='handleFn.selectAllStu()', ng-show="handleFn.studentList.length>0") 全选
                     .col-sm-1
                     .col-sm-5
                         fieldset
@@ -167,12 +167,20 @@
                                     tr(role='row')
                                         th.sorting_asc 工号
                                         th.expand.sorting 姓名
-                                        th.sorting 院系
+                                        th.sorting 企业名称
+                                        th.sorting 部门
+                                        th.sorting 职务
+                                        th.sorting 邮箱
+                                        th.sorting 手机号
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
                                         td {{teacher.loginName}}
                                         td {{teacher.name}}
                                         td {{teacher.enterpriseName}}
+                                        td {{teacher.department}}
+                                        td {{teacher.position}}
+                                        td {{teacher.mailbox}}
+                                        td {{teacher.phone}}
                     .row(ng-if="handleFn.params.classOrStudents==20")
                         .col-sm-3 学生信息：
                         .col-sm-7
@@ -182,12 +190,22 @@
                                         tr(role='row')
                                             th.sorting_asc 学号
                                             th.expand.sorting 姓名
+                                            th.expand.sorting 性别
+                                            th.expand.sorting 院系
+                                            th.expand.sorting 专业
                                             th.sorting 班级
+                                            th.sorting 邮箱
+                                            th.sorting 手机号
                                     tbody
                                         tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
                                             td {{student.jobNumber}}
                                             td {{student.name}}
+                                            td {{student.sex}}
+                                            td {{student.collegeName}}
+                                            td {{student.major}}
                                             td {{student.classesName}}
+                                            td {{student.email}}
+                                            td {{student.phone}}
 
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
                         a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
