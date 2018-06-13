@@ -58,7 +58,7 @@
                                 td {{record.endDate}}
                                 td {{record.status == 'end' ? '已结束' : '进行中'}}
                                 td
-                                    a.handle(ui-sref="createpracticegroup({id: record.corporateMentorsId})")
+                                    a.handle(ui-sref="createpracticegroup({id: record.id})")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
                                     a.handle(ng-click="practiceGroupMan.deletePrompt(record)")
