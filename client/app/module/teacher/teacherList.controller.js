@@ -242,6 +242,27 @@ angular.module('dleduWebApp')
                 ImpBatchService.downLoad('teacher');
             },
 
+            /**
+             * 导出
+             */
+            exportData: function(){
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    managerId: AuthService.getUser().id
+                };
+                params.pageNumber = 1;
+                params.pageSize = 9999999;
+                params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+
+                TeacherService.exportTea(params).success(function(data) {
+                    CommonService.saveAs(data, '教师信息');
+                }).catch(function (e) {
+
+                });
+            },
+
             init: function () {
                 this.params.collegeId=$state.params.collegeId;
                 this.params.name=$state.params.name;
