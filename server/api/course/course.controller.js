@@ -2,6 +2,7 @@
 
 var _ = require('lodash'),
 	CourseService = require('../../services/courseService');
+var XLSX = require('xlsx');
 
 module.exports = {
 	getCourseList: function (req, res) {
@@ -214,6 +215,26 @@ module.exports = {
 		CourseService.getImpResultSync(req.query, req.user.access_token)
 			.then(function (data) {
 				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+	exportCourse: function (req, res) {
+		CourseService.getCourseListSync(req.query, req.user.access_token)
+			.then(function (data) {
+				var datas = [
+					["课程名称", "课程编号","课程性质", "学分", "课程描述"]
+				];
+				var values = data.data;
+				for (var index in values) {
+					var item = values[index];
+					datas.push([item.name, item.code, item.courseProp, item.credit, item.courseDesc]);
+				}
+				var ws = XLSX.utils.aoa_to_sheet(datas);
+				var wb = XLSX.utils.book_new();
+				XLSX.utils.book_append_sheet(wb, ws, "课程信息");
+				res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
 			})
 			.catch(function (e) {
 				res.status(e.code).send(e.message);
