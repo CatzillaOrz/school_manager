@@ -2,7 +2,7 @@ angular.module('dleduWebApp')
 	.controller('CreatePracticeGroupCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
 													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
 		$scope.handleFn = {
-			//企业导师记录id
+			//计划id
 			id: '',
 			//导师账号id
 			tutorId: '',
@@ -387,7 +387,7 @@ angular.module('dleduWebApp')
 					return;
 				}
 				if(this.isEidt){
-					entity.id = this.practiceGroupInfo.trainingGroupId;
+					entity.id = this.id;
 					PracticeManService.updatePracticeGroup(entity).$promise
 						.then(function (data) {
 							messageService.openMsg("编辑实践计划成功！");
