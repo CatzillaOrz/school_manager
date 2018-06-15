@@ -147,6 +147,27 @@ angular.module('dleduWebApp')
 				ImpBatchService.downLoad('course');
 			},
 
+			/**
+			 * 导出
+			 */
+			exportData: function(){
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+					pageNumber: that.page.pageNumber,
+					pageSize: that.page.pageSize
+				};
+				params.name = that.params.name;
+				params.pageNumber = 1;
+				params.pageSize = 9999999;
+
+				CourseService.exportCourse(params).success(function(data) {
+					CommonService.saveAs(data, '课程信息');
+				}).catch(function (e) {
+
+				});
+			},
+
 			init: function () {
 				this.getCourseList();
 			}

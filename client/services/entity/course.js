@@ -51,6 +51,13 @@ angular.module('dleduWebService')
 				var course = $resource('api/course/getImpResult');
 				return course.get(params);
 			},
+			exportCourse: function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/course/exportCourse",
+					params: params
+				});
+			},
 		}
 
 	});

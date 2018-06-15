@@ -18,7 +18,7 @@ angular.module('dleduWebService')
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.0.9.4'
+                version: '0.0.9.5'
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
@@ -199,7 +199,26 @@ angular.module('dleduWebService')
                     $(divParent + ' .show-curtain').remove();
                     $(".show-container").remove();
                 }
-            }
+            },
+
+            s2ab: function(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            },
+            saveAs: function(data, fileName) {
+                var that = this;
+                var blob = new Blob([that.s2ab(data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+                var windowUrl = (window.URL || window.webkitURL)
+                var downloadUrl = windowUrl.createObjectURL(blob);
+                var anchor = document.createElement("a");
+                anchor.href = downloadUrl;
+                anchor.download = fileName + '.xlsx';
+                document.body.appendChild(anchor);
+                anchor.click();
+                windowUrl.revokeObjectURL(blob);
+            },
         }
     });
 Date.prototype.Format = function (fmt) { //author: meizz
