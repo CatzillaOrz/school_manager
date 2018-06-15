@@ -160,6 +160,24 @@
                     fieldset
                         legend 实践计划信息预览
                     .row
+                        .col-sm-3 指导教师信息：
+                        .col-sm-7
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 工号
+                                        th.expand.sorting 姓名
+                                        th.sorting 性别
+                                        th.sorting 院系
+                                        th.sorting 手机号
+                                tbody
+                                    tr.cursor-pointer(role='row')
+                                        td {{handleFn.practiceGroupInfo.teacherJobNumer}}
+                                        td {{handleFn.practiceGroupInfo.teacherName}}
+                                        td {{handleFn.practiceGroupInfo.teacherSex}}
+                                        td {{handleFn.practiceGroupInfo.trainingGroupName}}
+                                        td {{handleFn.practiceGroupInfo.teacherPhone}}
+                    .row
                         .col-sm-3 教师信息：
                         .col-sm-7
                             table.table.table-striped.table-bordered.table-hover.dataTable
