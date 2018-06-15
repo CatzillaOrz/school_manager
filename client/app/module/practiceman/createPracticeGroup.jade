@@ -159,7 +159,7 @@
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 提交
                     fieldset
                         legend 实践计划信息预览
-                    .row
+                    .row(ng-if='handleFn.isEidt')
                         .col-sm-3 指导教师信息：
                         .col-sm-7
                             table.table.table-striped.table-bordered.table-hover.dataTable
