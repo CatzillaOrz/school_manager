@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
 					completeMSG:'恭喜你，编辑院系成功！'
 				},
 				ncyBreadcrumb: {
-					label: '创建实践小组'
+					label: '创建实践计划'
 				}
 			})
 			.state('practicemanstats', {

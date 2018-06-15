@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 创建实践小组
- */
 angular.module('dleduWebApp')
 	.controller('CreatePracticeGroupCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
 													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
@@ -10,7 +6,7 @@ angular.module('dleduWebApp')
 			id: '',
 			//导师账号id
 			tutorId: '',
-			//实践小组信息
+			//实践计划信息
 			practiceGroupInfo: null,
 			//是否是编辑
 			isEidt: false,
@@ -28,7 +24,7 @@ angular.module('dleduWebApp')
 			steps: [
 				{title: '选择学生'},
 				{title: '选择导师'},
-				{title: '创建实践小组'}
+				{title: '创建实践计划'}
 			],
 			//当前步骤
 			step: 1,
@@ -372,7 +368,7 @@ angular.module('dleduWebApp')
 				return result;
 
 			},
-			//保存实践小组
+			//保存实践计划
 			addTeachClass: function () {
 				var _this = this;
 				var params = _this.params;
@@ -394,13 +390,13 @@ angular.module('dleduWebApp')
 					entity.id = this.practiceGroupInfo.trainingGroupId;
 					PracticeManService.updatePracticeGroup(entity).$promise
 						.then(function (data) {
-							messageService.openMsg("编辑实践小组成功！");
+							messageService.openMsg("编辑实践计划成功！");
 							$state.go("practicegroupman");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
 							if (re.test(error.data)) {
-								messageService.openMsg("编辑实践小组失败！");
+								messageService.openMsg("编辑实践计划失败！");
 
 							} else {
 								messageService.openMsg(error.data);
@@ -410,13 +406,13 @@ angular.module('dleduWebApp')
 				}else{
 					PracticeManService.addPracticeGroup(entity).$promise
 						.then(function (data) {
-							messageService.openMsg("创建实践小组成功！");
+							messageService.openMsg("创建实践计划成功！");
 							$state.go("practicegroupman");
 						})
 						.catch(function (error) {
 							var re = /[^\u4e00-\u9fa5]/;
 							if (re.test(error.data)) {
-								messageService.openMsg("创建实践小组失败！");
+								messageService.openMsg("创建实践计划失败！");
 
 							} else {
 								messageService.openMsg(error.data);
@@ -474,7 +470,7 @@ angular.module('dleduWebApp')
 						that.practiceGroupInfo = data;
 						if(that.practiceGroupInfo){
 							that.isEidt = true;
-							that.title = '编辑实践小组';
+							that.title = '编辑实践计划';
 						}
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;

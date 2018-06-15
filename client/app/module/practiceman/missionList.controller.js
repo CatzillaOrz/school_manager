@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 实践小组管理
- */
 angular.module('dleduWebApp')
 	.controller('MissionListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService, ImpBatchService, $timeout, ngDialog,
 		PracticeManService) {
