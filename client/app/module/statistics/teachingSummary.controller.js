@@ -1,6 +1,6 @@
 /**
  * Created by Administrator on 2017/6/22.
- * 实践小组管理
+ * 实践计划管理
  */
 angular.module('dleduWebApp')
     .controller('TeachingSummaryCtrl', function ($scope, $state, AuthService, messageService, CollegeService, CommonService, Select2LoadOptionsService, ClassService,

@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 实践小组管理
- */
 angular.module('dleduWebApp')
 	.controller('PracticeGroupManCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
 												  PracticeManService) {
@@ -23,7 +19,7 @@ angular.module('dleduWebApp')
 				status: 'all'
 			},
 
-			// 实践小组列表
+			// 实践计划列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {

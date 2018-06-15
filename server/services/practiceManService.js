@@ -164,7 +164,7 @@ var PracticeManService = {
         });
     },
 
-    //查询实践小组
+    //查询实践计划
     getPracticeGroupList: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
@@ -182,7 +182,7 @@ var PracticeManService = {
         });
     },
 
-    //创建实践小组
+    //创建实践计划
     addPracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
@@ -247,7 +247,7 @@ var PracticeManService = {
         });
     },
 
-    //编辑实践小组
+    //编辑实践计划
     updatePracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
@@ -369,7 +369,7 @@ var PracticeManService = {
             callback(e);
         });
     },
-    //删除实践小组
+    //删除实践计划
     delPracticeGroupByGId: function (params, access_token, callback) {
         params.accessToken = access_token;
         RestClient.delete({

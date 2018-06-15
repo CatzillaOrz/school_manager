@@ -129,14 +129,14 @@
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
-                        legend 给实践小组设置名称
+                        legend 给实践计划设置名称
                     .md-form
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
-                                | 实践小组名称：
+                                | 实践计划名称：
                             .col-sm-7
-                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" placeholder='请输入实践小组名称' validator="required, maxlength=30")
+                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" placeholder='请输入实践计划名称' validator="required, maxlength=30")
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
@@ -158,7 +158,7 @@
                         .col-sm-12.text-center
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 提交
                     fieldset
-                        legend 实践小组信息预览
+                        legend 实践计划信息预览
                     .row
                         .col-sm-3 教师信息：
                         .col-sm-7
