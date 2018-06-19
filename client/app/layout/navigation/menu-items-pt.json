@@ -5,7 +5,7 @@
             "sref": "workbench",
             "icon": "navicon",
             "active": "workbench",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
             "items":[
                 {
                     "title": "我的工作台",
@@ -20,7 +20,7 @@
             "sref": "enterpriseList",
             "icon": "navicon",
             "active": "enterpriseList",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
             "items":[
                 {
                     "title": "企业管理",
@@ -41,7 +41,7 @@
             "sref": "trainClassList",
             "icon": "navicon",
             "active": "trainClassList",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
             "items":[
                 {
                     "title": "实践计划",
