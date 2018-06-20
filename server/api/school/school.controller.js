@@ -293,6 +293,88 @@ module.exports = {
             })
     },
 
+
+    getSchoolNewList: function (req, res) {
+        SchoolService.getSchoolNewListSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getDetailById: function (req, res) {
+        SchoolService.getDetailByIdSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateNews: function (req, res) {
+        SchoolService.updateNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addNews: function (req, res) {
+        SchoolService.addNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delNews: function (req, res) {
+        SchoolService.delNewsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    publishNews: function (req, res) {
+        SchoolService.publishNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    canclePublish: function (req, res) {
+        SchoolService.canclePublishSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchPublishNews: function (req, res) {
+        SchoolService.batchPublishNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchDelNews: function (req, res) {
+        SchoolService.batchDelNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    }
 };
 
 

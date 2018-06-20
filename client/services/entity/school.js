@@ -144,6 +144,51 @@ angular.module('dleduWebService')
                 });
                 return boutiqueCourse.update(params);
             },
+
+            getSchoolNewList:function (params) {
+                var boutiqueCourse = $resource('api/school/getSchoolNewList');
+                return boutiqueCourse.get(params);
+            },
+            getDetailById:function (params) {
+                var boutiqueCourse = $resource('api/school/getDetailById');
+                return boutiqueCourse.get(params);
+            },
+            updateNews: function (params) {
+                var boutiqueCourse = $resource('api/school/updateNews');
+                return boutiqueCourse.save(params);
+            },
+            delNews:function (params) {
+                var boutiqueCourse=$resource('api/school/delNews');
+                return boutiqueCourse.remove(params);
+            },
+            addNews:function (params) {
+                var boutiqueCourse=$resource('api/school/addNews');
+                return boutiqueCourse.save(params);
+            },
+            publishNews: function (params) {
+                var boutiqueCourse = $resource('api/school/publishNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            canclePublish: function (params) {
+                var boutiqueCourse = $resource('api/school/canclePublish', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            batchDelNews: function (params) {
+                var boutiqueCourse = $resource('api/school/batchDelNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            batchPublishNews: function (params) {
+                var boutiqueCourse = $resource('api/school/batchPublishNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
         }
 
     });

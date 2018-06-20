@@ -433,6 +433,162 @@ var SchoolService = {
 
         });
     },
+
+    //school news
+    addNews: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/addNews',
+            entity: params,
+            access_token: access_token,
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    getSchoolNewList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/newsLists',
+            params:params,
+            access_token: access_token
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    getDetailById: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/newsDetail',
+            params:params,
+            access_token: access_token
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    updateNews: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/updateNews',
+            access_token: access_token,
+            entity: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
+
+    delNews: function (params, access_token, callback) {
+        RestClient.delete({
+            host: 'hy',
+            access_token: access_token,
+            path: '/api/web/v1/news/newsShow/deleteNews',
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
+    publishNews: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/Publish',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
+    canclePublish: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/noPublish',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
+
+    batchPublishNews: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/Publishes',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
+    batchDelNews: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'hy',
+            path: '/api/web/v1/news/newsShow/deleteNewss',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+
+        });
+    },
 };
 
 
