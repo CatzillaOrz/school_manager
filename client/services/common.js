@@ -219,6 +219,15 @@ angular.module('dleduWebService')
                 anchor.click();
                 windowUrl.revokeObjectURL(blob);
             },
+
+            revertOldResultType: function(data){
+                //"totalCount":0,"pageCount":1,"offset":1,"limit":10,"data":[]
+                //{"data":[],"page":{"totalElements":0,"totalPages":0,"pageNumber":0,"pageSize":10}}
+                var newData = {data: data.data};
+                var page = {totalElements: data.totalCount, totalPages: data.pageCount, pageNumber: data.offset, pageSize: data.limit};
+                newData.page = page;
+                return newData;
+            }
         }
     });
 Date.prototype.Format = function (fmt) { //author: meizz

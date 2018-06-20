@@ -48,5 +48,13 @@ router.get('/getApplyList', controller.getApplyList);
 router.put('/handleApply', controller.handleApply);
 router.get('/getSchoolStatistics', controller.getSchoolStatistics);
 
-
+router.get('/getSchoolNewList', auth.isSignedIn, controller.getSchoolNewList);
+router.get('/getDetailById', auth.isSignedIn, controller.getDetailById);
+router.post('/addNews',auth.isSignedIn, controller.addNews);
+router.post('/updateNews',auth.isSignedIn, controller.updateNews);
+router.delete('/delNews',auth.isSignedIn, controller.delNews);
+router.put('/publishNews',auth.isSignedIn, controller.publishNews);
+router.put('/canclePublish',auth.isSignedIn, controller.canclePublish);
+router.put('/batchDelNews',auth.isSignedIn, controller.batchDelNews);
+router.put('/batchPublishNews',auth.isSignedIn, controller.batchPublishNews);
 module.exports = router;

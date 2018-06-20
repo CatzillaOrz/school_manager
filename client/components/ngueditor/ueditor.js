@@ -26,6 +26,9 @@ angular.module('ngUeditor',[])
                   });
                   ue.addListener("ready", function (type, event) {
                    // scope.$watch('uec', function (val) {
+                      if(!scope.uec){
+                          scope.uec = "";
+                      }
                         ue.setContent(scope.uec);
                    //});
                   });
