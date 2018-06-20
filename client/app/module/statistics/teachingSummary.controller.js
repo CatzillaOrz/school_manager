@@ -9,8 +9,8 @@ angular.module('dleduWebApp')
 
 
         $scope.summaryFn = {
-            portalUrl: $state.current.name, // 当前路由
-            portalGun: { // 匹配当前路由入口方法 - 传送门
+            portalUrl: $state.current.name, //当前路由
+            portalGun: { //传送门
                 teachingSummary: '$scope.summaryFn.teachingSummary',
                 studentAttending: '$scope.summaryFn.studentAttending',
                 studentActive: '$scope.summaryFn.studentActive',
@@ -18,6 +18,7 @@ angular.module('dleduWebApp')
                 stuJournal: '$scope.summaryFn.stuJournal',
                 impartProcess: '$scope.summaryFn.impartProcess',
                 stuRoutineCount: '$scope.summaryFn.stuRoutineCount',
+                stuRoutineDetail: '$scope.summaryFn.stuRoutineDetail',
                 enterpriseDetail: '$scope.summaryFn.enterpriseDetail',
                 taskDetail: '$scope.summaryFn.taskDetail',
                 stuReport: '$scope.summaryFn.stuReport',
@@ -38,7 +39,8 @@ angular.module('dleduWebApp')
                 classId: "",
                 masterName: "",
                 enterpriseName: '',
-                teachingYear: ""
+                teachingYear: "",
+                stuId: ''
             },
             summeryList: [],
             majorDropList: [],
@@ -46,6 +48,35 @@ angular.module('dleduWebApp')
             setPagination: function () {
                 this.params.pageNumber = this.page.pageNumber;
                 this.params.pageSize = this.page.pageSize;
+            },
+            stuRoutineCount: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.stuRoutineCount(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            stuRoutineDetail: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                that.params.stuInfo = {
+                    jobNum: $state.params.jobNum,
+                    studentName: $state.params.studentName,
+                    grade: $state.params.grade,
+                    collegeName: $state.params.collegeName,
+                    professionalName: $state.params.professionalName,
+                    className: $state.params.className
+                }
+                that.params.stuId = $state.params.id;
+                StatisticsService.stuRoutineDetail(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
             },
             stuReport: function () {
                 var that = $scope.summaryFn;
@@ -360,6 +391,35 @@ angular.module('dleduWebApp')
                 StatisticsService.exportTeachingSummary(_params)
                     .success(function (data) {
                         that.saveAs(data, '实践教学汇总');
+                    })
+            },
+            exportStuRoutineCount: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStuRoutineCount(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '签到统计汇总表');
+                    })
+            },
+            exportStuRoutineDetail: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                _params.stuInfo = {
+                    jobNum: $state.params.jobNum,
+                    studentName: $state.params.studentName,
+                    grade: $state.params.grade,
+                    collegeName: $state.params.collegeName,
+                    professionalName: $state.params.professionalName,
+                    className: $state.params.className
+                }
+                _params.stuId = $state.params.id;
+                StatisticsService.exportStuRoutineDetail(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '签到统计详情');
                     })
             },
             taskStatus: function (stuTaskStatus) {
