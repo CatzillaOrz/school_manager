@@ -49,6 +49,12 @@
                     "sref": "boutiquecourseapply",
                     "active": "boutiquecourseapply",
                     "icon": "magic"
+                },
+                {
+                    "title": "app校园动态",
+                    "sref": "schoolnewlist",
+                    "active": "schoolnewlist",
+                    "icon": "magic"
                 }
             ]
         },

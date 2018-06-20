@@ -91,4 +91,32 @@ angular.module('dleduWebApp')
                     label: '精品课程申请处理'
                 }
             })
+            .state('schoolnewlist', {
+                parent: 'base',
+                url   : '/schoolnewlist',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SchoolNewListCtrl',
+                        templateUrl: 'app/module/school/schoolNewList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'app校园动态'
+                }
+            })
+            .state('setschoolnew', {
+                parent: 'schoolnewlist',
+                url   : '/setschoolnew/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SetSchoolNewCtrl',
+                        templateUrl: 'app/module/school/setSchoolNew.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'app校园动态设置'
+                }
+            })
     });

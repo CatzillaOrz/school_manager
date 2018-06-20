@@ -171,6 +171,15 @@ angular.module('dleduWebService')
                         "ROLE_COLLEG_EDUCATIONALMANAGER": "",
                         "ROLE_COLLEG_DATAVIEW": ""
                     }
+                },
+                {
+                    "url": "schoolnewlist",
+                    "roles":
+                    {
+                        "ROLE_ORG_ADMIN": "add,update,del,get,publish,noPublish,batchPublish,batchDel",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,publish,noPublish,batchPublish,batchDel",
+                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,publish,noPublish,batchPublish,batchDel"
+                    }
                 }
             ]
         };
