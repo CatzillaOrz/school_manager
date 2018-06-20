@@ -23,6 +23,24 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    stuRoutineCount: function (req, res) {
+        StatisticsService.stuRoutineCountSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    stuRoutineDetail: function (req, res) {
+        StatisticsService.stuRoutineDetailSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     teachingSummary: function (req, res) {
         StatisticsService.teachingSummarySync(req.body, req.user.access_token)
             .then(function (data) {
@@ -165,6 +183,48 @@ module.exports = {
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "学生参与过程明细表");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportStuRoutineCount: function (req, res) {
+        StatisticsService.stuRoutineCountSync(req.query, req.user.access_token)
+            .then(function (data) {
+                var thead = [
+                    ["学号", "姓名", "学院", "专业","班级", 
+                     "打卡次数", "正常打卡次数", "请假天数"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    thead.push([item.jobNum, item.studentName, item.collegeName,  item.professionalName,   item.className,
+                        item.signInTotalNum, item.signInNormalNum, item.leaveNum]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(thead);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "签到统计汇总表");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportStuRoutineDetail: function (req, res) {
+        StatisticsService.stuRoutineDetailSync(req.query, req.user.access_token)
+            .then(function (data) {
+                var thead = [
+                    ["姓名", "学号", "班级", "年级", "学院", "专业",
+                     "打卡时间", "打卡地址", "备注原因", "打卡设备", "设备编号"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    thead.push([item.studentName, item.jobNum, item.className, item.grade,  item.collegeName,  item.professionalName,   
+                        item.signTime, item.gpsDetail, item.gpsLocation, item.gpsType, item.gpsType]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(thead);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "签到统计详情表");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {

@@ -20,12 +20,12 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
+                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder'  ng-model="summaryFn.params.keyWords" my-enter="summaryFn.portalTrigger()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
-                                button.btn.btn-primary
+                                button.btn.btn-primary(ng-click="summaryFn.exportStuRoutineCount()")
                                     span 导出
                         .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
@@ -39,15 +39,11 @@
                                     select.select2.form-control(ng-model="summaryFn.params.professionalId" ui-select2="summaryFn.select2MajorOptions(summaryFn.collegeId)", ng-change="summaryFn.getClassList()"  )
                                         option(value="") 全部
                                         option(ng-repeat="major in summaryFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                //- .form-group.col-sm-4.margin-top-5
-                                    label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
-                                //- .form-group.col-sm-4.margin-top-5
-                                    label 导员：
-                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
+                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -62,21 +58,21 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 请假天数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 操作
                         tbody
-                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
-                                td 1390291{{$index+1}}
-                                td {{rp}}
-                                td 外语学院{{$index+1}}
-                                td 英语专业
-                                td 商务英语{{$index}}班
-                                td {{$index+1}}
-                                td 1{{$index+1}}
-                                td 0
+                                td {{rp.jobNum}}
+                                td {{rp.studentName}}
+                                td {{rp.collegeName}}
+                                td {{rp.professionalName}}
+                                td {{rp.className}}
+                                td {{rp.signInTotalNum}}
+                                td {{rp.signInNormalNum}}
+                                td {{rp.leaveNum}}
                                 td 
-                                    a.handle(href="#")
+                                    a.handle(ui-sref="stuRoutineDetail({id: rp.studentId, jobNum: rp.jobNum, studentName: rp.studentName, grade: rp.grade, collegeName: rp.collegeName, professionalName: rp.professionalName, className: rp.className})")
                                         i.fa.fa-pencil-square-o
                                         span 查看详情
-                    //- .dt-toolbar-footer
+                    .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
@@ -88,4 +84,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.portalTrigger()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

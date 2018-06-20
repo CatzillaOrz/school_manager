@@ -4,7 +4,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 学生激活明细表
+            h2 签到统计汇总
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -17,39 +17,11 @@
             .widget-body.no-padding
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
-                        .col-xs-3
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords" my-enter="summaryFn.portalTrigger()")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
-                                        i.glyphicon.glyphicon-search
-                        .col-sm-9
+                        .col-xs-12
+                        .col-sm-12
                             .ColVis
-                                button.btn.btn-primary(ng-click="summaryFn.exportStudentActive()")
+                                button.btn.btn-primary(ng-click="summaryFn.exportStuRoutineDetail()")
                                     span 导出
-                        .col-xs-12.margin-bottom-10.no-padding
-                            form.form-inline
-                                .form-group.col-sm-3.margin-top-5.no-padding
-                                    label 院系：
-                                    select.select.form-control(ng-model="summaryFn.params.collegeId" ui-select2="summaryFn.selectCollege2Options()", ng-change="summaryFn.getClassList()" )
-                                        option(value="-1") 全部
-                                        option(ng-repeat="college in summaryFn.collegeDropList" value="{{college.id}}" ng-selected="summaryFn.params.collegeId==college.id") {{college.name}}
-                                .form-group.col-sm-3.margin-top-5
-                                    label 专业：
-                                    select.select2.form-control(ng-model="summaryFn.params.professionalId" ui-select2="summaryFn.select2MajorOptions(summaryFn.collegeId)", ng-change="summaryFn.getClassList()"  )
-                                        option(value="") 全部
-                                        option(ng-repeat="major in summaryFn.majorDropList" value="{{major.id}}" ) {{major.name}}
-                                //- .form-group.col-sm-4.margin-top-5
-                                    label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
-                                .form-group.col-sm-3.margin-top-5.no-padding
-                                    label 班级：
-                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
-                                        option(value="") 全部
-                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
-                                //- .form-group.col-sm-4.margin-top-5
-                                    label 导员：
-                                    input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -59,18 +31,26 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 激活状态
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 院系
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 打卡时间
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 打卡地址
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 备注原因
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 打卡设备
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 设备编号
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
-                                td {{rp.studentName}}
                                 td {{rp.jobNum}}
+                                td {{rp.studentName}}
                                 td {{rp.className}}
                                 td {{rp.grade}}
                                 td {{rp.professionalName}}
                                 td {{rp.collegeName}}
-                                td {{rp.active ? '已激活' : '未激活'}}
+                                td {{rp.signTime}}
+                                td {{rp.gpsDetail}}
+                                td {{rp.gpsLocation}}
+                                td {{rp.gpsType}}
+                                td {{rp.gpsType}}
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
@@ -84,3 +64,7 @@
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
                                 ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.portalTrigger()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    .col-sm-6.col-xs-12.dt-toolbar-footer 
+                        .ColVis
+                            button.btn.btn-primary(ui-sref="stuRoutineCount")
+                                span 返回

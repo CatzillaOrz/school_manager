@@ -104,6 +104,20 @@ angular.module('dleduWebApp')
                     label: '签到统计汇总'
                 }
             })
+            .state('stuRoutineDetail', {
+                parent: 'base',
+                url   : '/stuRoutineDetail/:id/:jobNum/:studentName/:grade/:collegeName/:professionalName/:className',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TeachingSummaryCtrl',
+                        templateUrl: 'app/module/statistics/stuRoutineDetail.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '签到统计详情'
+                }
+            })
             .state('enterpriseDetail', {
                 parent: 'base',
                 url   : '/enterpriseDetail',
