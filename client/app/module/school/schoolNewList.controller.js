@@ -52,7 +52,7 @@ angular.module('dleduWebApp')
                 var params = angular.copy(this.params);
                 if(params.published == 2)
                     delete params.published;
-                params.page = this.page.pageNumber;
+                params.pageNumber = this.page.pageNumber;
                 params.pageSize = this.page.pageSize;
                 SchoolService.getSchoolNewList(params).$promise
                     .then(function (data) {
@@ -235,13 +235,17 @@ angular.module('dleduWebApp')
 
             batchPrompt: function(type){
                 var that = this, message = '';
+                if(this.selDistObj.length == 0){
+                    messageService.openMsg("请先选择记录！");
+                    return;
+                }
                 if(type == 'publish'){
                     message = "您确定要发布这些记录吗？";
 					messageService.getMsg(message, that.batchPublish);
                 }else{
                     message = "您确定要删除这些记录吗？";
+                    messageService.getMsg(message, that.batchDel);
                 }
-                messageService.getMsg(message, that.batchDel);
             },
 
             batchPublish: function(){
@@ -249,9 +253,13 @@ angular.module('dleduWebApp')
                 var params = {newsIds: that.getIdsByProperty(that.selDistObj, 'id')};
                 SchoolService.batchPublishNews(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("批量发布成功！");
-                        that.selDistObj = [];
-                        that.getSchoolNewList();
+                        if(data.result == 'success'){
+                            messageService.openMsg("批量发布成功！");
+                            that.selDistObj = [];
+                            that.getSchoolNewList();
+                        }else{
+                            messageService.openMsg("批量发布失败！");
+                        }
                     })
                     .catch(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error,"批量发布失败！"));
@@ -263,9 +271,13 @@ angular.module('dleduWebApp')
                 var params = {newsIds: that.getIdsByProperty(that.selDistObj, 'id')};
                 SchoolService.batchDelNews(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("批量删除成功！");
-                        that.getSchoolNewList();
-                        that.selDistObj = [];
+                        if(data.result == 'success'){
+                            messageService.openMsg("批量删除成功！");
+                            that.getSchoolNewList();
+                            that.selDistObj = [];
+                        }else{
+                            messageService.openMsg("批量删除失败！");
+                        }
                     })
                     .catch(function (error) {
                         messageService.openMsg(CommonService.exceptionPrompt(error,"批量删除失败！"));

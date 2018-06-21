@@ -21,15 +21,15 @@
                             label.col-sm-3.control-label
                                 span.required *
                                 | 文章标题：
-                            .col-sm-5
+                            .col-sm-4
                                 input.form-control(type='text', name="title" placeholder='点击输入新闻标题', ng-model="setSchollNews.dataMobel.title" validator="required, maxlength=200")
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
                                 | 发布时间：
-                            .col-sm-5
-                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                    input.form-control.col-sm-12(size='16',name="date" placeholder='发布时间' type='text' ng-model="setSchollNews.dataMobel.publishDate" validator="required")
+                            .col-sm-4
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block.col-sm-12(data-date='', data-date-end-date="0d" data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16',name="date" placeholder='发布时间' type='text' ng-model="setSchollNews.dataMobel.publishDate" validator="required")
                                     span.add-on
                                         i.icon-calendar.glyphicon.glyphicon-calendar
                         .article-file
@@ -66,7 +66,7 @@
                                 .col-md-12(style="text-align:left")
                                     a.btn.btn-primary(ng-click="setSchollNews.submit(1)" validation-submit="newform") 预览
                                     a.btn.btn-primary.margin-left-10(ng-click="setSchollNews.submit(2)" validation-submit="newform") 保存
-                                    a.btn.btn-default.margin-left-10(ng-click="setSchollNews.returnArticleMag()") 取消
+                                    a.btn.btn-default(ng-click="setSchollNews.returnArticleMag()") 取消
 
     //-  添加学生弹出窗模版
     script(type='text/ng-template',id='prewNews')
