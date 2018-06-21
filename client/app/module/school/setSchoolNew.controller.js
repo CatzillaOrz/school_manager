@@ -4,7 +4,7 @@
 */
 
 angular.module('dleduWebApp')
-    .controller('SetSchoolNewCtrl', function ($scope, $rootScope, $state, AuthService, messageService, ImageService, UploadService,
+    .controller('SetSchoolNewCtrl', function ($scope, $rootScope, $state, $timeout, AuthService, messageService, ImageService, UploadService,
                                               CommonService,SchoolService, ngDialog) {
         $scope.setSchollNews = {
             id: 0,
@@ -52,13 +52,14 @@ angular.module('dleduWebApp')
                     autoHeightEnabled: false,
                     autoFloatEnabled: false,
                     initialFrameWidth: '100%',
-                    initialFrameHeight: '200'
+                    initialFrameHeight: '200',
+                    maximumWords: 3000
                 },
                 selectList: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"],
                 exerciseChoice: [],
                 setting: {},
                 zNodes: [],
-                tagList: {},
+                tagList: {}
             },
             selected: function($newFiles,$invalidFiles){
                 if($newFiles){
@@ -201,6 +202,7 @@ angular.module('dleduWebApp')
                 that.dataMobel.organIDs = AuthService.getUser().orgId;
                 that.dataMobel.publishDate = result.createdDate;
                 that.questionsFn.exerciseContent = result.content;
+
                 if(result.picUrl1){
                     that.dataMobel.picUrl = result.picUrl1;
                 }
@@ -213,7 +215,7 @@ angular.module('dleduWebApp')
             },
 
             init: function(){
-                this.id = $state.params.id
+                this.id = $state.params.id;
                 if(this.id){
                     this.getDetail();
                 }
