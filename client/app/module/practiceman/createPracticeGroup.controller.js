@@ -24,10 +24,11 @@ angular.module('dleduWebApp')
 			steps: [
 				{title: '选择学生'},
 				{title: '选择导师'},
+				{title: '设置实践规则'},
 				{title: '创建实践计划'}
 			],
 			//当前步骤
-			step: 1,
+			step: 3,
 			//参数
 			params: {
 				classOrStudents: 20,
