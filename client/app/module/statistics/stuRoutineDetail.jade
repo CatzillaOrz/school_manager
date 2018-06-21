@@ -40,8 +40,8 @@
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
-                                td {{rp.jobNum}}
                                 td {{rp.studentName}}
+                                td {{rp.jobNum}}
                                 td {{rp.className}}
                                 td {{rp.grade}}
                                 td {{rp.professionalName}}
