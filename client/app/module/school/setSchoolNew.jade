@@ -59,7 +59,7 @@
                                         .add-news-upload-button
                                             button.file_btn.btn( ngf-select='selected($newFiles,$invalidFiles)' ng-model="myFile3" name="file" ngf-pattern="'.png,.jpg,.jpeg'" ngf-validate="{size: {max: '1MB'}}" ) 选择文件
                                             button.file_btn.btn.btn-success(ng-click='setSchollNews.uploadFile(myFile3, 3)') 保存
-                        .article-ueditor
+                        .article-ueditor(ng-if="(setSchollNews.type=='add'||setSchollNews.type=='edit'&&setSchollNews.complete)")
                             .editor(ueditor id='setSchollNews.questionsFn.editorid' uec='setSchollNews.questionsFn.exerciseContent' editor='editor' config="setSchollNews.questionsFn.editorConf")
                         .form-actions(style="border-top:none;margin:0")
                             .row

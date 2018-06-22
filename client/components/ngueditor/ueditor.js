@@ -41,14 +41,6 @@ angular.module('ngUeditor',[])
                 initEditor();
 
               });
-              scope.$watch('uec', function (val) {
-                if(!scope.uec){
-                    scope.uec = "";
-                }
-                if(ue){
-                    ue.setContent(scope.uec);
-                }
-              });
             }
         }
 });
