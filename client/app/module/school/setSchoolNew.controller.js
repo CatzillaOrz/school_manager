@@ -135,7 +135,7 @@ angular.module('dleduWebApp')
             },
 
             submit: function(id){
-                if(_.isEmpty(this.questionsFn.exerciseContent)&&_.isEmpty(this.dataMobel.content)){
+                if(_.isEmpty(this.questionsFn.exerciseContent)){
                     messageService.openMsg('请输入内容！');
                     return ;
                 }
