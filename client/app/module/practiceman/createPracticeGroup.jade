@@ -1,4 +1,4 @@
-.college-handle-container
+.college-handle-container.student-practice
     .jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             span.widget-icon
@@ -140,19 +140,19 @@
                                     .col-md-7
                                             .row.inline-group
                                                 label.radio
-                                                    input(type='radio', name='radio-inline', checked='checked')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSign' ng-value='true')
                                                     i(style='top:10px;')
                                                     span 需要
                                                 label.radio
-                                                    input(type='radio', name='radio-inline')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSign' ng-value='false')
                                                     i(style='top:10px;')
                                                     span 不需要
-                                            .row.form-group
+                                            .row.form-group(ng-if='handleFn.params.setDTO.isNeedSign')
                                                 label.col-md-3.control-label
                                                     span
                                                     | 应签到：
                                                 .col-md-2
-                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;")
+                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needSignNum")
                                                 label.col-md-1.control-label
                                                     span 次
                                 .form-group
@@ -163,37 +163,38 @@
                                     .col-md-7
                                             .row.inline-group
                                                 label.radio
-                                                    input(type='radio', name='radio-inline1', checked='checked')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSummary' ng-value='true')
                                                     i(style='top:10px;')
                                                     span 需要
                                                 label.radio
-                                                    input(type='radio', name='radio-inline1')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSummary',  ng-value='false')
                                                     i(style='top:10px;')
                                                     span 不需要
-                                            .row.form-group
-                                                label.col-md-3.control-label
-                                                    span
-                                                    | 日志：
-                                                .col-md-2
-                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;")
-                                                label.col-md-1.control-label
-                                                    span 篇
-                                            .row.form-group
-                                                label.col-md-3.control-label
-                                                    span
-                                                    | 周志：
-                                                .col-md-2
-                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;")
-                                                label.col-md-1.control-label
-                                                    span 篇
-                                            .row.form-group
-                                                label.col-md-3.control-label
-                                                    span
-                                                    | 月总结：
-                                                .col-md-2
-                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;")
-                                                label.col-md-1.control-label
-                                                    span 篇
+                                            section(ng-if='handleFn.params.setDTO.isNeedSummary')
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 日志：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needDailyNum")
+                                                    label.col-md-1.control-label
+                                                        span 篇
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 周志：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needWeeklyNum")
+                                                    label.col-md-1.control-label
+                                                        span 篇
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 月总结：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needMonthlyNum")
+                                                    label.col-md-1.control-label
+                                                        span 篇
                                 .form-group
                                     label.col-md-3.control-label
                                         span.required *
@@ -202,11 +203,11 @@
                                     .col-md-7
                                             .row.inline-group
                                                 label.radio
-                                                    input(type='radio', name='radio-inline2', checked='checked')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.needReport' ng-value='true')
                                                     i(style='top:10px;')
                                                     span 需要
                                                 label.radio
-                                                    input(type='radio', name='radio-inline2')
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.needReport' ng-value='false')
                                                     i(style='top:10px;')
                                                     span 不需要
                     form.form-horizontal
@@ -218,33 +219,40 @@
                                         span.required *
                                         | 签到所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="Holiday.entity.name")
+                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.signWeight")
                                     label.col-md-1.control-label
                                         span %
+                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.signWeight > 100 || handleFn.params.setDTO.signWeight<0', style) 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 周日志所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="Holiday.entity.name")
+                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.summaryWeight")
                                     label.col-md-1.control-label
                                         span %
+                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
+                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.summaryWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 实践报告所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="Holiday.entity.name")
+                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.reportWeight")
                                     label.col-md-1.control-label
                                         span %
+                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
+                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.reportWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 实践任务所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="Holiday.entity.name")
+                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.taskWeight")
                                     label.col-md-1.control-label
                                         span %
+                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
+                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.taskWeight<0') 请填写100以内的正整数
                     
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
                 form.form-horizontal(name="teachClassForm")
