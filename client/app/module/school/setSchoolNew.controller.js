@@ -17,6 +17,8 @@ angular.module('dleduWebApp')
                 organIDs: AuthService.getUser().orgId,
                 publishDate: ''
             },
+            complete: false,
+            type: 'add',
 
             questionsFn:{
                 editor: {},
@@ -107,7 +109,7 @@ angular.module('dleduWebApp')
             addNews: function(){
                 var that = this;
                 var params = this.dataMobel;
-                params.content = that.questionsFn.exerciseContent ? that.questionsFn.exerciseContent: that.dataMobel.content
+                params.content = that.questionsFn.exerciseContent ? that.questionsFn.exerciseContent: that.dataMobel.content;
                 SchoolService.addNews(params).$promise
                     .then(function (data) {
                         messageService.openMsg("新增成功！");
@@ -121,6 +123,7 @@ angular.module('dleduWebApp')
             updateNews: function(){
 				var that = this;
                 var params = this.dataMobel;
+                params.content = that.questionsFn.exerciseContent ? that.questionsFn.exerciseContent: that.dataMobel.content;
                 SchoolService.updateNews(params).$promise
                     .then(function (data) {
                         messageService.openMsg("编辑成功！");
@@ -188,6 +191,7 @@ angular.module('dleduWebApp')
                 var params = {articleId: that.id};
                 SchoolService.getDetailById(params).$promise
                     .then(function (data) {
+                        that.complete = true;
                         that.revertData(data.news)
                     })
                     .catch(function (error) {
@@ -217,6 +221,7 @@ angular.module('dleduWebApp')
             init: function(){
                 this.id = $state.params.id;
                 if(this.id){
+                    this.type = 'edit';
                     this.getDetail();
                 }
             }
