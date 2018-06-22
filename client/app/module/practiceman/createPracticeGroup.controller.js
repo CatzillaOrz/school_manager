@@ -24,6 +24,7 @@ angular.module('dleduWebApp')
 			steps: [
 				{title: '选择学生'},
 				{title: '选择导师'},
+				{title: '设置实践规则'},
 				{title: '创建实践计划'}
 			],
 			//当前步骤
@@ -40,7 +41,20 @@ angular.module('dleduWebApp')
 				code: "",
 				userId: AuthService.getUser().id,
 				id: 0,
-				name: ""
+				name: "",
+				setDTO:{
+					isNeedSign: false,
+					isNeedSummary: false,
+					needDailyNum: 0,
+					needMonthlyNum: 0,
+					needReport: true,
+					needSignNum: 0,
+					needWeeklyNum: 0,
+					reportWeight: 0,
+					signWeight: 0,
+					summaryWeight: 0,
+					taskWeight: 0
+				}
 			},
 			page: {
 				totalElements: 0,
@@ -383,6 +397,7 @@ angular.module('dleduWebApp')
 				entity.startDate = params.startDate;
 				entity.endDate = params.endDate;
 				entity.orgId = AuthService.getUser().orgId;
+				entity.setDTO = params.setDTO;
 				if(this.validateDate(entity.startDate, entity.endDate)){
 					return;
 				}
@@ -458,6 +473,10 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.addTeachClass();
 			},
+			//compute
+			computeTotal: function(){
+				return this.params.setDTO.signWeight + this.params.setDTO.summaryWeight + this.params.setDTO.reportWeight + this.params.setDTO.taskWeight > 100
+			},
 
 			/**
 			 * 获取实训小组信息
@@ -475,6 +494,7 @@ angular.module('dleduWebApp')
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;
 						that.params.endDate = that.practiceGroupInfo.endDate;
+						that.params.setDTO = that.practiceGroupInfo.setDTO;
 						// that.getSimpleTeachers();
 						that.getEntTutorList();
 						// that.getSimpleStudents();

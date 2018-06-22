@@ -40,7 +40,7 @@
             "title": "实践过程管理",
             "sref": "trainClassList",
             "icon": "navicon",
-            "active": "trainClassList",
+            "active": "practiceGroupMan",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
             "items":[
                 {
