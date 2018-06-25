@@ -102,7 +102,7 @@
                                             #datatable_col_reorder_paginate6.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选问卷
+                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选
                                 //button.btn.btn-primary.margin-left-10(ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
 
                 #hr2.tab-pane
