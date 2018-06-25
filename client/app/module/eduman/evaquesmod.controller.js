@@ -161,11 +161,11 @@ angular.module('dleduWebApp')
 			 */
 			convertRadio: function(params){
 				//转换题目类型
-				if(params.quantification == true){
+				/*if(params.quantification == true){
 					this.params.choiceType = 'score';
 				}else if(params.choiceQuestion == true){
 					this.params.choiceType = 'choice'
-				}
+				}*/
 				var questions = params.questions;
 				if(!this.isEditOrAdd){
 					delete params.id;
@@ -278,14 +278,14 @@ angular.module('dleduWebApp')
 			 * 监控量化选择选项变化
 			 */
 			monitorOptionChange: function(){
-				//转换题目类型保持和之前类型一致
+				/*//转换题目类型保持和之前类型一致
 				if(this.params.choiceType == 'score'){
 					this.params.quantification = true;
 					this.params.choiceQuestion = false;
 				}else if(this.params.choiceType == 'choice'){
 					this.params.choiceQuestion = true;
 					this.params.quantification = false;
-				}
+				}*/
 				this.emptyDataScore(this.quesLists);//清空选择分数
 				this.params.totalScore = 0; //清空总分
 			},
@@ -356,13 +356,13 @@ angular.module('dleduWebApp')
 					this.isEditOrAdd = true;
 					this.getEvaQuesInfo($state.params.id);
 				}else{
-					if(this.params.choiceType == 'score'){
+					/*if(this.params.choiceType == 'score'){
 						this.params.quantification = true;
 						this.params.choiceQuestion = false;
 					}else if(this.params.choiceType == 'choice'){
 						this.params.choiceQuestion = true;
 						this.params.quantification = false;
-					}
+					}*/
 					this.quesLists.push({
 						name: '',//题目
 						score: 0,//分数

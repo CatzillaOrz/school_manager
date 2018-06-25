@@ -6,7 +6,7 @@
 angular.module('dleduWebApp')
 	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
 												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService, tempStorageService,
-												SchoolYearService) {
+												SchoolYearService, EduManService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -226,6 +226,21 @@ angular.module('dleduWebApp')
 				messageService.getMsg("课表、考勤等点点相关的业务数据，以及开卷相关业务数据将被清除,您确定仍要删除此教学班吗？", that.deleteTeachClass)
 			},
 
+			getCurrentSemester: function () {
+				var that = this;
+				var _params = {
+					orgId: AuthService.getUser().orgId
+				};
+				EduManService.getCurrentSemester(_params).$promise
+					.then(function (data) {
+						that.params.semesterId = data.id;
+						that.schoolYearDropList = [data];
+					})
+					.catch(function (error) {
+
+					})
+			},
+
 			/**
 			 * 弹出批量导入弹出框
 			 * type 按必须导入还是选项导入
@@ -364,8 +379,9 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				this.getTermList();
+				//this.getTermList();
 				this.getTeachClassList();
+				this.getCurrentSemester();
 			}
 		};
 

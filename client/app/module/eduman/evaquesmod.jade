@@ -30,11 +30,11 @@
                             span.required
                             | 问卷类型：
                         .col-sm-7
-                            label.radio-inline
-                                input(type="radio" name='questype'  ng-model="evaQuesModFn.params.choiceType" ng-click="evaQuesModFn.monitorOptionChange()" value='score')
+                            label.checkbox-inline
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.quantification" ng-model="evaQuesModFn.params.quantification" ng-click="evaQuesModFn.monitorOptionChange()" )
                                 | 打分型
-                            label.radio-inline
-                                input(type="radio" name='questype'  ng-model="evaQuesModFn.params.choiceType" ng-click="evaQuesModFn.monitorOptionChange()" value='choice')
+                            label.checkbox-inline
+                                input(type="checkbox" ng-checked="evaQuesModFn.params.choiceQuestion" ng-model="evaQuesModFn.params.choiceQuestion" ng-click="evaQuesModFn.monitorOptionChange()" )
                                 | 选项型
                             label.checkbox-inline.margin-left-10
                                 input(type="checkbox" ng-checked="evaQuesModFn.params.qcomment" ng-model="evaQuesModFn.params.qcomment")
@@ -95,6 +95,30 @@
                                                         input(type="hidden" ng-model="quesOption.choice" ng-value="quesOption.choice=evaQuesModFn.convertToLetter($index+1)")
                                                     .col-sm-1.padding-10
                                                         a.handle(ng-click="evaQuesModFn.delQuesOption(outerIndex)")
+                                                            i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                            .row.no-margin(ng-if='evaQuesModFn.params.quantification && evaQuesModFn.params.choiceQuestion')
+                                                .form-group.no-margin
+                                                    .col-sm-1.padding-10
+                                                        label 选项
+                                                    .col-sm-8.padding-10
+                                                        input(type="checkbox" ng-checked="record.radio" ng-model="record.radio" ng-change="evaQuesModFn.calcOptionScore(record, record.radio)")
+                                                        |  是否多选
+                                                    .col-sm-2.padding-10
+                                                        label.margin-left-10 分值: {{record.score}}
+                                                    .col-sm-1.padding-10
+                                                        i.fa.fa-plus-circle(style="font-size:16px;margin-right:10px;" title="新增" ng-click="evaQuesModFn.addQuesOption(outerIndex, $index)")
+                                                .form-group.no-margin(ng-repeat="quesOption in record.questionChioce")
+                                                    .col-sm-1.padding-10
+                                                        span.margin-right-10 {{evaQuesModFn.convertToLetter($index+1)}}
+                                                    .col-sm-8.padding-10
+                                                        .form-group.no-margin
+                                                            textarea.form-control.margin-right-10(ng-model="quesOption.content" name="{{'optioncontent1'+ outerIndex +$index}}" validator="required, maxlength=200")
+                                                    .col-sm-2.padding-10
+                                                        .form-group.no-margin
+                                                            input.form-control.margin-right-10(type="text" ng-model="quesOption.score" name="{{'optionscore'+ outerIndex + $index}}" validator="required, number" ng-change="evaQuesModFn.calcOptionScore(record, record.radio)")
+                                                            input(type="hidden" ng-model="quesOption.choice" ng-value="quesOption.choice=evaQuesModFn.convertToLetter($index+1)")
+                                                    .col-sm-1.padding-10
+                                                        a.handle(ng-click="evaQuesModFn.delQuesOption(outerIndex,$index)")
                                                             i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
                                         td
                                             a.handle(ng-click="evaQuesModFn.delQues($index)")

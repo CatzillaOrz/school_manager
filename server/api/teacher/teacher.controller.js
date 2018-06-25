@@ -87,7 +87,7 @@ module.exports = {
                 var values = data.data;
                 for (var index in values) {
                     var item = values[index];
-                    datas.push([item.jobNumber, item.name, item.sex, item.collegeName, item.phone]);
+                    datas.push([item.name, item.jobNumber, item.sex, item.collegeName, item.phone]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(datas);
                 var wb = XLSX.utils.book_new();
