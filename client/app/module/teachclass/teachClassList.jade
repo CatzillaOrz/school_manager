@@ -57,6 +57,9 @@
                             .speace-10
                             button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.openImpBatch('compulsory')" ng-if="teachClassListFn.isUseAuth('imp')")
                                 span 按必修课批量导入
+                            .speace-10
+                            button.btn.btn-primary.margin-top-5(type='button' ng-click="teachClassListFn.exportData()")
+                                span 导出
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')

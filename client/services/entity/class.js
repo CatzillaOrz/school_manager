@@ -52,7 +52,13 @@ angular.module('dleduWebService')
                 var classes = $resource('api/class/getClassDropListOrg');
                 return classes.get(params);
             },
-
+            exportClass: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/class/exportClass",
+                    params: params
+                });
+            },
         }
 
     });

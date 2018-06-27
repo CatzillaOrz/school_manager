@@ -378,6 +378,29 @@ angular.module('dleduWebApp')
 				ImpBatchService.downLoad(type);
 			},
 
+			/**
+			 * 导出
+			 */
+			exportData: function(){
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+				};
+				params.semesterId = that.params.semesterId;
+				params.mustOrOption = that.params.mustOrOption;
+				params.courseName = that.params.courseName;
+				params.teacherName = that.params.teacherName;
+				params.name = that.params.name;
+				params.pageNumber = 1;
+				params.pageSize = 9999999;
+				TeachClassService.exportTeachClass(params).success(function(data) {
+					CommonService.saveAs(data, '教学班信息');
+				}).catch(function (e) {
+
+				});
+			},
+
+
 			init: function () {
 				//this.getTermList();
 				this.getTeachClassList();

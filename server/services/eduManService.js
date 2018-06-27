@@ -90,6 +90,24 @@ var EduManService = {
         });
     },
 
+    //编辑评教问卷
+    updateEvaDate: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/questionnaire/updateEndTime',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
     //查询评教问卷列表
     getEvaQuesInfo: function (params, access_token, callback) {
         RestClient.get({

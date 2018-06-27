@@ -2,6 +2,7 @@
 
 var _ = require('lodash'),
 	TeachClassService = require('../../services/teachClassService');
+var XLSX = require('xlsx');
 
 module.exports = {
 	getTeachClassList: function (req, res) {
@@ -343,6 +344,28 @@ module.exports = {
 		TeachClassService.getAllCourseSchedulesByTeaSync(req.query, req.user.access_token)
 			.then(function (data) {
 				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	exportTeachClass: function (req, res) {
+		TeachClassService.getTeachClassListSync(req.query, req.user.access_token)
+			.then(function (data) {
+				var datas = [
+					["教学班名称", "编码", "学期", "课程", "课程类型", "教师名称", "学生数量"]
+				];
+				var values = data.data;
+				for (var index in values) {
+					var item = values[index];
+					datas.push([item.name, item.code, item.semesterName, item.courseName, item.classOrStudents==10 ? "必修" : "选修",
+						item.teacherNames, item.studentsCount]);
+				}
+				var ws = XLSX.utils.aoa_to_sheet(datas);
+				var wb = XLSX.utils.book_new();
+				XLSX.utils.book_append_sheet(wb, ws, "教学班信息");
+				res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
 			})
 			.catch(function (e) {
 				res.status(e.code).send(e.message);
