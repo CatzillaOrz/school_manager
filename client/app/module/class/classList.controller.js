@@ -273,6 +273,32 @@ angular.module('dleduWebApp')
                 ImpBatchService.downLoad('classes');
             },
 
+            /**
+             * 导出
+             */
+            exportData: function(){
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize,
+                    managerId: AuthService.getUser().id
+                };
+                params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+                params.professionalId=that.params.professionalId;
+                params.masterName=that.params.masterName;
+                params.teachingYear=that.params.teachingYear;
+                params.pageNumber = 1;
+                params.pageSize = 9999999;
+                ClassService.exportClass(params).success(function(data) {
+                    CommonService.saveAs(data, '班级信息');
+                }).catch(function (e) {
+
+                });
+            },
+
+
             init: function (type) {
                 var _this=this;
                 if(!type){

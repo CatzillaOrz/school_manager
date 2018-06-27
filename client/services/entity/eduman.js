@@ -33,6 +33,12 @@ angular.module('dleduWebService')
 				return eduman.update(params);
 			},
 
+			updateEvaDate: function (params) {
+				var eduman = $resource('api/eduman/updateEvaDate','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+
 			getEvaQuesDist: function (params) {
 				var eduman = $resource('api/eduman/getEvaQuesDist');
 				return eduman.get(params);

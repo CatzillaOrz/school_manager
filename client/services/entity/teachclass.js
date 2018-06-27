@@ -163,7 +163,13 @@ angular.module('dleduWebService')
                 var courseSchedule = $resource('api/teachclass/getTeacherChangeCourseList');
                 return courseSchedule.get(params);
             },
-
+			exportTeachClass: function (params) {
+				return $http({
+					method: 'GET',
+					url: "api/teachclass/exportTeachClass",
+					params: params
+				});
+			},
 		}
 
 	});

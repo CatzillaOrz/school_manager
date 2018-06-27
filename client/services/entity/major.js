@@ -32,6 +32,13 @@ angular.module('dleduWebService')
                 var majorList = $resource('api/major/getMajorDropList');
                 return majorList.get(params);
             },
+            exportMajor: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/major/exportMajor",
+                    params: params
+                });
+            },
         }
 
     });

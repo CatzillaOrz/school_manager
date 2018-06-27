@@ -21,5 +21,6 @@ router.get('/getClassTeacherList',auth.isSignedIn, controller.getClassTeacherLis
 router.get('/getInstructorList',auth.isSignedIn, controller.getInstructorList);
 router.delete('/deleteClassTeacher',auth.isSignedIn, controller.deleteClassTeacher);
 router.get('/getClassDropListOrg',auth.isSignedIn, controller.getClassDropListOrg);
+router.get('/exportClass',auth.isSignedIn, controller.exportClass);
 
 module.exports = router;

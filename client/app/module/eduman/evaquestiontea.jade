@@ -62,6 +62,9 @@
                                     a.handle(ui-sref="evaquestatictea({type:0,id:record.id})")
                                         i.fa.fa-line-chart
                                         span 统计
+                                    a.handle(ng-click="evaQuesListFn.openEditDate($index)")
+                                        i.fa.fa-pencil-square-o
+                                        span 修改日期
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
@@ -92,3 +95,22 @@
                             span.spanshow {{option.choice}}、
                             input(type="{{!que.radio?'checkbox':'radio'}}" ng-class="{true: 'checkbox-inline', false: 'radio-inline'}[!que.radio]" ng-disabled='true')
                             | {{' '+ option.content}}
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='editDate')
+        .container-fluid(ng-if="evaQuesListFn.isShowDialog")
+            .dialog-title
+                h3.font-weight-800 {{'修改截止日期'}}
+            .dialog-body
+                form.form-horizontal(role="form" name="form" novalidate)
+                    .form-group
+                        label.col-sm-3.control-label 截止日期：
+                        .col-sm-7
+                            .col-sm-12.input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='',  data-date-format='yyyy-mm-dd' b-datepicker)
+                                input.form-control(ng-disabled="true" size='16',  name="{{'dateStart'}}" placeholder='请选择截止日期' type='text' ng-model='evaQuesListFn.endDate' validator="required")
+                                span.add-on
+                                    i.icon-calendar.glyphicon.glyphicon-calendar
+
+                    .form-group
+                        .col-sm-6
+                            button.btn.btn-primary(ng-click="evaQuesListFn.submit()" validation-submit="form") 确定
+                            button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消
