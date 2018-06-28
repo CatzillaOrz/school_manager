@@ -27,6 +27,7 @@ angular.module('dleduWebApp')
             currentClasses:{},
             //学生全选标识
             selectAll:false,
+            stuName: '',
             //选择所有
             //分页
             page: {
@@ -93,7 +94,8 @@ angular.module('dleduWebApp')
                 var params = {
                     teachingClassId: _this.params.id,
                     pageNumber: _this.page.pageNumber,
-                    pageSize: _this.page.pageSize
+                    pageSize: _this.page.pageSize,
+                    name: _this.stuName
                 };
                 TeachClassService.getTeachClassStudentList(params).$promise
                     .then(function (data) {

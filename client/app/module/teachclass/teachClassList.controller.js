@@ -411,6 +411,7 @@ angular.module('dleduWebApp')
 		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
 			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek")){
 				var params = $scope.teachClassListFn.params;
+				//params.pageNumber = $scope.teachClassListFn.page.pageNumber;
 				var key = fromState.name + toState.name;
 				tempStorageService.setObject(key, params);
 			}
@@ -421,6 +422,7 @@ angular.module('dleduWebApp')
 				var params = tempStorageService.getObject(key);
 				if(params){
 					$scope.teachClassListFn.params = params;
+					//$scope.teachClassListFn.page.pageNumber = params.pageNumber;
 					tempStorageService.removeObject(key);
 				}
 				$scope.teachClassListFn.init();

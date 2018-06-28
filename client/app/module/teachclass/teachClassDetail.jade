@@ -104,13 +104,22 @@
 
             .widget-body
                 fieldset
-                    span 本班学生
-                    button.btn.btn-primary.btn-class-detail(ui-sref="teachClassStudentUpdate({id:teachClassDetailFn.params.id})")
-                        i.fa.fa-sign-out
-                        span 添加
-                    button.btn.btn-primary.btn-class-detail(ng-click="teachClassDetailFn.deleteStudentPrompt()")
-                        i.fa.fa-sign-out
-                        span 批量删除学生
+                    .col-lg-12
+                        span.title-class-detail 本班学生
+                    .row
+                        .col-lg-3
+                            .input-group
+                                input.form-control(type='text', placeholder='按学号或姓名搜索' ng-model="teachClassDetailFn.stuName")
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button' ng-click="teachClassDetailFn.getTeachClassStudentList()")
+                                        i.fa.fa-search
+                        .col-lg-9
+                            button.btn.btn-primary.btn-class-detail(ui-sref="teachClassStudentUpdate({id:teachClassDetailFn.params.id})")
+                                i.fa.fa-sign-out
+                                span 添加
+                            button.btn.btn-primary.btn-class-detail(ng-click="teachClassDetailFn.deleteStudentPrompt()")
+                                i.fa.fa-sign-out
+                                span 批量删除学生
                 table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='dt_basic_info', style='width: 100%;')
                     thead
                         tr(role='row')

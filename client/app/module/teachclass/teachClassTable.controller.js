@@ -5,6 +5,7 @@ angular.module('dleduWebApp')
 		Upload, UploadService, ImpBatchService, ngDialog, SchoolYearService, EduManService, RoleAuthService) {
 		var tId = $state.params.tId;
 		$scope.collegeId = $state.params.collegeId;
+		$scope.pgNumber = $state.params.pgNumber;
 		$scope.name = $state.params.name;
 		$scope.teachClassTableFn = {
 			teachingTable: [],
