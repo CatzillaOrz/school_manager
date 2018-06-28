@@ -11,6 +11,119 @@ angular.module('dleduWebApp')
             return RoleAuthService.isUseAuthority(type);
         };
 
+
+        $scope.batch = {
+            /**
+             * 对象数据添加check属性
+             * @param records
+             */
+            addCheckProperty: function (records) {
+                for (var i = 0, recordLen = records.length; i < recordLen; i++) {
+                    var record = records[i];
+                    record.check = false;
+                }
+            },
+
+            //还原之前选中的记录，在选择分配列表中的显示出来
+            showSelDistList: function (records, that, property) {
+                var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
+                for (var k = 0, lenRecord = records.length; k < lenRecord; k++) {
+                    var record = records[k], selId = record[property];
+                    //判断元素在之前元素里面是否已经存在，如果存在不添加
+                    for (var j = 0, selLen = that.selDistObj.length; j < selLen; j++) {
+                        var id = that.selDistObj[j][property];
+                        if (selId == id) {
+                            record.check = true;
+                            calcCount++;
+                            break;
+                        }
+                    }
+                }
+
+                if (calcCount == lenRecord && calcCount) {
+                    that.checkAllRecord = true;
+                }
+            },
+
+            /**
+             * 根据对象属性获取值
+             */
+            getIdsByProperty: function(objs, property){
+                var propertyValues = [];
+                for (var k = 0, length = objs.length; k < length; k++) {
+                    var temp = objs[k];
+                    propertyValues.push(temp[property]);
+                }
+                return propertyValues;
+            },
+
+            //单击选择单个记录
+            selSingleRecord: function (records, $index, that, property) {
+                var selObj = records[$index];
+                if (selObj.check) { //选中当前记录
+                    var flag = false, index, selId =  selObj[property];
+                    for (var j = 0; j < that.selDistObj.length; j++) {
+                        var id = that.selDistObj[j][property];
+                        if (selId == id) {
+                            flag = true;
+                            index = j;
+                        }
+                    }
+                    if (!flag) {
+                        that.selDistObj.push(selObj);
+                    }
+                } else {//反选当前记录
+                    var flag = false, index, selId = selObj[property];
+                    that.checkAllRecord = false;
+                    for (var k = 0; k < that.selDistObj.length; k++) {
+                        var id = that.selDistObj[k][property];
+                        if (selId == id) {
+                            that.selDistObj.splice(k, 1);
+                            break;
+                        }
+                    }
+                }
+                //this.cloneSelDistObj = angular.copy(this.selDistObj);
+                this.showSelDistList(records, that, property);
+            },
+
+            //点击选择当前页全选
+            checkAll: function (pageAllRecords, that, property) {
+                if (that.checkAllRecord) {
+                    for (var k = 0, lenRecord = pageAllRecords.length; k < lenRecord; k++) {
+                        var record = pageAllRecords[k];
+                        var flag = false, selId = record[property];
+                        //判断元素在之前元素里面是否已经存在，如果存在不添加
+                        for (var j = 0, selLen = that.selDistObj.length; j < selLen; j++) {
+                            var id = that.selDistObj[j][property];
+                            if (selId == id) {
+                                flag = true;
+                            }
+                        }
+                        if (!flag) {
+                            that.selDistObj.push(record);
+                            record.check = true;
+                        }
+                    }
+
+                } else {//点击反选时当前页所有元素都被删除
+                    for (var k = 0, lenRecord = pageAllRecords.length; k < lenRecord; k++) {
+                        var record = pageAllRecords[k];
+                        var selId = record[property];
+                        //判断元素在之前元素里面是否已经存在，如果存在则删除此元素
+                        for (var j = 0; j < that.selDistObj.length; j++) {
+                            var id = that.selDistObj[j][property];
+                            if (selId == id) {
+                                that.selDistObj.splice(j, 1);
+                                record.check = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            },
+        }
+
         //当天时间
         var today = new Date().Format("yyyy-MM-dd");
         $scope.attendFn = {
@@ -853,6 +966,8 @@ angular.module('dleduWebApp')
                 managerId: AuthService.getUser().id
 
             },
+            cause: '',
+            currentSt: null,
             //分页参数
             page: {
                 totalElements: 0,
@@ -861,6 +976,7 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
             attendList: [],
+
             getAttendStopLogs: function () {
                 var _this = this;
                 var params = _this.params;
@@ -883,6 +999,48 @@ angular.module('dleduWebApp')
 
                     })
             },
+
+            //恢复考勤
+            openAttendDialog:function (stu) {
+                this.currentSt = stu;
+                ngDialog.open({
+                    template: 'attendPauseDialog',
+                    width: 550,
+                    scope: $scope
+                })
+            },
+
+            operAttend: function(){
+                var that = this;
+                var params = {msg: that.cause, studentId: that.currentSt.stuId};
+                if(that.currentSt.optContent=='暂停考勤'){
+                    EduManService.recoverAttend(params).$promise
+                        .then(function (data) {
+                            if(data.success){
+                                that.getAttendStopLogs();
+                                messageService.openMsg("恢复考勤成功！");
+                            }else{
+                                messageService.openMsg("恢复考勤失败！");
+                            }
+                        })
+                        .catch(function (error) {
+
+                        })
+                }else{
+                    EduManService.cancleAttend(params).$promise
+                        .then(function (data) {
+                            that.getAttendStopLogs();
+                            if(data.success){
+                                messageService.openMsg("暂停考勤成功！");
+                            }else{
+                                messageService.openMsg("暂停考勤失败！");
+                            }
+                        })
+                        .catch(function (error) {
+
+                        })
+                }
+            }
         };
         //修改考勤
         $scope.attendFixFn = {
@@ -891,8 +1049,10 @@ angular.module('dleduWebApp')
                 criteria: null,
                 startTime: null,
                 endTime: null,
-                managerId: AuthService.getUser().id
-
+                managerId: AuthService.getUser().id,
+                teachingClassName: '',
+                teacherName: '',
+                courseName: ''
             },
             fixParams: {
                 type: "",
@@ -902,6 +1062,9 @@ angular.module('dleduWebApp')
             attendList: [],
             fixLogs:[],
             currentEntity: {},
+            checkAllRecord: false,
+            selDistObj: [],
+            isBatch: false, //是否批量修改，true批量
             //分页参数
             page: {
                 totalElements: 0,
@@ -928,6 +1091,9 @@ angular.module('dleduWebApp')
                 EduManService.getAttendListByCondition(params).$promise
                     .then(function (data) {
                         _this.attendList = data.data;
+                        $scope.batch.addCheckProperty(data.data);
+                        _this.checkAllRecord = false;
+                        $scope.batch.showSelDistList(data.data, _this, 'id');
                         _this.page = data.page;
                     })
                     .catch(function (error) {
@@ -964,6 +1130,27 @@ angular.module('dleduWebApp')
 
                         })
             },
+
+            batchUpdateAttend: function () {
+                var _this = this;
+                var params = this.fixParams;
+                params.rollcallIds = $scope.batch.getIdsByProperty(_this.selDistObj, 'id');
+                EduManService.batchUpdateAttend(params).$promise
+                    .then(function (data) {
+                        if(data.success){
+                            _this.getAttendListByCondition();
+                            messageService.openMsg("修改成功！");
+                        }else{
+                            messageService.openMsg("修改失败！");
+                        }
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+
+
+
             detailOpen: function (entity) {
                 var _this = this;
                 _this.currentEntity=entity;
@@ -975,9 +1162,19 @@ angular.module('dleduWebApp')
                 });
             },
             fixOpen: function (entity) {
-                var _this = this;
-                _this.currentEntity=entity;
-                _this.fixParams.type=_this.translate(_this.currentEntity.type);
+                if(!entity){
+                    this.isBatch = true;
+                    this.fixParams.type = 1;
+                    if(!this.selDistObj.length){
+                        messageService.openMsg("请选择记录！");
+                        return;
+                    }
+                }else{
+                    this.isBatch = false;
+                    var _this = this;
+                    _this.currentEntity=entity;
+                    _this.fixParams.type=_this.translate(_this.currentEntity.type);
+                }
                 ngDialog.open({
                     template: 'fixAttendDialog',
                     // className: 'ngdialog-theme-plain',

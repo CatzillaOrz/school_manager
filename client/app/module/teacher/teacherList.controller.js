@@ -93,8 +93,7 @@ angular.module('dleduWebApp')
                 TeacherService.getTeacherList(params).$promise
                     .then(function (data) {
                         that.teacherList = data.data;
-                        that.page.totalElements=data.page.totalElements;
-                        that.page.totalPages=data.page.totalPages;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -266,8 +265,9 @@ angular.module('dleduWebApp')
             init: function () {
                 this.params.collegeId=$state.params.collegeId;
                 this.params.name=$state.params.name;
+                this.page.pageNumber=$state.params.pgNumber==""? 0: $state.params.pgNumber;
                 this.getCollegeDropList();
-                this.getTeacherList();
+                this.findTeacherByPage();
             }
         };
         $scope.teacherListFn.init();

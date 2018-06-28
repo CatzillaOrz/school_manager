@@ -229,6 +229,26 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return eduman.update(params);
             },
+			cancleAttend: function (params) {
+				var eduman = $resource('api/eduman/cancleAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			recoverAttend: function (params) {
+				var eduman = $resource('api/eduman/recoverAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			batchCancleAttend: function (params) {
+				var eduman = $resource('api/eduman/batchCancleAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			batchUpdateAttend: function (params) {
+				var eduman = $resource('api/eduman/batchUpdateAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
             getAttendStopLogs:function (params) {
                 var eduman = $resource('api/eduman/getAttendStopLogs');
                 return eduman.get(params);

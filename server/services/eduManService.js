@@ -816,6 +816,71 @@ var EduManService = {
             callback(e);
         });
     },
+    cancleAttend: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/phone/v1/counsellor/cansel',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    recoverAttend: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/phone/v1/counsellor/recover',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    batchCancleAttend: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/phone/v1/counsellor/cansel/batch',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+    batchUpdateAttend: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'dd',
+            path: '/api/web/v1/attendancerecor/modifyattendanceBatch',
+            access_token: access_token,
+            params: params
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
+
     getAttendStopLogs: function (params, access_token, callback) {
         RestClient.get({
             host:  'gateway-org',
