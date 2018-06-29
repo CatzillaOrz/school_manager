@@ -265,9 +265,8 @@ angular.module('dleduWebApp')
             init: function () {
                 this.params.collegeId=$state.params.collegeId;
                 this.params.name=$state.params.name;
-                this.page.pageNumber=$state.params.pgNumber==""? 0: $state.params.pgNumber;
                 this.getCollegeDropList();
-                this.findTeacherByPage();
+                this.getTeacherList();
             }
         };
         $scope.teacherListFn.init();
