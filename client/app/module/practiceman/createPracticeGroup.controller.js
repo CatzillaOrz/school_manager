@@ -45,15 +45,15 @@ angular.module('dleduWebApp')
 				setDTO:{
 					isNeedSign: false,
 					isNeedSummary: false,
-					needDailyNum: 0,
-					needMonthlyNum: 0,
+					needDailyNum: 1,
+					needMonthlyNum: 1,
 					needReport: true,
-					needSignNum: 0,
-					needWeeklyNum: 0,
-					reportWeight: 0,
-					signWeight: 0,
-					summaryWeight: 0,
-					taskWeight: 0
+					needSignNum: 1,
+					needWeeklyNum: 1,
+					reportWeight: 25,
+					signWeight: 25,
+					summaryWeight: 25,
+					taskWeight: 25
 				}
 			},
 			page: {
