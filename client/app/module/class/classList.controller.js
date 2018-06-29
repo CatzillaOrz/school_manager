@@ -201,9 +201,9 @@ angular.module('dleduWebApp')
                 ClassService.getClassList(params).$promise
                     .then(function (data) {
                         that.classList = data.data;
-                        that.page=data.page;
-                        /*that.page.totalElements=data.page.totalElements;
-                        that.page.totalPages=data.page.totalPages;*/
+                        //that.page=data.page;
+                        that.page.totalElements=data.page.totalElements;
+                        that.page.totalPages=data.page.totalPages;
                     })
                     .catch(function (error) {
 
@@ -308,13 +308,13 @@ angular.module('dleduWebApp')
                 }
                 _this.getCollegeDropList();
                 _this.getMajorDropList();
-                _this.findClassByPage();
+                _this.getClassList();
                 _this.grades = _this.initGrades();
                 _this.grades.splice(0, 0, {value:"", name: "请选择"});
             }
         };
         //$scope.classListFn.init();
-        /*$timeout(function () {
+        $timeout(function () {
             $scope.$watch('classListFn.params.collegeId', function(newValue, oldValue) {
                 if(newValue==-1){
                     $scope.classListFn.params.professionalId=null;
@@ -326,12 +326,12 @@ angular.module('dleduWebApp')
                     $scope.classListFn.majorDropList=[];
                 }
             });
-        });*/
+        });
 
         $scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
             if(toState.name == "classDetail" && fromState.name == "classlist"){
                 var params = {params: $scope.classListFn.params};
-                params.pageNumber = $scope.classListFn.page.pageNumber;
+                //params.pageNumber = $scope.classListFn.page.pageNumber;
                 var key = fromState.name + toState.name;
                 tempStorageService.setObject(key, params);
             }
@@ -343,7 +343,7 @@ angular.module('dleduWebApp')
                 if(params){
                     tempStorageService.removeObject(key);
                     $scope.classListFn.params = params.params;
-                    $scope.classListFn.page.pageNumber = params.pageNumber;
+                    //$scope.classListFn.page.pageNumber = params.pageNumber;
                 }
                 $scope.classListFn.init("backdetail");
             }else{
