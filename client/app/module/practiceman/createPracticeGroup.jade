@@ -231,7 +231,6 @@
                                         input.form-control(type='number' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0')
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
                                         span.required.tip-warning(ng-if='handleFn.params.setDTO.summaryWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
@@ -241,7 +240,6 @@
                                         input.form-control(type='number' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0')
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
                                         span.required.tip-warning(ng-if='handleFn.params.setDTO.reportWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
@@ -251,8 +249,10 @@
                                         input.form-control(type='number' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0')
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.computeTotal()') 权重比列之和大于100，请重新输入
                                         span.required.tip-warning(ng-if='handleFn.params.setDTO.taskWeight<0') 请填写100以内的正整数
+                                .form-group(ng-if='handleFn.computeTotal()')
+                                    label.col-md-10.control-label
+                                        span.required * 权重比列相加需大于0且不超过100%，请重新输入
                     
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
                 form.form-horizontal(name="teachClassForm")
@@ -362,7 +362,7 @@
                         .speace-10
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectStudentList.length==0") 下一步
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="!handleFn.validateStep3()") 下一步
+                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal()") 下一步
 
 
 
