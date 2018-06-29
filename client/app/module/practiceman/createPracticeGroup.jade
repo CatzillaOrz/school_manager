@@ -128,7 +128,7 @@
                         span(style="margin-left: 85px;color:red;") * 企业导师可不选择，但如果不选，不能进行实践任务操作
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
                 div(role='content')
-                    form.form-horizontal.smart-form
+                    form.form-horizontal.smart-form(name='stupid')
                         fieldset
                             legend 实践过程设置
                             .col-md-3.col-lg-5
@@ -152,9 +152,10 @@
                                                     span
                                                     | 应签到：
                                                 .col-md-2
-                                                    input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needSignNum")
-                                                label.col-md-1.control-label
+                                                    input.form-control(placeholder="0" type='number' name='sign' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needSignNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                label.col-md-4.control-label
                                                     span 次
+                                                    span.required(ng-if='stupid.sign.$invalid') &nbsp;*需大于0
                                 .form-group
                                     label.col-md-3.control-label
                                         span.required *
@@ -176,25 +177,28 @@
                                                         span
                                                         | 日志：
                                                     .col-md-2
-                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needDailyNum")
-                                                    label.col-md-1.control-label
+                                                        input.form-control(placeholder="0" type='number' name='daily' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needDailyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
                                                         span 篇
+                                                        span.required(ng-if='!stupid.daily.$valid') &nbsp;*需大于0
                                                 .row.form-group
                                                     label.col-md-3.control-label
                                                         span
                                                         | 周志：
                                                     .col-md-2
-                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needWeeklyNum")
-                                                    label.col-md-1.control-label
+                                                        input.form-control(placeholder="0" type='number' name='weekly' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needWeeklyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
                                                         span 篇
+                                                        span.required(ng-if='!stupid.weekly.$valid') &nbsp;*需大于0
                                                 .row.form-group
                                                     label.col-md-3.control-label
                                                         span
                                                         | 月总结：
                                                     .col-md-2
-                                                        input.form-control(placeholder="0" type='number' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needMonthlyNum")
-                                                    label.col-md-1.control-label
+                                                        input.form-control(placeholder="0" type='number' name='monthly' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needMonthlyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
                                                         span 篇
+                                                        span.required(ng-if='!stupid.monthly.$valid') &nbsp;*需大于0
                                 .form-group
                                     label.col-md-3.control-label
                                         span.required *
@@ -210,7 +214,7 @@
                                                     input(type='radio', ng-model='handleFn.params.setDTO.needReport' ng-value='false')
                                                     i(style='top:10px;')
                                                     span 不需要
-                    form.form-horizontal
+                    form.form-horizontal.smart-form(name='percent')
                         fieldset
                             legend 实践成绩加权设置
                             .col-md-3.col-lg-5
@@ -219,40 +223,41 @@
                                         span.required *
                                         | 签到所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.signWeight", ng-disabled='handleFn.selectTeacherList.length===0')
+                                        input.form-control(type='number' name='sp' ng-model="handleFn.params.setDTO.signWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.signWeight > 100 || handleFn.params.setDTO.signWeight<0', style) 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 周日志所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0')
+                                        input.form-control(type='number' name='wp' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.summaryWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 实践报告所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0')
+                                        input.form-control(type='number' name='rp' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.reportWeight<0') 请填写100以内的正整数
                                 .form-group
                                     label.col-md-5.control-label
                                         span.required *
                                         | 实践任务所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0')
+                                        input.form-control(type='number' name='tp' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
-                                        span.required.tip-warning(ng-if='handleFn.params.setDTO.taskWeight<0') 请填写100以内的正整数
-                                .form-group(ng-if='handleFn.computeTotal()')
+                                .form-group(ng-if='handleFn.computeTotal() || percent.sp.$invalid || percent.wp.$invalid || percent.rp.$invalid || percent.tp.$invalid')
                                     label.col-md-10.control-label
-                                        span.required * 权重比列相加需大于0且不超过100%，请重新输入
+                                        span.required * 权重比列各项必填且相加不超过100%，请重新输入
+                    .row
+                        .col-md-12(style='text-align:center;')
+                            a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
+                            .speace-10
+                            button.btn.btn-primary(type='submit' ng-click="stupid.$valid && handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal() || stupid.$invalid || percent.$invalid") 下一步
                     
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
                 form.form-horizontal(name="teachClassForm")
@@ -356,13 +361,13 @@
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
                         a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
             .form-actions
-                .row
+                .row(ng-show='handleFn.step!==3')
                     .col-md-12
                         a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
                         .speace-10
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectStudentList.length==0") 下一步
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal()") 下一步
+                        //- button.btn.btn-primary(type='submit' ng-click="stupid.$valid && handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal() || stupid.sign.$invalid") 下一步
 
 
 
