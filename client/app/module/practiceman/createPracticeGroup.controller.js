@@ -475,7 +475,8 @@ angular.module('dleduWebApp')
 			},
 			//compute
 			computeTotal: function(){
-				return this.params.setDTO.signWeight + this.params.setDTO.summaryWeight + this.params.setDTO.reportWeight + this.params.setDTO.taskWeight > 100
+				var res = this.params.setDTO.signWeight + this.params.setDTO.summaryWeight + this.params.setDTO.reportWeight + this.params.setDTO.taskWeight
+				return res<=0 || res > 100
 			},
 
 			/**
