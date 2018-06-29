@@ -55,6 +55,12 @@
                     "sref": "schoolnewlist",
                     "active": "schoolnewlist",
                     "icon": "magic"
+                },
+                {
+                    "title": "app发布通知",
+                    "sref": "appnoticelist",
+                    "active": "appnoticelist",
+                    "icon": "magic"
                 }
             ]
         },

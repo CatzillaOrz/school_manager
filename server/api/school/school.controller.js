@@ -374,7 +374,63 @@ module.exports = {
             .catch(function (e) {
                 res.status(e.code).send(e.message);
             })
-    }
+    },
+
+
+    getAppNoticeList: function (req, res) {
+        SchoolService.getAppNoticeListSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAppNoticeDetail: function (req, res) {
+        SchoolService.getAppNoticeDetailSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateAppNotice: function (req, res) {
+        SchoolService.updateAppNoticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addAppNotice: function (req, res) {
+        SchoolService.addAppNoticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteAppNotice: function (req, res) {
+        SchoolService.deleteAppNoticeSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAllSchool: function (req, res) {
+        SchoolService.getAllSchoolSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

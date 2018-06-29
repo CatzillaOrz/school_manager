@@ -119,4 +119,32 @@ angular.module('dleduWebApp')
                     label: 'app校园动态设置'
                 }
             })
+            .state('appnoticelist', {
+                parent: 'base',
+                url   : '/appnoticelist',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'AppNoticeListCtrl',
+                        templateUrl: 'app/module/school/appNoticeList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'app发布通知'
+                }
+            })
+            .state('appnoticeset', {
+                parent: 'base',
+                url   : '/appnoticelist/:role/:id',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'AppNoticeSetCtrl',
+                        templateUrl: 'app/module/school/appNoticeSet.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'app通知编辑'
+                }
+            })
     });
