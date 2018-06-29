@@ -6,7 +6,6 @@ angular.module('dleduWebApp')
 		var tId = $state.params.id;
 		$scope.collegeId = $state.params.collegeId;
 		$scope.name = $state.params.name;
-		$scope.pgNumber = $state.params.pgNumber;
 		$scope.teachClassTableFn = {
 			teachingTable: [],
 			schoolYearDropList: [],

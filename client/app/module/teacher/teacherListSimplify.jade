@@ -54,10 +54,10 @@
                                 td {{teacher.email}}
                                 td {{teacher.phone}}
                                 td
-                                    a.handle(ui-sref="teachclasstable({tId:teacher.id,collegeId:teacherListFn.params.collegeId,name:teacherListFn.params.name,pgNumber:teacherListFn.page.pageNumber})")
+                                    a.handle(ui-sref="teachclasstable({tId:teacher.id,collegeId:teacherListFn.params.collegeId,name:teacherListFn.params.name})")
                                         i.fa.fa-pencil-square-o
                                         span 查看周课表
-                                    a.handle(ui-sref="teachclasscoursescan({id:teacher.id,collegeId:teacherListFn.params.collegeId,name:teacherListFn.params.name,pgNumber:teacherListFn.page.pageNumber})")
+                                    a.handle(ui-sref="teachclasscoursescan({id:teacher.id,collegeId:teacherListFn.params.collegeId,name:teacherListFn.params.name})")
                                         i.fa.fa-pencil-square-o
                                         span 查看总课表
                     .dt-toolbar-footer
