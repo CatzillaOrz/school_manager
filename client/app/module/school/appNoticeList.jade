@@ -1,12 +1,17 @@
 .college-list-container
-    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
         header(role='heading')
             .jarviswidget-ctrls(role='menu')
-            span.widget-icon
-                i.fa.fa-table
-            h2 app校园动态
-            span.jarviswidget-loader
-                i.fa.fa-refresh.fa-spin
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': dialogInfoList.type=='student'}" ng-click="dialogInfoList.switchType('student')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{dialogInfoList.type=="student"}}')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  学生
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': dialogInfoList.type=='teacher'}" ng-click="dialogInfoList.switchType('teacher')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{dialogInfoList.type=="teacher"}}')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 教师
         // widget div
         div(role='content')
             // widget edit box
@@ -15,90 +20,78 @@
             // end widget edit box
             // widget content
             .widget-body.no-padding
-                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
-                    .dt-toolbar
-                        .col-md-12.no-padding.margin-bottom-10
-                            form.form-inline
-                                .form-group.col-md-4.margin-top-10.no-padding
-                                    label.control-label 文章标题：
-                                    input.form-control(type='search', placeholder='文章标题', ng-model="schoolNewList.params.title", my-enter="schoolNewList.querySchoolNewList()")
-                                .form-group.col-md-4
-                                    label.control-label 文章状态：
-                                    select.form-control(ng-model="schoolNewList.params.published" ng-options="obj.statusId as obj.name for obj in schoolNewList.statusDomains", ng-change="schoolNewList.querySchoolNewList()")
+                .tab-content
+                    #hr1.tab-pane.active
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-12.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="dialogInfoList.editRecord()")
+                                                        span 新建
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 图片地址
+                                                    th 跳转类型
+                                                    th 跳转地址
+                                                    th 跳转标题
+                                                    th 使用状态
+                                                    th 操作
 
-                                .form-group.col-md-4
-                                    label.control-label 发布时间：
-                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="schoolNewList.params.startDate" validator="required")
-                                        span.add-on
-                                            i.icon-calendar.glyphicon.glyphicon-calendar
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in dialogInfoList.records")
+                                                    td.sorting_1 {{$index+1}}
+                                                    td
+                                                        img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
+                                                    td {{record.targetType}}
+                                                    td {{record.targetUrl}}
+                                                    td {{record.title}}
+                                                    td {{record.onOff=="on"? "开放": record.onOff=="off" ? "关闭" : "部分开放"}}
+                                                    td
+                                                        a.handle(ng-click="dialogInfoList.editRecord($index)")
+                                                            span 修改
+                                                        a.handle(ng-click="dialogInfoList.delRecordPrompt(record)")
+                                                            span 删除
+                    #hr2.tab-pane
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-12.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="dialogInfoList.editRecord()")
+                                                        span 新建
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 图片地址
+                                                    th 跳转类型
+                                                    th 跳转地址
+                                                    th 跳转标题
+                                                    th 使用状态
+                                                    th 操作
 
-                                    .inline-block -
-                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="schoolNewList.params.endDate" validator="required")
-                                        span.add-on
-                                            i.icon-calendar.glyphicon.glyphicon-calendar
-
-                                .form-group.col-md-8.margin-top-10
-                                    .ColVis
-                                        button.btn.btn-primary(ng-click="schoolNewList.querySchoolNewList()")
-                                            span 查询
-                                        .speace-10
-                                        button.btn.btn-primary(type='button' ui-sref="setschoolnew" ng-if="schoolNewList.isUseAuth('add')")
-                                            span 添加新闻
-                                        .speace-10
-                                        button.btn.btn-primary(type='button' ng-click="schoolNewList.batchPrompt('publish')" ng-if="schoolNewList.isUseAuth('batchPublish')")
-                                            span 批量发布
-                                        .speace-10
-                                        button.btn.btn-primary(type='button' ng-click="schoolNewList.batchPrompt('del')" ng-if="schoolNewList.isUseAuth('batchDel')")
-                                            span 批量删除
-                        .col-sm-12.hidden-xs.margin-bottom-10.no-padding
-
-                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
-                        thead
-                            tr(role='row')
-                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 50px;')
-                                    input(style="width:auto!important" type="checkbox" ng-click="schoolNewList.checkAll(schoolNewList.records)" ng-checked="schoolNewList.checkAllRecord" ng-model="schoolNewList.checkAllRecord")
-                                    | 全选当页
-                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 200px;') 文章标题
-                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 发布时间
-                                th(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 50px;') 状态
-                                th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='City: activate to sort column ascending', style='width: 100px;') 操作
-                        tbody
-                            tr.odd(role='row' ng-repeat="record in schoolNewList.records")
-                                td
-                                    input(type="checkbox"  ng-click="schoolNewList.selSingleRecord(schoolNewList.records, $index)" ng-checked="record.check" ng-model="record.check")
-                                td {{record.title}}
-                                td {{record.publishDate}}
-                                td {{record.published==1?'已发布':'未发布'}}
-                                td
-                                    a.handle(ng-if="!record.published&&schoolNewList.isUseAuth('publish')" ng-click="schoolNewList.publishNews(record.id)")
-                                        i.fa.fa-pencil-square-o
-                                        span 发布
-                                    a.handle(ng-if="record.published&&schoolNewList.isUseAuth('noPublish')" ng-click="schoolNewList.canclePublish(record.id)")
-                                        i.fa.fa-pencil-square-o
-                                        span 取消发布
-                                    a.handle(ui-sref="setschoolnew({id:record.id})" ng-if="schoolNewList.isUseAuth('update')")
-                                        i.fa.fa-pencil-square-o
-                                        span 编辑
-                                    a.handle(ng-click="schoolNewList.deletePrompt(record)" ng-if="schoolNewList.isUseAuth('del')")
-                                        i.fa.fa-trash-o
-                                        span 删除
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in dialogInfoList.records")
+                                                    td.sorting_1 {{$index+1}}
+                                                    td
+                                                        img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
+                                                    td {{record.targetType}}
+                                                    td {{record.targetUrl}}
+                                                    td {{record.title}}
+                                                    td {{record.onOff=="on"? "开放": record.onOff=="off" ? "关闭" : "部分开放"}}
+                                                    td
+                                                        a.handle(ng-click="dialogInfoList.editRecord($index)")
+                                                            span 修改
+                                                        a.handle(ng-click="dialogInfoList.delRecordPrompt(record)")
+                                                            span 删除
 
 
-                    .dt-toolbar-footer
-                        .col-sm-6.col-xs-12.hidden-xs
-                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                | 显示第
-                                span.txt-color-darken {{schoolNewList.page.pageNumber==0?schoolNewList.page.pageNumber*10:(schoolNewList.page.pageNumber-1)*10+1}}
-                                |  到
-                                span.txt-color-darken {{((schoolNewList.page.pageNumber==0?schoolNewList.page.pageNumber+1:schoolNewList.page.pageNumber)-1)*10+schoolNewList.records.length}}
-                                |  条 总共
-                                span.text-primary {{schoolNewList.page.totalElements}}
-                                |  条记录
-                        .col-sm-6.col-xs-12
-                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='schoolNewList.page.totalElements', items-per-page="schoolNewList.page.pageSize" max-size='schoolNewList.page.pageSize' ng-model='schoolNewList.page.pageNumber',ng-change="schoolNewList.getSchoolNewList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-
-            // end widget content
-        // end widget div

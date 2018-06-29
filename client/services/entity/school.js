@@ -189,6 +189,43 @@ angular.module('dleduWebService')
                 });
                 return boutiqueCourse.update(params);
             },
+
+            getAppNoticeList:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAppNoticeList',
+                    params: params
+                })
+            },
+            getAppNoticeDetail:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAppNoticeDetail',
+                    params: params
+                })
+            },
+            addAppNotice:function (params) {
+                return $http.post('api/school/addAppNotice', params)
+            },
+            updateAppNotice: function (params) {
+                /*return $http({
+                    method: 'PUT',
+                    url: 'api/school/updateAppNotice',
+                    params: params
+                })*/
+                return $http.post('api/school/updateAppNotice', params)
+            },
+            deleteAppNotice:function (params) {
+                var excellentTeacher=$resource('api/school/deleteAppNotice');
+                return excellentTeacher.remove(params);
+            },
+            getAllSchool:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAllSchool',
+                    params: params
+                })
+            },
         }
 
     });
