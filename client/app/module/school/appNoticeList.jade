@@ -51,7 +51,7 @@
                                                     td {{record.targetType}}
                                                     td {{record.targetUrl}}
                                                     td {{record.title}}
-                                                    td {{record.onOff=="on"? "开放": record.onOff=="off" ? "关闭" : "部分开放"}}
+                                                    td {{record.onOff=="off"? "关闭": "开放"}}
                                                     td
                                                         a.handle(ng-click="dialogInfoList.editRecord($index)")
                                                             span 修改
@@ -87,7 +87,7 @@
                                                     td {{record.targetType}}
                                                     td {{record.targetUrl}}
                                                     td {{record.title}}
-                                                    td {{record.onOff=="on"? "开放": record.onOff=="off" ? "关闭" : "部分开放"}}
+                                                    td {{record.onOff=="off"? "关闭": "开放"}}
                                                     td
                                                         a.handle(ng-click="dialogInfoList.editRecord($index)")
                                                             span 修改
