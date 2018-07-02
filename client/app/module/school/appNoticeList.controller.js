@@ -4,8 +4,9 @@
 */
 
 angular.module('dleduWebApp')
-    .controller('AppNoticeListCtrl', function ($scope, $rootScope, $state, $timeout, SchoolService, messageService
-                                               ) {
+    .controller('AppNoticeListCtrl', function ($scope, $rootScope, $state, $timeout, SchoolService, messageService,
+                                               AuthService) {
+
         var TabBlock = {
             s: {
                 animLen: 200
@@ -70,7 +71,7 @@ angular.module('dleduWebApp')
             //列表
             getAppNoticeList: function(){
                 var that = this;
-                var params = {role: this.type, type:'alert'};
+                var params = {role: this.type, type:'alert', orgId: AuthService.getUser().orgId};
                 SchoolService.getAppNoticeList(params)
                     .success(function (data) {
                         that.records = data;

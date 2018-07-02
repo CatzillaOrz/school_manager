@@ -71,23 +71,11 @@
                                 | 使用状态：
                             .col-sm-7
                                 label.radio-inline
-                                    input(type="radio"  ng-model="dialogInfoEdit.params.onOff" name="status", value='on',)
-                                    | 开放
-                                label.radio-inline
                                     input(type="radio"  ng-model="dialogInfoEdit.params.onOff" name="status", value='many')
-                                    | 部分开放
+                                    | 开放
                                 label.radio-inline
                                     input(type="radio"  ng-model="dialogInfoEdit.params.onOff" name="status", value='off')
                                     | 关闭
-                        .form-group(ng-show='dialogInfoEdit.params.onOff == "many"')
-                            label.col-sm-3.control-label
-                                span
-                                | 启用列表：
-                            .col-sm-7
-                                .inline
-                                    .tags(style="max-height:380px;overflow:scroll;")
-                                        div(ivh-treeview='dialogInfoEdit.orgList', ivh-treeview-id-attribute="'id'", ivh-treeview-label-attribute="'name'",  ivh-treeview-default-selected-state='false', ivh-treeview-expand-to-depth='-1', ivh-treeview-twistie-expanded-tpl="'V'", ivh-treeview-twistie-collapsed-tpl="'>'", ivh-treeview-twistie-leaf-tpl="'-'")
-                                    a(ng-click='dialogInfoEdit.toggleSelect()', style="position: absolute; padding-left: 10px;") {{dialogInfoEdit.selectAll ? "反选" : "全选"}}
                         .form-actions(style="border-top:none;margin:0")
                             .row
                                 .col-md-12(style="text-align:left")

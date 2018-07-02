@@ -43,9 +43,10 @@ angular.module('dleduWebApp')
             //添加 提交
             addConfig: function(){
                 var that = this;
-                that.params.orgs = that.orgFilter();
-                that.params.isQuestionnaire = that.params.isQuestionnaire == 'true'? true: false;
-                SchoolService.addAppNotice(that.params)
+                var params = angular.copy(that.params);
+                params.orgs = AuthService.getUser().orgId + "";
+                params.isQuestionnaire = that.params.isQuestionnaire == 'true'? true: false;
+                SchoolService.addAppNotice(params)
                     .success(function (data) {
                         if(data.success){
                             messageService.openMsg("新增成功！");
@@ -63,15 +64,16 @@ angular.module('dleduWebApp')
             //查询 回填
             updateConfig: function(){
                 var that = this;
-                that.params.orgs = that.orgFilter();
-                that.params.isQuestionnaire = that.params.isQuestionnaire == 'true'? true: false;
-                SchoolService.updateAppNotice(that.params)
+                var params = angular.copy(that.params);
+                params.orgs = AuthService.getUser().orgId + "";
+                params.isQuestionnaire = that.params.isQuestionnaire == 'true'? true: false;
+                SchoolService.updateAppNotice(params)
                     .success(function (data) {
                         if(data.success){
                             messageService.openMsg("修改成功！");
 							$state.go('appnoticelist');
                         }else{
-                            messageService.openMsg("修改成功！");
+                            messageService.openMsg("修改失败！");
                         }
                     })
                     .catch(function (e) {
