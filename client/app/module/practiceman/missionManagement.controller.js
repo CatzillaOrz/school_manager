@@ -334,7 +334,7 @@ angular.module('dleduWebApp')
 				var entity = {};
 				entity.weekTaskIdList = params.teacherIds;
 				entity.practiceTaskIdList = params.teacherIds;
-				entity.practiceTeamIdList = params.studentIds;
+				entity.practiceGroupIdList = params.studentIds;
 				entity.beginDate = params.startDate;
 				entity.endDate = params.endDate;
 				if(_this.status == '1'){
