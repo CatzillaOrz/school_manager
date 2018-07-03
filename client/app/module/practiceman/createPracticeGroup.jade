@@ -223,7 +223,7 @@
                                         span.required *
                                         | 签到所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' name='sp' ng-model="handleFn.params.setDTO.signWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                        input.form-control(type='number' name='sp' ng-model="handleFn.params.setDTO.signWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
                                 .form-group
@@ -231,7 +231,7 @@
                                         span.required *
                                         | 周日志所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' name='wp' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                        input.form-control(type='number' name='wp' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
                                 .form-group
@@ -239,7 +239,7 @@
                                         span.required *
                                         | 实践报告所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' name='rp' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                        input.form-control(type='number' name='rp' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
                                 .form-group
@@ -247,7 +247,7 @@
                                         span.required *
                                         | 实践任务所占比重：
                                     .col-sm-2
-                                        input.form-control(type='number' name='tp' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="1" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                        input.form-control(type='number' name='tp' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
                                     label.col-md-1.control-label
                                         span %
                                 .form-group(ng-if='handleFn.computeTotal() || percent.sp.$invalid || percent.wp.$invalid || percent.rp.$invalid || percent.tp.$invalid')
