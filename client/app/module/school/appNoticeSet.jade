@@ -42,10 +42,10 @@
                                 span.required *
                                 | 跳转地址：
                             .col-sm-7
-                                input.form-control(name='targetUrl', type="text", placeholder="redirect Url:https://", ng-model='dialogInfoEdit.params.targetUrl' validator="required, maxlength=200")
+                                input.form-control(name='targetUrl', type="text", placeholder="redirect Url:https://", ng-model='dialogInfoEdit.params.targetUrl' validator="maxlength=200")
                         .form-group
                             label.col-sm-3.control-label
-                                span.required *
+                                span
                                 | 跳转标题：
                             .col-sm-7
                                 input.form-control(name='targetTitle', type="text", placeholder="跳转标题", ng-model='dialogInfoEdit.params.targetTitle')
