@@ -49,6 +49,12 @@ angular.module('dleduWebApp')
                 pageNumber: 1,
                 pageSize: 10
             },
+            pageStu: {
+                totalElements: 0,
+                totalPages: 0,
+                pageNumber: 1,
+                pageSize: 10
+            },
             //学年下拉数据列表
             schoolYearDropList: [],
             //课程下拉列表数据
@@ -272,13 +278,13 @@ angular.module('dleduWebApp')
             getSimpleStudents:function () {
                 var _this=this;
                 var params=_this.searchStudentParams;
-                params.pageSize=_this.page.pageSize;
-                params.pageNumber=_this.page.pageNumber;
+                params.pageSize=_this.pageStu.pageSize;
+                params.pageNumber=_this.pageStu.pageNumber;
                 params.userId = AuthService.getUser().id;
                 StudentService.getSimpleStudents(params).$promise
                     .then(function (data) {
                         _this.studentList = data.data;
-                        _this.page=data.page;
+                        _this.pageStu=data.page;
                     })
                     .catch(function (error) {
 
