@@ -18,7 +18,7 @@ angular.module('dleduWebService')
         return {
             product: {
                 name: '知新网综合平台',
-                version: '0.0.9.0'
+                version: '0.0.9.6'
             },
             isMSIE789: function () {
                 return navigator.appName == 'Microsoft Internet Explorer' && /MSIE [7-9]/.test(navigator.appVersion);
@@ -177,6 +177,56 @@ angular.module('dleduWebService')
                         delete obj[property];
                     }
                 }
+            },
+            /**
+             *
+             * @param status 是否隐藏
+             * @param type 添加类型 part局部添加 all整个添加
+             */
+            curtainLayoutFn: function(status, type) {
+                var divParent = '.show-container', imgSub = 'show-loading-img';
+                if(type == 'part'){
+                    divParent = '.show-container-part';
+                    imgSub = 'show-loading-imgsub';
+                }
+                var html = '<div class="show-curtain"><img class="' + imgSub + '" src="https://s.aizhixin.com/loading.gif"></div>';
+                $('body').append('<div class="show-container"></div>');
+                if (status) {
+                    if ($(divParent + ' .show-curtain').length === 0) {
+                        $(divParent).append(html);
+                    }
+                } else {
+                    $(divParent + ' .show-curtain').remove();
+                    $(".show-container").remove();
+                }
+            },
+
+            s2ab: function(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            },
+            saveAs: function(data, fileName) {
+                var that = this;
+                var blob = new Blob([that.s2ab(data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+                var windowUrl = (window.URL || window.webkitURL)
+                var downloadUrl = windowUrl.createObjectURL(blob);
+                var anchor = document.createElement("a");
+                anchor.href = downloadUrl;
+                anchor.download = fileName + '.xlsx';
+                document.body.appendChild(anchor);
+                anchor.click();
+                windowUrl.revokeObjectURL(blob);
+            },
+
+            revertOldResultType: function(data){
+                //"totalCount":0,"pageCount":1,"offset":1,"limit":10,"data":[]
+                //{"data":[],"page":{"totalElements":0,"totalPages":0,"pageNumber":0,"pageSize":10}}
+                var newData = {data: data.data};
+                var page = {totalElements: data.totalCount, totalPages: data.pageCount, pageNumber: data.offset, pageSize: data.limit};
+                newData.page = page;
+                return newData;
             }
         }
     });

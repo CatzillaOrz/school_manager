@@ -40,6 +40,10 @@ angular.module('dleduWebService')
                 var classesList = $resource('api/class/getClassTeacherList');
                 return classesList.get(params);
             },
+            getInstructorList: function (params) {
+                var classesList = $resource('api/class/getInstructorList');
+                return classesList.get(params);
+            },
             deleteClassTeacher:function (params) {
                 var classes=$resource('api/class/deleteClassTeacher');
                 return classes.remove(params);
@@ -48,7 +52,13 @@ angular.module('dleduWebService')
                 var classes = $resource('api/class/getClassDropListOrg');
                 return classes.get(params);
             },
-
+            exportClass: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/class/exportClass",
+                    params: params
+                });
+            },
         }
 
     });

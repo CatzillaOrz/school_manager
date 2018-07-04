@@ -33,6 +33,12 @@ angular.module('dleduWebService')
 				return eduman.update(params);
 			},
 
+			updateEvaDate: function (params) {
+				var eduman = $resource('api/eduman/updateEvaDate','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+
 			getEvaQuesDist: function (params) {
 				var eduman = $resource('api/eduman/getEvaQuesDist');
 				return eduman.get(params);
@@ -223,6 +229,26 @@ angular.module('dleduWebService')
                     update: {method:'PUT'}});
                 return eduman.update(params);
             },
+			cancleAttend: function (params) {
+				var eduman = $resource('api/eduman/cancleAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			recoverAttend: function (params) {
+				var eduman = $resource('api/eduman/recoverAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			batchCancleAttend: function (params) {
+				var eduman = $resource('api/eduman/batchCancleAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
+			batchUpdateAttend: function (params) {
+				var eduman = $resource('api/eduman/batchUpdateAttend','',{
+					update: {method:'PUT'}});
+				return eduman.update(params);
+			},
             getAttendStopLogs:function (params) {
                 var eduman = $resource('api/eduman/getAttendStopLogs');
                 return eduman.get(params);
@@ -243,11 +269,7 @@ angular.module('dleduWebService')
 				});
 			},
             getTeachClassDataList:function (params) {
-				return $http({
-					method: 'GET',
-					url: "api/eduman/getTeachClassDataList",
-					params: params
-				});
+
 			},
             getCollageDataList:function (params) {
 				return $http({
@@ -338,18 +360,33 @@ angular.module('dleduWebService')
 			delTeaching:function (params) {
 				var eduman = $resource('api/eduman/delTeaching');
 				return eduman.save(params);
-				/*return $http({
-					method: 'POST',
-					url: "api/eduman/delTeaching",
-					data: params
-				});*/
 			},
 			//教师评学已经分配接口
 			getDistTeaching: function (params) {
 				var eduman = $resource('api/eduman/getDistTeaching');
 				return eduman.get(params);
 			},
-
+			getSamePartList: function (params) {
+				var dormman = $resource('api/eduman/getSamePartList');
+				return dormman.get(params);
+			},
+			//保存权重
+			saveWeight:function (params) {
+				var eduman = $resource('api/eduman/saveWeight');
+				return eduman.save(params);
+			},
+			getAssignResult: function (params) {
+				var dormman = $resource('api/eduman/getAssignResult');
+				return dormman.get(params);
+			},
+			getExportQuesResult: function (params) {
+				var dormman = $resource('api/eduman/getExportQuesResult');
+				return dormman.get(params);
+			},
+			exportQuesStatResult: function (params) {
+				var dormman = $resource('api/eduman/exportQuesStatResult');
+				return dormman.get(params);
+			},
 		}
 
 	});

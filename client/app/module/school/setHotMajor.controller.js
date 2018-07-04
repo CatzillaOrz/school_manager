@@ -57,6 +57,7 @@ angular.module('dleduWebApp')
                                 pageNumber: 1,
                                 pageSize: 100,
                                 collegeId:_this.collegeId,
+                                managerId: AuthService.getUser().id
 
                             }
                             params.name=query.term;
@@ -97,6 +98,7 @@ angular.module('dleduWebApp')
                                 pageNumber: 1,
                                 pageSize: 100,
                                 collegeId:_this.collegeId,
+                                managerId: AuthService.getUser().id
 
                             }
                             params.name=query.term;
@@ -129,7 +131,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: _this.page.pageNumber,
-                    pageSize: 100
+                    pageSize: 100,
+                    managerId: AuthService.getUser().id
                 }
                 CollegeService.getCollegeDropList(params).$promise
                     .then(function (data) {
@@ -144,7 +147,8 @@ angular.module('dleduWebApp')
                 var params = {
                     orgId: AuthService.getUser().orgId,
                     pageNumber: _this.page.pageNumber,
-                    pageSize: 100
+                    pageSize: 100,
+                    managerId: AuthService.getUser().id
                 }
                 params.collegeId=_this.collegeId;
                 MajorService.getMajorDropList(params).$promise

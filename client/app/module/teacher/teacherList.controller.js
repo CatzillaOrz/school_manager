@@ -93,8 +93,7 @@ angular.module('dleduWebApp')
                 TeacherService.getTeacherList(params).$promise
                     .then(function (data) {
                         that.teacherList = data.data;
-                        that.page.totalElements=data.page.totalElements;
-                        that.page.totalPages=data.page.totalPages;
+                        that.page=data.page;
                     })
                     .catch(function (error) {
 
@@ -240,6 +239,27 @@ angular.module('dleduWebApp')
              */
             downLoad: function(){
                 ImpBatchService.downLoad('teacher');
+            },
+
+            /**
+             * 导出
+             */
+            exportData: function(){
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    managerId: AuthService.getUser().id
+                };
+                params.pageNumber = 1;
+                params.pageSize = 9999999;
+                params.name=that.params.name;
+                params.collegeId=that.params.collegeId;
+
+                TeacherService.exportTea(params).success(function(data) {
+                    CommonService.saveAs(data, '教师信息');
+                }).catch(function (e) {
+
+                });
             },
 
             init: function () {

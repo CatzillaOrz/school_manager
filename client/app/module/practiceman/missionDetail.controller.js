@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 实践小组管理
- */
 angular.module('dleduWebApp')
 	.controller('MissionDetailCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
 		PracticeManService) {
@@ -30,8 +26,8 @@ angular.module('dleduWebApp')
 				};
 				PracticeManService.getMissionDetail(params).$promise
 					.then(function (data) {
-						that.records = data.data;
-						// that.page = data.page;
+						that.records = data.data.data;
+						that.page = data.data.page;
 					})
 					.catch(function (error) {
 
@@ -71,7 +67,7 @@ angular.module('dleduWebApp')
 				  return "未通过";
 				} else if (task.studentTaskStatus == "backTo") {
 				  return "已打回";
-				} else if (task.studentTaskStatus == "pass") {
+				} else if (task.studentTaskStatus == "finish") {
 				  return "已通过";
 				} else {
 				  return "状态出错";

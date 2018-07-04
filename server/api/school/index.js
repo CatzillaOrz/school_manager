@@ -44,4 +44,25 @@ router.get('/getBoutiqueCourseDropList', controller.getBoutiqueCourseDropList);
 
 router.get('/getSchoolOra', controller.getSchoolOra);
 router.get('/getApiUrl', controller.getApiUrl);
+router.get('/getApplyList', controller.getApplyList);
+router.put('/handleApply', controller.handleApply);
+router.get('/getSchoolStatistics', controller.getSchoolStatistics);
+
+router.get('/getSchoolNewList', auth.isSignedIn, controller.getSchoolNewList);
+router.get('/getDetailById', auth.isSignedIn, controller.getDetailById);
+router.post('/addNews',auth.isSignedIn, controller.addNews);
+router.post('/updateNews',auth.isSignedIn, controller.updateNews);
+router.delete('/delNews',auth.isSignedIn, controller.delNews);
+router.put('/publishNews',auth.isSignedIn, controller.publishNews);
+router.put('/canclePublish',auth.isSignedIn, controller.canclePublish);
+router.put('/batchDelNews',auth.isSignedIn, controller.batchDelNews);
+router.put('/batchPublishNews',auth.isSignedIn, controller.batchPublishNews);
+
+//app发布通知
+router.get('/getAppNoticeList', auth.isSignedIn, controller.getAppNoticeList);
+router.get('/getAppNoticeDetail', auth.isSignedIn, controller.getAppNoticeDetail);
+router.get('/getAllSchool', auth.isSignedIn, controller.getAllSchool);
+router.post('/addAppNotice',auth.isSignedIn, controller.addAppNotice);
+router.delete('/deleteAppNotice',auth.isSignedIn, controller.deleteAppNotice);
+router.post('/updateAppNotice',auth.isSignedIn, controller.updateAppNotice);
 module.exports = router;

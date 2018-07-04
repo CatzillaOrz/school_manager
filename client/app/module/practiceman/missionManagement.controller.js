@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 创建实践小组
- */
 angular.module('dleduWebApp')
 	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
 													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
@@ -14,14 +10,14 @@ angular.module('dleduWebApp')
 			wid: $state.params.wid,
 			//导师账号id
 			tutorId: '',
-			//实践小组信息
+			//实践计划信息
 			practiceGroupInfo: null,
 			//是否是编辑
 			isEidt: false,
 			//提示title
-			title: "新建实践小组",
+			title: "新建实践计划",
 			//提示
-			prompt: "填写以下信息以建立实践小组",
+			prompt: "填写以下信息以建立实践计划",
 			//操作标识
 			handle: "create",
 			//是否添加了已经分配的学生
@@ -31,7 +27,7 @@ angular.module('dleduWebApp')
 			//添加步骤
 			steps: [
 				{title: '选择课程任务'},
-				{title: '选择实践小组'},
+				{title: '选择实践计划'},
 				{title: '发布任务'}
 			],
 			//当前步骤
@@ -236,9 +232,9 @@ angular.module('dleduWebApp')
 					name: that.searchStudentParams.name
 				};
 				CommonService.delEmptyProperty(params);
-				PracticeManService.getPracticeGroupList(params).$promise
+				PracticeManService.getGrouplistByOrgId(params).$promise
 					.then(function (data) {
-						that.studentList = data.data;
+						that.studentList = data;
 					})
 			},
 
@@ -328,7 +324,7 @@ angular.module('dleduWebApp')
 				return result;
 
 			},
-			//保存实践小组
+			//保存实践计划
 			addTeachClass: function () {
 				var _this = this;
 				var params = _this.params;
@@ -338,7 +334,7 @@ angular.module('dleduWebApp')
 				var entity = {};
 				entity.weekTaskIdList = params.teacherIds;
 				entity.practiceTaskIdList = params.teacherIds;
-				entity.practiceTeamIdList = params.studentIds;
+				entity.practiceGroupIdList = params.studentIds;
 				entity.beginDate = params.startDate;
 				entity.endDate = params.endDate;
 				if(_this.status == '1'){
@@ -434,7 +430,7 @@ angular.module('dleduWebApp')
 						that.practiceGroupInfo = data;
 						if(that.practiceGroupInfo){
 							that.isEidt = true;
-							that.title = '编辑实践小组';
+							that.title = '编辑实践计划';
 						}
 						that.params.name = that.practiceGroupInfo.trainingGroupName;
 						that.params.startDate = that.practiceGroupInfo.starDate;

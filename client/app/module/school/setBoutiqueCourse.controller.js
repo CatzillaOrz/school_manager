@@ -40,6 +40,7 @@ angular.module('dleduWebApp')
                                 orgId: AuthService.getUser().orgId,
                                 pageNumber: 1,
                                 pageSize: 100,
+                                managerId: AuthService.getUser().id
 
                             }
                             params.name=query.term;
@@ -112,6 +113,7 @@ angular.module('dleduWebApp')
                     orgId: AuthService.getUser().orgId,
                     pageNumber: 1,
                     pageSize: 10000,
+                    managerId: AuthService.getUser().id
 
                 }
                 CourseService.getCourseDropListOrg(params).$promise
@@ -129,6 +131,7 @@ angular.module('dleduWebApp')
                     orgId: AuthService.getUser().orgId,
                     pageNumber: 1,
                     pageSize: 10000,
+                    managerId: AuthService.getUser().id
 
                 }
                 SchoolService.getBoutiqueCourseDropList(params).$promise
@@ -281,4 +284,4 @@ angular.module('dleduWebApp')
             }
         };
         $scope.boutiqueCourseFn.init();
-    })
+    });

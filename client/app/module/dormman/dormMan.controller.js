@@ -99,6 +99,48 @@ angular.module('dleduWebApp')
 			},
 
 			/**
+			 * 导出已经选择宿舍的学生
+			 */
+			exportSelectedStu: function(){
+				var that = this;
+				var params = angular.copy(this.statisticParams);
+				params.orgId = AuthService.getUser().orgId;
+				params.pageNumber = 1;
+				params.pageSize = 9999999;
+				if(params.gender == '请选择'){
+					delete params.gender;
+				}
+				if(params.professionalId == 0){
+					delete params.professionalId;
+				}
+				DormManService.exportSelectedStu(params).success(function(data) {
+					that.saveAs(data, '已选学生名单');
+				}).catch(function (e) {
+
+				});
+			},
+
+			s2ab: function(s) {
+				var buf = new ArrayBuffer(s.length);
+				var view = new Uint8Array(buf);
+				for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+				return buf;
+			},
+			saveAs: function(data, fileName) {
+				var that = this;
+				var blob = new Blob([that.s2ab(data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+				var windowUrl = (window.URL || window.webkitURL)
+				var downloadUrl = windowUrl.createObjectURL(blob);
+				var anchor = document.createElement("a");
+				anchor.href = downloadUrl;
+				anchor.download = fileName + '.xlsx';
+				document.body.appendChild(anchor);
+				anchor.click();
+				windowUrl.revokeObjectURL(blob);
+			},
+
+
+			/**
 			 * 获取宿舍楼
 			 */
 			getStusSelected: function(){

@@ -44,7 +44,9 @@
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
+                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
                                 //- .form-group.col-sm-4.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
@@ -52,12 +54,11 @@
                         thead
                             tr
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校内指导老师
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习单位
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校外指导老师
@@ -71,28 +72,27 @@
                                 th(tabindex='0', aria-controls='datatable_col_reorder') 提交日记、周记（20%）
                                 
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
-                                td.sorting_1 {{$index+1}}
-                                td 蔡庚{{$index+1}}
-                                td 1390291{{$index}}
-                                td 法语
-                                td 201{{$index}}级
-                                td 商务英语{{$index+1}}
+                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                                td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
                                 td 外语学院{{$index+1}}
-                                td 导师{{$index}}
+                                td 商务英语{{$index+1}}
+                                td 商务英语{{$index+1}}班
+                                td 1390291{{$index}}
+                                td {{rp}}
+                                td 李老师
                                 td 杭州品胜珠宝鉴定
-                                td 教师{{$index}}
+                                td 吴老师
                                 td 1{{$index+1}}
                                 td {{$index+1}}
                                 td {{$index+1}}
                                 
-                    .dt-toolbar-footer
+                    //.dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(((summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+1)}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.weekTaskList.length}}
+                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共
                                 span.text-primary {{summaryFn.page.totalElements}}
                                 |  条记录

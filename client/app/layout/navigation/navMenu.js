@@ -105,6 +105,8 @@ angular.module('dleduWebApp').directive('smartMenu', function ($state, $rootScop
             $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
                 // console.log(toState);
                 activeMenu(toState);
+                scope.url = toState.ncyBreadcrumbStateRef;
+                console.log(toState.ncyBreadcrumbStateRef);
             });
 
             // click on route link

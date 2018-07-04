@@ -21,9 +21,45 @@
                     "icon": "cog"
                 },
                 {
+                    "title": "设置轮播图与简介",
+                    "sref": "setplayview",
+                    "active": "setplayview",
+                    "icon": "cogs"
+                },
+                {
+                    "title": "设置热门专业",
+                    "sref": "sethotmajor",
+                    "active": "sethotmajor",
+                    "icon": "wrench"
+                },
+                {
+                    "title": "设置优秀老师",
+                    "sref": "setexcellentteacher",
+                    "active": "setexcellentteacher",
+                    "icon": "gavel"
+                },
+                {
                     "title": "设置精品课程",
                     "sref": "setboutiquecourse",
                     "active": "setboutiquecourse",
+                    "icon": "magic"
+                },
+                {
+                    "title": "精品课程申请处理",
+                    "sref": "boutiquecourseapply",
+                    "active": "boutiquecourseapply",
+                    "icon": "magic"
+                },
+                {
+                    "title": "app校园动态",
+                    "sref": "schoolnewlist",
+                    "active": "schoolnewlist",
+                    "icon": "magic"
+                },
+                {
+                    "title": "app发布通知",
+                    "sref": "appnoticelist",
+                    "active": "appnoticelist",
                     "icon": "magic"
                 }
             ]
@@ -60,6 +96,13 @@
                     "title": "教师管理",
                     "sref": "teacherlist",
                     "active": "teacher",
+                    "icon": "id-card-o",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "辅导员管理",
+                    "sref": "instructorList",
+                    "active": "instructorList",
                     "icon": "id-card-o",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
@@ -189,64 +232,16 @@
                     "icon": "question-circle"
                 },
                 {
+                    "title": "教师/督导同行评教",
+                    "sref": "evaquesamepart",
+                    "active": "evaquesamepart",
+                    "icon": "question-circle"
+                },
+                {
                     "title": "教学主动反馈",
                     "sref": "teachingSupervisor",
                     "active": "teachingSupervisor",
                     "icon": "comments-o"
-                }
-            ]
-        },
-        {
-            "title": "实践管理",
-            "sref": "enterpriseList",
-            "icon": "navicon",
-            "active": "enterpriseList",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
-            "items":[
-                {
-                    "title": "企业管理",
-                    "sref": "enterpriseList",
-                    "active": "enterpriseList",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "企业导师管理",
-                    "sref": "enttutorman",
-                    "active": "enttutorman",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "实践小组管理",
-                    "sref": "practicegroupman",
-                    "active": "practicegroupman",
-                    "icon": "pencil-square-o"
-                }
-            ]
-        },
-        {
-            "title": "实践课程管理",
-            "sref": "trainClassList",
-            "icon": "navicon",
-            "active": "trainClassList",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
-            "items":[
-                {
-                    "title": "实践课程任务管理",
-                    "sref": "trainClassList",
-                    "active": "trainClassList",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "实践任务详情",
-                    "sref": "missionList",
-                    "active": "missionList",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "通知管理",
-                    "sref": "newslist",
-                    "active": "news",
-                    "icon": "commenting"
                 }
             ]
         },

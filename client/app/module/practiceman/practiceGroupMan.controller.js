@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 实践小组管理
- */
 angular.module('dleduWebApp')
 	.controller('PracticeGroupManCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
 												  PracticeManService) {
@@ -20,16 +16,18 @@ angular.module('dleduWebApp')
 			//查询条件
 			queryOption: {
 				name: '',
+				status: 'all'
 			},
 
-			// 实践小组列表
+			// 实践计划列表
 			getPracticeGroupList: function () {
 				var that = this;
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					name: that.queryOption.name
+					name: that.queryOption.name,
+					status: that.queryOption.status
 				};
 				CommonService.delEmptyProperty(params);
 				PracticeManService.getPracticeGroupList(params).$promise

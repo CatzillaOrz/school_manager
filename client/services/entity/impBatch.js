@@ -30,7 +30,7 @@ angular.module('dleduWebService')
 					}).then(function(res){
 						CommonService.addLoading(false, 'all');
 						if(res.status === 200){
-							if(res.data && res.data.success){//学生教师、排课处理
+							if((res.data && res.data.success) || res.data.result == 'success'){//学生教师、排课处理
 								messageService.openMsg("上传文件成功！请稍候查看处理结果");
 							}else{
 								if(res.data && res.data.errorInfo){//处理企业管理不一致的导入接口

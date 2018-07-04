@@ -122,6 +122,26 @@ angular.module('dleduWebApp')
                 ImpBatchService.downLoad('college');
             },
 
+            /**
+             * 导出
+             */
+            exportData: function(){
+                var that = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: that.page.pageNumber,
+                    pageSize: that.page.pageSize
+                };
+                params.name = that.params.name;
+                params.pageNumber = 1;
+                params.pageSize = 9999999;
+                CollegeService.exportCollege(params).success(function(data) {
+                    CommonService.saveAs(data, '院系信息');
+                }).catch(function (e) {
+
+                });
+            },
+
             init: function () {
                 this.getCollegeList();
             }

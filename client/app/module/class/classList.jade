@@ -27,11 +27,11 @@
                                 .form-group.col-sm-4.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="classListFn.params.professionalId" ui-select2="classListFn.select2MajorOptions(classListFn.collegeId)", ng-change="classListFn.getClassList()"  )
-                                        option(value="") 全部
-                                        option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ) {{major.name}}
+                                        option(value="-1") 全部
+                                        option(ng-repeat="major in classListFn.majorDropList" value="{{major.id}}" ng-selected="classListFn.params.professionalId==major.id" ) {{major.name}}
                                 .form-group.col-sm-4.margin-top-5
                                     label 年级：
-                                    input.form-control(type='search', placeholder='按年级查询',  ng-model="classListFn.params.teachingYear", my-enter="classListFn.getClassList()")
+                                    select.form-control(type='text', ng-model="classListFn.params.teachingYear"  ng-options="obj.value as obj.name for obj in classListFn.grades" ng-change="classListFn.getClassList()")
                                 .form-group.col-sm-4.margin-top-5.no-padding
                                     label 班级：
                                     input.form-control(type='search', placeholder='按班级名称查询',  ng-model="classListFn.params.name", my-enter="classListFn.getClassList()")
@@ -50,6 +50,9 @@
                                 .speace-10
                                 button.btn.btn-primary(type='button' ng-click="classListFn.openImpBatch()" ng-if="classListFn.isUseAuth('imp')")
                                     span 批量导入
+                                .speace-10
+                                button.btn.btn-primary(type='button' ng-click="classListFn.exportData()")
+                                    span 导出
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
@@ -58,6 +61,7 @@
                                 th 院系
                                 th 专业名称
                                 th 年级
+                                th 学制
                                 th 导员
                                 th 操作
                         tbody
@@ -69,6 +73,7 @@
                                 td {{class.collegeName}}
                                 td {{class.professionalName}}
                                 td {{class.teachingYear}}
+                                td {{class.schoolingLength}}
                                 td {{class.teachers}}
                                 td
                                     a.handle(ui-sref="classEdit({id:class.id})")

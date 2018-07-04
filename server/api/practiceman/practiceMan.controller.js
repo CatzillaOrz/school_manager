@@ -315,6 +315,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    checkAllStu: function (req, res) {
+        PracticeManService.checkAllStuSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json({data: data});
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getWeekTaskDetail: function (req, res) {
         PracticeManService.getWeekTaskDetailSync(req.query, req.user.access_token)
             .then(function (data) {

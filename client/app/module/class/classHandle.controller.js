@@ -20,8 +20,8 @@ angular.module('dleduWebApp')
                 schoolStatus:10,
                 teachingYear:"",
                 inSchoolDate:"",
-                outSchoolDate:""
-
+                outSchoolDate:"",
+                schoolingLength: "请选择" //学制
             },
             page: {
                 totalElements: 0,
@@ -30,6 +30,25 @@ angular.module('dleduWebApp')
                 pageSize: 10
             },
             complete:false,
+
+            grades: [],//年级
+            eduSys:[{value: 0, name: '请选择'}, {value: 1, name: '2年制'}, {value: 20, name: '3年制'}, {value: 30, name: '4年制'}, {value: 40, name: '5年制'}],
+
+            //初始化年级
+            initGrades: function(){
+                var year = new Date().getFullYear();
+                var grades = [];
+                //前面加4年
+                for(var i = 0; i < 4; i++ ){
+                    grades.splice(0, 0, (year - i - 1) + "");
+                }
+                //后面加5年
+                for(var j = 0; j < 6; j++ ){
+                    grades.push(year + j + "");
+                }
+                return grades;
+            },
+
             select2CollegeOptions:{
                 ajax: Select2LoadOptionsService.getLoadOptions("api/college/getCollegeDropList",{
                     orgId: AuthService.getUser().orgId,
@@ -93,7 +112,11 @@ angular.module('dleduWebApp')
                 var params = that.params;
                 params.collegeId = that.collegeId;
                 params.professionalId = that.majorId;
-                ClassService.addClass(that.params).$promise
+                var paramsClone = angular.copy(that.params);
+                if(paramsClone.schoolingLength == "请选择"){
+                    paramsClone.schoolingLength = "";
+                }
+                ClassService.addClass(paramsClone).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
@@ -133,7 +156,11 @@ angular.module('dleduWebApp')
                 var params = that.params;
                 params.collegeId = that.collegeId;
                 params.professionalId = that.majorId;
-                ClassService.updateClass(this.params).$promise
+                var paramsClone = angular.copy(that.params);
+                if(paramsClone.schoolingLength == "请选择"){
+                    paramsClone.schoolingLength = "";
+                }
+                ClassService.updateClass(paramsClone).$promise
                     .then(function (data) {
                         that.complete = true;
                     })
@@ -243,11 +270,12 @@ angular.module('dleduWebApp')
                     that.params.id = $state.params.id;
                     that.getClassById();
                 }
+                that.params.teachingYear = new Date().getFullYear() + "";
                 that.title = $state.current.data.title;
                 that.prompt = $state.current.data.prompt;
                 that.completeMSG = $state.current.data.completeMSG;
                 console.log($state);
-
+                that.grades = that.initGrades();
             }
         };
         $timeout(function () {

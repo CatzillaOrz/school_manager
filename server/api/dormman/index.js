@@ -35,5 +35,6 @@ router.get('/getStusByMajor',auth.isSignedIn, controller.getStusByMajor);
 router.delete('/delBedStu',auth.isSignedIn, controller.delBedStu);
 router.get('/getStusSelected',auth.isSignedIn, controller.getStusSelected);
 router.get('/statisticsSelDorm',auth.isSignedIn, controller.statisticsSelDorm);
+router.get('/exportSelectedStu',auth.isSignedIn, controller.exportSelectedStu);
 
 module.exports = router;

@@ -1,0 +1,83 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 app通知设置
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                form.form-horizontal(name='form', autocomplete="off")
+                    .md-form
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 名称：
+                            .col-sm-7
+                                input.form-control(name='name', type="text", placeholder="name", ng-model='dialogInfoEdit.params.title' validator="required, maxlength=50")
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | img地址：
+                            .col-sm-7
+                                input.form-control(name='iconUrl', type="text", placeholder="img Url: https://" ng-model='dialogInfoEdit.params.iconUrl' validator="required, maxlength=200")
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 跳转类型：
+                            .col-sm-7
+                                select.form-control(ng-model='dialogInfoEdit.params.targetType')
+                                    option(value='app') app
+                                    option(value='web') web
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 跳转地址：
+                            .col-sm-7
+                                input.form-control(name='targetUrl', type="text", placeholder="redirect Url:https://", ng-model='dialogInfoEdit.params.targetUrl' validator="maxlength=200")
+                        .form-group
+                            label.col-sm-3.control-label
+                                span
+                                | 跳转标题：
+                            .col-sm-7
+                                input.form-control(name='targetTitle', type="text", placeholder="跳转标题", ng-model='dialogInfoEdit.params.targetTitle')
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 权限：
+                            .col-sm-7
+                                select.form-control(ng-model='dialogInfoEdit.params.role')
+                                    option(value="teacher") 教师
+                                    option(value="student") 学生
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 是否问卷：
+                            .col-sm-7
+                                select.form-control(ng-model='dialogInfoEdit.params.isQuestionnaire')
+                                    option(value='true') 是
+                                    option(value='false') 否
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required
+                                | 使用状态：
+                            .col-sm-7
+                                label.radio-inline
+                                    input(type="radio"  ng-model="dialogInfoEdit.params.onOff" name="status", value='many')
+                                    | 开放
+                                label.radio-inline
+                                    input(type="radio"  ng-model="dialogInfoEdit.params.onOff" name="status", value='off')
+                                    | 关闭
+                        .form-actions(style="border-top:none;margin:0")
+                            .row
+                                .col-md-12(style="text-align:left")
+                                    a.btn.btn-primary.margin-left-10(ng-click="dialogInfoEdit.submit()" validation-submit="form") 保存
+                                    a.btn.btn-default(ui-sref="appnoticelist") 取消

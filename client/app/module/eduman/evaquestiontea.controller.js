@@ -3,13 +3,15 @@
  * 教师评学列表
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuestionTeaCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog) {
+	.controller('EvaQuestionTeaCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
 			record: null,
 			//当前操作的class
 			currentRecord: {},
+			endDate: '',
+			isShowDialog: false, //is show dialog
 			page: {
 				totalElements: 0,
 				totalPages: 0,
@@ -73,6 +75,42 @@ angular.module('dleduWebApp')
 					width: 700,
 					scope: $scope
 				})
+			},
+
+			/**
+			 * edit enddate
+			 */
+			openEditDate: function($index){
+				this.isShowDialog = true;
+				this.currentRecord = this.records[$index];
+				this.endDate = this.currentRecord.endDate.substring(0, 10);
+				ngDialog.open({
+					template: 'editDate',
+					width: 550,
+					scope: $scope
+				})
+			},
+
+			submit: function(){
+				this.editDate();
+			},
+
+			editDate: function(){
+				var that = this;
+				var cloneParams = angular.copy({quesId: that.currentRecord.id, endDate: that.endDate});
+				cloneParams.endDate = cloneParams.endDate + ' 23:59:59';
+				EduManService.updateEvaDate(cloneParams).$promise
+					.then(function (data) {
+						if(data.success){
+							messageService.openMsg("修改成功!");
+							that.getEvaQuesList();
+						}else{
+							messageService.openMsg(data.message);
+						}
+					})
+					.catch(function (error) {
+
+					})
 			},
 
 			init: function () {

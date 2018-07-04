@@ -164,7 +164,7 @@ var PracticeManService = {
         });
     },
 
-    //查询实践小组
+    //查询实践计划
     getPracticeGroupList: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',
@@ -182,7 +182,7 @@ var PracticeManService = {
         });
     },
 
-    //创建实践小组
+    //创建实践计划
     addPracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
@@ -247,7 +247,7 @@ var PracticeManService = {
         });
     },
 
-    //编辑实践小组
+    //编辑实践计划
     updatePracticeGroup: function (params, access_token, callback) {
         RestClient.post({
             host: 'gateway-org',
@@ -369,7 +369,7 @@ var PracticeManService = {
             callback(e);
         });
     },
-    //删除实践小组
+    //删除实践计划
     delPracticeGroupByGId: function (params, access_token, callback) {
         params.accessToken = access_token;
         RestClient.delete({
@@ -528,6 +528,22 @@ var PracticeManService = {
             callback(e);
         });
     },
+    checkAllStu: function (params, access_token, callback) {
+        RestClient.put({
+            host: 'gateway-org',
+            path: 'v1/trainingmanage/checkallstu',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+            callback(e);
+        });
+    },
 
     //获取实践周任务详情
     getWeekTaskDetail: function (params, access_token, callback) {
@@ -648,7 +664,6 @@ var PracticeManService = {
         });
     },
 
-    //删除实践小组
     getGrouplistByOrgId: function (params, access_token, callback) {
         RestClient.get({
             host: 'gateway-org',

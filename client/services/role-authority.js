@@ -26,8 +26,8 @@ angular.module('dleduWebService')
                     "url": "teacherlist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,imp,reset",
-                        "ROLE_ORG_MANAGER": "add,update,del,imp,reset",
+                        "ROLE_ORG_ADMIN": "add,update,del,imp,reset,exp",
+                        "ROLE_ORG_MANAGER": "add,update,del,imp,reset,exp",
                         "ROLE_COLLEGE_ADMIN": "add,update,del,reset"
                     }
                 },
@@ -53,8 +53,8 @@ angular.module('dleduWebService')
                     "url": "courselist",
                     "roles":
                     {
-                        "ROLE_ORG_ADMIN": "add,update,del,get,imp",
-                        "ROLE_ORG_MANAGER": "add,update,del,get,imp",
+                        "ROLE_ORG_ADMIN": "add,update,del,get,imp,exp",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,imp,exp",
                         "ROLE_COLLEGE_ADMIN": "get"
                     }
                 },
@@ -170,6 +170,15 @@ angular.module('dleduWebService')
                         "ROLE_ORG_DATAVIEW": "",
                         "ROLE_COLLEG_EDUCATIONALMANAGER": "",
                         "ROLE_COLLEG_DATAVIEW": ""
+                    }
+                },
+                {
+                    "url": "schoolnewlist",
+                    "roles":
+                    {
+                        "ROLE_ORG_ADMIN": "add,update,del,get,publish,noPublish,batchPublish,batchDel",
+                        "ROLE_ORG_MANAGER": "add,update,del,get,publish,noPublish,batchPublish,batchDel",
+                        "ROLE_COLLEGE_ADMIN": "add,update,del,get,publish,noPublish,batchPublish,batchDel"
                     }
                 }
             ]

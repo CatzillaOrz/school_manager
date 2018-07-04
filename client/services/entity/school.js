@@ -8,6 +8,19 @@ angular.module('dleduWebService')
     .factory('SchoolService', function ($http, $q,$resource) {
 
         return {
+            defineProperty: function (entity) {
+                var that = this;
+                return {
+                    bar: {},
+                    get: function () {
+                        return that.bar;
+                    },
+                    set: function () {
+                        entity && (that.bar = entity);
+                        !entity && (that.bar = void 0);
+                    }
+                }
+            },
             addLogo: function (params) {
                 var schoolLogo = $resource('api/school/addLogo');
                 return schoolLogo.save(params);
@@ -116,6 +129,102 @@ angular.module('dleduWebService')
             getApiUrl:function (params) {
                 var teacher = $resource('api/school/getApiUrl');
                 return teacher.get(params);
+            },
+            getApplyList:function (params) {
+                var boutiqueCourse = $resource('api/school/getApplyList');
+                return boutiqueCourse.get(params);
+            },
+            getSchoolStatistics:function (params) {
+                var boutiqueCourse = $resource('api/school/getSchoolStatistics');
+                return boutiqueCourse.get(params);
+            },
+            handleApply: function (params) {
+                var boutiqueCourse = $resource('api/school/handleApply', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+
+            getSchoolNewList:function (params) {
+                var boutiqueCourse = $resource('api/school/getSchoolNewList');
+                return boutiqueCourse.get(params);
+            },
+            getDetailById:function (params) {
+                var boutiqueCourse = $resource('api/school/getDetailById');
+                return boutiqueCourse.get(params);
+            },
+            updateNews: function (params) {
+                var boutiqueCourse = $resource('api/school/updateNews');
+                return boutiqueCourse.save(params);
+            },
+            delNews:function (params) {
+                var boutiqueCourse=$resource('api/school/delNews');
+                return boutiqueCourse.remove(params);
+            },
+            addNews:function (params) {
+                var boutiqueCourse=$resource('api/school/addNews');
+                return boutiqueCourse.save(params);
+            },
+            publishNews: function (params) {
+                var boutiqueCourse = $resource('api/school/publishNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            canclePublish: function (params) {
+                var boutiqueCourse = $resource('api/school/canclePublish', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            batchDelNews: function (params) {
+                var boutiqueCourse = $resource('api/school/batchDelNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+            batchPublishNews: function (params) {
+                var boutiqueCourse = $resource('api/school/batchPublishNews', '', {
+                    update: {method: 'PUT'}
+                });
+                return boutiqueCourse.update(params);
+            },
+
+            getAppNoticeList:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAppNoticeList',
+                    params: params
+                })
+            },
+            getAppNoticeDetail:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAppNoticeDetail',
+                    params: params
+                })
+            },
+            addAppNotice:function (params) {
+                return $http.post('api/school/addAppNotice', params)
+            },
+            updateAppNotice: function (params) {
+                /*return $http({
+                    method: 'PUT',
+                    url: 'api/school/updateAppNotice',
+                    params: params
+                })*/
+                return $http.post('api/school/updateAppNotice', params)
+            },
+            deleteAppNotice:function (params) {
+                var excellentTeacher=$resource('api/school/deleteAppNotice');
+                return excellentTeacher.remove(params);
+            },
+            getAllSchool:function (params) {
+                return $http({
+                    method: 'GET',
+                    url: 'api/school/getAllSchool',
+                    params: params
+                })
             },
         }
 

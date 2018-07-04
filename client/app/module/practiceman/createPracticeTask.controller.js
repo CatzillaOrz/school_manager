@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/6/22.
- * 创建实践小组
- */
 angular.module('dleduWebApp')
     .controller('CreatePracticeTaskCtrl', function ($scope, $state, $timeout, AuthService, UploadService, messageService, PracticeManService) {
 

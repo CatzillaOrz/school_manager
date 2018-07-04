@@ -134,6 +134,22 @@ var ClassService = {
             callback(e);
         });
     },
+    getInstructorList: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'gateway-org',
+            path: '/v1/classesteacher/pagebykeywords',
+            params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
     deleteClassTeacher: function (params, access_token, callback) {
         RestClient.delete({
             host: 'gateway-org',

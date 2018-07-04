@@ -17,12 +17,15 @@ angular.module('dleduWebService')
       fileUploadToQiNiu:function (file) {
         var deferred = $q.defer();
         var token;
+        var index = file.name.lastIndexOf(".");
+        var type = file.name.substring(index);
+        var fileName = new Date().getTime() + type;
         this.getQiNiuToken().$promise
           .then(function (res) {
             token = res.token;
             Upload.upload({
               url: qiniuUploadUrl,
-              data: {file: file, token: token, name: file.name, key: file.name}
+              data: {file: file, token: token, name: file.name, key: fileName}
             }).then(function (res) {
               //var data={url:}
               res.data.url = qiniuBaseLinkUrl + res.data.key;

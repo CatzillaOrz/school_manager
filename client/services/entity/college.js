@@ -32,6 +32,13 @@ angular.module('dleduWebService')
                 var majorList = $resource('api/college/getCollegeDropList');
                 return majorList.get(params);
             },
+            exportCollege: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/college/exportCollege",
+                    params: params
+                });
+            },
         }
 
     });

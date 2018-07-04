@@ -18,14 +18,9 @@
                 #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
                     .dt-toolbar
                         .col-xs-3
-                            #datatable_col_reorder_filter.dataTables_filter
-                                label
-                                    input.form-control(type='search', placeholder='按班级名称查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
-                                        i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
-                                button.btn.btn-primary
+                                button.btn.btn-primary(ng-click="summaryFn.exportTeachingSummary()")
                                     span 导出
                         .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
@@ -44,7 +39,9 @@
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
-                                    input.form-control(type='search', placeholder='按班级名称查询',  ng-model="summaryFn.params.name", my-enter="summaryFn.getClassList()")
+                                    select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
+                                        option(value="") 全部
+                                        option(ng-repeat="class in summaryFn.classList" value="{{class.id}}" ) {{class.name}}
                                 //- .form-group.col-sm-4.margin-top-5
                                     label 导员：
                                     input.form-control(type='search', placeholder='按导员姓名查询',  ng-model="summaryFn.params.masterName", my-enter="summaryFn.getClassList()")
@@ -61,27 +58,26 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 周日志提交总数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 报告提交总数
                         tbody
-                            tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
-                                td.sorting_1 1
-                                td 法语
-                                td 外语专业
-                                td 1{{$index}}
-                                td {{$index}}9
-                                td {{$index}}
-                                td {{$index}}
-                                td {{$index}}2
-                                td {{$index}}
-                                   
+                            tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
+                                td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
+                                td {{rp.className}}
+                                td {{rp.professionalName}}
+                                td {{rp.stuNum}}
+                                td {{rp.joinNum}}
+                                td {{rp.notJoinNum}}
+                                td {{rp.notPraticeNum}}
+                                td {{rp.praticeNum}}
+                                td {{rp.reportNum}}
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
-                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(((summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+1)}}
+                                span.txt-color-darken {{summaryFn.page.totalElements==0?0:(summaryFn.page.pageNumber-1)*10+1}}
                                 |  到
-                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.weekTaskList.length}}
+                                span.txt-color-darken {{((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*summaryFn.page.pageSize+summaryFn.summeryList.length}}
                                 |  条 总共
                                 span.text-primary {{summaryFn.page.totalElements}}
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.portalTrigger()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

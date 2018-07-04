@@ -183,6 +183,15 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    updateEvaDate: function (req, res) {
+        EduManService.updateEvaDateSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     distQuestionaire:function (req,res) {
         EduManService.distQuestionaireSync(req.body, req.user.access_token)
             .then(function (data) {
@@ -447,6 +456,42 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    cancleAttend: function (req, res) {
+        EduManService.cancleAttendSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    recoverAttend: function (req, res) {
+        EduManService.recoverAttendSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchCancleAttend: function (req, res) {
+        EduManService.batchCancleAttendSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchUpdateAttend: function (req, res) {
+        EduManService.batchUpdateAttendSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     getAttendStopLogs: function (req, res) {
         EduManService.getAttendStopLogsSync(req.query, req.user.access_token)
             .then(function (data) {
@@ -629,8 +674,6 @@ module.exports = {
             })
     },
     delTeaching: function (req, res) {
-        console.log("***********");
-        console.log(req.body);
         EduManService.delTeachingSync(req.body, req.user.access_token)
             .then(function (data) {
                 res.json(data);
@@ -648,7 +691,52 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getSamePartList: function (req, res) {
+        EduManService.getSamePartListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
+    saveWeight: function (req, res) {
+        EduManService.saveWeightSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAssignResult: function (req, res) {
+        EduManService.getAssignResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getExportQuesResult: function (req, res) {
+        EduManService.getExportQuesResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportQuesStatResult: function (req, res) {
+        EduManService.exportQuesStatResultSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

@@ -264,8 +264,173 @@ module.exports = {
             url : url
         };
         res.json(data);
-    }
+    },
+    getApplyList: function (req, res) {
+        SchoolService.getApplyListSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    handleApply: function (req, res) {
+        SchoolService.handleApplySync(req.body)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getSchoolStatistics: function (req, res) {
+        SchoolService.getSchoolStatisticsSync(req.query)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
+
+    getSchoolNewList: function (req, res) {
+        SchoolService.getSchoolNewListSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getDetailById: function (req, res) {
+        SchoolService.getDetailByIdSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateNews: function (req, res) {
+        SchoolService.updateNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addNews: function (req, res) {
+        SchoolService.addNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    delNews: function (req, res) {
+        SchoolService.delNewsSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    publishNews: function (req, res) {
+        SchoolService.publishNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    canclePublish: function (req, res) {
+        SchoolService.canclePublishSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchPublishNews: function (req, res) {
+        SchoolService.batchPublishNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    batchDelNews: function (req, res) {
+        SchoolService.batchDelNewsSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+
+
+    getAppNoticeList: function (req, res) {
+        SchoolService.getAppNoticeListSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAppNoticeDetail: function (req, res) {
+        SchoolService.getAppNoticeDetailSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    updateAppNotice: function (req, res) {
+        SchoolService.updateAppNoticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    addAppNotice: function (req, res) {
+        SchoolService.addAppNoticeSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    deleteAppNotice: function (req, res) {
+        SchoolService.deleteAppNoticeSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getAllSchool: function (req, res) {
+        SchoolService.getAllSchoolSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

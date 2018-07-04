@@ -3,8 +3,8 @@
  * 分配页面
  */
 angular.module('dleduWebApp')
-	.controller('DistributeListCtrl', function ($scope, $state, $timeout, AuthService, EduManService, messageService,
-												Select2LoadOptionsService, CollegeService, RoleAuthService, MajorService, ClassService) {
+	.controller('DistributeListCtrl', function ($scope, $state, $timeout, $interval, AuthService, EduManService, messageService,
+												Select2LoadOptionsService, CollegeService, RoleAuthService, MajorService, ClassService, tempStorageService) {
 		$scope.distributeListFn = {
 			//问卷id
 			quesId: 0,
@@ -32,6 +32,7 @@ angular.module('dleduWebApp')
 			invertCheckRecord: false,
 			//删除标识
 			delType: 'single',
+
 			//查询类型
 			queryTypes: [{value: 10, name: '按教学班'},
 				{value: 20, name: '按行政班'}, {value: 30, name: '按专业'}, {value: 40, name: '按院系'},
@@ -80,11 +81,12 @@ angular.module('dleduWebApp')
 					this.checkAllRecord = false;
 					this.getEvaQuesUnDist();
 				} else {
-					this.queryOption.queryType = '班级类型';
+					if(this.queryOption.queryType == '按教学班') {
+						this.queryOption.queryType = '班级类型';
+					}
 					this.getEvaQuesDist();
 				}
 			},
-
 
 			// 获取评教问卷已分配列表
 			getEvaQuesDist: function () {
@@ -256,7 +258,7 @@ angular.module('dleduWebApp')
 				}else if(that.queryOption.queryType=='按行政班'){
 					var params = {
 						orgId: AuthService.getUser().orgId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements,
 						managerId: AuthService.getUser().id
 					};
@@ -283,7 +285,7 @@ angular.module('dleduWebApp')
 						orgId: AuthService.getUser().orgId,
 						managerId: AuthService.getUser().id,
 						collegeId: that.queryOption.collegeId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements
 					};
 					params.name = that.queryOption.majorName;
@@ -304,7 +306,7 @@ angular.module('dleduWebApp')
 				}else if(that.queryOption.queryType=='按院系'){
 					var params = {
 						orgId: AuthService.getUser().orgId,
-						pageNumber: that.page.pageNumber,
+						pageNumber: 1,
 						pageSize: that.page.totalElements
 					};
 					params.name = that.queryOption.collegeName;
@@ -851,11 +853,12 @@ angular.module('dleduWebApp')
 				this.quesId = $state.params.quesId;
 				var isEnd = $state.params.type; //判断是否结束
 				this.isEnd = isEnd;
+				this.id = $state.params.id;
 				if(isEnd == "end"){
 					$("#comp").tab("show");
 					this.switchType('complete');
 				}else{
-					if ($state.params.id == 1) { // id = 1 已经分配列表 0 未分配列表
+					if (this.id == 1) { // id = 1 已经分配列表 0 未分配列表
 						$("#myTab  a:last").tab("show");
 						this.switchType('complete');
 					} else {
@@ -880,4 +883,8 @@ angular.module('dleduWebApp')
 				}
 			});
 		});
+		$scope.$on("$destroy", function() { //路由切换时结束定时器
+			$interval.cancel($scope.distributeListFn.intervalResult);
+
+		})
 	});

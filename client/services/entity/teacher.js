@@ -40,6 +40,13 @@ angular.module('dleduWebService')
                 var teacheres = $resource('api/teacher/getImpResult');
                 return teacheres.get(params);
             },
+            exportTea: function (params) {
+                return $http({
+                    method: 'GET',
+                    url: "api/teacher/exportTea",
+                    params: params
+                });
+            },
         }
 
     });

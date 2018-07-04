@@ -1,0 +1,58 @@
+.college-list-container.logo-container
+    .jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 精品课程申请处理列表
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                #datatable_col_reorder_wrapper.dataTables_wrapper.form-inline.no-footer
+                    .dt-toolbar
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                        thead
+                            tr(role='row')
+                                th 序号
+                                th 课程名称
+                                th 申请教师
+                                th 操作
+                        tbody
+                            tr.odd(role='row' ng-repeat="course in BCApplyFn.applyList")
+                                td.sorting_1 {{$index+1 + ((BCApplyFn.page.pageNumber==0?BCApplyFn.page.pageNumber+1:BCApplyFn.page.pageNumber)-1)*10}}
+                                td.expand
+                                    span.responsiveExpander
+                                    | {{course.courseName}}
+                                td  {{course.teacherName}}
+                                td
+                                    a.handle(ng-click="BCApplyFn.handleApply(course.id,20)",ng-if="course.state==10")
+                                        i.fa.fa-pencil-square-o
+                                        span 通过
+                                    a.handle(ng-click="BCApplyFn.handleApply(course.id,30)",ng-if="course.state==10")
+                                        i.fa.fa-trash-o
+                                        span 拒绝
+                                    a.handle(ng-if="course.state!=10")
+                                        span 处理结果：
+                                        span(ng-if="course.state==20")  通过
+                                        span(ng-if="course.state==30")  拒绝
+
+                    .dt-toolbar-footer
+                        .col-sm-6.col-xs-12.hidden-xs
+                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
+                                | 显示第
+                                span.txt-color-darken {{BCApplyFn.page.pageNumber==0?BCApplyFn.page.pageNumber*10+1:(BCApplyFn.page.pageNumber-1)*10+1}}
+                                |  到
+                                span.txt-color-darken {{((BCApplyFn.page.pageNumber==0?BCApplyFn.page.pageNumber+1:BCApplyFn.page.pageNumber)-1)*10+BCApplyFn.applyList.length}}
+                                |  条 总共
+                                span.text-primary {{BCApplyFn.page.totalElements}}
+                                |  条记录
+                        .col-sm-6.col-xs-12
+                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
+                                ul.pagination-sm(uib-pagination, total-items='BCApplyFn.page.totalElements', max-size='BCApplyFn.page.pageSize' ng-model='BCApplyFn.page.pageNumber',ng-change="BCApplyFn.getApplyList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

@@ -1,7 +1,7 @@
 .college-list-container
     .jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
-            .jarviswidget-ctrls(role='menu')
+            .jarviswidget-ctr.table-no-borderls(role='menu')
             span.widget-icon
                 i.fa.fa-table
             h2 实践任务详情
@@ -20,7 +20,7 @@
                         .col-xs-12.col-sm-6
                             //#datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按企业名查询', aria-controls='datatable_col_reorder' ng-model="practiceGroupMan.queryOption.name", my-enter="practiceGroupMan.getpracticeGroupMan()")
+                                    input.form-contr.table-no-borderol(type='search', placeholder='按企业名查询', aria-contr.table-no-borderols='datatable_col_reorder' ng-model="practiceGroupMan.queryOption.name", my-enter="practiceGroupMan.getpracticeGroupMan()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="practiceGroupMan.getpracticeGroupMan()")
                                         i.glyphicon.glyphicon-search
                         //.col-sm-6.col-xs-6.hidden-xs
@@ -29,120 +29,65 @@
                                     span 新建
                                 //- button.btn.btn-primary(type='button' ng-click="practiceGroupMan.openImpBatch()")
                                     span 批量导入
-                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
-                        //thead
-                            tr(role='row')
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 学号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 姓名
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 实践小组
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 完成状态
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 138px;') 得分
-                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
+                    table#datatable_col_reorder.table.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         tbody
-                            tr.odd
-                                td.sorting_1.col-sm-3 所属课程：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.weekTaskName}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 任务名称：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.taskName}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 任务内容：
-                                td.sorting_1.col-sm-9 
-                                    div {{stdFn.stDetail.description}}
+                            tr.table-no-border
+                                td.col-sm-2 姓名：
+                                td.col-sm-10 {{stdFn.studentName}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 学号：
+                                td.no-border.col-sm-10 {{stdFn.jobNum}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 所属课程：
+                                td.no-border.col-sm-10 {{stdFn.stDetail.weekTaskName}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 任务名称：
+                                td.no-border.col-sm-10(style="max-width: 600px;") {{stdFn.stDetail.taskName}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 任务内容：
+                                td.no-border.col-sm-10
+                                    div(style="max-width: 600px;") {{stdFn.stDetail.description}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
                                             li(ng-repeat='pic in stdFn.stDetail.taskFileList')
                                                 img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
-                            tr.odd
-                                td.sorting_1.col-sm-3 补充内容：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.describe}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 学时：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.classHour}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 时间：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 任务完成详情：
-                                td.sorting_1.col-sm-9 
-                                    span {{stdFn.stDetail.resultDescription}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 补充内容：
+                                td.no-border.col-sm-10(style="max-width: 600px;") {{stdFn.stDetail.describe}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 学时：
+                                td.no-border.col-sm-10 {{stdFn.stDetail.classHour}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 时间：
+                                td.no-border.col-sm-10(style="height: 40px;") {{stdFn.stDetail.beginDate}} 至 {{stdFn.stDetail.deadLine}}
+                            tr.table-no-border
+                                td.col-sm-2(style="padding-top: 30px;") 任务完成详情：
+                                td.col-sm-10
+                                    div(style="max-width: 600px;margin-top: 23px;") {{stdFn.stDetail.resultDescription}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
                                             li(ng-repeat='pic in stdFn.stDetail.stuFileList')
                                                 img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
-                            tr.odd
-                                td.sorting_1.col-sm-3 完成状态：
-                                td.sorting_1.col-sm-9 {{stdFn.taskStatus(stdFn.stDetail.stuTaskStatus)}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 评分：
-                                td.sorting_1.col-sm-9 {{stdFn.stDetail.taskScore}}
-                            tr.odd
-                                td.sorting_1.col-sm-3 评语：
-                                td.sorting_1.col-sm-9 
-                                    div {{stdFn.stDetail.taskAdvice}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 完成状态：
+                                td.no-border.col-sm-10 {{stdFn.taskStatus(stdFn.stDetail.stuTaskStatus)}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 评分：
+                                td.no-border.col-sm-10 {{stdFn.stDetail.taskScore}}
+                            tr.table-no-border
+                                td.col-sm-2.no-border 评语：
+                                td.no-border.col-sm-10 
+                                    div(style="max-width: 600px;") {{stdFn.stDetail.taskAdvice}}
                                     .col-sm-8
                                         ul(style='list-style:none;display:inline-flex;')
                                             li(ng-repeat='pic in stdFn.stDetail.reviewFileList')
                                                 img(style="width:100px;height:100px;margin-right:10px;", ng-src='{{pic.srcUrl}}')
 
-                    .dt-toolbar-footer
-                        .col-sm-6.col-xs-12.hidden-xs
-                            #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
-                                | 已显示全部
-                                //- span.txt-color-darken {{practiceGroupMan.page.totalElements==0?0:(((practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize+1)}}
-                                //- |  到
-                                //- span.txt-color-darken {{((practiceGroupMan.page.pageNumber==0?practiceGroupMan.page.pageNumber+1:practiceGroupMan.page.pageNumber)-1)*practiceGroupMan.page.pageSize+practiceGroupMan.records.length}}
-                                //- |  条 总共
-                                //- span.text-primary {{practiceGroupMan.page.totalElements}}
-                                //- |  条记录
-                        .col-sm-6.col-xs-12
-                            #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='practiceGroupMan.page.totalElements', max-size='practiceGroupMan.page.pageSize' ng-model='practiceGroupMan.page.pageNumber',ng-change="practiceGroupMan.getpracticeGroupMan()" boundary-link-numbers='true' items-per-page="practiceGroupMan.page.pageSize" rotate='false' previous-text="<" next-text=">")
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
                                 button.btn.btn-primary(ui-sref="missionDetail({id: stdFn.mId})")
                                     span 返回
-
-    //-  添加学生弹出窗模版
-    script(type='text/ng-template',id='importDialog')
-        .buld_wrap
-            .buld_head
-                i.fa.fa-file-excel-o
-                span.buld 批量导入
-            .propt_content
-                table
-                    tr
-                        td.first_td 上传文件
-                        td
-                            .choseFile.left(ngf-select='practiceGroupMan.selected($newFiles)' ng-model="practiceGroupMan.myFile" name="file"  ngf-validate="{size: {max: '1MB'}}" required) 选择文件
-                            input.left.load(type='text', readonly='readonly' ng-disabled='true' ng-model="practiceGroupMan.myFile.name" )
-                            .left.load_inner(ng-click='practiceGroupMan.importantBatch(practiceGroupMan.myFile)', type='button') 导入
-                    tr
-                        td.first_td.downlaod-temp 模板下载
-                        td
-                            .load_inner_w(style="cursor:pointer" ng-click="practiceGroupMan.downLoad()") 导师导入模板
-                    tr
-                        td.first_td 导入功能说明
-                        td
-                            ul
-                                li 1.请先下载导师导入模板
-                                li 2.根据模板内容样式填写账号相关信息
-                                li 3.选择要导入的账号文件，点击导入
-    script(type='text/ng-template',id='importResultDialog')
-        .repeatLoad
-            .repeat_header
-                i.fa.fa-exclamation-triangle
-                span.buld 导入错误提示
-            .repeat_content.content-scorll
-                table
-                    tr
-                        td 错误行号
-                        td(style="width:20%;") 错误字段
-                        td(style="width:auto") 错误信息
-                    tr(ng-repeat="info in practiceGroupMan.errorInfos")
-                        td {{info.line}}
-                        td(style="width:20%;") {{info.name}}
-                        td(style="width:auto") {{info.msg}}
+                                button.btn.btn-primary(ng-click="stdFn.exportPDF()")
+                                    span 打印

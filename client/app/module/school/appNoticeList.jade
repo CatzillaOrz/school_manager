@@ -1,0 +1,97 @@
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': dialogInfoList.type=='student'}" ng-click="dialogInfoList.switchType('student')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{dialogInfoList.type=="student"}}')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  学生
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': dialogInfoList.type=='teacher'}" ng-click="dialogInfoList.switchType('teacher')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{dialogInfoList.type=="teacher"}}')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 教师
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                .tab-content
+                    #hr1.tab-pane.active
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-12.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="dialogInfoList.editRecord()")
+                                                        span 新建
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 图片地址
+                                                    th 跳转类型
+                                                    th 跳转地址
+                                                    th 跳转标题
+                                                    th 使用状态
+                                                    th 操作
+
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in dialogInfoList.records")
+                                                    td.sorting_1 {{$index+1}}
+                                                    td
+                                                        img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
+                                                    td {{record.targetType}}
+                                                    td {{record.targetUrl}}
+                                                    td {{record.title}}
+                                                    td {{record.onOff=="off"? "关闭": "开放"}}
+                                                    td
+                                                        a.handle(ng-click="dialogInfoList.editRecord($index)")
+                                                            span 修改
+                                                        a.handle(ng-click="dialogInfoList.delRecordPrompt(record)")
+                                                            span 删除
+                    #hr2.tab-pane
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-12.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="dialogInfoList.editRecord()")
+                                                        span 新建
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 图片地址
+                                                    th 跳转类型
+                                                    th 跳转地址
+                                                    th 跳转标题
+                                                    th 使用状态
+                                                    th 操作
+
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in dialogInfoList.records")
+                                                    td.sorting_1 {{$index+1}}
+                                                    td
+                                                        img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
+                                                    td {{record.targetType}}
+                                                    td {{record.targetUrl}}
+                                                    td {{record.title}}
+                                                    td {{record.onOff=="off"? "关闭": "开放"}}
+                                                    td
+                                                        a.handle(ng-click="dialogInfoList.editRecord($index)")
+                                                            span 修改
+                                                        a.handle(ng-click="dialogInfoList.delRecordPrompt(record)")
+                                                            span 删除
+
+

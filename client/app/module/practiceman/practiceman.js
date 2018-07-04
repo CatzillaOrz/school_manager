@@ -49,7 +49,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '实践小组管理'
+					label: '实践计划管理'
 				}
 			})
 			.state('createpracticegroup', {
@@ -67,7 +67,7 @@ angular.module('dleduWebApp')
 					completeMSG:'恭喜你，编辑院系成功！'
 				},
 				ncyBreadcrumb: {
-					label: '创建实践小组'
+					label: '创建实践计划'
 				}
 			})
 			.state('practicemanstats', {
@@ -173,7 +173,7 @@ angular.module('dleduWebApp')
 					completeMSG:'恭喜你，分配任务成功！'
 				},
                 ncyBreadcrumb: {
-                    label: '任务分配'
+                    label: '实践课程分配'
                 }
             })
             .state('missionList', {
@@ -220,7 +220,7 @@ angular.module('dleduWebApp')
             })
             .state('studentTaskDetail', {
                 parent: 'base',
-                url   : '/studentTaskDetail/:id/:mId',
+                url   : '/studentTaskDetail/:id/:mId/:jobNum/:studentName',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
@@ -244,6 +244,20 @@ angular.module('dleduWebApp')
                 },
                 ncyBreadcrumb: {
                     label: '实践企业管理'
+                }
+            })
+            .state('workbench', {
+                parent: 'base',
+                url   : '/workbench',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'LayoutCtrl',
+                        templateUrl: 'app/module/practiceman/workbench.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '我的工作台'
                 }
             })
 	});

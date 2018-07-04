@@ -13,7 +13,6 @@ module.exports = function (req, res, next) {
         next();
         return;
     }
-
     var t = new Date();
    logger.access(util.format('\n\nStarted', t.toISOString(), req.method, req.url, req.ip));
 

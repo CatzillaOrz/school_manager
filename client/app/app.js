@@ -25,7 +25,8 @@ angular.module('dleduWebApp', [
     'angular-echarts',
     'angular-datepicker',
     'frapontillo.bootstrap-switch',
-    'ui.select'
+    'ui.select',
+    'ivh.treeview'
 ])
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
         var _location = $injector.get('$location');
@@ -73,8 +74,12 @@ angular.module('dleduWebApp', [
                 return response;
             },
             'request': function (config) {
+                var filterUrl = {"api/eduman/getAssignResult": "api/eduman/getAssignResult"}; //配置不需要加载全局正在加载效果的url
                 if(config.url.split('/').indexOf('geo') == -1&&config.url.split('/').indexOf('templet1') == -1&&config.method!="JSONP"){
-                    loading(true,'all')
+                    if(config.url == filterUrl[config.url]){
+                    }else{
+                        loading(true,'all');
+                    }
                 }
                 return config;
             },

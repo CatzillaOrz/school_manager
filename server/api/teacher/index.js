@@ -18,5 +18,6 @@ router.get('/getTeacherById',auth.isSignedIn, controller.getTeacherById);
 router.get('/getTeacherDropListOrg',auth.isSignedIn, controller.getTeacherDropListOrg);
 router.get('/getSimpleTeachers',auth.isSignedIn, controller.getSimpleTeachers);
 router.get('/getImpResult',auth.isSignedIn, controller.getImpResult);
+router.get('/exportTea',auth.isSignedIn, controller.exportTea);
 
 module.exports = router;

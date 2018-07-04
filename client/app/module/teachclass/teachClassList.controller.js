@@ -6,7 +6,7 @@
 angular.module('dleduWebApp')
 	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
 												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService, tempStorageService,
-												SchoolYearService) {
+												SchoolYearService, EduManService) {
 		$scope.teachClassListFn = {
 			//教学班列表
 			teachClassList: [],
@@ -226,6 +226,21 @@ angular.module('dleduWebApp')
 				messageService.getMsg("课表、考勤等点点相关的业务数据，以及开卷相关业务数据将被清除,您确定仍要删除此教学班吗？", that.deleteTeachClass)
 			},
 
+			getCurrentSemester: function () {
+				var that = this;
+				var _params = {
+					orgId: AuthService.getUser().orgId
+				};
+				EduManService.getCurrentSemester(_params).$promise
+					.then(function (data) {
+						that.params.semesterId = data.id;
+						that.schoolYearDropList = [data];
+					})
+					.catch(function (error) {
+
+					})
+			},
+
 			/**
 			 * 弹出批量导入弹出框
 			 * type 按必须导入还是选项导入
@@ -363,15 +378,40 @@ angular.module('dleduWebApp')
 				ImpBatchService.downLoad(type);
 			},
 
+			/**
+			 * 导出
+			 */
+			exportData: function(){
+				var that = this;
+				var params = {
+					orgId: AuthService.getUser().orgId,
+				};
+				params.semesterId = that.params.semesterId;
+				params.mustOrOption = that.params.mustOrOption;
+				params.courseName = that.params.courseName;
+				params.teacherName = that.params.teacherName;
+				params.name = that.params.name;
+				params.pageNumber = 1;
+				params.pageSize = 9999999;
+				TeachClassService.exportTeachClass(params).success(function(data) {
+					CommonService.saveAs(data, '教学班信息');
+				}).catch(function (e) {
+
+				});
+			},
+
+
 			init: function () {
-				this.getTermList();
+				//this.getTermList();
 				this.getTeachClassList();
+				this.getCurrentSemester();
 			}
 		};
 
 		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
 			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek")){
 				var params = $scope.teachClassListFn.params;
+				//params.pageNumber = $scope.teachClassListFn.page.pageNumber;
 				var key = fromState.name + toState.name;
 				tempStorageService.setObject(key, params);
 			}
@@ -382,6 +422,7 @@ angular.module('dleduWebApp')
 				var params = tempStorageService.getObject(key);
 				if(params){
 					$scope.teachClassListFn.params = params;
+					//$scope.teachClassListFn.page.pageNumber = params.pageNumber;
 					tempStorageService.removeObject(key);
 				}
 				$scope.teachClassListFn.init();

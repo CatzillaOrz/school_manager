@@ -1,6 +1,6 @@
 /**
  * Created by Administrator on 2017/6/22.
- * 实践小组管理
+ * 实践计划管理
  */
 angular.module('dleduWebApp')
 	.controller('StudentTaskDetailCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
@@ -14,6 +14,8 @@ angular.module('dleduWebApp')
 				pageSize: 10
 			},
 			mId: $state.params.mId,
+			jobNum: $state.params.jobNum,
+			studentName: $state.params.studentName,
 
 			// 获取详情
 			getStd: function () {
@@ -38,12 +40,16 @@ angular.module('dleduWebApp')
 				  return "未通过";
 				} else if (stuTaskStatus == "backTo") {
 				  return "已打回";
-				} else if (stuTaskStatus == "pass") {
+				} else if (stuTaskStatus == "finish") {
 				  return "已通过";
 				} else {
 				  return "状态出错";
 				}
-			  },
+				},
+				
+				exportPDF: function(){
+					window.print();
+				},
 
 
 			init: function () {

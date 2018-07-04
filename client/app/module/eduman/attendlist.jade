@@ -681,6 +681,8 @@
                                             thead
                                                 tr(role='row')
                                                     th 序号
+                                                        //input(style="width:auto!important" type="checkbox" ng-click="batch.checkAll(attendPauseFn.attendList, attendPauseFn)" ng-checked="attendPauseFn.checkAllRecord" ng-model="attendPauseFn.checkAllRecord")
+                                                        //| 全选当页
                                                     th 操作时间
                                                     th 操作人
                                                     th 操作内容
@@ -691,9 +693,12 @@
                                                     th 年级
                                                     th 专业
                                                     th 院系
+                                                    td 操作
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendPauseFn.attendList")
                                                     td.sorting_1 {{$index+1 + ((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10}}
+                                                    //td
+                                                        input(type="checkbox" ng-click="batch.selSingleRecord(attendPauseFn.attendList, $index, attendPauseFn)" ng-checked="attend.check" ng-model="attend.check")
                                                     td {{attend.operationTime}}
                                                     td {{attend.operator}}
                                                     td {{attend.optContent}}
@@ -704,7 +709,9 @@
                                                     td {{attend.stuClassesYear }}
                                                     td {{attend.stuProfessionalName }}
                                                     td {{attend.stuCollegeName }}
-
+                                                    td
+                                                        a(ng-if="attend.optContent=='暂停考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 恢复考勤
+                                                        a(ng-if="attend.optContent=='恢复考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 暂停考勤
                                         .dt-toolbar-footer
                                             .col-sm-6.col-xs-12.hidden-xs
                                                 .dataTables_info(role='status', aria-live='polite')
@@ -723,12 +730,15 @@
                             .tab-content
                                 .no-padding
                                     .dataTables_wrapper.form-inline.no-footer
-                                        .col-xs-9.margin-top-10
+                                        .col-xs-12.margin-top-10
                                             form.form-inline
                                                 .form-group.col-sm-4
                                                     label.control-label  学生名称：
                                                     input.form-control(type="text" ng-model="attendFixFn.params.criteria" placeholder="请输学生名称或学号", my-enter="attendFixFn.getAttendListByCondition()" )
-                                                .form-group.col-sm-6
+                                                .form-group.col-sm-4
+                                                    label.control-label  教学班名称：
+                                                    input.form-control(type="text" ng-model="attendFixFn.params.teachingClassName" placeholder="请输教学班名", my-enter="attendFixFn.getAttendListByCondition()" )
+                                                .form-group.col-sm-4
                                                     label.control-label 时间段：
                                                     .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
                                                         input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendFixFn.params.startTime" validator="required")
@@ -740,15 +750,27 @@
                                                         input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendFixFn.params.endTime" validator="required")
                                                         span.add-on
                                                             i.icon-calendar.glyphicon.glyphicon-calendar
-
-                                        .col-sm-3.hidden-xs
-                                            .ColVis
-                                                button.btn.btn-primary(ng-click="attendFixFn.getAttendListByCondition()")
-                                                    span 查询
+                                        .col-xs-12.margin-top-10.margin-bottom-10
+                                            form.form-inline
+                                                .form-group.col-sm-4
+                                                    label.control-label  教师名称：
+                                                    input.form-control(type="text" ng-model="attendFixFn.params.teacherName" placeholder="请输教师名称", my-enter="attendFixFn.getAttendListByCondition()" )
+                                                .form-group.col-sm-4
+                                                    label.control-label  课程名称：
+                                                    input.form-control(type="text" ng-model="attendFixFn.params.courseName" placeholder="请输课程名称", my-enter="attendFixFn.getAttendListByCondition()" )
+                                                .form-group.col-sm-4.hidden-xs
+                                                    .ColVis
+                                                        button.btn.btn-primary(ng-click="attendFixFn.getAttendListByCondition()")
+                                                            span 查询
+                                                        button.btn.btn-primary(ng-click="attendFixFn.fixOpen(null)")
+                                                            span 批量修改
                                         table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                             thead
                                                 tr(role='row')
-                                                    th 序号
+                                                    //th 序号
+                                                    th
+                                                        input(style="width:auto!important" type="checkbox" ng-click="batch.checkAll(attendFixFn.attendList, attendFixFn, 'id')" ng-checked="attendFixFn.checkAllRecord" ng-model="attendFixFn.checkAllRecord")
+                                                        | 全选当页
                                                     th 学号
                                                     th 姓名
                                                     th 课程
@@ -762,7 +784,9 @@
                                                     th(ng-if="isUseAuth('modAttendance')") 操作
                                             tbody
                                                 tr.odd(role='row' ng-repeat="attend in attendFixFn.attendList")
-                                                    td.sorting_1 {{$index+1 + ((attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber+1:attendFixFn.page.pageNumber)-1)*10}}
+                                                    //td.sorting_1 {{$index+1 + ((attendFixFn.page.pageNumber==0?attendFixFn.page.pageNumber+1:attendFixFn.page.pageNumber)-1)*10}}
+                                                    td
+                                                        input(type="checkbox" ng-click="batch.selSingleRecord(attendFixFn.attendList, $index, attendFixFn, 'id')" ng-checked="attend.check" ng-model="attend.check")
                                                     td {{attend.studentNum}}
                                                     td {{attend.name}}
                                                     td {{attend.courseName}}
@@ -821,4 +845,20 @@
                     | 早退
             .attend-dialog-footer
                     button.btn.btn-defualt.dialog-btn(ng-click="closeThisDialog()") 取消
-                    button.btn.btn-primary.dialog-btn(ng-click="attendFixFn.updateAttend()") 确定
+                    button.btn.btn-primary.dialog-btn(ng-if="!attendFixFn.isBatch" ng-click="attendFixFn.updateAttend()") 确定
+                    button.btn.btn-primary.dialog-btn(ng-if="attendFixFn.isBatch" ng-click="attendFixFn.batchUpdateAttend()") 确定
+    script(type='text/ng-template',id='attendPauseDialog')
+        .container-fluid
+            .dialog-title
+                h2 考勤修改
+            .dialog-body
+                form.form-horizontal(role="form" name="form" novalidate)
+                    .form-group
+                        label.col-sm-3.control-label 备注：
+                        .col-sm-7
+                            textarea.form-control(type="text" placeholder="请填写不超过100个长度的内容" ng-model="attendPauseFn.cause" name="cause"  validator="required, maxlength=100")
+
+                    .form-group
+                        .col-sm-6
+                            button.btn.btn-primary(ng-click="attendPauseFn.operAttend()" ) 确定
+                            button.btn.btn-default(ng-click="closeThisDialog(0)" style="margin-left:20px") 取消

@@ -1,4 +1,4 @@
-.college-handle-container
+.college-handle-container.student-practice
     .jarviswidget.jarviswidget-color-blueDark
         header(role='heading')
             span.widget-icon
@@ -7,6 +7,69 @@
         .widget-body
             step-line.step-line.margin-bottom-10(on-step="handleFn.step" steps="handleFn.steps")
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
+                div
+                    .col-sm-5
+                        fieldset
+                            legend
+                                span 选择学生
+                        .row
+                            .col-lg-6
+                                 select.select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()")
+                                    option(value="") 请选择班级
+                                    option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}" ) {{class.name}}
+                            .col-lg-6
+                                .input-group
+                                    input.form-control(type='text', placeholder='按学号或姓名搜索' ng-model="handleFn.searchStudentParams.name")
+                                    span.input-group-btn
+                                        button.btn.btn-default(type='button' ng-click="handleFn.getSimpleStudents()")
+                                            i.fa.fa-search
+
+                        .row(style="cursor:default;min-height:74px;max-height:450px;overflow-y:scroll;")
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 学号
+                                        th.expand.sorting 姓名
+                                        th.sorting 班级
+                                        th.sorting 操作
+                                tbody
+                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.studentList")
+                                        td {{student.jobNumber}}
+                                        td {{student.name}}
+                                        td {{student.classesName}}
+                                        td
+                                            a.handle(ng-click="handleFn.selectStudent(student)")
+                                                i.fa.fa-arrow-circle-right
+                                                span 选中
+                            .row(style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectAllStu()', ng-show="handleFn.studentList.length>0") 全选
+                    .col-sm-1
+                    .col-sm-5
+                        fieldset
+                            legend
+                                span 已选择的学生
+                        .row(style="cursor:default;min-height:74px;max-height:470px;overflow-y:scroll;")
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 学号
+                                        th.expand.sorting 姓名
+                                        th.sorting 班级
+                                        th.sorting 操作
+                                tbody
+                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
+                                        td {{student.jobNumber}}
+                                        td {{student.name}}
+                                        td {{student.classesName}}
+                                        td
+                                            a.handle(ng-click="handleFn.removeSelectedStudent(student)")
+                                                i.fa.fa-times
+                                                span 撤销
+                            .row(ng-if='handleFn.selectStudentList.length>0' style="position: absolute;bottom: -25px;")
+                                .col-sm-12
+                                    a(ng-click='handleFn.selectStudentList =[]') 清空全部
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
                 .col-sm-5
                     fieldset
                         legend
@@ -17,7 +80,7 @@
                                 option(ng-repeat="college in handleFn.collegeDropList" value="{{college.id}}") {{college.name}}
                         .col-lg-6
                             .input-group
-                                input.form-control(type='text', placeholder='按姓名搜索' ng-model="handleFn.searchParams.name")
+                                input.form-control(type='text', placeholder='按姓名搜索' ng-model="handleFn.searchParams.name"  my-enter="handleFn.getEntTutorList()")
                                 span.input-group-btn
                                     button.btn.btn-default(type='button' ng-click="handleFn.getEntTutorList()")
                                         i.fa.fa-search
@@ -60,73 +123,153 @@
                                     a.handle(ng-click="handleFn.removeSelectedTeacher(teacher)")
                                         i.fa.fa-times
                                         span 撤销
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
-                div
+                .row(ng-if='handleFn.selectTeacherList.length===0')
                     .col-sm-5
-                        fieldset
-                            legend
-                                span 选择学生
-                        .row
-                            .col-lg-6
-                                select.form-control(ng-model="handleFn.searchStudentParams.classesId" ui-select2="handleFn.select2ClassOptions()"  )
-                                    option(ng-repeat="class in handleFn.classDropList" value="{{class.id}}" ) {{class.name}}
-                            .col-lg-6
-                                .input-group
-                                    input.form-control(type='text', placeholder='按学号或姓名搜索' ng-model="handleFn.searchStudentParams.name")
-                                    span.input-group-btn
-                                        button.btn.btn-default(type='button' ng-click="handleFn.getSimpleStudents()")
-                                            i.fa.fa-search
-
-                        .row(style="cursor:default;min-height:74px;max-height:450px;overflow-y:scroll;")
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 学号
-                                        th.expand.sorting 姓名
-                                        th.sorting 班级
-                                        th.sorting 操作
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.studentList")
-                                        td {{student.jobNumber}}
-                                        td {{student.name}}
-                                        td {{student.classesName}}
-                                        td
-                                            a.handle(ng-click="handleFn.selectStudent(student)")
-                                                i.fa.fa-arrow-circle-right
-                                                span 选中
-                    .col-sm-1
-                    .col-sm-5
-                        fieldset
-                            legend
-                                span 已选择的学生
-
-                        table.table.table-striped.table-bordered.table-hover.dataTable
-                            thead
-                                tr(role='row')
-                                    th.sorting_asc 学号
-                                    th.expand.sorting 姓名
-                                    th.sorting 班级
-                                    th.sorting 操作
-                            tbody
-                                tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
-                                    td {{student.jobNumber}}
-                                    td {{student.name}}
-                                    td {{student.classesName}}
-                                    td
-                                        a.handle(ng-click="handleFn.removeSelectedStudent(student)")
-                                            i.fa.fa-times
-                                            span 撤销
+                        span(style="margin-left: 85px;color:red;") * 企业导师可不选择，但如果不选，不能进行实践任务操作
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
+                div(role='content')
+                    form.form-horizontal.smart-form(name='stupid')
+                        fieldset
+                            legend 实践过程设置
+                            .col-md-3.col-lg-5
+                                .form-group
+                                    label.col-md-3.control-label
+                                        span.required *
+                                        | 签到：
+                                    .col-md-1
+                                    .col-md-7
+                                            .row.inline-group
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSign' ng-value='true')
+                                                    i(style='top:10px;')
+                                                    span 需要
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSign' ng-value='false')
+                                                    i(style='top:10px;')
+                                                    span 不需要
+                                            .row.form-group(ng-if='handleFn.params.setDTO.isNeedSign')
+                                                label.col-md-3.control-label
+                                                    span
+                                                    | 应签到：
+                                                .col-md-2
+                                                    input.form-control(placeholder="0" type='number' name='sign' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needSignNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                label.col-md-4.control-label
+                                                    span 次
+                                                    span.required(ng-if='stupid.sign.$invalid') &nbsp;*需大于0
+                                .form-group
+                                    label.col-md-3.control-label
+                                        span.required *
+                                        | 周日志：
+                                    .col-md-1
+                                    .col-md-7
+                                            .row.inline-group
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSummary' ng-value='true')
+                                                    i(style='top:10px;')
+                                                    span 需要
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.isNeedSummary',  ng-value='false')
+                                                    i(style='top:10px;')
+                                                    span 不需要
+                                            section(ng-if='handleFn.params.setDTO.isNeedSummary')
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 日志：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' name='daily' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needDailyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
+                                                        span 篇
+                                                        span.required(ng-if='!stupid.daily.$valid') &nbsp;*需大于0
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 周志：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' name='weekly' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needWeeklyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
+                                                        span 篇
+                                                        span.required(ng-if='!stupid.weekly.$valid') &nbsp;*需大于0
+                                                .row.form-group
+                                                    label.col-md-3.control-label
+                                                        span
+                                                        | 月总结：
+                                                    .col-md-2
+                                                        input.form-control(placeholder="0" type='number' name='monthly' style="padding-left:8px;" ng-model="handleFn.params.setDTO.needMonthlyNum" step="1" min="1"  required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                                    label.col-md-4.control-label
+                                                        span 篇
+                                                        span.required(ng-if='!stupid.monthly.$valid') &nbsp;*需大于0
+                                .form-group
+                                    label.col-md-3.control-label
+                                        span.required *
+                                        | 实践报告：
+                                    .col-md-1
+                                    .col-md-7
+                                            .row.inline-group
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.needReport' ng-value='true')
+                                                    i(style='top:10px;')
+                                                    span 需要
+                                                label.radio
+                                                    input(type='radio', ng-model='handleFn.params.setDTO.needReport' ng-value='false')
+                                                    i(style='top:10px;')
+                                                    span 不需要
+                    form.form-horizontal.smart-form(name='percent')
+                        fieldset
+                            legend 实践成绩加权设置
+                            .col-md-3.col-lg-5
+                                .form-group
+                                    label.col-md-5.control-label
+                                        span.required *
+                                        | 签到所占比重：
+                                    .col-sm-2
+                                        input.form-control(type='number' name='sp' ng-model="handleFn.params.setDTO.signWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                    label.col-md-1.control-label
+                                        span %
+                                .form-group
+                                    label.col-md-5.control-label
+                                        span.required *
+                                        | 周日志所占比重：
+                                    .col-sm-2
+                                        input.form-control(type='number' name='wp' ng-model="handleFn.params.setDTO.summaryWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                    label.col-md-1.control-label
+                                        span %
+                                .form-group
+                                    label.col-md-5.control-label
+                                        span.required *
+                                        | 实践报告所占比重：
+                                    .col-sm-2
+                                        input.form-control(type='number' name='rp' ng-model="handleFn.params.setDTO.reportWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                    label.col-md-1.control-label
+                                        span %
+                                .form-group
+                                    label.col-md-5.control-label
+                                        span.required *
+                                        | 实践任务所占比重：
+                                    .col-sm-2
+                                        input.form-control(type='number' name='tp' ng-model="handleFn.params.setDTO.taskWeight", ng-disabled='handleFn.selectTeacherList.length===0' step="1" min="0" max="100" required onkeypress="return event.charCode >= 48 && event.charCode <= 57")
+                                    label.col-md-1.control-label
+                                        span %
+                                .form-group(ng-if='handleFn.computeTotal() || percent.sp.$invalid || percent.wp.$invalid || percent.rp.$invalid || percent.tp.$invalid')
+                                    label.col-md-10.control-label
+                                        span.required * 权重比列各项必填且相加不超过100%，请重新输入
+                    .row
+                        .col-md-12(style='text-align:center;')
+                            a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
+                            .speace-10
+                            button.btn.btn-primary(type='submit' ng-click="stupid.$valid && handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal() || stupid.$invalid || percent.$invalid") 下一步
+                    
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
-                        legend 给实践小组设置名称
+                        legend 给实践计划设置名称
                     .md-form
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
-                                | 实践小组名称：
+                                | 实践计划名称：
                             .col-sm-7
-                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" placeholder='请输入实践小组名称' validator="required, maxlength=30")
+                                input.form-control(ng-model="handleFn.params.name" type="text" name="name" placeholder='请输入实践计划名称' validator="required, maxlength=30")
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
@@ -148,45 +291,83 @@
                         .col-sm-12.text-center
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 提交
                     fieldset
-                        legend 实践小组信息预览
-                    .row
-                        .col-sm-3 教师信息：
+                        legend 实践计划信息预览
+                    .row(ng-if='handleFn.isEidt')
+                        .col-sm-3 指导教师信息：
                         .col-sm-7
                             table.table.table-striped.table-bordered.table-hover.dataTable
                                 thead
                                     tr(role='row')
                                         th.sorting_asc 工号
                                         th.expand.sorting 姓名
+                                        th.sorting 性别
                                         th.sorting 院系
+                                        th.sorting 手机号
+                                tbody
+                                    tr.cursor-pointer(role='row')
+                                        td {{handleFn.practiceGroupInfo.teacherJobNumer}}
+                                        td {{handleFn.practiceGroupInfo.teacherName}}
+                                        td {{handleFn.practiceGroupInfo.teacherSex}}
+                                        td {{handleFn.practiceGroupInfo.collegeName}}
+                                        td {{handleFn.practiceGroupInfo.teacherPhone}}
+                    .row
+                        .col-sm-3 企业导师信息：
+                        .col-sm-7
+                            table.table.table-striped.table-bordered.table-hover.dataTable
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc 工号
+                                        th.expand.sorting 姓名
+                                        th.sorting 企业名称
+                                        th.sorting 部门
+                                        th.sorting 职务
+                                        th.sorting 邮箱
+                                        th.sorting 手机号
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
                                         td {{teacher.loginName}}
                                         td {{teacher.name}}
                                         td {{teacher.enterpriseName}}
+                                        td {{teacher.department}}
+                                        td {{teacher.position}}
+                                        td {{teacher.mailbox}}
+                                        td {{teacher.phone}}
                     .row(ng-if="handleFn.params.classOrStudents==20")
                         .col-sm-3 学生信息：
                         .col-sm-7
-                            table.table.table-striped.table-bordered.table-hover.dataTable
-                                thead
-                                    tr(role='row')
-                                        th.sorting_asc 学号
-                                        th.expand.sorting 姓名
-                                        th.sorting 班级
-                                tbody
-                                    tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
-                                        td {{student.jobNumber}}
-                                        td {{student.name}}
-                                        td {{student.classesName}}
+                            .row(style="cursor:default;min-height:74px;max-height:470px;overflow-y:scroll;")
+                                table.table.table-striped.table-bordered.table-hover.dataTable
+                                    thead
+                                        tr(role='row')
+                                            th.sorting_asc 学号
+                                            th.expand.sorting 姓名
+                                            th.expand.sorting 性别
+                                            th.expand.sorting 院系
+                                            th.expand.sorting 专业
+                                            th.sorting 班级
+                                            th.sorting 邮箱
+                                            th.sorting 手机号
+                                    tbody
+                                        tr.cursor-pointer(role='row' ng-repeat="student in handleFn.selectStudentList" )
+                                            td {{student.jobNumber}}
+                                            td {{student.name}}
+                                            td {{student.sex}}
+                                            td {{student.collegeName}}
+                                            td {{student.professionalName}}
+                                            td {{student.classesName}}
+                                            td {{student.email}}
+                                            td {{student.phone}}
 
                     //.col-md-12.text-center.margin-top-10(ng-if="handleFn.step==3")
                         a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
             .form-actions
-                .row
+                .row(ng-show='handleFn.step!==3')
                     .col-md-12
                         a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
                         .speace-10
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectTeacherList.length==0") 下一步
+                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectStudentList.length==0") 下一步
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
+                        //- button.btn.btn-primary(type='submit' ng-click="stupid.$valid && handleFn.nextStep()" ng-if="handleFn.step==3" ng-disabled="handleFn.computeTotal() || stupid.sign.$invalid") 下一步
 
 
 

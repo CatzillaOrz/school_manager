@@ -3,7 +3,7 @@
  * 企业导师管理
  */
 angular.module('dleduWebApp')
-	.controller('enterpriseListCtrl', function ($scope, $state, AuthService, messageService, PracticeManService, CommonService,
+	.controller('enterpriseListCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService, CommonService,
 											 AccountService, ImpBatchService) {
 		$scope.enterpriseList = {
 			//列表
@@ -134,5 +134,8 @@ angular.module('dleduWebApp')
 				this.getEnterpriseList();
 			}
 		};
-		$scope.enterpriseList.init();
+		$timeout(function(){
+			$scope.enterpriseList.init();
+		}, 2000)
+		
 	});

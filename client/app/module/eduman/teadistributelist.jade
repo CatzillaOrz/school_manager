@@ -93,7 +93,7 @@
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
                                                 td {{record.name}}
-                                                td {{record.jobNumber}}
+                                                td {{record.jobNum}}
                                                 td {{record.collegeName}}
                                                 td {{record.teacherType==20?"授课教师": "--"}}
 
@@ -111,8 +111,8 @@
                                             #datatable_col_reorder_paginate6.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesUnDist()" boundary-link-numbers='true' items-per-page="distributeListFn.page.pageSize" rotate='false' previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选问卷
-                                button.btn.btn-primary.margin-left-10(ng-click="distributeListFn.distQuesPrompt('all')") 分配所有问卷
+                                button.btn.btn-primary(ng-click="distributeListFn.distQuesPrompt('batch')") 分配已选
+                                button.btn.btn-primary.margin-left-10(ng-click="distributeListFn.distQuesPrompt('all')") 分配所有
 
                 #hr2.tab-pane
                     #wid-id-5.jarviswidget.jarviswidget-color-blueDark.margin-bottom0-eduman
@@ -198,5 +198,5 @@
                                             #datatable_col_reorder_paginate1.dataTables_paginate.paging_simple_numbers
                                                 ul.pagination-sm(uib-pagination, total-items='distributeListFn.page.totalElements', max-size='distributeListFn.page.pageSize' ng-model='distributeListFn.page.pageNumber',ng-change="distributeListFn.getEvaQuesDist()" boundary-link-numbers='true' rotate='false' items-per-page="distributeListFn.page.pageSize"  previous-text="<" next-text=">")
                             .panel.panel-default.no-border(style="box-shadow:none!important;" ng-if="distributeListFn.isUseAuth('dist')")
-                                button.btn.btn-primary.margin-right-10(ng-click="distributeListFn.deletePrompt(record, 'batch')") 删除已选班级的分配
+                                button.btn.btn-primary.margin-right-10(ng-click="distributeListFn.deletePrompt(record, 'batch')") 删除已选分配
                                 button.btn.btn-primary(ng-click="distributeListFn.deletePrompt(record, 'all')") 删除所有分配

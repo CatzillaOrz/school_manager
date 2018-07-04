@@ -1,0 +1,81 @@
+.college-list-container
+    #wid-id-2.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 app校园动态设置
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                form.form-horizontal(name="newform")
+                    .lg-form
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 文章标题：
+                            .col-sm-4
+                                input.form-control(type='text', name="title" placeholder='点击输入新闻标题', ng-model="setSchollNews.dataMobel.title" validator="required, maxlength=200")
+                        .form-group
+                            label.col-sm-3.control-label
+                                span.required *
+                                | 发布时间：
+                            .col-sm-4
+                                .input-append.date.datepicker.datepicker-basic.no-padding.inline-block.col-sm-12(data-date='', data-date-end-date="0d" data-date-format='yyyy-mm-dd' b-datepicker)
+                                    input.form-control(size='16',name="date" placeholder='发布时间' type='text' ng-model="setSchollNews.dataMobel.publishDate" validator="required")
+                                    span.add-on
+                                        i.icon-calendar.glyphicon.glyphicon-calendar
+                        .article-file
+                            .logo_ctrl
+                                p 请上传一到三张图片作为此文章的首图
+                                    span(style="color:red") （大小不能超1MB,图片格式jpg,jpeg,png）
+                                .img_preview.clearfix
+                                    .new-upload-img
+                                        .upload-img
+                                            span 图片1：
+                                                .image
+                                                    img(ngf-src='myFile1' src="{{setSchollNews.dataMobel.picUrl}}" onload='angular.element(this).scope().setSchollNews.imgChange(this)' ng-show="setSchollNews.dataMobel.picUrl")
+                                        .add-news-upload-button
+                                            button.file_btn.btn( ngf-select='selected($newFiles,$invalidFiles)' ng-model="myFile1" name="file" ngf-pattern="'.png,.jpg,.jpeg'" ngf-validate="{size: {max: '1MB'}}" ) 选择文件
+                                            button.file_btn.btn.btn-success(ng-click='setSchollNews.uploadFile(myFile1, 1)') 保存
+                                        .upload-img
+                                            span 图片2：
+                                                .image
+                                                    img(ngf-src='myFile2' src="{{setSchollNews.dataMobel.picUr2}}" onload='angular.element(this).scope().setSchollNews.imgChange(this)' ng-show="setSchollNews.dataMobel.picUr2")
+                                        .add-news-upload-button
+                                            button.file_btn.btn( ngf-select='selected($newFiles,$invalidFiles)' ng-model="myFile2" name="file" ngf-pattern="'.png,.jpg,.jpeg'" ngf-validate="{size: {max: '1MB'}}" ) 选择文件
+                                            button.file_btn.btn.btn-success(ng-click='setSchollNews.uploadFile(myFile2, 2)') 保存
+                                        .upload-img
+                                            span 图片3：
+                                                .image
+                                                    img(ngf-src='myFile3' src="{{setSchollNews.dataMobel.picUr3}}" onload='angular.element(this).scope().setSchollNews.imgChange(this)' ng-show="setSchollNews.dataMobel.picUr3")
+                                        .add-news-upload-button
+                                            button.file_btn.btn( ngf-select='selected($newFiles,$invalidFiles)' ng-model="myFile3" name="file" ngf-pattern="'.png,.jpg,.jpeg'" ngf-validate="{size: {max: '1MB'}}" ) 选择文件
+                                            button.file_btn.btn.btn-success(ng-click='setSchollNews.uploadFile(myFile3, 3)') 保存
+                        .article-ueditor(ng-if="(setSchollNews.type=='add'||setSchollNews.type=='edit'&&setSchollNews.complete)")
+                            .editor(ueditor id='setSchollNews.questionsFn.editorid' uec='setSchollNews.questionsFn.exerciseContent' editor='editor' config="setSchollNews.questionsFn.editorConf")
+                        .form-actions(style="border-top:none;margin:0")
+                            .row
+                                .col-md-12(style="text-align:left")
+                                    a.btn.btn-primary(ng-click="setSchollNews.submit(1)" validation-submit="newform") 预览
+                                    a.btn.btn-primary.margin-left-10(ng-click="setSchollNews.submit(2)" validation-submit="newform") 保存
+                                    a.btn.btn-default(ng-click="setSchollNews.returnArticleMag()") 取消
+
+    //-  添加学生弹出窗模版
+    script(type='text/ng-template',id='prewNews')
+        .container-fluid
+            .dialog-body
+                #newsManage(style="margin:0 auto")
+                    .newsPreviewManagement
+                        .newsTitle
+                            span {{setSchollNews.newsPreviewData.title}}
+                        .publishView
+                            span {{setSchollNews.newsPreviewData.publishDate}}
+                        #previewManage.previewContent(ng-bind-html="setSchollNews.newsPreviewData.content")
