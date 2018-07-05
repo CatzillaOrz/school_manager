@@ -276,8 +276,8 @@ var SchoolService = {
     },
     getBoutiqueCourseList: function (params, callback) {
         RestClient.get({
-            host: 'gateway-school',
-            path: '/v1/schoolcourse/findcourse',
+            host: 'em',
+            path: '/api/web/v1/schoolcourse/findcourse',
             params:params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -285,8 +285,7 @@ var SchoolService = {
             } else {
                 callback(ErrorCode.errorHandle(res));
             }
-        })
-            .catch(function (e) {
+        }) .catch(function (e) {
                 callback(e);
             });
     },
@@ -300,6 +299,7 @@ var SchoolService = {
                 callback(null, res.entity);
             } else {
                 callback(ErrorCode.errorHandle(res));
+
             }
         }).catch(function (e) {
             callback(e);
@@ -307,8 +307,8 @@ var SchoolService = {
     },
     deleteBoutiqueCourse: function (params, access_token, callback) {
         RestClient.delete({
-            host: 'gateway-school',
-            path: '/v1/schoolcourse/deletecourse/' + params.id,
+            host: 'em',
+            path: '/api/web/v1/schoolcourse/deletecourse/' + params.id,
 
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -387,8 +387,8 @@ var SchoolService = {
     },
     getApplyList: function (params, callback) {
         RestClient.get({
-            host: 'gateway-school',
-            path: '/v1/schoolcourse/apply/list',
+            host: 'em',
+            path: '/api/web/v1/schoolcourse/apply/list',
             params:params
         }).then(function (res) {
             if (res.status.code == 200) {
@@ -419,8 +419,8 @@ var SchoolService = {
     },
     handleApply: function (params, callback) {
         RestClient.put({
-            host: 'gateway-school',
-            path: '/v1/schoolcourse/apply/put',
+            host: 'em',
+            path: '/api/web/v1/schoolcourse/apply/put',
             entity: params
         }).then(function (res) {
             if (res.status.code == 200) {
