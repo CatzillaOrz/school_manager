@@ -41,7 +41,8 @@
                                 td.expand
                                     span.responsiveExpander
                                     | {{course.courseName}}
-                                td  {{course.courseDesc}}
+                                td
+                                    span(ng-bind-html="course.introduction")
                                 td  {{course.createDate | date:'yyyy-MM-dd HH:mm:ss'}}
                                 td
                                     a.handle(ng-click="boutiqueCourseFn.deletePrompt(course)")
