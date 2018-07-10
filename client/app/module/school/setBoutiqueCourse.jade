@@ -32,7 +32,6 @@
                             tr(role='row')
                                 th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
                                 th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 86px;') 课程名称
-                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 课程描述
                                 th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Company: activate to sort column ascending', style='width: 195px;') 创建时间
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 195px;') 操作
                         tbody
@@ -41,7 +40,7 @@
                                 td.expand
                                     span.responsiveExpander
                                     | {{course.courseName}}
-                                td  {{course.courseDesc}}
+
                                 td  {{course.createDate | date:'yyyy-MM-dd HH:mm:ss'}}
                                 td
                                     a.handle(ng-click="boutiqueCourseFn.deletePrompt(course)")
