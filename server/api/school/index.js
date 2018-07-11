@@ -65,4 +65,7 @@ router.get('/getAllSchool', auth.isSignedIn, controller.getAllSchool);
 router.post('/addAppNotice',auth.isSignedIn, controller.addAppNotice);
 router.delete('/deleteAppNotice',auth.isSignedIn, controller.deleteAppNotice);
 router.post('/updateAppNotice',auth.isSignedIn, controller.updateAppNotice);
+
+router.get('/getDefMenu', auth.isSignedIn, controller.getDefMenu);
+router.post('/saveDefMenu',auth.isSignedIn, controller.saveDefMenu);
 module.exports = router;

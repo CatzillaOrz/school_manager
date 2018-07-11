@@ -33,7 +33,7 @@ angular.module('dleduWebApp')
                     .success(function (data) {
                         that.params = data;
                         that.params.isQuestionnaire = data.isQuestionnaire ? 'true':'false';
-                        that.getAllOrg();
+                        //that.getAllOrg();
                     })
                     .catch(function () {
 
@@ -140,7 +140,7 @@ angular.module('dleduWebApp')
                 if (that.params.id !== 0) {
                     that.getAppNoticeDetail(that.params.id);
                 } else {
-                    this.getAllOrg();
+                    //this.getAllOrg();
                 }
             }
         }

@@ -431,6 +431,24 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getDefMenu: function (req, res) {
+        SchoolService.getDefMenuSync(req.query,req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    saveDefMenu: function (req, res) {
+        SchoolService.saveDefMenuSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 };
 
 

@@ -1,0 +1,111 @@
+{
+    "items":[
+        {
+            "title": "基本信息",
+            "items":[
+                {
+                    "title": "学期管理",
+                    "sref": "periodlist",
+                    "active": "period",
+                    "icon": "https://s1.aizhixin.com/c919fb98-0e6a-4d35-a281-e85151b50ff8.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "课程基本信息",
+                    "sref": "courselist",
+                    "active": "course",
+                    "icon": "https://s1.aizhixin.com/b1109dcf-2a38-4ef1-9093-41c7aff9a568.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "课程安排",
+                    "sref": "teachclasslist",
+                    "active": "teachclasslist",
+                    "icon": "https://s1.aizhixin.com/211a0e11-99bf-4707-a53a-cd836e231444.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(127,185,234,1),rgba(96,166,224,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "电子围栏",
+                    "sref": "elecfence",
+                    "active": "elecfence",
+                    "bg": "background:linear-gradient(133.7deg,rgba(129,142,230,1),rgba(110,123,210,1))",
+                    "icon": "https://s1.aizhixin.com/03731c94-cb67-4aa8-91d7-78ddb4af6597.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "实时监控分析",
+                    "sref": "geodetail",
+                    "target":"_blank",
+                    "active": "geodetail",
+                    "bg": "background:linear-gradient(133.7deg,rgba(245,210,112,1),rgba(246,193,87,1))",
+                    "icon": "https://s1.aizhixin.com/00aabbbe-3079-4252-88f9-6f5ceae9ddfb.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                }
+            ]
+        },
+        {
+            "title": "信息设置",
+            "items":[
+                {
+                    "title": "设置学校LOGO",
+                    "sref": "setlogo",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "icon": "https://s1.aizhixin.com/41a5a8ce-9780-42d4-9a41-2bdcda169910.png",
+                    "iconSmall": "https://s1.aizhixin.com/768a4c6c-3e7f-47ab-9e45-246501337a45.png"
+                },
+                {
+                    "title": "设置轮播图与简介",
+                    "sref": "setplayview",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/918e114e-3c3f-49de-b12c-d682a3e89add.png",
+                    "icon": "https://s1.aizhixin.com/f1c87a8b-a947-421f-b5c2-7eddac309369.png"
+                },
+                {
+                    "title": "设置热门专业",
+                    "sref": "sethotmajor",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/bcb0a37f-a880-4ab1-a38b-00070843e4fa.png",
+                    "icon": "https://s1.aizhixin.com/c400c43b-ecb7-4087-bfb1-eab93276a588.png"
+                },
+                {
+                    "title": "设置优秀老师",
+                    "sref": "setexcellentteacher",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/eb4a4a7d-d9f1-40c6-a655-36584bb19846.png",
+                    "icon": "https://s1.aizhixin.com/6bd43380-49fd-495f-837d-1f0a7d3d3f6f.png"
+                },
+                {
+                    "title": "设置精品课程",
+                    "sref": "setboutiquecourse",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/71cb6566-f8fd-4227-827a-e9ebcf241b06.png",
+                    "icon": "https://s1.aizhixin.com/1762c45e-616b-447e-9466-aa22d5ad0c4f.png"
+                },
+                {
+                    "title": "精品课程申请处理",
+                    "sref": "boutiquecourseapply",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/6c06710b-5d57-4bd7-88a5-7ed7f906d10a.png",
+                    "icon": "https://s1.aizhixin.com/7ce021c6-cd79-4196-9c05-b2910614e589.png"
+                },
+                {
+                    "title": "app校园动态",
+                    "sref": "schoolnewlist",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/86573552-fc0a-4ea0-bb32-f709c92f9bbf.png",
+                    "icon": "https://s1.aizhixin.com/c0ab1dd4-006e-450a-8894-aee317b525ca.png"
+                },
+                {
+                    "title": "app发布通知",
+                    "sref": "appnoticelist",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "iconSmall": "https://s1.aizhixin.com/86573552-fc0a-4ea0-bb32-f709c92f9bbf.png",
+                    "icon": "https://s1.aizhixin.com/c0ab1dd4-006e-450a-8894-aee317b525ca.png"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "items":[
+        {
+            "title": "",
+            "items":[
+                {
+                    "title": "宿舍楼管理",
+                    "sref": "dormbuildingman",
+                    "active": "dormbuildingman",
+                    "icon": "https://s1.aizhixin.com/901019ba-3fd4-4809-bb1e-cee48d56e28b.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
+                },
+                {
+                    "title": "宿舍管理",
+                    "sref": "dormman",
+                    "active": "dormman",
+                    "icon": "https://s1.aizhixin.com/019a9ed0-047a-463d-ba60-06f193cdd422.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
+                },
+                {
+                    "title": "在线缴费",
+                    "sref": "payment",
+                    "active": "payment",
+                    "icon": "https://s1.aizhixin.com/0247da58-7172-40b7-9477-10a852da76ed.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(127,185,234,1),rgba(96,166,224,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
+                }
+            ]
+        }
+    ]
+}

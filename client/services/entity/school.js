@@ -226,6 +226,14 @@ angular.module('dleduWebService')
                     params: params
                 })
             },
+            getDefMenu:function (params) {
+                var boutiqueCourse = $resource('api/school/getDefMenu');
+                return boutiqueCourse.get(params);
+            },
+            saveDefMenu:function (params) {
+                var boutiqueCourse=$resource('api/school/saveDefMenu');
+                return boutiqueCourse.save(params);
+            },
         }
 
     });
