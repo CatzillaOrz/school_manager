@@ -20,12 +20,12 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
+                                    input.form-control(type='search', placeholder='按学生名称或学号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords" my-enter="summaryFn.portalTrigger()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
-                                button.btn.btn-primary
+                                button.btn.btn-primary(ng-click='summaryFn.exportStuScore()')
                                     span 导出
                         .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
@@ -53,40 +53,39 @@
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr
-                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 班级
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 学号
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校内指导老师
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习单位
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 校外指导老师
-                                th(tabindex='0', aria-controls='datatable_col_reorder' style="border-right: none;") 成绩（20%）
-                                th(style="border:none;")
-                                     table
-                                        tr
-                                            th( rowspan='1', colspan='1') 指导老师鉴定
-                                        tr
-                                            th(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 遵守实习单位制度和纪律（20%）
-                                th(tabindex='0', aria-controls='datatable_col_reorder') 提交日记、周记（20%）
+                                th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 专业
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Phone: activate to sort column ascending') 班级
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Phone: activate to sort column ascending') 学号
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Phone: activate to sort column ascending') 姓名
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 校内指导老师
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 实习单位
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 校外指导老师
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 考勤成绩
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 周日志成绩
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 实践报告成绩
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 实践课程任务成绩
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', aria-label='Date: activate to sort column ascending') 总成绩
                                 
                         tbody
-                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
-                                td 外语学院{{$index+1}}
-                                td 商务英语{{$index+1}}
-                                td 商务英语{{$index+1}}班
-                                td 1390291{{$index}}
-                                td {{rp}}
-                                td 李老师
-                                td 杭州品胜珠宝鉴定
-                                td 吴老师
-                                td 1{{$index+1}}
-                                td {{$index+1}}
-                                td {{$index+1}}
+                                td(title='{{rp.collegeName}}') {{rp.collegeName}}
+                                td(title='{{rp.professionalName}}') {{rp.professionalName}}
+                                td(title='{{rp.className}}') {{rp.className}}
+                                td(title='{{rp.jobNum}}') {{rp.jobNum}}
+                                td(title='{{rp.studentName}}') {{rp.studentName}}
+                                td(title='{{rp.mentorName}}') {{rp.counselorName}}
+                                td(title='{{rp.enterpriseName}}') {{rp.enterpriseName}}
+                                td(title='{{rp.groupName}}') {{rp.mentorName}}
+                                td(title='{{rp.signScore}}') {{rp.signScore}}
+                                td(title='{{rp.summaryScore}}') {{rp.summaryScore}}
+                                td(title='{{rp.reportScore}}') {{rp.reportScore}}
+                                td(title='{{rp.taskScore}}') {{rp.taskScore}}
+                                td(title='{{rp.totalScore}}') {{rp.totalScore}}
                                 
-                    //.dt-toolbar-footer
+                    .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
@@ -98,4 +97,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.portalTrigger()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
