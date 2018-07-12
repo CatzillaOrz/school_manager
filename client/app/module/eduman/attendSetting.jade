@@ -1,0 +1,34 @@
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 到课率设置
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                .tab-content
+                    .college-handle-container
+                        .jarviswidget-color-blueDark
+                            .widget-body
+                                form.form-horizontal(name="studentForm")
+                                    fieldset
+                                        legend 到课率设置
+                                    .short-form
+                                        .form-group
+                                            .radio(ng-repeat="obj in attendSettingFn.settingList")
+                                                input(type='radio', name='inlineRadioOptions',ng-model="attendSettingFn.params.arithmetic" value='{{obj.key}}')
+                                                |  {{obj.value}}
+
+                                    .form-actions
+                                        .row
+                                            .col-md-12
+                                                a.btn.btn-primary(ng-click="attendSettingFn.updateAttendacne()" validation-submit="studentForm") 应用设置

@@ -1,0 +1,60 @@
+.home-container
+    .home-content
+        .swiper-home
+            .swiper-container
+                .swiper-wrapper
+                    .swiper-slide(ng-repeat='img in subIndexFn.imgs')
+                        a
+                            .home-image(style="background:url({{img}});background-size:cover;")
+                .swiper-pagination
+
+                .swiper-home-button-prv
+                .swiper-home-button-next
+        .content
+            .quick-button(ng-repeat="data in subIndexFn.datas")
+                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
+                    header(role='heading')
+                        .jarviswidget-ctrls(role='menu')
+                        span.icon-title
+                        h2 {{data.title}}
+                        span.jarviswidget-loader
+                            i.fa.fa-refresh.fa-spin
+                        span.operat(ng-click="subIndexFn.operatMenu($index)") {{data.button}}
+                    div.menus(role='content')
+                        button.item-menu(style="{{item.bg}}" ng-repeat='item in data.items' ui-sref="{{item.sref}}")
+                            img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="subIndexFn.selMenu($parent.$index, $index,$event);$event.stopPropagation()")
+                            img.other-img(ng-if="!$parent.$index" src="{{item.icon}}")
+                            .img-contain(ng-if="$parent.$index")
+                                img(src="{{item.iconSmall}}")
+                            span(ng-class="{'base-title-color': !$parent.$index}") {{item.title}}
+
+
+            //.quick-button(ng-repeat="item in subIndexFn.datas")
+                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
+                    header(role='heading')
+                        .jarviswidget-ctrls(role='menu')
+                        span.icon-title
+                        h2 基本信息
+                        span.jarviswidget-loader
+                            i.fa.fa-refresh.fa-spin
+                    div.menus(role='content')
+                        a.item-menu(style="background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))" ng-repeat='data in subIndexFn.datas' ui-sref="{{data.sref}}")
+                            img.other-img(src="https://s1.aizhixin.com/8ccfbba3-27c9-407f-85cb-696ab48ac5f9.png")
+                            span {{data.title}}
+
+            //.quick-button
+                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
+                    header(role='heading')
+                        .jarviswidget-ctrls(role='menu')
+                        span.icon-title
+                        h2 信息设置
+                        span.jarviswidget-loader
+                            i.fa.fa-refresh.fa-spin
+                    div.menus(role='content')
+                        a.item-menu(ng-repeat='data in subIndexFn.datas' ui-sref="{{data.sref}}")
+                            .img-contain
+                                img(src="https://s1.aizhixin.com/8ccfbba3-27c9-407f-85cb-696ab48ac5f9.png")
+                            span {{data.title}}
+
+
+

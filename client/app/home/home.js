@@ -17,4 +17,18 @@ angular.module('dleduWebApp')
                     label: '首页'
                 }
             })
+            .state('subindex', {
+                parent: 'base',
+                url   : '/subindex/:type',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'SubIndexCtrl',
+                        templateUrl: 'app/home/subIndex.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '子功能首页'
+                }
+            })
     });

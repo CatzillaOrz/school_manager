@@ -24,6 +24,118 @@ angular.module('dleduWebApp')
 					label: '考勤记录'
 				}
 			})
+			.state('attendsetting', {
+				parent: 'base',
+				url   : '/attendsetting',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendSettingCtrl',
+						templateUrl: 'app/module/eduman/attendSetting.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '到课率设置'
+				}
+			})
+			.state('attendpause', {
+				parent: 'base',
+				url   : '/attendpause',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendPauseCtrl',
+						templateUrl: 'app/module/eduman/attendPause.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '辅导员暂停考勤记录'
+				}
+			})
+			.state('attendfix', {
+				parent: 'base',
+				url   : '/attendfix',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendFixCtrl',
+						templateUrl: 'app/module/eduman/attendFix.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '修改课程考勤'
+				}
+			})
+			.state('attendtime', {
+				parent: 'base',
+				url   : '/attendtime',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendTimeCtrl',
+						templateUrl: 'app/module/eduman/attendTime.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '上课时间考勤报表'
+				}
+			})
+			.state('attendteacher', {
+				parent: 'base',
+				url   : '/attendteacher',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendTeacherCtrl',
+						templateUrl: 'app/module/eduman/attendTeacher.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师考勤报表'
+				}
+			})
+			.state('attendcollege', {
+				parent: 'base',
+				url   : '/attendcollege',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendCollegeCtrl',
+						templateUrl: 'app/module/eduman/attendCollege.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '院系考勤报表'
+				}
+			})
+			.state('attendmajor', {
+				parent: 'base',
+				url   : '/attendmajor',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendMajorCtrl',
+						templateUrl: 'app/module/eduman/attendMajor.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '专业考勤报表'
+				}
+			})
+			.state('attendclass', {
+				parent: 'base',
+				url   : '/attendclass',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'AttendClassCtrl',
+						templateUrl: 'app/module/eduman/attendClass.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '班级考勤报表'
+				}
+			})
             .state('attenddetail', {
                 parent: 'attendlist',
                 url   : '/attenddetail/:id/:classes',

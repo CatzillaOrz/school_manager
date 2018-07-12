@@ -1,0 +1,126 @@
+{
+    "items":[
+        {
+            "title": "考勤报表",
+            "items":[
+                {
+                    "title": "上课时间考勤报表",
+                    "sref": "attendtime",
+                    "active": "attendtime",
+                    "icon": "https://s1.aizhixin.com/54be9052-b557-4c01-8e1b-d081f66bbc7e.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "教师考勤报表",
+                    "sref": "attendteacher",
+                    "active": "attendteacher",
+                    "icon": "https://s1.aizhixin.com/b590bd3b-da8a-42bd-a933-4875c99b4789.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "院系考勤报表",
+                    "sref": "attendcollege",
+                    "active": "attendcollege",
+                    "icon": "https://s1.aizhixin.com/accf7277-0d99-447a-86ca-b94a83ed8c4d.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(127,185,234,1),rgba(96,166,224,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "专业考勤报表",
+                    "sref": "attendmajor",
+                    "active": "attendmajor",
+                    "icon": "https://s1.aizhixin.com/676534ea-7778-47b4-aa08-303616fbb8d5.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(129,142,230,1),rgba(110,123,210,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "班级考勤报表",
+                    "sref": "attendclass",
+                    "active": "attendclass",
+                    "icon": "https://s1.aizhixin.com/f6005372-b37e-4c4d-93bb-beed02c510ff.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "导员考勤",
+                    "sref": "instructor",
+                    "active": "instructor",
+                    "icon": "https://s1.aizhixin.com/52a9ff3e-3c61-4333-b140-76b746f9a4b7.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(245,210,112,1),rgba(246,193,87,1))",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                }
+            ]
+        },
+        {
+            "title": "考勤相关",
+            "items":[
+                {
+                    "title": "节假日管理",
+                    "sref": "holidayman",
+                    "active": "holidayman",
+                    "iconSmall": "https://s1.aizhixin.com/0e670fd4-6f64-40e3-88a5-5304fe399d61.png",
+                    "icon": "https://s1.aizhixin.com/94fab53e-66a5-4f04-a26f-b4267aac833e.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "节假日补休调课",
+                    "sref": "changecourse",
+                    "active": "changecourse",
+                    "iconSmall": "https://s1.aizhixin.com/5438755f-2e3f-47d4-a921-14cfa415f20a.png",
+                    "icon": "https://s1.aizhixin.com/31d04097-777c-4ca6-bda0-93b48e3a10e7.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "教师调停课记录",
+                    "sref": "changecourselist",
+                    "active": "changecourselist",
+                    "iconSmall": "https://s1.aizhixin.com/0b6722c6-c95f-44ab-8930-65550162a0bd.png",
+                    "icon": "https://s1.aizhixin.com/f54c4250-1ac2-4bcc-a2d1-e9ba2a7e5613.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "教师课表",
+                    "sref": "teacherListSimplify",
+                    "active": "teacherListSimplify",
+                    "iconSmall": "https://s1.aizhixin.com/896527d9-c942-4a4d-b80d-ecd78b57961b.png",
+                    "icon": "https://s1.aizhixin.com/bf776894-c763-4cc4-b854-9c7f312ccb23.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "到课率设置",
+                    "sref": "attendsetting",
+                    "active": "attendsetting",
+                    "iconSmall": "https://s1.aizhixin.com/4c1f35d7-bae8-42be-baa5-dadc813bace3.png",
+                    "icon": "https://s1.aizhixin.com/cd24edb5-37cd-46c0-993b-ba68ac0b988f.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "辅导员暂停考勤记录",
+                    "sref": "attendpause",
+                    "active": "attendpause",
+                    "iconSmall": "https://s1.aizhixin.com/698c6500-f897-4db2-b894-0142e5761a3c.png",
+                    "icon": "https://s1.aizhixin.com/12ab7036-a974-469f-8964-5a758fc13042.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "修改课程考勤",
+                    "sref": "attendfix",
+                    "active": "attendfix",
+                    "iconSmall": "https://s1.aizhixin.com/b4608995-341f-4dcf-8510-8b50e2ed3673.png",
+                    "icon": "https://s1.aizhixin.com/d5e61166-d020-4189-a5a1-625a2c581a75.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "课程评分",
+                    "sref": "coursescore",
+                    "active": "coursescore",
+                    "iconSmall": "https://s1.aizhixin.com/20bf641c-de23-4f55-8d5d-684a91cf7037.png",
+                    "icon": "https://s1.aizhixin.com/7bdd6e53-5adc-40ce-8e8e-3575d45f35ae.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                }
+            ]
+        }
+    ]
+}

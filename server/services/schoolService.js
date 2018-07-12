@@ -693,6 +693,41 @@ var SchoolService = {
                 callback(e);
             });
     },
+	//快捷入口菜单
+    getDefMenu: function (params, access_token, callback) {
+        RestClient.get({
+            host: 'dd',
+            path: '/api/web/v1/menus/custommenu/getCustomMenu',
+            params:params,
+            access_token: access_token
+        }).then(function (res) {
+                if (res.status.code == 200) {
+                    callback(null, res.entity);
+                } else {
+                    callback(ErrorCode.errorHandle(res));
+                }
+            })
+            .catch(function (e) {
+                callback(e);
+            });
+    },
+    //保存快捷目录
+    saveDefMenu: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'dd',
+            path: '/api/web/v1/menus/custommenu/save',
+            params: params,
+            access_token: access_token,
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                callback(ErrorCode.errorHandle(res));
+            }
+        }).catch(function (e) {
+            callback(e);
+        });
+    },
 
 };
 

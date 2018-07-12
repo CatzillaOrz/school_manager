@@ -4,19 +4,25 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
+    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,
+                                        SchoolService, tempStorageService) {
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
-           
-            currentLink: SchoolService.defineProperty().get() || 'home',
+            currentLink: 'home',
             nav:[
-                {name: '首页', url: 'home', selected: true},
-                {name: '实践教学', url: 'workbench', selected: false},
-                {name: '统计报表', url: 'teachingSummary', selected: false},
+                {name: '学校信息管理', url:'subindex({type:0})', selected: true},
+                {name: '学校机构人员', url:'subindex({type:1})', selected: false},
+                {name: '教务考勤管理', url:'subindex({type:2})', selected: false},
+                {name: '教学质量管理', url:'subindex({type:3})', selected: false},
+                {name: '实践教学', url:'subindex({type:4})', selected: false},
+                {name: '迎新管理', url:'subindex({type:5})', selected: false},
+                {name: '权限管理', url:'subindex({type:6})', selected: false}
             ],
             schoolStatistics: {},
             tab: true,
+
+
 			stepOne: [
 				{title: '导入院系信息', url:'college.list', tab: 0},
 				{title: '导入专业信息', url: 'majorlist', tab: 0},
@@ -39,9 +45,15 @@ angular.module('dleduWebApp')
                     c.selected = false
                 });
                 entity.selected = true;
-                SchoolService.defineProperty(entity.url).set();
                 that.currentLink = entity.url;
-                step && $state.go(step.url,{},{relative: $state.$current, reload: true});
+                tempStorageService.setObject('hometempmyurl$', {url: entity.url});
+                //step && $state.go(step.url,{},{relative: $state.$current, reload: true});
+            },
+            goHome: function(){
+                tempStorageService.setObject('hometempmyurl$', {url: "home"});
+                this.nav.forEach(function(c){
+                    c.selected = false;
+                })
             },
             redirectStep: function(){
                 
@@ -91,17 +103,23 @@ angular.module('dleduWebApp')
 
                     })
             },
+            init: function(){
+                if($state.current.name == 'home'){
+                    tempStorageService.removeObject("hometempmyurl$")
+                }
+                $scope.layoutFn.getLogoList();
+                //($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+                $scope.layoutFn.nav.forEach(function(c){
+                    var currentLink = tempStorageService.getObject("hometempmyurl$").url;
+                    c.selected = c.url == currentLink;
+                })
+            }
         };
-        $scope.layoutFn.getLogoList();
-        ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
-        $scope.layoutFn.nav.forEach(function(c){
-            c.selected = c.url == $scope.layoutFn.currentLink
-        })
+        $scope.layoutFn.init();
+
         $rootScope.$watch('user', function () {
-            // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
         }, true);
-        console.log($scope.layoutFn.currentLink);
     })
 
     .directive('smartInclude', function () {

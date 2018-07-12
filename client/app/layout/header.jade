@@ -1,38 +1,42 @@
-header#header.hidden-print
-    #logo-group.cursor-pointer(ng-click="layoutFn.toIndex()")
-        span#logo
-            img(ng-src='{{layoutFn.user.orgLogo || "https://s.aizhixin.com/defaultimg/logo.png"}}', alt='{{layoutFn.user.orgName}}')
-        span#orgName {{layoutFn.user.orgName}}
-    //#logout.btn-header.transparent.pull-right
-        span
-            a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
-                i.fa.fa-sign-out
-    .head-navigation.hidden-print
-        ul
-            li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav', ng-click='layoutFn.redirectTo(nav)') {{nav.name}}
-    .pull-right.hidden-print
-        ul.account(ng-if=' layoutFn.user')
-            li.user-menu(uib-dropdown='uib-dropdown' uib-dropdown-toggle='uib-dropdown-toggle')
-                span.user-avatar
-                    img.avatar-30.img-circle(ng-src='{{ layoutFn.user.avatar}}')
-                span#user-name.dropdown-toggle
-                    span {{ layoutFn.user.login | cutStr:8}}
-                    i.caret
-                ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu' aria-labelledby='user-name')
-                    li(ng-repeat='anav in navigation.accountNav' class='{{anav.name}}')
-                        a(ng-if="anav.name != 'split'" ng-click=' layoutFn.navigate(anav.host,anav.path)')
-                            i.fa(class='{{anav.icon}}')
-                            span {{anav.name}}
-                        li
-                            a(ng-click=" layoutFn.navigate(0,'/userCenter')")
-                                i.fa.fa-sun-o
-                                span 个人中心
-                        li
-                            a(ng-click=" layoutFn.navigate(0,'/account')")
-                                i.fa.fa-vcard-o
-                                span 账号设置
-                        li.split
-                        li
-                            a(ng-click=' layoutFn.signOut()')
-                                i.fa.fa-sign-out
-                                span 退出
+.header-container
+    header#header.hidden-print
+        #logo-group.cursor-pointer(ng-click="layoutFn.goHome()" ui-sref="home")
+            span#logo
+                img(ng-src='{{layoutFn.user.orgLogo || "https://s.aizhixin.com/defaultimg/logo.png"}}', alt='{{layoutFn.user.orgName}}')
+            span#orgName {{layoutFn.user.orgName}}
+        //#logout.btn-header.transparent.pull-right
+            span
+                a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                    i.fa.fa-sign-out
+        .head-navigation.hidden-print
+            ul
+                //li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav', ng-click='layoutFn.redirectTo(nav)') {{nav.name}}
+                li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav' ng-click='layoutFn.redirectTo(nav)')
+                    .border-top(ng-if="nav.selected")
+                    span {{nav.name}}
+        .pull-right.hidden-print
+            ul.account(ng-if=' layoutFn.user')
+                li.user-menu(uib-dropdown='uib-dropdown' uib-dropdown-toggle='uib-dropdown-toggle')
+                    span.user-avatar
+                        img.avatar-30.img-circle(ng-src='{{ layoutFn.user.avatar}}')
+                    span#user-name.dropdown-toggle
+                        span {{ layoutFn.user.login | cutStr:8}}
+                        i.caret
+                    ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu' aria-labelledby='user-name')
+                        li(ng-repeat='anav in navigation.accountNav' class='{{anav.name}}')
+                            a(ng-if="anav.name != 'split'" ng-click=' layoutFn.navigate(anav.host,anav.path)')
+                                i.fa(class='{{anav.icon}}')
+                                span {{anav.name}}
+                            li
+                                a(ng-click=" layoutFn.navigate(0,'/userCenter')")
+                                    i.fa.fa-sun-o
+                                    span 个人中心
+                            li
+                                a(ng-click=" layoutFn.navigate(0,'/account')")
+                                    i.fa.fa-vcard-o
+                                    span 账号设置
+                            li.split
+                            li
+                                a(ng-click=' layoutFn.signOut()')
+                                    i.fa.fa-sign-out
+                                    span 退出
