@@ -12,6 +12,14 @@ angular.module('dleduWebService')
                 var statistics = $resource('api/statistics/studentAttending');
                 return statistics.save(params);
             },
+            getAchievementList: function (params) {
+                var statistics = $resource('api/statistics/getAchievementList');
+                return statistics.save(params);
+            },
+            getImpartProcess: function (params) {
+                var statistics = $resource('api/statistics/getImpartProcess');
+                return statistics.save(params);
+            },
             teachingSummary: function (params) {
                 var statistics = $resource('api/statistics/teachingSummary');
                 return statistics.save(params);
@@ -93,6 +101,20 @@ angular.module('dleduWebService')
                 return $http({
 					method: 'GET',
 					url: "api/statistics/exportStuRoutineDetail",
+					params: params
+				});
+            },
+            exportStuScore: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportStuScore",
+					params: params
+				});
+            },
+            exportImpartProcess: function(params){
+                return $http({
+					method: 'GET',
+					url: "api/statistics/exportImpartProcess",
 					params: params
 				});
             },

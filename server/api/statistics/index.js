@@ -13,6 +13,8 @@ var router = express.Router();
 router.post('/stuReport',auth.isSignedIn, controller.stuReport);
 router.post('/studentAttending',auth.isSignedIn, controller.studentAttending);
 router.post('/teachingSummary',auth.isSignedIn, controller.teachingSummary);
+router.post('/getAchievementList',auth.isSignedIn, controller.getAchievementList);
+router.post('/getImpartProcess',auth.isSignedIn, controller.getImpartProcess);
 router.post('/getStudentActive',auth.isSignedIn, controller.getStudentActive);
 router.post('/stuRoutineCount',auth.isSignedIn, controller.stuRoutineCount);
 router.post('/stuRoutineDetail',auth.isSignedIn, controller.stuRoutineDetail);
@@ -28,5 +30,7 @@ router.get('/exportStuReport',auth.isSignedIn, controller.exportStuReport);
 router.get('/exportTeachingSummary',auth.isSignedIn, controller.exportTeachingSummary);
 router.get('/exportStuRoutineCount',auth.isSignedIn, controller.exportStuRoutineCount);
 router.get('/exportStuRoutineDetail',auth.isSignedIn, controller.exportStuRoutineDetail);
+router.get('/exportStuScore',auth.isSignedIn, controller.exportStuScore);
+router.get('/exportImpartProcess',auth.isSignedIn, controller.exportImpartProcess);
 
 module.exports = router;

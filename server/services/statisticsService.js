@@ -67,6 +67,38 @@ var StatisticsService = {
                 callback(e);
             });
     },
+    getAchievementList: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/score/page',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
+    getImpartProcess: function (params, access_token, callback) {
+        RestClient.post({
+            host: 'stu-practice',
+            path: '/v1/taskstatistics/counselorcount',
+            entity: params,
+            access_token: access_token
+        }).then(function (res) {
+            if (res.status.code == 200) {
+                callback(null, res.entity);
+            } else {
+                 callback(ErrorCode.errorHandle(res));
+            }
+        }) .catch(function (e) {
+                callback(e);
+            });
+    },
     studentAttending: function (params, access_token, callback) {
         RestClient.post({
             host: 'stu-practice',

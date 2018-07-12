@@ -23,6 +23,24 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getAchievementList: function (req, res) {
+        StatisticsService.getAchievementListSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getImpartProcess: function (req, res) {
+        StatisticsService.getImpartProcessSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
     stuRoutineCount: function (req, res) {
         StatisticsService.stuRoutineCountSync(req.body, req.user.access_token)
             .then(function (data) {
@@ -246,6 +264,48 @@ module.exports = {
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "学生实践报告明细表");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportStuScore: function (req, res) {
+        StatisticsService.getAchievementListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                var thead = [
+                    ["学院", "专业", "班级", "学号", "姓名",
+                    "指导老师", "企业导师", "企业单位", "考勤成绩", "周日志成绩", "实践报告成绩", "实践课程任务成绩", "总成绩"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    thead.push([item.collegeName, item.professionalName, item.className, item.jobNum, item.studentName, 
+                        item.counselorName, item.enterpriseName , item.mentorName, item.signScore, item.summaryScore, item.reportScore, item.taskScore, item.totalScore]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(thead);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "学生实习成绩汇总表");
+                res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    exportImpartProcess: function (req, res) {
+        StatisticsService.getImpartProcessSync(req.query, req.user.access_token)
+            .then(function (data) {
+                var thead = [
+                    ["姓名", "工号", "院系", "指导计划", "指导学生", "日志",
+                    "周志", "月报", "实习报告", "批阅篇数"]
+                ];
+                for (var index in data.data) {
+                    var item = data.data[index];
+                    thead.push([item.counselorName, item.jobNum, item.counselorCollegeName, item.groupName, item.groupStuNum == "noNeed" ? "不需要" : item.groupStuNum, 
+                        item.dailyNum == "noNeed" ? "不需要" : item.dailyNum, item.weeklyNum == "noNeed" ? "不需要" : item.weeklyNum , item.monthlyNum == "noNeed" ? "不需要" : item.monthlyNum, item.reportNum == "noNeed" ? "不需要" : item.reportNum, item.reviewReportNum]);
+                }
+                var ws = XLSX.utils.aoa_to_sheet(thead);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "学生实习成绩汇总表");
                 res.status(200).send(XLSX.write(wb, {type: 'binary', bookType: 'xlsx'}));
             })
             .catch(function (e) {

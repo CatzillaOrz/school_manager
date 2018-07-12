@@ -34,6 +34,8 @@ angular.module('dleduWebApp')
             params: {
                 keyWords: '',
                 stuName: "",
+                // sortField: 'TOTAL_SCORE',
+                // sortFlag: 'desc',
                 collegeId: '',
                 professionalId: '',
                 classId: "",
@@ -53,6 +55,26 @@ angular.module('dleduWebApp')
                 var that = $scope.summaryFn;
                 that.setPagination();
                 StatisticsService.stuRoutineCount(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            stuScore: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getAchievementList(that.params).$promise
+                    .then(function (data) {
+                        console.log(data);
+                        that.summeryList = data.data;
+                        that.page = data.page;
+                    })
+            },
+            impartProcess: function () {
+                var that = $scope.summaryFn;
+                that.setPagination();
+                StatisticsService.getImpartProcess(that.params).$promise
                     .then(function (data) {
                         console.log(data);
                         that.summeryList = data.data;
@@ -401,6 +423,26 @@ angular.module('dleduWebApp')
                 StatisticsService.exportStuRoutineCount(_params)
                     .success(function (data) {
                         that.saveAs(data, '签到统计汇总表');
+                    })
+            },
+            exportStuScore: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportStuScore(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '学生实习成绩汇总');
+                    })
+            },
+            exportImpartProcess: function () {
+                var that = this;
+                var _params = this.params;
+                _params.pageNumber = 1;
+                _params.pageSize = 10000;
+                StatisticsService.exportImpartProcess(_params)
+                    .success(function (data) {
+                        that.saveAs(data, '教师指导过程明细');
                     })
             },
             exportStuRoutineDetail: function () {

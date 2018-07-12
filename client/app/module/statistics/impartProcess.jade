@@ -20,12 +20,12 @@
                         .col-xs-3
                             #datatable_col_reorder_filter.dataTables_filter
                                 label
-                                    input.form-control(type='search', placeholder='按姓名或工号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.queryOption.name")
-                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.getPracticeGroupList()")
+                                    input.form-control(type='search', placeholder='按姓名或工号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords"  my-enter="summaryFn.portalTrigger()")
+                                    span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
                         .col-sm-9
                             .ColVis
-                                button.btn.btn-primary
+                                button.btn.btn-primary(ng-click='summaryFn.exportImpartProcess()')
                                     span 导出
                         .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
@@ -57,35 +57,27 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 姓名
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 工号
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 院系
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 指导课程
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 指导计划
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 指导学生
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 日志
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 披阅数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 周志
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 批阅篇数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 月报
-                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 批阅篇数
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实习报告
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 批阅篇数
                         tbody
-                            //tr.odd(role='row' ng-repeat='rp in summaryFn.someArr')
+                            tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
                                 td.sorting_1 {{$index+1+((summaryFn.page.pageNumber==0?summaryFn.page.pageNumber+1:summaryFn.page.pageNumber)-1)*10}}
-                                td 蔡庚{{$index+1}}
-                                td 1390291{{$index}}
-                                td 外语学院{{$index+1}}
-                                td 专业实习...
-                                td 毕业指导
-                                td 9
-                                td 不需要
-                                td -
-                                td 12
-                                td {{$index + 1}}
-                                td 不需要
-                                td -
-                                td 0
-                                td 0
-                    //.dt-toolbar-footer
+                                td {{rp.counselorName}}
+                                td {{rp.jobNum}}
+                                td {{rp.counselorCollegeName}}
+                                td {{rp.groupName}}
+                                td {{rp.groupStuNum == "noNeed" ? "不需要" : rp.groupStuNum}}
+                                td {{rp.dailyNum == "noNeed" ? "不需要" : rp.dailyNum}}
+                                td {{rp.weeklyNum == "noNeed" ? "不需要" : rp.weeklyNum}}
+                                td {{rp.monthlyNum == "noNeed" ? "不需要" : rp.monthlyNum}}
+                                td {{rp.reportNum == "noNeed" ? "不需要" : rp.reportNum}}
+                                td {{rp.reviewReportNum}}
+                    .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
                                 | 显示第
@@ -97,4 +89,4 @@
                                 |  条记录
                         .col-sm-6.col-xs-12
                             #datatable_col_reorder_paginate.dataTables_paginate.paging_simple_numbers
-                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.getPracticeGroupList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                ul.pagination-sm(uib-pagination, total-items='summaryFn.page.totalElements', max-size='summaryFn.page.pageSize' ng-model='summaryFn.page.pageNumber',ng-change="summaryFn.portalTrigger()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
