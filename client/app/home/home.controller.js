@@ -7,7 +7,8 @@ angular.module('dleduWebApp')
             month:"",
             day:"",
             week:"",
-            imgs: ['https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png','https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
+            imgs: ['https://s1.aizhixin.com/977b5de4-fec1-4762-8bcd-ce78fab31e47.jpg','https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png',
+                'https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
             swiper: function(){
                 $timeout(function () {
                     var swiper = new Swiper('.swiper-container', {

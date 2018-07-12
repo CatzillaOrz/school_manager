@@ -6,7 +6,9 @@ angular.module('dleduWebApp')
             type: $state.params.type,
             datas: [],
             mapDatas: {},
-            imgs: ['https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png','https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
+            imgs: ['https://s1.aizhixin.com/977b5de4-fec1-4762-8bcd-ce78fab31e47.jpg',
+                'https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png',
+                'https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
 
             //baseinfo 学校信息管理， organ学校组织机构， attend教务考勤管理，qc教学质量管理， pt实践教学，welcome迎新管理，role权限管理
             dataSource: ['app/layout/navigation/menu-items-baseinfo.json',
