@@ -80,7 +80,7 @@
                                 td {{rp.commit ? summaryFn.taskStatus(rp.status) : ''}}
                                 td {{rp.reportTitle}}
                                 td {{rp.commit ? rp.reviewTime : ''}}
-                                td {{rp.commit ? rp.advice : ''}}
+                                td(title="{{rp.advice}}") {{rp.commit ? rp.advice : '' | limitTo:10 }}{{rp.advice ? "..." : ''}}
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
                             #datatable_col_reorder_info.dataTables_info(role='status', aria-live='polite')
