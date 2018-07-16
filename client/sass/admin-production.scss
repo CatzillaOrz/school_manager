@@ -11322,13 +11322,15 @@ aside {
 }
 
 #ribbon .breadcrumb, #ribbon .breadcrumb a {
-  //color: #BBB !important;
+  color: $blueDef !important;
+  font-size: 14px;
   text-decoration: none !Important
 }
 
 #ribbon .breadcrumb li:last-child, #ribbon .breadcrumb > .active {
-  color: $text-active;
+  color: #666;
 }
+
 
 .fixed-ribbon #ribbon {
   position: fixed;

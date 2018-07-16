@@ -17,7 +17,7 @@
             .widget-body.no-padding
                 #datatable_col_reorder_filter1
                     .dt-toolbar
-                        .col-md-9.margin-bottom-10
+                        .col-md-8.margin-bottom-10
                             form.form-inline
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label 院系：
@@ -27,7 +27,7 @@
                                 .form-group.col-md-5.margin-top-5
                                     label.control-label 教师：
                                     input.form-control(type='search', placeholder='名称或工号查询',  ng-model="teacherListFn.params.name", my-enter="teacherListFn.getTeacherList()")
-                        .col-sm-3.hidden-xs.margin-bottom-10
+                        .col-sm-4.hidden-xs.margin-bottom-10
                             .ColVis
                                 button.btn.btn-primary(ng-click="teacherListFn.getTeacherList()")
                                     span 查询

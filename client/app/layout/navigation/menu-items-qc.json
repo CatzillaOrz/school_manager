@@ -7,7 +7,7 @@
                     "title": "学生评教",
                     "sref": "evaquestion",
                     "active": "evaquestion",
-                    "icon": "https://s1.aizhixin.com/c919fb98-0e6a-4d35-a281-e85151b50ff8.png",
+                    "icon": "https://s1.aizhixin.com/4309bc5c-9d82-40b5-a14f-48265e64ca0e.png",
                     "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 },
@@ -15,7 +15,7 @@
                     "title": "教师评学",
                     "sref": "evaquestiontea",
                     "active": "evaquestiontea",
-                    "icon": "https://s1.aizhixin.com/c919fb98-0e6a-4d35-a281-e85151b50ff8.png",
+                    "icon": "https://s1.aizhixin.com/5b086eb2-b139-4d65-8716-d1fcab71baad.png",
                     "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 },
@@ -23,7 +23,7 @@
                     "title": "教师/督导同行评教",
                     "sref": "evaquesamepart",
                     "active": "evaquesamepart",
-                    "icon": "https://s1.aizhixin.com/c919fb98-0e6a-4d35-a281-e85151b50ff8.png",
+                    "icon": "https://s1.aizhixin.com/c92e0179-b6fc-458d-92e4-3e01f68ebaa4.png",
                     "bg": "background:linear-gradient(133.7deg,rgba(127,185,234,1),rgba(96,166,224,1))",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 },
@@ -31,7 +31,7 @@
                     "title": "教学主动反馈",
                     "sref": "teachingSupervisor",
                     "active": "teachingSupervisor",
-                    "icon": "https://s1.aizhixin.com/c919fb98-0e6a-4d35-a281-e85151b50ff8.png",
+                    "icon": "https://s1.aizhixin.com/9b7399e1-a963-4d5c-8acb-c057a36176ab.png",
                     "bg": "background:linear-gradient(133.7deg,rgba(129,142,230,1),rgba(110,123,210,1))",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 },
@@ -40,7 +40,7 @@
                     "sref": "teachingData",
                     "active": "teachingData",
                     "bg": "background:linear-gradient(133.7deg,rgba(245,210,112,1),rgba(246,193,87,1))",
-                    "icon": "https://s1.aizhixin.com/00aabbbe-3079-4252-88f9-6f5ceae9ddfb.png",
+                    "icon": "https://s1.aizhixin.com/c809724e-56fc-488f-b1e7-4a6bc44496c9.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 }
             ]

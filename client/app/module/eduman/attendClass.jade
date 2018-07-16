@@ -40,7 +40,7 @@
                                         .form-group.col-sm-4.margin-top-10
                                             label.control-label  年级：
                                             input.form-control(type="text" ng-model="attendClassFn.params.grade" placeholder="请输入年级名称", my-enter="attendClassFn.getClassAttendanceGroupByclass()" )
-                                        .form-group.col-sm-6.margin-top-10
+                                        .form-group.col-sm-8.margin-top-10
                                             label.control-label 时间段：
                                             .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
                                                 input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendClassFn.params.beginDate" validator="required")

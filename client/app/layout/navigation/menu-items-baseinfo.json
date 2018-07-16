@@ -54,6 +54,7 @@
                     "sref": "setlogo",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "icon": "https://s1.aizhixin.com/41a5a8ce-9780-42d4-9a41-2bdcda169910.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(127,185,234,1),rgba(96,166,224,1))",
                     "iconSmall": "https://s1.aizhixin.com/768a4c6c-3e7f-47ab-9e45-246501337a45.png"
                 },
                 {
@@ -61,6 +62,7 @@
                     "sref": "setplayview",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/918e114e-3c3f-49de-b12c-d682a3e89add.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
                     "icon": "https://s1.aizhixin.com/f1c87a8b-a947-421f-b5c2-7eddac309369.png"
                 },
                 {
@@ -68,6 +70,7 @@
                     "sref": "sethotmajor",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/bcb0a37f-a880-4ab1-a38b-00070843e4fa.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
                     "icon": "https://s1.aizhixin.com/c400c43b-ecb7-4087-bfb1-eab93276a588.png"
                 },
                 {
@@ -75,6 +78,7 @@
                     "sref": "setexcellentteacher",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/eb4a4a7d-d9f1-40c6-a655-36584bb19846.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(129,142,230,1),rgba(110,123,210,1))",
                     "icon": "https://s1.aizhixin.com/6bd43380-49fd-495f-837d-1f0a7d3d3f6f.png"
                 },
                 {
@@ -82,6 +86,7 @@
                     "sref": "setboutiquecourse",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/71cb6566-f8fd-4227-827a-e9ebcf241b06.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(245,210,112,1),rgba(246,193,87,1))",
                     "icon": "https://s1.aizhixin.com/1762c45e-616b-447e-9466-aa22d5ad0c4f.png"
                 },
                 {
@@ -89,12 +94,14 @@
                     "sref": "boutiquecourseapply",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/6c06710b-5d57-4bd7-88a5-7ed7f906d10a.png",
+                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
                     "icon": "https://s1.aizhixin.com/7ce021c6-cd79-4196-9c05-b2910614e589.png"
                 },
                 {
                     "title": "app校园动态",
                     "sref": "schoolnewlist",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "bg": "background:linear-gradient(133.7deg,rgba(245,210,112,1),rgba(246,193,87,1))",
                     "iconSmall": "https://s1.aizhixin.com/86573552-fc0a-4ea0-bb32-f709c92f9bbf.png",
                     "icon": "https://s1.aizhixin.com/c0ab1dd4-006e-450a-8894-aee317b525ca.png"
                 },
@@ -103,7 +110,8 @@
                     "sref": "appnoticelist",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "iconSmall": "https://s1.aizhixin.com/86573552-fc0a-4ea0-bb32-f709c92f9bbf.png",
-                    "icon": "https://s1.aizhixin.com/c0ab1dd4-006e-450a-8894-aee317b525ca.png"
+                    "icon": "https://s1.aizhixin.com/c0ab1dd4-006e-450a-8894-aee317b525ca.png",
+                    "bg": "background:linear-gradient(133.7deg,rgba(129,142,230,1),rgba(110,123,210,1))"
                 }
             ]
         }
