@@ -60,6 +60,7 @@
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending') 年级
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 专业
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 学院
+                                th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 实践计划
                                 th.sorting(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending') 激活状态
                         tbody
                             tr.odd(role='row' ng-repeat='rp in summaryFn.summeryList')
@@ -70,6 +71,7 @@
                                 td {{rp.grade}}
                                 td {{rp.professionalName}}
                                 td {{rp.collegeName}}
+                                td {{rp.groupName}}
                                 td {{rp.active ? '已激活' : '未激活'}}
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs
