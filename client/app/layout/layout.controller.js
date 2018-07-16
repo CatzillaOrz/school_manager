@@ -95,18 +95,18 @@ angular.module('dleduWebApp')
 
 
 			stepOne: [
-				{title: '导入院系信息', url:'college.list', tab: 0},
-				{title: '导入专业信息', url: 'majorlist', tab: 0},
-				{title: '导入班级信息', url: 'classlist', tab: 0},
-				{title: '导入辅导员信息', url: 'instructorList', tab: 0},
-				{title: '导入企业信息', url: 'enterpriseList', tab: 1},
-				{title: '导入企业导师信息', url: 'enttutorman', tab: 1}
+				{title: '导入院系信息', url:'college.list', tab: 1},
+				{title: '导入专业信息', url: 'majorlist', tab: 1},
+				{title: '导入班级信息', url: 'classlist', tab: 1},
+				{title: '导入辅导员信息', url: 'instructorList', tab: 1},
+				{title: '导入企业信息', url: 'enterpriseList', tab: 4},
+				{title: '导入企业导师信息', url: 'enttutorman', tab: 4}
             ],
             stepTwo: [
-                {title: '导入基础数据', url: '', tab: 1},
-                {title: '创建实践计划', url: 'practicegroupman', tab: 1},
-                {title: '关联企业导师', url: 'practicegroupman', tab: 1},
-                {title: '数据汇总统计', url: 'teachingSummary', tab: 2},
+                {title: '导入基础数据', url: '', tab: 4},
+                {title: '创建实践计划', url: 'practicegroupman', tab: 4},
+                {title: '关联企业导师', url: 'practicegroupman', tab: 4},
+                {title: '数据汇总统计', url: 'teachingSummary', tab: 4},
 
             ],
             user: $rootScope.user,
@@ -118,7 +118,7 @@ angular.module('dleduWebApp')
                 entity.selected = true;
                 that.currentLink = entity.url;
                 tempStorageService.setObject('hometempmyurl$', {url: entity.url});
-                //step && $state.go(step.url,{},{relative: $state.$current, reload: true});
+                step && $state.go(step.url,{},{relative: $state.$current, reload: true});
             },
             goHome: function(){
                 tempStorageService.setObject('hometempmyurl$', {url: "home"});
@@ -192,7 +192,7 @@ angular.module('dleduWebApp')
                     tempStorageService.removeObject("hometempmyurl$")
                 }
                 $scope.layoutFn.getLogoList();
-                //($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+                ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
                 $scope.layoutFn.nav.forEach(function(c){
                     var currentLink = tempStorageService.getObject("hometempmyurl$").url;
                     c.selected = c.url == currentLink;
