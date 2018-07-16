@@ -285,4 +285,17 @@ a:focus {outline: none;}
 #main.main_contain{
   width: 1200px;
   margin: 0 auto;
+  #ribbon{
+    .backgo{
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      &:hover{
+        color: #4790E8;
+      }
+    }
+  }
 }
