@@ -31,10 +31,10 @@
                             form.form-inline
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 院系：
-                                    select.select.form-control(ng-model="summaryFn.params.collegeId" ui-select2="summaryFn.selectCollege2Options()", ng-change="summaryFn.getClassList()" )
+                                    select.select.form-control(ng-model="summaryFn.params.collegeId" ui-select2="summaryFn.selectCollege2Options()", ng-change="summaryFn.portalTrigger()" )
                                         option(value="-1") 全部
                                         option(ng-repeat="college in summaryFn.collegeDropList" value="{{college.id}}" ng-selected="summaryFn.params.collegeId==college.id") {{college.name}}
-                                .form-group.col-sm-3.margin-top-5
+                                //- .form-group.col-sm-3.margin-top-5
                                     label 专业：
                                     select.select2.form-control(ng-model="summaryFn.params.professionalId" ui-select2="summaryFn.select2MajorOptions(summaryFn.collegeId)", ng-change="summaryFn.getClassList()"  )
                                         option(value="") 全部
@@ -42,7 +42,7 @@
                                 //- .form-group.col-sm-4.margin-top-5
                                     label 年级：
                                     input.form-control(type='search', placeholder='按年级查询',  ng-model="summaryFn.params.teachingYear", my-enter="summaryFn.getClassList()")
-                                .form-group.col-sm-3.margin-top-5.no-padding
+                                //- .form-group.col-sm-3.margin-top-5.no-padding
                                     label 班级：
                                     select.select2.form-control(ng-model="summaryFn.params.classId" ui-select2="summaryFn.selectClassOptions()", ng-change="summaryFn.portalTrigger()")
                                         option(value="") 全部
