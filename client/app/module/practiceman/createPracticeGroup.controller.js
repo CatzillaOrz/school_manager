@@ -261,6 +261,7 @@ angular.module('dleduWebApp')
 						that.selectStudentList = that.studentList.filter(function(c){
 							if(resIds.indexOf(c.id) === -1){return c}
 						})
+						!that.selectStudentList.length && messageService.openMsg("已过滤其他小组中的学生，暂无可选学生，请重新搜索添加", 3000);
 						$timeout(function(){
 							CommonService.curtainLayoutFn(false, 'all');
 						},2000)

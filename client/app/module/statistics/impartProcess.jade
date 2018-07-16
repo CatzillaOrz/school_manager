@@ -23,11 +23,18 @@
                                     input.form-control(type='search', placeholder='按姓名或工号查询', aria-controls='datatable_col_reorder' ng-model="summaryFn.params.keyWords"  my-enter="summaryFn.portalTrigger()")
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="summaryFn.portalTrigger()")
                                         i.glyphicon.glyphicon-search
-                        .col-sm-9
+                        .col-xs-4.margin-bottom-10.no-padding
+                            form.form-inline
+                                .form-group.col-sm-12.margin-top-5.no-padding
+                                    label 院系：
+                                    select.select.form-control(ng-model="summaryFn.params.collegeId" ui-select2="summaryFn.selectCollege2Options()", ng-change="summaryFn.portalTrigger()" )
+                                        option(value="-1") 全部
+                                        option(ng-repeat="college in summaryFn.collegeDropList" value="{{college.id}}" ng-selected="summaryFn.params.collegeId==college.id") {{college.name}}
+                        .col-sm-5
                             .ColVis
                                 button.btn.btn-primary(ng-click='summaryFn.exportImpartProcess()')
                                     span 导出
-                        .col-xs-12.margin-bottom-10.no-padding
+                        //- .col-xs-12.margin-bottom-10.no-padding
                             form.form-inline
                                 .form-group.col-sm-3.margin-top-5.no-padding
                                     label 院系：
