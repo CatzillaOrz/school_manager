@@ -90,7 +90,7 @@
         //span.ribbon-button-alignment
             span#refresh.btn.btn-ribbon(ng-click='layoutFn.lcReload();')
                 i.fa.fa-refresh
-        span(style="display:none" ncy-breadcrumb)
+        span(ng-show="!isBack" ncy-breadcrumb)
         div.backgo(ng-show="isBack" ng-click="layoutFn.backPre()")
             span(style="font-size:16px")
                 i.fa.fa-angle-left

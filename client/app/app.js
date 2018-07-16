@@ -161,7 +161,7 @@ angular.module('dleduWebApp', [
         $locationProvider.html5Mode(true);
 
         $breadcrumbProvider.setOptions({
-            prefixStateName: 'home'
+            prefixStateName: null
         });
     }])
     .run(function ($state, $rootScope, AuthService, $window,CommonService,localStorageService) {

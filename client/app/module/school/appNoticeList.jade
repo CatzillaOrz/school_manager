@@ -50,7 +50,7 @@
                                                         img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
                                                     td {{record.targetType}}
                                                     td {{record.targetUrl}}
-                                                    td {{record.title}}
+                                                    td {{record.targetTitle}}
                                                     td {{record.onOff=="off"? "关闭": "开放"}}
                                                     td
                                                         a.handle(ng-click="dialogInfoList.editRecord($index)")
@@ -86,7 +86,7 @@
                                                         img(width='150px', height='75px', alt='点击查看原图', src='{{record.iconUrl}}' title="点击查看原图")
                                                     td {{record.targetType}}
                                                     td {{record.targetUrl}}
-                                                    td {{record.title}}
+                                                    td {{record.targetTitle}}
                                                     td {{record.onOff=="off"? "关闭": "开放"}}
                                                     td
                                                         a.handle(ng-click="dialogInfoList.editRecord($index)")

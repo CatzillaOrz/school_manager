@@ -50,9 +50,9 @@ angular.module('dleduWebApp')
                     data.button = '管理';
                     for(var j = 0, subLen = subItems.length; j < subLen; j++){
                         if(this.isUseAuthority(subItems[j])){
-                            if(!subItems[j].bg){
+                            /*if(!subItems[j].bg){
                                 subItems[j].bg = this.bg[Math.floor(Math.random()*5)];
-                            }
+                            }*/
                             tempItems.push(subItems[j]);
                         }
                     }
