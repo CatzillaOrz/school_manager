@@ -25,7 +25,7 @@ angular.module('dleduWebApp')
             "college.list": "subindex,1",
             "majorlist": "subindex,1",
             "classlist": "subindex,1",
-            "teacher": "subindex,1",
+            "teacherlist": "subindex,1",
             "studentlist": "subindex,1",
             "instructorList": "subindex,1",
             "batch.imp": "subindex,1",
