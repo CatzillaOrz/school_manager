@@ -6,6 +6,77 @@
 angular.module('dleduWebApp')
     .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,
                                         SchoolService, tempStorageService) {
+        var backConfig = {
+            "periodlist": "subindex,0",
+            "courselist": "subindex,0",
+            "teachclasslist": "subindex,0",
+            "elecfence": "subindex,0",
+            "setlogo": "subindex,0",
+            "setplayview": "subindex,0",
+            "sethotmajor": "subindex,0",
+            "setexcellentteacher": "subindex,0",
+            "setboutiquecourse": "subindex,0",
+            "boutiquecourseapply": "subindex,0",
+            "schoolnewlist": "subindex,0",
+            "setschoolnew": "subindex,0",
+            "appnoticelist": "subindex,0",
+            "appnoticeset": "subindex,0",
+
+            "college.list": "subindex,1",
+            "majorlist": "subindex,1",
+            "classlist": "subindex,1",
+            "teacher": "subindex,1",
+            "studentlist": "subindex,1",
+            "instructorList": "subindex,1",
+            "batch.imp": "subindex,1",
+
+            "attendtime": "subindex,2",
+            "attendteacher": "subindex,2",
+            "attendcollege": "subindex,2",
+            "attendmajor": "subindex,2",
+            "attendclass": "subindex,2",
+            "instructor": "subindex,2",
+            "holidayman": "subindex,2",
+            "changecourse": "subindex,2",
+            "changecourselist": "subindex,2",
+            "teacherListSimplify": "subindex,2",
+            "attendsetting": "subindex,2",
+            "attendpause": "subindex,2",
+            "attendfix": "subindex,2",
+            "coursescore": "subindex,2",
+
+            "evaquestion": "subindex,3",
+            "evaquesamepart": "subindex,3",
+            "evaquestiontea": "subindex,3",
+            "teachingSupervisor": "subindex,3",
+            "teachingData": "subindex,3",
+
+            "workbench": "subindex,4",
+            "enterpriseList": "subindex,4",
+            "enttutorman": "subindex,4",
+            "practicegroupman": "subindex,4",
+            "trainClassList": "subindex,4",
+            "missionList": "subindex,4",
+            "newslist": "subindex,4",
+            "teachingSummary": "subindex,4",
+            "studentAttending": "subindex,4",
+            "studentActive": "subindex,4",
+
+            "stuProcess": "subindex,4",
+            "stuJournal": "subindex,4",
+            "impartProcess": "subindex,4",
+            "stuRoutineCount": "subindex,4",
+            "enterpriseDetail": "subindex,4",
+            "stuReport": "subindex,4",
+            "stuScore": "subindex,4",
+
+            "dormbuildingman": "subindex,5",
+            "dormman": "subindex,5",
+            "payment": "subindex,5",
+
+            "distlist": "subindex,5",
+            "distedlist": "subindex,5",
+        };
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
@@ -67,6 +138,19 @@ angular.module('dleduWebApp')
             lcReload: function () {
                 $window.location.reload();
             },
+            //返回
+            backPre: function () {
+                var pathArr = $scope.backUrl.split(",")
+                $state.go(pathArr[0], {type:pathArr[1]});
+            },
+            //是否显示返回按钮
+            isShowBack: function(){
+                var urlName = $state.current.name;
+                if(urlName == 'home' || urlName == 'subindex' ){
+                    return false;
+                }
+                return true;
+            },
             getLogoList:function () {
                 var _this=this;
                 var params={
@@ -120,6 +204,14 @@ angular.module('dleduWebApp')
         $rootScope.$watch('user', function () {
             $scope.layoutFn.user = $rootScope.user;
         }, true);
+        $scope.$on('$stateChangeSuccess', function () {
+            var currentName = $state.current.name;
+            $scope.isBack = false;
+            $scope.backUrl = backConfig[currentName];
+            if($scope.backUrl){
+                $scope.isBack = true;
+            }
+        });
     })
 
     .directive('smartInclude', function () {

@@ -1,8 +1,7 @@
 .college-list-container{
   font-family: $font-family-sans-serif;
-  margin: 10px;
   .handle{
-    color:$text-color-light;
+    color:$blueDef;
     cursor: pointer;
     i{
       margin: 0px 5px;
@@ -16,8 +15,8 @@
   }
   .search-btn{
     color: #fff;
-    background-color: #29c192;
-    border-color: #25ac82;
+    background-color: $blueDef;
+    border-color: $blueDef;
   }
   .btn-class-detail{
     margin-left: 20px;
