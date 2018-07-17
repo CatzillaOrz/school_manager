@@ -128,6 +128,7 @@ angular.module('dleduWebApp')
                 $timeout(function(){
                     TabBlock.init();
                 });
+                this.type = $state.params.type ? $state.params.type:'student';
                 this.getAppNoticeList();
             }
         }

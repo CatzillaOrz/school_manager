@@ -156,7 +156,10 @@ angular.module('dleduWebApp')
                         selMenus.push(menus[i]);
                     }
                 }
-                if(typeof quickMenus.menus == "undefined" || (quickMenus.menus == "''")){//没有快捷入口时，直接保存选中的目录
+                if(selMenus.length == 0){//no select
+                    return menusResult = selMenus;
+                }
+                if(typeof quickMenus.menus == "undefined" || (quickMenus.menus == "")){//没有快捷入口时，直接保存选中的目录
                     if(selMenus.length){
                         menusResult = selMenus;
                     }

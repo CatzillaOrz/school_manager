@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-	.controller('TeachClassListCtrl', function ($scope,$state, TeachClassService, AuthService, messageService,CommonService,
+	.controller('TeachClassListCtrl', function ($scope,$state,$timeout, TeachClassService, AuthService, messageService,CommonService,
 												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService, tempStorageService,
 												SchoolYearService, EduManService) {
 		$scope.teachClassListFn = {
@@ -401,17 +401,23 @@ angular.module('dleduWebApp')
 			},
 
 
-			init: function () {
+			init: function (type) {
 				//this.getTermList();
 				this.getTeachClassList();
-				this.getCurrentSemester();
+				var that = this;
+				if(!type){
+					$timeout(function(){
+						that.getCurrentSemester();
+					});
+				}else{
+					this.getTermList();
+				}
 			}
 		};
 
 		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
 			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek")){
 				var params = $scope.teachClassListFn.params;
-				//params.pageNumber = $scope.teachClassListFn.page.pageNumber;
 				var key = fromState.name + toState.name;
 				tempStorageService.setObject(key, params);
 			}
@@ -422,10 +428,9 @@ angular.module('dleduWebApp')
 				var params = tempStorageService.getObject(key);
 				if(params){
 					$scope.teachClassListFn.params = params;
-					//$scope.teachClassListFn.page.pageNumber = params.pageNumber;
 					tempStorageService.removeObject(key);
 				}
-				$scope.teachClassListFn.init();
+				$scope.teachClassListFn.init('back');
 			}else{
 				//其他情况清空保存的值
 				if(toState.name == "teachclasslist"){

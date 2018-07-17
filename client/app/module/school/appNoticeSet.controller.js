@@ -50,7 +50,7 @@ angular.module('dleduWebApp')
                     .success(function (data) {
                         if(data.success){
                             messageService.openMsg("新增成功！");
-                            $state.go('appnoticelist');
+                            $state.go('appnoticelist',{type:params.role});
                         }else{
                             messageService.openMsg("新增失败！");
                         }
@@ -71,7 +71,7 @@ angular.module('dleduWebApp')
                     .success(function (data) {
                         if(data.success){
                             messageService.openMsg("修改成功！");
-							$state.go('appnoticelist');
+							$state.go('appnoticelist',{type:params.role});
                         }else{
                             messageService.openMsg("修改失败！");
                         }
