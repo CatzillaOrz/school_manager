@@ -74,7 +74,7 @@
                                     .dataTables_wrapper.form-inline.no-footer
                                         .dt-toolbar.padding-bottom-10
                                             .col-xs-10
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label.control-label  学期：
                                                     select(ng-model="teachDataFn.selectedSemester" ng-options='item as item.name for item in teachDataFn.semesterList track by item.id')
                                                 //.form-group.col-sm-3
@@ -82,11 +82,11 @@
                                                         select.select2.form-control(ng-model="teachDataFn.params.collegeId" ui-select2="teachDataFn.selectCollege2Options()" )
                                                             option(value="") 全部
                                                             option(ng-repeat="college in teachDataFn.collegeDropList" value="{{college.id}}" ) {{college.name}}
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label.control-label  课程：
                                                     input.form-control(type="text" ng-model="teachDataFn.courseName" placeholder="请输入课程名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
 
-                                                .form-group.col-sm-3
+                                                .form-group.col-sm-4
                                                     label.control-label  教师：
                                                     input.form-control(type="text" ng-model="teachDataFn.teacherName" placeholder="请输入教师名称", my-enter="teachDataFn.getTeachingclassAttendByTeacher()" )
 

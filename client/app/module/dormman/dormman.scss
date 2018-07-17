@@ -24,3 +24,12 @@
 .select2-dropdown{
     z-index: 10001;
 }
+select optgroup{
+    width: 135px;
+    overflow-x:hidden ;
+    option{
+        width: 135px;
+        overflow-x:hidden ;
+    }
+
+}
