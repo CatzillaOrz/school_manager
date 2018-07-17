@@ -511,7 +511,11 @@ angular.module('dleduWebApp')
 
 
 			init: function () {
-				this.getCollegeDropList();
+				var that = this;
+				$timeout(function(){
+					that.getCollegeDropList();
+				});
+
 				this.date = this.getNowDate();
 				this.getElecFenceList();
 			}
