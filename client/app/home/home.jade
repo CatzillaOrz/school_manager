@@ -21,8 +21,8 @@
                             i.fa.fa-refresh.fa-spin
                         span.operat(ng-click="homeFn.operatMenu($index)") {{data.button}}
                     div.menus(role='content')
-                        button.item-menu(style="{{item.bg}}" ng-repeat='item in data.items' ui-sref="{{item.sref}}")
-                            img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="homeFn.delMenu($parent.$index, $index,$event);$event.stopPropagation()")
+                        a.item-menu(style="{{item.bg}}" ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
+                            img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="homeFn.delMenu($parent.$index,$index,$event);")
                             img.other-img(src="{{item.icon}}")
                             span(ng-class="{'base-title-color': !$parent.$index}") {{item.title}}
             .quick-button(ng-if="homeFn.datas[0].items.length==0")

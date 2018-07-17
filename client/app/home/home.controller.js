@@ -99,7 +99,9 @@ angular.module('dleduWebApp')
             },
 
             //删除功能选择功能
-            delMenu: function(parent, sub){
+            delMenu: function(parent, sub, $event){
+                $event.preventDefault();
+                $event.stopPropagation();
                 var that = this, datas = angular.copy(this.datas);
                 datas[parent].items.splice(sub, 1);
                 var items = datas[parent].items;

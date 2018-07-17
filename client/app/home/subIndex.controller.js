@@ -184,7 +184,9 @@ angular.module('dleduWebApp')
             },
 
             //选择功能
-            selMenu: function(parent, sub, event){
+            selMenu: function(parent, sub, $event){
+                $event.preventDefault();
+                $event.stopPropagation();
                 var item = this.datas[parent].items[sub];
                 if(!item.isSel){
                     item.selImg = 'https://s1.aizhixin.com/1b817db3-fc27-4173-8a6f-2dff73c5c22d.png';
