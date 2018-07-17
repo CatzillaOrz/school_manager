@@ -47,7 +47,7 @@ angular.module('dleduWebApp')
 					isNeedSummary: false,
 					needDailyNum: 1,
 					needMonthlyNum: 1,
-					needReport: true,
+					isNeedReport: true,
 					needSignNum: 1,
 					needWeeklyNum: 1,
 					reportWeight: 25,
