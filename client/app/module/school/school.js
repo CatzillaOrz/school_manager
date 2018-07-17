@@ -121,7 +121,7 @@ angular.module('dleduWebApp')
             })
             .state('appnoticelist', {
                 parent: 'base',
-                url   : '/appnoticelist',
+                url   : '/appnoticelist/:type',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
