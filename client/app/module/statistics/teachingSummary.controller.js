@@ -352,7 +352,7 @@ angular.module('dleduWebApp')
                 _params.pageSize = 10000;
                 StatisticsService.exportStuJournal(_params)
                     .success(function (data) {
-                        that.saveAs(data, '学生周日志统计报表');
+                        that.saveAs(data, '学生周日志统计报表');
                     })
             },
             exportStuProcess: function () {
@@ -362,7 +362,7 @@ angular.module('dleduWebApp')
                 _params.pageSize = 10000;
                 StatisticsService.exportStuProcess(_params)
                     .success(function (data) {
-                        that.saveAs(data, '学生参与过程明细表');
+                        that.saveAs(data, '学生参与过程明细表');
                     })
             },
             exportEnterpriseDetail: function () {
@@ -372,7 +372,7 @@ angular.module('dleduWebApp')
                 _params.pageSize = 10000;
                 StatisticsService.exportEnterpriseDetail(_params)
                     .success(function (data) {
-                        that.saveAs(data, '实践企业统计表');
+                        that.saveAs(data, '实践企业统计表');
                     })
             },
             exportStudentActive: function () {
