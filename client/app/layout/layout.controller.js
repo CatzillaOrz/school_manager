@@ -4,109 +4,32 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,
-                                        SchoolService, tempStorageService) {
-        var backConfig = {
-            "periodlist": "subindex,0",
-            "courselist": "subindex,0",
-            "teachclasslist": "subindex,0",
-            "elecfence": "subindex,0",
-            "setlogo": "subindex,0",
-            "setplayview": "subindex,0",
-            "sethotmajor": "subindex,0",
-            "setexcellentteacher": "subindex,0",
-            "setboutiquecourse": "subindex,0",
-            "boutiquecourseapply": "subindex,0",
-            "schoolnewlist": "subindex,0",
-            "setschoolnew": "subindex,0",
-            "appnoticelist": "subindex,0",
-            "appnoticeset": "subindex,0",
-
-            "college.list": "subindex,1",
-            "majorlist": "subindex,1",
-            "classlist": "subindex,1",
-            "teacherlist": "subindex,1",
-            "studentlist": "subindex,1",
-            "instructorList": "subindex,1",
-            "batch.imp": "subindex,1",
-
-            "attendtime": "subindex,2",
-            "attendteacher": "subindex,2",
-            "attendcollege": "subindex,2",
-            "attendmajor": "subindex,2",
-            "attendclass": "subindex,2",
-            "instructor": "subindex,2",
-            "holidayman": "subindex,2",
-            "changecourse": "subindex,2",
-            "changecourselist": "subindex,2",
-            "teacherListSimplify": "subindex,2",
-            "attendsetting": "subindex,2",
-            "attendpause": "subindex,2",
-            "attendfix": "subindex,2",
-            "coursescore": "subindex,2",
-
-            "evaquestion": "subindex,3",
-            "evaquesamepart": "subindex,3",
-            "evaquestiontea": "subindex,3",
-            "teachingSupervisor": "subindex,3",
-            "teachingData": "subindex,3",
-
-            "workbench": "subindex,4",
-            "enterpriseList": "subindex,4",
-            "enttutorman": "subindex,4",
-            "practicegroupman": "subindex,4",
-            "trainClassList": "subindex,4",
-            "missionList": "subindex,4",
-            "newslist": "subindex,4",
-            "teachingSummary": "subindex,4",
-            "studentAttending": "subindex,4",
-            "studentActive": "subindex,4",
-
-            "stuProcess": "subindex,4",
-            "stuJournal": "subindex,4",
-            "impartProcess": "subindex,4",
-            "stuRoutineCount": "subindex,4",
-            "enterpriseDetail": "subindex,4",
-            "stuReport": "subindex,4",
-            "stuScore": "subindex,4",
-
-            "dormbuildingman": "subindex,5",
-            "dormman": "subindex,5",
-            "payment": "subindex,5",
-
-            "distlist": "subindex,5",
-            "distedlist": "subindex,5",
-        };
+    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
-            currentLink: 'home',
+
+            currentLink: SchoolService.defineProperty().get() || 'home',
             nav:[
-                {name: '学校信息管理', url:'subindex({type:0})', selected: true},
-                {name: '学校机构人员', url:'subindex({type:1})', selected: false},
-                {name: '教务考勤管理', url:'subindex({type:2})', selected: false},
-                {name: '教学质量管理', url:'subindex({type:3})', selected: false},
-                {name: '实践教学', url:'subindex({type:4})', selected: false},
-                {name: '迎新管理', url:'subindex({type:5})', selected: false},
-                {name: '权限管理', url:'subindex({type:6})', selected: false}
+                {name: '首页', url: 'home', selected: true},
+                {name: '实践教学', url: 'workbench', selected: false},
+                {name: '统计报表', url: 'teachingSummary', selected: false},
             ],
             schoolStatistics: {},
             tab: true,
-
-
-			stepOne: [
-				{title: '导入院系信息', url:'college.list', tab: 1},
-				{title: '导入专业信息', url: 'majorlist', tab: 1},
-				{title: '导入班级信息', url: 'classlist', tab: 1},
-				{title: '导入辅导员信息', url: 'instructorList', tab: 1},
-				{title: '导入企业信息', url: 'enterpriseList', tab: 4},
-				{title: '导入企业导师信息', url: 'enttutorman', tab: 4}
+            stepOne: [
+                {title: '导入院系信息', url:'college.list', tab: 0},
+                {title: '导入专业信息', url: 'majorlist', tab: 0},
+                {title: '导入班级信息', url: 'classlist', tab: 0},
+                {title: '导入辅导员信息', url: 'instructorList', tab: 0},
+                {title: '导入企业信息', url: 'enterpriseList', tab: 1},
+                {title: '导入企业导师信息', url: 'enttutorman', tab: 1}
             ],
             stepTwo: [
-                {title: '导入基础数据', url: '', tab: 4},
-                {title: '创建实践计划', url: 'practicegroupman', tab: 4},
-                {title: '关联企业导师', url: 'practicegroupman', tab: 4},
-                {title: '数据汇总统计', url: 'teachingSummary', tab: 4},
+                {title: '导入基础数据', url: '', tab: 1},
+                {title: '创建实践计划', url: 'practicegroupman', tab: 1},
+                {title: '关联企业导师', url: 'practicegroupman', tab: 1},
+                {title: '数据汇总统计', url: 'teachingSummary', tab: 2},
 
             ],
             user: $rootScope.user,
@@ -116,18 +39,12 @@ angular.module('dleduWebApp')
                     c.selected = false
                 });
                 entity.selected = true;
+                SchoolService.defineProperty(entity.url).set();
                 that.currentLink = entity.url;
-                tempStorageService.setObject('hometempmyurl$', {url: entity.url});
                 step && $state.go(step.url,{},{relative: $state.$current, reload: true});
             },
-            goHome: function(){
-                tempStorageService.setObject('hometempmyurl$', {url: "home"});
-                this.nav.forEach(function(c){
-                    c.selected = false;
-                })
-            },
             redirectStep: function(){
-                
+
             },
             signOut: function () {
                 AuthService.signOut();
@@ -137,19 +54,6 @@ angular.module('dleduWebApp')
             },
             lcReload: function () {
                 $window.location.reload();
-            },
-            //返回
-            backPre: function () {
-                var pathArr = $scope.backUrl.split(",")
-                $state.go(pathArr[0], {type:pathArr[1]});
-            },
-            //是否显示返回按钮
-            isShowBack: function(){
-                var urlName = $state.current.name;
-                if(urlName == 'home' || urlName == 'subindex' ){
-                    return false;
-                }
-                return true;
             },
             getLogoList:function () {
                 var _this=this;
@@ -187,31 +91,17 @@ angular.module('dleduWebApp')
 
                     })
             },
-            init: function(){
-                if($state.current.name == 'home'){
-                    tempStorageService.removeObject("hometempmyurl$")
-                }
-                $scope.layoutFn.getLogoList();
-                ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
-                $scope.layoutFn.nav.forEach(function(c){
-                    var currentLink = tempStorageService.getObject("hometempmyurl$").url;
-                    c.selected = c.url == currentLink;
-                })
-            }
         };
-        $scope.layoutFn.init();
-
+        $scope.layoutFn.getLogoList();
+        ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+        $scope.layoutFn.nav.forEach(function(c){
+            c.selected = c.url == $scope.layoutFn.currentLink
+        })
         $rootScope.$watch('user', function () {
+            // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
         }, true);
-        $scope.$on('$stateChangeSuccess', function () {
-            var currentName = $state.current.name;
-            $scope.isBack = false;
-            $scope.backUrl = backConfig[currentName];
-            if($scope.backUrl){
-                $scope.isBack = true;
-            }
-        });
+        console.log($scope.layoutFn.currentLink);
     })
 
     .directive('smartInclude', function () {
