@@ -87,17 +87,19 @@
                     table#datatable_col_reorder2.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead
                             tr(role='row')
-                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 50px;')
                                     input(style="width:auto!important" type="checkbox" ng-click="dormMan.checkAll()" ng-checked="dormMan.checkAllRecord" ng-model="dormMan.checkAllRecord")
                                     | 全选
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 80px;') 宿舍楼栋
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 单元号
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 楼层
                                 th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 宿舍号
-                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 总床位数
-                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 空床位数
-                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 开放状态
-                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 80px;') 是否分配
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 总床位数
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 空床位数
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 100px;') 辅导员
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 100px;') 分配专业
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 开放状态
+                                th(tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Phone: activate to sort column ascending', style='width: 60px;') 是否分配
                                 th(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 300px;') 操作
                         tbody
                             tr.odd(role='row' ng-repeat="record in dormMan.records")
@@ -109,6 +111,8 @@
                                 td {{record.no}}
                                 td {{record.beds}}
                                 td {{record.emBeds}}
+                                td {{record.counselorNames}}
+                                td {{record.profNames}}
                                 td {{record.open ? "已开放" : "已关闭"}}
                                 td {{record.assgin ? "已分配" : "未分配"}}
                                 td
@@ -118,12 +122,12 @@
                                     a.handle(ng-if="record.beds == record.emBeds" ng-click="dormMan.deletePrompt(record)")
                                         i.fa.fa-trash-o
                                         span 删除
+                                    a.handle(ng-click="dormMan.openDistedDorm(record)")
+                                        i.fa.fa-pencil-square-o
+                                        span 分配专业
                                     a.handle(ng-if="record.open" ng-click="dormMan.closeDormPrompt(record)")
                                         i.fa.fa-window-close
                                         span 关闭
-                                    a.handle(ng-if="record.beds==record.emBeds" ng-click="dormMan.openDistedDorm(record)")
-                                        i.fa.fa-pencil-square-o
-                                        span 分配专业
                                     a.handle(ng-if="!record.open" ng-click="dormMan.openDorms(record)")
                                         i.fa.fa-pencil-square-o
                                         span 开放
@@ -263,7 +267,16 @@
                                     | 女
                             .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.dormAssign.sexType") 请选择性别
-
+                    .form-group
+                        label.col-sm-3.control-label
+                            span
+                            | 分配辅导员：
+                        .col-sm-9
+                            .col-sm-8
+                                ui-select(multiple ng-model="dormMan.dormAssign.teachers" remove-selected="false" class="form-control" mod-Placeholder)
+                                    ui-select-match.ui-select-match(placeholder="输入导员姓名搜索...", allow-clear='true') {{$item.name}}
+                                    ui-select-choices.ui-select-choices(repeat="item in dormMan.teachers | filter: $select.search")
+                                        span(ng-bind="item.name + ' ' + item.jobNumber" title="{{item.name+ ' ' + item.jobNumber}}")
                     .form-group
                         .col-sm-6
                             button.btn.btn-primary(ng-click="dormMan.distDorm()") 确定发布
@@ -280,8 +293,8 @@
                             span.required *
                             | 分配给专业：
                         .col-sm-9
-                            .col-sm-8
-                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" class="form-control" mod-Placeholder)
+                            .col-sm-8#b
+                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" theme="bootstrap" class="form-control" mod-Placeholder="点击选择专业" id="b")
                                     ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
                                     ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
                                         span(ng-bind="item.name" title='{{item.name}}')
@@ -301,6 +314,16 @@
                                     | 女
                             .col-sm-4(ng-show="dormMan.showTip")
                                 span.text-danger(ng-show="!dormMan.editDormAssign.sexType") 请选择性别
+                    .form-group
+                        label.col-sm-3.control-label
+                            span
+                            | 分配辅导员：
+                        .col-sm-9
+                            .col-sm-8#a
+                                ui-select(multiple ng-model="dormMan.editDormAssign.teacherIds" remove-selected="false" class="form-control" mod-Placeholder="点击选择导员" id="a")
+                                    ui-select-match.ui-select-match(placeholder="输入导员姓名搜索...", allow-clear='true') {{$item.name}}
+                                    ui-select-choices.ui-select-choices(repeat="item.accountId as item in dormMan.teachers | filter: $select.search")
+                                        span(ng-bind="item.name + ' ' + item.jobNumber" title="{{item.name+ ' ' + item.jobNumber}}")
                     .form-group
                         .col-sm-6
                             button.btn.btn-primary(ng-click="dormMan.updateDistedDorm()") 保存

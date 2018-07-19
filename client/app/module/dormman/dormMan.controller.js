@@ -4,7 +4,7 @@
  */
 angular.module('dleduWebApp')
 	.controller('DormManCtrl', function ($scope, $state, $timeout, DormManService, CommonService, messageService,
-										 ngDialog, MajorService, AuthService, tempStorageService) {
+										 ngDialog, MajorService, AuthService, tempStorageService, ClassService) {
 		$scope.dormMan = {
 			currentRecord: null,
 			selectedRecord: null, //当前已经选择宿舍的记录
@@ -21,6 +21,7 @@ angular.module('dleduWebApp')
 			isBatchDist: false, //是否批量分配宿舍
 			showTip: false, //是否显示提示信息
 			tableIndex:1,
+			teachers: [],//辅导员
 
 			//宿舍统计参数
 			params: {
@@ -66,7 +67,8 @@ angular.module('dleduWebApp')
 				profId: 0,
 				profName: "",
 				roomIds: [],
-				sexType: 0
+				sexType: 0,
+				teachers: []
 			},
 
 			editDormAssign: {
@@ -387,10 +389,10 @@ angular.module('dleduWebApp')
 						return;
 					}
 					//判断选择的宿舍中是否包含已经分配的宿舍，若已经分配提示去掉已分配宿舍后进行批量分配
-					if(this.isAssign(this.selDistObj)){
+					/*if(this.isAssign(this.selDistObj)){
 						messageService.openMsg("请选择未分配状态的宿舍!");
 						return;
-					}
+					}*/
 					this.isBatchDist = true;
 					selectedDorm = this.selDistObj;
 				}
@@ -440,6 +442,11 @@ angular.module('dleduWebApp')
 								ids.push(data.data.radl[i].profId);
 							}
 							that.editDormAssign.profId = ids;
+							if(that.editDormAssign.counselorIds && that.editDormAssign.counselorIds != ''){
+								that.editDormAssign.teacherIds = JSON.parse('[' + String(that.editDormAssign.counselorIds.split(",")) + ']');
+							}else{
+								that.editDormAssign.teacherIds = [];
+							}
 						}else{
 							messageService.openMsg("获取已分配信息异常!");
 						}
@@ -498,6 +505,20 @@ angular.module('dleduWebApp')
 				}
 			},
 
+			getNames: function(data){
+				var ids = data, names = [];
+				for(var j = 0, lenSel = ids.length; j < lenSel; j++ ){
+					for(var i = 0, len = this.teachers.length; i < len; i++ ){
+						var teacher = this.teachers[i];
+						if(teacher['accountId'] == ids[j]){
+							names.push(teacher['name']);
+							continue;
+						}
+					}
+				}
+				return names;
+			},
+
 			//分配宿舍
 			updateDistedDorm: function(){
 				var that = this;
@@ -513,6 +534,14 @@ angular.module('dleduWebApp')
 				this.showTip = true;
 				if(!this.editDormAssign.profId.length || !this.editDormAssign.sexType)
 					return;
+				//获取导员姓名
+				if(this.editDormAssign.teacherIds.length){
+					this.editDormAssign.counselorIds = this.editDormAssign.teacherIds.join(',');
+					this.editDormAssign.counselorNames = this.getNames(this.editDormAssign.teacherIds).join(',');
+				}else{
+					this.editDormAssign.counselorIds = "";
+					this.editDormAssign.counselorNames = "";
+				}
 				DormManService.updateDistedInfo(this.editDormAssign).$promise
 					.then(function (data) {
 						if(data.result){
@@ -539,7 +568,7 @@ angular.module('dleduWebApp')
 						return;
 					}
 				});
-				var params = this.dormAssign;
+				var params = angular.copy(this.dormAssign);
 				params.collegeId = major.collegeId;
 				params.collegeName = major.collegeName;
 				params.profName = major.name;
@@ -551,10 +580,12 @@ angular.module('dleduWebApp')
 					var validSel = [], ids = [];
 					for(var i = 0, len = this.selDistObj.length; i < len; i++){
 						var record = this.selDistObj[i];
-						if(record.beds==record.emBeds){//空宿舍
+						/*if(record.beds==record.emBeds){//空宿舍
 							validSel.push(record);
 							ids.push(record.roomId);
-						}
+						}*/
+						validSel.push(record);
+						ids.push(record.roomId);
 					}
 					this.dormAssign.roomIds = ids;
 				}
@@ -563,6 +594,10 @@ angular.module('dleduWebApp')
 					return;
 				}
 				var mess = this.isBatchDist ? (validSel.length + "个宿舍批量分配成功!") : "分配宿舍成功!";
+				params.counselorIds = this.getIds(params.teachers, 'accountId').join(",");
+				params.counselorNames = this.getIds(params.teachers, 'name').join(",");
+				delete params.teachers;
+				//辅导员id和名称
 				DormManService.assignDorms(params).$promise
 					.then(function (data) {
 						if(data.result){
@@ -570,6 +605,8 @@ angular.module('dleduWebApp')
 							that.selDistObj = [];
 							that.queryDorm();
 							that.getDistedMajors();
+							//分配成功清空之前内容
+							//that.dormAssign = {collegeId: 0, collegeName: "", profId: 0, profName: "", roomIds: [], sexType: 0, teachers: []};
 						}else{
 							messageService.openMsg("分配宿舍失败！");
 						}
@@ -841,9 +878,46 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			/**
+			 * 过滤辅导员
+			 */
+			filterIntructs: function(data){
+				var output = [];
+				for(var i = 0, len = data.length; i < len; i++){
+					var temp = data[i], flag = false;
+					for(var j = 0, lenSub = output.length; j < lenSub; j++){
+						var tempSub = output[j];
+						if(tempSub['accountId'] == temp['accountId']){
+							flag = true;
+						}
+					}
+					if(!flag){
+						output.push(temp);
+					}
+				}
+				return output;
+			},
+
+			//获取辅导员
+			getInstructs: function(){
+				var that = this;
+				var params ={
+					orgId: AuthService.getUser().orgId,
+					pageNumber: 1,
+					pageSize: 3000
+				}
+				ClassService.getInstructorList(params).$promise
+					.then(function (data) {
+						that.teachers = that.filterIntructs(data.data);
+					})
+					.catch(function (error) {
+					})
+			},
+
 
 			init: function () {
 				//this.getDorms();
+				this.getInstructs();
 				this.getBulids();
 				this.getDistedMajors();
 				this.getMajors();
@@ -856,11 +930,21 @@ angular.module('dleduWebApp')
 				if (newValue != oldValue) {
 					if($scope.dormMan.editDormAssign.profId.length != 0){
 						$timeout(function(){
-							$("input.ui-select-search").attr("placeholder", "点击选择专业");
+							$("#b input.ui-select-search").attr("placeholder", "点击选择专业");
 						},1000);
 					}
 				}
 			});
+			$scope.$watch('dormMan.editDormAssign.teacherIds', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					if($scope.dormMan.editDormAssign.teacherIds.length != 0){
+						$timeout(function(){
+							$("#a input.ui-select-search").attr("placeholder", "点击选择导员");
+						},1000);
+					}
+				}
+			});
+
 		});
 
 		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
@@ -907,7 +991,7 @@ angular.module('dleduWebApp')
 		scope: false,   // 默认值
 		link: function(scope, element, attrs) {
 			$timeout(function(){
-				$("input.ui-select-search").attr("placeholder", "点击选择专业");
+				$("#"+ attrs.id + " input.ui-select-search").attr("placeholder", attrs.modPlaceholder);
 			},1000);
 		}
 	}
