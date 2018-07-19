@@ -119,12 +119,12 @@ module.exports = {
             .then(function (data) {
                 var thead = [
                     ["姓名", "学号", "班级", "年级", "专业", "学院",
-                     "日志", "周志", "月报"]
+                    "参与计划", "指导老师","日志", "周志", "月报"]
                 ];
                 for (var index in data.data) {
                     var item = data.data[index];
                     thead.push([item.studentName, item.jobNum, item.className, item.grade, item.professionalName,  item.collegeName,  
-                        item.dailyNum, item.weeklyNum, item.monthlyNum]);
+                        item.groupName, item.counselorName, item.dailyNum, item.weeklyNum, item.monthlyNum]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(thead);
                 var wb = XLSX.utils.book_new();
