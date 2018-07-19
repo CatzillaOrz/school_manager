@@ -1,45 +1,15 @@
 .home-container
     .home-content
-        .swiper-home
-            .swiper-container
-                .swiper-wrapper
-                    .swiper-slide(ng-repeat='img in homeFn.imgs')
-                        a
-                            .home-image(style="background:url({{img}});background-size:cover;")
-                .swiper-pagination
-
-                .swiper-home-button-prv
-                .swiper-home-button-next
-        .content
-            .quick-button(ng-if="data.items.length>0" ng-repeat="data in homeFn.datas")
-                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
-                    header(role='heading')
-                        .jarviswidget-ctrls(role='menu')
-                        span.icon-title
-                        h2 {{'快捷入口'}}
-                        span.jarviswidget-loader
-                            i.fa.fa-refresh.fa-spin
-                        span.operat(ng-click="homeFn.operatMenu($index)") {{data.button}}
-                    div.menus(role='content')
-                        a.item-menu(style="{{item.bg}}" ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
-                            img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="homeFn.delMenu($parent.$index,$index,$event);")
-                            img.other-img(src="{{item.icon}}")
-                            span(ng-class="{'base-title-color': !$parent.$index}") {{item.title}}
-            .quick-button(ng-if="homeFn.datas[0].items.length==0")
-                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
-                    header(role='heading')
-                        .jarviswidget-ctrls(role='menu')
-                        span.icon-title
-                        h2 {{'快捷入口'}}
-                        span.jarviswidget-loader
-                            i.fa.fa-refresh.fa-spin
-                        //span.operat {{''}}
-                    div.menus(role='content')
-                        .no-content
-                            img(src="https://s1.aizhixin.com/7fa93102-abf2-47d7-b33f-7644a380b755.png")
-                            div 你还没有添加快捷入口功能！&nbsp;
-
-
-
-
-
+        .content-left
+            .round
+            .round
+            .round
+            .round
+            .round
+            .round
+            .round
+        .content-right
+            .welcome 欢迎登录知新树校园管理系统
+            .welcome-en Welcome to ZhiXinPingTai management system
+            .detail 今天是 {{homeFn.year}} 年{{homeFn.month}}月{{homeFn.day}}日 {{homeFn.week}}
+            .tree-bg

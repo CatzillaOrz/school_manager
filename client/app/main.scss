@@ -67,7 +67,7 @@ body{
   opacity: 1;
 }
 .zhixin-font-color{
-  color: $blueDef!important;
+  color:  #29C192!important;
 }
 .form-control{
   background-color: #F6F6F6!important;
@@ -79,24 +79,6 @@ body{
   background-color: #F6F6F6!important;
   border: 1px solid #E1E3E8;
   border-radius: 4px!important;
-}
-button.btn-primary, a.btn-primary{
-  background-color: $blueDef;
-  border-color: $blueDef;
-}
-button.btn-primary, a.btn-primary:hover{
-  background-color: $blueDef!important;
-  border-color: $blueDef!important;
-}
-.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{
-  background-color: $blueDef;
-  border-color: $blueDef;
-}
-.text-primary{
-  color: $blueDef;
-}
-.jarviswidget > div{
-  border:none;
 }
 @import '../app/layout/layout.scss';
 @import "../app/layout/header.scss";

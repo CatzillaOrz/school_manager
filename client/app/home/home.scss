@@ -1,166 +1,65 @@
 .home-container{
   font-family: $font-family-sans-serif;
+  background-color: #f5f5f5;
+  padding-top: 50px;
+  padding-left: 50px;
+
   min-height: 840px;
   .home-content{
-    background-color: #F4F6F8;
-    .swiper-home{
-      height: 360px;
-      margin-top: 20px;
-      .home-image{
-        height: 360px;
-      }
-      .swiper-home-button-prv {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        z-index: 999;
-        cursor: pointer;
-        left:20px;
-        top: 160px;
-        border-radius: 50%;
-        background: url('https://s1.aizhixin.com/30957549-7add-4692-9405-bede72d07d3d.png') no-repeat;
-      }
-      .swiper-home-button-next {
-        position: absolute;
-        top: 50%;
-        width: 40px;
-        height: 40px;
-        z-index: 999;
-        cursor: pointer;
-        right:20px;
-        top: 160px;
-        border-radius: 50%;
-        background: url('https://s1.aizhixin.com/8a5ca496-a932-4a9f-a0ed-8528568ab174.png') no-repeat;
-        &:hover{
-        }
+    background-color: #ffffff;
+    min-height: 690px;
+    border-top: 1px solid  #dddddd;
+    border-bottom: 1px solid  #dddddd;
+    border-left: 1px solid  #dddddd;
+    .content-left{
+      width: 100px;
+      display: inline-block;
+      vertical-align: top;
+      .round{
+        height: 45px;
+        width: 45px;
+        margin: 35px;
+        border-radius:50%;
+        background-color: #f5f5f5;
+        -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset ;            /* For Firefox3.6+ */
+        -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;          /* For Chrome5+, Safari5+ */
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;                  /* For Latest Opera */
       }
     }
-    .content{
-      .quick-button{
-        margin-top: 40px;
-        .button-content{
-          border: none;
-          header{
-            background: #E9F3FD;
-            border: none;
-            height: 50px;
-            line-height: 50px;
-            h2{
-              padding-left: 10px;
-              border-left: solid 4px #4790E8;
-              top: 15px;
-              font-size:18px;
-              color: #666668;
-              margin-left: 20px;
-              height: auto;
-              line-height: 18px;
-            }
-            .operat{
-              width:60px;
-              line-height: 24px;
-              text-align: center;
-              border-radius:26px;
-              border:1px solid rgba(78,169,245,1);
-              display: inline-block;
-              float: right;
-              margin: 13px 20px 0 0;
-              font-size: 12px;
-              color: #007CE4;
-              cursor: pointer;
-            }
-          }
-          .menus{
-            border:none;
-            background: #E9F3FD;
-            padding: 0 20px 30px;
-            .item-menu{
-              text-align: left;
-              background: #fff;
-              position: relative;
-              width:200px;
-              line-height:76px;
-              height:76px;
-              display: inline-block;
-              color: #384556;
-              font-weight: 600;
-              border-radius:4px;
-              border:1px solid rgba(242,242,242,1);
-              margin: 30px 40px 0 0;
-              box-sizing:border-box;
-              -moz-box-sizing:border-box;
-              -webkit-box-sizing:border-box;
-              .operate-sel{
-                position: absolute;
-                right: -10px;
-                top: -10px;
-                z-index: 1;
-              }
-              .img-contain{
-                display: inline-block;
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                border-radius: 50%;
-                margin: 0 10px 0 20px;
-                vertical-align: middle;
-                text-align: center;
-                background:linear-gradient(148.8deg,rgba(96,166,224,1),rgba(96,166,224,1));
-                img{
-                  width: 20px;
-                  height: 20px;
-                }
-              }
-              .other-img{
-                width: 40px;
-                height: 40px;
-                display: inline-block;
-                margin: 0 10px 0 20px;
-              }
-              span{
-                display: inline-block;
-                width: 108px;
-                color: #384556;
-                font-size: 14px;
-                line-height: 14px;
-                vertical-align: middle;
-              }
-              &:hover{
-                box-shadow:0px 2px 8px 0px rgba(214,214,214,0.5);
-              }
-              .base-title-color{
-                color: #fff;
-              }
-            }
-            .item-menu:nth-child(5n){
-              margin-right: 0;
-            }
-            .no-content{
-              text-align: center;
-              img{
-                margin-top: 68px;
-              }
-              div{
-                margin: 20px 0 30px;
-                font-size:16px;
-                color: #999;
-                padding-right:10px;
-              }
-            }
-          }
-        }
+    .content-right{
+      display: inline-block;
+      margin-top: 70px;
+      margin-left: 35px;
+      .welcome{
+        font-weight: 400;
+        font-style: normal;
+        font-size: 36px;
+        color: #33495F;
+        text-align: left;
+        line-height: 42px;
       }
-    }
-  }
-}
-.new-dialog{
-  text-align: center;
-  .img-success{
-    margin-top: 30px;
-  }
-  .tip{
-    color: #333;
-    font-size: 20px;
-    margin: 26px 0 40px;
-  }
-}
+      .welcome-en{
+        margin-top: 12px;
+        font-size: 16px;
+        color: #858585;
+      }
+      .detail{
+        margin-top: 45px;
+        font-weight: 200;
+        font-size: 18px;
+        color: #666666;
 
+      }
+      .tree-bg{
+        margin-top: 65px;
+        width: 534px;
+        position: absolute;
+        right: 0;
+        height: 494px;
+        background-image: url(https://s.aizhixin.com/tree-bg@1.png);
+        background-repeat: no-repeat;
+      }
+    }
+
+  }
+}
