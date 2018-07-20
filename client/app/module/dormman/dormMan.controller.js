@@ -442,7 +442,7 @@ angular.module('dleduWebApp')
 								ids.push(data.data.radl[i].profId);
 							}
 							that.editDormAssign.profId = ids;
-							if(that.editDormAssign.counselorIds && that.editDormAssign.counselorIds != ''){
+							if(that.editDormAssign.counselorIds && that.editDormAssign.counselorIds != ''){//转换之前选的辅导员为数组方便反选
 								that.editDormAssign.teacherIds = JSON.parse('[' + String(that.editDormAssign.counselorIds.split(",")) + ']');
 							}else{
 								that.editDormAssign.teacherIds = [];

@@ -1,11 +1,12 @@
 'use strict';
-
+/**
+ * 新样式总菜单
+ */
 angular.module('dleduWebApp')
     .controller('SubIndexCtrl', function ($scope, $state, $http, $timeout, AuthService, SchoolService, ngDialog) {
         $scope.subIndexFn={
             type: $state.params.type,
             datas: [],
-            mapDatas: {},
             imgs: ['https://s1.aizhixin.com/977b5de4-fec1-4762-8bcd-ce78fab31e47.jpg',
                 'https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png',
                 'https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
@@ -40,12 +41,7 @@ angular.module('dleduWebApp')
             getMenu: function(type){
                 var that = this;
                 var jsonData = that.dataSource[type];
-                /*if(that.mapDatas['data' + type]){
-                    that.datas = mapDatas['data' + type];
-                    return;
-                }*/
                 $http.get(jsonData).then(function(res){
-                    //that.mapDatas['data' + type] = res.data.items;
                     that.getMenusByAuth(res.data.items);
                     that.datas = res.data.items;
                 })
@@ -126,6 +122,7 @@ angular.module('dleduWebApp')
                 }
             },
 
+            //添加用到的特定弹框
             openDialogNew: function(msg,timer){
                 var template = '<div class="new-dialog">'+
                     '<img src="https://s1.aizhixin.com/aac16d20-7db2-47fd-a398-b213f571b93b.png" class="img-success"/>' +
@@ -173,7 +170,7 @@ angular.module('dleduWebApp')
                                 isHave = true;
                             }
                         }
-                        if(!isHave){
+                        if(!isHave){//保存之前不在快捷菜单中的功能菜单
                             menusObj.splice(0, 0, selMenu);
                         }
                     }
@@ -185,6 +182,7 @@ angular.module('dleduWebApp')
 
             //选择功能
             selMenu: function(parent, sub, $event){
+                //先阻止事件默认行为，在阻止事件冒泡
                 $event.preventDefault();
                 $event.stopPropagation();
                 var item = this.datas[parent].items[sub];

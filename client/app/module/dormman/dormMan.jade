@@ -294,7 +294,7 @@
                             | 分配给专业：
                         .col-sm-9
                             .col-sm-8#b
-                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" theme="bootstrap" class="form-control" mod-Placeholder="点击选择专业" id="b")
+                                ui-select(multiple ng-model="dormMan.editDormAssign.profId" remove-selected="false" theme="bootstrap" class="form-control" mod-Placeholder="点击选择专业" )
                                     ui-select-match.ui-select-match(placeholder="输入专业名称搜索...", allow-clear='true') {{$item.name}}
                                     ui-select-choices.ui-select-choices(repeat="item.id as item in dormMan.majorLists | filter: $select.search")
                                         span(ng-bind="item.name" title='{{item.name}}')
@@ -320,7 +320,7 @@
                             | 分配辅导员：
                         .col-sm-9
                             .col-sm-8#a
-                                ui-select(multiple ng-model="dormMan.editDormAssign.teacherIds" remove-selected="false" class="form-control" mod-Placeholder="点击选择导员" id="a")
+                                ui-select(multiple ng-model="dormMan.editDormAssign.teacherIds" remove-selected="false" class="form-control" mod-Placeholder="点击选择导员" )
                                     ui-select-match.ui-select-match(placeholder="输入导员姓名搜索...", allow-clear='true') {{$item.name}}
                                     ui-select-choices.ui-select-choices(repeat="item.accountId as item in dormMan.teachers | filter: $select.search")
                                         span(ng-bind="item.name + ' ' + item.jobNumber" title="{{item.name+ ' ' + item.jobNumber}}")
