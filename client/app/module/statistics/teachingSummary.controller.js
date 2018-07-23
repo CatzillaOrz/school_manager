@@ -42,6 +42,7 @@ angular.module('dleduWebApp')
                 masterName: "",
                 enterpriseName: '',
                 teachingYear: "",
+                groupId: '',
                 stuId: ''
             },
             summeryList: [],
@@ -90,10 +91,10 @@ angular.module('dleduWebApp')
                     grade: $state.params.grade,
                     collegeName: $state.params.collegeName,
                     professionalName: $state.params.professionalName,
-                    className: $state.params.className,
-                    groupId: $state.params.groupId
+                    className: $state.params.className
                 }
                 that.params.stuId = $state.params.id;
+                that.params.groupId = $state.params.groupId;
                 StatisticsService.stuRoutineDetail(that.params).$promise
                     .then(function (data) {
                         console.log(data);
