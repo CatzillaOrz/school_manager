@@ -90,7 +90,8 @@ angular.module('dleduWebApp')
                     grade: $state.params.grade,
                     collegeName: $state.params.collegeName,
                     professionalName: $state.params.professionalName,
-                    className: $state.params.className
+                    className: $state.params.className,
+                    groupId: $state.params.groupId
                 }
                 that.params.stuId = $state.params.id;
                 StatisticsService.stuRoutineDetail(that.params).$promise

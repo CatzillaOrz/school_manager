@@ -106,7 +106,7 @@ angular.module('dleduWebApp')
             })
             .state('stuRoutineDetail', {
                 parent: 'base',
-                url   : '/stuRoutineDetail/:id/:jobNum/:studentName/:grade/:collegeName/:professionalName/:className',
+                url   : '/stuRoutineDetail/:id/:jobNum/:studentName/:grade/:collegeName/:professionalName/:className/:groupId',
                 access: {requiredLogin: true},
                 views : {
                     'content@base': {
