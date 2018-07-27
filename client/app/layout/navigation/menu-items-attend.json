@@ -1,9 +1,7 @@
 {
-    "items":[
-        {
+    "items": [{
             "title": "考勤报表",
-            "items":[
-                {
+            "items": [{
                     "title": "上课时间考勤报表",
                     "sref": "attendtime",
                     "active": "attendtime",
@@ -49,8 +47,7 @@
         },
         {
             "title": "评教报表",
-            "items":[
-                {
+            "items": [{
                     "title": "课程评分报表",
                     "sref": "coursescore",
                     "active": "coursescore",
@@ -89,27 +86,105 @@
         },
         {
             "title": "实践报表",
-            "items":[
-                {
-                    "title": "",
-                    "sref": "",
-                    "active": "",
+            "items": [{
+                    "title": "实践教学汇总",
+                    "sref": "teachingSummary",
+                    "active": "teachingSummary",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
                     "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生参与明细表",
+                    "sref": "studentAttending",
+                    "active": "studentAttending",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生激活明细表",
+                    "sref": "studentActive",
+                    "active": "studentActive",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生参与过程明细",
+                    "sref": "stuProcess",
+                    "active": "stuProcess",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生周日志明细",
+                    "sref": "stuJournal",
+                    "active": "stuJournal",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "教师指导过程明细",
+                    "sref": "impartProcess",
+                    "active": "impartProcess",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "签到统计汇总",
+                    "sref": "stuRoutineCount",
+                    "active": "stuRoutineCount",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "实践企业统计表",
+                    "sref": "enterpriseDetail",
+                    "active": "enterpriseDetail",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "实践任务明细",
+                    "sref": "missionList",
+                    "active": "missionList",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生实践报告成绩",
+                    "sref": "stuReport",
+                    "active": "stuReport",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "学生实习成绩汇总",
+                    "sref": "stuScore",
+                    "active": "stuScore",
+                    "bg": "background:linear-gradient(143.8deg,rgba(161,217,131,1),rgba(218,244,134,1))",
+                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 }
             ]
         },
         {
             "title": "教学统计",
-            "items":[
-                {
-                    "title": "教学数据统计",
-                    "sref": "teachingData",
-                    "active": "teachingData",
-                    "icon": "https://s1.aizhixin.com/a335d6a3-c5f8-4916-ae59-5f55c4beafcb.png",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
-                }
-            ]
+            "items": [{
+                "title": "教学数据统计",
+                "sref": "teachingData",
+                "active": "teachingData",
+                "icon": "https://s1.aizhixin.com/a335d6a3-c5f8-4916-ae59-5f55c4beafcb.png",
+                "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+            }]
         }
     ]
 }
