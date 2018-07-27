@@ -18,11 +18,16 @@
                                     label.control-label 学期：
                                     select#ddd.select2.form-control( ng-model="teachClassTableFn.params.semesterId" ui-select2="teachClassTableFn.select2SemesterOptions()" )
                                         option(value="{{semester.id}}" ng-repeat="semester in teachClassTableFn.schoolYearDropList") {{semester.name}}
-
+                                .form-group.col-md-4.margin-top-5
+                                    label.control-label 类型：
+                                    select.form-control(type='text', ng-model="teachClassTableFn.type"  ng-options="item for item in teachClassTableFn.types" data-ng-change='teachClassTableFn.switchType()')
+                                .form-group.col-md-4.margin-top-5(ng-if='teachClassTableFn.params.weekId !== 0&&!teachClassTableFn.isSingleOrAll')
+                                    label.control-label 学周：
+                                    select.form-control(type='text', ng-model="teachClassTableFn.params.weekId"  ng-options="item.id as item.no for item in teachClassTableFn.weekDropList" data-ng-change='teachClassTableFn.getTeachingTableSingle()')
                         .col-sm-3.hidden-xs.margin-bottom-10
                             .ColVis
-                                .btn.btn-default(ui-sref='teacherListSimplify({collegeId:collegeId,name:name})') 返回
-                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                .btn.btn-default(ui-sref='teachclasslist') 返回
+                    table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;' ng-show="teachClassTableFn.isSingleOrAll")
                         thead
                             tr(role='row')
                                 th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='ID: activate to sort column descending', style='width: 100px;') 周/节
@@ -41,3 +46,21 @@
                                         span.responsiveExpander {{item.courseName + "(" +item.teachingClassName+")"|| ''}}
                                         p
                                             small {{teachClassTableFn.formatCourseInfo(list,item)}}
+                    table#datatable_col_reorder1.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;' ng-show="!teachClassTableFn.isSingleOrAll")
+                        thead
+                            tr(role='row')
+                                th(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='ID: activate to sort column descending', style='width: 50px;') 周/节
+                                th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周一
+                                th.sorting(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周二
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周三
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周四
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周五
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周六
+                                th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周日
+                        tbody
+                            tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTable")
+                                td.sorting_1 第{{$index+1}}节课
+                                td.expand(ng-repeat="list in table.courseList  track by $index", ng-class="{'td-table-no-border-bottom':list.periodNum > 1, 'td-table-no-border-top' : (!list && key > 0 && (((!!teachClassTableFn.teachingTable[key-1].courseList && teachClassTableFn.teachingTable[key-1].courseList[$index].periodNum > 1 && teachClassTableFn.teachingTable[key-1].courseList[$index].periodNum >= key-(key-1))) || ((!!teachClassTableFn.teachingTable[key-2].courseList && teachClassTableFn.teachingTable[key-2].courseList[$index].periodNum > 2 && teachClassTableFn.teachingTable[key-2].courseList[$index].periodNum >= key-(key-1))) || ((!!teachClassTableFn.teachingTable[key-3].courseList && teachClassTableFn.teachingTable[key-3].courseList[$index].periodNum > 3 && teachClassTableFn.teachingTable[key-3].courseList[$index].periodNum >= key-(key-1)))))}")
+                                    span.responsiveExpander {{list.courseName || ''}}
+                                    p
+                                        small {{ list.whichLesson || ''}}

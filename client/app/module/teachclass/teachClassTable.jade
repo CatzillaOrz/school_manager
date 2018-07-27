@@ -37,7 +37,7 @@
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周六
                                 th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1') 周日
                         tbody
-                            tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTable")
+                            tr.odd(role='row' ng-repeat="(key,table) in teachClassTableFn.teachingTableSingle")
                                 td.sorting_1 第{{$index+1}}节课
                                 td.expand(ng-repeat="list in table.courseList  track by $index", ng-class="{'td-table-no-border-bottom':list.periodNum > 1, 'td-table-no-border-top' : (!list && key > 0 && (((!!teachClassTableFn.teachingTable[key-1].courseList && teachClassTableFn.teachingTable[key-1].courseList[$index].periodNum > 1 && teachClassTableFn.teachingTable[key-1].courseList[$index].periodNum >= key-(key-1))) || ((!!teachClassTableFn.teachingTable[key-2].courseList && teachClassTableFn.teachingTable[key-2].courseList[$index].periodNum > 2 && teachClassTableFn.teachingTable[key-2].courseList[$index].periodNum >= key-(key-1))) || ((!!teachClassTableFn.teachingTable[key-3].courseList && teachClassTableFn.teachingTable[key-3].courseList[$index].periodNum > 3 && teachClassTableFn.teachingTable[key-3].courseList[$index].periodNum >= key-(key-1)))))}")
                                     span.responsiveExpander {{list.courseName || ''}}
