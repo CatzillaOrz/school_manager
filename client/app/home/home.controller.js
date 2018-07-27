@@ -92,6 +92,7 @@ angular.module('dleduWebApp')
                     delete items[i].isSel;
                 }
                 var params = {menus: JSON.stringify(datas[parent].items)};
+                //that.confirmDialog('将该功能从快捷入口移除？');
                 SchoolService.saveDefMenu(params).$promise
                     .then(function (data) {
                         if(data.success){
@@ -123,7 +124,27 @@ angular.module('dleduWebApp')
                     ngDialog.closeAll();
                 }, timer);
             },
-
+            /*
+             * 是否执行
+             * */
+            confirmDialog  : function (Msg,callback) {
+                ngDialog.openConfirm({
+                    template: '<h5 class="">'+Msg+'</h5>' +
+                    '<div class="ngdialog-buttons">' +
+                    '<button type="button" class="ngdialog-button ngdialog-button-secondary btn-small" ng-click="closeThisDialog(0)">取消</button>' +
+                    '<button type="button" class="ngdialog-button ngdialog-button-primary btn-small" ng-click="confirm(1)">确定</button>' +
+                    '</div>',
+                    plain   : true,
+                    width : 150,
+                    //className: 'aa',
+                }).then(
+                    function (value) {
+                        if(callback) {
+                            (callback && typeof(callback) === "function") && callback(1);
+                        }
+                    }
+                );
+            },
 
             //获取快捷菜单
             getQuickMenu: function(){

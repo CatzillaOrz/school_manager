@@ -9,9 +9,23 @@ angular.module('dleduWebApp')
 		$scope.teachClassTableFn = {
 			teachingTable: [],
 			schoolYearDropList: [],
+			types: ['总课表', '单周课表'],
 			params: {
 				semesterId: 0,
 				teacherId: tId,
+				weekId: 0
+			},
+			type: '总课表',
+			isSingleOrAll: true, //true总课表
+
+			switchType: function(){
+				if(this.type == '总课表'){
+					this.isSingleOrAll = true;
+					this.getTeachingTable();
+				}else{
+					this.isSingleOrAll = false;
+					this.getWeekList();
+				}
 			},
 
 			select2SemesterOptions: function () {
@@ -72,6 +86,33 @@ angular.module('dleduWebApp')
 					})
 			},
 
+			getWeekList: function () {
+				var that = this;
+				var params = {semesterId: that.params.semesterId, pageSize: 40};
+				SchoolYearService.getTeachWeekList(params).$promise
+					.then(function (data) {
+						that.weekDropList = data.data;
+						that.params.weekId !== 0 && (that.getTeachingTableSingle());
+
+					})
+					.catch(function (error) {
+						console.log(error)
+					})
+			},
+
+			getCurrentSemesterWeek : function () {
+				var that = this;
+				SchoolYearService.getCurrentWeek().$promise
+					.then(function (data) {
+						that.params.weekId = data.id;
+						that.getTeachingTableSingle();
+
+					})
+					.catch(function (error) {
+						console.log(error)
+					})
+			},
+
 			/**
 			 * 获取教师排课信息
 			 */
@@ -84,6 +125,47 @@ angular.module('dleduWebApp')
 					.catch(function (error) {
 						console.log(error)
 					})
+			},
+
+			/**
+			 * 按周查询
+			 */
+			getTeachingTableSingle: function () {
+				var that = this;
+				var params = {teacherId: that.params.teacherId, weekId: that.params.weekId};
+				TeachClassService.getCourseSchedulesByTeacher(params).$promise
+					.then(function (data) {
+						that.teachingTableSingle = that.scanDataSingle(data.data);
+					})
+					.catch(function (error) {
+						console.log(error)
+					})
+			},
+
+			/**
+			 * 按周查询
+			 */
+			scanDataSingle: function (entity) {
+				var tr = [];
+				entity = _.sortBy(entity, 'dayOfWeek');
+				var count = 0;
+				for (var i = 0; i < 13; i++) {
+					var td = {
+						courseList: new Array(7)
+					};
+					for (var j = 0; j < 7; j++) {
+						angular.forEach(entity, function (list) {
+							(list.courseList).forEach(function (cl) {
+								if ((parseInt(list.dayOfWeek)) === j + 1 && cl.lessonOrderNum === i + 1) {
+									td.courseList[j] = cl;
+									count++;
+								}
+							})
+						})
+					}
+					tr.push(td);
+				}
+				return tr;
 			},
 
 			//规整划数据变成可以循环的格式
@@ -237,13 +319,23 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
+				this.getCurrentSemesterWeek();
 				this.getCurrentSemester();
 			}
 		};
 		$scope.teachClassTableFn.init();
+		$scope.$watch('teachClassTableFn.params.weekId', function (valOld, valNew) {
+			if (valNew !== valOld) {
+				$scope.teachClassTableFn.getTeachingTableSingle();
+			}
+		})
 		$scope.$watch('teachClassTableFn.params.semesterId', function (valOld, valNew) {
 			if (valNew != valOld) {
-				$scope.teachClassTableFn.getTeachingTable();
+				if($scope.teachClassTableFn.type == '总课表'){
+					$scope.teachClassTableFn.getTeachingTable();
+				}else{
+					$scope.teachClassTableFn.getWeekList();
+				}
 			}
 		})
 	});

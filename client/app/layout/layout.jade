@@ -77,9 +77,9 @@
 
 .placeholder-header(data-smart-include='app/layout/header.html')
 
-.placeholder-left-panel(data-smart-include='app/layout/navigation/navigation.html' ng-show="layoutFn.currentLink !=='workbench' || layoutFn.currentLink !=='teachingSummary'")
-.placeholder-left-panel(data-smart-include='app/layout/navigation/navigationPT.html' ng-show="layoutFn.currentLink =='workbench'")
-.placeholder-left-panel(data-smart-include='app/layout/navigation/navigationCalc.html' ng-show="layoutFn.currentLink =='teachingSummary'")
+.placeholder-left-panel(data-smart-include='app/layout/navigation/navigation.html')
+//.placeholder-left-panel(data-smart-include='app/layout/navigation/navigationPT.html' ng-show="layoutFn.currentLink =='workbench'")
+//.placeholder-left-panel(data-smart-include='app/layout/navigation/navigationCalc.html' ng-show="layoutFn.currentLink =='teachingSummary'")
 
 #main(role='main')
     #ribbon(style="left:0" ng-show="layoutFn.isShowBack()")

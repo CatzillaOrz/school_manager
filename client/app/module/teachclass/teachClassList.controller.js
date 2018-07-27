@@ -416,14 +416,14 @@ angular.module('dleduWebApp')
 		};
 
 		$scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
-			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek")){
+			if(fromState.name == "teachclasslist" && (toState.name == "teachClassDetail" || toState.name == "agendaWeek" || toState.name == "teachclasscoursescan")){
 				var params = $scope.teachClassListFn.params;
 				var key = fromState.name + toState.name;
 				tempStorageService.setObject(key, params);
 			}
 		});
 		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-			if(toState.name == "teachclasslist" && (fromState.name == "teachClassDetail" || fromState.name == "agendaWeek")){
+			if(toState.name == "teachclasslist" && (fromState.name == "teachClassDetail" || fromState.name == "agendaWeek" || fromState.name == "teachclasscoursescan")){
 				var key = toState.name + fromState.name;
 				var params = tempStorageService.getObject(key);
 				if(params){
@@ -436,6 +436,7 @@ angular.module('dleduWebApp')
 				if(toState.name == "teachclasslist"){
 					tempStorageService.removeObject("teachclasslist" + "teachClassDetail");
 					tempStorageService.removeObject("teachclasslist" + "agendaWeek");
+					tempStorageService.removeObject("teachclasslist" + "teachclasscoursescan");
 					$scope.teachClassListFn.init();
 				}
 			}

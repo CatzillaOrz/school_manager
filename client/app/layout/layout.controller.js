@@ -100,7 +100,7 @@ angular.module('dleduWebApp')
                 var sourceLeft = "app/layout/navigation/menu-items.json";
                 $http.get(sourceLeft).then(function(res){
                     that.datas = res.data.items;
-                    ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+                    //($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
                     that.datas.forEach(function(c){
                         var currentLink = tempStorageService.getObject("hometempmyurl$").url;
                         if(!currentLink && c.sref == 'home'){
