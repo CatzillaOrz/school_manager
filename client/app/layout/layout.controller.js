@@ -4,12 +4,12 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('LayoutCtrl', function ($scope, $timeout, CommonService, $rootScope, AuthService, $window, $state,SchoolService) {
+    .controller('LayoutCtrl', function ($scope, $timeout, $http, CommonService, $rootScope, AuthService, $window,
+                                        $state, SchoolService, tempStorageService) {
         $scope.product = CommonService.product;
         $rootScope.user = AuthService.getUser();
         $scope.layoutFn = {
-
-            currentLink: SchoolService.defineProperty().get() || 'home',
+            currentLink: 'home',
             nav:[
                 {name: '首页', url: 'home', selected: true},
                 {name: '实践教学', url: 'workbench', selected: false},
@@ -91,17 +91,60 @@ angular.module('dleduWebApp')
 
                     })
             },
+
+	        /**
+	         * 获取左边菜单配置
+             */
+            getLeftMenu: function(){
+                var that = this;
+                var sourceLeft = "app/layout/navigation/menu-items.json";
+                $http.get(sourceLeft).then(function(res){
+                    that.datas = res.data.items;
+                    ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+                    that.datas.forEach(function(c){
+                        var currentLink = tempStorageService.getObject("hometempmyurl$").url;
+                        if(!currentLink && c.sref == 'home'){
+                            c.selected = true;
+                        }else{
+                            c.selected = c.sref == currentLink;
+                        }
+                    })
+                })
+            },
+
+            //点击添加背景颜色
+            clickMenu : function(entity){
+                var that = this;
+                that.datas.forEach(function(c){
+                    c.selected = false
+                });
+                tempStorageService.setObject('hometempmyurl$', {url: entity.sref});
+                entity.selected = true;
+            },
+
+            //是否显示导航
+            isShowBack: function(){
+                var urlName = $state.current.name;
+                if(urlName == 'home' || urlName == 'subindex' ){
+                    return false;
+                }
+                return true;
+            },
+
+            init: function(){
+                if($state.current.name == 'home'){
+                    tempStorageService.removeObject("hometempmyurl$");
+                }
+                $scope.layoutFn.getLogoList();
+                $scope.layoutFn.getLeftMenu();
+            }
+
         };
-        $scope.layoutFn.getLogoList();
-        ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
-        $scope.layoutFn.nav.forEach(function(c){
-            c.selected = c.url == $scope.layoutFn.currentLink
-        })
+        $scope.layoutFn.init();
+
         $rootScope.$watch('user', function () {
-            // console.log($rootScope.user);
             $scope.layoutFn.user = $rootScope.user;
         }, true);
-        console.log($scope.layoutFn.currentLink);
     })
 
     .directive('smartInclude', function () {

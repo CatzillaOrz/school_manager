@@ -3,7 +3,7 @@
  * 教师评学列表
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuestionTeaCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
+	.controller('EvaQuestionTeaCtrl', function ($scope, $state, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
@@ -115,6 +115,9 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.getEvaQuesList();
+				if($state.current.name == "evaquestionteareport"){
+					$scope.isReport = true;//是否是统计报表
+				}
 			}
 		};
 		$scope.evaQuesListFn.init();

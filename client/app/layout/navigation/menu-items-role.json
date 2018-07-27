@@ -1,22 +1,20 @@
 {
     "items":[
         {
-            "title": "",
+            "title": "权限管理",
             "items":[
                 {
                     "title": "角色分配",
                     "sref": "distlist",
                     "active": "distlist",
-                    "icon": "https://s1.aizhixin.com/4d6b9f3c-a59e-4a59-95b5-0a971b8c9252.png",
-                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
+                    "icon": "https://s1.aizhixin.com/465c6584-3966-4900-8438-de8edd7942f3.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
                     "title": "已分配列表",
                     "sref": "distedlist",
                     "active": "distedlist",
-                    "icon": "https://s1.aizhixin.com/7958b522-bf9e-4273-a56e-e732ccef7c0f.png",
-                    "bg": "background:linear-gradient(133.7deg,rgba(233,159,132,1),rgba(232,136,101,1))",
+                    "icon": "https://s1.aizhixin.com/fe9b23df-9567-48d6-b7ef-6a17207e1f06.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 }
             ]

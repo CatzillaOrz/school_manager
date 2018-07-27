@@ -1,15 +1,5 @@
 .home-container
     .home-content
-        .swiper-home
-            .swiper-container
-                .swiper-wrapper
-                    .swiper-slide(ng-repeat='img in subIndexFn.imgs')
-                        a
-                            .home-image(style="background:url({{img}});background-size:cover;")
-                .swiper-pagination
-
-                .swiper-home-button-prv
-                .swiper-home-button-next
         .content
             .quick-button(ng-repeat="data in subIndexFn.datas")
                 .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
@@ -21,12 +11,11 @@
                             i.fa.fa-refresh.fa-spin
                         div.operat(ng-click="subIndexFn.operatMenu($index)") {{data.button}}
                     div.menus(role='content')
-                        a.item-menu(style="{{!$parent.$index?item.bg:''}}" ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
+                        a.item-menu(ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
                             img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="subIndexFn.selMenu($parent.$index,$index,$event);")
-                            img.other-img(ng-if="!$parent.$index" src="{{item.icon}}")
-                            .img-contain(style="{{item.bg}}" ng-if="$parent.$index")
-                                img(src="{{item.iconSmall}}")
-                            span(ng-class="{'base-title-color': !$parent.$index}") {{item.title}}
+                            .img-contain
+                                img(src="{{item.icon}}")
+                            span {{item.title}}
 
 
             //.quick-button(ng-repeat="item in subIndexFn.datas")

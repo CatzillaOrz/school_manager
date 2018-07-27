@@ -4,30 +4,30 @@
             .jarviswidget-ctrls(role='menu')
 
             ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
-                li.tabBlock-tab.active.cursor-pointer(ng-click="attendFn.switchOneTab(1)" role="navigation")
+                //li.tabBlock-tab.cursor-pointer(ng-click="attendFn.switchOneTab(1)" role="navigation")
                     a(data-toggle='tab',  aria-expanded='true')
                         i.fa.fa-lg.fa-calendar
                         span.hidden-mobile.hidden-tablet  教学班考勤
-                li.tabBlock-tab.cursor-pointer(ng-click="attendFn.switchOneTab(2)" role="navigation")
+                //li.tabBlock-tab.cursor-pointer(ng-click="attendFn.switchOneTab(2)" role="navigation")
                     a(data-toggle='tab',  aria-expanded='false')
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 行政班考勤
-                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(3)" ng-if="isUseAuth('classRate')")
+                li.tabBlock-tab.active.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(5)")
                     a(data-toggle='tab', aria-expanded='false')
-                        i.fa.fa-lg.fa-pencil
+                        i.fa.fa-lg.fa-wrench
                         span.hidden-mobile.hidden-tablet
-                            | 到课率设置
+                            | 考勤明细查看/修改
                 li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(4)")
                     a(data-toggle='tab', aria-expanded='false')
                         i.fa.fa-lg.fa-ban
                         span.hidden-mobile.hidden-tablet
                             | 暂停考勤
-                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(5)")
+                li.tabBlock-tab.cursor-pointer(role="navigation" ng-click="attendFn.switchOneTab(3)" ng-if="isUseAuth('classRate')")
                     a(data-toggle='tab', aria-expanded='false')
-                        i.fa.fa-lg.fa-wrench
+                        i.fa.fa-lg.fa-pencil
                         span.hidden-mobile.hidden-tablet
-                            | 修改考勤
+                            | 到课率设置
         // widget div
         div(role='content')
             // widget edit box
@@ -37,7 +37,7 @@
             // widget content
             .widget-body.no-padding
                 .tab-content
-                    #hr1.tab-pane.active
+                    //#hr1.tab-pane.active
                         .col-xs-12.margin-top-10
                             .col-xs-6.no-padding
                                 //button.btn.btn-default(ng-click="attendFn.switchTowTab('course')" ng-class="{'btn-primary':attendFn.tab=='course'}")
@@ -276,7 +276,7 @@
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
                                                     ul.pagination-sm(uib-pagination, total-items='attendTimeFn.page.totalElements', max-size='attendTimeFn.page.pageSize' ng-model='attendTimeFn.page.pageNumber',ng-change="attendTimeFn.getAttendanceByPeriod()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-                    #hr2.tab-pane
+                    //#hr2.tab-pane
                         .col-xs-12.margin-top-10
                             .col-xs-6.no-padding
                                 button.btn.btn-default(ng-click="attendFn.switchTowTab('college')" ng-class="{'btn-primary':attendFn.tab=='college'}")
@@ -626,105 +626,6 @@
                         //                    .col-sm-6.col-xs-12
                         //                        .dataTables_paginate.paging_simple_numbers
                         //                            ul.pagination-sm(uib-pagination, total-items='attendFn.page.totalElements', max-size='attendFn.page.pageSize' ng-model='attendFn.page.pageNumber',ng-change="attendFn.getClassAttendList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
-                    #hr3.tab-pane(ng-if="isUseAuth('classRate')")
-                        .college-handle-container
-                            .jarviswidget-color-blueDark
-                                .widget-body
-                                    form.form-horizontal(name="studentForm")
-                                        fieldset
-                                            legend 到课率设置
-                                        .short-form
-                                            .form-group
-                                                .radio(ng-repeat="obj in attendSettingFn.settingList")
-                                                    input(type='radio', name='inlineRadioOptions',ng-model="attendSettingFn.params.arithmetic" value='{{obj.key}}')
-                                                    |  {{obj.value}}
-
-                                        .form-actions
-                                            .row
-                                                .col-md-12
-                                                    a.btn.btn-primary(ng-click="attendSettingFn.updateAttendacne()" validation-submit="studentForm") 应用设置
-                    #hr4.tab-pane
-                        .tabbable.tabs-below
-                            .tab-content
-                                .no-padding
-                                    .dataTables_wrapper.form-inline.no-footer
-                                        .col-xs-9.margin-top-10
-                                            form.form-inline
-                                                .form-group.col-sm-4
-                                                    label.control-label  学生名称：
-                                                    input.form-control(type="text" ng-model="attendPauseFn.params.criteria" placeholder="请输学生名称或学号", my-enter="attendPauseFn.getAttendStopLogs()" )
-                                                .form-group.col-sm-4
-                                                    label 操作类型：
-                                                    select.select2.form-control(ng-model="attendPauseFn.params.opt" )
-                                                        option(value="") 全部
-                                                        option(value="10") 暂停考勤
-                                                        option(value="20") 恢复考勤
-
-                                                .form-group.col-sm-6.margin-top-10
-                                                    label.control-label 时间段：
-                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendPauseFn.params.startTime" validator="required")
-                                                        span.add-on
-                                                            i.icon-calendar.glyphicon.glyphicon-calendar
-
-                                                    .inline-block -
-                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
-                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendPauseFn.params.endTime" validator="required")
-                                                        span.add-on
-                                                            i.icon-calendar.glyphicon.glyphicon-calendar
-
-                                        .col-sm-3.hidden-xs
-                                            .ColVis
-                                                button.btn.btn-primary(ng-click="attendPauseFn.getAttendStopLogs()")
-                                                    span 查询
-                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
-                                            thead
-                                                tr(role='row')
-                                                    th 序号
-                                                        //input(style="width:auto!important" type="checkbox" ng-click="batch.checkAll(attendPauseFn.attendList, attendPauseFn)" ng-checked="attendPauseFn.checkAllRecord" ng-model="attendPauseFn.checkAllRecord")
-                                                        //| 全选当页
-                                                    th 操作时间
-                                                    th 操作人
-                                                    th 操作内容
-                                                    th 备注理由
-                                                    th 被操作人学号
-                                                    th 被操作人姓名
-                                                    th 班级
-                                                    th 年级
-                                                    th 专业
-                                                    th 院系
-                                                    td 操作
-                                            tbody
-                                                tr.odd(role='row' ng-repeat="attend in attendPauseFn.attendList")
-                                                    td.sorting_1 {{$index+1 + ((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10}}
-                                                    //td
-                                                        input(type="checkbox" ng-click="batch.selSingleRecord(attendPauseFn.attendList, $index, attendPauseFn)" ng-checked="attend.check" ng-model="attend.check")
-                                                    td {{attend.operationTime}}
-                                                    td {{attend.operator}}
-                                                    td {{attend.optContent}}
-                                                    td {{attend.msg}}
-                                                    td {{attend.stuJobNumber}}
-                                                    td {{attend.stuName }}
-                                                    td {{attend.stuClassesName}}
-                                                    td {{attend.stuClassesYear }}
-                                                    td {{attend.stuProfessionalName }}
-                                                    td {{attend.stuCollegeName }}
-                                                    td
-                                                        a(ng-if="attend.optContent=='暂停考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 恢复考勤
-                                                        a(ng-if="attend.optContent=='恢复考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 暂停考勤
-                                        .dt-toolbar-footer
-                                            .col-sm-6.col-xs-12.hidden-xs
-                                                .dataTables_info(role='status', aria-live='polite')
-                                                    | 显示第
-                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
-                                                    |  到
-                                                    span.txt-color-darken {{((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10+attendPauseFn.attendList.length}}
-                                                    |  条 总共
-                                                    span.text-primary {{attendPauseFn.page.totalElements}}
-                                                    |  条记录
-                                            .col-sm-6.col-xs-12
-                                                .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='attendPauseFn.page.totalElements', max-size='attendPauseFn.page.pageSize' ng-model='attendPauseFn.page.pageNumber',ng-change="attendPauseFn.getAttendStopLogs()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     #hr5.tab-pane
                         .tabbable.tabs-below
                             .tab-content
@@ -815,6 +716,105 @@
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
                                                     ul.pagination-sm(uib-pagination, total-items='attendFixFn.page.totalElements', max-size='attendFixFn.page.pageSize' ng-model='attendFixFn.page.pageNumber',ng-change="attendFixFn.getAttendListByCondition()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr4.tab-pane
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-9.margin-top-10
+                                            form.form-inline
+                                                .form-group.col-sm-4
+                                                    label.control-label  学生名称：
+                                                    input.form-control(type="text" ng-model="attendPauseFn.params.criteria" placeholder="请输学生名称或学号", my-enter="attendPauseFn.getAttendStopLogs()" )
+                                                .form-group.col-sm-4
+                                                    label 操作类型：
+                                                    select.select2.form-control(ng-model="attendPauseFn.params.opt" )
+                                                        option(value="") 全部
+                                                        option(value="10") 暂停考勤
+                                                        option(value="20") 恢复考勤
+
+                                                .form-group.col-sm-6.margin-top-10
+                                                    label.control-label 时间段：
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择开始日期' type='text' ng-model="attendPauseFn.params.startTime" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                                    .inline-block -
+                                                    .input-append.date.datepicker.datepicker-basic.no-padding.inline-block(data-date='', data-date-format='yyyy-mm-dd' b-datepicker)
+                                                        input.form-control(size='16', ng-disabled='true' name="dateStart" placeholder='请选择结束日期' type='text' ng-model="attendPauseFn.params.endTime" validator="required")
+                                                        span.add-on
+                                                            i.icon-calendar.glyphicon.glyphicon-calendar
+
+                                        .col-sm-3.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ng-click="attendPauseFn.getAttendStopLogs()")
+                                                    span 查询
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                        //input(style="width:auto!important" type="checkbox" ng-click="batch.checkAll(attendPauseFn.attendList, attendPauseFn)" ng-checked="attendPauseFn.checkAllRecord" ng-model="attendPauseFn.checkAllRecord")
+                                                        //| 全选当页
+                                                    th 操作时间
+                                                    th 操作人
+                                                    th 操作内容
+                                                    th 备注理由
+                                                    th 被操作人学号
+                                                    th 被操作人姓名
+                                                    th 班级
+                                                    th 年级
+                                                    th 专业
+                                                    th 院系
+                                                    td 操作
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="attend in attendPauseFn.attendList")
+                                                    td.sorting_1 {{$index+1 + ((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10}}
+                                                    //td
+                                                        input(type="checkbox" ng-click="batch.selSingleRecord(attendPauseFn.attendList, $index, attendPauseFn)" ng-checked="attend.check" ng-model="attend.check")
+                                                    td {{attend.operationTime}}
+                                                    td {{attend.operator}}
+                                                    td {{attend.optContent}}
+                                                    td {{attend.msg}}
+                                                    td {{attend.stuJobNumber}}
+                                                    td {{attend.stuName }}
+                                                    td {{attend.stuClassesName}}
+                                                    td {{attend.stuClassesYear }}
+                                                    td {{attend.stuProfessionalName }}
+                                                    td {{attend.stuCollegeName }}
+                                                    td
+                                                        a(ng-if="attend.optContent=='暂停考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 恢复考勤
+                                                        a(ng-if="attend.optContent=='恢复考勤'" ng-click="attendPauseFn.openAttendDialog(attend)") 暂停考勤
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber*10:(attendPauseFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((attendPauseFn.page.pageNumber==0?attendPauseFn.page.pageNumber+1:attendPauseFn.page.pageNumber)-1)*10+attendPauseFn.attendList.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{attendPauseFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='attendPauseFn.page.totalElements', max-size='attendPauseFn.page.pageSize' ng-model='attendPauseFn.page.pageNumber',ng-change="attendPauseFn.getAttendStopLogs()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr3.tab-pane(ng-if="isUseAuth('classRate')")
+                        .college-handle-container
+                            .jarviswidget-color-blueDark
+                                .widget-body
+                                    form.form-horizontal(name="studentForm")
+                                        fieldset
+                                            legend 到课率设置
+                                        .short-form
+                                            .form-group
+                                                .radio(ng-repeat="obj in attendSettingFn.settingList")
+                                                    input(type='radio', name='inlineRadioOptions',ng-model="attendSettingFn.params.arithmetic" value='{{obj.key}}')
+                                                    |  {{obj.value}}
+
+                                        .form-actions
+                                            .row
+                                                .col-md-12
+                                                    a.btn.btn-primary(ng-click="attendSettingFn.updateAttendacne()" validation-submit="studentForm") 应用设置
     script(type='text/ng-template',id='fixDetailtDialog')
         .repeatLoad
             .repeat_header

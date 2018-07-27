@@ -1,0 +1,61 @@
+{
+    "items":[
+        {
+            "title": "教学日历",
+            "items":[
+                {
+                    "title": "学期安排",
+                    "sref": "termlist",
+                    "active": "period",
+                    "icon": "https://s1.aizhixin.com/8c53f700-06e9-43e9-9b99-a77194a08595.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "课节安排",
+                    "sref": "lessonlist",
+                    "active": "lessonlist",
+                    "icon": "https://s1.aizhixin.com/e0128ae9-8775-4745-bee0-3e03d279ffa6.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "节假日管理",
+                    "sref": "holidayman",
+                    "active": "holidayman",
+                    "icon": "https://s1.aizhixin.com/6c4adaeb-5ab1-4ab8-a758-37c6fef98832.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                }
+            ]
+        },
+        {
+            "title": "课表",
+            "items":[
+                {
+                    "title": "课程表",
+                    "sref": "teachclasslist",
+                    "active": "teachclasslist",
+                    "icon": "https://s1.aizhixin.com/e0128ae9-8775-4745-bee0-3e03d279ffa6.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                },
+                {
+                    "title": "调停课",
+                    "sref": "changecourselist",
+                    "active": "changecourselist",
+                    "icon": "https://s1.aizhixin.com/7cf34797-0aaa-4f0a-b889-cfe38a83eaff.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                }
+            ]
+        },
+        {
+            "title": "考勤",
+            "items":[
+                {
+                    "title": "考勤管理",
+                    "sref": "attendlist",
+                    "active": "attendlist",
+                    "icon": "https://s1.aizhixin.com/fbd1c3b8-04b6-4168-b58b-f98dd4370571.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+                }
+            ]
+        }
+    ]
+}

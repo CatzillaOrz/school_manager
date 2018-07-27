@@ -282,3 +282,38 @@ a:focus {outline: none;}
     left: 30px;
   }
 }
+aside#left-panel{
+  nav{
+    ul{
+      li{
+        a{
+          background: #363843;
+          font-size: 14px;
+          color: #C7C7D4;
+          margin: 0;
+          padding: 15px 0 15px 20px;
+          img{
+            display: inline-block;
+            opacity: 0.8;
+            margin-right: 11px;
+          }
+          transition: All 0.2s linear;
+          &:hover{
+            background: #444656;
+            color: #FFFFFF;
+            img{
+              opacity: 1;
+            }
+          }
+        }
+        .active{
+          background: #499AFF!important;
+          color: #fff!important;
+          img{
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

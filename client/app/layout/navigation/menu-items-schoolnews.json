@@ -1,0 +1,28 @@
+{
+    "items":[
+        {
+            "title": "校园动态",
+            "items":[
+                {
+                    "title": "校园新闻",
+                    "sref": "schoolnewlist",
+                    "icon": "https://s1.aizhixin.com/874e5934-b1df-4a0b-8862-a2fe8dad34f0.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+
+                },
+                {
+                    "title": "消息通知",
+                    "sref": "appnoticelist",
+                    "icon": "https://s1.aizhixin.com/1cd230da-43c2-4c37-aaa4-972e68302e96.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                },
+                {
+                    "title": "调查问卷",
+                    "sref": "schoolnewlist",
+                    "icon": "https://s1.aizhixin.com/cb886b0d-4932-4481-975b-a5b06e93e8a5.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
+                }
+            ]
+        }
+    ]
+}

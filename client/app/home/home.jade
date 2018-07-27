@@ -1,15 +1,40 @@
 .home-container
     .home-content
-        .content-left
-            .round
-            .round
-            .round
-            .round
-            .round
-            .round
-            .round
-        .content-right
-            .welcome 欢迎登录知新树校园管理系统
-            .welcome-en Welcome to ZhiXinPingTai management system
-            .detail 今天是 {{homeFn.year}} 年{{homeFn.month}}月{{homeFn.day}}日 {{homeFn.week}}
-            .tree-bg
+        .swiper-home
+            .swiper-container
+                .swiper-wrapper
+                    .swiper-slide(ng-repeat='img in homeFn.imgs')
+                        a
+                            .home-image(style="background:url({{img}});background-size:cover;")
+                .swiper-pagination
+
+                .swiper-home-button-prv
+                .swiper-home-button-next
+        .content
+            .quick-button(ng-if="data.items.length>0" ng-repeat="data in homeFn.datas")
+                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
+                    header(role='heading')
+                        .jarviswidget-ctrls(role='menu')
+                        span.icon-title
+                        h2 {{'快捷入口'}}
+                        span.jarviswidget-loader
+                            i.fa.fa-refresh.fa-spin
+                        span.operat(ng-click="homeFn.operatMenu($index)") {{data.button}}
+                    div.menus(role='content')
+                        a.item-menu(ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
+                            img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="homeFn.delMenu($parent.$index,$index,$event);")
+                            .img-contain
+                                img(src="https://s1.aizhixin.com/da911f76-ef3b-479b-8710-4278c7e8f657.png")
+                            span {{item.title}}
+            .quick-button(ng-if="homeFn.datas[0].items.length==0")
+                .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
+                    header(role='heading')
+                        .jarviswidget-ctrls(role='menu')
+                        span.icon-title
+                        h2 {{'快捷入口'}}
+                        span.jarviswidget-loader
+                            i.fa.fa-refresh.fa-spin
+                    div.menus(role='content')
+                        .no-content
+                            img(src="https://s1.aizhixin.com/70349e7f-452f-4789-91d8-6ce5e94c80df.png")
+                            div 你还没有添加快捷功能！&nbsp;

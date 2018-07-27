@@ -4,312 +4,71 @@
             "title": "首页",
             "sref": "home",
             "active": "home",
-            "icon": "home",
+            "icon": "https://s1.aizhixin.com/88fc90f6-5ca7-43ef-87ea-31b4e7107048.png",
             "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
-            "title": "学校信息管理",
-            "sref": "setlogo",
-            "icon": "university",
+            "title": "基础信息",
+            "sref": "subindex({type:0})",
+            "icon": "https://s1.aizhixin.com/58541ce8-cd99-4d45-9d0b-4a456ab2562b.png",
             "active": "school",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
-            "items":[
-                {
-                    "title": "设置学校LOGO",
-                    "sref": "setlogo",
-                    "active": "setlogo",
-                    "icon": "cog"
-                },
-                {
-                    "title": "设置轮播图与简介",
-                    "sref": "setplayview",
-                    "active": "setplayview",
-                    "icon": "cogs"
-                },
-                {
-                    "title": "设置热门专业",
-                    "sref": "sethotmajor",
-                    "active": "sethotmajor",
-                    "icon": "wrench"
-                },
-                {
-                    "title": "设置优秀老师",
-                    "sref": "setexcellentteacher",
-                    "active": "setexcellentteacher",
-                    "icon": "gavel"
-                },
-                {
-                    "title": "设置精品课程",
-                    "sref": "setboutiquecourse",
-                    "active": "setboutiquecourse",
-                    "icon": "magic"
-                },
-                {
-                    "title": "精品课程申请处理",
-                    "sref": "boutiquecourseapply",
-                    "active": "boutiquecourseapply",
-                    "icon": "magic"
-                },
-                {
-                    "title": "app校园动态",
-                    "sref": "schoolnewlist",
-                    "active": "schoolnewlist",
-                    "icon": "magic"
-                },
-                {
-                    "title": "app发布通知",
-                    "sref": "appnoticelist",
-                    "active": "appnoticelist",
-                    "icon": "magic"
-                }
-            ]
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
-            "title": "学校机构和人员",
-            "sref": "college.list",
-            "icon": "object-group",
+            "title": "班课管理",
+            "sref": "subindex({type:1})",
+            "icon": "https://s1.aizhixin.com/9e7c8512-a04f-4cc8-beb9-712ff01bcf21.png",
             "active": "organization",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN",
-            "items":[
-                {
-                    "title": "院系管理",
-                    "sref": "college.list",
-                    "active": "college",
-                    "icon": "building-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
-                },
-                {
-                    "title": "专业管理",
-                    "sref": "majorlist",
-                    "active": "major",
-                    "icon": "bookmark-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
-                    "title": "班级管理",
-                    "sref": "classlist",
-                    "active": "class",
-                    "icon": "users",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
-                    "title": "教师管理",
-                    "sref": "teacherlist",
-                    "active": "teacher",
-                    "icon": "id-card-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
-                    "title": "辅导员管理",
-                    "sref": "instructorList",
-                    "active": "instructorList",
-                    "icon": "id-card-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
-                    "title": "学生管理",
-                    "sref": "studentlist",
-                    "active": "student",
-                    "icon": "graduation-cap",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
-                }
-            ]
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
-
         {
-            "title": "学期管理",
-            "sref": "periodlist",
+            "title": "评教管理",
+            "sref": "subindex({type:2})",
             "active": "period",
-            "icon": "calendar",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
+            "icon": "https://s1.aizhixin.com/8d7c0331-22ba-4fe1-b188-d0c91b258ba7.png",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
-            "title": "课程基本信息",
-            "sref": "courselist",
+            "title": "实践教学",
+            "sref": "subindex({type:3})",
             "active": "course",
-            "icon": "book",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-        },
-        {
-            "title": "课程安排管理",
-            "sref": "teachclasslist",
-            "active": "teachclass",
-            "icon": "th",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
-            "items":[
-                {
-                    "title": "课程安排",
-                    "sref": "teachclasslist",
-                    "active": "teachclasslist",
-                    "icon": "pencil-square-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
-                },
-                {
-                    "title": "节假日管理",
-                    "sref": "holidayman",
-                    "active": "holidayman",
-                    "icon": "signal",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
-                },
-                {
-                    "title": "节假日补休调课",
-                    "sref": "changecourse",
-                    "active": "changecourse",
-                    "icon": "signal",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
-                },
-                {
-                    "title": "教师调停课记录",
-                    "sref": "changecourselist",
-                    "active": "changecourselist",
-                    "icon": "signal",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
-                }
-            ]
-        },
-        {
-            "title": "教务管理",
-            "sref": "attendlist",
-            "icon": "navicon",
-            "active": "eduman",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
-            "items":[
-                {
-                    "title": "考勤记录",
-                    "sref": "attendlist",
-                    "active": "attendlist",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "教师课表",
-                    "sref": "teacherListSimplify",
-                    "active": "teacherListSimplify",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "课程评分",
-                    "sref": "coursescore",
-                    "active": "coursescore",
-                    "icon": "signal"
-                },
-                {
-                    "title": "电子围栏",
-                    "sref": "elecfence",
-                    "active": "elecfence",
-                    "icon": "barcode"
-                },
-                {
-                    "title": "导员考勤",
-                    "sref": "instructor",
-                    "active": "instructor",
-                    "icon": "barcode"
-                },
-                {
-                    "title": "教学数据",
-                    "sref": "teachingData",
-                    "active": "teachingData",
-                    "icon": "comments-o"
-                }
-            ]
-        },
-        {
-            "title": "教学质量评价",
-            "sref": "attendlist",
-            "icon": "navicon",
-            "active": "eduman",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER",
-            "items":[
-                {
-                    "title": "学生评教",
-                    "sref": "evaquestion",
-                    "active": "evaquestion",
-                    "icon": "question-circle"
-                },
-                {
-                    "title": "教师评学",
-                    "sref": "evaquestiontea",
-                    "active": "evaquestiontea",
-                    "icon": "question-circle"
-                },
-                {
-                    "title": "教师/督导同行评教",
-                    "sref": "evaquesamepart",
-                    "active": "evaquesamepart",
-                    "icon": "question-circle"
-                },
-                {
-                    "title": "教学主动反馈",
-                    "sref": "teachingSupervisor",
-                    "active": "teachingSupervisor",
-                    "icon": "comments-o"
-                }
-            ]
-        },
-        {
-            "title": "权限管理",
-            "sref": "distlist",
-            "icon": "navicon",
-            "active": "rolemanager",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN",
-            "items":[
-                {
-                    "title": "角色分配",
-                    "sref": "distlist",
-                    "active": "distlist",
-                    "icon": "pencil-square-o"
-                },
-                {
-                    "title": "已分配列表",
-                    "sref": "distedlist",
-                    "active": "distedlist",
-                    "icon": "pencil-square-o"
-                }
-            ]
+            "icon": "https://s1.aizhixin.com/44e41d75-0826-48d3-a192-9279752e816a.png",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "迎新管理",
-            "sref": "dormbuildingman",
-            "icon": "navicon",
+            "sref": "subindex({type:4})",
+            "active": "teachclass",
+            "icon": "https://s1.aizhixin.com/56976e88-93c8-4d7a-a689-08c45e5a6115.png",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+        },
+        {
+            "title": "统计报表",
+            "sref": "subindex({type:5})",
+            "icon": "https://s1.aizhixin.com/a9f34499-ad4d-4c2e-89b8-04028ab58cb1.png",
+            "active": "eduman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+        },
+        {
+            "title": "权限管理",
+            "sref": "subindex({type:6})",
+            "icon": "https://s1.aizhixin.com/83939c75-9db1-4aec-a940-663a77e128cd.png",
+            "active": "eduman",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+        },
+        {
+            "title": "电子围栏",
+            "sref": "subindex({type:7})",
+            "icon": "https://s1.aizhixin.com/302dda61-efec-4cbb-a841-325ebe74b6d8.png",
+            "active": "rolemanager",
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+        },
+        {
+            "title": "校园动态",
+            "sref": "subindex({type:8})",
+            "icon": "https://s1.aizhixin.com/03420ccb-0495-4dd4-bb81-128ff6e86c55.png",
             "active": "dormmansys",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN,ROLE_FINANCE_ADMIN",
-            "items":[
-                {
-                    "title": "宿舍楼管理",
-                    "sref": "dormbuildingman",
-                    "active": "dormbuildingman",
-                    "icon": "pencil-square-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
-                },
-                {
-                    "title": "宿舍管理",
-                    "sref": "dormman",
-                    "active": "dormman",
-                    "icon": "pencil-square-o",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN"
-                },
-                {
-                    "title": "在线缴费",
-                    "sref": "payment",
-                    "active": "payment",
-                    "icon": "money",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
-                }
-            ]
-        },
-        {
-            "title": "实时监控分析",
-            "sref": "geodetail",
-            "target":"_blank",
-            "active": "geodetail",
-            "icon": "bar-chart-o",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
-        },
-        {
-            "title": "批量导入数据",
-            "sref": "batch.imp",
-            "active": "geodetail",
-            "icon": "file",
-            "role": "ROLE_ORG_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
         }
     ]
 }

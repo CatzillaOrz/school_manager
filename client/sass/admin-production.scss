@@ -11024,8 +11024,9 @@ h6 {
 aside {
   $bgcolorA:#2c3e50;
   $bgcolorB:#2c3e50;
+  $bgcolorC:#2A2A34;
   display: block;
-  background: $bgcolorA;
+  background: $bgcolorC!important;
   background: -moz-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
   background: -webkit-gradient(linear, left top, right top, color-stop(93%, $bgcolorA), color-stop(100%, $bgcolorA));
   background: -webkit-linear-gradient(left, $bgcolorA 93%, $bgcolorA 100%);
@@ -11280,11 +11281,11 @@ aside {
 }
 
 #header > :first-child, aside {
-  width: 220px
+  width: 200px
 }
 #header>:first-child {
   //background: $brand-primary;
-  background: #54BF9B;
+  background: #363843;
 }
 #left-panel {
   position: absolute;

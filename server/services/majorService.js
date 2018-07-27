@@ -4,7 +4,6 @@
 'use strict';
 
 
-
 var Promise = require('bluebird'),
   RestClient = require('./helper/RestClient'),
   Config = require('../config/environment'),

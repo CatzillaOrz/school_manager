@@ -1183,7 +1183,7 @@ angular.module('dleduWebApp')
             },
         };
         //$scope.attendSettingFn.init();
-        $scope.attendTimeFn.init();
+        $scope.attendFixFn.getAttendListByCondition();
         $timeout(function () {
             $scope.$watch('attendFn.params.collegeId', function (newValue, oldValue) {
                 if (!newValue) {

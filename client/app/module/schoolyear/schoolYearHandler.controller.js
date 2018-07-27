@@ -39,7 +39,7 @@ angular.module('dleduWebApp')
 				SchoolYearService.addSemester(params).$promise
 					.then(function (data) {
 						messageService.openMsg("新增学期成功！");
-						$state.go("periodlist");
+						$state.go("termlist");
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error, "新增学期失败！"));
@@ -55,7 +55,7 @@ angular.module('dleduWebApp')
 				SchoolYearService.updateSemester(params).$promise
 					.then(function (data) {
 						messageService.openMsg("更新学期成功！");
-						$state.go("periodlist");
+						$state.go("termlist");
 					})
 					.catch(function (error) {
 						messageService.openMsg(CommonService.exceptionPrompt(error, "更新学期失败！"));
