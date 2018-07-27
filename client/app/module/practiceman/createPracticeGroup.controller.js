@@ -402,6 +402,7 @@ angular.module('dleduWebApp')
 				if(this.validateDate(entity.startDate, entity.endDate)){
 					return;
 				}
+				entity.endDate = entity.endDate + ' 23:59:59';
 				if(this.isEidt){
 					entity.id = this.id;
 					PracticeManService.updatePracticeGroup(entity).$promise
@@ -441,7 +442,7 @@ angular.module('dleduWebApp')
 			//校验日期
 			validateDate: function(startDate, endDate){
 				var resultFlag = false;
-				var start = new Date(startDate + ' 00:00:00').getTime(), end = new Date(endDate + ' 23:59:59').getTime();
+				var start = new Date(startDate + ' 00:00:00').getTime(), end = new Date(endDate + ' 00:00:00').getTime();
 				var timeStampCurrent = new Date(new Date().setHours(0, 0, 0, 0));
 				if(start >= end){
 					resultFlag = true;
