@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/6/21.
  */
 angular.module('dleduWebApp')
-	.controller('EvaQuestionCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
+	.controller('EvaQuestionCtrl', function ($scope, $state, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
@@ -113,6 +113,9 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.getEvaQuesList();
+				if($state.current.name == "evaquestionreport"){
+					$scope.isReport = true;//是否是统计报表
+				}
 			}
 		};
 		$scope.evaQuesListFn.init();

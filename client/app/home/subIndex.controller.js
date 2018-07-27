@@ -7,36 +7,13 @@ angular.module('dleduWebApp')
         $scope.subIndexFn={
             type: $state.params.type,
             datas: [],
-            imgs: ['https://s1.aizhixin.com/977b5de4-fec1-4762-8bcd-ce78fab31e47.jpg',
-                'https://s1.aizhixin.com/c54e9e93-3ba6-4c33-bc23-6679ebed4c8a.png',
-                'https://s1.aizhixin.com/02804385-bc4a-4b9a-bf18-43a83cde8a4d.png'],
-
             //baseinfo 学校信息管理， organ学校组织机构， attend教务考勤管理，qc教学质量管理， pt实践教学，welcome迎新管理，role权限管理
-            dataSource: ['app/layout/navigation/menu-items-baseinfo.json',
-                'app/layout/navigation/menu-items-organ.json','app/layout/navigation/menu-items-attend.json',
-                'app/layout/navigation/menu-items-qc.json','app/layout/navigation/menu-items-ptcalc.json',
-                'app/layout/navigation/menu-items-welcome.json', 'app/layout/navigation/menu-items-role.json'], //菜单数据json
+            dataSource: ['app/layout/navigation/menu-items-baseinfo.json', 'app/layout/navigation/menu-items-classcourse.json',
+                'app/layout/navigation/menu-items-qc.json', 'app/layout/navigation/menu-items-ptcalc.json',
+                'app/layout/navigation/menu-items-welcome.json', 'app/layout/navigation/menu-items-attend.json',
+                'app/layout/navigation/menu-items-role.json', 'app/layout/navigation/menu-items-elecfence.json',
+                'app/layout/navigation/menu-items-schoolnews.json'], //菜单数据json
             quickMenu: [],
-
-            swiper: function(){
-                $timeout(function () {
-                    var swiper = new Swiper('.swiper-container', {
-                        autoplay: 2000,
-                        autoplayDisableOnInteraction: false,
-                        speed: 2000,
-                        loop: true,
-                        // 如果需要分页器
-                        pagination: '.swiper-pagination',
-                        paginationClickable: true,
-                        //监听，自动更新
-                        observer: true,
-                        observeParents: true,
-                        // 如果需要前进后退按钮
-                        nextButton: '.swiper-home-button-prv',
-                        prevButton: '.swiper-home-button-next'
-                    },100);
-                })
-            },
 
             getMenu: function(type){
                 var that = this;
@@ -89,7 +66,7 @@ angular.module('dleduWebApp')
                     this.datas[index].button = '完成';
                     for(var i = 0, len = datas.length; i < len; i++){
                         datas[i].isShow = true;
-                        datas[i].selImg = 'https://s1.aizhixin.com/03f6d93a-5f9f-478f-932c-a90778510d69.png';
+                        datas[i].selImg = 'https://s1.aizhixin.com/cf1ac5c4-65b6-4361-b65a-6682e92520c0.png';//新增图片
                         datas[i].isSel = false;
                     }
                 }else{//点击完成时保存选择的菜单
@@ -187,11 +164,11 @@ angular.module('dleduWebApp')
                 $event.stopPropagation();
                 var item = this.datas[parent].items[sub];
                 if(!item.isSel){
-                    item.selImg = 'https://s1.aizhixin.com/1b817db3-fc27-4173-8a6f-2dff73c5c22d.png';
+                    item.selImg = 'https://s1.aizhixin.com/ad00a3a7-c359-46c5-a8fa-75b4211cf520.png';//对勾
                     item.isSel = true;
                 }else{
                     item.isSel = false;
-                    item.selImg = 'https://s1.aizhixin.com/03f6d93a-5f9f-478f-932c-a90778510d69.png';
+                    item.selImg = 'https://s1.aizhixin.com/cf1ac5c4-65b6-4361-b65a-6682e92520c0.png'; //新增
                 }
 
             },
@@ -209,7 +186,6 @@ angular.module('dleduWebApp')
             },
 
             init:function () {
-                this.swiper();
                 this.getMenu(this.type);
                 this.getDefMenu();
             }

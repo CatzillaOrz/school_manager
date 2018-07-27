@@ -8,7 +8,7 @@ header#header.hidden-print
             a(ui-sref='login' title='Sign Out' data-action='userLogout' data-logout-msg='You can improve your security further after logging out by closing this opened browser')
                 i.fa.fa-sign-out
     .head-navigation.hidden-print
-        ul
+        //ul
             li(ng-class="{'active': nav.selected}", ui-sref='{{nav.url}}' ng-repeat='nav in layoutFn.nav', ng-click='layoutFn.redirectTo(nav)') {{nav.name}}
     .pull-right.hidden-print
         ul.account(ng-if=' layoutFn.user')

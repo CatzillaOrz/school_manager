@@ -211,6 +211,20 @@ angular.module('dleduWebApp')
 					label: '学生评教'
 				}
 			})
+			.state('evaquestionreport', {
+				parent: 'base',
+				url   : '/evaquestionreport',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuestionCtrl',
+						templateUrl: 'app/module/eduman/evaquestion.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '学生评教报表'
+				}
+			})
 			.state('evaquesshow', {
 				parent: 'evaquestion',
 				url   : '/evaquesshow/:id',
@@ -502,6 +516,20 @@ angular.module('dleduWebApp')
 					label: '教师评学'
 				}
 			})
+			.state('evaquestionteareport', {
+				parent: 'base',
+				url   : '/evaquestionteareport',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQuestionTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquestiontea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学报表'
+				}
+			})
 			.state('evaquesshowtea', {
 				parent: 'evaquestiontea',
 				url   : '/evaquesshowtea/:id',
@@ -573,9 +601,9 @@ angular.module('dleduWebApp')
 				}
 			})
 
-			.state('evaquesamepart', {
+			.state('evaquesamepartreport', {
 				parent: 'base',
-				url   : '/evaquesamepart',
+				url   : '/evaquesamepartreport',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {

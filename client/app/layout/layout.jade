@@ -82,7 +82,7 @@
 .placeholder-left-panel(data-smart-include='app/layout/navigation/navigationCalc.html' ng-show="layoutFn.currentLink =='teachingSummary'")
 
 #main(role='main')
-    #ribbon
+    #ribbon(style="left:0" ng-show="layoutFn.isShowBack()")
         //span.ribbon-button-alignment.pull-right
             span.btn.btn-ribbon.hidden-xs
                 i.fa.fa-gear

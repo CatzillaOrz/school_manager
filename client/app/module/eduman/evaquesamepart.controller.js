@@ -3,7 +3,7 @@
  * 同行评教
  */
 angular.module('dleduWebApp')
-	.controller('EvaQueSamePartCtrl', function ($scope, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
+	.controller('EvaQueSamePartCtrl', function ($scope, $state, AuthService, EduManService, RoleAuthService, ngDialog, messageService) {
 		$scope.evaQuesListFn={
 			//问卷列表
 			records: [],
@@ -115,6 +115,9 @@ angular.module('dleduWebApp')
 
 			init: function () {
 				this.getEvaQuesList();
+				if($state.current.name == "evaquesamepartreport"){
+					$scope.isReport = true;//是否是统计报表
+				}
 			}
 		};
 		$scope.evaQuesListFn.init();

@@ -6,7 +6,12 @@ aside#left-panel
     //div(login-info='')
     // end user info
     nav
-        ul(data-smart-menu-items="app/layout/navigation/menu-items.json")
+        //ul(data-smart-menu-items="app/layout/navigation/menu-items.json")
+        ul
+            li(ng-repeat="menu in layoutFn.datas")
+                a(ng-class="{'active': menu.selected}" ng-click='layoutFn.clickMenu(menu)' ui-sref="{{menu.sref}}")
+                    img(src="{{menu.icon}}")
+                    span {{menu.title}}
 
     //span.minifyme(data-action='minifyMenu', minify-menu='')
         i.fa.fa-arrow-circle-left.hit

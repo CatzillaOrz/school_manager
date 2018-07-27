@@ -21,7 +21,34 @@ angular.module('dleduWebApp')
                     label: '学期管理'
                 }
             })
-
+            .state('termlist', {
+                parent: 'period',
+                url   : '/period/termlist',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'TermListCtrl',
+                        templateUrl: 'app/module/schoolyear/termList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '学期安排'
+                }
+            })
+            .state('lessonlist', {
+                parent: 'period',
+                url   : '/period/lessonlist',
+                access: {requiredLogin: true},
+                views : {
+                    'content@base': {
+                        controller : 'LessonListCtrl',
+                        templateUrl: 'app/module/schoolyear/lessonList.html'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: '课节安排'
+                }
+            })
             .state('periodCreate', {
                 parent: 'period',
                 url   : '/period/create',
@@ -95,7 +122,7 @@ angular.module('dleduWebApp')
             }
         })
         .state('weeklist', {
-            parent: 'periodlist',
+            parent: 'termlist',
             url   : '/period/weeklist/:id',
             access: {requiredLogin: true},
             views : {

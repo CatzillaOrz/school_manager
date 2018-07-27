@@ -1,0 +1,39 @@
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(d ata-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            span.widget-icon
+                i.fa.fa-table
+            h2 课节列表
+            span.jarviswidget-loader
+                i.fa.fa-refresh.fa-spin
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body
+                .tabbable.tabs-below
+                    .tab-content.padding-10
+                        .col-sm-offset-6.col-xs-6.hidden-xs.no-padding.margin-bottom-10
+                            .ColVis
+                                button.btn.btn-primary(ui-sref="semesterCreate" ng-if="preiodFn.isUseAuth('addtime')")
+                                    span 添加新的时段
+                        table.table.table-condensed.table-bordered.table-hover(ng-table='demo.tableParams')
+                            tr( ng-repeat='schoolTerm in preiodFn.periodList', ng-repeat-end='')
+                                td(sortable="'country'", data-title="'课节'", groupable="'country'")
+                                    | {{schoolTerm.name}}
+                                td(sortable="'name'", data-title="'上课时间'", groupable="'name'")
+                                    | {{schoolTerm.startTime}}
+                                td(sortable="'age'", data-title="'下课时间'", groupable="'age'")
+                                    | {{schoolTerm.endTime}}
+                                td(sortable="'money'", data-title="'操作'")
+                                    a.handle.margin-left-10(ui-sref="semesterEdit({id:schoolTerm.id})" ng-if="preiodFn.isUseAuth('update')")
+                                        i.fa.fa-pencil-square-o
+                                        span 编辑
+                                    a.handle.margin-left-10(ng-click="preiodFn.deletePeriodPrompt(schoolTerm)" ng-if="preiodFn.isUseAuth('del')")
+                                        i.fa.fa-trash-o
+                                        span 删除
+        // end widget div

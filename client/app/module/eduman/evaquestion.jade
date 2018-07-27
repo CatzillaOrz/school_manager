@@ -50,22 +50,22 @@
                                     //a.handle.disable-style(ng-if="evaQuesListFn.isUseAuth('dist')&&record.isEnd=='已截至'" )
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ng-if="evaQuesListFn.isUseAuth('dist')" ui-sref="distributelist({id:0,quesId:record.id,type:record.isEnd!='已截至'?'unend':'end'})" )
+                                    a.handle(ng-if="evaQuesListFn.isUseAuth('dist')&&!isReport" ui-sref="distributelist({id:0,quesId:record.id,type:record.isEnd!='已截至'?'unend':'end'})" )
                                         i.fa.fa-pencil-square-o
                                         span 分配
-                                    a.handle(ng-if="evaQuesListFn.isUseAuth('edit')&&record.teachingNum==0" ui-sref="evaquesedit({id:record.id})" )
+                                    a.handle(ng-if="evaQuesListFn.isUseAuth('edit')&&record.teachingNum==0&&!isReport" ui-sref="evaquesedit({id:record.id})" )
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle.disable-style(ng-if="evaQuesListFn.isUseAuth('edit')&&record.teachingNum!=0")
+                                    a.handle.disable-style(ng-if="evaQuesListFn.isUseAuth('edit')&&record.teachingNum!=0&&!isReport")
                                         i.fa.fa-pencil-square-o
                                         span 编辑
-                                    a.handle(ng-click="evaQuesListFn.preViewQue($index)")
+                                    a.handle(ng-if="!isReport" ng-click="evaQuesListFn.preViewQue($index)")
                                         i.fa.fa-bars
                                         span 预览
                                     a.handle(ui-sref="evaquestatic({type:0,id:record.id})")
                                         i.fa.fa-line-chart
                                         span 统计
-                                    a.handle(ng-click="evaQuesListFn.openEditDate($index)")
+                                    a.handle(ng-if="!isReport" ng-click="evaQuesListFn.openEditDate($index)")
                                         i.fa.fa-pencil-square-o
                                         span 修改日期
 
