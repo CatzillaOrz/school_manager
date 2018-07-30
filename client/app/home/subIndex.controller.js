@@ -83,9 +83,9 @@ angular.module('dleduWebApp')
                     SchoolService.saveDefMenu(params).$promise
                         .then(function (data) {
                             if(data.success){
-                               that.openDialogNew('添加快捷入口成功！');
+                                that.openDialogNew('添加成功');
                             }else{
-                                that.openDialogNew('添加快捷入口失败！');
+                                that.openDialogNew('添加失败');
                             }
                             that.datas[index].button = '管理';
                             for(var i = 0, len = datas.length; i < len; i++){
@@ -102,13 +102,16 @@ angular.module('dleduWebApp')
             //添加用到的特定弹框
             openDialogNew: function(msg,timer){
                 var template = '<div class="new-dialog">'+
-                    '<img src="https://s1.aizhixin.com/aac16d20-7db2-47fd-a398-b213f571b93b.png" class="img-success"/>' +
+                    '<img src="https://s1.aizhixin.com/099c1270-c025-4680-97d0-88f4a027661c.png" class="img-success"/>' +
                     '<div class="tip">' + msg + '</div>' +
                     '</div>';
                 ngDialog.open({
                     template: template,
                     plain: true,
-                    width: 400
+                    width: 150,
+                    className: 'home-dialog-response',
+                    showClose: false,
+                    disableAnimation: true
                 });
                 if(timer =="" || timer ==undefined || timer == null){
                     timer = 2000;
