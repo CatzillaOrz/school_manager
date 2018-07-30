@@ -79,11 +79,28 @@ angular.module('dleduWebApp')
                 }
             },
 
-            //删除功能选择功能
-            delMenu: function(parent, sub, $event){
+	        /**
+             * 删除快捷入口
+             * @param parent 父index
+             * @param sub
+             * @param $event
+	         */
+            delTip: function(parent, sub, $event){
                 $event.preventDefault();
                 $event.stopPropagation();
-                var that = this, datas = angular.copy(this.datas);
+                $scope.parentIndex = parent;
+                $scope.subIndex = sub;
+                var that = this;
+                this.confirmDialog("将该功能从快捷入口移除？", that.delMenu);
+            },
+
+            //删除功能选择功能
+            delMenu: function(){
+                var parent = $scope.parentIndex;
+                var sub = $scope.subIndex;
+                //$event.preventDefault();
+                //$event.stopPropagation();
+                var that = $scope.homeFn, datas = angular.copy(that.datas);
                 datas[parent].items.splice(sub, 1);
                 var items = datas[parent].items;
                 for(var i = 0, len = items.length; i < len; i++){
@@ -92,13 +109,12 @@ angular.module('dleduWebApp')
                     delete items[i].isSel;
                 }
                 var params = {menus: JSON.stringify(datas[parent].items)};
-                //that.confirmDialog('将该功能从快捷入口移除？');
                 SchoolService.saveDefMenu(params).$promise
                     .then(function (data) {
                         if(data.success){
-                            that.openDialogNew('移除快捷入口成功！');
+                            that.openDialogNew('移除成功');
                         }else{
-                            that.openDialogNew('移除快捷入口失败！');
+                            that.openDialogNew('移除失败');
                         }
                         that.getQuickMenu();
                     })
@@ -109,13 +125,16 @@ angular.module('dleduWebApp')
 
             openDialogNew: function(msg,timer){
                 var template = '<div class="new-dialog">'+
-                    '<img src="https://s1.aizhixin.com/aac16d20-7db2-47fd-a398-b213f571b93b.png" class="img-success"/>' +
+                    '<img src="https://s1.aizhixin.com/099c1270-c025-4680-97d0-88f4a027661c.png" class="img-success"/>' +
                     '<div class="tip">' + msg + '</div>' +
                     '</div>';
                 ngDialog.open({
                     template: template,
                     plain: true,
-                    width: 400
+                    width: 150,
+                    className: 'home-dialog-response',
+                    showClose: false,
+                    disableAnimation: true
                 });
                 if(timer =="" || timer ==undefined || timer == null){
                     timer = 2000;
@@ -131,12 +150,13 @@ angular.module('dleduWebApp')
                 ngDialog.openConfirm({
                     template: '<h5 class="">'+Msg+'</h5>' +
                     '<div class="ngdialog-buttons">' +
-                    '<button type="button" class="ngdialog-button ngdialog-button-secondary btn-small" ng-click="closeThisDialog(0)">取消</button>' +
-                    '<button type="button" class="ngdialog-button ngdialog-button-primary btn-small" ng-click="confirm(1)">确定</button>' +
+                    '<button type="button" class="ngdialog-button ngdialog-button-primary btn-small home-button ok" ng-click="confirm(1)">确定</button>' +
+                    '<button type="button" class="ngdialog-button ngdialog-button-secondary btn-small home-button" ng-click="closeThisDialog(0)">取消</button>' +
                     '</div>',
                     plain   : true,
-                    width : 150,
-                    //className: 'aa',
+                    width : 289,
+                    className: 'ngdialog-theme-default home-dialog-confirm',
+                    showClose: false,
                 }).then(
                     function (value) {
                         if(callback) {
