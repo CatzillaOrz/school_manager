@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('HomeCtrl', function ($scope, $state, $http, $timeout, AuthService, SchoolService, ngDialog) {
         $scope.homeFn={
-            imgs: ['https://s1.aizhixin.com/977b5de4-fec1-4762-8bcd-ce78fab31e47.jpg'],
+            imgs: ['https://s1.aizhixin.com/83727622-0d88-4a65-b79b-c66f31dc6b99.png'],
             swiper: function(){
                 $timeout(function () {
                     var swiper = new Swiper('.swiper-container', {
