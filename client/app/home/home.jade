@@ -24,7 +24,7 @@
                         a.item-menu(ng-repeat='item in data.items' ui-sref="{{item.sref}}" target="{{item.target?'_blank':''}}")
                             img.operate-sel(ng-show="item.isShow" src="{{item.selImg}}" ng-click="homeFn.delTip($parent.$index,$index,$event);")
                             .img-contain
-                                img(src="https://s1.aizhixin.com/da911f76-ef3b-479b-8710-4278c7e8f657.png")
+                                img(src="{{item.icon}}")
                             span {{item.title}}
             .quick-button(ng-if="homeFn.datas[0].items.length==0")
                 .jarviswidget.button-content(data-widget-editbutton='false', style='', role='widget')
