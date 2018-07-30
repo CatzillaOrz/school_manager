@@ -126,7 +126,7 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getCurrentSemester(params).$promise
                     .then(function (data) {
-                        _this.entity.semesterId = data.id;
+                        _this.entity.semesterId = data.id+"";
                         _this.schoolYearDropList=[data];
                     })
                     .catch(function (error) {
@@ -285,10 +285,8 @@ angular.module('dleduWebApp')
                 };
                 EduManService.getCurrentSemester(params).$promise
                     .then(function (data) {
-                        _this.entity.semesterId = data.id;
+                        _this.entity.semesterId = data.id + "";
                         _this.schoolYearDropList=[data];
-
-
                     })
                     .catch(function (error) {
 
