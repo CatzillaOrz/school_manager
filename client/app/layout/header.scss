@@ -28,11 +28,11 @@
     float: right;
     // margin: 26px 30px 26px 10px;
     display: table;
-
+    margin-right: 20px;
+    color: #5D626F;
     li {
       &:hover {
-        //background: #f5f5f5;
-        color: $brand-logo;
+        color: $brand-logo!important;
         cursor: pointer;
       }
     }
@@ -56,7 +56,7 @@
       }
       #user-name {
         display: inline;
-        font-size: 14px;
+        font-size: 12px;
         .caret {
           margin-left: 5px;
         }
@@ -67,14 +67,14 @@
         left: auto;
         right: 0;
         border-radius: 0;
-        margin: 0;
+        margin: 5px 0 0 0;
         text-align: center;
         border-width: 1px;
         border-style: solid;
         border-color: #f0f0f0;
         background: #ffffff;
         font-size: 12px;
-        @include box-shadow2(6px, 6px, 0, rgba(0, 0, 0, 0.05));
+        box-shadow:0px 1px 2px 0px rgba(221,223,233,1);
         li a {
           padding: 6px 20px;
           &:hover {
