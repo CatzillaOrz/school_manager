@@ -74,8 +74,10 @@ angular.module('dleduWebApp')
              */
             toActive: function(){
                 //window.location.href = "http://passport.aizhixintest.com/userActiveOfficialDef?org=lmcs" ;
-                var domain = AuthService.getUser().orgDomainName;
-                window.location.href = "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
+                var domain = location.hostname.split(".")[0];
+                if(domain.length == 4){
+                    window.location.href = "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
+                }
             },
 
 	        /**
@@ -90,8 +92,10 @@ angular.module('dleduWebApp')
                 } else {
                     window.location.href = "//" + location.hostname + "//account/forgotpassword"
                 }*/
-                var domain = AuthService.getUser().orgDomainName;
-                window.location.href = "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
+                var domain = location.hostname.split(".")[0];
+                if(domain.length == 4){
+                    window.location.href = "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
+                }
             },
 
             isLogin: function(){
@@ -304,6 +308,14 @@ angular.module('dleduWebApp')
 	         * 点击去往不同的功能
              */
             goPage: function(host, path){
+                if(host == '6'){
+                    var role = AuthService.getUser().roleNames.join("");
+                    if(role == 'ROLE_STUDENT'){
+                        path = '/student/list';
+                    }else{
+                        path = '/monitor';
+                    }
+                }
                 AuthService.navigation(host, path);
             },
 
