@@ -1,0 +1,1127 @@
+/* -------------------------------------------------------------
+  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+
+  List of CSS3 Sass Mixins File to be @imported and @included as you need
+
+  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
+  ENDING css files
+
+  note: All CSS3 Properties are being supported by Safari 5
+  more info: http://www.findmebyip.com/litmus/#css3-properties
+
+------------------------------------------------------------- */
+/**
+ * Created by Secmax on 16/5/20.
+ */
+h1 {
+  font-size: 28px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+h2 {
+  font-size: 26px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+h3 {
+  font-size: 22px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+h4 {
+  font-size: 18px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+h5 {
+  font-size: 16px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+h6 {
+  font-size: 14px;
+  font-family: "PingFang SC", "SimSun", Helvetica, Arial, Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit; }
+
+/* left side */
+/* right side */
+/* the color that flashes when you click on the first nav element */
+.avatar-20 {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-20 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 20px; }
+  .avatar-20 span.fn {
+    line-height: 20px; }
+
+.avatar-30 {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-30 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 30px; }
+  .avatar-30 span.fn {
+    line-height: 30px; }
+
+.avatar-40 {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-40 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 40px; }
+  .avatar-40 span.fn {
+    line-height: 40px; }
+
+.avatar-50 {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-50 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 50px; }
+  .avatar-50 span.fn {
+    line-height: 50px; }
+
+.avatar-60 {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-60 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 60px; }
+  .avatar-60 span.fn {
+    line-height: 60px; }
+
+.avatar-70 {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-70 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 70px; }
+  .avatar-70 span.fn {
+    line-height: 70px; }
+
+.avatar-80 {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-80 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 80px; }
+  .avatar-80 span.fn {
+    line-height: 80px; }
+
+.avatar-100 {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-100 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 100px; }
+  .avatar-100 span.fn {
+    line-height: 100px; }
+
+.avatar-120 {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-120 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 120px; }
+  .avatar-120 span.fn {
+    line-height: 120px; }
+
+.avatar-150 {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  .avatar-150 img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 150px; }
+  .avatar-150 span.fn {
+    line-height: 150px; }
+
+.img-circle {
+  border-radius: 50%;
+  overflow: hidden;
+  text-align: center;
+  background: #fff; }
+
+.azx-school-header {
+  background-color: #f8f8f8;
+  font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif; }
+  .azx-school-header .school-header {
+    background: #ffffff;
+    height: 50px;
+    width: 100%;
+    z-index: 999;
+    position: relative;
+    border-bottom: 1px solid #eeeeee; }
+    .azx-school-header .school-header .border-top {
+      width: 100%;
+      height: 2px;
+      background: #58b5a2 url("//s.aizhixin.com/nav_top_border.gif") repeat-y;
+      -webkit-background-size: cover;
+      background-size: cover; }
+    .azx-school-header .school-header .school-nav-bar {
+      width: 990px;
+      margin: 0px auto; }
+      .azx-school-header .school-header .school-nav-bar .logo {
+        display: inline-block;
+        vertical-align: middle;
+        height: 50px; }
+      .azx-school-header .school-header .school-nav-bar .account {
+        height: 48px;
+        float: right;
+        margin: 0 0 0 8px;
+        display: table; }
+        .azx-school-header .school-header .school-nav-bar .account li:hover {
+          color: #3D8DFF;
+          cursor: pointer; }
+        .azx-school-header .school-header .school-nav-bar .account .user-menu {
+          width: 145px;
+          text-align: right;
+          padding: 0;
+          height: 48px;
+          display: table-cell;
+          color: #ccc;
+          font-size: 12px;
+          vertical-align: middle; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu .user-avatar {
+            margin: 4px 10px 4px 0; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu #user-name {
+            display: inline;
+            color: #ffa133;
+            font-size: 12px; }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu #user-name .caret {
+              margin-left: 5px; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu .signout {
+            color: #ccc; }
+          .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu {
+            width: 130px;
+            min-width: 130px !important;
+            left: auto;
+            right: 0;
+            border-radius: 0;
+            margin: 0;
+            text-align: center;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #f0f0f0;
+            background: #ffffff;
+            font-size: 12px;
+            -webkit-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -khtml-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -ms-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -o-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05); }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a {
+              padding: 6px 20px; }
+              .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a:hover {
+                color: #666;
+                background: #f5f5f5; }
+              .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu li a i.fa {
+                float: left;
+                margin: 2px 10px 2px 0;
+                color: #999999; }
+            .azx-school-header .school-header .school-nav-bar .account .user-menu .dropdown-menu .split {
+              height: 1px;
+              background: #f0f0f0;
+              margin: 5px 0; }
+        .azx-school-header .school-header .school-nav-bar .account .tool-bar {
+          height: 48px;
+          padding: 0 20px;
+          display: table-cell;
+          vertical-align: middle; }
+          .azx-school-header .school-header .school-nav-bar .account .tool-bar .user-inbox {
+            display: inline;
+            position: relative; }
+            .azx-school-header .school-header .school-nav-bar .account .tool-bar .user-inbox .badge {
+              position: absolute;
+              left: 12px;
+              top: -12px;
+              min-width: 16px;
+              font-size: 11px;
+              padding: 2px;
+              background: #f95a5a;
+              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+              font-weight: 400;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              text-align: center;
+              letter-spacing: 1px; }
+      .azx-school-header .school-header .school-nav-bar .btn-login {
+        height: 29px;
+        margin-top: 8px;
+        margin-left: 20px;
+        padding: 4px 10px;
+        min-width: 41px;
+        float: right;
+        color: #666;
+        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        background-color: #fff;
+        font-size: 12px;
+        line-height: 1em;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        border: 1px solid #8b8b8b;
+        box-sizing: border-box;
+        transition-property: all;
+        transition-duration: .3s;
+        border-radius: 4px; }
+      .azx-school-header .school-header .school-nav-bar .btn-login:hover {
+        background-color: #509EFF;
+        color: #fff;
+        border: 1px solid #fff; }
+      .azx-school-header .school-header .school-nav-bar .navigation {
+        height: 48px;
+        float: right;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 41px; }
+        .azx-school-header .school-header .school-nav-bar .navigation ul {
+          padding: 0; }
+          .azx-school-header .school-header .school-nav-bar .navigation ul li {
+            text-align: center;
+            vertical-align: middle;
+            font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+            float: left;
+            padding: 0px 20px;
+            font-size: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0);
+            color: #343434; }
+            .azx-school-header .school-header .school-nav-bar .navigation ul li:hover {
+              color: #509EFF;
+              cursor: pointer; }
+            .azx-school-header .school-header .school-nav-bar .navigation ul li .keyline {
+              height: 2px;
+              width: 22px;
+              background: #509EFF;
+              /* left: 40%; */
+              bottom: 5px;
+              position: relative;
+              /* text-align: center; */
+              margin: 0 auto; }
+          .azx-school-header .school-header .school-nav-bar .navigation ul .active {
+            cursor: pointer;
+            color: #29c192; }
+
+.azx-header {
+  width: 100%;
+  text-align: center;
+  min-width: 1000px; }
+  .azx-header .nav-fiexd-box {
+    display: block;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    z-index: 999;
+    background: #ffffff; }
+    .azx-header .nav-fiexd-box .border-top {
+      width: 100%;
+      height: 2px;
+      background: #58b5a2 url("//s.aizhixin.com/nav_top_border.gif") repeat-y;
+      -webkit-background-size: cover;
+      background-size: cover; }
+    .azx-header .nav-fiexd-box .nav-container {
+      margin: 0 auto;
+      height: 48px;
+      padding: 0 15px;
+      box-sizing: border-box;
+      min-width: 1000px;
+      color: #666; }
+      @media only screen and (max-width: 899px) {
+        .azx-header .nav-fiexd-box .nav-container {
+          min-width: 1000px; } }
+      @media only screen and (min-width: 900px) and (max-width: 1280px) {
+        .azx-header .nav-fiexd-box .nav-container {
+          width: 100%; } }
+      @media only screen and (min-width: 1281px) {
+        .azx-header .nav-fiexd-box .nav-container {
+          width: 1200px; } }
+      .azx-header .nav-fiexd-box .nav-container .logo-split {
+        float: left;
+        margin: 0 10px;
+        margin-top: 12.5px;
+        width: 1px;
+        height: 25px;
+        background: #58b5a2; }
+      .azx-header .nav-fiexd-box .nav-container .logo-info {
+        float: left;
+        margin-top: 8px;
+        display: inline;
+        text-align: left;
+        font-size: 12px;
+        color: #999999; }
+      .azx-header .nav-fiexd-box .nav-container .nav-split {
+        float: right;
+        margin: 0 10px;
+        margin-top: 17px;
+        width: 1px;
+        height: 14px;
+        background: #eeeeee; }
+      .azx-header .nav-fiexd-box .nav-container .azxlogo {
+        height: 35px;
+        margin-top: 6px;
+        display: table;
+        float: left;
+        min-width: 35px;
+        max-width: 232px;
+        width: 232px;
+        background: url("https://s.aizhixin.com/zhixin/img_nav_logo.png") center center no-repeat;
+        height: 40px;
+        background-size: auto 40px; }
+      .azx-header .nav-fiexd-box .nav-container .navigation {
+        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        height: 48px;
+        float: right;
+        margin: 0 0 0 30px;
+        padding: 0;
+        list-style: none; }
+        .azx-header .nav-fiexd-box .nav-container .navigation li {
+          float: left;
+          padding: 0 20px;
+          line-height: 48px;
+          font-size: 14px; }
+          .azx-header .nav-fiexd-box .nav-container .navigation li .subnav-arrow {
+            width: 12px;
+            height: 10px;
+            position: absolute;
+            margin-left: -6px;
+            bottom: 0; }
+            .azx-header .nav-fiexd-box .nav-container .navigation li .subnav-arrow polygon {
+              fill: #25b085; }
+          .azx-header .nav-fiexd-box .nav-container .navigation li:hover {
+            color: #28b780;
+            cursor: pointer; }
+        .azx-header .nav-fiexd-box .nav-container .navigation .active {
+          color: #28b780;
+          position: relative; }
+          .azx-header .nav-fiexd-box .nav-container .navigation .active .keyline {
+            height: 2px;
+            position: absolute;
+            width: 16px;
+            background: #28b780;
+            left: 40%;
+            bottom: 10px; }
+      .azx-header .nav-fiexd-box .nav-container .account {
+        height: 48px;
+        float: right;
+        margin: 0 0 0 8px;
+        display: table; }
+        .azx-header .nav-fiexd-box .nav-container .account li:hover {
+          color: #58b5a2;
+          cursor: pointer; }
+        .azx-header .nav-fiexd-box .nav-container .account .user-menu {
+          width: 145px;
+          padding: 0;
+          height: 48px;
+          display: table-cell;
+          vertical-align: middle; }
+          .azx-header .nav-fiexd-box .nav-container .account .user-menu .user-avatar {
+            margin: 4px 10px 4px 0; }
+          .azx-header .nav-fiexd-box .nav-container .account .user-menu #user-name {
+            display: inline;
+            font-size: 14px; }
+            .azx-header .nav-fiexd-box .nav-container .account .user-menu #user-name .caret {
+              margin-left: 5px; }
+          .azx-header .nav-fiexd-box .nav-container .account .user-menu .dropdown-menu {
+            width: 130px;
+            min-width: 130px !important;
+            left: auto;
+            right: 0;
+            border-radius: 0;
+            margin: 0;
+            text-align: center;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #f0f0f0;
+            background: #ffffff;
+            font-size: 12px;
+            -webkit-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -khtml-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -ms-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            -o-box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05); }
+            .azx-header .nav-fiexd-box .nav-container .account .user-menu .dropdown-menu li a {
+              padding: 6px 20px; }
+              .azx-header .nav-fiexd-box .nav-container .account .user-menu .dropdown-menu li a:hover {
+                color: #666;
+                background: #f5f5f5; }
+              .azx-header .nav-fiexd-box .nav-container .account .user-menu .dropdown-menu li a i.fa {
+                float: left;
+                margin: 2px 10px 2px 0;
+                color: #999999; }
+            .azx-header .nav-fiexd-box .nav-container .account .user-menu .dropdown-menu .split {
+              height: 1px;
+              background: #f0f0f0;
+              margin: 5px 0; }
+        .azx-header .nav-fiexd-box .nav-container .account .tool-bar {
+          height: 48px;
+          padding: 0 20px;
+          display: table-cell;
+          vertical-align: middle; }
+          .azx-header .nav-fiexd-box .nav-container .account .tool-bar .user-inbox {
+            display: inline;
+            position: relative; }
+            .azx-header .nav-fiexd-box .nav-container .account .tool-bar .user-inbox .badge {
+              position: absolute;
+              left: 12px;
+              top: -12px;
+              min-width: 16px;
+              font-size: 11px;
+              padding: 2px;
+              background: #f95a5a;
+              font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+              font-weight: 400;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              text-align: center;
+              letter-spacing: 1px; }
+      .azx-header .nav-fiexd-box .nav-container .btn-login {
+        height: 29px;
+        margin-top: 8px;
+        margin-left: 20px;
+        padding: 4px 10px;
+        min-width: 41px;
+        float: right;
+        color: #666;
+        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        background-color: #fff;
+        font-size: 12px;
+        line-height: 1em;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        border: 1px solid #8b8b8b;
+        box-sizing: border-box;
+        transition-property: all;
+        transition-duration: .3s;
+        border-radius: 4px; }
+      .azx-header .nav-fiexd-box .nav-container .btn-login:hover {
+        background-color: #28b780;
+        color: #fff;
+        border: 1px solid #28b780; }
+  .azx-header .nav-sub {
+    width: 100%;
+    background-color: #29c192;
+    background-blend-mode: overlay;
+    background-image: url("//s.aizhixin.com/bg_nav.png");
+    background-size: 20%;
+    position: relative; }
+    .azx-header .nav-sub .nav-sub-container {
+      margin: 0 auto;
+      height: 50px;
+      box-sizing: border-box;
+      overflow: hidden; }
+      @media only screen and (min-width: 1px) and (max-width: 899px) {
+        .azx-header .nav-sub .nav-sub-container {
+          min-width: 1000px; } }
+      @media only screen and (min-width: 900px) and (max-width: 1280px) {
+        .azx-header .nav-sub .nav-sub-container {
+          width: 100%; } }
+      @media only screen and (min-width: 1281px) {
+        .azx-header .nav-sub .nav-sub-container {
+          width: 1200px; } }
+      .azx-header .nav-sub .nav-sub-container ul li {
+        font-family: "PingFang SC", "Hiragino Sans GB W3", "Microsoft Yahei", "STHeiti", Helvetica, Arial, sans-serif;
+        float: left;
+        margin: 0;
+        padding: 0 22px;
+        line-height: 52px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        list-style: none; }
+        .azx-header .nav-sub .nav-sub-container ul li:hover {
+          background: rgba(255, 255, 255, 0.2);
+          color: #ffffff;
+          cursor: pointer; }
+
+.alpha-light-nav .azx-header {
+  height: 0; }
+.alpha-light-nav .nav-fiexd-box {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.9) !important;
+  height: 80px; }
+  .alpha-light-nav .nav-fiexd-box .nav-container {
+    height: 78px; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .logo-split {
+      margin-top: 27.5px; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .logo-info {
+      float: left;
+      margin-top: 23px;
+      display: inline;
+      text-align: left; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .nav-split {
+      margin-top: 32px;
+      background: #999999; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .azxlogo {
+      height: 35px;
+      margin-top: 21px; }
+      .alpha-light-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo {
+        height: 35px; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .navigation {
+      height: 30px; }
+      .alpha-light-nav .nav-fiexd-box .nav-container .navigation li {
+        height: 30px;
+        margin: 0 10px;
+        margin-top: 24px;
+        float: left;
+        padding: 0 20px;
+        line-height: 30px;
+        font-size: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0); }
+        .alpha-light-nav .nav-fiexd-box .nav-container .navigation li:hover {
+          background: rgba(255, 255, 255, 0.2);
+          color: #6abdac;
+          cursor: pointer;
+          border: 1px solid #58b5a2;
+          border-radius: 25px !important; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .account {
+      height: 78px; }
+      .alpha-light-nav .nav-fiexd-box .nav-container .account li:hover {
+        background: rgba(255, 255, 255, 0.2); }
+      .alpha-light-nav .nav-fiexd-box .nav-container .account .user-menu {
+        height: 78px; }
+      .alpha-light-nav .nav-fiexd-box .nav-container .account .tool-bar {
+        height: 78px; }
+    .alpha-light-nav .nav-fiexd-box .nav-container .btn-login {
+      margin-top: 24px; }
+
+.alpha-dark-nav .azx-header {
+  height: 0; }
+.alpha-dark-nav .nav-fiexd-box {
+  position: fixed;
+  background: rgba(36, 42, 49, 0.9) !important; }
+  .alpha-dark-nav .nav-fiexd-box .nav-container {
+    color: #ffffff; }
+    .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo {
+      width: auto;
+      width: 104px\9;
+      height: 35px; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st0 {
+        fill: #58B5A2; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st1 {
+        fill: #34AA77; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st2 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #68C299; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st3 {
+        fill: #68C299; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st4 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #ffffff; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st5 {
+        fill: #ffffff; }
+    .alpha-dark-nav .nav-fiexd-box .nav-container .navigation li {
+      color: #ffffff; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .navigation li .subnav-arrow {
+        fill: #ff0000; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .navigation li:hover {
+        background: #44464a;
+        color: #f5f5f5; }
+    .alpha-dark-nav .nav-fiexd-box .nav-container .nav-split {
+      background: #999999; }
+    .alpha-dark-nav .nav-fiexd-box .nav-container .account li {
+      color: #ffffff; }
+      .alpha-dark-nav .nav-fiexd-box .nav-container .account li:hover {
+        background: #44464a;
+        color: #f5f5f5; }
+    .alpha-dark-nav .nav-fiexd-box .nav-container .account .tool-bar .user-inbox .badge {
+      background: #f95a5a; }
+
+.fixed-nav .nav-fiexd-box {
+  position: fixed;
+  display: none; }
+
+.fluid .nav-fiexd-box .nav-container {
+  width: 100%; }
+
+.inverse-nav .nav-fiexd-box {
+  background: #242a31; }
+  .inverse-nav .nav-fiexd-box .nav-container {
+    color: #ffffff; }
+    .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo {
+      width: auto;
+      width: 104px\9;
+      height: 35px; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st0 {
+        fill: #58B5A2; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st1 {
+        fill: #34AA77; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st2 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #68C299; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st3 {
+        fill: #68C299; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st4 {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        fill: #ffffff; }
+      .inverse-nav .nav-fiexd-box .nav-container .azxlogo #azxlogo .st5 {
+        fill: #ffffff; }
+    .inverse-nav .nav-fiexd-box .nav-container .navigation li {
+      color: #ffffff; }
+      .inverse-nav .nav-fiexd-box .nav-container .navigation li .subnav-arrow {
+        fill: #ff0000; }
+      .inverse-nav .nav-fiexd-box .nav-container .navigation li:hover {
+        background: #44464a;
+        color: #f5f5f5; }
+    .inverse-nav .nav-fiexd-box .nav-container .nav-split {
+      background: #666666; }
+    .inverse-nav .nav-fiexd-box .nav-container .account li {
+      color: #ffffff; }
+      .inverse-nav .nav-fiexd-box .nav-container .account li:hover {
+        background: #44464a;
+        color: #f5f5f5; }
+    .inverse-nav .nav-fiexd-box .nav-container .account .tool-bar .user-inbox .badge {
+      background: #f95a5a; }
+
+.azx-footer {
+  width: 100%;
+  background-color: #3c3c3c;
+  min-height: 60px; }
+  .azx-footer .footer-content {
+    margin: 0 auto;
+    padding: 20px 10px;
+    text-align: left;
+    color: #666;
+    position: relative;
+    min-width: 1000px; }
+    @media only screen and (min-width: 900px) and (max-width: 1280px) {
+      .azx-footer .footer-content {
+        width: 100%; } }
+    @media only screen and (min-width: 1281px) {
+      .azx-footer .footer-content {
+        width: 1200px; } }
+    .azx-footer .footer-content .azx-logo-gray {
+      display: inline-block;
+      padding-right: 30px;
+      border-right: 1px solid #6c6c6c; }
+      .azx-footer .footer-content .azx-logo-gray #azxlogo {
+        width: auto;
+        width: 104px\9;
+        height: 35px; }
+    .azx-footer .footer-content .azx-logo-white {
+      width: 117px;
+      color: #fff;
+      position: absolute;
+      left: 0px;
+      top: 18px;
+      border-right: 1px solid #ccc;
+      padding-right: 20px; }
+    .azx-footer .footer-content .version {
+      font-size: 12px;
+      text-align: left;
+      color: #ccc; }
+    .azx-footer .footer-content .Copyright {
+      display: inline-block;
+      font-size: 12px;
+      color: #ccc; }
+      .azx-footer .footer-content .Copyright span {
+        color: #ccc; }
+    .azx-footer .footer-content .QRcode {
+      display: inline-block; }
+      .azx-footer .footer-content .QRcode i.fa {
+        color: #999;
+        margin: 5px 10px; }
+        .azx-footer .footer-content .QRcode i.fa:hover {
+          color: #ccc; }
+    .azx-footer .footer-content .popover-title {
+      text-align: center; }
+    .azx-footer .footer-content .barcode {
+      text-align: center; }
+      .azx-footer .footer-content .barcode img {
+        margin: 0 auto;
+        width: 120px;
+        height: 120px; }
+    .azx-footer .footer-content .footer-right {
+      display: inline-block;
+      margin-left: 149px;
+      margin-top: 2px; }
+    .azx-footer .footer-content .float-right {
+      position: absolute;
+      bottom: 23px;
+      right: 80px;
+      z-index: 5000; }
+
+.azx-school-footer {
+  width: 100%;
+  background-color: #F1F4F8;
+  min-height: 80px; }
+  .azx-school-footer .footer-content {
+    margin: 0 auto;
+    padding: 30px 10px;
+    text-align: left;
+    color: #666;
+    position: relative;
+    min-width: 1000px; }
+    @media only screen and (min-width: 900px) and (max-width: 1280px) {
+      .azx-school-footer .footer-content {
+        width: 100%; } }
+    @media only screen and (min-width: 1281px) {
+      .azx-school-footer .footer-content {
+        width: 1200px; } }
+    .azx-school-footer .footer-content .version {
+      font-size: 14px;
+      text-align: left;
+      color: #999999;
+      display: inline-block; }
+    .azx-school-footer .footer-content .Copyright {
+      display: inline-block;
+      font-size: 14px;
+      color: #999999; }
+      .azx-school-footer .footer-content .Copyright span {
+        color: #999999; }
+    .azx-school-footer .footer-content .footer-center {
+      display: inline-block;
+      margin-left: 149px;
+      margin-top: 2px; }
+    .azx-school-footer .footer-content .float-right {
+      position: absolute;
+      bottom: 23px;
+      right: 80px;
+      z-index: 5000; }
+
+.footer-fiexd .azx-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0; }
+
+#azxlogo .st0 {
+  fill: #58B5A2; }
+#azxlogo .st1 {
+  fill: #34AA77; }
+#azxlogo .st2 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #68C299; }
+#azxlogo .st3 {
+  fill: #68C299; }
+#azxlogo .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #5C5D5A; }
+#azxlogo .st5 {
+  fill: #5C5D5A; }
+
+.azx-logo-inverse #azxlogo .st0 {
+  fill: #58B5A2; }
+.azx-logo-inverse #azxlogo .st1 {
+  fill: #34AA77; }
+.azx-logo-inverse #azxlogo .st2 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #68C299; }
+.azx-logo-inverse #azxlogo .st3 {
+  fill: #68C299; }
+.azx-logo-inverse #azxlogo .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #ffffff; }
+.azx-logo-inverse #azxlogo .st5 {
+  fill: #ffffff; }
+
+.azx-logo-gray #azxlogo .st0 {
+  fill: #999999; }
+.azx-logo-gray #azxlogo .st1 {
+  fill: #808080; }
+.azx-logo-gray #azxlogo .st2 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #999999; }
+.azx-logo-gray #azxlogo .st3 {
+  fill: #999999; }
+.azx-logo-gray #azxlogo .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #999999; }
+.azx-logo-gray #azxlogo .st5 {
+  fill: #999999; }
+
+.azx-logo-white #azxlogo .st0 {
+  fill: rgba(255, 255, 255, 0.8); }
+.azx-logo-white #azxlogo .st1 {
+  fill: #ffffff; }
+.azx-logo-white #azxlogo .st2 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #ffffff; }
+.azx-logo-white #azxlogo .st3 {
+  fill: #ffffff; }
+.azx-logo-white #azxlogo .st4 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #ffffff; }
+.azx-logo-white #azxlogo .st5 {
+  fill: #ffffff; }
+
+.form-group {
+  position: relative; }
+  .form-group .alert {
+    margin: 0; }
+  .form-group .tooltip {
+    opacity: 0.7;
+    filter: alpha(opacity=70%); }
+  .form-group .top-right {
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .form-group .top-right .tooltip-arrow {
+      left: auto;
+      right: 50%;
+      margin-right: -5px; }
+  .form-group label {
+    font-weight: normal; }
+  .form-group .add-text {
+    position: absolute;
+    top: 33px; }
+
+.validation-invalid {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #f95a5a; }
+
+.form-horizontal .form-group .add-text {
+  position: absolute;
+  top: 0;
+  height: 35px;
+  right: -10px;
+  line-height: 35px; }
+.form-horizontal .form-group .top-right {
+  position: absolute;
+  top: -30px;
+  right: 0; }
+  .form-horizontal .form-group .top-right .tooltip-arrow {
+    left: auto;
+    right: 50%;
+    margin-right: -5px; }
+
+.step-line {
+  margin: 30px auto;
+  *overflow: hidden;
+  *zoom: 1; }
+  .step-line .mt-step-col {
+    float: left;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    min-height: 1px; }
+    .step-line .mt-step-col .mt-step-number {
+      font-size: 26px;
+      display: inline-block;
+      margin: auto auto 5px;
+      padding: 3px;
+      position: relative;
+      z-index: 5;
+      height: 50px;
+      width: 50px;
+      text-align: center;
+      color: #ffffff;
+      background: #cccccc;
+      border: 5px solid rgba(255, 255, 255, 0.7);
+      -webkit-box-shadow: 0 0 0 5px white;
+      -khtml-box-shadow: 0 0 0 5px white;
+      -moz-box-shadow: 0 0 0 5px white;
+      -ms-box-shadow: 0 0 0 5px white;
+      -o-box-shadow: 0 0 0 5px white;
+      box-shadow: 0 0 0 5px white;
+      -webkit-border-radius: 50%;
+      -khtml-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%; }
+    .step-line .mt-step-col .mt-step-title {
+      color: #cccccc;
+      position: relative; }
+    .step-line .mt-step-col .mt-step-title:after, .step-line .mt-step-col .mt-step-title:before {
+      content: '';
+      height: 5px;
+      width: 50%;
+      position: absolute;
+      background-color: #e5e5e5;
+      top: -27px;
+      z-index: 4;
+      transform: translateY(-100%); }
+    .step-line .mt-step-col .mt-step-title:before {
+      right: 50%; }
+    .step-line .mt-step-col .mt-step-title:after {
+      left: 50%; }
+    .step-line .mt-step-col .mt-step-content {
+      font-size: 12px;
+      color: #cccccc; }
+  .step-line .mt-step-col:first-child .mt-step-title:before {
+    display: none; }
+  .step-line .mt-step-col:last-child .mt-step-title:after {
+    display: none; }
+  .step-line .done .mt-step-number {
+    color: #ffffff;
+    background: #29c192; }
+  .step-line .done .mt-step-title {
+    color: #29c192; }
+  .step-line .done .mt-step-title:after, .step-line .done .mt-step-title:before {
+    /*background-image: -webkit-linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;*/
+    background-color: #29c192; }
+  .step-line .done .mt-step-content {
+    color: #999999; }
+  .step-line .active .mt-step-number {
+    border: 5px solid rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+    background: #29c192; }
+  .step-line .active .mt-step-title {
+    color: #29c192; }
+  .step-line .active .mt-step-title:before {
+    /*background-image: -webkit-linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(-45deg,rgba(255,255,255,.25) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;*/
+    background-color: #29c192; }
+  .step-line .active .mt-step-content {
+    color: #999999; }
+
+.step-line:after {
+  display: table;
+  content: "";
+  width: 0;
+  clear: both; }
+
+.clearfix {
+  *overflow: hidden;
+  *zoom: 1; }
+
+.clearfix:after {
+  display: table;
+  content: "";
+  width: 0;
+  clear: both; }
+
+/*# sourceMappingURL=azxcommon.css.map */

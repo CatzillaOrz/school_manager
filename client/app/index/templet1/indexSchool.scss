@@ -1,0 +1,688 @@
+.indexSchool-container {
+  width: 100%;
+  height: 100%;
+  background: url(https://s1.aizhixin.com/725a28ec-9012-4d6f-8263-e9c94043b253.png) center center no-repeat !important;
+  background-size: cover!important;
+  overflow: hidden;
+  @keyframes background-move{
+    from{
+      background: #7A6EFF;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+  }
+  @-webkit-keyframes background-move{
+    from{
+      background: #7A6EFF;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+  }
+  @-moz-keyframes background-move{
+    from{
+      background: #7A6EFF;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+  }
+  @-o-keyframes background-move{
+    from{
+      background: #7A6EFF;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+  }
+  @keyframes background-move-back{
+    from{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+    to{
+      background: #7A6EFF;
+    }
+  }
+  @-webkit-keyframes background-move-back{
+    from{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+    to{
+      background: #7A6EFF;
+    }
+  }
+  @-moz-keyframes background-move-back{
+    from{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+    to{
+      background: #7A6EFF;
+    }
+  }
+  @-o-keyframes background-move-back{
+    from{
+      background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+    }
+    to{
+      background: #7A6EFF;
+    }
+  }
+
+
+
+  @keyframes background-move1{
+    from{
+      background: #FF5BB0;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+  }
+  @-webkit-keyframes background-move1{
+    from{
+      background: #FF5BB0;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+  }
+  @-moz-keyframes background-move1{
+    from{
+      background: #FF5BB0;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+  }
+  @-o-keyframes background-move1{
+    from{
+      background: #FF5BB0;
+    }
+    to{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+  }
+  @keyframes background-move-back1{
+    from{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+    to{
+      background: #FF5BB0;
+    }
+  }
+  @-webkit-keyframes background-move-back1{
+    from{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+    to{
+      background: #FF5BB0;
+    }
+  }
+  @-moz-keyframes background-move-back1{
+    from{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+    to{
+      background: #FF5BB0;
+    }
+  }
+  @-o-keyframes background-move-back1{
+    from{
+      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+    }
+    to{
+      background: #FF5BB0;
+    }
+  }
+
+
+  @keyframes display-move-back{
+    0%{
+      height: 43px;
+      opacity: 1;
+    }
+    100%{
+      height: 0;
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes  display-move-back{
+    0%{
+      height: 43px;
+      opacity: 1;
+    }
+    100%{
+      height: 0;
+      opacity: 0;
+    }
+  }
+  @-moz-keyframes  display-move-back{
+    0%{
+      height: 43px;
+      opacity: 1;
+    }
+    100%{
+      height: 0;
+      opacity: 0;
+    }
+  }
+  @-o-keyframes  display-move-back{
+    0%{
+      height: 43px;
+      opacity: 1;
+    }
+    100%{
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes display-move{
+    0%{
+      height: 0;
+      opacity: 0;
+    }
+    100%{
+      height: 43px;
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes  display-move{
+    0%{
+      height: 0;
+      opacity: 0;
+
+    }
+    100%{
+      height: 43px;
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes  display-move{
+    0%{
+      height: 0;
+      opacity: 0;
+    }
+    100%{
+      height: 43px;
+      opacity: 1;
+    }
+  }
+  @-o-keyframes  display-move{
+    0%{
+      height: 0;
+      opacity: 0;
+    }
+    100%{
+      height: 43px;
+      opacity: 1;
+    }
+  }
+
+  .shade {
+    height: inherit;
+    .header {
+      position: fixed;
+      width: 100%;
+      animation-duration: 0.3s;
+      animation-delay: 1s;
+      z-index: 999;
+      .azx-school-header {
+        position: relative;
+        color: #fff;
+        background: transparent;
+        border: none;
+        .school-header {
+          background: none;
+          border: none;
+          height: 56px;
+          padding-top: 16px;
+          .border-top {
+            display: none;
+          }
+          .school-nav-bar {
+            width: 990px;
+            margin: 0px auto;
+            .logo {
+              height: 40px;
+              display: none;
+            }
+            .account {
+
+              li {
+                &:hover {
+                  color: #fff;
+                }
+              }
+              .user-menu {
+
+                .user-avatar {
+
+                }
+                #user-name {
+
+                  .caret {
+
+                  }
+                }
+                .dropdown-menu {
+
+                  li a {
+
+                    &:hover {
+
+                    }
+                    i.fa {
+
+                    }
+                  }
+                  .split {
+
+                  }
+                }
+              }
+              .tool-bar {
+
+                .user-inbox {
+
+                  .badge {
+
+                  }
+                }
+              }
+            }
+            .btn-login {
+              color: #fff;
+              border: 1px solid #fff;
+              background: transparent;
+            }
+            .btn-login:hover {
+              color: #509EFF;
+              border: 1px solid #fff;
+              background: #fff;
+            }
+            .navigation {
+
+              ul {
+
+                li {
+
+                  color: #fff;
+                  &:hover {
+
+                  }
+                  .keyline {
+                    background: #fff;
+
+                  }
+                }
+                .active {
+
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+    .context {
+      width: 990px;
+      margin: 0px auto;
+      height: inherit;
+      position: relative;
+      .slogin-panel {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        z-index: 4;
+        width: 272px;
+        height: 263px;
+        background:rgba(0,0,0,0.2);
+        border-radius:6px;
+        overflow: hidden;
+        .user_signin_inner {
+          position: relative;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 4px;
+          .content {
+            padding: 40px 20px;
+            .zh-signin {
+              .signin_user {
+                position: relative;
+                margin-bottom: 0!important;
+                width: 100%;
+                * {
+                  box-sizing: content-box;
+                }
+                span {
+                  position: absolute;
+                  top: 11px;
+                  left: 12px;
+                  z-index: 100;
+                  font-size: 18px;
+                  color: #c3c3c3;
+                  &:focus {
+                    color: #fff ;
+                  }
+                }
+                .active {
+                  color: #fff ;
+                }
+                input {
+                  width: 202px;
+                  padding-left: 30px;
+                  height:36px;
+                  background:rgba(0,0,0,0.2);
+                  border-radius:6px;
+                  border: none;
+                  &:focus {
+                    border-color: #fff;
+                  }
+                }
+                &:last-child{
+                  margin: 15px 0 0;
+                }
+              }
+              .signin_warning {
+                margin-top: 6px;
+                .signin_warning_inner {
+                  text-align: left;
+                  font-size: 14px;
+                  font-weight: 700;
+                  color: #fff ;
+                  margin: 0 auto;
+                }
+              }
+              .signin_submit {
+                margin-top: 20px;
+                .signin_submit_btn {
+                  border: none;
+                  width: 100%;
+                  height:36px;
+                  background:linear-gradient(-90deg,rgba(255,197,81,1),rgba(255,146,40,1));
+                  border-radius:6px;
+                  color: #fff;
+                  font-size: 14px;
+                }
+              }
+              .forget_pawd {
+                height: 40px;
+                line-height: 40px;
+                font-size:12px;
+                text-align: right;
+                right: 5px;
+                a {
+                  color: #FFA133 ;
+                  cursor: pointer;
+                }
+                .school_forget {
+                  color: #fff;
+                }
+              }
+            }
+            .code-signin {
+              position: relative;
+              .qrcode{
+                text-align: center;
+                #qrcode {
+                  width: 120px;
+                  height: 120px;
+                  margin: auto;
+                  #qrcode-logo {
+                    position: absolute; //生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom"
+                    z-index: 998;
+                    width: 40px;
+                    height: 40px;
+                    background: url($base-url + "login/tree.png") no-repeat;
+                    border-radius: 4px;
+                    background-size: 40px;
+                  }
+                }
+              }
+              .qrcode-error {
+                top: 0px;
+                position: absolute;
+                font-size: 12px;
+                height: 120px;
+                width: 120px;
+                background: rgba(255,255,255,0.8);
+                right: 56px;
+                line-height: 120px;
+                cursor: pointer;
+                z-index: 999;
+                text-align: center;
+              }
+              .qrcode-success {
+                top: 0px;
+                position: absolute;
+                font-size: 12px;
+                height: 120px;
+                width: 70px;
+                background: rgba(255,255,255,0.8);
+                right: 83px;
+                z-index: 999;
+              }
+              .qrcode-success-tipes {
+                padding-top: 15px;
+                font-size: 14px;
+                color: #3F9EFE ;
+                text-align: center;
+                font-weight: 800;
+                z-index: 999;
+              }
+              .qrcode-tipes {
+                padding-top: 20px;
+                line-height: 20px;
+                font-size: 14px;
+                color: #fff;
+                text-align: center;
+              }
+            }
+            .back-home {
+              margin: 0 auto;
+              height: 35px;
+              line-height: 30px;
+              font-size: 14px;
+              text-align: center;
+              width: 80%;
+              margin-top: -8px;
+              a {
+                color: #666666;
+                &:hover {
+                  color: #3F9EFE;
+                }
+              }
+            }
+            .tab-tips {
+              float: right;
+              top: -28px;
+              position: relative;
+              right: 36px;
+              z-index: 999;
+            }
+            .tab-btn {
+              cursor: pointer;
+              float: right;
+              position: absolute;
+              right: 0px;
+              width: 40px;
+              height: 40px;
+              bottom: 0;
+            }
+          }
+
+        }
+      }
+      .context1{
+        padding-top: 161px;
+        .title1{
+          color: #FFFFFF;
+          font-size: 30px;
+          height:42px;
+          line-height:42px;
+        }
+        .title2{
+          margin-top: 10px;
+          color: #FFFFFF;
+          height:20px;
+          font-size:18px;
+          line-height:20px;
+        }
+      }
+      .menu{
+        margin-top: 150px;
+        position: relative;
+        width: 990px;
+        height: 350px;
+        color: #fff;
+        font-size: 18px;
+        .menu-common{
+          text-align: center;
+          display: table;
+          cursor: pointer;
+        }
+        .content{
+          display: table-cell;
+          vertical-align: middle;
+          .title{
+            margin-top: 20px;
+          }
+          .profile{
+            margin: 15px 24px 0;
+            font-size: 14px;
+            line-height: 20px;
+            height: 0;
+            opacity: 0;
+            -webkit-animation: display-move-back 0.3s forwards;
+            animation: display-move-back 0.3s forwards;
+          }
+        }
+        .class-live{
+          position: absolute;
+          width: 240px;
+          height: 350px;
+          left: 0;
+          top: 0;
+          background: url('https://s1.aizhixin.com/b5a4f3b6-bcee-4caf-9c2f-f1c4b0f6a61c.png') no-repeat center center;
+          background-size: cover;
+          -webkit-animation: background-move 0.3s forwards;
+          animation: background-move 0.3s forwards;
+          &:hover{
+            -webkit-animation: background-move-back 0.3s forwards;
+            animation: background-move-back 0.3s forwards;
+            .content{
+              .profile{
+                -webkit-animation: display-move 0.3s forwards;
+                animation: display-move 0.3s forwards;
+              }
+            }
+          }
+        }
+        .big-data{
+          position: absolute;
+          width: 240px;
+          height: 230px;
+          left: 250px;
+          top: 0;
+          background:#2D71FF;
+          &:hover{
+            .content{
+              .profile{
+                -webkit-animation: display-move 0.3s forwards;
+                animation: display-move 0.3s forwards;
+              }
+            }
+          }
+        }
+        .man-center{
+          position: absolute;
+          width: 240px;
+          height: 110px;
+          right: 250px;
+          top: 0;
+          background: #7A6EFF;
+          transition: background 0.2s linear;
+          &:hover{
+            background: #8E84FF;
+          }
+        }
+        .user-center{
+          position: absolute;
+          width: 240px;
+          height: 110px;
+          right: 250px;
+          top: 120px;
+          background: #FF9116;
+          transition: background 0.2s linear;
+          &:hover{
+            background: #FFA138;
+          }
+        }
+        .pt{
+          position: absolute;
+          width: 490px;
+          height: 110px;
+          right: 250px;
+          bottom: 0px;
+          background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+          background-size: cover;
+          -webkit-animation: background-move1 0.3s forwards;
+          animation: background-move1 0.3s forwards;
+          &:hover{
+            -webkit-animation: background-move-back1 0.3s forwards;
+            animation: background-move-back1 0.3s forwards;
+            .content{
+              .profile{
+                -webkit-animation: display-move 0.3s forwards;
+                animation: display-move 0.3s forwards;
+              }
+            }
+          }
+        }
+        .hand-school{
+          position: absolute;
+          width: 240px;
+          height: 230px;
+          right: 0;
+          top: 0px;
+          background: #00D152;
+          &:hover{
+            .content{
+              .profile{
+                -webkit-animation: display-move 0.3s forwards;
+                animation: display-move 0.3s forwards;
+              }
+            }
+          }
+        }
+        .course{
+          position: absolute;
+          width: 240px;
+          height: 110px;
+          right: 0;
+          bottom: 0px;
+          background: #2D71FF;
+          &:hover{
+            background: #4D86FF;
+          }
+        }
+      }
+    }
+    .footer {
+      animation-delay: 1.6s;
+      animation-duration: 0.3s;
+      position: absolute;
+      bottom: 35px;
+      text-align: center;
+      width: 100%;
+      height:17px;
+      font-size:12px;
+      font-family:PingFangSC-Light;
+      color:rgba(122,122,141,1);
+      line-height:17px;
+    }
+  }
+}

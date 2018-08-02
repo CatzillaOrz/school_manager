@@ -449,6 +449,20 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+
+    getUrl: function (req, res) {
+        var data={
+            mobileUrl:Config.backend_api.diandian_mobile_host,
+            socketIoUrl:Config.backend_api.socket_io_host
+        };
+        res.json(data);
+    },
+    getTimestamp: function (req, res) {
+        var data={
+            timestamp:Date.now()
+        };
+        res.json(data);
+    },
 };
 
 
