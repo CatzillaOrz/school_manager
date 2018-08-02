@@ -74,10 +74,8 @@ angular.module('dleduWebApp')
              */
             toActive: function(){
                 //window.location.href = "http://passport.aizhixintest.com/userActiveOfficialDef?org=lmcs" ;
-                var search = $location.search();
-                if (("org" in search) && search.org) {
-                    window.location.href = "passport."+location.hostname + "/userActiveOfficialDee?org=" + search.org;
-                }
+                var domain = AuthService.getUser().orgDomainName;
+                window.location.href = "passport."+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
             },
 
 	        /**
@@ -92,9 +90,12 @@ angular.module('dleduWebApp')
                 } else {
                     window.location.href = "//" + location.hostname + "//account/forgotpassword"
                 }*/
-                if (("org" in search) && search.org) {
-                    window.location.href = "passport."+location.hostname + "/account/forgotpassworddef?org=" + search.org;
-                }
+                var domain = AuthService.getUser().orgDomainName;
+                window.location.href = "passport."+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
+            },
+
+            isLogin: function(){
+                return AuthService.isLogin();
             },
 
             //二维码和账号登录切换
