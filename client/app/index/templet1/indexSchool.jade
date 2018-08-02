@@ -3,7 +3,7 @@
         .header.animated.fadeInDown
             azx-school-header
         .context
-            .slogin-panel
+            .slogin-panel(ng-show="!template1Fn.isLogin()")
                 .user_signin_inner
                     .content
                         .zh-signin(ng-if="template1Fn.singinType")
