@@ -75,7 +75,7 @@ angular.module('dleduWebApp')
             toActive: function(){
                 //window.location.href = "http://passport.aizhixintest.com/userActiveOfficialDef?org=lmcs" ;
                 var domain = AuthService.getUser().orgDomainName;
-                window.location.href = "passport."+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
+                window.location.href = "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
             },
 
 	        /**
@@ -91,7 +91,7 @@ angular.module('dleduWebApp')
                     window.location.href = "//" + location.hostname + "//account/forgotpassword"
                 }*/
                 var domain = AuthService.getUser().orgDomainName;
-                window.location.href = "passport."+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
+                window.location.href = "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
             },
 
             isLogin: function(){
