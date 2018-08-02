@@ -40,6 +40,8 @@ var all = {
         open_host: process.env.BACKEND_OPEN_API || 'http://127.0.0.1:8080/dledu',
         api_gateway:process.env.API_GATEWAY || 'http://172.16.23.120:3333',
         pay_host:process.env.PAY_API || 'http://dddev.aizhixin.com/diandian_api',
+        diandian_mobile_host: process.env.DIANDIAN_MOBILE ||  'dddev.aizhixin.com/mobileui/scanLogin',
+        socket_io_host: process.env.SOCKET_IO || 'http://172.16.40.67:3002'
     },
 
     oa: 'http://172.16.1.103',

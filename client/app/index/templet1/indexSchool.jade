@@ -1,0 +1,71 @@
+.indexSchool-container
+    .shade
+        .header.animated.fadeInDown
+            azx-school-header
+        .context
+            .slogin-panel
+                .user_signin_inner
+                    .content
+                        .zh-signin(ng-if="template1Fn.singinType")
+                            label.signin_user(ng-init="nameFocus=false")
+                                span.i.fa.fa-user(ng-class="{'active':nameFocus}")
+                                input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(ng-focus="nameFocus=true" ng-blur="nameFocus=false" placeholder='账号/手机号/邮箱 ', type='text' name='username', ng-trim='true', ng-keypress='template1Fn.keyPressHandle($event)', required='required', ng-model='template1Fn.form.username')
+                            label.signin_user(style="margin-top:15px;" ng-init="focus=false")
+                                span.i.fa.fa-lock(ng-class="{'active':focus}")
+                                input.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(ng-focus="focus=true" ng-blur="focus=false" placeholder='请输入您的密码', type='password', name='password', required='required', ng-keypress='template1Fn.keyPressHandle($event)', ng-model='template1Fn.form.password', autocomplete='off')
+                            .signin_warning
+                                .signin_warning_inner.ng-binding.ng-hide(ng-show='signInError')
+                            .signin_submit
+                                button.signin_submit_btn.school_sigin(ng-click='template1Fn.signIn()', type='button') 登 录
+                            .forget_pawd
+                                a(ng-click="template1Fn.toActive()", title='激活', style="float:left;") 新账号注册激活
+                                a.school_forget(ng-click="template1Fn.forgotPassword()", title='忘记密码') 忘记密码
+                        .code-signin(ng-show="!template1Fn.singinType")
+                            .qrcode
+                                #qrcode
+                            .qrcode-error(ng-if='template1Fn.QrTimeOut' ng-click="template1Fn.refreshQRCode()")
+                                img(src="https://s1.aizhixin.com/c2f24f5f-cdbe-4a98-98a8-664417f8ebea.png")
+                            .qrcode-success(ng-if="signinFn.QrCode")
+                                img(src="https://s1.aizhixin.com/3da69df5-5b3d-4e9c-b70e-8e79a7ec1677.png")
+                            .qrcode-tipes(ng-if="template1Fn.QrCode") 扫码成功，请手机上确认！
+                            .qrcode-tipes(ng-if="!template1Fn.QrCode&&!template1Fn.QrTimeOut") 请使用知新点点/知新教师手机端扫描二维码
+                            .qrcode-tipes(ng-if="!template1Fn.QrCode&&template1Fn.QrTimeOut") 二维码已过期，点击刷新
+                        .tab-btn(ng-click="template1Fn.singinToggle()")
+                            img(src='https://s1.aizhixin.com/54841d45-f109-44e9-bc0b-07eb271ca72b.png' ng-if="template1Fn.singinType")
+                            img(src='https://s1.aizhixin.com/c38c8474-822b-408e-9ede-13d5ec10d8c7.png' ng-if="!template1Fn.singinType")
+            .context1
+                .title1 {{'教育综合应用平台'}}
+                .title2 {{'打造新一代教育模式，辅助学校培养精英人才'}}
+            .menu
+                .class-live.menu-common(ng-click="template1Fn.goPage(6,'/schindex')")
+                    .content
+                        img(src="https://s1.aizhixin.com/3b2358d0-1497-4f12-a803-9d5de14df74d.png")
+                        div.title {{"课堂在线"}}
+                        div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
+                .big-data.menu-common(ng-click="template1Fn.goPage(6,'/schindex')")
+                    .content
+                        img(src="https://s1.aizhixin.com/cd01ad18-c1a2-485d-bf51-8094f8927c54.png")
+                        div.title {{"学情大数据"}}
+                        div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
+                .man-center.menu-common(ng-click="template1Fn.goPage(5,'/home')")
+                    .content
+                        div {{"管理中心"}}
+                .user-center.menu-common(ng-click="template1Fn.goPage(0,'/userCenter')")
+                    .content
+                        div {{"个人中心"}}
+                .pt.menu-common(ng-click="template1Fn.goPage(2,'/schindex')")
+                    .content
+                        div {{"学习实践"}}
+                        div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
+                .hand-school.menu-common(ng-click="template1Fn.goPage(4,'/schindex')")
+                    .content
+                        img(src="https://s1.aizhixin.com/76c84f8e-c930-4cc7-837a-eea1e5837370.png")
+                        div.title {{"掌上校园"}}
+                        div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
+                .course.menu-common(ng-click="template1Fn.goPage(6,'/schindex')")
+                    .content
+                        div {{"精品课程"}}
+
+        .footer.animated.fadeInUp
+            | 技术支持：北京知新树科技有限公司
+            //| {{template1Fn.schoolInfo.name}} aizhixin.com All Rights Reserved · 京ICP证160973号 · ver{{template1Fn.product.version}}

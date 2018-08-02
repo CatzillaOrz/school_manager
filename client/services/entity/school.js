@@ -234,6 +234,15 @@ angular.module('dleduWebService')
                 var boutiqueCourse=$resource('api/school/saveDefMenu');
                 return boutiqueCourse.save(params);
             },
+
+            getUrl: function () {
+                var resource = $resource('api/school/getUrl');
+                return resource.get();
+            },
+            getTimestamp: function () {
+                var resource = $resource('api/school/getTimestamp');
+                return resource.get();
+            },
         }
 
     });

@@ -68,4 +68,7 @@ router.post('/updateAppNotice',auth.isSignedIn, controller.updateAppNotice);
 
 router.get('/getDefMenu', auth.isSignedIn, controller.getDefMenu);
 router.post('/saveDefMenu',auth.isSignedIn, controller.saveDefMenu);
+
+router.get('/getUrl', controller.getUrl);
+router.get('/getTimestamp', controller.getTimestamp);
 module.exports = router;
