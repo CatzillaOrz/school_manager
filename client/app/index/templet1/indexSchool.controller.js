@@ -145,7 +145,6 @@ angular.module('dleduWebApp')
                         // } else {
                         //     that.toRedirectUrl();
                         // }
-                        that.toRedirectUrl();
                     })
                     .catch(function (err) {
                         that.signError(err);
@@ -308,6 +307,10 @@ angular.module('dleduWebApp')
 	         * 点击去往不同的功能
              */
             goPage: function(host, path){
+                if(!AuthService.isLogin()){
+                    CommonService.msgDialog("请选登录！",3);
+                    return;
+                }
                 if(host == '6'){
                     var role = AuthService.getUser().roleNames.join("");
                     if(role == 'ROLE_STUDENT'){
