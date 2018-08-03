@@ -335,18 +335,20 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var search = $location.search();
                 if (hasLogin) {
                     if (pathname == "/userCenter" || pathname == "/account") {//账户类增加mycenter
-                        $window.location.href = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname;
+                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname;
+                        window.open(url, '_blank');
                     } else {
                         if (link == 5 || link == 0) {
                             if (pathname == "/home") {
                                 var toUrl = '//manager.' + currentEnvUrls[link] + _pathname;
                                 window.open(toUrl, '_blank');
                             } else {
-                                $window.location.href = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname;
+                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname;
+                                window.open(url, '_blank');
                             }
 
                         } else {
-                            $window.location.href = '//' + currentEnvUrls[link] + _pathname;
+                            window.open('//' + currentEnvUrls[link] + _pathname, '_blank');
                         }
                     }
                 } else {
@@ -357,9 +359,11 @@ angular.module("azx.common", ['ui.bootstrap'])
                         var search = $location.search();
                         if (link == 5 && _pathname == "/") {
                             if(search&&search.org){
-                                $window.location.href = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                var url = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                window.open(url, '_blank');
                             }else {
-                                $window.location.href = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                var url = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                window.open(url, '_blank');
                             }
 
                         } else {

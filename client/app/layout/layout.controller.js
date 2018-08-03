@@ -92,6 +92,23 @@ angular.module('dleduWebApp')
                     })
             },
 
+            //判断角色是否应当授予权限
+            isUseAuthority: function(auth){
+                if(typeof auth.role == 'undefined'){
+                    return true;
+                }
+                var user = AuthService.getUser();
+                var roleNames = user.roleNames;
+                for(var i = 0, length = roleNames.length; i < length; i++){
+                    var roleName = roleNames[i];
+                    if(roleName && roleName != '' && auth.role.indexOf(roleName) != -1){
+                        return true;
+                        break;
+                    }
+                }
+                return false;
+            },
+
 	        /**
 	         * 获取左边菜单配置
              */
