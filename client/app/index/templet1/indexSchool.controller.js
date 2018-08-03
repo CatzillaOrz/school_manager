@@ -75,7 +75,6 @@ angular.module('dleduWebApp')
             toActive: function(){
                 //window.location.href = "http://passport.aizhixintest.com/userActiveOfficialDef?org=lmcs" ;
                 var domain = location.hostname.split(".")[0];
-                domain = 'lmcs';
                 if(domain.length == 4){
                     window.location.href =  '//' + "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
                 }
@@ -94,7 +93,7 @@ angular.module('dleduWebApp')
                 }*/
                 var domain = location.hostname.split(".")[0];
                 if(domain.length == 4){
-                    window.location.href =  '//' + "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + search.domain;
+                    window.location.href =  '//' + "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + domain;
                 }
             },
 
