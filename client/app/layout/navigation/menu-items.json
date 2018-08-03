@@ -12,21 +12,21 @@
             "sref": "subindex({type:0})",
             "icon": "https://s1.aizhixin.com/58541ce8-cd99-4d45-9d0b-4a456ab2562b.png",
             "active": "school",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "班课管理",
             "sref": "subindex({type:1})",
             "icon": "https://s1.aizhixin.com/9e7c8512-a04f-4cc8-beb9-712ff01bcf21.png",
             "active": "organization",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "评教管理",
             "sref": "subindex({type:2})",
             "active": "period",
             "icon": "https://s1.aizhixin.com/8d7c0331-22ba-4fe1-b188-d0c91b258ba7.png",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         },
         {
             "title": "实践教学",
@@ -40,35 +40,35 @@
             "sref": "subindex({type:4})",
             "active": "teachclass",
             "icon": "https://s1.aizhixin.com/56976e88-93c8-4d7a-a689-08c45e5a6115.png",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN,ROLE_FINANCE_ADMIN"
         },
         {
             "title": "统计报表",
             "sref": "subindex({type:5})",
             "icon": "https://s1.aizhixin.com/a9f34499-ad4d-4c2e-89b8-04028ab58cb1.png",
             "active": "eduman",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         },
         {
             "title": "权限管理",
             "sref": "subindex({type:6})",
             "icon": "https://s1.aizhixin.com/83939c75-9db1-4aec-a940-663a77e128cd.png",
             "active": "eduman",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "电子围栏",
             "sref": "subindex({type:7})",
             "icon": "https://s1.aizhixin.com/302dda61-efec-4cbb-a841-325ebe74b6d8.png",
             "active": "rolemanager",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
         },
         {
             "title": "校园动态",
             "sref": "subindex({type:8})",
             "icon": "https://s1.aizhixin.com/03420ccb-0495-4dd4-bb81-128ff6e86c55.png",
             "active": "dormmansys",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER,ROLE_FINANCE_ADMIN,ROLE_DORM_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER"
         }
     ]
 }

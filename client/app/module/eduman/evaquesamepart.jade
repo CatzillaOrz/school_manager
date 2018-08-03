@@ -22,7 +22,7 @@
                         .col-xs-12.col-sm-6
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
-                                button.btn.btn-primary(ui-sref="evaquesaddsamepart" ng-if="evaQuesListFn.isUseAuth('add')")
+                                button.btn.btn-primary(ui-sref="evaquesaddsamepart" ng-if="evaQuesListFn.isUseAuth('add')&&!isReport")
                                     span 新建同行评教问卷
                     table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                         thead

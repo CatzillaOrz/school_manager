@@ -601,6 +601,21 @@ angular.module('dleduWebApp')
 				}
 			})
 
+			.state('evaquesamepart', {
+				parent: 'base',
+				url   : '/evaquesamepart',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquesamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师/督导同行评教'
+				}
+			})
+
 			.state('evaquesamepartreport', {
 				parent: 'base',
 				url   : '/evaquesamepartreport',
@@ -612,7 +627,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教师/督导同行评教'
+					label: '教师/督导同行评教统计'
 				}
 			})
 			.state('evaquesaddsamepart', {
