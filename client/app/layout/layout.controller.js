@@ -109,7 +109,20 @@ angular.module('dleduWebApp')
                 return false;
             },
 
-	        /**
+            //根据权限重新生成新的菜单数据
+            getMenusByAuth: function(datas){
+                var tempItems = [];
+                for(var i = 0, len = datas.length; i < len; i++){
+                    var data = datas[i];
+                    if(this.isUseAuthority(data)){
+                        tempItems.push(data);
+                    }
+                }
+                this.datas = tempItems;
+            },
+
+
+            /**
 	         * 获取左边菜单配置
              */
             getLeftMenu: function(){
@@ -117,8 +130,7 @@ angular.module('dleduWebApp')
                 var sourceLeft = "app/layout/navigation/menu-items.json";
                 $http.get(sourceLeft).then(function(res){
                     that.datas = res.data.items;
-                    //实践工作台查询统计数据
-                    ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
+                    that.getMenusByAuth(that.datas);
                     that.datas.forEach(function(c){
                         var currentLink = tempStorageService.getObject("hometempmyurl$").url;
                         if(!currentLink && c.sref == 'home'){
