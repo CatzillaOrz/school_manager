@@ -59,14 +59,14 @@
                     "title": "课程管理",
                     "sref": "courselist",
                     "active": "course",
-                    "icon": "https://s1.aizhixin.com/b7ba05d2-524b-47e3-8348-bd9d41c73d8c.png",
+                    "icon": "https://s1.aizhixin.com/ca8b4b11-2a68-45ed-af06-ee8b86bc4ec6.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
                     "title": "批量导入数据",
                     "sref": "batch.imp",
                     "active": "imp",
-                    "icon": "https://s1.aizhixin.com/b7ba05d2-524b-47e3-8348-bd9d41c73d8c.png",
+                    "icon": "https://s1.aizhixin.com/1644110b-149c-456b-8616-4d88c3c9bdd9.png",
                     "role": "ROLE_ORG_ADMIN"
                 }
             ]
