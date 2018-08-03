@@ -132,6 +132,20 @@ angular.module('dleduWebApp')
                 return true;
             },
 
+	        /**
+             * 返回首页
+             */
+            goHome: function(){
+                var myurl = tempStorageService.getObject("hometempmyurl$").url;
+                var goUrl = myurl && myurl != '' ? myurl : 'home';
+                if(goUrl == 'home'){
+                    $state.go('home');
+                }else{
+                    var params = myurl.split(':')[1].substr(0,1);
+                    $state.go('subindex',{type: params});
+                }
+            },
+
             init: function(){
                 if($state.current.name == 'home'){
                     tempStorageService.removeObject("hometempmyurl$");

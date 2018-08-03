@@ -317,3 +317,17 @@ aside#left-panel{
     }
   }
 }
+
+.backgo{
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 11px;
+  font-size: 12px;
+  a{
+    cursor: pointer;
+  }
+  span{
+    padding: 0 5px;
+    color: #ccc;
+  }
+}
