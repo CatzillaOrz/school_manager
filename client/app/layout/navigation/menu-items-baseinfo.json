@@ -14,6 +14,12 @@
                     "sref": "setboutiquecourse",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
                     "icon": "https://s1.aizhixin.com/24e29ea8-e252-4441-92db-1850767727ba.png"
+                },
+                {
+                    "title": "精品课程申请处理",
+                    "sref": "boutiquecourseapply",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER",
+                    "icon": "https://s1.aizhixin.com/24e29ea8-e252-4441-92db-1850767727ba.png"
                 }
             ]
         },

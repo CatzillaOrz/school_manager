@@ -76,7 +76,8 @@ angular.module('dleduWebApp')
                 //window.location.href = "http://passport.aizhixintest.com/userActiveOfficialDef?org=lmcs" ;
                 var domain = location.hostname.split(".")[0];
                 if(domain.length == 4){
-                    window.location.href =  '//' + "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
+                    var url =  '//' + "passport"+location.hostname.replace(domain, "") + "/userActiveOfficialDef?org=" + domain;
+                    window.open(url, '_blank');
                 }
             },
 
@@ -93,7 +94,8 @@ angular.module('dleduWebApp')
                 }*/
                 var domain = location.hostname.split(".")[0];
                 if(domain.length == 4){
-                    window.location.href =  '//' + "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + domain;
+                    var url =  '//' + "passport"+location.hostname.replace(domain, "") + "/account/forgotpassworddef?org=" + domain;
+                    window.open(url, '_blank');
                 }
             },
 
@@ -127,6 +129,7 @@ angular.module('dleduWebApp')
                     CommonService.msgDialog("用户名密码不能为空！",3);
                     return;
                 }
+                //this.isShowCourse = false;
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                         var isCustomize = AuthService.isCustomize();
@@ -306,11 +309,15 @@ angular.module('dleduWebApp')
 	         * 点击去往不同的功能
              */
             goPage: function(host, path){
-                if(!AuthService.isLogin()){
-                    CommonService.msgDialog("请选登录！",3);
+                if(!AuthService.isLogin() && (host!=3 && host != 4)){
+                    messageService.openMsg("请先登录！")
                     return;
                 }
                 if(host == '6'){
+                    if(!this.showLearn){
+                        messageService.openMsg("请没有访问权限！")
+                        return;
+                    }
                     var role = AuthService.getUser().roleNames.join("");
                     if(role == 'ROLE_STUDENT'){
                         path = '/student/list';
@@ -321,9 +328,41 @@ angular.module('dleduWebApp')
                 AuthService.navigation(host, path);
             },
 
+            /**
+             *是否显示学情
+             */
+            isShowLearn: function () {
+                var _this = this;
+                var search = $location.search();
+                var showLearnReg=/\w*(\bgllg\b)|(\bglut\b)|(\bzxxy\b)|(\bzxkj\b)|(\bgcjs\b)|(\bsccj\b)\w*/;
+                if(AuthService.isLogin()){
+                    var orgDomainName= AuthService.getUser().orgDomainName
+                    if(orgDomainName=="gllg"||orgDomainName=="glut"||orgDomainName=="zxxy"||orgDomainName=="zxkj"||orgDomainName=="gcjs"||orgDomainName=="sccj"){
+                        _this.showLearn=true;
+                    }else {
+                        _this.showLearn=false;
+                    }
+                }else {
+                    if(showLearnReg.test($window.location.hostname)){
+                        _this.showLearn=true;
+                    }
+                    if (("org" in search) && search.org) {
+                        if(search.org=="gllg"||search.org=="glut"||search.org=="zxxy"||search.org=="zxkj"||search.org=="gcjs"||search.org=="sccj"){
+                            _this.showLearn=true;
+                        }else {
+                            _this.showLearn=false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+
+            },
+
             init:function () {
                 var that=this;
                 that.schoolInfo=  CommonService.getSchool();
+                this.isShowCourse = true;
                 console.log(that.schoolInfo);
                 if(that.schoolInfo){
                     that.params.orgId=that.schoolInfo.id;
@@ -347,6 +386,8 @@ angular.module('dleduWebApp')
                         // console.log(e);
                     }
                 }
+
+                that.isShowLearn();
             }
         }
         $scope.template1Fn.init();
