@@ -214,8 +214,8 @@ angular.module('dleduWebApp')
                 this.qrcode = new QRCode(document.getElementById("qrcode"), {
                     text: "init",
                     // render: "table",
-                    width: 120,
-                    height: 120,
+                    width: 150,
+                    height: 150,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
@@ -271,7 +271,6 @@ angular.module('dleduWebApp')
                 });
                 _this.socket.on('success', function (data) {
                     // console.log(data);
-                    alert();
                     var temp = data.split(" ")
                     _this.qrcodeSignIn(temp[1]);
                     _this.socket.on('disconnect', function () {
