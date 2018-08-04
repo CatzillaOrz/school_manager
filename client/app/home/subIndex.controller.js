@@ -66,7 +66,7 @@ angular.module('dleduWebApp')
                     this.datas[index].button = '完成';
                     for(var i = 0, len = datas.length; i < len; i++){
                         datas[i].isShow = true;
-                        datas[i].selImg = 'https://s1.aizhixin.com/cf1ac5c4-65b6-4361-b65a-6682e92520c0.png';//新增图片
+                        datas[i].selImg = 'https://s1.aizhixin.com/a38a3d4a-087b-4ca9-b452-e201ef49a6ba.png';//新增图片
                         datas[i].isSel = false;
                     }
                 }else{//点击完成时保存选择的菜单
@@ -171,7 +171,7 @@ angular.module('dleduWebApp')
                     item.isSel = true;
                 }else{
                     item.isSel = false;
-                    item.selImg = 'https://s1.aizhixin.com/cf1ac5c4-65b6-4361-b65a-6682e92520c0.png'; //新增
+                    item.selImg = 'https://s1.aizhixin.com/a38a3d4a-087b-4ca9-b452-e201ef49a6ba.png'; //新增
                 }
 
             },

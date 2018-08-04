@@ -91,7 +91,8 @@
             span#refresh.btn.btn-ribbon(ng-click='layoutFn.lcReload();')
                 i.fa.fa-refresh
         div.backgo
-            a(ng-click="layoutFn.goHome()") 首页
+            a(ng-click="layoutFn.goHome()") {{layoutFn.navigateHome}}
+
             span /
         span(ncy-breadcrumb)
 
