@@ -164,7 +164,7 @@ angular.module('dleduWebApp', [
             prefixStateName: null
         });
     }])
-    .run(function ($state, $rootScope, AuthService, $window,CommonService,localStorageService) {
+    .run(function ($state, $rootScope, $timeout, AuthService, $window,CommonService,localStorageService) {
         localStorageService.remove('school');
         CommonService.getSchool();
        // 站内页面的访问权限验证

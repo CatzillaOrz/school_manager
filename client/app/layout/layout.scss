@@ -283,6 +283,7 @@ a:focus {outline: none;}
   }
 }
 aside#left-panel{
+  position: fixed;
   nav{
     ul{
       li{
@@ -330,4 +331,7 @@ aside#left-panel{
     padding: 0 5px;
     color: #ccc;
   }
+}
+#main{
+  padding-top:50px 0 30px;
 }
