@@ -149,6 +149,7 @@ angular.module('dleduWebApp')
                     c.selected = false
                 });
                 tempStorageService.setObject('hometempmyurl$', {url: entity.sref});
+                this.navigateHome = entity.title;
                 entity.selected = true;
             },
 
