@@ -385,6 +385,9 @@
                 &:last-child{
                   margin: 15px 0 0;
                 }
+                input:-webkit-autofill {
+                  -webkit-box-shadow: 0 0 0 30px white inset;
+                }
               }
               .signin_warning {
                 margin-top: 6px;
