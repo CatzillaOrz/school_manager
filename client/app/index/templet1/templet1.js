@@ -8,8 +8,8 @@ angular.module('dleduWebApp')
                 access: {requiredLogin: false},
                 views : {
                     root: {
-                        controller : 'templet1Ctrl',
-                        templateUrl: 'app/index/templet1/templet1.html'
+                        controller : 'IndexSchoolCtrl',
+                        templateUrl: 'app/index/templet1/indexSchool.html'
                     }
                 },
             })
