@@ -443,16 +443,19 @@
                     border-radius: 4px;
                     background-size: 40px;
                   }
+                  img{
+                    border: 5px solid #fff;
+                  }
                 }
               }
               .qrcode-error {
                 top: 0px;
                 position: absolute;
                 font-size: 12px;
-                height: 120px;
-                width: 120px;
+                height: 130px;
+                width: 130px;
                 background: rgba(255,255,255,0.8);
-                right: 56px;
+                right: 47px;
                 line-height: 120px;
                 cursor: pointer;
                 z-index: 999;

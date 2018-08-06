@@ -214,10 +214,10 @@ angular.module('dleduWebApp')
                 this.qrcode = new QRCode(document.getElementById("qrcode"), {
                     text: "init",
                     // render: "table",
-                    width: 150,
-                    height: 150,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
+                    width: 120,
+                    height: 120,
+                    colorDark: "#000000", //前景色
+                    colorLight: "#ffffff", //背景色
                     correctLevel: QRCode.CorrectLevel.H
                 });
                 var margin = ($("#qrcode").height() - $("#qrcode-logo").height()) / 2;
