@@ -12,11 +12,11 @@ angular.module("azx.common", ['ui.bootstrap'])
  */
     .factory('AuthService', ['$rootScope', '$http', '$q', '$window', '$location', '$templateCache', function ($rootScope, $http, $q, $window, $location, $templateCache) {
         var _headerLink = {
-            DEV: ['aizhixindev.com', 'em.aizhixindev.com', 'pt.aizhixindev.com', 'hy.aizhixindev.com', 'dd.aizhixindev.com', 'aizhixindev.com', 'learn.aizhixindev.com'],
-            TEST: ['aizhixintest.com', 'em.aizhixintest.com', 'pt.aizhixintest.com', 'hy.aizhixintest.com', 'dd.aizhixintest.com', 'aizhixintest.com', 'learn.aizhixintest.com'],
-            PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'dlztc.com', 'learn.dlztc.com'],
-            SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'aizhixin.com', 'learn.aizhixin.com'],
-            PRODUCT: ['zhixin', 'em', 'pt', 'hy', 'dd', 'school', 'learn']
+            DEV: ['aizhixindev.com', 'em.aizhixindev.com', 'pt.aizhixindev.com', 'hy.aizhixindev.com', 'dd.aizhixindev.com', 'aizhixindev.com', 'learn.aizhixindev.com', 'sp.aizhixindev.com'],
+            TEST: ['aizhixintest.com', 'em.aizhixintest.com', 'pt.aizhixintest.com', 'hy.aizhixintest.com', 'dd.aizhixintest.com', 'aizhixintest.com', 'learn.aizhixintest.com', 'sp.aizhixintest.com'],
+            PDE: ['dlztc.com', 'em.dlztc.com', 'pt.dlztc.com', 'hy.dlztc.com', 'dd.dlztc.com', 'dlztc.com', 'learn.dlztc.com', 'sp.dlztc.com'],
+            SDE: ['aizhixin.com', 'em.aizhixin.com', 'pt.aizhixin.com', 'hy.aizhixin.com', 'dd.aizhixin.com', 'aizhixin.com', 'learn.aizhixin.com', 'sp.aizhixin.com'],
+            PRODUCT: ['zhixin', 'em', 'pt', 'hy', 'dd', 'school', 'learn', 'sp']
         };
         var AuthService = {
             setUser: function (user) {

@@ -37,7 +37,7 @@
                 .title1 {{'教育综合应用平台'}}
                 .title2 {{'打造新一代教育模式，辅助学校培养精英人才'}}
             .menu
-                .class-live.menu-common(ng-click="template1Fn.goPage(1,'/schindex')")
+                .class-live.menu-common(ng-click="template1Fn.goPage(1)")
                     .content
                         img(src="https://s1.aizhixin.com/3b2358d0-1497-4f12-a803-9d5de14df74d.png")
                         div.title {{"课堂在线"}}
@@ -53,16 +53,16 @@
                 .user-center.menu-common(ng-click="template1Fn.goPage(0,'/userCenter')")
                     .content
                         div {{"个人中心"}}
-                .pt.menu-common(ng-click="template1Fn.goPage(2,'/schindex')" ng-class="{'pt-no-course':!template1Fn.isShowCourse}")
+                .pt.menu-common(ng-click="template1Fn.goPage(2,'/schindex')" ng-class="{'pt-no-course':!template1Fn.isGoodGoodCourse}")
                     .content
                         div {{"学习实践"}}
                         div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
-                .hand-school.menu-common(ng-click="template1Fn.goPage(4,'/schindex')")
+                .hand-school.menu-common(ng-click="template1Fn.goPage(7,'/index')")
                     .content
                         img(src="https://s1.aizhixin.com/76c84f8e-c930-4cc7-837a-eea1e5837370.png")
                         div.title {{"掌上校园"}}
                         div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
-                .course.menu-common(ng-click="template1Fn.goPage(3,'/schindex')" ng-if="template1Fn.isShowCourse")
+                .course.menu-common(ng-click="template1Fn.goPage(1,'/publicClass/list')" ng-if="template1Fn.isGoodGoodCourse")
                     .content
                         div {{"精品课程"}}
 

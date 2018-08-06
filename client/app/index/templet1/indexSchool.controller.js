@@ -129,10 +129,10 @@ angular.module('dleduWebApp')
                     CommonService.msgDialog("用户名密码不能为空！",3);
                     return;
                 }
-                //this.isShowCourse = false;
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                         var isCustomize = AuthService.isCustomize();
+                        that.isShowGoodCourse(); //是否显示精品课程列表
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -162,6 +162,7 @@ angular.module('dleduWebApp')
                 AuthService.qrcodeSignIn(token)
                     .then(function (user) {
                         var isCustomize = AuthService.isCustomize();
+                        that.isShowGoodCourse(); //是否显示精品课程列表
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -314,7 +315,7 @@ angular.module('dleduWebApp')
                 }
                 if(host == '6'){
                     if(!this.showLearn){
-                        messageService.openMsg("请没有访问权限！")
+                        messageService.openMsg("你没有访问权限！")
                         return;
                     }
                     var role = AuthService.getUser().roleNames.join("");
@@ -324,11 +325,21 @@ angular.module('dleduWebApp')
                         path = '/monitor';
                     }
                 }
+                if(host == '1'){//课堂在线 1是开卷的
+                    var role = AuthService.getUser().roleNames.join("");
+                    if(!path){
+                        if(role == 'ROLE_STUDENT'){
+                            path = 'classes/stuclasslist';
+                        }else{
+                            path = 'classes/classlist/';
+                        }
+                    }
+                }
                 AuthService.navigation(host, path);
             },
 
             /**
-             *是否显示学情
+             *是否可以点击学情
              */
             isShowLearn: function () {
                 var _this = this;
@@ -358,10 +369,29 @@ angular.module('dleduWebApp')
 
             },
 
+	        /**
+	         * 是否显示精品课程
+             */
+            isShowGoodCourse: function(){
+                var _this = this;
+                var params = {
+                    orgId: AuthService.getUser().orgId,
+                    pageNumber: 1,
+                    pageSize: 10
+                };
+                SchoolService.getBoutiqueCourseList(params).$promise
+                    .then(function (data) {
+                        _this.isGoodGoodCourse = data.data.length ? true : false;
+                    })
+                    .catch(function (error) {
+                        _this.isGoodGoodCourse = false;
+                    })
+            },
+
             init:function () {
                 var that=this;
                 that.schoolInfo=  CommonService.getSchool();
-                this.isShowCourse = true;
+                that.isGoodGoodCourse = true;
                 console.log(that.schoolInfo);
                 if(that.schoolInfo){
                     that.params.orgId=that.schoolInfo.id;
