@@ -203,7 +203,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 if(oneLevelReg.test(location.hostname)){
                     //$window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
                     var domain = AuthService.getCurrentEnvDomain();
-                    $window.location.href = "//" + domain[0] + "/index" + "?org=" + orgCode;
+                    $window.location.href = "//" + orgCode + "." + domain[0] + "/index" + "?org=" + orgCode;
                 }
                 var twoLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                 if(!twoLevelReg.test(location.hostname)){
@@ -211,7 +211,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                     $window.location.href = "//"+orgCode +"."+ url ;
                 }else {
                     var domain = AuthService.getCurrentEnvDomain();
-                    $window.location.href = "//" + domain[0] + "/index" + "?org=" + orgCode;
+                    $window.location.href = "//"  + orgCode + "." + domain[0] + "/index" + "?org=" + orgCode;
                     //$window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
                 }
 
