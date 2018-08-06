@@ -201,14 +201,18 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var passportReg = /\w*\bpassport\b\w*/;
                 var oneLevelReg = /^aizhixindev\.com$|^aizhixintest\.com$|^dlztc\.com$|^aizhixin\.com$/;
                 if(oneLevelReg.test(location.hostname)){
-                    $window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
+                    //$window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
+                    var domain = AuthService.getCurrentEnvDomain();
+                    $window.location.href = "//" + domain[0] + "/index" + "?org=" + orgCode;
                 }
                 var twoLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                 if(!twoLevelReg.test(location.hostname)){
                     var url= AuthService.getCurrentEnvDomainByProduct("zhixin");
                     $window.location.href = "//"+orgCode +"."+ url ;
                 }else {
-                    $window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
+                    var domain = AuthService.getCurrentEnvDomain();
+                    $window.location.href = "//" + domain[0] + "/index" + "?org=" + orgCode;
+                    //$window.location.href = "//" + location.hostname + "/schindex" + "?org=" + orgCode;
                 }
 
             },
@@ -1151,8 +1155,8 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<div class="azx-school-footer"> ' +
             '    <div class="footer-content">' +
             '            <div class="footer-center">' +
-            '               <div class="version">{{footerFn.schoolInfo.data.name || "知新网"}} · ver.{{version}}</div>' +
-            '               <div class="Copyright">Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · <span>京ICP备160973号</span></div>' +
+            //'               <div class="version">{{footerFn.schoolInfo.data.name || "知新网"}} · ver.{{version}}</div>' +
+            '               <div class="Copyright"><span>技术支持：北京知新树科技有限公司</span></div>' +
             // '               <div class="float-right">' +
             // '               <span class="QRcode" data-popover-title="知新网微信公众号" uib-popover-html="footerFn.qrWeixin" data-popover-trigger="footerFn.mouseenter">' +
             // '                   <i class="fa fa-lg fa-weixin"></i>' +
