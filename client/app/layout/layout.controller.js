@@ -131,6 +131,8 @@ angular.module('dleduWebApp')
                 $http.get(sourceLeft).then(function(res){
                     that.datas = res.data.items;
                     that.getMenusByAuth(that.datas);
+                    //实践工作台查询统计数据 - 请勿删除
+                    ($state.current.name == 'workbench') && ($scope.layoutFn.getSchoolStatistics());
                     that.datas.forEach(function(c){
                         var currentLink = tempStorageService.getObject("hometempmyurl$").url;
                         if(!currentLink && c.sref == 'home'){
