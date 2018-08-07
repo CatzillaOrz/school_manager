@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   min-height: 900px;
+  min-width: 1230px;
   background: url(https://s1.aizhixin.com/725a28ec-9012-4d6f-8263-e9c94043b253.png) center center no-repeat !important;
   background-size: cover!important;
   @keyframes background-move{
@@ -73,66 +74,66 @@
 
   @keyframes background-move1{
     from{
-      background: #FF5BB0;
+      background: #00D152;
     }
     to{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
   }
   @-webkit-keyframes background-move1{
     from{
-      background: #FF5BB0;
+      background: #00D152;
     }
     to{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
   }
   @-moz-keyframes background-move1{
     from{
-      background: #FF5BB0;
+      background: #00D152;
     }
     to{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
   }
   @-o-keyframes background-move1{
     from{
-      background: #FF5BB0;
+      background: #00D152;
     }
     to{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
   }
   @keyframes background-move-back1{
     from{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
     to{
-      background: #FF5BB0;
+      background: #00D152;
     }
   }
   @-webkit-keyframes background-move-back1{
     from{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
     to{
-      background: #FF5BB0;
+      background: #00D152;
     }
   }
   @-moz-keyframes background-move-back1{
     from{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
     to{
-      background: #FF5BB0;
+      background: #00D152;
     }
   }
   @-o-keyframes background-move-back1{
     from{
-      background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+      background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
     }
     to{
-      background: #FF5BB0;
+      background: #00D152;
     }
   }
 
@@ -670,8 +671,13 @@
           height: 350px;
           right: 0;
           top: 0px;
-          background: #00D152;
+          background: url('https://s1.aizhixin.com/1a048682-8426-43f9-9ed7-f7be33acf6ae.png') no-repeat center center;
+          background-size: cover;
+          -webkit-animation: background-move1 0.3s forwards;
+          animation: background-move1 0.3s forwards;
           &:hover{
+            -webkit-animation: background-move-back1 0.3s forwards;
+            animation: background-move-back1 0.3s forwards;
             .content{
               .profile{
                 -webkit-animation: display-move 0.3s forwards;
