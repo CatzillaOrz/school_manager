@@ -309,7 +309,11 @@ angular.module('dleduWebApp')
 	         * 点击去往不同的功能
              */
             goPage: function(host, path){
-                if(!AuthService.isLogin() && (host!=3 && host != 4)){
+                if(!AuthService.isLogin() && (host !=1 && host != 4)){
+                    messageService.openMsg("请先登录！")
+                    return;
+                }
+                if(host == 1 && !path){
                     messageService.openMsg("请先登录！")
                     return;
                 }
@@ -329,9 +333,9 @@ angular.module('dleduWebApp')
                     var role = AuthService.getUser().roleNames.join("");
                     if(!path){
                         if(role == 'ROLE_STUDENT'){
-                            path = 'classes/stuclasslist';
+                            path = '/classes/stuclasslist';
                         }else{
-                            path = 'classes/classlist/';
+                            path = '/classes/classlist/';
                         }
                     }
                 }
