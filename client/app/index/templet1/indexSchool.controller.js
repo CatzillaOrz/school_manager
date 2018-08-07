@@ -309,14 +309,17 @@ angular.module('dleduWebApp')
 	         * 点击去往不同的功能
              */
             goPage: function(host, path){
-                if(!AuthService.isLogin() && (host !=1 && host != 4)){
-                    messageService.openMsg("请先登录！")
-                    return;
+                if(!AuthService.isLogin()){
+                    if(host !=1 && host != 4){
+                        messageService.openMsg("请先登录！")
+                        return;
+                    }
+                    if(host == 1 && !path){
+                        messageService.openMsg("请先登录！")
+                        return;
+                    }
                 }
-                if(host == 1 && !path){
-                    messageService.openMsg("请先登录！")
-                    return;
-                }
+
                 if(host == '6'){
                     if(!this.showLearn){
                         messageService.openMsg("你没有访问权限！")
