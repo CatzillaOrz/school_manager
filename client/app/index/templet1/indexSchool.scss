@@ -4,7 +4,6 @@
   min-height: 900px;
   background: url(https://s1.aizhixin.com/725a28ec-9012-4d6f-8263-e9c94043b253.png) center center no-repeat !important;
   background-size: cover!important;
-  overflow: hidden;
   @keyframes background-move{
     from{
       background: #7A6EFF;
@@ -223,7 +222,6 @@
 
   .shade {
     height: inherit;
-    min-height: 1080px;
     .header {
       position: fixed;
       width: 100%;
@@ -244,7 +242,7 @@
             display: none;
           }
           .school-nav-bar {
-            width: 990px;
+            width: 1200px;
             margin: 0px auto;
             .logo {
               height: 40px;
@@ -330,7 +328,7 @@
       }
     }
     .context {
-      width: 990px;
+      width: 1200px;
       margin: 0px auto;
       height: inherit;
       position: relative;
@@ -543,7 +541,6 @@
       .menu{
         margin: 150px 0 110px;
         position: relative;
-        width: 990px;
         height: 350px;
         color: #fff;
         font-size: 18px;
@@ -570,7 +567,7 @@
         }
         .class-live{
           position: absolute;
-          width: 240px;
+          width: 232px;
           height: 350px;
           left: 0;
           top: 0;
@@ -591,9 +588,9 @@
         }
         .big-data{
           position: absolute;
-          width: 240px;
+          width: 232px;
           height: 230px;
-          left: 250px;
+          left: 242px;
           top: 0;
           background:#2D71FF;
           &:hover{
@@ -607,9 +604,9 @@
         }
         .man-center{
           position: absolute;
-          width: 240px;
+          width: 232px;
           height: 110px;
-          right: 250px;
+          right: 484px;
           top: 0;
           background: #7A6EFF;
           transition: background 0.2s linear;
@@ -619,9 +616,9 @@
         }
         .user-center{
           position: absolute;
-          width: 240px;
+          width: 232px;
           height: 110px;
-          right: 250px;
+          right: 484px;
           top: 120px;
           background: #FF9116;
           transition: background 0.2s linear;
@@ -629,19 +626,32 @@
             background: #FFA138;
           }
         }
+        .pt-help{
+          position: absolute;
+          width: 474px;
+          height: 110px;
+          left: 242px;
+          bottom: 0px;
+          background: #FF5BB0;
+          transition: background 0.2s linear;
+          &:hover{
+            .content{
+              .profile{
+                -webkit-animation: display-move 0.3s forwards;
+                animation: display-move 0.3s forwards;
+              }
+            }
+          }
+        }
         .pt{
           position: absolute;
-          width: 490px;
-          height: 110px;
-          right: 250px;
-          bottom: 0px;
-          background: url('https://s1.aizhixin.com/4e91cf04-68c0-4e23-8680-f2cadd0de3ec.png') no-repeat center center;
+          width: 232px;
+          height: 230px;
+          right: 242px;
+          top: 0px;
+          background: #FF5BB0;
           background-size: cover;
-          -webkit-animation: background-move1 0.3s forwards;
-          animation: background-move1 0.3s forwards;
           &:hover{
-            -webkit-animation: background-move-back1 0.3s forwards;
-            animation: background-move-back1 0.3s forwards;
             .content{
               .profile{
                 -webkit-animation: display-move 0.3s forwards;
@@ -656,8 +666,8 @@
         }
         .hand-school{
           position: absolute;
-          width: 240px;
-          height: 230px;
+          width: 232px;
+          height: 350px;
           right: 0;
           top: 0px;
           background: #00D152;
@@ -672,9 +682,9 @@
         }
         .course{
           position: absolute;
-          width: 240px;
+          width: 232px;
           height: 110px;
-          right: 0;
+          right: 242px;
           bottom: 0px;
           background: #2D71FF;
           &:hover{
@@ -686,7 +696,6 @@
     .footer {
       animation-delay: 1.6s;
       animation-duration: 0.3s;
-      position: absolute;
       bottom: 35px;
       text-align: center;
       width: 100%;
@@ -695,6 +704,16 @@
       font-family:PingFangSC-Light;
       color:rgba(122,122,141,1);
       line-height:17px;
+    }
+    @media only screen and (max-height: 899px){
+      .footer {
+        position: static;
+      }
+    }
+    @media only screen and (min-height: 900px){
+      .footer {
+        position: absolute;
+      }
     }
   }
 }
