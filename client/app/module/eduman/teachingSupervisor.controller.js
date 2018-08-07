@@ -172,6 +172,9 @@ angular.module('dleduWebApp')
 				if(type){
 					this.tab = type;
 				}
+				if($state.current.name == "teachingSupervisortj"){
+					$scope.isReport = true;//是否是统计报表
+				}
 				this.getFeedbackList();
 				$timeout(function(){
 					TabBlock.init();

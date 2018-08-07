@@ -77,8 +77,8 @@
                 },
                 {
                     "title": "教学反馈报表",
-                    "sref": "teachingSupervisor",
-                    "active": "teachingSupervisor",
+                    "sref": "teachingSupervisortj",
+                    "active": "teachingSupervisortj",
                     "icon": "https://s1.aizhixin.com/a7f6a603-b056-4efc-903a-b83adb9fd873.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 }

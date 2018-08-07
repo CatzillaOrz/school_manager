@@ -12,7 +12,7 @@
                         i.fa.fa-lg.fa-clock-o
                         span.hidden-mobile.hidden-tablet
                             | 督导反馈
-                li.tabBlock-tab.cursor-pointer(ng-class="{'active': teachingSuperFn.tab=='template'}" role="navigation" ng-click="teachingSuperFn.switchTab('template')")
+                li.tabBlock-tab.cursor-pointer(ng-if="!isReport" ng-class="{'active': teachingSuperFn.tab=='template'}" role="navigation" ng-click="teachingSuperFn.switchTab('template')")
                     a(data-toggle='tab', aria-expanded='{{teachingSuperFn.tab=="template"}}')
                         i.fa.fa-lg.fa-pencil
                         span.hidden-mobile.hidden-tablet
@@ -145,7 +145,9 @@
                                                     td {{record.createDate|date: 'yyyy-MM-dd HH:mm:ss'}}
                                                     td {{record.userName}}
                                                     td
-                                                        a.handle(ui-sref="teachingSuperInfo({id:record.id, type: 'superInfo'})")
+                                                        a.handle(ng-if="!isReport" ui-sref="teachingSuperInfo({id:record.id, type: 'superInfo'})")
+                                                            span 查看
+                                                        a.handle(ng-if="isReport" ui-sref="teachingSuperInfotj({id:record.id, type: 'superInfo'})")
                                                             span 查看
 
 
