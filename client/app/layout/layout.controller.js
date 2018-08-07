@@ -150,7 +150,7 @@ angular.module('dleduWebApp')
                 that.datas.forEach(function(c){
                     c.selected = false
                 });
-                tempStorageService.setObject('hometempmyurl$', {url: entity.sref});
+                tempStorageService.setObject('hometempmyurl$', {url: entity.sref, name: entity.title});
                 this.navigateHome = entity.title;
                 entity.selected = true;
             },
@@ -182,6 +182,9 @@ angular.module('dleduWebApp')
                 if($state.current.name == 'home'){
                     tempStorageService.removeObject("hometempmyurl$");
                 }
+                //页面刷新时给导航赋值
+                var urlInfo = tempStorageService.getObject("hometempmyurl$");
+                this.navigateHome = urlInfo ? urlInfo.name : '首页';
                 $scope.layoutFn.getLogoList();
                 $scope.layoutFn.getLeftMenu();
             }

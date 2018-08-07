@@ -267,6 +267,20 @@ angular.module('dleduWebApp')
 					label: '学生评教统计'
 				}
 			})
+			.state('evaquestaticreport', {
+				parent: 'evaquestionreport',
+				url   : '/evaquestatic/:type/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticCtrl',
+						templateUrl: 'app/module/eduman/evaquestatic.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '学生评教统计'
+				}
+			})
 			.state('evaquesadd', {
 				parent: 'evaquestion',
 				url   : '/evaquesadd',
@@ -472,9 +486,37 @@ angular.module('dleduWebApp')
 					label: '教学督导'
 				}
 			})
+			.state('teachingSupervisortj', {
+				parent: 'base',
+				url   : '/teachingsupervisortj/:tab',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'teachingSupervisorCtrl',
+						templateUrl: 'app/module/eduman/teachingSupervisor.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教学督导统计'
+				}
+			})
 			.state('teachingSuperInfo', {
 				parent: 'teachingSupervisor',
 				url   : '/teachingsuperinfo/:id/:type',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'teachingSuperInfoCtrl',
+						templateUrl: 'app/module/eduman/teachingSuperInfo.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '反馈详情'
+				}
+			})
+			.state('teachingSuperInfotj', {
+				parent: 'teachingSupervisortj',
+				url   : '/teachingsuperinfotj/:id/:type',
 				access: {requiredLogin: true},
 				views : {
 					'content@base': {
@@ -560,6 +602,20 @@ angular.module('dleduWebApp')
 			})
 			.state('evaquestatictea', {
 				parent: 'evaquestiontea',
+				url   : '/evaquestatictea/:type/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticTeaCtrl',
+						templateUrl: 'app/module/eduman/evaquestatictea.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '教师评学统计'
+				}
+			})
+			.state('evaquestaticteatj', {
+				parent: 'evaquestionteareport',
 				url   : '/evaquestatictea/:type/:id',
 				access: {requiredLogin: true},
 				views : {
@@ -674,6 +730,20 @@ angular.module('dleduWebApp')
 			})
 			.state('evaquestaticsamepart', {
 				parent: 'evaquesamepart',
+				url   : '/evaquestaticsamepart/:type/:id',
+				access: {requiredLogin: true},
+				views : {
+					'content@base': {
+						controller : 'EvaQueStaticSamePartCtrl',
+						templateUrl: 'app/module/eduman/evaquestaticsamepart.html'
+					}
+				},
+				ncyBreadcrumb: {
+					label: '同行评教统计'
+				}
+			})
+			.state('evaquestaticsameparttj', {
+				parent: 'evaquesamepartreport',
 				url   : '/evaquestaticsamepart/:type/:id',
 				access: {requiredLogin: true},
 				views : {
