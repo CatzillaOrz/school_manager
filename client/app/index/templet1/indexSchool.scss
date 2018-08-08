@@ -223,6 +223,17 @@
 
   .shade {
     height: inherit;
+    .header-scroll{
+      background: #1A1A28;
+      .school-nav-bar{
+        .logo{
+          margin-top: -2px;
+        }
+        .account {
+          margin-top: -10px;
+        }
+      }
+    }
     .header {
       position: fixed;
       width: 100%;
@@ -238,7 +249,7 @@
           background: none;
           border: none;
           height: 56px;
-          padding-top: 16px;
+          padding-top: 12px;
           .border-top {
             display: none;
           }
