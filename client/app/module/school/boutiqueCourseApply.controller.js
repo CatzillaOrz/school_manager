@@ -44,6 +44,12 @@ angular.module('dleduWebApp')
 
                     })
             },
+
+            preView: function(id){
+                var path = '/publicClass/detailsPreview/0/' + id;
+                AuthService.navigation(1, path);
+            },
+
             init:function () {
                 var _this=this;
                 _this.getApplyList();
