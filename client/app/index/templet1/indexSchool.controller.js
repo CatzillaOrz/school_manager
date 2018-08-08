@@ -23,6 +23,8 @@ angular.module('dleduWebApp')
                 username: '',
                 password: ''
             },
+            showLearn:true, //是否显示学情大数据
+
             getLogoList:function () {
                 var _this=this;
                 var params={

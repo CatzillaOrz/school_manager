@@ -37,37 +37,72 @@
                 .title1 {{'教学应用综合平台'}}
                 .title2 {{'开放、共享、交互、协作的数字化教育信息管理服务'}}
             .menu
-                .class-live.menu-common(ng-click="template1Fn.goPage(1)")
+                .class-live.menu-common(ng-if="true" ng-click="template1Fn.goPage(1)")
                     .content
                         img(src="https://s1.aizhixin.com/3b2358d0-1497-4f12-a803-9d5de14df74d.png")
                         div.title {{"课堂在线"}}
                         div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
-                .big-data.menu-common(ng-click="template1Fn.goPage(6,'/schindex')")
+                .class-live-disabled.menu-common(ng-if="false" )
+                    .content
+                        img(src="https://s1.aizhixin.com/45e26315-f297-4d59-88b6-ea5824572a10.png")
+                        div.title {{"课堂在线"}}
+
+                .big-data.menu-common(ng-if="template1Fn.showLearn" ng-click="template1Fn.goPage(6,'/schindex')")
                     .content
                         img(src="https://s1.aizhixin.com/cd01ad18-c1a2-485d-bf51-8094f8927c54.png")
                         div.title {{"学情大数据"}}
                         div.profile {{'学情深度分析，学业主动预警，大数据助力教育洞察。'}}
-                .man-center.menu-common(ng-click="template1Fn.goPage(5,'/home')")
+                .big-data-disabed.menu-common(ng-if="!template1Fn.showLearn")
+                    .content
+                        img(src="https://s1.aizhixin.com/016cc63d-c1b3-4f6b-9332-164750d0d147.png")
+                        div.title {{"学情大数据"}}
+
+                .man-center.menu-common(ng-if="true" ng-click="template1Fn.goPage(5,'/home')")
                     .content
                         div {{"管理中心"}}
-                .user-center.menu-common(ng-click="template1Fn.goPage(0,'/userCenter')")
+                .man-center-disabled.menu-common(ng-if="false")
+                    .content
+                        div {{"管理中心"}}
+
+                .user-center.menu-common(ng-if="true" ng-click="template1Fn.goPage(0,'/userCenter')")
                     .content
                         div {{"个人中心"}}
-                .pt-help.menu-common(ng-click="template1Fn.goPage(2,'/schindex')" ng-class="{'pt-no-course':!template1Fn.isGoodGoodCourse}")
+                .user-center-disabled.menu-common(ng-if="false")
+                    .content
+                        div {{"个人中心"}}
+
+                .pt-help.menu-common(ng-if="true" ng-click="template1Fn.goPage(2,'/schindex')" ng-class="{'pt-no-course':!template1Fn.isGoodGoodCourse}")
                     .content
                         div.title {{"实训协作"}}
                         div.profile {{'项目式团队建设管理 学习企业项目工作模式。'}}
-                .pt.menu-common(ng-click="template1Fn.goPage(7,'/index')")
+                .pt-help-disabled.menu-common(ng-if="false" ng-class="{'pt-no-course':!template1Fn.isGoodGoodCourse}")
+                    .content
+                        div.title {{"实训协作"}}
+
+                .pt.menu-common(ng-if="true"  ng-click="template1Fn.goPage(7,'/index')")
                     .content
                         img(src="https://s1.aizhixin.com/3cbafe15-1fcd-42f7-be30-efe48ad1a257.png")
                         div.title {{"学习实践"}}
                         div.profile {{'学生实践安全掌控，实践过程有效考核，校企协同育人。'}}
-                .hand-school.menu-common(ng-click="template1Fn.goPage(4,'/schindex')")
+                .pt-disabled.menu-common(ng-if="false")
+                    .content
+                        img(src="https://s1.aizhixin.com/d207dccb-944d-452e-b3df-deaa4ee7f575.png")
+                        div.title {{"学习实践"}}
+
+                .hand-school.menu-common(ng-if="true" ng-click="template1Fn.goPage(4,'/schindex')")
                     .content
                         img(src="https://s1.aizhixin.com/6d218b89-4c69-48fb-bd1f-4059cf28330d.png")
                         div.title {{"掌上校园"}}
                         div.profile {{'两句话的简介，介绍课堂在线的核心产品功能。'}}
-                .course.menu-common(ng-click="template1Fn.goPage(1,'/publicClass/list')" ng-if="template1Fn.isGoodGoodCourse")
+                .hand-school-disabled.menu-common(ng-if="false")
+                    .content
+                        img(src="https://s1.aizhixin.com/39409a13-a0d3-410e-96cf-7dc296ae4573.png")
+                        div.title {{"掌上校园"}}
+
+                .course.menu-common(ng-click="template1Fn.goPage(1,'/publicClass/list')" ng-if="template1Fn.isGoodGoodCourse&&true")
+                    .content
+                        div {{"精品课程"}}
+                .course-disabled.menu-common(ng-if="template1Fn.isGoodGoodCourse&&false")
                     .content
                         div {{"精品课程"}}
 

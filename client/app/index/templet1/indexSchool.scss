@@ -587,6 +587,18 @@
             }
           }
         }
+        .class-live-disabled{
+          position: absolute;
+          width: 232px;
+          height: 350px;
+          left: 0;
+          top: 0;
+          background: url('https://s1.aizhixin.com/80dd59b5-8bf1-43e4-96f8-c63820e54066.png') no-repeat center center;
+          background-size: cover;
+          &:hover{
+            cursor: not-allowed;
+          }
+        }
         .big-data{
           position: absolute;
           width: 232px;
@@ -603,6 +615,15 @@
             }
           }
         }
+        .big-data-disabed {
+          position: absolute;
+          width: 232px;
+          height: 230px;
+          left: 242px;
+          top: 0;
+          background: #A1A1A1;
+          cursor: not-allowed;
+        }
         .man-center{
           position: absolute;
           width: 232px;
@@ -615,6 +636,15 @@
             background: #8E84FF;
           }
         }
+        .man-center-disabled{
+          position: absolute;
+          width: 232px;
+          height: 110px;
+          right: 484px;
+          top: 0;
+          background: #A1A1A1;
+          cursor: not-allowed;
+        }
         .user-center{
           position: absolute;
           width: 232px;
@@ -626,6 +656,15 @@
           &:hover{
             background: #FFA138;
           }
+        }
+        .user-center-disabled{
+          position: absolute;
+          width: 232px;
+          height: 110px;
+          right: 484px;
+          top: 120px;
+          background: #A1A1A1;
+          cursor: not-allowed;
         }
         .pt-help{
           position: absolute;
@@ -644,6 +683,15 @@
             }
           }
         }
+        .pt-help-disabled{
+          position: absolute;
+          width: 474px;
+          height: 110px;
+          left: 242px;
+          bottom: 0px;
+          background: #A1A1A1;
+          cursor: not-allowed;
+        }
         .pt{
           position: absolute;
           width: 232px;
@@ -660,6 +708,15 @@
               }
             }
           }
+        }
+        .pt-disabled{
+          position: absolute;
+          width: 232px;
+          height: 230px;
+          right: 242px;
+          top: 0px;
+          background: #A1A1A1;
+          cursor: not-allowed;
         }
         .pt-no-course{
           width: 740px!important;
@@ -686,6 +743,18 @@
             }
           }
         }
+        .hand-school-disabled{
+          position: absolute;
+          width: 232px;
+          height: 350px;
+          right: 0;
+          top: 0px;
+          background: url('https://s1.aizhixin.com/2f47c22a-7ab0-4181-821e-789db436871d.png') no-repeat center center;
+          background-size: cover;
+          &:hover{
+            cursor: not-allowed;
+          }
+        }
         .course{
           position: absolute;
           width: 232px;
@@ -696,6 +765,15 @@
           &:hover{
             background: #4D86FF;
           }
+        }
+        .course-disabled{
+          position: absolute;
+          width: 232px;
+          height: 110px;
+          right: 242px;
+          bottom: 0px;
+          background: #A1A1A1;
+          cursor: not-allowed;
         }
       }
     }
