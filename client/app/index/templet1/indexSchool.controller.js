@@ -429,4 +429,13 @@ angular.module('dleduWebApp')
             }
         }
         $scope.template1Fn.init();
+        $timeout(function(){
+            $(window).bind("scroll",function(){
+                if($(window).scrollTop() > 60){
+                    $('.header.animated.fadeInDown').addClass('header-scroll');
+                }else{
+                    $('.header.animated.fadeInDown').removeClass('header-scroll');
+                }
+            });
+        });
     });
