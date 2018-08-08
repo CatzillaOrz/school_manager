@@ -178,6 +178,32 @@ angular.module('dleduWebApp')
                 }
             },
 
+            /**
+             * 点击去往不同的功能
+             */
+            goPage: function(host, path){
+                if(host == '6'){
+                    var role = AuthService.getUser().roleNames.join("");
+                    if(role == 'ROLE_STUDENT'){
+                        path = '/student/list';
+                    }else{
+                        path = '/monitor';
+                    }
+                }
+                if(host == '1'){//课堂在线 1是开卷的
+                    var role = AuthService.getUser().roleNames.join("");
+                    if(!path){
+                        if(role == 'ROLE_STUDENT'){
+                            path = '/classes/stuclasslist';
+                        }else{
+                            path = '/classes/classlist/';
+                        }
+                    }
+                }
+                AuthService.navigation(host, path);
+            },
+
+
             init: function(){
                 if($state.current.name == 'home'){
                     tempStorageService.removeObject("hometempmyurl$");
