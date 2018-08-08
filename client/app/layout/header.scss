@@ -64,13 +64,13 @@
         }
       }
       .dropdown-menu {
-        width: 130px;
-        min-width: 130px !important;
+        width: 200px;
+        min-width: 200px !important;
         left: auto;
         right: 0;
         border-radius: 0;
-        margin: 5px 0 0 0;
-        text-align: center;
+        margin: 0;
+        text-align: left;
         border-width: 1px;
         border-style: solid;
         border-color: #f0f0f0;
@@ -78,15 +78,31 @@
         font-size: 12px;
         box-shadow:0px 1px 2px 0px rgba(221,223,233,1);
         li a {
-          padding: 6px 20px;
+          padding: 6px 10px;
           &:hover {
-            color: #666;
-            background: #f5f5f5;
+            color: #27A1E9;
+            background-color: #fff!important;
           }
           i.fa {
             float: left;
             margin: 2px 10px 2px 0;
             color: #999999;
+          }
+          .account-new{
+            color: #999;
+            font-size: 12px;
+            cursor: default;
+          }
+          .account-name{
+            color: #333;
+            font-size: 16px;
+            cursor: default;
+          }
+        }
+        li:last-child{
+          a{
+            text-align: center;
+            color: #FF8181!important;
           }
         }
         .split {

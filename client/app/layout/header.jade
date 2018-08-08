@@ -16,23 +16,41 @@ header#header.hidden-print
                 span.user-avatar
                     img.avatar-30.img-circle(ng-src='{{ layoutFn.user.avatar}}')
                 span#user-name.dropdown-toggle
-                    span {{ layoutFn.user.login | cutStr:8}}
+                    //span {{ layoutFn.user.login | cutStr:8}}
                     i.caret
                 ul.dropdown-menu(uib-dropdown-menu='uib-dropdown-menu' aria-labelledby='user-name')
                     li(ng-repeat='anav in navigation.accountNav' class='{{anav.name}}')
                         a(ng-if="anav.name != 'split'" ng-click=' layoutFn.navigate(anav.host,anav.path)')
                             i.fa(class='{{anav.icon}}')
                             span {{anav.name}}
+
+                        li
+                            a
+                                span(class="account-name") {{ layoutFn.user.name | cutStr:20}}
+                        li
+                            a
+                                span(class="account-new") {{'账号 ' +layoutFn.user.login | cutStr:15}}
+                        li.split
+                        li
+                            a(ui-sref="index")
+                                span 首页
+                        li
+                            a(ng-click=" layoutFn.goPage(1, '/classes/classlist/')")
+                                span 课堂在线
+                        li
+                            a(ng-click=" layoutFn.goPage(6,'/monitor')")
+                                span 学情大数据
+                        li
+                            a(ng-click=" layoutFn.navigate(7,'/index')")
+                                span 实习实践
+                        li
+                            a(ng-click=" layoutFn.navigate(4,'/schindex')")
+                                span 掌上校园
+                        li.split
                         li
                             a(ng-click=" layoutFn.navigate(0,'/userCenter')")
-                                i.fa.fa-sun-o
                                 span 个人中心
-                        li
-                            a(ng-click=" layoutFn.navigate(0,'/account')")
-                                i.fa.fa-vcard-o
-                                span 账号设置
-                        //li.split
+                        li.split
                         li
                             a(ng-click=' layoutFn.signOut()')
-                                i.fa.fa-sign-out
                                 span 退出登录
