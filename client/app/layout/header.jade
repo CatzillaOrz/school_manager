@@ -37,7 +37,7 @@ header#header.hidden-print
                         li
                             a(ng-click=" layoutFn.goPage(1, '/classes/classlist/')")
                                 span 课堂在线
-                        li
+                        li(ng-if="layoutFn.user.orgDomainName=='gllg'")
                             a(ng-click=" layoutFn.goPage(6,'/monitor')")
                                 span 学情大数据
                         li
