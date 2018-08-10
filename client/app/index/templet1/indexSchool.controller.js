@@ -165,7 +165,7 @@ angular.module('dleduWebApp')
                     })
                     .catch(function (err) {
                         var error = {
-                            message: "扫码登录失败"
+                            message: "用户不存在或密码错误"
                         }
                         that.signError(error);
                     });
