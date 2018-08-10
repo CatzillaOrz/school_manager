@@ -71,4 +71,28 @@ module.exports = function (app) {
             res.cookie('getuserflag', 'true', {path: '/'});
             res.redirect('/home');
         });
+
+    app.post('/api/qrcodeSignIn',
+        //passport.authenticate('local', {}),
+        function (req, res) {
+            var _oauth =
+            { access_token:  req.body.token,
+                token_type: 'bearer',
+                refresh_token: '',
+                expires_in: 429912,
+                scope: 'read write' };
+            AccountService.getAccountSync(_oauth.access_token)
+                .then(function (account) {
+                    req.session.oauth = _oauth;
+                    req.session.oauth.timestamp_left = req.session.oauth.expires_in * 1000;
+                    req.session.oauth.timestamp = new Date().getTime();
+                    res.json(account);
+                })
+                .catch(function (e) {
+                    res.status(401).json({
+                        code: 401,
+                        message: e.message
+                    });
+                });
+        });
 };
