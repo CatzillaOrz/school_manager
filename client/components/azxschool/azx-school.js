@@ -91,7 +91,7 @@ angular.module("azx.schoolman", ['ui.bootstrap'])
 
                     },
                     signOut: function () {
-                        AuthService.signOut();
+                        $state.go("index");
                     },
                     navigate: function (host, path) {
                         AuthService.navigation(host, path);
