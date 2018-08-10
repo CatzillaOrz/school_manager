@@ -434,6 +434,8 @@ angular.module('dleduWebApp')
                     this.isShowMenu.manCenter = false;
                 }else if(role == 'ROLE_TEACHER'){//techer
                     this.isShowMenu.manCenter = false;
+                }else if(role.indexOf('ROLE_CLASSROOMTEACHE') != -1){//techer
+                    this.isShowMenu.manCenter = false;
                 }else{
                     this.isShowMenu.pt = false;
                     this.isShowMenu.handSchool = false;
