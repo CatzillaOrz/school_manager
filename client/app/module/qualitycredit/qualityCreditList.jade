@@ -1,0 +1,130 @@
+.college-list-container
+    #wid-id-2.tabBlock.jarviswidget.jarviswidget-color-blueDark.jarviswidget-sortable(data-widget-editbutton='false', style='', role='widget')
+        header(role='heading')
+            .jarviswidget-ctrls(role='menu')
+            ul.tabBlock-tabs.nav.nav-tabs.pull-left.in
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': qualityCreditListFn.tab=='list'}" ng-click="qualityCreditListFn.switchTab('list')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{qualityCreditListFn.tab=="list"}}')
+                        i.fa.fa-lg.fa-calendar
+                        span.hidden-mobile.hidden-tablet  素质学分报表
+                li.tabBlock-tab.cursor-pointer(ng-class="{'active': qualityCreditListFn.tab=='template'}" ng-click="qualityCreditListFn.switchTab('template')" role="navigation")
+                    a(data-toggle='tab',  aria-expanded='{{qualityCreditListFn.tab=="template"}}')
+                        i.fa.fa-lg.fa-clock-o
+                        span.hidden-mobile.hidden-tablet
+                            | 素质学分模板
+        // widget div
+        div(role='content')
+            // widget edit box
+            .jarviswidget-editbox
+                // This area used as dropdown edit box
+            // end widget edit box
+            // widget content
+            .widget-body.no-padding
+                .tab-content
+                    #hr1.tab-pane.active
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .dt-toolbar.padding-bottom-10
+                                            .col-xs-8
+                                                form.form-inline
+                                                    .form-group.col-sm-6
+                                                        label.control-label  行政班级：
+                                                        input.form-control(type="text" ng-model="qualityCreditListFn.params.className" placeholder="输入行政班名称", my-enter="qualityCreditListFn.query()" )
+                                                form.form-inline
+                                                    .form-group.col-sm-6
+                                                        label.control-label  辅导员：
+                                                        input.form-control(type="text" ng-model="qualityCreditListFn.params.teacherName" placeholder="输入辅导员姓名", my-enter="qualityCreditListFn.query()" )
+
+                                            .col-xs-4.hidden-xs
+                                                .ColVis
+                                                    button.btn.btn-primary(ng-click="qualityCreditListFn.query()")
+                                                        span 查询
+                                                    button.btn.btn-primary(ng-click="qualityCreditListFn.exportAll('all')")
+                                                        span 导出报表
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 班级列表
+                                                    th 辅导员
+                                                    th 提交次数
+                                                    th 引用模板
+                                                    th 学分平均
+                                                    th 操作
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in qualityCreditListFn.records")
+                                                    td.sorting_1 {{$index+1 + ((qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber+1:qualityCreditListFn.page.pageNumber)-1)*10}}
+                                                    td {{record.name}}
+                                                    td {{record.name}}
+                                                    td {{record.name}}
+                                                    td {{record.name}}
+                                                    td {{record.name}}
+                                                    td {{record.userName}}
+                                                    td {{record.jobNum}}
+                                                    td
+                                                        a.handle(ng-click="qualityCreditListFn.export(record)")
+                                                            span 导出
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber*10:(qualityCreditListFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber+1:qualityCreditListFn.page.pageNumber)-1)*10+qualityCreditListFn.records.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{qualityCreditListFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                    #hr2.tab-pane
+                        .col-xs-12.margin-top-10
+                        .tabbable.tabs-below
+                            .tab-content
+                                .no-padding
+                                    .dataTables_wrapper.form-inline.no-footer
+                                        .col-xs-8.padding-bottom-10
+                                            form.form-inline
+                                                .form-group.col-sm-12
+
+                                        .col-xs-4.hidden-xs
+                                            .ColVis
+                                                button.btn.btn-primary(ui-sref="qualitycredithandle")
+                                                    span 新增模板
+                                        table.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
+                                            thead
+                                                tr(role='row')
+                                                    th 序号
+                                                    th 模板名称
+                                                    th 总分
+                                                    th 辅导员引用
+                                                    th 操作
+                                            tbody
+                                                tr.odd(role='row' ng-repeat="record in qualityCreditListFn.records")
+                                                    td.sorting_1 {{$index+1 + ((qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber+1:qualityCreditListFn.page.pageNumber)-1)*10}}
+                                                    td {{record.name}}
+                                                    td {{record.totalScore}}
+                                                    td {{!record.usageCount? 0:record.usageCount}}
+                                                    td
+                                                        a.handle(ui-sref="qualitycredithandle({id:record.id})")
+                                                            span 修改
+                                                        a.handle(ng-click="qualityCreditListFn.delRecord(record.id)")
+                                                            span 删除
+
+
+                                        .dt-toolbar-footer
+                                            .col-sm-6.col-xs-12.hidden-xs
+                                                .dataTables_info(role='status', aria-live='polite')
+                                                    | 显示第
+                                                    span.txt-color-darken {{qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber*10:(qualityCreditListFn.page.pageNumber-1)*10+1}}
+                                                    |  到
+                                                    span.txt-color-darken {{((qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber+1:qualityCreditListFn.page.pageNumber)-1)*10+qualityCreditListFn.records.length}}
+                                                    |  条 总共
+                                                    span.text-primary {{qualityCreditListFn.page.totalElements}}
+                                                    |  条记录
+                                            .col-sm-6.col-xs-12
+                                                .dataTables_paginate.paging_simple_numbers
+                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

@@ -25,4 +25,5 @@ module.exports = function(app){
   app.use('/api/dormman', require('./api/dormman'));
   app.use('/api/payment', require('./api/payment'));
   app.use('/api/batchimp', require('./api/batchimp'));
+  app.use('/api/qualitycredit', require('./api/qualitycredit'));
 };
