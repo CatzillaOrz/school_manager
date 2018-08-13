@@ -82,6 +82,27 @@ module.exports = {
 			})
 	},
 
+
+	exportReport: function (req, res) {
+		QualityCreditService.exportReportSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
+	exportReportById: function (req, res) {
+		QualityCreditService.exportReportByIdSync(req.query, req.user.access_token)
+			.then(function (data) {
+				res.json(data);
+			})
+			.catch(function (e) {
+				res.status(e.code).send(e.message);
+			})
+	},
+
 };
 
 

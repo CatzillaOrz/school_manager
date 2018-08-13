@@ -80,7 +80,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						if(data.success){
 							messageService.openMsg("修改成功!");
-							$state.go("qualitycreditlist");
+							$state.go("qualitycreditlist",{type:'template'});
 						}else{
 							messageService.openMsg(data.message);
 						}

@@ -123,6 +123,44 @@ var QualityCreditService = {
 			callback(e);
 		});
 	},
+
+	//导出报表
+	exportReport: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+			path: '/api/web/v1/credit/report/exportReportByTemplet',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
+
+	//通过id导出
+	exportReportById: function (params, access_token, callback) {
+		RestClient.get({
+			host: 'dd',
+			path: '/api/web/v1/credit/report/exportReport',
+			access_token: access_token,
+			params: params
+		}).then(function (res) {
+				if (res.status.code == 200) {
+					callback(null, res.entity);
+				} else {
+					callback(ErrorCode.errorHandle(res));
+				}
+			})
+			.catch(function (e) {
+				callback(e);
+			});
+	},
 };
 
 

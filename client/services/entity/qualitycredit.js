@@ -43,6 +43,14 @@ angular.module('dleduWebService')
 					url: "api/course/exportCourse",
 					params: params
 				});
+			},
+			exportReport: function (params) {
+				var qualitycredit = $resource('api/qualitycredit/exportReport');
+				return qualitycredit.get(params);
+			},
+			exportReportById: function (params) {
+				var qualitycredit = $resource('api/qualitycredit/exportReportById');
+				return qualitycredit.get(params);
 			}
 		}
 

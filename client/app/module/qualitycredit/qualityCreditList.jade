@@ -28,17 +28,22 @@
                                 .no-padding
                                     .dataTables_wrapper.form-inline.no-footer
                                         .dt-toolbar.padding-bottom-10
-                                            .col-xs-8
+                                            .col-xs-9
                                                 form.form-inline
-                                                    .form-group.col-sm-6
+                                                    .form-group.col-sm-4
                                                         label.control-label  行政班级：
                                                         input.form-control(type="text" ng-model="qualityCreditListFn.params.className" placeholder="输入行政班名称", my-enter="qualityCreditListFn.query()" )
                                                 form.form-inline
-                                                    .form-group.col-sm-6
+                                                    .form-group.col-sm-4
                                                         label.control-label  辅导员：
                                                         input.form-control(type="text" ng-model="qualityCreditListFn.params.teacherName" placeholder="输入辅导员姓名", my-enter="qualityCreditListFn.query()" )
-
-                                            .col-xs-4.hidden-xs
+                                                form.form-inline
+                                                    .form-group.col-sm-4
+                                                        label.control-label 引用模板：
+                                                        select.form-control(ng-model="qualityCreditListFn.params.templateId" ui-select2="qualityCreditListFn.getTemplateList()", ng-change="qualityCreditListFn.query()" )
+                                                            option(value="-1") 全部
+                                                            option(ng-repeat="template in qualityCreditListFn.templates" value="{{template.id}}" ) {{template.name}}
+                                            .col-xs-3.hidden-xs
                                                 .ColVis
                                                     button.btn.btn-primary(ng-click="qualityCreditListFn.query()")
                                                         span 查询
@@ -57,13 +62,11 @@
                                             tbody
                                                 tr.odd(role='row' ng-repeat="record in qualityCreditListFn.records")
                                                     td.sorting_1 {{$index+1 + ((qualityCreditListFn.page.pageNumber==0?qualityCreditListFn.page.pageNumber+1:qualityCreditListFn.page.pageNumber)-1)*10}}
-                                                    td {{record.name}}
-                                                    td {{record.name}}
-                                                    td {{record.name}}
-                                                    td {{record.name}}
-                                                    td {{record.name}}
-                                                    td {{record.userName}}
-                                                    td {{record.jobNum}}
+                                                    td {{record.className}}
+                                                    td {{record.teacherName}}
+                                                    td {{record.commitCount}}
+                                                    td {{record.templetName}}
+                                                    td {{record.avgScore? record.avgScore:0}}
                                                     td
                                                         a.handle(ng-click="qualityCreditListFn.export(record)")
                                                             span 导出
@@ -111,7 +114,7 @@
                                                     td
                                                         a.handle(ui-sref="qualitycredithandle({id:record.id})")
                                                             span 修改
-                                                        a.handle(ng-click="qualityCreditListFn.delRecord(record.id)")
+                                                        a.handle(ng-click="qualityCreditListFn.deletePrompt(record)")
                                                             span 删除
 
 

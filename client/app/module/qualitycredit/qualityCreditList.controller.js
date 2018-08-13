@@ -7,7 +7,7 @@ angular.module('dleduWebApp')
 	                                               ngDialog, QualityCreditService, messageService) {
 		var TabBlock = {
 			s: {
-				animLen: 200
+				animLen: 100
 			},
 
 			init: function () {
@@ -59,6 +59,8 @@ angular.module('dleduWebApp')
 			//列表记录
 			records: [],
 			record: null,
+			templates: [],  //模板列表
+
 			tab: 'list', // list 信息员反馈   template模板
 			//当前操作的class
 			currentRecord: {},
@@ -71,7 +73,8 @@ angular.module('dleduWebApp')
 
 			params: {
 				teacherName: '', //辅导员名称
-				className: '' //班级名称
+				className: '', //班级名称
+				templateId: "" // 模板id
 			},
 
 			//控制按钮权限
@@ -84,6 +87,7 @@ angular.module('dleduWebApp')
 			 */
 			switchTab: function(type){
 				this.tab = type;
+				this.records = [];
 				this.query();
 			},
 
@@ -94,8 +98,9 @@ angular.module('dleduWebApp')
 					orgId: AuthService.getUser().orgId,
 					pageNumber: that.page.pageNumber,
 					pageSize: that.page.pageSize,
-					teacherName: that.params.className,
-					className: that.params.className
+					teacherName: that.params.teacherName,
+					className: that.params.className,
+					templetId: that.params.templateId
 				};
 				QualityCreditService.getQualityCreditReportList(params).$promise
 					.then(function (data) {
@@ -118,6 +123,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
+						that.templates = data.data;
 					})
 					.catch(function (error) {
 
@@ -134,59 +140,109 @@ angular.module('dleduWebApp')
 
 			},
 
-			//导出
-			export: function(id){
-				var that = this;
-				var params = {
-					orgId: AuthService.getUser().orgId,
-					teacherName: that.params.teacherName,
-					courseName: that.params.courseName,
-					supName: that.params.supName,
-				};
-				params.pageNumber = type == 'part' ? that.page.pageNumber : 1;
-				params.pageSize = type == 'part' ? that.page.pageSize : 999999999;
-
-				QualityCreditService.exportTea(params).success(function(data) {
-					if(data.success){
-						window.location.href = data.message+'?attname=督导反馈.xlsx';
-					}else{
-						messageService.openMsg("导出失败！");
+			/**
+			 *模板列表
+			 */
+			getTemplateList: function () {
+				var _this = this;
+				return {
+					placeholder: {
+						id: -1, // the value of the option
+						text: '全部'
+					},
+					allowClear: true,
+					ajax: {
+						url: "api/qualitycredit/getQualityCreditTemList",
+						dataType: 'json',
+						//delay: 250,
+						data: function (query) {
+							var params = {
+								orgId: AuthService.getUser().orgId,
+								pageNumber: 1,
+								pageSize: 100,
+							}
+							//params.name = query.term;
+							return params;
+						},
+						processResults: function (data, params) {
+							params.page = params.page || 1;
+							return {
+								results: data.data,
+								pagination: {
+									more: (params.page * 30) < data.total_count
+								}
+							};
+						},
+						cache: true
+					},
+					templateResult: function (data) {
+						if (data.id === '') { // adjust for custom placeholder values
+							return 'Custom styled placeholder text';
+						}
+						_this.templates.push(data);
+						return data.name;
 					}
-				}).catch(function (e) {
-					messageService.openMsg(CommonService.exceptionPrompt(error, "导出失败！"));
-				});
+
+				}
 			},
 
 			//导出
+			export: function(record){
+				var that = this;
+				QualityCreditService.exportReportById({reportId: record.id}).$promise
+					.then(function (data) {
+						if(data.success){
+							window.location.href = data.message+'?attname=' + data.fileName;
+						}else{
+							messageService.openMsg("导出失败！");
+						}
+					})
+					.catch(function (error) {
+
+					})
+
+			},
+
+			//导出当前模板的所有数据
 			exportAll: function(){
 				var that = this;
+				if(that.params.templateId == -1 || that.params.templateId == ""){
+					messageService.openMsg("请先选择引用模板！");
+					return;
+				}
 				var params = {
 					orgId: AuthService.getUser().orgId,
 					teacherName: that.params.teacherName,
-					courseName: that.params.courseName,
-					stuName: that.params.stuName,
+					className: that.params.className,
+					templetId: that.params.templateId
 				};
-				params.pageNumber = type == 'part' ? that.page.pageNumber : 1;
-				params.pageSize = type == 'part' ? that.page.pageSize : 999999999;
+				QualityCreditService.exportReport(params).$promise
+					.then(function (data) {
+						if(data.success){
+							window.location.href = data.message+'?attname=' + data.fileName;
+						}else{
+							messageService.openMsg("导出失败！");
+						}
+					})
+					.catch(function (error) {
 
-				QualityCreditService.exportStu(params).success(function(data) {
-					if(data.success){
-						window.location.href = data.message+'?attname=信息员反馈.xlsx';
-					}else{
-						messageService.openMsg("导出失败！");
-					}
-				}).catch(function (e) {
-					messageService.openMsg(CommonService.exceptionPrompt(error, "导出失败！"));
-				});
+					})
+			},
+
+			//删除提示
+			deletePrompt: function (entity) {
+				var that=this;
+				that.record = entity;
+				messageService.getMsg("您确定要删除此模板吗？", that.delRecord)
 			},
 
 			/**
 			 * 删除记录
 			 * @param id
 			 */
-			delRecord: function(id){
-				var that = this;
-				QualityCreditService.delTemplate({templetId: id}).$promise
+			delRecord: function(){
+				var that = $scope.qualityCreditListFn;
+				QualityCreditService.delTemplate({templetId: that.record.id}).$promise
 					.then(function (data) {
 						if(data.success){
 							messageService.openMsg("删除成功!");
@@ -201,11 +257,13 @@ angular.module('dleduWebApp')
 			},
 
 			init: function () {
-				var type = $state.params.tab;
+				var type = $state.params.type;
 				if(type){
-					this.tab = type;
+					this.tab = 'template';
+				}else{
+					this.getQualityCreditReportList();
 				}
-				this.getQualityCreditReportList();
+				this.getQualityCreditTemList();
 				$timeout(function(){
 					TabBlock.init();
 				});

@@ -16,6 +16,8 @@ router.get('/getTemplateById', auth.isSignedIn, controller.getTemplateById);
 router.post('/addTemplate', auth.isSignedIn, controller.addTemplate);
 router.delete('/delTemplate', auth.isSignedIn, controller.delTemplate);
 router.put('/updateTemplate', auth.isSignedIn, controller.updateTemplate);
-router.get('/getTemplateById', auth.isSignedIn, controller.getTemplateById);
+router.get('/exportReport', auth.isSignedIn, controller.exportReport);
+router.get('/exportReportById', auth.isSignedIn, controller.exportReportById);
+
 
 module.exports = router;
