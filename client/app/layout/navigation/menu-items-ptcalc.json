@@ -44,14 +44,6 @@
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 },
                 {
-                    "title": "实践任务详情",
-                    "sref": "missionList",
-                    "active": "missionList",
-                    "icon": "https://s1.aizhixin.com/f49e9432-6519-4c24-a470-8ff38e9cbab4.png",
-                    "bg": "background:linear-gradient(-135deg,rgba(84,186,119,1),rgba(104,203,137,1))",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
-                },
-                {
                     "title": "通知",
                     "sref": "newslist",
                     "active": "news",
