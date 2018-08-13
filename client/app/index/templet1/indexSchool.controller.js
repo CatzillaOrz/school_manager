@@ -438,7 +438,6 @@ angular.module('dleduWebApp')
                     this.isShowMenu.manCenter = false;
                 }else{
                     this.isShowMenu.pt = false;
-                    this.isShowMenu.handSchool = false;
                 }
             },
 

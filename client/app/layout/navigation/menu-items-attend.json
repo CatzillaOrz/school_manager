@@ -185,6 +185,16 @@
                 "icon": "https://s1.aizhixin.com/a335d6a3-c5f8-4916-ae59-5f55c4beafcb.png",
                 "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
             }]
+        },
+        {
+            "title": "素质学分",
+            "items": [{
+                "title": "学生素质学分报表",
+                "sref": "qualitycreditlist",
+                "active": "qualitycreditlist",
+                "icon": "https://s1.aizhixin.com/8bca4265-bc75-4118-94ab-fab87a8b3765.png",
+                "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+            }]
         }
     ]
 }

@@ -9,7 +9,7 @@ aside#left-panel
         //ul(data-smart-menu-items="app/layout/navigation/menu-items.json")
         ul
             li(ng-repeat="menu in layoutFn.datas")
-                a(ng-class="{'active': menu.selected}" ng-click='layoutFn.clickMenu(menu)' ui-sref="{{menu.sref}}")
+                a(ng-class="{'active': menu.selected}" ng-click='layoutFn.clickMenu(menu)' ui-sref="{{menu.sref}}" target="{{menu.target?'_blank':''}}")
                     img(src="{{menu.icon}}")
                     span {{menu.title}}
 

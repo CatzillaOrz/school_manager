@@ -1,0 +1,64 @@
+//
+   Created by Administrator on 2017/6/21.
+
+.college-handle-container
+    .jarviswidget.jarviswidget-color-blueDark
+        header(role='heading')
+            span.widget-icon
+                i.fa.fa-table
+            h2 {{'素质学分模板编辑'}}
+        .widget-body(style="padding:13px 0 0 0")
+            form.form-horizontal(name="evaquesForm")
+                .md-form(style="min-height: auto;")
+                    .form-group
+                        label.col-sm-3.control-label
+                            span.required *
+                            | 素质学分名称：
+                        .col-sm-7
+                            input.form-control(placeholder="请填写不超过200个字的名称" ng-model="qualityCreditHandle.params.name" name="name" validator="required, maxlength=200")
+                .panel.panel-default.no-border
+                    .jarviswidget.jarviswidget-color-blueDark
+                        header(role='heading')
+                            span.widget-icon
+                                i.fa.fa-table
+                            h2 {{'题目'}}
+                .widget-body(style='border:0;')
+                    .dataTables_wrapper(role='grid')
+                        #datatable_col_reorder_wrapper.dataTables_wrapper.no-footer
+                            table#datatable_col_reorder.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 70%;')
+                                thead
+                                    tr(role='row')
+                                        th.sorting_asc(data-hide='phone', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-sort='ascending', aria-label='ID: activate to sort column descending', style='width: 35px;') 序号
+                                        th.expand.sorting(data-class='expand', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Name: activate to sort column ascending', style='width: 180px;') 题目信息
+                                        th.sorting(data-hide='phone,tablet', tabindex='0', aria-controls='datatable_col_reorder', rowspan='1', colspan='1', aria-label='Date: activate to sort column ascending', style='width: 50px;')
+                                            i.fa.fa-plus-circle(style="font-size:16px;" title="新增" ng-click="qualityCreditHandle.addQues()")
+                                tbody
+                                    tr.odd(role='row' ng-repeat="record in qualityCreditHandle.quesLists" ng-init="outerIndex = $index")
+                                        td.sorting_1
+                                            span {{$index+1}}
+                                            input(type="hidden" ng-model="record.no" ng-value="record.no=outerIndex+1")
+                                        td
+                                            .ques-item.no-margin
+                                                .form-group.no-margin
+                                                    label 题目
+                                                .form-group.no-margin
+                                                    textarea.form-control(ng-model="record.content" name="{{'textarea'+ $index}}" validator="required, maxlength=200")
+                                            .row.no-margin
+                                                .form-group
+                                                    .row.no-margin.padding-10 最低分（整数或一位小数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.minScore" name="{{'scoremin'+ $index}}" validator="required" )
+                                                .form-group
+                                                    .row.no-margin.padding-10 最高分（整数或一位小数）
+                                                    .col-sm-6.no-margin
+                                                        input.form-control(type="text" ng-model="record.maxScore" name="{{'scoremax'+ $index}}" validator="required" ng-change="qualityCreditHandle.calcAllTotal(qualityCreditHandle.quesLists)")
+                                        td
+                                            a.handle(ng-click="qualityCreditHandle.delQues($index)")
+                                                i.fa.fa-minus-circle(style="font-size:16px;" title="删除")
+                                    tr(role='row')
+                                        td(colspan="3" )
+                                            .row.margin-left-10.padding-5 {{'素质学分总分:' + qualityCreditHandle.params.totalScore}}
+                .form-actions(style="border-top:none;margin:0")
+                    .row
+                        .col-md-12(style="text-align:left")
+                            a.btn.btn-primary(ng-click="qualityCreditHandle.submit()" validation-submit="evaquesForm") 保存模板

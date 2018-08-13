@@ -9,6 +9,14 @@
                     "active": "elecfence",
                     "icon": "https://s1.aizhixin.com/112d67a5-98d0-43ef-bb8a-4b03136aac05.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
+                },
+                {
+                    "title": "实时监控分析",
+                    "sref": "geodetail",
+                    "active": "geodetail",
+                    "target":"_blank",
+                    "icon": "https://s1.aizhixin.com/2ffef8be-41b4-45a5-bf23-23cc16fa7966.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ORG_DATAVIEW,ROLE_COLLEG_DATAVIEW,ROLE_ORG_EDUCATIONALMANAGER,ROLE_COLLEG_EDUCATIONALMANAGER"
                 }
             ]
         }
