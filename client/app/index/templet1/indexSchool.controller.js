@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dleduWebApp')
-    .controller('IndexSchoolCtrl', function ($scope, $rootScope, $location, $window, AuthService, $timeout, $state,
+    .controller('IndexSchoolCtrl', function ($scope, $rootScope, $location, $window, AuthService, $timeout, $state, $http,
                                              CollegeService, messageService, SchoolService, CommonService, ngDialog) {
         $scope.template1Fn={
             singinType: true,
@@ -145,9 +145,19 @@ angular.module('dleduWebApp')
                 AuthService.signIn(that.form.username, that.form.password)
                     .then(function (user) {
                         var isCustomize = AuthService.isCustomize();
+                        var user = AuthService.getUser();
+                        var code = $location.host().split('.')[0];
+                        if(user.orgCode != code){
+                            messageService.openMsg("非本校成员，禁止登录!");
+                            AuthService.clearUser();
+                            AuthService.clearSiginPosition();
+                            $http.post("api/account/signout");
+                            return;
+                        }
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
+
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -180,9 +190,19 @@ angular.module('dleduWebApp')
                 AuthService.qrcodeSignIn(token)
                     .then(function (user) {
                         var isCustomize = AuthService.isCustomize();
+                        var user = AuthService.getUser();
+                        var code = $location.host().split('.')[0];
+                        if(user.orgCode != code){
+                            messageService.openMsg("非本校成员，禁止登录!");
+                            AuthService.clearUser();
+                            AuthService.clearSiginPosition();
+                            $http.post("api/account/signout");
+                            return;
+                        }
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
+
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
