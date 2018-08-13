@@ -91,7 +91,11 @@ angular.module("azx.schoolman", ['ui.bootstrap'])
 
                     },
                     signOut: function () {
-                        AuthService.signOut();
+                        AuthService.clearUser();
+                        AuthService.clearSiginPosition();
+                        $http.post("api/account/signout");
+                        $state.go("index");
+                        //AuthService.signOut();
                     },
                     navigate: function (host, path) {
                         AuthService.navigation(host, path);
