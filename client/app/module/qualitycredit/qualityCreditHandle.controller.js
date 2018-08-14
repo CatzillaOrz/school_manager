@@ -73,7 +73,11 @@ angular.module('dleduWebApp')
 					messageService.openMsg("请添加题目!");
 					return;
 				}
-				//var tips = this.showNoOptionTip(questions);
+				var tips = this.showScoreTip(questions);
+				if(tips.length > 0){
+					messageService.openMsg("第" + tips.join(',') + "题最小分值不能大于最大分值！");
+					return;
+				}
 
 				var cloneParams = angular.copy(params);
 				QualityCreditService.addTemplate(cloneParams).$promise
@@ -97,13 +101,13 @@ angular.module('dleduWebApp')
 			},
 
 			/**
-			 * 提示选项题没有增加选项
+			 * 提示选项分值最小值不能超过最大值
 			 */
-			showNoOptionTip: function(objs){
+			showScoreTip: function(objs){
 				var noOptionArr = [];//记录没有选择的选择题号
 				for(var i = 0, len = objs.length; i < len; i++){
-					var options = objs[i].questionChioce;
-					if(options.length == 0){
+					var maxScore = objs[i].maxScore, minScore = objs[i].minScore;
+					if(parseFloat(maxScore) < parseFloat(minScore)){
 						noOptionArr.push(i + 1);
 					}
 				}
@@ -128,8 +132,8 @@ angular.module('dleduWebApp')
 				//计算总分
 				for(var i = 0, len = arr.length; i < len; i++){
 					var ques = arr[i];
-					if(!isNaN(parseInt(ques.maxScore))){
-						total += parseInt(ques.maxScore);
+					if(!isNaN(parseFloat(ques.maxScore))){
+						total += parseFloat(ques.maxScore);
 					}
 
 				}
