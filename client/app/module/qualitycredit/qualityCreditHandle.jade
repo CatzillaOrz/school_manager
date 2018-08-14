@@ -47,11 +47,11 @@
                                                 .form-group
                                                     .row.no-margin.padding-10 最低分（整数或一位小数）
                                                     .col-sm-6.no-margin
-                                                        input.form-control(type="text" ng-model="record.minScore" name="{{'scoremin'+ $index}}" validator="required" )
+                                                        input.form-control(type="text" ng-model="record.minScore" name="{{'scoremin'+ $index}}" validator="required, onedotnumber" )
                                                 .form-group
                                                     .row.no-margin.padding-10 最高分（整数或一位小数）
                                                     .col-sm-6.no-margin
-                                                        input.form-control(type="text" ng-model="record.maxScore" name="{{'scoremax'+ $index}}" validator="required" ng-change="qualityCreditHandle.calcAllTotal(qualityCreditHandle.quesLists)")
+                                                        input.form-control(type="text" ng-model="record.maxScore" name="{{'scoremax'+ $index}}" validator="required, onedotnumber" ng-change="qualityCreditHandle.calcAllTotal(qualityCreditHandle.quesLists)")
                                         td
                                             a.handle(ng-click="qualityCreditHandle.delQues($index)")
                                                 i.fa.fa-minus-circle(style="font-size:16px;" title="删除")

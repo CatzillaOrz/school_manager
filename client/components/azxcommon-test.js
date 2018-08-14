@@ -2263,6 +2263,10 @@ angular.module('validation.directive', ['validation.provider']);
                     var numberreg = /^(\d{1,2}?(\.\d{1,2})?|100)$/;
                     return !value || numberreg.test(value);
                 },
+                onedotnumber: function (value) {
+                    var numberreg = /^(\d{1,2}?(\.\d{0,1})?|100)$/;
+                    return !value || numberreg.test(value);
+                },
                 ip: function (value) {
                     var ipreg = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
                     return !value || ipreg.test(value);
@@ -2318,6 +2322,10 @@ angular.module('validation.directive', ['validation.provider']);
                 },
                 workscore: {
                     error: '请输入小数不超过2位的0-100的分数',
+                    success: ''
+                },
+                onedotnumber: {
+                    error: '请输入小数不超过1位的0-100的分数',
                     success: ''
                 },
                 repassword: {
