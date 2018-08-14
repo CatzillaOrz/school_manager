@@ -40,7 +40,7 @@
                                                 form.form-inline
                                                     .form-group.col-sm-4
                                                         label.control-label 引用模板：
-                                                        select.form-control(ng-model="qualityCreditListFn.params.templateId" ui-select2="qualityCreditListFn.getTemplateList()", ng-change="qualityCreditListFn.query()" )
+                                                        select.select2.form-control(ng-model="qualityCreditListFn.params.templateId" ui-select2="qualityCreditListFn.getTemplateList()", ng-change="qualityCreditListFn.query()" )
                                                             option(value="-1") 全部
                                                             option(ng-repeat="template in qualityCreditListFn.templates" value="{{template.id}}" ) {{template.name}}
                                             .col-xs-3.hidden-xs
