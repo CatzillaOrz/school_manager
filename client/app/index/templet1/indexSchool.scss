@@ -231,6 +231,9 @@
         }
         .account {
           margin-top: -10px;
+          .user-menu{
+            width: auto;
+          }
         }
       }
     }
@@ -268,7 +271,7 @@
                 }
               }
               .user-menu {
-
+                width: auto;
                 .user-avatar {
 
                 }
