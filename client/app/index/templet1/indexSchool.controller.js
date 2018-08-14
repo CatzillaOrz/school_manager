@@ -452,12 +452,14 @@ angular.module('dleduWebApp')
                         goodCourse: true //精品课程
                     };*/
                     this.isShowMenu.manCenter = false;
-                }else if(role == 'ROLE_TEACHER'){//techer
-                    this.isShowMenu.manCenter = false;
-                }else if(role.indexOf('ROLE_CLASSROOMTEACHE') != -1){//techer
-                    this.isShowMenu.manCenter = false;
-                }else{
-                    this.isShowMenu.pt = false;
+                }else if(role.indexOf('ROLE_TEACHER') != -1){//techer
+                    if(AuthService.authority()){ //admin
+                        this.isShowMenu.pt = false;
+                    }else if(role.indexOf('ROLE_CLASSROOMTEACHE') != -1){
+                        this.isShowMenu.manCenter = false;
+                    }else{
+                        this.isShowMenu.manCenter = false;
+                    }
                 }
             },
 
