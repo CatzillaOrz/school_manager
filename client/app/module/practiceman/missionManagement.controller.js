@@ -1,5 +1,5 @@
 angular.module('dleduWebApp')
-	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService,
+	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService, localStorageService,
 													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
 		$scope.handleFn = {
 			//企业导师记录id
@@ -25,11 +25,7 @@ angular.module('dleduWebApp')
 			//是否添加了分配的教师
 			isAddTea: false,
 			//添加步骤
-			steps: [
-				{title: '选择课程任务'},
-				{title: '选择实践计划'},
-				{title: '发布任务'}
-			],
+			steps: [],
 			//当前步骤
 			step: 1,
 			//参数
@@ -339,6 +335,8 @@ angular.module('dleduWebApp')
 				entity.endDate = params.endDate;
 				if(_this.status == '1'){
 					entity.practiceTaskIdList = null;
+				}else if(_this.status == '3'){
+
 				}else{
 					entity.weekTaskIdList = null;
 				}
@@ -349,6 +347,8 @@ angular.module('dleduWebApp')
 							messageService.openMsg("编辑实践分配成功！");
 							if(_this.status == '1'){
 								$state.go("trainClassList");
+							}else if(_this.status == '3'){
+								$state.go('practiceGroupMan');
 							}else{
 								$state.go("practicetasklist", {wid: _this.wid});
 							}
@@ -449,7 +449,21 @@ angular.module('dleduWebApp')
 			init: function () {
 				var that = this;
 				if(that.status == '1'){
+					that.steps = [
+						{title: '选择课程任务'},
+						{title: '选择实践计划'},
+						{title: '发布任务'}
+					];
 					that.getEntTutorList();
+				}else if(that.status == '3'){
+					that.getEntTutorList(); // 获取实践课程任务列表
+					that.steps = [
+						{title: '选择课程任务'},
+						{title: '发布任务'}
+					];
+					var _group = localStorageService.get('definedEntity');
+					that.selectStudentList.push(_group);
+					console.log(_group);
 				}else{
 					that.getTaskList();
 				}
