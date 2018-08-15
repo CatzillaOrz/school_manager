@@ -1,5 +1,5 @@
 .college-handle-container
-    .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status != '3'")
+    .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status != '3' && handleFn.status != '4'")
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
@@ -432,14 +432,14 @@
 
 
 
-    //- .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status == '4'")
+    .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status == '4'")
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
             h2 下发任务
         .widget-body
             step-line.step-line.margin-bottom-10(on-step="handleFn.step" steps="handleFn.steps")
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
+            //- div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
                 .col-sm-5
                     fieldset
                         legend
@@ -524,7 +524,7 @@
                                     a.handle(ng-click="handleFn.removeSelectedTeacher(teacher)")
                                         i.fa.fa-times
                                         span 撤销
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==1")
                 div
                     .col-sm-5
                         fieldset
@@ -580,7 +580,7 @@
                                         a.handle(ng-click="handleFn.removeSelectedStudent(student)")
                                             i.fa.fa-times
                                             span 撤销
-            div.margin-top-10.padding-10.container(ng-if="handleFn.step==3")
+            div.margin-top-10.padding-10.container(ng-if="handleFn.step==2")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
                         legend 设置任务时间段
@@ -620,12 +620,12 @@
                                 thead
                                     tr(role='row')
                                         //- th.sorting_asc 序号
-                                        th.expand.sorting {{handleFn.status == '1'  ?  '课程名称' : '任务名称'}}
-                                        th.sorting {{handleFn.status == '1'  ? '任务数' : '所属课程'}}
+                                        th.expand.sorting {{handleFn.status == '4'  ?  '课程名称' : '任务名称'}}
+                                        th.sorting {{handleFn.status == '4'  ? '任务数' : '所属课程'}}
                                 tbody
                                     tr.cursor-pointer(role='row' ng-repeat="teacher in handleFn.selectTeacherList" )
-                                        td {{handleFn.status == '1' ? teacher.taskTitle : teacher.taskName}}
-                                        td {{handleFn.status == '1' ? teacher.taskNum : teacher.weekTaskName}}
+                                        td {{handleFn.status == '4' ? teacher.taskTitle : teacher.taskName}}
+                                        td {{handleFn.status == '4' ? teacher.taskNum : teacher.weekTaskName}}
                     .row(ng-if="handleFn.params.classOrStudents==20")
                         .col-sm-3 实践计划信息：
                         .col-sm-7
@@ -651,7 +651,7 @@
                         a.btn.btn-default(ng-if="handleFn.step!=1" ng-click="handleFn.preStep()") 上一步
                         .speace-10
                         button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==1&&handleFn.step!=3" ng-disabled="handleFn.selectTeacherList.length==0") 下一步
-                        button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
+                        //- button.btn.btn-primary(type='submit' ng-click="handleFn.nextStep()" ng-if="handleFn.step==2&&handleFn.step!=3" ng-disabled="!handleFn.validateStep3()") 下一步
 
 
 

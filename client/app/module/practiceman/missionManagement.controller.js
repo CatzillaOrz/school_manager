@@ -335,7 +335,7 @@ angular.module('dleduWebApp')
 				entity.endDate = params.endDate;
 				if(_this.status == '1'){
 					entity.practiceTaskIdList = null;
-				}else if(_this.status == '3'){
+				}else if(_this.status == '3' || _this.status == '4'){
 
 				}else{
 					entity.weekTaskIdList = null;
@@ -464,6 +464,14 @@ angular.module('dleduWebApp')
 					var _group = localStorageService.get('definedEntity');
 					that.selectStudentList.push(_group);
 					console.log(_group);
+				}else if(that.status == '4'){
+					that.steps = [
+						{title: '选择实践计划'},
+						{title: '发布任务'}
+					];
+					var _course = localStorageService.get('definedEntity');
+					that.selectTeacherList.push(_course);
+					console.log(_course);
 				}else{
 					that.getTaskList();
 				}
