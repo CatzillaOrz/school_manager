@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教学班管理'
+					label: '课程表'
 				}
 			})
 			.state('teachClassCreat', {
