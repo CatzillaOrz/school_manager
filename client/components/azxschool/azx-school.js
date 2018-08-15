@@ -98,7 +98,7 @@ angular.module("azx.schoolman", ['ui.bootstrap'])
                         $state.go("index");
                         $scope.menu = {
                             classLive: true, //课堂在线
-                            showLearn: true, //学情
+                            showLearn: $scope.indexFn.isShowLearn(), //学情
                             manCenter: true, //管理中心
                             userCenter: true, //个人中心
                             pt: true, //实训

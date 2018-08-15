@@ -147,17 +147,17 @@ angular.module('dleduWebApp')
                         var isCustomize = AuthService.isCustomize();
                         var user = AuthService.getUser();
                         var code = $location.host().split('.')[0];
-                        if(user.orgCode != code){
+                        /*if(user.orgCode != code){
                             messageService.openMsg("非本校成员，禁止登录!");
                             AuthService.clearUser();
                             AuthService.clearSiginPosition();
                             $http.post("api/account/signout");
                             return;
-                        }
+                        }*/
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -202,7 +202,7 @@ angular.module('dleduWebApp')
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
