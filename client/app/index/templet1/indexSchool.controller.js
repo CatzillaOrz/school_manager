@@ -350,12 +350,13 @@ angular.module('dleduWebApp')
              */
             goPage: function(host, path){
                 if(!AuthService.isLogin()){
-                    AuthService.clearUser();
                     if(host !=1 && host != 4){
+                        AuthService.clearUser();
                         messageService.openMsg("请先登录！")
                         return;
                     }
                     if(host == 1 && !path){
+                        AuthService.clearUser();
                         messageService.openMsg("请先登录！")
                         return;
                     }
