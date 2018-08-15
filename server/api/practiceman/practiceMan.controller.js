@@ -127,11 +127,29 @@ module.exports = {
                 res.status(e.code).send(e.message);
             })
     },
+    getIssuedWeekTaskList: function (req, res) {
+        PracticeManService.getIssuedWeekTaskListSync(req.body, req.user.access_token)
+            .then(function (data) {
+                res.json({data: data});
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
 
     getPracticeGroupInfo: function (req, res) {
         PracticeManService.getPracticeGroupInfoSync(req.query, req.user.access_token)
             .then(function (data) {
                 res.json(data);
+            })
+            .catch(function (e) {
+                res.status(e.code).send(e.message);
+            })
+    },
+    getIssuedGroupList: function (req, res) {
+        PracticeManService.getIssuedGroupListSync(req.query, req.user.access_token)
+            .then(function (data) {
+                res.json({data: data});
             })
             .catch(function (e) {
                 res.status(e.code).send(e.message);

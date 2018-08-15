@@ -1,6 +1,6 @@
 angular.module('dleduWebApp')
 	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService, localStorageService,
-													 CommonService, TeacherService, StudentService, TeachClassService, Select2LoadOptionsService) {
+													 CommonService, TeacherService, StudentService, PracticeManService, Select2LoadOptionsService) {
 		$scope.handleFn = {
 			//企业导师记录id
 			id: '',
@@ -166,6 +166,22 @@ angular.module('dleduWebApp')
 					})
 					.catch(function (error) {
 
+					})
+			},
+			//未下发过该实践课程的实践计划列表
+			getIssuedGroup: function(weekTaskId){
+				var _this = this;
+				PracticeManService.getIssuedGroupList({orgId: AuthService.getUser().orgId, weekTaskId: weekTaskId}).$promise
+					.then(function(data){
+					_this.studentList = data.data;
+					})
+			},
+			// 未下发的实践课程信息
+			getIssuedWeekTaskList: function(groupId){
+				var _this = this;
+				PracticeManService.getIssuedWeekTaskList({orgId: AuthService.getUser().orgId, groupId: groupId}).$promise
+					.then(function(data){
+						_this.teacherList = data.data;
 					})
 			},
 
@@ -454,9 +470,10 @@ angular.module('dleduWebApp')
 						{title: '选择实践计划'},
 						{title: '发布任务'}
 					];
-					that.getEntTutorList();
+					// that.getEntTutorList();
+					that.getSimpleStudents();
 				}else if(that.status == '3'){
-					that.getEntTutorList(); // 获取实践课程任务列表
+					// that.getEntTutorList(); // 获取实践课程任务列表
 					that.steps = [
 						{title: '选择课程任务'},
 						{title: '发布任务'}
@@ -464,6 +481,7 @@ angular.module('dleduWebApp')
 					var _group = localStorageService.get('definedEntity');
 					that.selectStudentList.push(_group);
 					console.log(_group);
+					that.getIssuedWeekTaskList(_group.id);
 				}else if(that.status == '4'){
 					that.steps = [
 						{title: '选择实践计划'},
@@ -472,10 +490,11 @@ angular.module('dleduWebApp')
 					var _course = localStorageService.get('definedEntity');
 					that.selectTeacherList.push(_course);
 					console.log(_course);
+					that.getIssuedGroup(_course.id);
 				}else{
 					that.getTaskList();
+					that.getSimpleStudents();
 				}
-				that.getSimpleStudents();
 				that.title = $state.current.ncyBreadcrumb.label;
 				that.prompt = $state.current.data.prompt;
 				that.completeMSG = $state.current.data.completeMSG;

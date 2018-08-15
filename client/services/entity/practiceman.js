@@ -32,6 +32,10 @@ angular.module('dleduWebService')
                 var practiceman = $resource('api/practiceman/updateEnterprise');
                 return practiceman.save(params);
             },
+            getIssuedWeekTaskList: function (params) {
+                var practiceman = $resource('api/practiceman/getIssuedWeekTaskList');
+                return practiceman.save(params);
+            },
             getEnterpriseList: function (params) {
                 var practiceman = $resource('api/practiceman/getEnterpriseList');
                 return practiceman.get(params);
@@ -42,6 +46,10 @@ angular.module('dleduWebService')
             },
             getStudentTaskDetail: function (params) {
                 var practiceman = $resource('api/practiceman/getStudentTaskDetail');
+                return practiceman.get(params);
+            },
+            getIssuedGroupList: function (params) {
+                var practiceman = $resource('api/practiceman/getIssuedGroupList');
                 return practiceman.get(params);
             },
             addEntTutor: function (params) {

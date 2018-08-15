@@ -165,6 +165,15 @@ $speace-size: 5 10 15 20 30;
   border-bottom: 1px solid $gray-lighter;
 }
 
+// practice student
+.sp-table-group{
+  tr{
+    td{
+      max-width: 300px;
+    }
+  }
+}
+
 //== ngDialog
 .modal-header {
   padding: 0 0 10px 0;

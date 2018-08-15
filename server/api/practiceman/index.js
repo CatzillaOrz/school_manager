@@ -26,6 +26,7 @@ router.put('/updateEntTutor',auth.isSignedIn, controller.updateEntTutor);
 router.get('/getStudentTaskDetail',auth.isSignedIn, controller.getStudentTaskDetail);
 router.get('/getPracticeGroupList',auth.isSignedIn, controller.getPracticeGroupList);
 router.get('/getPracticeGroupInfo',auth.isSignedIn, controller.getPracticeGroupInfo);
+router.get('/getIssuedGroupList',auth.isSignedIn, controller.getIssuedGroupList);
 router.put('/updatePracticeGroup',auth.isSignedIn, controller.updatePracticeGroup);
 router.put('/updatePracticeTask',auth.isSignedIn, controller.updatePracticeTask);
 router.put('/editTaskTime',auth.isSignedIn, controller.editTaskTime);
@@ -51,6 +52,7 @@ router.delete('/deleteTask',auth.isSignedIn, controller.deleteTask);
 router.post('/deleteTaskDetail',auth.isSignedIn, controller.deleteTaskDetail);
 router.post('/addWeekTask',auth.isSignedIn, controller.addWeekTask);
 router.post('/addTask',auth.isSignedIn, controller.addTask);
+router.post('/getIssuedWeekTaskList',auth.isSignedIn, controller.getIssuedWeekTaskList);
 router.get('/getGrouplistByOrgId',auth.isSignedIn, controller.getGrouplistByOrgId);
 
 module.exports = router;
