@@ -157,7 +157,7 @@ angular.module('dleduWebApp')
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -202,7 +202,7 @@ angular.module('dleduWebApp')
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -459,6 +459,10 @@ angular.module('dleduWebApp')
                         this.isShowMenu.manCenter = false;
                     }else{
                         this.isShowMenu.manCenter = false;
+                    }
+                }else{
+                    if(AuthService.authority()){ //admin
+                        this.isShowMenu.pt = false;
                     }
                 }
             },
