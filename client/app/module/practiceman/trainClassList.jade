@@ -26,7 +26,7 @@
                                     span.input-group-addon.pull-right.cursor-pointer.search-btn(ng-click="practiceGroupMan.getPracticeGroupList()")
                                         i.glyphicon.glyphicon-search
                         .col-xs-12.col-sm-3
-                            button.btn.btn-primary(ui-sref="missionManagement({status: '1'})")
+                            //- button.btn.btn-primary(ui-sref="missionManagement({status: '1'})")
                                 span 分配课程
                         .col-sm-6.col-xs-6.hidden-xs
                             .ColVis
@@ -58,6 +58,9 @@
                                     a.handle(ui-sref="practicetasklist({wid: weektask.id})")
                                         i.fa.fa-lg.fa-fw.fa-book
                                         span 任务
+                                    a.handle(ng-click="practiceGroupMan.redirectToAssign(weektask)")
+                                        i.fa.fa-pencil-square-o
+                                        span 下发任务
 
                     .dt-toolbar-footer
                         .col-sm-6.col-xs-12.hidden-xs

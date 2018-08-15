@@ -1,6 +1,6 @@
 angular.module('dleduWebApp')
 	.controller('PracticeGroupManCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
-												  PracticeManService) {
+												  PracticeManService, localStorageService) {
 		$scope.practiceGroupMan = {
 			//问卷列表
 			records: [],
@@ -63,6 +63,11 @@ angular.module('dleduWebApp')
 				var that = this;
 				that.currentRecord = entity;
 				messageService.getMsg("您确定要删除此条记录吗？", that.delPracticeGroup)
+			},
+
+			redirectToAssign: function(entity){
+				localStorageService.set('definedEntity', entity);
+				$state.go('missionManagement', {status: 3, wid:''});
 			},
 
 			init: function () {

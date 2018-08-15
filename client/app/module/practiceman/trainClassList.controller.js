@@ -3,7 +3,7 @@
  * 实践计划管理
  */
 angular.module('dleduWebApp')
-	.controller('TrainClassListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService,
+	.controller('TrainClassListCtrl', function ($scope, $state, AuthService, EduManService, messageService, CommonService, localStorageService,
 		PracticeManService) {
 		$scope.practiceGroupMan = {
 			weekTaskList: [],
@@ -59,7 +59,10 @@ angular.module('dleduWebApp')
 				that.currentEntity = entity;
 				messageService.getMsg("您确定要删除此条记录吗？", that.deleteWeekTask)
 			},
-
+			redirectToAssign: function(entity){
+				localStorageService.set('definedEntity', entity);
+				$state.go('missionManagement', {status: 4, wid: ''});
+			},
 			init: function () {
 				this.getPracticeGroupList();
 			}
