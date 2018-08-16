@@ -1,6 +1,6 @@
 angular.module('dleduWebApp')
 	.controller('MissionManagementCtrl', function ($scope, $state, $timeout, AuthService, messageService, PracticeManService, localStorageService,
-													 CommonService, TeacherService, StudentService, PracticeManService, Select2LoadOptionsService) {
+													 CommonService, TeacherService, StudentService, Select2LoadOptionsService) {
 		$scope.handleFn = {
 			//企业导师记录id
 			id: '',
