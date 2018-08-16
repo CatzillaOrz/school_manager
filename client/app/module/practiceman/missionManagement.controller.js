@@ -365,6 +365,9 @@ angular.module('dleduWebApp')
 								$state.go("trainClassList");
 							}else if(_this.status == '3'){
 								$state.go('practiceGroupMan');
+								trainClassList
+							}else if(_this.status == '4'){
+								$state.go('trainClassList');
 							}else{
 								$state.go("practicetasklist", {wid: _this.wid});
 							}
@@ -471,6 +474,14 @@ angular.module('dleduWebApp')
 						{title: '发布任务'}
 					];
 					// that.getEntTutorList();
+					that.getSimpleStudents();
+				}else if(that.status == '2'){
+					that.steps = [
+						{title: '选择课程任务'},
+						{title: '选择实践计划'},
+						{title: '发布任务'}
+					];
+					that.getTaskList();
 					that.getSimpleStudents();
 				}else if(that.status == '3'){
 					// that.getEntTutorList(); // 获取实践课程任务列表

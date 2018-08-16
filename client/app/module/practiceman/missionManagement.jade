@@ -1,5 +1,5 @@
 .college-handle-container
-    .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status != '3' && handleFn.status != '4'")
+    .jarviswidget.jarviswidget-color-blueDark(ng-if="handleFn.status == '1' ||  handleFn.status == '2'")
         header(role='heading')
             span.widget-icon
                 i.fa.fa-table
@@ -10,7 +10,7 @@
                 .col-sm-5
                     fieldset
                         legend
-                            span 选择实践课程
+                            span 选择实践课程任务
                     .row
                         .col-lg-6
                             //- select.form-control(ng-model="handleFn.searchParams.collegeId" ui-select2="handleFn.selectCollege2Options()")
