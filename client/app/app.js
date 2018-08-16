@@ -29,7 +29,7 @@ angular.module('dleduWebApp', [
     'ivh.treeview',
     'azx.schoolman'
 ])
-    .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
+    .factory('httpInterceptor', ['$q', '$injector',  function ($q, $injector) {
         var _location = $injector.get('$location');
         /**
          *
@@ -59,9 +59,14 @@ angular.module('dleduWebApp', [
                 loading(false,'all')
                 if (response.status == 401 || response.data == "该用户id信息不存在!") {
                     var AuthService = $injector.get('AuthService');
+                    var state = $injector.get('$state')
                     //AuthService.clearUser();
                      //_location.$$path != '/login' && (AuthService.navigation(0, '/login'));
                     //_location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
+                    if(!AuthService.getUser()){
+                        state.go("index");
+                        return;
+                    }
                     AuthService.signOut();
                 } else if (response.status === 404) {
                     // _window.location.href = '/404';
@@ -169,14 +174,11 @@ angular.module('dleduWebApp', [
         localStorageService.remove('school');
         CommonService.getSchool();
        // 站内页面的访问权限验证
+        var flag = false;
         $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
             if (toState.access.requiredLogin && !AuthService.authorize()) {
-                //$window.location.href = '/login';
+                $window.location.href = '/index';
                 //AuthService.toLogin();
-                $state.go("index");
-            }
-            if(toState.name == 'index' && !AuthService.authorize()){
-                $state.go("index");
             }
         });
     });
