@@ -80,7 +80,7 @@ angular.module("azx.common", ['ui.bootstrap'])
 
             },
             toLogin: function (path) {
-                var _path = path || "/schindex";
+                /*var _path = path || "/schindex";
                 var pathname = "/schoolLogin?redirectUrl=" + window.location.protocol + "//" + location.hostname + _path;
                 var search = $location.search();
                 if (("org" in search) && search.org) {
@@ -92,6 +92,13 @@ angular.module("azx.common", ['ui.bootstrap'])
 					 }
 					
 				}
+                 AuthService.navigation(0, pathname);
+				*/
+                var search = $location.search();
+                var pathname = "";
+                if (("org" in search) && search.org) {
+                    pathname = "/index" + "?org=" + search.org;
+                }
                 AuthService.navigation(0, pathname);
             },
             getUser: function () {
@@ -339,20 +346,20 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var search = $location.search();
                 if (hasLogin) {
                     if (pathname == "/userCenter" || pathname == "/account") {//账户类增加mycenter
-                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname;
+                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
                         window.open(url, '_blank');
                     } else {
                         if (link == 5 || link == 0) {
                             if (pathname == "/home") {
-                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname;
+                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
                                 window.open(toUrl, '_blank');
                             } else {
-                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname;
+                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
                                 window.open(url, '_blank');
                             }
 
                         } else {
-                            window.open('//' + currentEnvUrls[link] + _pathname, '_blank');
+                            window.open('//' + currentEnvUrls[link] + _pathname + "?org=" + search.org, '_blank');
                         }
                     }
                 } else {
