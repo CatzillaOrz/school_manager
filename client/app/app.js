@@ -172,7 +172,8 @@ angular.module('dleduWebApp', [
         $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
             if (toState.access.requiredLogin && !AuthService.authorize()) {
                 //$window.location.href = '/login';
-                AuthService.toLogin();
+                //AuthService.toLogin();
+                $state.go("index");
             }
         });
     });
