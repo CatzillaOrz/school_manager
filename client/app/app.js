@@ -175,5 +175,8 @@ angular.module('dleduWebApp', [
                 //AuthService.toLogin();
                 $state.go("index");
             }
+            if(toState.name == 'index' && !AuthService.authorize()){
+                $state.go("index");
+            }
         });
     });
