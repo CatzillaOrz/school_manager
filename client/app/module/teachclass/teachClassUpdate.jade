@@ -28,13 +28,13 @@
                     .form-group
                         label.col-sm-4.control-label
                             span.required *
-                            | 教学班名称：
+                            | 班课名称：
                         .col-sm-7
-                            input.form-control(placeholder="请填写不超过30个字教学班级名称" ng-model="teachClassUpdateFn.params.name" name="name" validator="required, maxlength=30")
+                            input.form-control(placeholder="请填写不超过30个字班课级名称" ng-model="teachClassUpdateFn.params.name" name="name" validator="required, maxlength=30")
                     .form-group
                         label.col-sm-4.control-label
                             span.required *
-                            | 教学班编号：
+                            | 班课编号：
                         .col-sm-7
                             input.form-control(disabled="true" ng-model="teachClassUpdateFn.params.code" name="code" )
                 .form-actions

@@ -977,7 +977,7 @@ angular.module('dleduWebApp')
                         })
                     });
                 }
-                //实时教学班考勤展示
+                //实时班课考勤展示
                 function realtimestatistics(){
                     GeoService.realtimestatistics(params).success(function(res){
                         if(res.data.length!=0){

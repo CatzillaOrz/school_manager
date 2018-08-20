@@ -3,14 +3,14 @@
 angular.module('dleduWebApp')
     .controller('TeachClassAddCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService,StudentService,TeacherService,TeachClassService) {
         /**
-         * 创建教学班
+         * 创建班课
          * @type {{title: string, prompt: string, handle: string, steps: [*], step: number, params: {classOrStudents: number, classesIds: Array, courseId: string, courseName: string, semesterEnd: string, semesterId: string, semesterName: string, semesterStart: string, studentIds: Array, studentsCount: number, teacherIds: Array, teacherNames: string, userId, id: number, name: string}, step3Tooggle: string, page: {totalElements: number, totalPages: number, pageNumber: number, pageSize: number}, schoolYearDropList: Array, courseDropList: Array, collegeDropList: Array, classDropList: Array, searchParams: {orgId, name: string, collegeId: string}, searchStudentParams: {orgId, name: string, classesId: string}, teacherList: Array, selectTeacherList: Array, studentList: Array, selectStudentList: Array, selectClassesList: Array, semesterName: string, courseName: string, selectClassesId: string, select2SemesterOptions: select2SemesterOptions, select2CourseOptions: select2CourseOptions, selectCollege2Options: selectCollege2Options, select2ClassOptions: select2ClassOptions, complete: boolean, select2GroupFormat: select2GroupFormat, getSimpleTeachers: getSimpleTeachers, getSimpleStudents: getSimpleStudents, nextStep: nextStep, preStep: preStep, selectTeacher: selectTeacher, removeSelectedTeacher: removeSelectedTeacher, selectStudent: selectStudent, removeSelectedStudent: removeSelectedStudent, step3Select: step3Select, addOneClasses: addOneClasses, getSelectTeacherIdList: getSelectTeacherIdList, getSelectStudentIdList: getSelectStudentIdList, addTeachClass: addTeachClass, validateStep3: validateStep3, submit: submit, init: init}}
          */
         $scope.handleFn = {
             //提示title
-            title: "新建教学班",
+            title: "新建班课",
             //提示
-            prompt: "填写以下信息以建立新的教学班",
+            prompt: "填写以下信息以建立新的班课",
             //操作标识
             handle: "create",
             //添加步骤
@@ -18,7 +18,7 @@ angular.module('dleduWebApp')
                 {title: '选择课程'},
                 {title: '选择教师'},
                 {title: '选择学生'},
-                {title: '创建教学班'}
+                {title: '创建班课'}
             ],
             //当前步骤
             step: 1,
@@ -392,7 +392,7 @@ angular.module('dleduWebApp')
                 return result;
 
             },
-            //保存教学班
+            //保存班课
             addTeachClass:function () {
                 var _this=this;
                 var params=_this.params;
@@ -420,7 +420,7 @@ angular.module('dleduWebApp')
                     .catch(function (error) {
                         var re = /[^\u4e00-\u9fa5]/;
                         if(re.test(error.data)){
-                            messageService.openMsg("添加教学班失败！");
+                            messageService.openMsg("添加班课失败！");
 
                         }else {
                             messageService.openMsg(error.data);

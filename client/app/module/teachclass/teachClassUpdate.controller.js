@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('TeachClassUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,SchoolYearService,$q) {
         /**
-         * 教学班基本信息更新
+         * 班课基本信息更新
          * @type {{params: {userId, id: string, semesterId: string, name: string, courseId: string}, schoolYearDropList: Array, courseDropList: Array, select2CourseOptions: select2CourseOptions, select2SemesterOptions: select2SemesterOptions, select2GroupFormat: select2GroupFormat, getTeachClassById: getTeachClassById, getCourseDropListOrg: getCourseDropListOrg, getSchoolYearDropList: getSchoolYearDropList, updateTeachClass: updateTeachClass, init: init}}
          */
         $scope.teachClassUpdateFn = {
@@ -122,7 +122,7 @@ angular.module('dleduWebApp')
                 })
                 return result;
             },
-            //查询教学班
+            //查询班课
             getTeachClassById: function () {
                 var _this = this;
                 TeachClassService.getTeachClassById(_this.params).$promise
@@ -237,13 +237,13 @@ angular.module('dleduWebApp')
                     })
                 return deferred.promise;
             },
-            //更新教学班
+            //更新班课
             updateTeachClass:function () {
                 var _this=this;
                 var params=_this.params;
                 TeachClassService.updateTeachClass(params).$promise
                     .then(function (data) {
-                        messageService.openMsg("教学班修改成功");
+                        messageService.openMsg("班课修改成功");
                         $timeout(function () {
                             $state.go("teachClassDetail",{id:_this.params.id});
                         })

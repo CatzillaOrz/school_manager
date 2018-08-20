@@ -668,7 +668,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教师/督导同行评教'
+					label: '同行评教'
 				}
 			})
 
@@ -683,7 +683,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教师/督导同行评教统计'
+					label: '同行评教统计'
 				}
 			})
 			.state('evaquesaddsamepart', {

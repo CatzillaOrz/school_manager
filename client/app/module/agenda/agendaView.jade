@@ -11,9 +11,9 @@
                         form.smart-form(name="creatCourseCard")
                             fieldset
                                 section
-                                    label.label 教学班
+                                    label.label 班课
                                     label.select.col-xs-12
-                                        //input(name='title' maxlength='40' type='text' placeholder='选择教学班' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
+                                        //input(name='title' maxlength='40' type='text' placeholder='选择班课' ng-model='schedule.teachingClass.teachingClassName' ng-disabled='true')
                                         select(ng-options="item.name for item in schedule.teachClasses track by item.id" data-ng-change='schedule.classChange(schedule.courseCardForm.teachingClass)' ng-model="schedule.courseCardForm.teachingClass" ng-disabled='schedule.bulk')
                                         i(ng-show="schedule.teachClasses.length > 1")
                                     .clearfix
@@ -93,7 +93,7 @@
                 header
                     span.widget-icon
                         i.fa.fa-calendar
-                    h2(ng-if='!schedule.bulk')  教学班排课表
+                    h2(ng-if='!schedule.bulk')  班课排课表
                     h2(ng-if='schedule.bulk')  {{schedule.teachClasses[0].name}} 排课表
                     .widget-toolbar
                 div
@@ -112,7 +112,7 @@
 
         .col-xs-12.col-sm-8.col-lg-9.col-sm-offset-4.col-lg-offset-3(ng-if='!schedule.bulk')
             ul.well.courseEx
-                h6 教学班颜色图示：
+                h6 班课颜色图示：
                 li(ng-repeat='item in schedule.eventSources')
                     span.label(ng-style="{'background':item.color}") {{item.teachingClassName}}
                 .clearfix

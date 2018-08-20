@@ -135,7 +135,7 @@ angular.module('dleduWebApp')
             majorDropList: [],
             //班级下拉列表
             classDropList: [],
-            //教学班考勤列表
+            //班课考勤列表
             teachClassAttendList: [],
             //行政班考勤列表
             classAttendList: [],
@@ -316,7 +316,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //按教学班查询考勤列表
+            //按班课查询考勤列表
             getTeachClassAttendList: function () {
                 var _this = this;
                 var params = {
@@ -385,7 +385,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //教学班考勤记录导出
+            //班课考勤记录导出
             teachClassAttendExport: function () {
                 var _this = this;
                 var params = {

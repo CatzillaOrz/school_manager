@@ -122,7 +122,7 @@ angular.module('dleduWebApp')
                     })
 
             },
-            //按教学班查询
+            //按班课查询
             getTeachClassDataList: function () {
                 var _this = this;
                 var params = {
@@ -147,7 +147,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //教学班导出
+            //班课导出
             teachClassDataExport: function () {
                 var _this = this;
                 var params = {

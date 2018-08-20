@@ -34,11 +34,11 @@ angular.module('dleduWebApp')
 			delType: 'single',
 
 			//查询类型
-			queryTypes: [{value: 10, name: '按教学班'},
+			queryTypes: [{value: 10, name: '按班课'},
 				{value: 20, name: '按行政班'}, {value: 30, name: '按专业'}, {value: 40, name: '按院系'},
 				{value: 50, name: '按学校'}],
 			//已分配的查询类型
-			assignedQueTypes: [{value: 0, name: '班级类型'},{value: 10, name: '教学班'},
+			assignedQueTypes: [{value: 0, name: '班级类型'},{value: 10, name: '班课'},
 				{value: 20, name: '行政班'}],
 
 			page: {
@@ -50,7 +50,7 @@ angular.module('dleduWebApp')
 
 			//查询条件
 			queryOption: {
-				queryType: '按教学班',
+				queryType: '按班课',
 				courseName: '',//课程名称
 				teacherName: '',//授课教师
 				className: '', //班级名称
@@ -75,13 +75,13 @@ angular.module('dleduWebApp')
 				this.page.totalPages = 0;
 				this.records = [];
 				if (type == 'uncomplete') {
-					this.queryOption.queryType = '按教学班';
+					this.queryOption.queryType = '按班课';
 					//切换后清空选择分配列表
 					this.selDistObj = [];
 					this.checkAllRecord = false;
 					this.getEvaQuesUnDist();
 				} else {
-					if(this.queryOption.queryType == '按教学班') {
+					if(this.queryOption.queryType == '按班课') {
 						this.queryOption.queryType = '班级类型';
 					}
 					this.getEvaQuesDist();
@@ -101,7 +101,7 @@ angular.module('dleduWebApp')
 					name: that.queryOption.className, //班级名称
 				};
 				var type = this.queryOption.queryType;
-				if (type == '教学班') {
+				if (type == '班课') {
 					params.classType = 10;
 				} else if (type == '行政班') {
 					params.classType = 20;
@@ -233,7 +233,7 @@ angular.module('dleduWebApp')
 			 */
 			distAllQues: function () {
 				var that = $scope.distributeListFn, postParams = {questionnaireId: that.quesId};
-				if(that.queryOption.queryType=='按教学班'){
+				if(that.queryOption.queryType=='按班课'){
 					var params = {
 						orgId: AuthService.getUser().orgId,
 						pageNumber: 1,
@@ -403,10 +403,10 @@ angular.module('dleduWebApp')
 				}
 				var calcCount = 0;//统计包含的元素值和当前页面记录数是否一样
 				for (var k = 0, lenRecord = records.length; k < lenRecord; k++) {
-					var record = records[k], selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+					var record = records[k], selId = this.queryOption.queryType == '按班课' ? record.teachingClassesId : record.id;
 					//判断元素在之前元素里面是否已经存在，如果存在不添加
 					for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
-						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+						var id = this.queryOption.queryType == '按班课' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
 						if (selId == id) {
 							record.check = true;
 							calcCount++;
@@ -444,7 +444,7 @@ angular.module('dleduWebApp')
 			},
 
 			/**
-			 * 查询所有未分配的教学班
+			 * 查询所有未分配的班课
 			 */
 			invertAllRecords: function(datas){
 				var dataArr = [];
@@ -480,7 +480,7 @@ angular.module('dleduWebApp')
 				} else if (type == '按行政班') {
 					postParams.assignType = 20;
 					postParams.classesIds = this.getIds();
-				} else if (type == '按教学班') {
+				} else if (type == '按班课') {
 					postParams.assignType = 10;
 					postParams.teachingClasses = this.selDistObj;
 				}
@@ -515,9 +515,9 @@ angular.module('dleduWebApp')
 			selDist: function ($index) {
 				var selObj = this.records[$index];
 				if (selObj.check) {
-					var flag = false, index, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
+					var flag = false, index, selId = this.queryOption.queryType == '按班课' ? selObj.teachingClassesId : selObj.id;
 					for (var j = 0; j < this.selDistObj.length; j++) {
-						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+						var id = this.queryOption.queryType == '按班课' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
 						if (selId == id) {
 							flag = true;
 							index = j;
@@ -533,9 +533,9 @@ angular.module('dleduWebApp')
 						}
 					}
 				} else {
-					var flag = false, index, selId = this.queryOption.queryType == '按教学班' ? selObj.teachingClassesId : selObj.id;
+					var flag = false, index, selId = this.queryOption.queryType == '按班课' ? selObj.teachingClassesId : selObj.id;
 					for (var k = 0; k < this.selDistObj.length; k++) {
-						var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[k].teachingClassesId : this.selDistObj[k].id;
+						var id = this.queryOption.queryType == '按班课' ? this.selDistObj[k].teachingClassesId : this.selDistObj[k].id;
 						if(this.invertCheckRecord){//反选的时候
 							if (selId == id) {
 								flag = true;
@@ -569,10 +569,10 @@ angular.module('dleduWebApp')
 					if (this.checkAllRecord) {
 						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
 							var record = this.records[k];
-							var flag = false, selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+							var flag = false, selId = this.queryOption.queryType == '按班课' ? record.teachingClassesId : record.id;
 							//判断元素在之前元素里面是否已经存在，如果存在不添加
 							for (var j = 0, selLen = this.selDistObj.length; j < selLen; j++) {
-								var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+								var id = this.queryOption.queryType == '按班课' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
 								if (selId == id) {
 									flag = true;
 								}
@@ -586,10 +586,10 @@ angular.module('dleduWebApp')
 					} else {//反选时当前页所有元素都被删除
 						for (var k = 0, lenRecord = this.records.length; k < lenRecord; k++) {
 							var record = this.records[k];
-							var selId = this.queryOption.queryType == '按教学班' ? record.teachingClassesId : record.id;
+							var selId = this.queryOption.queryType == '按班课' ? record.teachingClassesId : record.id;
 							//判断元素在之前元素里面是否已经存在，如果存在则删除此元素
 							for (var j = 0; j < this.selDistObj.length; j++) {
-								var id = this.queryOption.queryType == '按教学班' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
+								var id = this.queryOption.queryType == '按班课' ? this.selDistObj[j].teachingClassesId : this.selDistObj[j].id;
 								if (selId == id) {
 									this.selDistObj.splice(j, 1);
 									record.check = false;
@@ -665,7 +665,7 @@ angular.module('dleduWebApp')
 					this.getMajor();
 				} else if (type == '按行政班') {
 					this.getClasses();
-				} else if (type == '按教学班') {
+				} else if (type == '按班课') {
 					this.getEvaQuesUnDist();
 				}
 			},
