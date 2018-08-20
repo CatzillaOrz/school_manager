@@ -63,9 +63,8 @@ angular.module('dleduWebApp', [
                     //AuthService.clearUser();
                      //_location.$$path != '/login' && (AuthService.navigation(0, '/login'));
                     //_location.$$path != '/schoolLogin' && (AuthService.navigation(0,'/schoolLogin'));
-                    if(!AuthService.getUser()){
+                    if(response.config.url!="api/signin" && !AuthService.isLogin()){
                         state.go("index");
-                        return;
                     }
                     AuthService.signOut();
                 } else if (response.status === 404) {
