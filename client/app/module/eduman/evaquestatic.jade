@@ -126,7 +126,7 @@
                         tbody
                             tr.odd(role='row' ng-repeat="record in evaQueStaticFn.records")
                                 td {{$index+1 + ((evaQueStaticFn.page.pageNumber==0?evaQueStaticFn.page.pageNumber+1:evaQueStaticFn.page.pageNumber)-1)*evaQueStaticFn.page.pageSize}}
-                                td {{record.classType==10?'教学班':'行政班'}}
+                                td {{record.classType==10?'班课':'行政班'}}
                                 td {{record.stuName}}
                                 td {{record.classType==10?record.teachingClassName:record.classesName}}
                                 td {{record.profName}}

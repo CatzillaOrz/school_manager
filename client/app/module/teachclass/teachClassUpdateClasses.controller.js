@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('TeachClassClassesUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
         /**
-         * 更新教学班关联的行政班
+         * 更新班课关联的行政班
          * @type {{params: {ids: Array, teachingClassId: number}, classesIds: [*], classDropList: Array, select2ClassOptions: select2ClassOptions, submit: submit, addTeachClassClasses: addTeachClassClasses, addOneClass: addOneClass, removeOneClassTeacher: removeOneClassTeacher, init: init}}
          */
         $scope.classesUpdateFn = {

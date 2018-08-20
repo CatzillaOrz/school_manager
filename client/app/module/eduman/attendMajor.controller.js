@@ -23,7 +23,7 @@ angular.module('dleduWebApp')
             majorDropList: [],
             //班级下拉列表
             classDropList: [],
-            //教学班考勤列表
+            //班课考勤列表
             teachClassAttendList: [],
             //行政班考勤列表
             classAttendList: [],

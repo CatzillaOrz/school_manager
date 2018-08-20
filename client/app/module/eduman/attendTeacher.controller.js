@@ -61,7 +61,7 @@ angular.module('dleduWebApp')
                 }, 100)
             },
         };
-        //教学班按教师维度查询
+        //班课按教师维度查询
         $scope.attendTeacherFn = {
             //分页参数
             page: {

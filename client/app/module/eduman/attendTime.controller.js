@@ -15,7 +15,7 @@ angular.module('dleduWebApp')
         //当天时间
         var today = new Date().Format("yyyy-MM-dd");
 
-        //教学班按时间维度查询
+        //班课按时间维度查询
         $scope.attendTimeFn = {
             params: {
                 courseName: null,

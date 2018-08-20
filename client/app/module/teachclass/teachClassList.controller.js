@@ -1,5 +1,5 @@
 /**
- * 教学班管理列表
+ * 班课管理列表
  */
 'use strict';
 
@@ -8,9 +8,9 @@ angular.module('dleduWebApp')
 												Upload, UploadService, ImpBatchService, ngDialog, RoleAuthService, tempStorageService,
 												SchoolYearService, EduManService) {
 		$scope.teachClassListFn = {
-			//教学班列表
+			//班课列表
 			teachClassList: [],
-			//当前操作的教学班
+			//当前操作的班课
 			currentTeachClass: {},
 			myFile: null, //选择的文件对象
 			errorInfos: null, //返回的错误信息
@@ -155,10 +155,10 @@ angular.module('dleduWebApp')
                 if(arr.length >0){
                     $state.go('agendaWeeks',{ids:angular.toJson(arr)});
                 }else{
-                    messageService.openMsg("请先勾选需要排课的教学班。");
+                    messageService.openMsg("请先勾选需要排课的班课。");
                 }
             },
-			// 获取教学班列表
+			// 获取班课列表
 			getTeachClassList: function () {
 				var that = this;
 				var params = {
@@ -212,18 +212,18 @@ angular.module('dleduWebApp')
 				}
 				TeachClassService.deleteTeachClass(params).$promise
 					.then(function (data) {
-						messageService.openMsg("教学班删除成功！");
+						messageService.openMsg("班课删除成功！");
 						_this.getTeachClassList();
 					})
 					.catch(function (error) {
-                        messageService.openMsg(CommonService.exceptionPrompt(error,"教学班删除失败！"));
+                        messageService.openMsg(CommonService.exceptionPrompt(error,"班课删除失败！"));
 					})
 			},
 			//删除提示
 			deletePrompt: function (entity) {
 				var that = this;
 				that.currentTeachClass = entity;
-				messageService.getMsg("课表、考勤等点点相关的业务数据，以及开卷相关业务数据将被清除,您确定仍要删除此教学班吗？", that.deleteTeachClass)
+				messageService.getMsg("课表、考勤等点点相关的业务数据，以及开卷相关业务数据将被清除,您确定仍要删除此班课吗？", that.deleteTeachClass)
 			},
 
 			getCurrentSemester: function () {
@@ -394,7 +394,7 @@ angular.module('dleduWebApp')
 				params.pageNumber = 1;
 				params.pageSize = 9999999;
 				TeachClassService.exportTeachClass(params).success(function(data) {
-					CommonService.saveAs(data, '教学班信息');
+					CommonService.saveAs(data, '班课信息');
 				}).catch(function (e) {
 
 				});

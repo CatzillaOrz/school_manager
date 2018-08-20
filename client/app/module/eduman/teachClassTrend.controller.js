@@ -36,7 +36,7 @@ angular.module('dleduWebApp')
                 courseName: null,
                 teacherName: null
             },
-            //查询教学班趋势数据
+            //查询班课趋势数据
             teachClassTrend:function () {
                 var _this=this;
                 var params=_this.params;
@@ -57,7 +57,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //教学班趋势数据转换
+            //班课趋势数据转换
             getChartData:function (list) {
                 var dataPoints=[];
                 angular.forEach(list,function (data) {
@@ -80,7 +80,7 @@ angular.module('dleduWebApp')
             viewToggle:function () {
                 this.showLine=!this.showLine;
             },
-            //教学班考勤记录导出
+            //班课考勤记录导出
             teachClassAttendExportTend:function () {
                 var _this = this;
                 var params = {

@@ -4,7 +4,7 @@
             .jarviswidget-ctrls(role='menu')
             span.widget-icon
                 i.fa.fa-table
-            h2 教学班管理
+            h2 班课管理
             span.jarviswidget-loader
                 i.fa.fa-refresh.fa-spin
         // widget div
@@ -35,8 +35,8 @@
                                     label.control-label(for="id3") 课程名称：
                                     input#id3.form-control(type='search', placeholder='按课程名称查询',ng-model="teachClassListFn.params.courseName")
                                 .form-group.col-md-4.margin-top-5
-                                    label.control-label(for="id4") 教学班：
-                                    input#id4.form-control(type='search', placeholder='按教学班名称查询',ng-model="teachClassListFn.params.name")
+                                    label.control-label(for="id4") 班课：
+                                    input#id4.form-control(type='search', placeholder='按班课名称查询',ng-model="teachClassListFn.params.name")
                                 .form-group.col-md-4.margin-top-5
                                     label.control-label(for="id5") 教师：
                                     input#id5.form-control(type='search', placeholder='按教师班名称查询',ng-model="teachClassListFn.params.teacherName")
@@ -47,7 +47,7 @@
 
                                         input(type='checkbox'  ng-model="teachClassListFn.allChedked" ng-click='teachClassListFn.allCheck(teachClassListFn.allChedked)' )
                                         span 全选
-                                th 教学班名称
+                                th 班课名称
                                 th 学期
                                 th 课程
                                 th 课程类型

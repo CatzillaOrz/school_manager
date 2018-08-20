@@ -33,10 +33,10 @@ angular.module('dleduWebApp')
 				},
 				data: {
 					prompt: '选择学期与课程',
-					completeMSG: '恭喜你，新建教学班成功！'
+					completeMSG: '恭喜你，新建班课成功！'
 				},
 				ncyBreadcrumb: {
-					label: '新建教学班'
+					label: '新建班课'
 				}
 			})
             .state('teachClassDetail', {
@@ -51,10 +51,10 @@ angular.module('dleduWebApp')
                 },
                 data: {
                     prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
+                    completeMSG: '恭喜你，新建班课成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '教学班详情'
+                    label: '班课详情'
                 }
             })
             .state('teachClassUpdate', {
@@ -69,10 +69,10 @@ angular.module('dleduWebApp')
                 },
                 data: {
                     prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
+                    completeMSG: '恭喜你，新建班课成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '教学班详情'
+                    label: '班课详情'
                 }
             })
             .state('teachClassTeacherUpdate', {
@@ -87,10 +87,10 @@ angular.module('dleduWebApp')
                 },
                 data: {
                     prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
+                    completeMSG: '恭喜你，新建班课成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '教学班详情'
+                    label: '班课详情'
                 }
             })
             .state('teachClassStudentUpdate', {
@@ -105,10 +105,10 @@ angular.module('dleduWebApp')
                 },
                 data: {
                     prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
+                    completeMSG: '恭喜你，新建班课成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '教学班详情'
+                    label: '班课详情'
                 }
             })
             .state('teachClassClassesUpdate', {
@@ -123,10 +123,10 @@ angular.module('dleduWebApp')
                 },
                 data: {
                     prompt: '选择学期与课程',
-                    completeMSG: '恭喜你，新建教学班成功！'
+                    completeMSG: '恭喜你，新建班课成功！'
                 },
                 ncyBreadcrumb: {
-                    label: '教学班详情'
+                    label: '班课详情'
                 }
             })
 			.state('teachclasstable', {
