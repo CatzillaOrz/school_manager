@@ -242,7 +242,7 @@ angular.module('dleduWebApp')
                     }
                 },
                 ncyBreadcrumb: {
-                    label: '教师调停课记录'
+                    label: '调停课'
                 }
             })
 	});
