@@ -80,7 +80,7 @@ angular.module("azx.common", ['ui.bootstrap'])
 
             },
             toLogin: function (path) {
-                /*var _path = path || "/schindex";
+                var _path = path || "/schindex";
                 var pathname = "/schoolLogin?redirectUrl=" + window.location.protocol + "//" + location.hostname + _path;
                 var search = $location.search();
                 if (("org" in search) && search.org) {
@@ -92,13 +92,6 @@ angular.module("azx.common", ['ui.bootstrap'])
 					 }
 					
 				}
-                 AuthService.navigation(0, pathname);
-				*/
-                var search = $location.search();
-                var pathname = "";
-                if (("org" in search) && search.org) {
-                    pathname = "/index" + "?org=" + search.org;
-                }
                 AuthService.navigation(0, pathname);
             },
             getUser: function () {
