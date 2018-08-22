@@ -88,9 +88,9 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }else{
 					 var orgCode = AuthService.getUser().orgDomainName;
 					 if(orgCode){
-						 pathname = pathname + "?org=" + orgCode; 
+						 pathname = pathname + "?org=" + orgCode;
 					 }
-					
+
 				}
                 AuthService.navigation(0, pathname);
             },
@@ -339,20 +339,20 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var search = $location.search();
                 if (hasLogin) {
                     if (pathname == "/userCenter" || pathname == "/account") {//账户类增加mycenter
-                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
+                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                         window.open(url, '_blank');
                     } else {
                         if (link == 5 || link == 0) {
                             if (pathname == "/home") {
-                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
+                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                                 window.open(toUrl, '_blank');
                             } else {
-                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
+                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                                 window.open(url, '_blank');
                             }
 
                         } else {
-                            window.open('//' + currentEnvUrls[link] + _pathname + "?org=" + search.org, '_blank');
+                            window.open('//' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName, '_blank');
                         }
                     }
                 } else {
