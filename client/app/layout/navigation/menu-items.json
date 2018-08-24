@@ -12,7 +12,7 @@
             "sref": "subindex({type:0})",
             "icon": "https://s1.aizhixin.com/58541ce8-cd99-4d45-9d0b-4a456ab2562b.png",
             "active": "school",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
         },
         {
             "title": "班课管理",
@@ -40,7 +40,7 @@
             "sref": "subindex({type:4})",
             "active": "teachclass",
             "icon": "https://s1.aizhixin.com/56976e88-93c8-4d7a-a689-08c45e5a6115.png",
-            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_DORM_ADMIN,ROLE_FINANCE_ADMIN"
+            "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_DORM_ADMIN,ROLE_FINANCE_ADMIN,ROLE_ENROL_ADMIN"
         },
         {
             "title": "统计报表",

@@ -106,6 +106,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
+						that.page.pageNumber++;
 					})
 					.catch(function (error) {
 
@@ -123,6 +124,7 @@ angular.module('dleduWebApp')
 					.then(function (data) {
 						that.records = data.data;
 						that.page = data.page;
+						that.page.pageNumber++;
 						that.templates = data.data;
 					})
 					.catch(function (error) {

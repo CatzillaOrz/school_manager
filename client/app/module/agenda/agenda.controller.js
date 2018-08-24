@@ -45,9 +45,9 @@ angular.module('dleduWebApp')
             timePeriod: [],
             //当前课程卡数据
             courseCard: {},
-            //单教学班排课还是批量排课的状态
+            //单班课排课还是批量排课的状态
             bulk: true,
-            //批量排课用的教学班课程颜色组
+            //批量排课用的班课课程颜色组
             groupColors: ['#57889C', '#A8829F', '#356E35', '#6E587A', '#A57225', '#A90329', '#71843F', '#6E3671', '#AC5287', '#4C4F53', '#A65858', '#C79121'],
             //排课日程参数设置
             scheduleConfig: {
@@ -179,7 +179,7 @@ angular.module('dleduWebApp')
                     // console.log(group.teachingClassId);
                     // console.log(newObj.teachingClassId);
                     if (group.teachingClassId == newObj.teachingClassId) {
-                        //如果该教学班排课为空，需要先删除它在数组中的位置，再重新添加进去，否则event监听不起作用。
+                        //如果该班课排课为空，需要先删除它在数组中的位置，再重新添加进去，否则event监听不起作用。
                         if(initNum == 0 && group.length ==0){
                             initNum++;
                             var arr = [];
@@ -214,7 +214,7 @@ angular.module('dleduWebApp')
             },
 
             /**
-             * 重新选择教学班后如果学期有变化就重新获取学周信息。
+             * 重新选择班课后如果学期有变化就重新获取学周信息。
              */
             classChange: function (item) {
                 // console.log(item);
@@ -445,7 +445,7 @@ angular.module('dleduWebApp')
             },
 
             /**
-             * 从api获取多个教学班排课数据
+             * 从api获取多个班课排课数据
              */
             getCourseSchedules: function ( ids) {
                 // console.log(ids);
@@ -489,7 +489,7 @@ angular.module('dleduWebApp')
                 $scope.user = AuthService.getUser();
                 _this.getPeriod();
                 _this.eventSources = [];
-                //单教学班排课
+                //单班课排课
                 var newArr = [];
                 if (!!$state.params.id) {
                     _this.bulk = true;
@@ -503,7 +503,7 @@ angular.module('dleduWebApp')
                     });
                     _this.getCourseSchedules(newArr);
                 }
-                //多教学班批量排课，获取批量排课的教学班id,默认初始化第一个
+                //多班课批量排课，获取批量排课的班课id,默认初始化第一个
                 if (!!$state.params.ids) {
                     _this.bulk = false;
                     _this.teachClasses = angular.fromJson($state.params.ids);

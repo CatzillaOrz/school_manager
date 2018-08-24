@@ -40,7 +40,7 @@
                                                 form.form-inline
                                                     .form-group.col-sm-4
                                                         label.control-label 引用模板：
-                                                        select.form-control(ng-model="qualityCreditListFn.params.templateId" ui-select2="qualityCreditListFn.getTemplateList()", ng-change="qualityCreditListFn.query()" )
+                                                        select.form-control(style="width:180px;" ng-model="qualityCreditListFn.params.templateId" ui-select2="qualityCreditListFn.getTemplateList()", ng-change="qualityCreditListFn.query()" )
                                                             option(value="-1") 全部
                                                             option(ng-repeat="template in qualityCreditListFn.templates" value="{{template.id}}" ) {{template.name}}
                                             .col-xs-3.hidden-xs
@@ -82,7 +82,7 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getQualityCreditReportList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
                     #hr2.tab-pane
                         .col-xs-12.margin-top-10
                         .tabbable.tabs-below
@@ -130,4 +130,4 @@
                                                     |  条记录
                                             .col-sm-6.col-xs-12
                                                 .dataTables_paginate.paging_simple_numbers
-                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getFeedbackList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")
+                                                    ul.pagination-sm(uib-pagination, total-items='qualityCreditListFn.page.totalElements', max-size='qualityCreditListFn.page.pageSize' ng-model='qualityCreditListFn.page.pageNumber',ng-change="qualityCreditListFn.getQualityCreditTemList()" boundary-link-numbers='true' rotate='false' previous-text="<" next-text=">")

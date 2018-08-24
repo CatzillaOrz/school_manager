@@ -231,6 +231,9 @@
         }
         .account {
           margin-top: -10px;
+          .user-menu{
+            width: auto;
+          }
         }
       }
     }
@@ -268,7 +271,7 @@
                 }
               }
               .user-menu {
-
+                width: auto;
                 .user-avatar {
 
                 }
@@ -387,6 +390,7 @@
                   width: 202px;
                   padding-left: 30px;
                   height:36px;
+                  color:#ccc;
                   background:rgba(0,0,0,0.2);
                   border-radius:6px;
                   border: none;

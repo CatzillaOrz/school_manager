@@ -3,11 +3,11 @@
 angular.module('dleduWebApp')
     .controller('TeachClassStudentUpdateCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService,StudentService,ClassService) {
         /**
-         * 更新教学班下的学生
+         * 更新班课下的学生
          * @type {{classes: {}, studentList: Array, selectClassesId: string, params: {classesId: string, orgId, pageNumber: number, pageSize: number}, keyWord: string, classesDropList: Array, selectedStudents: Array, select2Options: select2Options, getClassById: getClassById, findStudentByKey: findStudentByKey, selectStudent: selectStudent, removeSelectedStudent: removeSelectedStudent, submit: submit, addTeachClassStudent: addTeachClassStudent, addAll: addAll, removeAll: removeAll, init: init}}
          */
         $scope.studentUpdateFn = {
-            //教学班对象
+            //班课对象
             classes:{},
             //学生对象
             studentList:[],

@@ -59,7 +59,7 @@
                     "sref": "studentlist",
                     "active": "student",
                     "icon": "https://s1.aizhixin.com/b7ba05d2-524b-47e3-8348-bd9d41c73d8c.png",
-                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN"
                 },
                 {
                     "title": "课程管理",

@@ -94,17 +94,17 @@
                         .panel-body
                             .text-center.font-color-black-24.margin-top-10.padding-10
                                 span 按行政班添加
-                            p  适合必修课创建教学班，可以关联一个或者多个班级，行政班有人员调换时，该教学班也会同步调整。
+                            p  适合必修课创建班课，可以关联一个或者多个班级，行政班有人员调换时，该班课也会同步调整。
 
                     .col-md-offset-2.col-md-5.panel.panel-default.cursor-pointer(ng-click="handleFn.step3Select('students')")
                         .panel-body
                             .text-center.font-color-black-24.margin-top-10.padding-10
                                 span 按学生添加
-                            p  适合选修课创建教学班，可以关联一个或者多个学生，只能在教学班编辑的操作中调换学生。
+                            p  适合选修课创建班课，可以关联一个或者多个学生，只能在班课编辑的操作中调换学生。
                 div(ng-if="handleFn.step3Tooggle=='class'")
                     form.form-horizontal
                         fieldset
-                            legend 添加整个行政班到教学班
+                            legend 添加整个行政班到班课
                         .md-form
                             .form-group(ng-repeat="classse in handleFn.params.classesIds")
                                 label.col-sm-3.control-label
@@ -180,24 +180,24 @@
             div.margin-top-10.padding-10.container(ng-if="handleFn.step==4")
                 form.form-horizontal(name="teachClassForm")
                     fieldset
-                        legend 给教学班设置名称
+                        legend 给班课设置名称
                     .md-form
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
-                                | 教学班级：
+                                | 班课级：
                             .col-sm-6
                                 input.form-control(ng-model="handleFn.params.name" type="text" name="name" validator="required, maxlength=30")
                         .form-group
                             label.col-sm-3.control-label
                                 span.required *
-                                | 教学班编号：
+                                | 班课编号：
                             .col-sm-6
                                 input.form-control(ng-model="handleFn.params.code" type="text" name="name" validator="required, maxlength=50")
                         .col-sm-12.text-center
                             a.btn.btn-primary(type='submit'  ng-click="handleFn.submit()" validation-submit="teachClassForm") 创建
                     fieldset
-                        legend 教学班信息预览
+                        legend 班课信息预览
                     .row
                         .col-sm-3 学期信息：
                         .col-sm-5 {{handleFn.semesterName}}

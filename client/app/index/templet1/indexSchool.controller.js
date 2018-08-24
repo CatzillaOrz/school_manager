@@ -157,7 +157,7 @@ angular.module('dleduWebApp')
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -202,7 +202,7 @@ angular.module('dleduWebApp')
                         that.isShowGoodCourse(); //是否显示精品课程列表
                         //登录以后对页面功能权限判断
                         that.isHaveAuthority();
-
+                        that.isShowLearn();
                         // if (isCustomize) {
                         //     var code = $location.host().split('.')[0];
                         //     if (user.orgCode == code) {
@@ -351,10 +351,12 @@ angular.module('dleduWebApp')
             goPage: function(host, path){
                 if(!AuthService.isLogin()){
                     if(host !=1 && host != 4){
+                        AuthService.clearUser();
                         messageService.openMsg("请先登录！")
                         return;
                     }
                     if(host == 1 && !path){
+                        AuthService.clearUser();
                         messageService.openMsg("请先登录！")
                         return;
                     }
@@ -368,13 +370,17 @@ angular.module('dleduWebApp')
                     var role = AuthService.getUser().roleNames.join("");
                     if(role == 'ROLE_STUDENT'){
                         path = '/student/list';
+                    }else if(role && (role.indexOf('ROLE_CLASSROOMTEACHE') > -1||
+                        role.indexOf('ROLE_COLLEG_EDUCATIONALMANAGER') > -1||
+                        role.indexOf('ROLE_COLLEG_DATAVIEW') > -1 || role.indexOf('ROLE_COLLEGE_ADMIN') > -1)){
+                        path = '/counselor/list';
                     }else{
                         path = '/monitor';
                     }
                 }
                 if(host == '1'){//课堂在线 1是开卷的
-                    var role = AuthService.getUser().roleNames.join("");
                     if(!path){
+                        var role = AuthService.getUser().roleNames.join("");
                         if(role == 'ROLE_STUDENT'){ //ROLE_TEACHER
                             path = '/classes/stuclasslist';
                         }else{
@@ -452,12 +458,18 @@ angular.module('dleduWebApp')
                         goodCourse: true //精品课程
                     };*/
                     this.isShowMenu.manCenter = false;
-                }else if(role == 'ROLE_TEACHER'){//techer
-                    this.isShowMenu.manCenter = false;
-                }else if(role.indexOf('ROLE_CLASSROOMTEACHE') != -1){//techer
-                    this.isShowMenu.manCenter = false;
+                }else if(role.indexOf('ROLE_TEACHER') != -1){//techer
+                    if(AuthService.authority()){ //admin
+                        this.isShowMenu.pt = false;
+                    }else if(role.indexOf('ROLE_CLASSROOMTEACHE') != -1){
+                        this.isShowMenu.manCenter = false;
+                    }else{
+                        this.isShowMenu.manCenter = false;
+                    }
                 }else{
-                    this.isShowMenu.pt = false;
+                    if(AuthService.authority()){ //admin
+                        this.isShowMenu.pt = false;
+                    }
                 }
             },
 

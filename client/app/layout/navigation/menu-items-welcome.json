@@ -23,6 +23,13 @@
                     "active": "payment",
                     "icon": "https://s1.aizhixin.com/e98db2c0-35db-4b37-a743-9465f9cfc6ba.png",
                     "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_FINANCE_ADMIN"
+                },
+                {
+                    "title": "新生导入",
+                    "sref": "newstudent",
+                    "active": "newstudent",
+                    "icon": "https://s1.aizhixin.com/14738c02-461d-4569-a524-e442b512fbb8.png",
+                    "role": "ROLE_ORG_ADMIN,ROLE_ORG_MANAGER,ROLE_COLLEGE_ADMIN,ROLE_ENROL_ADMIN"
                 }
             ]
         }

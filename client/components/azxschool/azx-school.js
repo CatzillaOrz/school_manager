@@ -33,7 +33,8 @@ angular.module("azx.schoolman", ['ui.bootstrap'])
             '</div>',
             scope: {
                 redirectUrl: '@',
-                subnav: '='
+                subnav: '=',
+                menu: '='
             },
             transclude: true,
             controller: function ($scope, $rootScope, $timeout, AuthService, $window, $state,localStorageService, $location, $http, $interval, $templateCache) {
@@ -95,6 +96,16 @@ angular.module("azx.schoolman", ['ui.bootstrap'])
                         AuthService.clearSiginPosition();
                         $http.post("api/account/signout");
                         $state.go("index");
+                        $scope.menu = {
+                            classLive: true, //课堂在线
+                            showLearn: $scope.indexFn.isShowLearn(), //学情
+                            manCenter: true, //管理中心
+                            userCenter: true, //个人中心
+                            pt: true, //实训
+                            ptHelp: true, //实训协作
+                            handSchool: true, //掌上校园
+                            goodCourse: true //精品课程
+                        };
                         //AuthService.signOut();
                     },
                     navigate: function (host, path) {

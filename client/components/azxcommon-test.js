@@ -1,7 +1,7 @@
 /**
  * Created by Secmax on 2017/2/11.
  */
-
+//@ sourceURL=azxcommon-test.js
 'use strict';
 /**
  * 账号登录相关
@@ -88,9 +88,9 @@ angular.module("azx.common", ['ui.bootstrap'])
                 }else{
 					 var orgCode = AuthService.getUser().orgDomainName;
 					 if(orgCode){
-						 pathname = pathname + "?org=" + orgCode; 
+						 pathname = pathname + "?org=" + orgCode;
 					 }
-					
+
 				}
                 AuthService.navigation(0, pathname);
             },
@@ -197,7 +197,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 $http.post("api/account/signout");
 
                 //2.如果是定制化，判断是否是开卷 若是开卷 退出首页为路由为schindex 否则 判断登录时入口 若是从知新登入的 退出知新首页 若是从学校登录 退出当前定制首页
-                var modelReg = /\w*(\b\.em\b)|(\b\.pt\b)|(\b\.dd\b)|(\b\.learn\b)\w*/;
+                var modelReg = /\w*(\b\.sp\b)|(\b\.em\b)|(\b\.pt\b)|(\b\.dd\b)|(\b\.learn\b)\w*/;
                 var passportReg = /\w*\bpassport\b\w*/;
                 var oneLevelReg = /^aizhixindev\.com$|^aizhixintest\.com$|^dlztc\.com$|^aizhixin\.com$/;
                 if(oneLevelReg.test(location.hostname)){
@@ -205,7 +205,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                     var domain = AuthService.getCurrentEnvDomain();
                     $window.location.href = "//" + orgCode + "." + domain[0] + "/index" + "?org=" + orgCode;
                 }
-                var twoLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
+                var twoLevelReg = /((^\bsp\.\b)|(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                 if(!twoLevelReg.test(location.hostname)){
                     var url= AuthService.getCurrentEnvDomainByProduct("zhixin");
                     $window.location.href = "//"+orgCode +"."+ url ;
@@ -250,7 +250,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                     return true;
                 } else {
                     var oneLevelReg = /^aizhixindev\.com$|^aizhixintest\.com$|^dlztc\.com$|^aizhixin\.com$/;
-                    var twoLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
+                    var twoLevelReg = /((^\bsp\.\b)|(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                     var search = $location.search();
                     var _hostname = $window.location.hostname.replace('www.', '');
                     if (oneLevelReg.test(_hostname)) {
@@ -339,25 +339,25 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var search = $location.search();
                 if (hasLogin) {
                     if (pathname == "/userCenter" || pathname == "/account") {//账户类增加mycenter
-                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname;
+                        var url = '//' + 'mycenter.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                         window.open(url, '_blank');
                     } else {
                         if (link == 5 || link == 0) {
                             if (pathname == "/home") {
-                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname;
+                                var toUrl = '//manager.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                                 window.open(toUrl, '_blank');
                             } else {
-                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname;
+                                var url = '//' + AuthService.getUser().orgDomainName + '.' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName;
                                 window.open(url, '_blank');
                             }
 
                         } else {
-                            window.open('//' + currentEnvUrls[link] + _pathname, '_blank');
+                            window.open('//' + currentEnvUrls[link] + _pathname + "?org=" + AuthService.getUser().orgDomainName, '_blank');
                         }
                     }
                 } else {
                     var oneLevelReg = /^aizhixindev\.com$|^aizhixintest\.com$|^dlztc\.com$|^aizhixin\.com$/;
-                    var modelLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
+                    var modelLevelReg = /((^\bsp\.\b)|(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                     var twoLevelReg = /\w\.(\baizhixindev\b|\baizhixintest\b|\bdlztc\b|\baizhixin\b)\.com$/;
                     if (modelLevelReg.test(_hostname)) {
                         var search = $location.search();
@@ -374,19 +374,23 @@ angular.module("azx.common", ['ui.bootstrap'])
                             if (toLogin || toSchoolLogin) {//账户类增加passport
                                 console.log("passport");
                                 if(search.org){
-                                    $window.location.href = '//' + 'passport.'  + currentEnvUrls[link] + _pathname + "&org=" + search.org;
+                                    var url = '//' + 'passport.'  + currentEnvUrls[link] + _pathname + "&org=" + search.org;
+                                    window.open(url, '_blank');
                                     return ;
                                 }else {
-                                    $window.location.href = '//' + 'passport.'  + currentEnvUrls[link] + _pathname ;
+                                    var url = '//' + 'passport.'  + currentEnvUrls[link] + _pathname ;
+                                    window.open(url, '_blank');
                                     return ;
                                 }
 
                             }
                             if (loginRedirectUrlReg.test(_pathname) && search.org) {
-                                $window.location.href = '//' + currentEnvUrls[link] + _pathname + "&org=" + search.org;
+                                var url = '//' + currentEnvUrls[link] + _pathname + "&org=" + search.org;
+                                window.open(url, '_blank');
 
                             } else {
-                                $window.location.href = '//' + currentEnvUrls[link] + _pathname + location.search;
+                                var url = '//' + currentEnvUrls[link] + _pathname + location.search;
+                                window.open(url, '_blank');
                             }
 
                         }
@@ -396,32 +400,40 @@ angular.module("azx.common", ['ui.bootstrap'])
                             var twoLevel = $window.location.hostname.replace('www.', '').split(".")[0];
                             if (toLogin || toSchoolLogin) {//账户类增加passport
                                 if (loginRedirectUrlReg.test(_pathname)) {
-                                    $window.location.href = '//' + 'passport.' + currentEnvUrls[link] + _pathname + "&org=" + twoLevel;
+                                    var url = '//' + 'passport.' + currentEnvUrls[link] + _pathname + "&org=" + twoLevel;
+                                    window.open(url, '_blank');
                                 } else {
-                                    $window.location.href = '//' + 'passport.' + currentEnvUrls[link] + _pathname + "?org=" + twoLevel;
+                                    var url = '//' + 'passport.' + currentEnvUrls[link] + _pathname + "?org=" + twoLevel;
+                                    window.open(url, '_blank');
                                 }
 
                             } else {
                                 if (link == 5) {
-                                    $window.location.href = '//' + twoLevel + '.' + currentEnvUrls[link] + _pathname;
+                                    var url = '//' + twoLevel + '.' + currentEnvUrls[link] + _pathname;
+                                    window.open(url, '_blank');
                                 } else {
-                                    $window.location.href = '//' + currentEnvUrls[link] + _pathname + "?org=" + twoLevel;
+                                    var url = '//' + currentEnvUrls[link] + _pathname + "?org=" + twoLevel;
+                                    window.open(url, '_blank');
                                 }
 
                             }
                         } else {
                             if (toLogin || toSchoolLogin) {//账户类增加passport
-                                $window.location.href = '//' + 'passport.' + currentEnvUrls[link] + _pathname
+                                var url = '//' + 'passport.' + currentEnvUrls[link] + _pathname;
+                                window.open(url, '_blank')
                             } else {
                                 if (search.org) {
                                     if (link == 5) {
-                                        $window.location.href = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                        var url = '//' + search.org + '.' + currentEnvUrls[link] + _pathname;
+                                        window.open(url, '_blank')
                                     } else {
-                                        $window.location.href = '//' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
+                                        var url = '//' + currentEnvUrls[link] + _pathname + "?org=" + search.org;
+                                        window.open(url, '_blank');
                                     }
 
                                 } else {
-                                    $window.location.href = '//' + currentEnvUrls[link] + _pathname;
+                                    var url = '//' + currentEnvUrls[link] + _pathname;
+                                    window.open(url, '_blank');
                                 }
 
                             }
@@ -458,7 +470,7 @@ angular.module("azx.common", ['ui.bootstrap'])
                 var deferred = $q.defer();
                 var _this = this;
                 var schoolDomian = AuthService.getCurrentEnvDomainByProduct('school');
-                var modelLevelReg = /((^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
+                var modelLevelReg = /((^\bsp\.\b)|(^\bem\.\b)|(^\bpt\.\b)|(^\bdd\.\b)|(^\blearn\.\b)|(^\bpassport\.\b))((\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b))\b\.com\b$/
                 // var twoLevelReg=/^\.(\baizhixindev\b)|(\baizhixintest\b)|(\bdlztc\b)|(\baizhixin\b)\b\.com\b$/;
                 var _hostname = $window.location.hostname.replace('www.', '');
                 var code = ""
@@ -891,21 +903,42 @@ angular.module("azx.common", ['ui.bootstrap'])
             restrict: 'EA',
             template: '' +
             '<div class="azx-school-header">' +
-                '<div class="school-header">' +
-                    '<div class="school-nav-bar">' +
-                        '<div class="logo"><img id="logo" ng-src="{{indexFn.schoolLogo.logoUrl || \'https://s.aizhixin.com/lib/logo.png\' }}" class="logo"/></div>' +
-                        '<ul ng-if="indexFn.user" class="account">' +
-                            '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu">' +
-                                '<span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span>' +
-                                '<span id="user-name" class="dropdown-toggle">' +
-                                    '<span class="">{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span> ' +
-                                '</span>' +
-                                '<span> | </span> ' +
-                                '<a ng-click="indexFn.signOut()" class="signout"><span>退出</span></a> </span>' +
-                            '</li>' +
-                        '</ul>' +
-                    '</div>' +
-                '</div>' +
+            '<div class="school-header">' +
+            ' <div class="school-nav-bar">' +
+            '<div class="logo"><img id="logo" ng-src="{{indexFn.schoolLogo.logoUrl || \'https://s.aizhixin.com/lib/logo.png\' }}" class="logo"/></div>' +
+            '<ul ng-if="indexFn.user" class="account">' +
+            '<li uib-dropdown="uib-dropdown" uib-dropdown-toggle="uib-dropdown-toggle" class="user-menu"><span class="user-avatar"><img ng-src="{{indexFn.user.avatar}}" class="avatar-30 img-circle"/></span><span id="user-name" class="dropdown-toggle"><span>{{indexFn.user.name || indexFn.user.login | cutStr:8}}</span><i class="caret"></i></span>' +
+            '<ul uib-dropdown-menu="uib-dropdown-menu" aria-labelledby="user-name" class="dropdown-menu">' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/userCenter&quot;)"><i class="fa fa-sun-o"></i><span>个人中心</span></a></li>' +
+            '<li><a ng-click="indexFn.navigate(0,&quot;/account&quot;)"><i class="fa fa-vcard-o"></i><span>账号设置</span></a></li>' +
+            '<li ng-if="indexFn.authority()"><a ng-click="indexFn.navigate(5,&quot;/home&quot;)"><i class="fa fa-id-card"></i><span>管理中心</span></a></li>' +
+            '<li class="split"></li>' +
+            '<li><a ng-click="indexFn.signOut()"><i class="fa fa-sign-out"></i><span>退出</span></a></li>' +
+            '</ul>' +
+            '</li>' +
+            '</ul>' +
+            '<button ng-if="!indexFn.user" ng-click="indexFn.signIn()" class="btn-login">登录</button>' +
+            '<div class="navigation">' +
+            '<ul>' +
+            '<li ng-click="indexFn.navigate(5,&quot;/&quot;)" >学校首页' +
+            '<div ng-if="indexFn.currentTab==-1" class="keyline"></div>' +
+            '</li>' +
+            '<li ng-click="indexFn.navigate(1,&quot;/schindex&quot;)" >课程中心' +
+            '<div ng-if="indexFn.currentTab==1" class="keyline"></div>' +
+            '</li>' +
+            '<li ng-click="indexFn.navigate(2,&quot;/schindex&quot;)">实训中心' +
+            '<div ng-if="indexFn.currentTab==2" class="keyline"></div>' +
+            '</li>' +
+            '<li ng-click="indexFn.navigate(6,&quot;/schindex&quot;)" ng-if="indexFn.showLearn">学情中心' +
+            '<div ng-if="indexFn.currentTab==6" class="keyline"></div>' +
+            '</li>' +
+            '<li ng-click="indexFn.navigate(4,&quot;/schindex&quot;)">掌上校园' +
+            '<div ng-if="indexFn.currentTab==4" class="keyline"></div>' +
+            '</li>' +
+            '</ul>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
             '</div>',
             scope: {
                 redirectUrl: '@',
@@ -1155,8 +1188,8 @@ angular.module("azx.common", ['ui.bootstrap'])
             '<div class="azx-school-footer"> ' +
             '    <div class="footer-content">' +
             '            <div class="footer-center">' +
-            //'               <div class="version">{{footerFn.schoolInfo.data.name || "知新网"}} · ver.{{version}}</div>' +
-            '               <div class="Copyright"><span>技术支持：北京知新树科技有限公司</span></div>' +
+            '               <div class="version">{{footerFn.schoolInfo.data.name || "知新网"}} · ver.{{version}}</div>' +
+            '               <div class="Copyright">Copyright © 2016-2018 北京知新树科技有限公司 aizhixin.com All Rights Reserved · <span>京ICP备160973号</span></div>' +
             // '               <div class="float-right">' +
             // '               <span class="QRcode" data-popover-title="知新网微信公众号" uib-popover-html="footerFn.qrWeixin" data-popover-trigger="footerFn.mouseenter">' +
             // '                   <i class="fa fa-lg fa-weixin"></i>' +

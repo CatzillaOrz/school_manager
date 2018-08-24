@@ -3,7 +3,7 @@
 angular.module('dleduWebApp')
     .controller('TeachClassDetailCtrl', function ($scope, $state, CourseService, AuthService, messageService, $timeout, Select2LoadOptionsService, TeacherService, TeachClassService) {
         /**
-         * 教学班详情以及简单的操作
+         * 班课详情以及简单的操作
          * @type {{params: {id: string}, teachClass: {}, teachClassTeacherList: Array, teachClassStudentList: Array, teachClassClassesList: Array, currentTeacher: {}, currentStudent: {}, currentClasses: {}, selectAll: boolean, all: all, getTeachClassById: getTeachClassById, getTeachClassClassesList: getTeachClassClassesList, getTeachClassTeacherList: getTeachClassTeacherList, getTeachClassStudentList: getTeachClassStudentList, deleteTeachClassTeacher: deleteTeachClassTeacher, deleteTeacherPrompt: deleteTeacherPrompt, deleteTeachClassStudent: deleteTeachClassStudent, deleteTeachClassAllStudent: deleteTeachClassAllStudent, deleteStudentPrompt: deleteStudentPrompt, deleteTeachClassClasses: deleteTeachClassClasses, deleteClassesPrompt: deleteClassesPrompt, init: init}}
          */
         $scope.teachClassDetailFn = {
@@ -11,7 +11,7 @@ angular.module('dleduWebApp')
             params: {
                 id: ""
             },
-            //教学班对象
+            //班课对象
             teachClass: {},
             //代课老师列表
             teachClassTeacherList: [],
@@ -46,7 +46,7 @@ angular.module('dleduWebApp')
                     }
                 })
             },
-            //查询教学班
+            //查询班课
             getTeachClassById: function () {
                 var _this = this;
                 TeachClassService.getTeachClassById(_this.params).$promise
@@ -131,7 +131,7 @@ angular.module('dleduWebApp')
             deleteTeacherPrompt: function (entity) {
                 var _this=this;
                 _this.currentTeacher = entity;
-                messageService.getMsg("您确定要删除此教学班老师吗？", _this.deleteTeachClassTeacher)
+                messageService.getMsg("您确定要删除此班课老师吗？", _this.deleteTeachClassTeacher)
             },
 
             //删除学生

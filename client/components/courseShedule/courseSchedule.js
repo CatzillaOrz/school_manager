@@ -651,7 +651,7 @@ angular.module('courseSchedule', [])
                     };
 
                     /**
-                     * 增加某教学班课程表事件
+                     * 增加某班课课程表事件
                      * @param source
                      */
                     eventSourcesWatcher.onAdded = function (source) {
@@ -666,7 +666,7 @@ angular.module('courseSchedule', [])
                     };
 
                     /**
-                     * 删除该教学班课程表事件
+                     * 删除该班课课程表事件
                      * @param source
                      */
                     eventSourcesWatcher.onRemoved = function (source) {
@@ -677,7 +677,7 @@ angular.module('courseSchedule', [])
                     };
 
                     /**
-                     * 监听所有教学班课程表变化时触发的事件
+                     * 监听所有班课课程表变化时触发的事件
                      */
                     eventSourcesWatcher.onChanged = function () {
                         if (calendar && calendar.fullCalendar) {

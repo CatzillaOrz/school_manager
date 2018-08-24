@@ -54,7 +54,7 @@
                                                     label.control-label
                                                     select.form-control(type='text', ng-model="distributeListFn.queryOption.queryType"  ng-options="obj.name as obj.name for obj in distributeListFn.queryTypes"
                                                     ng-change='distributeListFn.monitorType(distributeListFn.queryOption.queryType)')
-                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按班课'")
                                                     label.control-label 课程名称：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字课程名称" ng-model="distributeListFn.queryOption.courseName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'||distributeListFn.queryOption.queryType=='按专业'")
@@ -73,7 +73,7 @@
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按行政班'")
                                                     label.control-label 班&nbsp;主&nbsp;任：
                                                     input.form-control(type="text" placeholder="请填写输入班主任姓名" ng-model="distributeListFn.queryOption.classHeader" my-enter="distributeListFn.findByOption('uncomplete')")
-                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
+                                                .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按班课'")
                                                     label.control-label 授课教师：
                                                     input.form-control(type="text" placeholder="请填写不超过30个字授课教师" ng-model="distributeListFn.queryOption.teacherName" my-enter="distributeListFn.findByOption('uncomplete')")
                                                 .form-group.col-md-4.padding-10(ng-if="distributeListFn.queryOption.queryType=='按专业'")
@@ -100,7 +100,7 @@
                                 // This area used as dropdown edit box
                             // end widget edit box
                             // widget content
-                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按教学班'")
+                            .widget-body.no-padding(ng-if="distributeListFn.queryOption.queryType=='按班课'")
                                 #datatable_col_reorder_wrapper6.dataTables_wrapper.form-inline.no-footer
                                     table#datatable_col_reorder6.table.table-striped.table-bordered.table-hover.dataTable.no-footer(width='100%', role='grid', aria-describedby='datatable_col_reorder_info', style='width: 100%;')
                                         thead
@@ -320,7 +320,7 @@
                                                 td
                                                     input(type="checkbox"  ng-click="distributeListFn.selDist($index)" ng-checked="record.check" ng-model="record.check")
                                                 td {{$index+1 + ((distributeListFn.page.pageNumber==0?distributeListFn.page.pageNumber+1:distributeListFn.page.pageNumber)-1)*distributeListFn.page.pageSize}}
-                                                td {{record.classType==10 ? '教学班':'行政班'}}
+                                                td {{record.classType==10 ? '班课':'行政班'}}
                                                 td {{record.code=='null' ? '--':record.code}}
                                                 td {{record.name}}
                                                 td {{record.teacherName}}

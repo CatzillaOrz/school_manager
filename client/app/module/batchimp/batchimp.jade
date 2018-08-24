@@ -18,7 +18,7 @@
                         span  批量导入基础数据
                     button.btn.btn-primary(type='button' ng-click="batchImpFn.openImpBatch('timetable')")
                         i.fa.fa-file(aria-hidden='true') &nbsp;
-                        span  批量导入课程教学班
+                        span  批量导入课程班课
     //-  添加学生弹出窗模版
     script(type='text/ng-template',id='importDialog')
         .buld_wrap
@@ -100,8 +100,8 @@
                         .repeat_content.content-scorll
                             table
                                 tr
-                                    td 教学班编码
-                                    td 教学班名称
+                                    td 班课编码
+                                    td 班课名称
                                     td 错误信息
                                 tr(ng-repeat="info in batchImpFn.errorInfos.classScheduleDomainList" ng-if="info.msg!=''")
                                     td {{info.teachingClassCode}}

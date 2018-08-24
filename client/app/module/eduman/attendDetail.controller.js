@@ -19,7 +19,7 @@ angular.module('dleduWebApp')
                 pageNumber: 0,
                 pageSize: 10
             },
-            //通过教学班id查询学生考勤
+            //通过班课id查询学生考勤
             getStudentAttendByTeachClassId:function () {
                 var _this = this;
                 var params = {
@@ -53,7 +53,7 @@ angular.module('dleduWebApp')
 
                     })
             },
-            //教学班考勤详情记录导出
+            //班课考勤详情记录导出
             teachClassAttendInfoExport:function () {
                 var _this = this;
                 var params = {

@@ -21,7 +21,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '考勤记录'
+					label: '考勤管理'
 				}
 			})
 			.state('attendsetting', {
@@ -483,7 +483,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教学督导'
+					label: '教学反馈'
 				}
 			})
 			.state('teachingSupervisortj', {
@@ -497,7 +497,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教学督导统计'
+					label: '教学反馈报表'
 				}
 			})
 			.state('teachingSuperInfo', {
@@ -668,7 +668,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教师/督导同行评教'
+					label: '同行评教'
 				}
 			})
 
@@ -683,7 +683,7 @@ angular.module('dleduWebApp')
 					}
 				},
 				ncyBreadcrumb: {
-					label: '教师/督导同行评教统计'
+					label: '同行评教统计'
 				}
 			})
 			.state('evaquesaddsamepart', {
