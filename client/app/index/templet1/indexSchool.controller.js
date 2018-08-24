@@ -370,8 +370,12 @@ angular.module('dleduWebApp')
                     var role = AuthService.getUser().roleNames.join("");
                     if(role == 'ROLE_STUDENT'){
                         path = '/student/list';
-                    }else{
+                    }else if(role && (role.indexOf('ROLE_CLASSROOMTEACHE') > -1||
+                        role.indexOf('ROLE_COLLEG_EDUCATIONALMANAGER') > -1||
+                        role.indexOf('ROLE_COLLEG_DATAVIEW') > -1)){
                         path = '/monitor';
+                    }else{
+                        path = '/counselor/list';
                     }
                 }
                 if(host == '1'){//课堂在线 1是开卷的
